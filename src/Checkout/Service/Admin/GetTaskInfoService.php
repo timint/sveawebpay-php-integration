@@ -4,8 +4,7 @@ namespace Svea\WebPay\Checkout\Service\Admin;
 
 use Svea\WebPay\BuildOrder\QueryTaskInfoBuilder;
 
-class GetTaskInfoService extends AdminImplementationService
-{
+class GetTaskInfoService extends AdminImplementationService {
 	/**
 	 * @var QueryTaskInfoBuilder $adminBuilder
 	 */
@@ -14,8 +13,7 @@ class GetTaskInfoService extends AdminImplementationService
 	/**
 	 * Send call Connection Library
 	 */
-	public function doRequest()
-	{
+	public function doRequest() {
 		$preparedData = $this->prepareRequest();
 		$response = $this->checkoutAdminConnection->getTask($preparedData);
 
@@ -26,8 +24,7 @@ class GetTaskInfoService extends AdminImplementationService
 	 * Format given date so that will match data structure required for Admin API
 	 * @return mixed
 	 */
-	public function prepareRequest()
-	{
+	public function prepareRequest() {
 		$this->validate();
 
 		$requestData = [
@@ -40,8 +37,7 @@ class GetTaskInfoService extends AdminImplementationService
 	/**
 	 * Validate order data
 	 */
-	public function validate()
-	{
+	public function validate() {
 		$errors = [];
 
 		$taskUrl = $this->adminBuilder->taskUrl;

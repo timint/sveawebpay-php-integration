@@ -5,8 +5,7 @@ namespace Svea\WebPay\WebService\WebServiceResponse\CustomerIdentity;
 /**
  * @author Anneli Halld'n, Daniel Brolund for Svea Webpay
  */
-class CreateOrderIdentity extends CustomerIdentityResponse
-{
+class CreateOrderIdentity extends CustomerIdentityResponse {
 	public $email;
 	public $ipAddress;
 	public $countryCode;
@@ -16,8 +15,7 @@ class CreateOrderIdentity extends CustomerIdentityResponse
 	 * CreateOrderIdentity constructor.
 	 * @param object $customer
 	 */
-	function __construct($customer)
-	{
+	function __construct($customer) {
 		$this->email = isset($customer->Email) ? $customer->Email : "";
 		$this->ipAddress = isset($customer->IpAddress) ? $customer->IpAddress : "";
 		$this->countryCode = isset($customer->CountryCode) ? $customer->CountryCode : "";

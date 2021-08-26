@@ -7,8 +7,7 @@ namespace Svea\WebPay\BuildOrder\RowBuilders;
  *
  * @author anne-hal, Kristian Grossman-Madsen
  */
-class OrderRow
-{
+class OrderRow {
 	/**
 	 * @var string $articlenumber Optional.
 	 */
@@ -74,8 +73,7 @@ class OrderRow
 	 * @param string $articleNumberAsString
 	 * @return $this
 	 */
-	public function setArticleNumber($articleNumberAsString)
-	{
+	public function setArticleNumber($articleNumberAsString) {
 		$this->articleNumber = $articleNumberAsString;
 		return $this;
 	}
@@ -89,8 +87,7 @@ class OrderRow
 	 * @param $quantityAsNumeric
 	 * @return $this
 	 */
-	public function setQuantity($quantityAsNumeric)
-	{
+	public function setQuantity($quantityAsNumeric) {
 		$this->quantity = $quantityAsNumeric;
 		return $this;
 	}
@@ -101,8 +98,7 @@ class OrderRow
 	 * @param string $unitAsString
 	 * @return $this
 	 */
-	public function setUnit($unitAsString)
-	{
+	public function setUnit($unitAsString) {
 		$this->unit = $unitAsString;
 		return $this;
 	}
@@ -115,8 +111,7 @@ class OrderRow
 	 * @param $temporaryReference
 	 * @return $this
 	 */
-	public function setTemporaryReference($temporaryReference)
-	{
+	public function setTemporaryReference($temporaryReference) {
 		$this->temporaryReference = $temporaryReference;
 		return $this;
 	}
@@ -129,8 +124,7 @@ class OrderRow
 	 * @param  $merchantData
 	 * @return $this
 	 */
-	public function setMerchantData($merchantData)
-	{
+	public function setMerchantData($merchantData) {
 		$this->merchantData = $merchantData;
 		return $this;
 	}
@@ -146,8 +140,7 @@ class OrderRow
 	 * @param float $amountAsFloat
 	 * @return $this
 	 */
-	public function setAmountExVat($amountAsFloat)
-	{
+	public function setAmountExVat($amountAsFloat) {
 		$this->amountExVat = $amountAsFloat;
 		return $this;
 	}
@@ -161,8 +154,7 @@ class OrderRow
 	 * @param int $vatPercentAsInt
 	 * @return $this
 	 */
-	public function setVatPercent($vatPercentAsInt)
-	{
+	public function setVatPercent($vatPercentAsInt) {
 		$this->vatPercent = $vatPercentAsInt;
 		return $this;
 	}
@@ -187,8 +179,7 @@ class OrderRow
 	 * @param float $amountAsFloat
 	 * @return $this
 	 */
-	public function setAmountIncVat($amountAsFloat)
-	{
+	public function setAmountIncVat($amountAsFloat) {
 		$this->amountIncVat = $amountAsFloat;
 		return $this;
 	}
@@ -201,8 +192,7 @@ class OrderRow
 	 * @param string $nameAsString
 	 * @return $this
 	 */
-	public function setName($nameAsString)
-	{
+	public function setName($nameAsString) {
 		$this->name = $nameAsString;
 		return $this;
 	}
@@ -217,8 +207,7 @@ class OrderRow
 	 * @param string $descriptionAsString
 	 * @return $this
 	 */
-	public function setDescription($descriptionAsString)
-	{
+	public function setDescription($descriptionAsString) {
 		$this->description = $descriptionAsString;
 		return $this;
 	}
@@ -229,8 +218,7 @@ class OrderRow
 	 * @param int $discountPercentAsInteger
 	 * @return $this
 	 */
-	public function setDiscountPercent($discountPercentAsInteger)
-	{
+	public function setDiscountPercent($discountPercentAsInteger) {
 		$this->discountPercent = $discountPercentAsInteger;
 		return $this;
 	}

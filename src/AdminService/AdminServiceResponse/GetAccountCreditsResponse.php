@@ -12,8 +12,7 @@ use Svea\WebPay\BuildOrder\RowBuilders\IndividualCustomer;
  *
  * @todo this is for searching AccountCredit orders and for formatting response, it will be implemented in the future
  */
-class GetAccountCreditsResponse
-{
+class GetAccountCreditsResponse {
 	/**
 	 * @var int $accepted true iff request was accepted by the service
 	 */
@@ -39,13 +38,11 @@ class GetAccountCreditsResponse
 	 * @param $message
 	 * @param $logs
 	 */
-	function __construct($message, $logs)
-	{
+	function __construct($message, $logs) {
 		$this->formatObject($message, $logs);
 	}
 
-	protected function formatObject($message, $logs)
-	{
+	protected function formatObject($message, $logs) {
 		$this->errormessage = isset($message->ErrorMessage) ? $message->ErrorMessage : "";
 		$this->resultcode = $message->ResultCode;
 
@@ -53,8 +50,7 @@ class GetAccountCreditsResponse
 		if (property_exists($message, "AccountCredits")) {
 
 			// @todo  -this is for searching AccountCredit orders and for formatting response, it will be implemented in the future
-			foreach($message->AccountCredits as $accountCredit)
-			{
+			foreach($message->AccountCredits as $accountCredit) {
 				// @todo - create AccountCredits class
 
 					// @todo - create AccountCreditItem class

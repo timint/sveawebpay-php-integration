@@ -4,8 +4,7 @@ namespace Svea\WebPay\Checkout\Service\Admin;
 
 use Svea\WebPay\BuildOrder\QueryOrderBuilder;
 
-class GetOrderService extends AdminImplementationService
-{
+class GetOrderService extends AdminImplementationService {
 	/**
 	 * @var QueryOrderBuilder $adminBuilder
 	 */
@@ -14,8 +13,7 @@ class GetOrderService extends AdminImplementationService
 	/**
 	 * Validate order data
 	 */
-	public function validate()
-	{
+	public function validate() {
 		$errors = [];
 
 		$orderId = $this->adminBuilder->orderId;
@@ -30,8 +28,7 @@ class GetOrderService extends AdminImplementationService
 	 * Format given date so that will match data structure required for Admin API
 	 * @return mixed
 	 */
-	public function prepareRequest()
-	{
+	public function prepareRequest() {
 		$this->validate();
 
 		$requestData = [
@@ -44,8 +41,7 @@ class GetOrderService extends AdminImplementationService
 	/**
 	 * Send call Connection Library
 	 */
-	public function doRequest()
-	{
+	public function doRequest() {
 		$preparedData = $this->prepareRequest();
 		$response = $this->checkoutAdminConnection->getOrder($preparedData);
 

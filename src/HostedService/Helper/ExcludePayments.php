@@ -7,15 +7,13 @@ use Svea\WebPay\Constant\SystemPaymentMethod;
 /**
  * @author anne-hal
  */
-class ExcludePayments
-{
+class ExcludePayments {
 	/**
 	 * Fetch an array of all paymentmethods representing a payment plan or invoice payment.
 	 * @ignore @param type $countryCode -- ignored
 	 * @return string[]
 	 */
-	public static function excludeInvoicesAndPaymentPlan()
-	{
+	public static function excludeInvoicesAndPaymentPlan() {
 		$methods = [];
 
 		$methods[] = SystemPaymentMethod::INVOICESE;

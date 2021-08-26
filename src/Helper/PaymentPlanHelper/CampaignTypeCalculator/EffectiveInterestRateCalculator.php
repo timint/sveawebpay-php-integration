@@ -6,8 +6,7 @@ namespace Svea\WebPay\Helper\PaymentPlanHelper\CampaignTypeCalculator;
 use Svea\WebPay\BuildOrder\Validator\ValidationException;
 use Svea\WebPay\Helper\Helper;
 
-class EffectiveInterestRateCalculator
-{
+class EffectiveInterestRateCalculator {
 	private $oneMonth = 0.08327627652; // Factor of month average length divided by average year length (leap years etc)
 	private $tolerance = 0.00000001;
 	private $initialLowerBound = 0;
@@ -15,8 +14,7 @@ class EffectiveInterestRateCalculator
 	private $payments = [];
 	private $sizeOfLoan;
 
-	public function __construct($sizeOfLoan)
-	{
+	public function __construct($sizeOfLoan) {
 		$this->sizeOfLoan = $sizeOfLoan;
 	}
 
@@ -29,27 +27,22 @@ class EffectiveInterestRateCalculator
 	 * @return float|int
 	 * @throws ValidationException
 	 */
-	public function calculate($sizeOfLoan, $firstPayment, $monthlyPayment, $contactLengthInMonths, $deferralPeriodInMonths)
-	{
-		if($monthlyPayment < 0)
-		{
+	public function calculate($sizeOfLoan, $firstPayment, $monthlyPayment, $contactLengthInMonths, $deferralPeriodInMonths) {
+		if($monthlyPayment < 0) {
 			throw new ValidationException("Monthly payment can not be below 0");
 		}
-		if($contactLengthInMonths < 1)
-		{
+		if($contactLengthInMonths < 1) {
 			throw new ValidationException("Contract length must be at least 1 month");
 		}
 
 		$firstPaymentMonth = min($contactLengthInMonths, $deferralPeriodInMonths + 1);
 		$this->addPayment($this->oneMonth * $firstPaymentMonth, $firstPayment);
 
-		for($month = $firstPaymentMonth + 1; $month <= $contactLengthInMonths; $month++)
-		{
+		for($month = $firstPaymentMonth + 1; $month <= $contactLengthInMonths; $month++) {
 			$this->addPayment($this->oneMonth * $month, $monthlyPayment);
 		}
 
-		if(array_sum(array_column($this->payments, 'amount')) - $sizeOfLoan < 0.1)
-		{
+		if(array_sum(array_column($this->payments, 'amount')) - $sizeOfLoan < 0.1) {
 			return 0;
 		}
 
@@ -60,26 +53,21 @@ class EffectiveInterestRateCalculator
 	 * @return float|int
 	 * @throws ValidationException
 	 */
-	public function solveUsingBisection()
-	{
+	public function solveUsingBisection() {
 		$lowerBound = $this->initialLowerBound;
 		$upperBound = $this->initialUpperBound;
 
-		while($upperBound - $lowerBound > $this->tolerance)
-		{
+		while($upperBound - $lowerBound > $this->tolerance) {
 			$newPoint = $lowerBound + ($upperBound - $lowerBound) / 2;
-			if($this->sign($this->evaluate($lowerBound)) == $this->sign($this->evaluate($newPoint)))
-			{
+			if($this->sign($this->evaluate($lowerBound)) == $this->sign($this->evaluate($newPoint))) {
 				$lowerBound = $newPoint;
 			}
-			else
-			{
+			else {
 				$upperBound = $newPoint;
 			}
 		}
 
-		if(abs($lowerBound - $this->initialLowerBound) < 2 * $this->tolerance || abs($upperBound - $this->initialUpperBound) < 2 * $this->tolerance)
-		{
+		if(abs($lowerBound - $this->initialLowerBound) < 2 * $this->tolerance || abs($upperBound - $this->initialUpperBound) < 2 * $this->tolerance) {
 			throw new ValidationException("No solution found");
 		}
 		return $lowerBound;
@@ -89,18 +77,15 @@ class EffectiveInterestRateCalculator
 		return ( $number > 0 ) ? 1 : ( ( $number < 0 ) ? -1 : 0 );
 	}
 
-	private function evaluate($val)
-	{
+	private function evaluate($val) {
 		$sum = 0;
-		foreach($this->payments as $value)
-		{
+		foreach($this->payments as $value) {
 			$sum += $value['amount'] / pow(1 + $val, $value['timeToPaymentInYears']);
 		}
 		return $sum - $this->sizeOfLoan;
 	}
 
-	public function addPayment($timeToPaymentInYears, $amount)
-	{
+	public function addPayment($timeToPaymentInYears, $amount) {
 		array_push($this->payments, ['timeToPaymentInYears' => $timeToPaymentInYears, 'amount' => $amount]);
 	}
 }

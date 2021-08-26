@@ -11,8 +11,7 @@ use Svea\WebPay\Helper\Helper;
 /**
  * Admin Service UpdateOrderRequest class
  */
-class UpdateOrderRequest extends AdminServiceRequest
-{
+class UpdateOrderRequest extends AdminServiceRequest {
 	/**
 	 * @var UpdateOrderRowsBuilder $orderBuilder
 	 */
@@ -21,8 +20,7 @@ class UpdateOrderRequest extends AdminServiceRequest
 	/**
 	 * @param UpdateOrderBuilder $updateOrderBuilder
 	 */
-	public function __construct($updateOrderBuilder)
-	{
+	public function __construct($updateOrderBuilder) {
 		$this->action = "UpdateOrder";
 		$this->orderBuilder = $updateOrderBuilder;
 	}
@@ -32,8 +30,7 @@ class UpdateOrderRequest extends AdminServiceRequest
 	 * @return \Svea\WebPay\AdminService\AdminSoap\UpdateOrderRequest
 	 * @throws ValidationException
 	 */
-	public function prepareRequest()
-	{
+	public function prepareRequest() {
 		$this->validateRequest();
 		$soapRequest = new \Svea\WebPay\AdminService\AdminSoap\UpdateOrderRequest(
 			new Authentication(
@@ -51,8 +48,7 @@ class UpdateOrderRequest extends AdminServiceRequest
 		return $soapRequest;
 	}
 
-	public function validate()
-	{
+	public function validate() {
 		$errors = [];
 		$errors = $this->validateOrderId($errors);
 		$errors = $this->validateOrderType($errors);
@@ -62,8 +58,7 @@ class UpdateOrderRequest extends AdminServiceRequest
 		return $errors;
 	}
 
-	private function validateOrderId($errors)
-	{
+	private function validateOrderId($errors) {
 		if (isset($this->orderBuilder->orderId) == FALSE) {
 			$errors[] = ['missing value' => "orderId is required."];
 		}
@@ -71,8 +66,7 @@ class UpdateOrderRequest extends AdminServiceRequest
 		return $errors;
 	}
 
-	private function validateOrderType($errors)
-	{
+	private function validateOrderType($errors) {
 		if (isset($this->orderBuilder->orderType) == FALSE) {
 			$errors[] = ['missing value' => "orderType is required."];
 		}
@@ -80,8 +74,7 @@ class UpdateOrderRequest extends AdminServiceRequest
 		return $errors;
 	}
 
-	private function validateCountryCode($errors)
-	{
+	private function validateCountryCode($errors) {
 		if (isset($this->orderBuilder->countryCode) == FALSE) {
 			$errors[] = ['missing value' => "countryCode is required."];
 		}
@@ -89,8 +82,7 @@ class UpdateOrderRequest extends AdminServiceRequest
 		return $errors;
 	}
 
-	private function validateStringLength($errors)
-	{
+	private function validateStringLength($errors) {
 		if (strlen($this->orderBuilder->notes) > 200) {
 			$errors[] = ['String length' => "The field Notes must be a string with a maximum length of 200."];
 		}

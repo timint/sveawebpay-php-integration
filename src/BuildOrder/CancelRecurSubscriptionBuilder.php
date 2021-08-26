@@ -5,8 +5,7 @@ namespace Svea\WebPay\BuildOrder;
 use Svea\WebPay\Checkout\Service\Admin\AdminImplementationService;
 use Svea\WebPay\HostedService\HostedAdminRequest\CancelRecurSubscription;
 
-class CancelRecurSubscriptionBuilder extends OrderBuilder
-{
+class CancelRecurSubscriptionBuilder extends OrderBuilder {
 
 	/**
 	 * @var string $subscriptionId
@@ -19,15 +18,13 @@ class CancelRecurSubscriptionBuilder extends OrderBuilder
 	 * @param string $subscriptionId
 	 * @return $this
 	 */
-	public function setSubscriptionId($subscriptionId)
-	{
+	public function setSubscriptionId($subscriptionId) {
 		$this->subscriptionId = $subscriptionId;
 
 		return $this;
 	}
 
-	public function cancelRecurSubscription()
-	{
+	public function cancelRecurSubscription() {
 		$cancelRecurSubscription = new CancelRecurSubscription($this->conf);
 		$cancelRecurSubscription->subscriptionId = $this->subscriptionId;
 		$cancelRecurSubscription->countryCode = $this->countryCode;

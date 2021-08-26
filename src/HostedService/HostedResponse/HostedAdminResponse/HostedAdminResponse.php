@@ -14,8 +14,7 @@ use Svea\WebPay\HostedService\HostedResponse\HostedResponse;
  *
  * @author anne-hal, Kristian Grossman-Madsen for Svea Svea\WebPay\WebPay
  */
-class HostedAdminResponse extends HostedResponse
-{
+class HostedAdminResponse extends HostedResponse {
 	protected $config;
 
 	/**
@@ -28,8 +27,7 @@ class HostedAdminResponse extends HostedResponse
 	 * @param string $countryCode
 	 * @param SveaConfigurationProvider $config
 	 */
-	function __construct($message, $countryCode, $config)
-	{
+	function __construct($message, $countryCode, $config) {
 		$this->config = $config;
 
 		if (is_object($message)) {
@@ -60,8 +58,7 @@ class HostedAdminResponse extends HostedResponse
 	 *
 	 * @param type $hostedAdminResponseXML
 	 */
-	protected function formatXml($hostedAdminResponseXML)
-	{
+	protected function formatXml($hostedAdminResponseXML) {
 		$hostedAdminResponse = new SimpleXMLElement($hostedAdminResponseXML);
 
 		if ((string)$hostedAdminResponse->statuscode == '0') {

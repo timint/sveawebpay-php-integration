@@ -9,8 +9,7 @@ namespace Svea\WebPay\Checkout\Model;
  * Class MerchantSettings
  * @package Svea\Svea\WebPay\WebPay\Checkout\Model
  */
-class MerchantSettings
-{
+class MerchantSettings {
 	/**
 	 * @var string $termsUri
 	 */
@@ -39,16 +38,14 @@ class MerchantSettings
 	/**
 	 * MerchantSettings constructor.
 	 */
-	public function __construct()
-	{
+	public function __construct() {
 		return $this;
 	}
 
 	/**
 	 * @return string
 	 */
-	public function getTermsUri()
-	{
+	public function getTermsUri() {
 		return $this->termsUri;
 	}
 
@@ -56,8 +53,7 @@ class MerchantSettings
 	 * @param string $termsUri
 	 * @return MerchantSettings
 	 */
-	public function setTermsUri($termsUri)
-	{
+	public function setTermsUri($termsUri) {
 		$this->termsUri = $termsUri;
 
 		return $this;
@@ -66,8 +62,7 @@ class MerchantSettings
 	/**
 	 * @return string
 	 */
-	public function getCheckoutUri()
-	{
+	public function getCheckoutUri() {
 		return $this->checkoutUri;
 	}
 
@@ -75,8 +70,7 @@ class MerchantSettings
 	 * @param string $checkoutUri
 	 * @return MerchantSettings
 	 */
-	public function setCheckoutUri($checkoutUri)
-	{
+	public function setCheckoutUri($checkoutUri) {
 		$this->checkoutUri = $checkoutUri;
 
 		return $this;
@@ -85,8 +79,7 @@ class MerchantSettings
 	/**
 	 * @return string
 	 */
-	public function getConfirmationUri()
-	{
+	public function getConfirmationUri() {
 		return $this->confirmationUri;
 	}
 
@@ -94,8 +87,7 @@ class MerchantSettings
 	 * @param string $confirmationUri
 	 * @return MerchantSettings
 	 */
-	public function setConfirmationUri($confirmationUri)
-	{
+	public function setConfirmationUri($confirmationUri) {
 		$this->confirmationUri = $confirmationUri;
 
 		return $this;
@@ -104,8 +96,7 @@ class MerchantSettings
 	/**
 	 * @return string
 	 */
-	public function getPushUri()
-	{
+	public function getPushUri() {
 		return $this->pushUri;
 	}
 
@@ -113,8 +104,7 @@ class MerchantSettings
 	 * @param string $pushUri
 	 * @return MerchantSettings
 	 */
-	public function setPushUri($pushUri)
-	{
+	public function setPushUri($pushUri) {
 		$this->pushUri = $pushUri;
 
 		return $this;
@@ -123,8 +113,7 @@ class MerchantSettings
 	/**
 	 * @return string
 	 */
-	public function getValidationCallbackUri()
-	{
+	public function getValidationCallbackUri() {
 		 return $this->validationCallbackUri;
 	}
 
@@ -132,8 +121,7 @@ class MerchantSettings
 	  * @param string $validationCallbackUri
 	  * @return MerchantSettings
 	  */
-	public function setValidationCallbackUri($validationCallbackUri)
-	{
+	public function setValidationCallbackUri($validationCallbackUri) {
 		$this->validationCallbackUri = $validationCallbackUri;
 		return $this;
 	}
@@ -142,8 +130,7 @@ class MerchantSettings
 	 * Return structured merchant urls
 	 * @return array
 	 */
-	public function getMerchantSettings()
-	{
+	public function getMerchantSettings() {
 		return [
 			'termsUri' => $this->getTermsUri(),
 			'checkoutUri' => $this->getCheckoutUri(),

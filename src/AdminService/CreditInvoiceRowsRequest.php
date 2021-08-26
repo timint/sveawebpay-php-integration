@@ -12,8 +12,7 @@ use Svea\WebPay\Helper\Helper;
  *
  * @author Kristian Grossman-Madsen
  */
-class CreditInvoiceRowsRequest extends AdminServiceRequest
-{
+class CreditInvoiceRowsRequest extends AdminServiceRequest {
 	/**
 	 * @var CreditOrderRowsBuilder $orderBuilder
 	 */
@@ -32,8 +31,7 @@ class CreditInvoiceRowsRequest extends AdminServiceRequest
 	/**
 	 * @param CreditOrderRowsBuilder $creditOrderRowsBuilder
 	 */
-	public function __construct($creditOrderRowsBuilder)
-	{
+	public function __construct($creditOrderRowsBuilder) {
 		$this->action = "CreditInvoiceRows";
 		$this->orderBuilder = $creditOrderRowsBuilder;
 		$this->rowNumbers = [];
@@ -46,8 +44,7 @@ class CreditInvoiceRowsRequest extends AdminServiceRequest
 	 * @return CreditOrderRowsRequest
 	 * @throws ValidationException
 	 */
-	public function prepareRequest($resendOrderWithFlippedPriceIncludingVat = false)
-	{
+	public function prepareRequest($resendOrderWithFlippedPriceIncludingVat = false) {
 		$this->validateRequest();
 		$this->priceIncludingVat = $this->determineVatFlag($this->orderBuilder->creditOrderRows, $resendOrderWithFlippedPriceIncludingVat);
 		$this->orderRows =
@@ -72,8 +69,7 @@ class CreditInvoiceRowsRequest extends AdminServiceRequest
 		return $soapRequest;
 	}
 
-	public function validate()
-	{
+	public function validate() {
 		$errors = [];
 		$errors = $this->validateInvoiceId($errors);
 		$errors = $this->validateInvoiceDistributionType($errors);
@@ -85,8 +81,7 @@ class CreditInvoiceRowsRequest extends AdminServiceRequest
 		return $errors;
 	}
 
-	private function validateInvoiceId($errors)
-	{
+	private function validateInvoiceId($errors) {
 		if (isset($this->orderBuilder->invoiceId) == FALSE) {
 			$errors[] = ['missing value' => "invoiceId is required, use setInvoiceId()."];
 		}
@@ -94,8 +89,7 @@ class CreditInvoiceRowsRequest extends AdminServiceRequest
 		return $errors;
 	}
 
-	private function validateInvoiceDistributionType($errors)
-	{
+	private function validateInvoiceDistributionType($errors) {
 		if (isset($this->orderBuilder->distributionType) == FALSE) {
 			$errors[] = ['missing value' => "distributionType is required, use setInvoiceDistributionType()."];
 		}
@@ -103,8 +97,7 @@ class CreditInvoiceRowsRequest extends AdminServiceRequest
 		return $errors;
 	}
 
-	private function validateOrderType($errors)
-	{
+	private function validateOrderType($errors) {
 		if (isset($this->orderBuilder->orderType) == FALSE) {
 			$errors[] = ['missing value' => "orderType is required."];
 		}
@@ -112,8 +105,7 @@ class CreditInvoiceRowsRequest extends AdminServiceRequest
 		return $errors;
 	}
 
-	private function validateCountryCode($errors)
-	{
+	private function validateCountryCode($errors) {
 		if (isset($this->orderBuilder->countryCode) == FALSE) {
 			$errors[] = ['missing value' => "countryCode is required, use setCountryCode()."];
 		}
@@ -121,8 +113,7 @@ class CreditInvoiceRowsRequest extends AdminServiceRequest
 		return $errors;
 	}
 
-	private function validateHasRows($errors)
-	{
+	private function validateHasRows($errors) {
 		if ((count($this->orderBuilder->rowsToCredit) == 0) &&
 			(count($this->orderBuilder->creditOrderRows) == 0)
 		) {
@@ -132,8 +123,7 @@ class CreditInvoiceRowsRequest extends AdminServiceRequest
 		return $errors;
 	}
 
-	private function validateCreditOrderRowsHasPriceAndVatInformation($errors)
-	{
+	private function validateCreditOrderRowsHasPriceAndVatInformation($errors) {
 		foreach ($this->orderBuilder->creditOrderRows as $orderRow) {
 			if (!isset($orderRow->vatPercent) && (!isset($orderRow->amountIncVat) && !isset($orderRow->amountExVat))) {
 				$errors[] = ['missing order row vat information' => "cannot calculate orderRow vatPercent, need at least two of amountExVat, amountIncVat and vatPercent."];

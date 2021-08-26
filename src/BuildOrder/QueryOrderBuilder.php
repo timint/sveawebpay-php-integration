@@ -27,8 +27,7 @@ use Svea\WebPay\HostedService\HostedAdminRequest\QueryTransactionByCustomerRefNo
  *
  * @author Kristian Grossman-Madsen for Svea Svea\WebPay\WebPay
  */
-class QueryOrderBuilder extends CheckoutAdminOrderBuilder
-{
+class QueryOrderBuilder extends CheckoutAdminOrderBuilder {
 	/**
 	 * @var ConfigurationProvider $conf
 	 */
@@ -76,8 +75,7 @@ class QueryOrderBuilder extends CheckoutAdminOrderBuilder
 	 * @param string $countryCodeAsString
 	 * @return $this
 	 */
-	public function setCountryCode($countryCodeAsString)
-	{
+	public function setCountryCode($countryCodeAsString) {
 		$this->countryCode = $countryCodeAsString;
 		return $this;
 	}
@@ -86,8 +84,7 @@ class QueryOrderBuilder extends CheckoutAdminOrderBuilder
 	 * Use queryInvoiceOrder() to query an Invoice order.
 	 * @return GetOrdersRequest
 	 */
-	public function queryInvoiceOrder()
-	{
+	public function queryInvoiceOrder() {
 		$this->orderType = ConfigurationProvider::INVOICE_TYPE;
 		return new GetOrdersRequest($this);
 	}
@@ -96,14 +93,12 @@ class QueryOrderBuilder extends CheckoutAdminOrderBuilder
 	 * Use queryPaymentPlanOrder() to query an PaymentPlan order.
 	 * @return GetOrdersRequest
 	 */
-	public function queryPaymentPlanOrder()
-	{
+	public function queryPaymentPlanOrder() {
 		$this->orderType = ConfigurationProvider::PAYMENTPLAN_TYPE;
 		return new GetOrdersRequest($this);
 	}
 
-	public function queryAccountCreditOrder()
-	{
+	public function queryAccountCreditOrder() {
 		$this->orderType = ConfigurationProvider::ACCOUNTCREDIT_TYPE;
 		return new GetOrdersRequest($this);
 	}
@@ -113,16 +108,13 @@ class QueryOrderBuilder extends CheckoutAdminOrderBuilder
 	 * Use queryCardOrder() to query a Card order.
 	 * @return QueryTransaction
 	 */
-	public function queryCardOrder()
-	{
+	public function queryCardOrder() {
 		$this->orderType = ConfigurationProvider::HOSTED_ADMIN_TYPE;
-		if(isset($this->clientOrderNumber))
-		{
+		if(isset($this->clientOrderNumber)) {
 			$queryTransaction = new QueryTransactionByCustomerRefNo($this->conf);
 			$queryTransaction->customerRefNo = $this->clientOrderNumber;
 		}
-		else
-		{
+		else {
 			$queryTransaction = new QueryTransaction($this->conf);
 			$queryTransaction->transactionId = $this->orderId;
 		}
@@ -134,16 +126,13 @@ class QueryOrderBuilder extends CheckoutAdminOrderBuilder
 	 * Use queryDirectBankOrder() to query a Direct Bank order.
 	 * @return QueryTransaction
 	 */
-	public function queryDirectBankOrder()
-	{
+	public function queryDirectBankOrder() {
 		$this->orderType = ConfigurationProvider::HOSTED_ADMIN_TYPE;
-		if(isset($this->clientOrderNumber))
-		{
+		if(isset($this->clientOrderNumber)) {
 			$queryTransaction = new QueryTransactionByCustomerRefNo($this->conf);
 			$queryTransaction->customerRefNo = $this->clientOrderNumber;
 		}
-		else
-		{
+		else {
 			$queryTransaction = new QueryTransaction($this->conf);
 			$queryTransaction->transactionId = $this->orderId;
 		}
@@ -151,8 +140,7 @@ class QueryOrderBuilder extends CheckoutAdminOrderBuilder
 		return $queryTransaction;
 	}
 
-	public function queryCheckoutOrder()
-	{
+	public function queryCheckoutOrder() {
 		return new GetOrderService($this);
 	}
 }

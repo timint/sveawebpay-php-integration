@@ -10,8 +10,7 @@ use Svea\WebPay\HostedService\HostedResponse\HostedAdminResponse\ListPaymentMeth
 /**
  * @author Kristian Grossman-Madsen
  */
-class ListPaymentMethods extends HostedRequest
-{
+class ListPaymentMethods extends HostedRequest {
 	/**
 	 * Use the Svea\WebPay\WebPay::listPaymentMethods() entrypoint to get an instance of ListPaymentMethods.
 	 * Then provide more information about the transaction and send the request using ListPaymentMethod methods.
@@ -25,8 +24,7 @@ class ListPaymentMethods extends HostedRequest
 	 *
 	 * @param ConfigurationProvider $config instance implementing Svea\WebPay\Config\ConfigurationProvider
 	 */
-	function __construct($config)
-	{
+	function __construct($config) {
 		$this->method = "getpaymentmethods";
 		parent::__construct($config);
 	}
@@ -36,22 +34,19 @@ class ListPaymentMethods extends HostedRequest
 	 * @param $countryCode
 	 * @return $this
 	 */
-	function setCountryCode($countryCode)
-	{
+	function setCountryCode($countryCode) {
 		$this->countryCode = $countryCode;
 
 		return $this;
 	}
 
-	protected function validateRequestAttributes()
-	{
+	protected function validateRequestAttributes() {
 		$errors = [];
 
 		return $errors;
 	}
 
-	protected function createRequestXml()
-	{
+	protected function createRequestXml() {
 		$XMLWriter = new \XMLWriter();
 
 		$XMLWriter->openMemory();
@@ -66,8 +61,7 @@ class ListPaymentMethods extends HostedRequest
 		return $XMLWriter->flush();
 	}
 
-	protected function parseResponse($message)
-	{
+	protected function parseResponse($message) {
 		$countryCode = $this->countryCode;
 		$config = $this->config;
 

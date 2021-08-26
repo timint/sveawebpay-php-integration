@@ -26,8 +26,7 @@ use Svea\WebPay\WebService\WebServiceResponse\GetAddressesResponse;
  *
  * @author Anneli Halld'n, Daniel Brolund, Kristian Grossman-Madsen, Fredrik Sundell for Svea WebPay
  */
-class GetAddresses
-{
+class GetAddresses {
 	public $conf;
 	public $countryCode;
 	public $customerIdentifier;
@@ -40,13 +39,11 @@ class GetAddresses
 	/**
 	 * @param ConfigurationProvider $config
 	 */
-	function __construct($config)
-	{
+	function __construct($config) {
 		$this->conf = $config;
 	}
 
-	public function enableLogging($logging)
-	{
+	public function enableLogging($logging) {
 		$this->logging = $logging;
 		return $this;
 	}
@@ -60,8 +57,7 @@ class GetAddresses
 	 * @param string $countryCodeAsString Country code as described by ISO 3166-1, one of "SE", "NO", "DK"
 	 * @return $this
 	 */
-	public function setCountryCode($countryCodeAsString)
-	{
+	public function setCountryCode($countryCodeAsString) {
 		$this->countryCode = $countryCodeAsString;
 
 		return $this;
@@ -78,8 +74,7 @@ class GetAddresses
 	 * @param string $customerIdentifier
 	 * @return $this
 	 */
-	public function setCustomerIdentifier($customerIdentifier)
-	{
+	public function setCustomerIdentifier($customerIdentifier) {
 		$this->customerIdentifier = $customerIdentifier;
 
 		return $this;
@@ -89,8 +84,7 @@ class GetAddresses
 	 * required -- use to define the customer type to lookup address for.
 	 * @return $this
 	 */
-	public function getIndividualAddresses()
-	{
+	public function getIndividualAddresses() {
 		$this->ssn = isset($this->customerIdentifier) ? $this->customerIdentifier : null;
 
 		return $this;
@@ -100,8 +94,7 @@ class GetAddresses
 	 * required -- use to define the customer type to lookup address for.
 	 * @return $this
 	 */
-	public function getCompanyAddresses()
-	{
+	public function getCompanyAddresses() {
 		$this->companyId = isset($this->customerIdentifier) ? $this->customerIdentifier : null;
 
 		return $this;
@@ -114,8 +107,7 @@ class GetAddresses
 	 * @param string $companyIdAsString SE: Organisationsnummer, DK: CVR, NO: Vat number
 	 * @return $this
 	 */
-	public function setCompany($companyIdAsString)
-	{
+	public function setCompany($companyIdAsString) {
 		$this->companyId = $companyIdAsString;
 
 		return $this;
@@ -128,8 +120,7 @@ class GetAddresses
 	 * @param string $NationalIdNumberAsString SE: Personnummer, DK: CPR, NO: N/A
 	 * @return $this
 	 */
-	public function setIndividual($NationalIdNumberAsString)
-	{
+	public function setIndividual($NationalIdNumberAsString) {
 		$this->ssn = $NationalIdNumberAsString;
 
 		return $this;
@@ -140,8 +131,7 @@ class GetAddresses
 	 * Required - you need call the method that corresponds to the account credentials (i.e. invoice, accountCredit or paymentplan) used for the address lookup.
 	 * @return $this
 	 */
-	public function setOrderTypeInvoice()
-	{
+	public function setOrderTypeInvoice() {
 		$this->orderType = ConfigurationProvider::INVOICE_TYPE;
 
 		return $this;
@@ -152,15 +142,13 @@ class GetAddresses
 	 * Required - you need call the method that corresponds to the account credentials (i.e. invoice, accountCredit or paymentplan) used for the address lookup.
 	 * @return $this
 	 */
-	public function setOrderTypePaymentPlan()
-	{
+	public function setOrderTypePaymentPlan() {
 		$this->orderType = ConfigurationProvider::PAYMENTPLAN_TYPE;
 
 		return $this;
 	}
 
-	public function setOrderTypeAccountCredit()
-	{
+	public function setOrderTypeAccountCredit() {
 		$this->orderType = ConfigurationProvider::ACCOUNTCREDIT_TYPE;
 
 		return $this;
@@ -170,8 +158,7 @@ class GetAddresses
 	 * Prepares and Sends request
 	 * @return GetAddressesResponse
 	 */
-	public function doRequest()
-	{
+	public function doRequest() {
 		$preparedRequest = $this->prepareRequest();
 		$request = new SveaDoRequest($this->conf, $this->orderType, "GetAddresses", $preparedRequest, $this->logging);
 		$response = new SveaResponse($request->result['requestResult'], "", NULL, NULL, isset($request->result['logs']) ? $request->result['logs'] : NULL);
@@ -188,8 +175,7 @@ class GetAddresses
 	 *
 	 * @return SveaRequest
 	 */
-	public function prepareRequest()
-	{
+	public function prepareRequest() {
 
 		$this->validateRequest();
 
@@ -211,8 +197,7 @@ class GetAddresses
 		return $this->request;
 	}
 
-	public function validateRequest()
-	{
+	public function validateRequest() {
 		$errors = $this->validate($this);
 		if (count($errors) > 0) {
 			$exceptionString = "";
@@ -224,8 +209,7 @@ class GetAddresses
 		}
 	}
 
-	public function validate($getaddressesrequest)
-	{
+	public function validate($getaddressesrequest) {
 		$errors = [];
 
 		// countrycode -> ssn/companyid -> check credentials
@@ -239,8 +223,7 @@ class GetAddresses
 		return $errors;
 	}
 
-	private function validateCountryCode($getaddressesrequest, $errors)
-	{
+	private function validateCountryCode($getaddressesrequest, $errors) {
 		if (isset($getaddressesrequest->countryCode) == FALSE) {
 			$errors[] = "countryCode is required. Use function setCountryCode().";
 		}
@@ -249,8 +232,7 @@ class GetAddresses
 		return $errors;
 	}
 
-	private function validateCustomerIdentifier($getaddressesrequest, $errors)
-	{
+	private function validateCustomerIdentifier($getaddressesrequest, $errors) {
 		if (!isset($getaddressesrequest->ssn) && !isset($getaddressesrequest->companyId)) {
 			$errors[] = "customerIdentifier is required. Use function setCustomerIdentifer().";
 		}
@@ -258,8 +240,7 @@ class GetAddresses
 		return $errors;
 	}
 
-	private function checkAndSetConfiguredPaymentMethod()
-	{
+	private function checkAndSetConfiguredPaymentMethod() {
 		if ($this->orderType == null) { // no order type set, so try and determine which configuration provider order type to use
 			$orderType = ConfigurationProvider::INVOICE_TYPE;
 			try {
@@ -304,8 +285,7 @@ class GetAddresses
 		}
 	}
 
-	private function validateCountryCodeConfigurationExists($getaddressesrequest, $errors)
-	{
+	private function validateCountryCodeConfigurationExists($getaddressesrequest, $errors) {
 		if (!isset($getaddressesrequest->orderType)) {
 			$errors[] = "missing authentication credentials. Check configuration.";
 		}

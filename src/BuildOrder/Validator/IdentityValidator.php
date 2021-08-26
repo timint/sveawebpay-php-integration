@@ -4,16 +4,14 @@ namespace Svea\WebPay\BuildOrder\Validator;
 
 use Svea\WebPay\BuildOrder\CreateOrderBuilder;
 
-class IdentityValidator
-{
+class IdentityValidator {
 	private $isCompany;
 
 	/**
 	 * IdentityValidator constructor.
 	 * @param bool $isCompany
 	 */
-	function __construct($isCompany = false)
-	{
+	function __construct($isCompany = false) {
 		$this->isCompany = $isCompany;
 	}
 
@@ -23,8 +21,7 @@ class IdentityValidator
 	 * @param string $errors
 	 * @return string
 	 */
-	public function validateThatCustomerIdentityExists($order, $errors)
-	{
+	public function validateThatCustomerIdentityExists($order, $errors) {
 		if (isset($order->customerIdentity->ssn) == false
 			&& isset($order->customerIdentity->orgNumber) == false
 			&& isset($order->customerIdentity->companyVatNumber) == false
@@ -55,14 +52,12 @@ class IdentityValidator
 	 * @param array of string $errors  -- validator errors array
 	 * @return array of string $errors -- updated validator errors array
 	 */
-	public function validateNordicIdentity($order, $errors)
-	{
+	public function validateNordicIdentity($order, $errors) {
 		if ($this->isCompany == FALSE) {
 			if (!isset($order->customerIdentity->ssn) || empty($order->customerIdentity->ssn)) {
 				$errors['missing value'] = "NationalIdNumber is required for individual customers when countrycode is SE, NO, DK or FI. Use function setNationalIdNumber().";
 			}
-		} else	// is company customer
-		{
+		} else	// is company customer {
 			if (!isset($order->customerIdentity->orgNumber) || empty($order->customerIdentity->orgNumber)) {
 				$errors['missing value'] = "OrgNumber is required for company customers when countrycode is SE, NO, DK or FI. Use function setNationalIdNumber().";
 			}
@@ -77,8 +72,7 @@ class IdentityValidator
 	 * @param type $errors
 	 * @return type
 	 */
-	public function validateNLidentity($order, $errors)
-	{
+	public function validateNLidentity($order, $errors) {
 		if ($this->isCompany == FALSE && isset($order->customerIdentity->initials) == false) {
 			$errors['missing value'] = "Initials is required for individual customers when countrycode is NL. Use function setInitials().";
 		}
@@ -120,8 +114,7 @@ class IdentityValidator
 	 * @param type $errors
 	 * @return type
 	 */
-	public function validateDEidentity($order, $errors)
-	{
+	public function validateDEidentity($order, $errors) {
 		if ($this->isCompany == FALSE && isset($order->customerIdentity->birthDate) == false) {
 			$errors['missing value'] = "BirthDate is required for individual customers when countrycode is DE. Use function setBirthDate().";
 		}
@@ -158,8 +151,7 @@ class IdentityValidator
 	 * @param type $errors
 	 * @return type $errors
 	 */
-	public function validateDoubleIdentity($order, $errors)
-	{
+	public function validateDoubleIdentity($order, $errors) {
 		if ((isset($order->customerIdentity->orgNumber) || isset($order->customerIdentity->companyVatNumber)) && isset($order->customerIdentity->ssn)) {
 			$errors['duplicated value'] = "Customer is either an individual or a company. You can not use function setNationalIdNumber() in combination with setNationalIdNumber() or setCompanyVatNumber().";
 		}

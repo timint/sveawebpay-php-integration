@@ -4,8 +4,7 @@ namespace Svea\WebPay\AdminService\AdminSoap;
 
 use SoapVar;
 
-class CancelPaymentPlanRowsRequest
-{
+class CancelPaymentPlanRowsRequest {
 	public $Authentication;	 // note that the order of the attributes matter!
 	public $CancellationRows;
 	public $ClientId;
@@ -19,8 +18,7 @@ class CancelPaymentPlanRowsRequest
 	 * @param string $clientId
 	 * @param ContractNumber $contractNumber
 	 */
-	function __construct($authentication, $newCancellationRows, $clientId, $contractNumber)
-	{
+	function __construct($authentication, $newCancellationRows, $clientId, $contractNumber) {
 		$this->Authentication = new SoapVar($authentication, SOAP_ENC_OBJECT,
 			"-", "--", "Authentication", "http://schemas.datacontract.org/2004/07/DataObjects.Admin.Service");
 		// Settings -- optional, not sent by package

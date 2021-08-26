@@ -20,8 +20,7 @@ use Svea\WebPay\HostedService\Helper\InvalidCountryException;
  *
  * @author anne-hal
  */
-class SveaConfigurationProvider implements ConfigurationProvider
-{
+class SveaConfigurationProvider implements ConfigurationProvider {
 	public $conf;
 
 	/**
@@ -30,8 +29,7 @@ class SveaConfigurationProvider implements ConfigurationProvider
 	 *
 	 * @param array $environmentConfig
 	 */
-	public function __construct($environmentConfig)
-	{
+	public function __construct($environmentConfig) {
 		$this->conf = (array)$environmentConfig;
 	}
 
@@ -41,8 +39,7 @@ class SveaConfigurationProvider implements ConfigurationProvider
 	 * @return string
 	 * @throws Exception
 	 */
-	public function getUsername($type, $country)
-	{
+	public function getUsername($type, $country) {
 		return $this->getCredentialsProperty('username', $type, $country);
 	}
 
@@ -55,8 +52,7 @@ class SveaConfigurationProvider implements ConfigurationProvider
 	 * @return string
 	 * @throws Exception
 	 */
-	private function getCredentialsProperty($property, $type, $country)
-	{
+	private function getCredentialsProperty($property, $type, $country) {
 		if ($property === 'merchantId' || $property === 'secret') {
 			if (array_key_exists($property, $this->conf['credentials']['common']['auth'][$type]) === false) {
 				$this->throwInvalidCredentialProperty();
@@ -68,8 +64,7 @@ class SveaConfigurationProvider implements ConfigurationProvider
 		}
 	}
 
-	private function getCredentialsPropertyByCountry($property, $type, $country)
-	{
+	private function getCredentialsPropertyByCountry($property, $type, $country) {
 		$uCountry = strtoupper($country);
 
 		if (array_key_exists($uCountry, $this->conf['credentials']) == FALSE) {
@@ -84,16 +79,14 @@ class SveaConfigurationProvider implements ConfigurationProvider
 	/**
 	 * @throws \Svea\WebPay\HostedService\Helper\InvalidCountryException
 	 */
-	private function throwInvalidCountryException()
-	{
+	private function throwInvalidCountryException() {
 		throw new InvalidCountryException('Invalid or missing Country code');
 	}
 
 	/**
 	 * @throws Exception
 	 */
-	private function throwInvalidCredentialProperty()
-	{
+	private function throwInvalidCredentialProperty() {
 		throw new Exception('Invalid or missing Credential property');
 	}
 
@@ -101,8 +94,7 @@ class SveaConfigurationProvider implements ConfigurationProvider
 	 * @param $invalid_type
 	 * @throws InvalidTypeException
 	 */
-	private function throwInvalidTypeException($invalid_type)
-	{
+	private function throwInvalidTypeException($invalid_type) {
 		throw new InvalidTypeException(sprintf('Invalid Svea\WebPay\Config\ConfigurationProvider::XXX_TYPE \"%s\".', $invalid_type));
 	}
 
@@ -112,8 +104,7 @@ class SveaConfigurationProvider implements ConfigurationProvider
 	 * @return string
 	 * @throws Exception
 	 */
-	public function getPassword($type, $country)
-	{
+	public function getPassword($type, $country) {
 		return $this->getCredentialsProperty('password', $type, $country);
 	}
 
@@ -123,8 +114,7 @@ class SveaConfigurationProvider implements ConfigurationProvider
 	 * @return string
 	 * @throws Exception
 	 */
-	public function getClientNumber($type, $country)
-	{
+	public function getClientNumber($type, $country) {
 		return $this->getCredentialsProperty('clientNumber', $type, $country);
 	}
 
@@ -134,8 +124,7 @@ class SveaConfigurationProvider implements ConfigurationProvider
 	 * @return string
 	 * @throws Exception
 	 */
-	public function getMerchantId($type, $country)
-	{
+	public function getMerchantId($type, $country) {
 		return $this->getCredentialsProperty('merchantId', $type, $country);
 	}
 
@@ -145,8 +134,7 @@ class SveaConfigurationProvider implements ConfigurationProvider
 	 * @return string
 	 * @throws Exception
 	 */
-	public function getSecret($type, $country)
-	{
+	public function getSecret($type, $country) {
 		return $this->getCredentialsProperty('secret', $type, $country);
 	}
 
@@ -155,8 +143,7 @@ class SveaConfigurationProvider implements ConfigurationProvider
 	 * @return string
 	 * @throws Exception
 	 */
-	public function getEndPoint($type)
-	{
+	public function getEndPoint($type) {
 		if (array_key_exists($type, $this->conf['url']) == FALSE) {
 			$this->throwInvalidTypeException($type);
 		}
@@ -164,8 +151,7 @@ class SveaConfigurationProvider implements ConfigurationProvider
 		return $this->conf['url'][$type];
 	}
 
-	public function getIntegrationPlatform()
-	{
+	public function getIntegrationPlatform() {
 		try {
 			$integrationplatform = $this->getIntegrationProperty('integrationplatform');
 		} catch (InvalidTypeException $e) {
@@ -175,8 +161,7 @@ class SveaConfigurationProvider implements ConfigurationProvider
 		return $integrationplatform;
 	}
 
-	private function getIntegrationProperty($property)
-	{
+	private function getIntegrationProperty($property) {
 		if (array_key_exists('integrationproperties', $this->conf) == FALSE) {
 			throw new InvalidTypeException("integration properties not set");
 		}
@@ -184,8 +169,7 @@ class SveaConfigurationProvider implements ConfigurationProvider
 		return $this->conf['integrationproperties'][$property];
 	}
 
-	public function getIntegrationVersion()
-	{
+	public function getIntegrationVersion() {
 		try {
 			$integrationversion = $this->getIntegrationProperty('integrationversion');
 		} catch (InvalidTypeException $e) {
@@ -195,8 +179,7 @@ class SveaConfigurationProvider implements ConfigurationProvider
 		return $integrationversion;
 	}
 
-	public function getIntegrationCompany()
-	{
+	public function getIntegrationCompany() {
 		try {
 			$integrationcompany = $this->getIntegrationProperty('integrationcompany');
 		} catch (InvalidTypeException $e) {
@@ -211,14 +194,11 @@ class SveaConfigurationProvider implements ConfigurationProvider
 	 *
 	 * @return string
 	 */
-	public function getCheckoutMerchantId($country = NULL)
-	{
-		if($country != NULL)
-		{
+	public function getCheckoutMerchantId($country = NULL) {
+		if($country != NULL) {
 			return $this->getCredentialsProperty('checkoutMerchantId', ConfigurationProvider::CHECKOUT, $country);
 		}
-		else
-		{
+		else {
 			return $this->getCredentialsProperty('checkoutMerchantId', ConfigurationProvider::CHECKOUT, 'SE');
 		}
 	}
@@ -228,14 +208,11 @@ class SveaConfigurationProvider implements ConfigurationProvider
 	 *
 	 * @return string
 	 */
-	public function getCheckoutSecret($country = NULL)
-	{
-		if($country != NULL)
-		{
+	public function getCheckoutSecret($country = NULL) {
+		if($country != NULL) {
 			return $this->getCredentialsProperty('checkoutSecret', ConfigurationProvider::CHECKOUT, $country);
 		}
-		else
-		{
+		else {
 			return $this->getCredentialsProperty('checkoutSecret', ConfigurationProvider::CHECKOUT, 'SE');
 		}
 	}

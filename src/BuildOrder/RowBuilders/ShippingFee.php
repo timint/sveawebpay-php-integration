@@ -7,8 +7,7 @@ namespace Svea\WebPay\BuildOrder\RowBuilders;
  *
  * @author anne-hal, Kristian Grossman-Madsen
  */
-class ShippingFee
-{
+class ShippingFee {
 	/**
 	 * @var float $quantity quantity is always 1
 	 */
@@ -64,8 +63,7 @@ class ShippingFee
 	/**
 	 * ShippingFee constructor.
 	 */
-	function __construct()
-	{
+	function __construct() {
 		// set to 1, as this attribute is used by WebServiceRowFormatter() and all shipping rows are for one (1) unit
 		$this->quantity = 1;
 	}
@@ -75,8 +73,7 @@ class ShippingFee
 	 * @param string $idAsString
 	 * @return $this
 	 */
-	public function setShippingId($idAsString)
-	{
+	public function setShippingId($idAsString) {
 		$this->shippingId = $idAsString;
 		return $this;
 	}
@@ -89,8 +86,7 @@ class ShippingFee
 	 * @param string $nameAsString
 	 * @return $this
 	 */
-	public function setName($nameAsString)
-	{
+	public function setName($nameAsString) {
 		$this->name = $nameAsString;
 		return $this;
 	}
@@ -103,8 +99,7 @@ class ShippingFee
 	 * @param string $descriptionAsString
 	 * @return $this
 	 */
-	public function setDescription($descriptionAsString)
-	{
+	public function setDescription($descriptionAsString) {
 		$this->description = $descriptionAsString;
 		return $this;
 	}
@@ -120,8 +115,7 @@ class ShippingFee
 	 * @param float $amountAsFloat
 	 * @return $this
 	 */
-	public function setAmountExVat($amountAsFloat)
-	{
+	public function setAmountExVat($amountAsFloat) {
 		$this->amountExVat = $amountAsFloat;
 		return $this;
 	}
@@ -143,8 +137,7 @@ class ShippingFee
 	 * @param float $amountAsFloat
 	 * @return $this
 	 */
-	public function setAmountIncVat($amountAsFloat)
-	{
+	public function setAmountIncVat($amountAsFloat) {
 		$this->amountIncVat = $amountAsFloat;
 		return $this;
 	}
@@ -158,8 +151,7 @@ class ShippingFee
 	 * @param int $vatPercentAsInt
 	 * @return $this
 	 */
-	public function setVatPercent($vatPercentAsInt)
-	{
+	public function setVatPercent($vatPercentAsInt) {
 		$this->vatPercent = $vatPercentAsInt;
 		return $this;
 	}
@@ -169,8 +161,7 @@ class ShippingFee
 	 * @param string $unitDescriptionAsString
 	 * @return $this
 	 */
-	public function setUnit($unitDescriptionAsString)
-	{
+	public function setUnit($unitDescriptionAsString) {
 		$this->unit = $unitDescriptionAsString;
 		return $this;
 	}
@@ -181,8 +172,7 @@ class ShippingFee
 	 * @param int $discountPercentAsInt
 	 * @return $this
 	 */
-	public function setDiscountPercent($discountPercentAsInt)
-	{
+	public function setDiscountPercent($discountPercentAsInt) {
 		$this->discountPercent = $discountPercentAsInt;
 		return $this;
 	}
@@ -195,8 +185,7 @@ class ShippingFee
 	 * @param $temporaryReference
 	 * @return $this
 	 */
-	public function setTemporaryReference($temporaryReference)
-	{
+	public function setTemporaryReference($temporaryReference) {
 		$this->temporaryReference = $temporaryReference;
 		return $this;
 	}

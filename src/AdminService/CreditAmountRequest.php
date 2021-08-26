@@ -16,8 +16,7 @@ use Svea\WebPay\AdminService\AdminSoap\CancelPaymentPlanAmountRequest;
  *
  * @author ann-hal
  */
-class CreditAmountRequest extends AdminServiceRequest
-{
+class CreditAmountRequest extends AdminServiceRequest {
 
 	/**
 	 * @var CreditOrderRowsBuilder $orderBuilder
@@ -27,8 +26,7 @@ class CreditAmountRequest extends AdminServiceRequest
 	/**
 	 * @param CreditAmountBuilder $creditAmountBuilder
 	 */
-	public function __construct($creditAmountBuilder)
-	{
+	public function __construct($creditAmountBuilder) {
 		$this->action = "CancelPaymentPlanAmount";
 		$this->orderBuilder = $creditAmountBuilder;
 
@@ -40,8 +38,7 @@ class CreditAmountRequest extends AdminServiceRequest
 	 * @return CreditOrderRowsRequest
 	 * @throws ValidationException
 	 */
-	public function prepareRequest($resendOrderWithFlippedPriceIncludingVat = false)
-	{
+	public function prepareRequest($resendOrderWithFlippedPriceIncludingVat = false) {
 		$this->validateRequest();
 		$soapRequest = new CancelPaymentPlanAmountRequest(
 			new Authentication(
@@ -58,8 +55,7 @@ class CreditAmountRequest extends AdminServiceRequest
 		return $soapRequest;
 	}
 
-	public function validate()
-	{
+	public function validate() {
 		$errors = [];
 		$errors = $this->validateContractNumber($errors);
 		$errors = $this->validateOrderType($errors);
@@ -69,8 +65,7 @@ class CreditAmountRequest extends AdminServiceRequest
 		return $errors;
 	}
 
-	public function validateContractNumber($errors)
-	{
+	public function validateContractNumber($errors) {
 		if (isset($this->orderBuilder->contractNumber) == FALSE) {
 			$errors[] = ['missing value' => "contractNumber is required, use setContractNumber()."];
 		}
@@ -78,8 +73,7 @@ class CreditAmountRequest extends AdminServiceRequest
 		return $errors;
 	}
 
-	private function validateOrderType($errors)
-	{
+	private function validateOrderType($errors) {
 		if (isset($this->orderBuilder->orderType) == FALSE) {
 			$errors[] = ['missing value' => "orderType is required."];
 		}
@@ -87,8 +81,7 @@ class CreditAmountRequest extends AdminServiceRequest
 		return $errors;
 	}
 
-	private function validateCountryCode($errors)
-	{
+	private function validateCountryCode($errors) {
 		if (isset($this->orderBuilder->countryCode) == FALSE) {
 			$errors[] = ['missing value' => "countryCode is required, use setCountryCode()."];
 		}
@@ -96,8 +89,7 @@ class CreditAmountRequest extends AdminServiceRequest
 		return $errors;
 	}
 
-	private function validateAmount($errors)
-	{
+	private function validateAmount($errors) {
 		if (!isset($this->orderBuilder->amountIncVat) || $this->orderBuilder->amountIncVat <= 0) {
 			$errors[] = ['incorrect value' => "amountIncVat is too small."];
 		} elseif (isset($this->orderBuilder->amountIncVat) && !(is_float($this->orderBuilder->amountIncVat) || is_int($this->orderBuilder->amountIncVat))) {
@@ -107,8 +99,7 @@ class CreditAmountRequest extends AdminServiceRequest
 		return $errors;
 	}
 
-	protected function getAdminSoapOrderRowsFromBuilderOrderRowsUsingVatFlag($builderOrderRows, $priceIncludingVat = NULL)
-	{
+	protected function getAdminSoapOrderRowsFromBuilderOrderRowsUsingVatFlag($builderOrderRows, $priceIncludingVat = NULL) {
 		$amount = 0;
 		$orderRows = [];
 		foreach ($builderOrderRows as $orderRow) {

@@ -25,8 +25,7 @@ use Svea\WebPay\WebService\WebServiceResponse\CampaignCode\AccountCreditCampaign
  * For possible resultcodes (27xxx), see svea webpay_eu_webservice documentation
  *
  */
-class AccountCreditParamsResponse extends WebServiceResponse
-{
+class AccountCreditParamsResponse extends WebServiceResponse {
 	/**
 	 * @var AccountCreditCampaignCode[] $AccountCreditCampaignCodes - array of AccountCreditCampaignCode
 	 */
@@ -37,8 +36,7 @@ class AccountCreditParamsResponse extends WebServiceResponse
 	 * @param $response
 	 * @param $logs
 	 */
-	public function __construct($response, $logs)
-	{
+	public function __construct($response, $logs) {
 		// was request accepted?
 		$this->accepted = $response->GetAccountCreditParamsEuResult->Accepted;
 
@@ -47,8 +45,7 @@ class AccountCreditParamsResponse extends WebServiceResponse
 
 		$this->errormessage = isset($response->GetAccountCreditParamsEuResult->ErrorMessage) ? $response->GetAccountCreditParamsEuResult->ErrorMessage : "";
 
-		if(isset($logs))
-		{
+		if(isset($logs)) {
 			$this->logs = $logs;
 		}
 
@@ -77,8 +74,7 @@ class AccountCreditParamsResponse extends WebServiceResponse
 	 * @param $code
 	 * @return AccountCreditCampaignCode
 	 */
-	private function mapResponseData($code)
-	{
+	private function mapResponseData($code) {
 		$campaign = new AccountCreditCampaignCode();
 
 		$campaign->initialFee = $code->InitialFee;

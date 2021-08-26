@@ -11,8 +11,7 @@ use Svea\WebPay\Checkout\Service\Connection\CheckoutAdminConnection;
  * Class AdminImplementationService
  * @package Svea\Svea\WebPay\WebPay\Checkout\Service\Adnin
  */
-abstract class AdminImplementationService
-{
+abstract class AdminImplementationService {
 	/**
 	 * @var CheckoutAdminConnection $checkoutAdminConnection
 	 */
@@ -28,8 +27,7 @@ abstract class AdminImplementationService
 	 *
 	 * @param CheckoutAdminOrderBuilder $adminBuilder
 	 */
-	public function __construct(CheckoutAdminOrderBuilder $adminBuilder)
-	{
+	public function __construct(CheckoutAdminOrderBuilder $adminBuilder) {
 		$this->adminBuilder = $adminBuilder;
 		$this->checkoutAdminConnection = new CheckoutAdminConnection($adminBuilder->conf, $adminBuilder->countryCode);
 	}
@@ -54,8 +52,7 @@ abstract class AdminImplementationService
 	 * @param array $errors
 	 * @throws ValidationException
 	 */
-	protected function processErrors(array $errors)
-	{
+	protected function processErrors(array $errors) {
 		if (count($errors) > 0) {
 			$message = '';
 			foreach ($errors as $key => $val) {
@@ -70,8 +67,7 @@ abstract class AdminImplementationService
 	/**
 	 * @return mixed
 	 */
-	protected function formatOrderInformationWithOrderRows()
-	{
+	protected function formatOrderInformationWithOrderRows() {
 		$formatter = new CheckoutRowFormatter($this);
 		$formattedOrderRows = $formatter->formatRows();
 

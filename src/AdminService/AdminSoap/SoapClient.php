@@ -76,8 +76,8 @@ class SoapClient
 	 * @param \SoapVar $request
 	 * @return \StdClass $response
 	 */
-	public function doSoapCall($action, $request)
-	{
+	public function doSoapCall($action, $request) {
+
 		// wrap the request
 		$wrappedRequest = new \SoapVar($request, SOAP_ENC_OBJECT, "-", "--", "request", "http://tempuri.org/");
 

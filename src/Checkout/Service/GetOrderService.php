@@ -9,14 +9,12 @@ use Svea\WebPay\Checkout\Validation\GetOrderValidator;
  * Class GetOrderService
  * @package Svea\Svea\WebPay\WebPay\Checkout\Service
  */
-class GetOrderService extends CheckoutService
-{
+class GetOrderService extends CheckoutService {
 	/**
 	 * Send call Connection Library
 	 * @return mixed
 	 */
-	public function doRequest()
-	{
+	public function doRequest() {
 		$this->prepareRequest();
 
 		$requestData = [
@@ -31,8 +29,7 @@ class GetOrderService extends CheckoutService
 	 * Validate order data
 	 * @return array|mixed
 	 */
-	protected function validateOrder()
-	{
+	protected function validateOrder() {
 		$validator = new GetOrderValidator();
 		$errors = $validator->validate($this->order);
 
@@ -42,8 +39,7 @@ class GetOrderService extends CheckoutService
 	/**
 	 * @throws \Svea\WebPay\BuildOrder\Validator\ValidationException
 	 */
-	protected function prepareRequest()
-	{
+	protected function prepareRequest() {
 		$errors = $this->validateOrder();
 		$this->processErrors($errors);
 	}

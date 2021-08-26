@@ -7,8 +7,7 @@ namespace Svea\WebPay\WebService\WebServiceResponse\CustomerIdentity;
  *
  * @author anne-hal, Kristian Grossman-Madsen
  */
-class GetAddressIdentity extends CustomerIdentityResponse
-{
+class GetAddressIdentity extends CustomerIdentityResponse {
 	/**
 	 * @var string $addressSelector
 	 */
@@ -28,8 +27,7 @@ class GetAddressIdentity extends CustomerIdentityResponse
 	 * GetAddressIdentity constructor.
 	 * @param object $customer
 	 */
-	function __construct($customer)
-	{
+	function __construct($customer) {
 		$this->addressSelector = isset($customer->AddressSelector) ? $customer->AddressSelector : "";
 		parent::__construct($customer);
 	}

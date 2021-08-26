@@ -9,8 +9,7 @@ use Svea\WebPay\BuildOrder\CreateOrderBuilder;
 /**
  * @author Anneli Halld'n, Daniel Brolund, Kristian Grossman-Madsen for Svea Svea\WebPay\WebPay
  */
-class PayPagePayment extends HostedPayment
-{
+class PayPagePayment extends HostedPayment {
 	public $paymentMethod;
 	public $excludedPaymentMethods;
 
@@ -18,13 +17,11 @@ class PayPagePayment extends HostedPayment
 	 * Creates a new PayPagePayment containing a given order.
 	 * @param CreateOrderBuilder $order
 	 */
-	public function __construct($order)
-	{
+	public function __construct($order) {
 		parent::__construct($order);
 	}
 
-	public function calculateRequestValues()
-	{
+	public function calculateRequestValues() {
 		if (isset($this->paymentMethod)) {
 			$this->request['paymentMethod'] = $this->paymentMethod;
 		}
@@ -41,8 +38,7 @@ class PayPagePayment extends HostedPayment
 	 * Flexible number of params
 	 * @return $this
 	 */
-	public function excludePaymentMethods()
-	{
+	public function excludePaymentMethods() {
 		$excludes = func_get_args();
 
 		foreach ($excludes as $method) {
@@ -65,8 +61,7 @@ class PayPagePayment extends HostedPayment
 	 * Flexible number of params
 	 * @return $this
 	 */
-	public function includePaymentMethods()
-	{
+	public function includePaymentMethods() {
 		//get parameters sent no matter how many
 		$include = func_get_args();
 		//exclude all functions
@@ -114,8 +109,7 @@ class PayPagePayment extends HostedPayment
 	 * Exclude all cardpayments from being shown on the PayPage.
 	 * @return $this
 	 */
-	public function excludeCardPaymentMethods()
-	{
+	public function excludeCardPaymentMethods() {
 		$this->excludedPaymentMethods[] = SystemPaymentMethod::KORTCERT;
 		$this->excludedPaymentMethods[] = SystemPaymentMethod::SKRILL;
 		$this->excludedPaymentMethods[] = SystemPaymentMethod::KORTWN;
@@ -128,8 +122,7 @@ class PayPagePayment extends HostedPayment
 	 * @return $this
 	 *
 	 */
-	public function excludeDirectPaymentMethods()
-	{
+	public function excludeDirectPaymentMethods() {
 		$this->excludedPaymentMethods[] = SystemPaymentMethod::BANKAXESS;
 		$this->excludedPaymentMethods[] = SystemPaymentMethod::DBNORDEASE;
 		$this->excludedPaymentMethods[] = SystemPaymentMethod::DBSEBSE;

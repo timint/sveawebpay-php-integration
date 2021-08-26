@@ -4,8 +4,7 @@ namespace Svea\WebPay\AdminService\AdminSoap;
 
 use SoapVar;
 
-class DeliverOrdersRequest
-{
+class DeliverOrdersRequest {
 	public $Authentication;	 // note that the order of the attributes matter!
 	public $InvoiceDistributionType;
 	public $OrdersToDeliver;
@@ -16,8 +15,7 @@ class DeliverOrdersRequest
 	 * @param string $invoiceDistributionType -- one of [Post|Email]
 	 * @param OrdersToDeliver $ordersToDeliver
 	 */
-	function __construct($authentication, $invoiceDistributionType, $ordersToDeliver)
-	{
+	function __construct($authentication, $invoiceDistributionType, $ordersToDeliver) {
 		$this->Authentication = new SoapVar($authentication, SOAP_ENC_OBJECT,
 			"-", "--", "Authentication", "http://schemas.datacontract.org/2004/07/DataObjects.Admin.Service");
 		// Settings -- optional, not sent by package

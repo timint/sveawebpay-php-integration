@@ -33,8 +33,7 @@ use Svea\WebPay\WebService\WebServiceResponse\CustomerIdentity\GetAddressIdentit
  *
  * @author anne-hal, Kristian Grossman-Madsen
  */
-class GetAddressesResponse extends WebServiceResponse
-{
+class GetAddressesResponse extends WebServiceResponse {
 	/**
 	 * @var $customerIdentity - GetAddressIdentity  array of GetAddressIdentity
 	 */
@@ -45,8 +44,7 @@ class GetAddressesResponse extends WebServiceResponse
 	 * @param $response
 	 * @param $logs
 	 */
-	public function __construct($response, $logs)
-	{
+	public function __construct($response, $logs) {
 		// was request accepted?
 		if ($response->GetAddressesResult->RejectionCode == "Error") {
 			$this->accepted = 0;
@@ -54,8 +52,7 @@ class GetAddressesResponse extends WebServiceResponse
 			$this->accepted = $response->GetAddressesResult->Accepted;
 		}
 
-		if(isset($logs))
-		{
+		if(isset($logs)) {
 			$this->logs = $logs;
 		}
 
@@ -68,8 +65,7 @@ class GetAddressesResponse extends WebServiceResponse
 		}
 	}
 
-	private function formatCustomerIdentity($customers)
-	{
+	private function formatCustomerIdentity($customers) {
 		is_array($customers->CustomerAddress) ? $loopValue = $customers->CustomerAddress : $loopValue = $customers;
 
 		foreach ($loopValue as $customer) {

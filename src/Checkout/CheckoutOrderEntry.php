@@ -10,8 +10,7 @@ use Svea\WebPay\Constant\IdentityFlags;
  * Class CheckoutOrderEntry
  * @package Svea\Svea\WebPay\WebPay\Checkout
  */
-class CheckoutOrderEntry
-{
+class CheckoutOrderEntry {
 	/**
 	 * @var CheckoutOrderBuilder
 	 */
@@ -21,8 +20,7 @@ class CheckoutOrderEntry
 	 * CheckoutOrderEntry constructor.
 	 * @param $checkoutOrderBuilder
 	 */
-	public function __construct($checkoutOrderBuilder)
-	{
+	public function __construct($checkoutOrderBuilder) {
 		$this->checkoutOrderBuilder = $checkoutOrderBuilder;
 	}
 
@@ -32,8 +30,7 @@ class CheckoutOrderEntry
 	 *
 	 * @return array
 	 */
-	public function createOrder()
-	{
+	public function createOrder() {
 		$createService = $this->checkoutOrderBuilder->createOrder();
 
 		return $createService;
@@ -45,8 +42,7 @@ class CheckoutOrderEntry
 	 *
 	 * @return array
 	 */
-	public function getOrder()
-	{
+	public function getOrder() {
 		$getOrderService = $this->checkoutOrderBuilder->getOrder();
 
 		return $getOrderService;
@@ -58,8 +54,7 @@ class CheckoutOrderEntry
 	 *
 	 * @return array
 	 */
-	public function updateOrder()
-	{
+	public function updateOrder() {
 		$updateOrderService = $this->checkoutOrderBuilder->updateOrder();
 
 		return $updateOrderService;
@@ -70,8 +65,7 @@ class CheckoutOrderEntry
 	 *
 	 * @return array
 	 */
-	public function getAvailablePartPaymentCampaigns()
-	{
+	public function getAvailablePartPaymentCampaigns() {
 		$getAvailablePartPaymentCampaigns = $this->checkoutOrderBuilder->getAvailablePartPaymentCampaigns();
 
 		return $getAvailablePartPaymentCampaigns;
@@ -81,8 +75,7 @@ class CheckoutOrderEntry
 	 * @param string $checkoutUri
 	 * @return $this
 	 */
-	public function setCheckoutUri($checkoutUri)
-	{
+	public function setCheckoutUri($checkoutUri) {
 		$this->checkoutOrderBuilder->setCheckoutUri($checkoutUri);
 
 		return $this;
@@ -92,8 +85,7 @@ class CheckoutOrderEntry
 	 * @param string $confirmationUri
 	 * @return $this
 	 */
-	public function setConfirmationUri($confirmationUri)
-	{
+	public function setConfirmationUri($confirmationUri) {
 		$this->checkoutOrderBuilder->setConfirmationUri($confirmationUri);
 
 		return $this;
@@ -103,8 +95,7 @@ class CheckoutOrderEntry
 	 * @param string $pushUri
 	 * @return $this
 	 */
-	public function setPushUri($pushUri)
-	{
+	public function setPushUri($pushUri) {
 		$this->checkoutOrderBuilder->setPushUri($pushUri);
 
 		return $this;
@@ -114,8 +105,7 @@ class CheckoutOrderEntry
 	 * @param string $termsUri
 	 * @return $this
 	 */
-	public function setTermsUri($termsUri)
-	{
+	public function setTermsUri($termsUri) {
 		$this->checkoutOrderBuilder->setTermsUri($termsUri);
 
 		return $this;
@@ -125,8 +115,7 @@ class CheckoutOrderEntry
 	 * @param string $locale
 	 * @return $this
 	 */
-	public function setLocale($locale)
-	{
+	public function setLocale($locale) {
 		$this->checkoutOrderBuilder->setLocale($locale);
 
 		return $this;
@@ -136,8 +125,7 @@ class CheckoutOrderEntry
 	 * @param string $validationCallbackUri
 	 * @return $this
 	 */
-	 public function setValidationCallbackUri($validationCallbackUri)
-	{
+	 public function setValidationCallbackUri($validationCallbackUri) {
 		$this->checkoutOrderBuilder->setValidationCallbackUri($validationCallbackUri);
 
 		return $this;
@@ -148,8 +136,7 @@ class CheckoutOrderEntry
 	 * @param $id
 	 * @return $this
 	 */
-	public function setCheckoutOrderId($id)
-	{
+	public function setCheckoutOrderId($id) {
 		$this->checkoutOrderBuilder->setId($id);
 
 		return $this;
@@ -159,8 +146,7 @@ class CheckoutOrderEntry
 	 * @param string $clientOrderNumber
 	 * @return $this
 	 */
-	public function setClientOrderNumber($clientOrderNumber)
-	{
+	public function setClientOrderNumber($clientOrderNumber) {
 		$this->checkoutOrderBuilder->setClientOrderNumber($clientOrderNumber);
 
 		return $this;
@@ -172,8 +158,7 @@ class CheckoutOrderEntry
 	 * @param PresetValue $presetValues
 	 * @return $this
 	 */
-	public function addPresetValue($presetValues)
-	{
+	public function addPresetValue($presetValues) {
 		$this->checkoutOrderBuilder->addPresetValue($presetValues);
 
 		return $this;
@@ -185,8 +170,7 @@ class CheckoutOrderEntry
 	 * @param string $partnerKey
 	 * @return $this
 	 */
-	public function setPartnerKey($partnerKey)
-	{
+	public function setPartnerKey($partnerKey) {
 		$this->checkoutOrderBuilder->setPartnerKey($partnerKey);
 
 		return $this;
@@ -203,8 +187,7 @@ class CheckoutOrderEntry
 	 * @param string $countryCode
 	 * @return $this
 	 */
-	public function setCountryCode($countryCode)
-	{
+	public function setCountryCode($countryCode) {
 		$this->checkoutOrderBuilder->setCountryCode($countryCode);
 
 		return $this;
@@ -216,8 +199,7 @@ class CheckoutOrderEntry
 	 * @param \Svea\WebPay\BuildOrder\RowBuilders\OrderRow $orderRowItem
 	 * @return $this
 	 */
-	public function addOrderRow($orderRowItem)
-	{
+	public function addOrderRow($orderRowItem) {
 		$this->checkoutOrderBuilder->addOrderRow($orderRowItem);
 
 		return $this;
@@ -229,8 +211,7 @@ class CheckoutOrderEntry
 	 * @param \Svea\WebPay\BuildOrder\RowBuilders\InvoiceFee|\Svea\WebPay\BuildOrder\RowBuilders\ShippingFee $itemFeeObject
 	 * @return $this
 	 */
-	public function addFee($itemFeeObject)
-	{
+	public function addFee($itemFeeObject) {
 		$this->checkoutOrderBuilder->addFee($itemFeeObject);
 
 		return $this;
@@ -247,8 +228,7 @@ class CheckoutOrderEntry
 	 * @param \Svea\WebPay\BuildOrder\RowBuilders\FixedDiscount|\Svea\WebPay\BuildOrder\RowBuilders\RelativeDiscount $itemDiscountObject
 	 * @return $this
 	 */
-	public function addDiscount($itemDiscountObject)
-	{
+	public function addDiscount($itemDiscountObject) {
 		$this->checkoutOrderBuilder->addDiscount($itemDiscountObject);
 
 		return $this;
@@ -262,8 +242,7 @@ class CheckoutOrderEntry
 	 * @param string $currencyString in ISO 4217 three-letter format, ex. "SEK", "EUR"
 	 * @return $this
 	 */
-	public function setCurrency($currencyString)
-	{
+	public function setCurrency($currencyString) {
 		$this->checkoutOrderBuilder->setCurrency($currencyString);
 
 		return $this;
@@ -272,8 +251,7 @@ class CheckoutOrderEntry
 	/**
 	 * @return CheckoutOrderBuilder
 	 */
-	public function getCheckoutOrderBuilder()
-	{
+	public function getCheckoutOrderBuilder() {
 		return $this->checkoutOrderBuilder;
 	}
 
@@ -283,8 +261,7 @@ class CheckoutOrderEntry
 	 * @param string $identityFlag
 	 * @return $this
 	 */
-	public function addIdentityFlag($identityFlag)
-	{
+	public function addIdentityFlag($identityFlag) {
 		$this->checkoutOrderBuilder->addIdentityFlag($identityFlag);
 
 		return $this;
@@ -296,8 +273,7 @@ class CheckoutOrderEntry
 	 * @param string $merchantData
 	 * @return $this
 	 */
-	public function setMerchantData($merchantData)
-	{
+	public function setMerchantData($merchantData) {
 		$this->checkoutOrderBuilder->setMerchantData($merchantData);
 		return $this;
 	}
@@ -308,8 +284,7 @@ class CheckoutOrderEntry
 	 * @param bool $enabled
 	 * @return $this
 	 */
-	public function setRequireElectronicIdAuthentication($enabled)
-	{
+	public function setRequireElectronicIdAuthentication($enabled) {
 		$this->checkoutOrderBuilder->setRequireElectronicIdAuthentication($enabled);
 		return $this;
 	}

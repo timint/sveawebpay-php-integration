@@ -10,8 +10,7 @@ use Svea\Checkout\Transport\Connector;
  * to Svea services. It provide credential data to SveaConfigurationProvider.
  * You can change that params in config files.
  */
-class ConfigurationService
-{
+class ConfigurationService {
 	const SWP_TEST_URL = "https://webpaypaymentgatewaystage.svea.com/webpay/payment";
 	const SWP_PROD_URL = "https://webpaypaymentgateway.svea.com/webpay/payment";
 	const SWP_TEST_WS_URL = "https://webpaywsstage.svea.com/SveaWebPay.asmx?WSDL";
@@ -35,16 +34,14 @@ class ConfigurationService
 	/**
 	 * @return SveaConfigurationProvider
 	 */
-	public static function getProdConfig()
-	{
+	public static function getProdConfig() {
 		return self::getConfig(true);
 	}
 
 	/**
 	 * @return SveaConfigurationProvider
 	 */
-	public static function getDefaultConfig()
-	{
+	public static function getDefaultConfig() {
 		return self::getTestConfig();
 	}
 
@@ -54,8 +51,7 @@ class ConfigurationService
 	 *
 	 * @return SveaConfigurationProvider
 	 */
-	public static function getTestConfig()
-	{
+	public static function getTestConfig() {
 		return self::getConfig(false);
 	}
 
@@ -84,8 +80,7 @@ class ConfigurationService
 		$invoiceUsername, $invoicePassword, $invoiceClientNo,
 		$paymentPlanUsername, $paymentPlanPassword, $paymentPlanClientNo,
 		$accountCreditUsername, $accountCreditPassword, $accountCreditClientNo,
-		$merchantId, $secret, $prod)
-	{
+		$merchantId, $secret, $prod) {
 		$prod = ($prod == null) ? false : $prod;
 
 		list($config, $urls) = self::retrieveConfigFile($prod);
@@ -158,8 +153,7 @@ class ConfigurationService
 		);
 	}
 
-	private static function getConfig($isProd)
-	{
+	private static function getConfig($isProd) {
 		list($config, $urls) = self::retrieveConfigFile($isProd);
 
 		$credentialParams = [];
@@ -187,8 +181,7 @@ class ConfigurationService
 		return new SveaConfigurationProvider(["url" => $urls, "credentials" => $credentialParams, "integrationproperties" => $integrationProperties]);
 	}
 
-	private static function retrieveConfigFile($isProd)
-	{
+	private static function retrieveConfigFile($isProd) {
 		if ($isProd === true) {
 			$config = require 'config_prod.php';
 			$urls = self::getProdUrls();
@@ -200,8 +193,7 @@ class ConfigurationService
 		return [$config, $urls];
 	}
 
-	private static function getTestUrls()
-	{
+	private static function getTestUrls() {
 		return [
 			ConfigurationProvider::HOSTED_TYPE => self::SWP_TEST_URL,
 			ConfigurationProvider::INVOICE_TYPE => self::SWP_TEST_WS_URL,
@@ -215,8 +207,7 @@ class ConfigurationService
 		];
 	}
 
-	private static function getProdUrls()
-	{
+	private static function getProdUrls() {
 		return [
 			ConfigurationProvider::HOSTED_TYPE => self::SWP_PROD_URL,
 			ConfigurationProvider::INVOICE_TYPE => self::SWP_PROD_WS_URL,

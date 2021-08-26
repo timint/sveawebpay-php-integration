@@ -11,8 +11,7 @@ use Svea\WebPay\BuildOrder\RowBuilders\FixedDiscount;
  *
  * @author Anneli Halld'n, Daniel Brolund, Kristian Grossman-Madsen for Svea Svea\WebPay\WebPay
  */
-class WebServiceRowFormatter
-{
+class WebServiceRowFormatter {
 	protected $order;
 	protected $totalAmountExVat;	  // summed in calculateTotals
 	protected $totalVatAsAmount;	  // summed in calculateTotals
@@ -30,8 +29,7 @@ class WebServiceRowFormatter
 	 * @param $order
 	 * @param $resendOrderVat
 	 */
-	public function __construct($order, $resendOrderVat = NULL)
-	{
+	public function __construct($order, $resendOrderVat = NULL) {
 		$this->order = $order;
 		$this->resendOrderVat = $resendOrderVat;
 
@@ -39,8 +37,7 @@ class WebServiceRowFormatter
 		$this->totalAmountPerVatRateExVat = [];
 	}
 
-	public function formatRows()
-	{
+	public function formatRows() {
 		$this->newRows = [];
 
 		$this->calculateTotals();
@@ -77,8 +74,7 @@ class WebServiceRowFormatter
 		return $this->newRows;
 	}
 
-	protected function calculateTotals()
-	{
+	protected function calculateTotals() {
 		$this->totalAmountExVat = 0;
 		$this->totalVatAsAmount = 0;
 
@@ -123,8 +119,7 @@ class WebServiceRowFormatter
 		}
 	}
 
-	protected function increaseCumulativeVatRateAmounts(&$array, $key, $value)
-	{
+	protected function increaseCumulativeVatRateAmounts(&$array, $key, $value) {
 		if (isset($array[$key])) {
 			$array[$key] += $value;
 		} else {
@@ -139,8 +134,7 @@ class WebServiceRowFormatter
 	 * @param isNumeric $vatPercent
 	 * @return float amountExVat
 	 */
-	public static function convertExVatToIncVat($amountExVat, $vatPercent)
-	{
+	public static function convertExVatToIncVat($amountExVat, $vatPercent) {
 		return ($amountExVat * (1 + $vatPercent / 100));
 	}
 
@@ -153,8 +147,7 @@ class WebServiceRowFormatter
 	 * @param isNumeric $vatPercent
 	 * @return float amountExVat
 	 */
-	public static function convertIncVatToExVat($amountIncVat, $vatPercent)
-	{
+	public static function convertIncVatToExVat($amountIncVat, $vatPercent) {
 		$reverseVatPercent = (1 - (1 / (1 + $vatPercent / 100))); // calculate "reverse vat", i.e. 25% => 20%
 		return ($amountIncVat - $amountIncVat * $reverseVatPercent);
 	}
@@ -163,16 +156,14 @@ class WebServiceRowFormatter
 	 * Helper function, calculates vat percentage as int from prices with and without vat.
 	 * Note: this function will drop any vat rate fractions, i.e. it only handles vat rates that can be expressed as integers.
 	 */
-	public static function calculateVatPercentFromPriceExVatAndPriceIncVat($incVat, $exVat)
-	{
+	public static function calculateVatPercentFromPriceExVatAndPriceIncVat($incVat, $exVat) {
 		if ($exVat == 0.0 || $incVat == 0.0) // avoid -100% vat on i.e. free products or fees
 			return 0;
 		else
 			return Helper::bround((($incVat / $exVat) - 1) * 100);
 	}
 
-	protected function determineVatFlag()
-	{
+	protected function determineVatFlag() {
 		$exVat = 0;
 		$incVat = 0;
 		foreach ($this->order->rows as $row) {
@@ -212,8 +203,7 @@ class WebServiceRowFormatter
 
 	}
 
-	protected function formatOrderRows($row)
-	{
+	protected function formatOrderRows($row) {
 //		foreach ($this->order->orderRows as $row) {
 
 		$orderRow = new SveaOrderRow();
@@ -257,8 +247,7 @@ class WebServiceRowFormatter
 	 * @param OrderRow|ShippingFee|et al . $webPayItemRow  an instance of the order row classes from Svea\WebPay\WebPayItem
 	 * @return string  the combined description string that should be written to Description
 	 */
-	public function formatRowNameAndDescription($webPayItemRow)
-	{
+	public function formatRowNameAndDescription($webPayItemRow) {
 
 		$description = ""; //fallback to empty string if we haven't got either of name or description
 
@@ -278,8 +267,7 @@ class WebServiceRowFormatter
 		return $description;
 	}
 
-	protected function formatShippingFeeRows($row)
-	{
+	protected function formatShippingFeeRows($row) {
 
 		$orderRow = new SveaOrderRow();
 
@@ -330,8 +318,7 @@ class WebServiceRowFormatter
 		$this->newRows[] = $orderRow;
 	}
 
-	protected function formatInvoiceFeeRows($row)
-	{
+	protected function formatInvoiceFeeRows($row) {
 		$orderRow = new SveaOrderRow();
 
 		$orderRow->ArticleNumber = "";
@@ -378,8 +365,7 @@ class WebServiceRowFormatter
 		$this->newRows[] = $orderRow;
 	}
 
-	protected function formatFixedDiscountRows($row)
-	{
+	protected function formatFixedDiscountRows($row) {
 		// only amountIncVat (i.e. amount) was specified:
 		if (isset($row->amount) && !isset($row->vatPercent) && !isset($row->amountExVat)) {
 			$this->newRows = array_merge($this->newRows, $this->formatFixedDiscountSpecifiedAsAmountIncVatOnly($row));
@@ -472,8 +458,7 @@ class WebServiceRowFormatter
 	 * @param FixedDiscount $discountRow
 	 * @return SveaOrderRow
 	 */
-	protected function formatFixedDiscountSpecifiedAsAmountIncVatOnly($discountRow)
-	{
+	protected function formatFixedDiscountSpecifiedAsAmountIncVatOnly($discountRow) {
 
 		$splitRows = []; // one (or more) formated discount rows, split across the vat rates in the order
 
@@ -525,8 +510,7 @@ class WebServiceRowFormatter
 	 * @param FixedDiscount $discountRow
 	 * @return SveaOrderRow
 	 */
-	protected function formatFixedDiscountSpecifiedAsAmountExVatOnly($discountRow)
-	{
+	protected function formatFixedDiscountSpecifiedAsAmountExVatOnly($discountRow) {
 		$splitRows = []; // one (or more) formated discount rows, split across the vat rates in the order
 
 		foreach ($this->totalAmountPerVatRateExVat as $vatRate => $amountAtThisVatRateExVat) {
@@ -577,8 +561,7 @@ class WebServiceRowFormatter
 		return $splitRows;
 	}
 
-	protected function formatRelativeDiscountRows($row)
-	{
+	protected function formatRelativeDiscountRows($row) {
 		foreach ($this->totalAmountPerVatRateIncVat as $vatRate => $amountAtThisVatRateIncVat) {
 			$orderRow = new SveaOrderRow();
 

@@ -9,8 +9,7 @@
 namespace Svea\WebPay\WebService\SveaSoap;
 
 
-class SveaOrderDeliveryAddress
-{
+class SveaOrderDeliveryAddress {
 	public $FullName;
 	public $FirstName;
 	public $LastName;

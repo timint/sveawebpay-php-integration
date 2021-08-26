@@ -5,8 +5,7 @@ namespace Svea\WebPay\Checkout\Service\Admin;
 use Svea\WebPay\BuildOrder\CheckoutAdminOrderBuilder;
 use Svea\WebPay\BuildOrder\DeliverOrderRowsBuilder;
 
-class DeliverOrderService extends AdminImplementationService
-{
+class DeliverOrderService extends AdminImplementationService {
 	/**
 	 * @var DeliverOrderRowsBuilder $adminBuilder
 	 */
@@ -22,8 +21,7 @@ class DeliverOrderService extends AdminImplementationService
 	 * @param CheckoutAdminOrderBuilder $adminBuilder
 	 * @param bool $isDeliverOrderRows
 	 */
-	public function __construct(CheckoutAdminOrderBuilder $adminBuilder, $isDeliverOrderRows = false)
-	{
+	public function __construct(CheckoutAdminOrderBuilder $adminBuilder, $isDeliverOrderRows = false) {
 		parent::__construct($adminBuilder);
 		$this->isDeliverOrderRows = $isDeliverOrderRows;
 	}
@@ -31,8 +29,7 @@ class DeliverOrderService extends AdminImplementationService
 	/**
 	 * Validate order data
 	 */
-	public function validate()
-	{
+	public function validate() {
 		$errors = [];
 
 		$orderId = $this->adminBuilder->orderId;
@@ -59,8 +56,7 @@ class DeliverOrderService extends AdminImplementationService
 	 * Format given date so that will match data structure required for Admin API
 	 * @return mixed|void
 	 */
-	public function prepareRequest()
-	{
+	public function prepareRequest() {
 		$this->validate();
 
 		$requestData = [
@@ -79,8 +75,7 @@ class DeliverOrderService extends AdminImplementationService
 	/**
 	 * Send call Connection Library
 	 */
-	public function doRequest()
-	{
+	public function doRequest() {
 		$preparedData = $this->prepareRequest();
 		$response = $this->checkoutAdminConnection->deliverOrder($preparedData);
 

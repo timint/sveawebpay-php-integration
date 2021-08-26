@@ -23,8 +23,7 @@ use Svea\WebPay\HostedService\HostedAdminRequest\AnnulTransaction;
  *
  * @author Kristian Grossman-Madsen for Svea Svea\WebPay\WebPay
  */
-class CancelOrderBuilder extends CheckoutAdminOrderBuilder
-{
+class CancelOrderBuilder extends CheckoutAdminOrderBuilder {
 	/**
 	 * @var ConfigurationProvider $conf
 	 */
@@ -61,8 +60,7 @@ class CancelOrderBuilder extends CheckoutAdminOrderBuilder
 	 * @param string $countryCodeAsString
 	 * @return $this
 	 */
-	public function setCountryCode($countryCodeAsString)
-	{
+	public function setCountryCode($countryCodeAsString) {
 		$this->countryCode = $countryCodeAsString;
 
 		return $this;
@@ -77,8 +75,7 @@ class CancelOrderBuilder extends CheckoutAdminOrderBuilder
 	 *
 	 * @return CloseOrder
 	 */
-	public function cancelInvoiceOrder()
-	{
+	public function cancelInvoiceOrder() {
 		$this->orderType = ConfigurationProvider::INVOICE_TYPE;
 
 		return new CloseOrder($this);
@@ -91,8 +88,7 @@ class CancelOrderBuilder extends CheckoutAdminOrderBuilder
 	 *
 	 * @return CloseOrder
 	 */
-	public function cancelPaymentPlanOrder()
-	{
+	public function cancelPaymentPlanOrder() {
 		$this->orderType = ConfigurationProvider::PAYMENTPLAN_TYPE;
 
 		return new CloseOrder($this);
@@ -105,8 +101,7 @@ class CancelOrderBuilder extends CheckoutAdminOrderBuilder
 	 *
 	 * @return CloseOrder
 	 */
-	public function cancelAccountCreditOrder()
-	{
+	public function cancelAccountCreditOrder() {
 		$this->orderType = ConfigurationProvider::ACCOUNTCREDIT_TYPE;
 
 		return new CloseOrder($this);
@@ -119,8 +114,7 @@ class CancelOrderBuilder extends CheckoutAdminOrderBuilder
 	 *
 	 * @return AnnulTransaction
 	 */
-	public function cancelCardOrder()
-	{
+	public function cancelCardOrder() {
 		$this->orderType = ConfigurationProvider::HOSTED_ADMIN_TYPE;
 		$annulTransaction = new AnnulTransaction($this->conf);
 		$annulTransaction->transactionId = $this->orderId;
@@ -129,13 +123,11 @@ class CancelOrderBuilder extends CheckoutAdminOrderBuilder
 		return $annulTransaction;
 	}
 
-	public function cancelCheckoutOrder()
-	{
+	public function cancelCheckoutOrder() {
 		return new CancelOrderService($this);
 	}
 
-	public function cancelCheckoutOrderAmount()
-	{
+	public function cancelCheckoutOrderAmount() {
 		return new CancelOrderService($this, true);
 	}
 }

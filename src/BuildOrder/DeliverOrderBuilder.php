@@ -47,8 +47,7 @@ use Svea\WebPay\HostedService\HostedAdminRequest\ConfirmTransaction;
  *
  * @author Kristian Grossman-Madsen, Anneli Halld'n, Daniel Brolund for Svea Webpay
  */
-class DeliverOrderBuilder  extends CheckoutAdminOrderBuilder
-{
+class DeliverOrderBuilder  extends CheckoutAdminOrderBuilder {
 	/**
 	 * @var string $orderId order id/transaction id as returned in the createOrder request response,
 	 */
@@ -84,8 +83,7 @@ class DeliverOrderBuilder  extends CheckoutAdminOrderBuilder
 	/**
 	 * @param \Svea\WebPay\Config\ConfigurationProvider $config
 	 */
-	public function __construct($config)
-	{
+	public function __construct($config) {
 		parent::__construct($config);
 	}
 
@@ -100,8 +98,7 @@ class DeliverOrderBuilder  extends CheckoutAdminOrderBuilder
 	 * @param \Svea\WebPay\BuildOrder\RowBuilders\OrderRow $itemOrderRowObject
 	 * @return $this
 	 */
-	public function addOrderRow($itemOrderRowObject)
-	{
+	public function addOrderRow($itemOrderRowObject) {
 		return parent::addOrderRow($itemOrderRowObject);
 	}
 
@@ -111,8 +108,7 @@ class DeliverOrderBuilder  extends CheckoutAdminOrderBuilder
 	 * @param string $orderIdAsString
 	 * @return $this
 	 */
-	public function setOrderId($orderIdAsString)
-	{
+	public function setOrderId($orderIdAsString) {
 		$this->orderId = $orderIdAsString;
 
 		return $this;
@@ -123,8 +119,7 @@ class DeliverOrderBuilder  extends CheckoutAdminOrderBuilder
 	 * @param string $transactionIdAsString
 	 * @return $this
 	 */
-	public function setTransactionId($transactionIdAsString)
-	{
+	public function setTransactionId($transactionIdAsString) {
 		return $this->setOrderId($transactionIdAsString);
 	}
 
@@ -136,8 +131,7 @@ class DeliverOrderBuilder  extends CheckoutAdminOrderBuilder
 	 * @param $captureDateAsString
 	 * @return $this
 	 */
-	public function setCaptureDate($captureDateAsString)
-	{
+	public function setCaptureDate($captureDateAsString) {
 		$this->captureDate = $captureDateAsString;
 
 		return $this;
@@ -149,8 +143,7 @@ class DeliverOrderBuilder  extends CheckoutAdminOrderBuilder
 	 *	 Svea\WebPay\Constant\DistributionType::POST|Svea\WebPay\Constant\DistributionType::EMAIL
 	 * @return $this
 	 */
-	public function setInvoiceDistributionType($distributionTypeAsConst)
-	{
+	public function setInvoiceDistributionType($distributionTypeAsConst) {
 		$this->distributionType = $distributionTypeAsConst;
 
 		return $this;
@@ -162,8 +155,7 @@ class DeliverOrderBuilder  extends CheckoutAdminOrderBuilder
 	 * @param $invoiceId
 	 * @return $this
 	 */
-	public function setCreditInvoice($invoiceId)
-	{
+	public function setCreditInvoice($invoiceId) {
 		$this->invoiceIdToCredit = $invoiceId;
 
 		return $this;
@@ -174,8 +166,7 @@ class DeliverOrderBuilder  extends CheckoutAdminOrderBuilder
 	 * @param int $numberOfDaysAsInt
 	 * @return $this
 	 */
-	public function setNumberOfCreditDays($numberOfDaysAsInt)
-	{
+	public function setNumberOfCreditDays($numberOfDaysAsInt) {
 		$this->numberOfCreditDays = $numberOfDaysAsInt;
 
 		return $this;
@@ -191,8 +182,7 @@ class DeliverOrderBuilder  extends CheckoutAdminOrderBuilder
 	 *
 	 * @return DeliverInvoice|DeliverOrdersRequest
 	 */
-	public function deliverInvoiceOrder()
-	{
+	public function deliverInvoiceOrder() {
 		if (count($this->orderRows) > 0) {
 			return new DeliverInvoice($this);
 		} else {
@@ -206,8 +196,7 @@ class DeliverOrderBuilder  extends CheckoutAdminOrderBuilder
 	 * deliverPaymentPlanOrder prepares the PaymentPlan order for delivery.
 	 * @return DeliverPaymentPlan
 	 */
-	public function deliverPaymentPlanOrder()
-	{
+	public function deliverPaymentPlanOrder() {
 		$this->distributionType = DistributionType::POST;
 
 		return new DeliverPaymentPlan($this);
@@ -217,8 +206,7 @@ class DeliverOrderBuilder  extends CheckoutAdminOrderBuilder
 	 * deliverAccountCreditOrder prepares the AccountPlan order for delivery.
 	 * @return DeliverAccountCredit
 	 */
-	public function deliverAccountCreditOrder()
-	{
+	public function deliverAccountCreditOrder() {
 		if (count($this->orderRows) > 0) {
 			return new DeliverAccountCredit($this);
 		} else {
@@ -238,8 +226,7 @@ class DeliverOrderBuilder  extends CheckoutAdminOrderBuilder
 	 *
 	 * @return ConfirmTransaction
 	 */
-	public function deliverCardOrder()
-	{
+	public function deliverCardOrder() {
 		$this->orderType = ConfigurationProvider::HOSTED_TYPE;
 
 		// validation is done in ConfirmTransaction

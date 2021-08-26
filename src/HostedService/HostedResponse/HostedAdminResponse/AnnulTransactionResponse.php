@@ -7,8 +7,7 @@ namespace Svea\WebPay\HostedService\HostedResponse\HostedAdminResponse;
  *
  * @author Kristian Grossman-Madsen for Svea Svea\WebPay\WebPay
  */
-class AnnulTransactionResponse extends HostedAdminResponse
-{
+class AnnulTransactionResponse extends HostedAdminResponse {
 	/**
 	 * @var string $transactionId transaction id that uniquely identifies the order at Svea
 	 */
@@ -25,8 +24,7 @@ class AnnulTransactionResponse extends HostedAdminResponse
 	 * @param string $countryCode
 	 * @param \Svea\WebPay\Config\SveaConfigurationProvider $config
 	 */
-	function __construct($message, $countryCode, $config)
-	{
+	function __construct($message, $countryCode, $config) {
 		parent::__construct($message, $countryCode, $config);
 	}
 
@@ -36,8 +34,7 @@ class AnnulTransactionResponse extends HostedAdminResponse
 	 *
 	 * @param string $hostedAdminResponseXML hostedAdminResponse as xml
 	 */
-	protected function formatXml($hostedAdminResponseXML)
-	{
+	protected function formatXml($hostedAdminResponseXML) {
 		$hostedAdminResponse = new \SimpleXMLElement($hostedAdminResponseXML);
 
 		if ((string)$hostedAdminResponse->statuscode == '0') {

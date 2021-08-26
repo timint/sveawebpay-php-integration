@@ -14,8 +14,7 @@ use Svea\WebPay\WebService\WebServiceResponse\CustomerIdentity\CreateOrderIdenti
  *
  * @author anne-hal, Kristian Grossman-Madsen
  */
-class CreateOrderResponse extends WebServiceResponse
-{
+class CreateOrderResponse extends WebServiceResponse {
 	/**
 	 * @var string $sveaOrderId Always present. Unique Id for the created order. Used for any further webservice requests.
 	 */
@@ -66,8 +65,7 @@ class CreateOrderResponse extends WebServiceResponse
 	 * @param $response
 	 * @param $logs
 	 */
-	public function __construct($response, $logs = NULL)
-	{
+	public function __construct($response, $logs = NULL) {
 		// was request accepted?
 		$this->accepted = $response->CreateOrderEuResult->Accepted;
 		$this->errormessage = isset($response->CreateOrderEuResult->ErrorMessage) ? $response->CreateOrderEuResult->ErrorMessage : "";
@@ -75,8 +73,7 @@ class CreateOrderResponse extends WebServiceResponse
 		// set response resultcode
 		$this->resultcode = $response->CreateOrderEuResult->ResultCode;
 
-		if(isset($logs))
-		{
+		if(isset($logs)) {
 			$this->logs = $logs;
 		}
 
@@ -99,8 +96,7 @@ class CreateOrderResponse extends WebServiceResponse
 			if (isset($response->CreateOrderEuResult->CreateOrderResult->CustomerIdentity)) {
 				$this->customerIdentity = new CreateOrderIdentity($response->CreateOrderEuResult->CreateOrderResult->CustomerIdentity);
 			}
-			if (isset($response->CreateOrderEuResult->CreateOrderResult->PendingReasons))
-			{
+			if (isset($response->CreateOrderEuResult->CreateOrderResult->PendingReasons)) {
 				$this->pending = 1;
 				$this->pendingReasons = $response->CreateOrderEuResult->CreateOrderResult->PendingReasons;
 			}

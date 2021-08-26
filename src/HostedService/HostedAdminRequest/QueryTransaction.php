@@ -14,8 +14,7 @@ use Svea\WebPay\HostedService\HostedResponse\HostedAdminResponse\QueryTransactio
  *
  * @author Kristian Grossman-Madsen
  */
-class QueryTransaction extends HostedRequest
-{
+class QueryTransaction extends HostedRequest {
 	/**
 	 * @var string $transactionId Required.
 	 */
@@ -26,22 +25,19 @@ class QueryTransaction extends HostedRequest
 	 * Required: $transactionId
 	 * @param ConfigurationProvider $config instance implementing Svea\WebPay\Config\ConfigurationProvider
 	 */
-	function __construct($config)
-	{
+	function __construct($config) {
 		$this->method = "querytransactionid";
 		parent::__construct($config);
 	}
 
-	protected function validateRequestAttributes()
-	{
+	protected function validateRequestAttributes() {
 		$errors = [];
 		$errors = $this->validateTransactionId($this, $errors);
 
 		return $errors;
 	}
 
-	private function validateTransactionId($self, $errors)
-	{
+	private function validateTransactionId($self, $errors) {
 		if (isset($self->transactionId) == FALSE) {
 			$errors['missing value'] = "transactionId is required. Use function setTransactionId() with the SveaOrderId from the createOrder response.";
 		}
@@ -49,8 +45,7 @@ class QueryTransaction extends HostedRequest
 		return $errors;
 	}
 
-	protected function createRequestXml()
-	{
+	protected function createRequestXml() {
 		$XMLWriter = new \XMLWriter();
 
 		$XMLWriter->openMemory();
@@ -65,8 +60,7 @@ class QueryTransaction extends HostedRequest
 		return $XMLWriter->flush();
 	}
 
-	protected function parseResponse($message)
-	{
+	protected function parseResponse($message) {
 		$countryCode = $this->countryCode;
 		$config = $this->config;
 

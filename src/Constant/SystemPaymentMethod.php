@@ -5,8 +5,7 @@ namespace Svea\WebPay\Constant;
 /**
  * Constants for Hosted payments
  */
-abstract class SystemPaymentMethod
-{
+abstract class SystemPaymentMethod {
 	//PaymentMethodType::DIRECT
 	const BANKAXESS = 'BANKAXESS';
 	const DBAKTIAFI = 'DBAKTIAFI';

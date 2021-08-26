@@ -9,16 +9,14 @@ use Svea\WebPay\Checkout\Helper\CheckoutOrderBuilder;
  * Class CreateCheckoutValidator
  * @package Svea\Svea\WebPay\WebPay\Checkout\Validation
  */
-class CreateOrderValidator extends OrderValidator
-{
+class CreateOrderValidator extends OrderValidator {
 	public $errors = [];
 
 	/**
 	 * @param CheckoutOrderBuilder $order
 	 * @return array|mixed
 	 */
-	public function validate($order)
-	{
+	public function validate($order) {
 		$errors = $this->errors;
 
 		$errors = $this->restrictExVatValue($order, $errors);
@@ -45,12 +43,9 @@ class CreateOrderValidator extends OrderValidator
 	 * @param array $errors
 	 * @return array
 	 */
-	private function validateRequireElectronicIdAuthentication($order, $errors)
-	{
-		if($order->getRequireElectronicIdAuthentication() != null)
-		{
-			if(!is_bool($order->getRequireElectronicIdAuthentication()))
-			{
+	private function validateRequireElectronicIdAuthentication($order, $errors) {
+		if($order->getRequireElectronicIdAuthentication() != null) {
+			if(!is_bool($order->getRequireElectronicIdAuthentication())) {
 				$errors['invalid type'] = "requireElectronicIdAuthentication field isn't a boolean type, use setRequireElectronicIdAuthentication(true)";
 			}
 		}
@@ -62,11 +57,9 @@ class CreateOrderValidator extends OrderValidator
 	 * @param array $errors
 	 * @return array
 	 */
-	private function validatePartnerKey($order, $errors)
-	{
+	private function validatePartnerKey($order, $errors) {
 		$guid = $order->getPartnerKey();
-		if($guid != null)
-		{
+		if($guid != null) {
 			if (!preg_match('/^\{?[A-Z0-9]{8}-[A-Z0-9]{4}-[A-Z0-9]{4}-[A-Z0-9]{4}-[A-Z0-9]{12}\}?$/', $guid)) {
 				$errors['invalidFormatPartnerKey'] = "partnerKey is not in guid-format. The partnerKey is provided by Svea. If you're a partner to Svea and wish to use the partnerKey, please contact Svea in order to receive a guid.";
 			}
@@ -79,8 +72,7 @@ class CreateOrderValidator extends OrderValidator
 	 * @param array $errors
 	 * @return array
 	 */
-	private function validateRequiredOrderFields($order, $errors)
-	{
+	private function validateRequiredOrderFields($order, $errors) {
 		// force correct order type of present attributes, see class OrderRow
 		if ($order->countryCode === null ||
 			!ctype_alpha($order->countryCode)
@@ -106,8 +98,7 @@ class CreateOrderValidator extends OrderValidator
 	 * @param array $errors
 	 * @return mixed
 	 */
-	private function validateMerchantSettings(CheckoutOrderBuilder $order, $errors)
-	{
+	private function validateMerchantSettings(CheckoutOrderBuilder $order, $errors) {
 		$merchantValidator = new MerchantValidator();
 		$errors = $merchantValidator->validate($order->getMerchantSettings(), $errors);
 
@@ -119,8 +110,7 @@ class CreateOrderValidator extends OrderValidator
 	 * @param array $errors
 	 * @return array
 	 */
-	protected function validateOrderRows($order, $errors)
-	{
+	protected function validateOrderRows($order, $errors) {
 		$errors = parent::validateOrderRows($order, $errors);
 		$errors = $this->validateCheckoutOrderRows($order, $errors);
 
@@ -132,8 +122,7 @@ class CreateOrderValidator extends OrderValidator
 	 * @param array $errors
 	 * @return array
 	 */
-	private function validateIdentityFlags($order, $errors)
-	{
+	private function validateIdentityFlags($order, $errors) {
 		$identityFlagValidator = new IdentityFlagValidator();
 		$errors = $identityFlagValidator->validate($order->getIdentityFlags(), $errors);
 

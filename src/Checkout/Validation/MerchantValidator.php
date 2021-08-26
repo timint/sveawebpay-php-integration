@@ -8,10 +8,8 @@ use Svea\WebPay\Checkout\Model\MerchantSettings;
  * Class MerchantValidator
  * @package Svea\Svea\WebPay\WebPay\Checkout\Validation
  */
-class MerchantValidator
-{
-	public function validate(MerchantSettings $merchant, $errors)
-	{
+class MerchantValidator {
+	public function validate(MerchantSettings $merchant, $errors) {
 		$termsUri = $merchant->getTermsUri();
 		$checkoutUri = $merchant->getCheckoutUri();
 		$confirmationUri = $merchant->getConfirmationUri();

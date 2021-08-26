@@ -29,8 +29,7 @@ namespace Svea\WebPay\BuildOrder\RowBuilders;
  *	  ->setStatus(NumberedOrderRow::ORDERROWSTATUS_DELIVERED) //optional, one of _DELIVERED, _NOTDELIVERED, _CANCELLED
  *
  */
-class NumberedOrderRow extends OrderRow
-{
+class NumberedOrderRow extends OrderRow {
 	const ORDERROWSTATUS_NOTDELIVERED = 'NotDelivered';
 	const ORDERROWSTATUS_DELIVERED = 'Delivered';
 	const ORDERROWSTATUS_CANCELLED = 'Cancelled';
@@ -60,8 +59,7 @@ class NumberedOrderRow extends OrderRow
 	 * @param string $creditInvoiceIdAsNumeric
 	 * @return $this
 	 */
-	public function setCreditInvoiceId($creditInvoiceIdAsNumeric)
-	{
+	public function setCreditInvoiceId($creditInvoiceIdAsNumeric) {
 		$this->creditInvoiceId = $creditInvoiceIdAsNumeric;
 		return $this;
 	}
@@ -71,8 +69,7 @@ class NumberedOrderRow extends OrderRow
 	 * @param string $invoiceIdAsNumeric
 	 * @return $this
 	 */
-	public function setInvoiceId($invoiceIdAsNumeric)
-	{
+	public function setInvoiceId($invoiceIdAsNumeric) {
 		$this->invoiceId = $invoiceIdAsNumeric;
 		return $this;
 	}
@@ -82,8 +79,7 @@ class NumberedOrderRow extends OrderRow
 	 * @param string $rowNumberAsNumeric
 	 * @return $this
 	 */
-	public function setRowNumber($rowNumberAsNumeric)
-	{
+	public function setRowNumber($rowNumberAsNumeric) {
 		$this->rowNumber = $rowNumberAsNumeric;
 		return $this;
 	}
@@ -93,8 +89,7 @@ class NumberedOrderRow extends OrderRow
 	 * @param string $status
 	 * @return $this
 	 */
-	public function setStatus($status)
-	{
+	public function setStatus($status) {
 		$this->status = $status;
 		return $this;
 	}
@@ -105,8 +100,7 @@ class NumberedOrderRow extends OrderRow
 	 * @param int $rowId
 	 * @return $this
 	 */
-	public function setRowId($rowId)
-	{
+	public function setRowId($rowId) {
 		$this->rowNumber = $rowId;
 		return $this;
 	}

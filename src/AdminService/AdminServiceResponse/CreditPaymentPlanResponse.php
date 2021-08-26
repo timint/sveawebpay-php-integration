@@ -7,15 +7,13 @@ namespace Svea\WebPay\AdminService\AdminServiceResponse;
  *
  * @author ann-hal for Svea Ekonomi Ab | Svea\WebPay\WebPay
  */
-class CreditPaymentPlanResponse extends AdminServiceResponse
-{
+class CreditPaymentPlanResponse extends AdminServiceResponse {
 	/**
 	 * CreditPaymentPlanResponse constructor.
 	 * @param $message
 	 * @param $logs
 	 */
-	function __construct($message, $logs)
-	{
+	function __construct($message, $logs) {
 		$this->formatObject($message, $logs);
 	}
 }

@@ -8,12 +8,10 @@ use Svea\WebPay\BuildOrder\Validator\OrderValidator;
  * Class GetAvailablePartPaymentCampaignsValidator
  * @package Svea\Svea\WebPay\WebPay\Checkout\Validation
  */
-class GetAvailablePartPaymentCampaignsValidator extends OrderValidator
-{
+class GetAvailablePartPaymentCampaignsValidator extends OrderValidator {
 	public $errors = [];
 
-	public function validate($request)
-	{
+	public function validate($request) {
 		$errors = $this->errors;
 		$errors = $this->validatePresetIsCompanyIsSet($request, $errors);
 		$errors = $this->validatePresetIsCompanyIsBoolean($request, $errors);

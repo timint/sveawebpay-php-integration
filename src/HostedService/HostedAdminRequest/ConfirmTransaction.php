@@ -16,8 +16,7 @@ use Svea\WebPay\HostedService\HostedResponse\HostedAdminResponse\ConfirmTransact
  *
  * @author Kristian Grossman-Madsen
  */
-class ConfirmTransaction extends HostedRequest
-{
+class ConfirmTransaction extends HostedRequest {
 
 	/**
 	 * @var string $transactionId Required.
@@ -34,14 +33,12 @@ class ConfirmTransaction extends HostedRequest
 	 * Required: $transactionId, $captureDate
 	 * @param ConfigurationProvider $config instance implementing Svea\WebPay\Config\ConfigurationProvider
 	 */
-	function __construct($config)
-	{
+	function __construct($config) {
 		$this->method = "confirm";
 		parent::__construct($config);
 	}
 
-	protected function validateRequestAttributes()
-	{
+	protected function validateRequestAttributes() {
 		$errors = [];
 		$errors = $this->validateTransactionId($this, $errors);
 		$errors = $this->validateCaptureDate($this, $errors);
@@ -49,8 +46,7 @@ class ConfirmTransaction extends HostedRequest
 		return $errors;
 	}
 
-	private function validateTransactionId($self, $errors)
-	{
+	private function validateTransactionId($self, $errors) {
 		if (isset($self->transactionId) == FALSE) {
 			$errors['missing value'] = "transactionId is required. Use function setTransactionId() with the SveaOrderId from the createOrder response.";
 		}
@@ -59,8 +55,7 @@ class ConfirmTransaction extends HostedRequest
 	}
 
 	// this is optional coming through the api, as the orderbuilder deliverCardOrder sets a default capturedate
-	private function validateCaptureDate($self, $errors)
-	{
+	private function validateCaptureDate($self, $errors) {
 		if (isset($self->captureDate) == FALSE) {
 			$errors['missing value'] = "captureDate is required. Use function setCaptureDate().";
 		}
@@ -69,8 +64,7 @@ class ConfirmTransaction extends HostedRequest
 	}
 
 	/** returns xml for hosted webservice "confirm" request */
-	protected function createRequestXml()
-	{
+	protected function createRequestXml() {
 		$XMLWriter = new \XMLWriter();
 
 		$XMLWriter->openMemory();
@@ -86,8 +80,7 @@ class ConfirmTransaction extends HostedRequest
 		return $XMLWriter->flush();
 	}
 
-	protected function parseResponse($message)
-	{
+	protected function parseResponse($message) {
 		$countryCode = $this->countryCode;
 		$config = $this->config;
 

@@ -13,8 +13,7 @@ use Svea\WebPay\HostedService\HostedResponse\HostedAdminResponse\CreditTransacti
  *
  * @author Kristian Grossman-Madsen
  */
-class CreditTransaction extends HostedRequest
-{
+class CreditTransaction extends HostedRequest {
 
 	/**
 	 * @var string $transactionId Required.
@@ -31,14 +30,12 @@ class CreditTransaction extends HostedRequest
 	 * Required: $transactionId, $creditAmount
 	 * @param ConfigurationProvider $config instance implementing Svea\WebPay\Config\ConfigurationProvider
 	 */
-	function __construct($config)
-	{
+	function __construct($config) {
 		$this->method = "credit";
 		parent::__construct($config);
 	}
 
-	protected function validateRequestAttributes()
-	{
+	protected function validateRequestAttributes() {
 		$errors = [];
 		$errors = $this->validateTransactionId($this, $errors);
 		$errors = $this->validateCreditAmount($this, $errors);
@@ -46,8 +43,7 @@ class CreditTransaction extends HostedRequest
 		return $errors;
 	}
 
-	private function validateTransactionId($self, $errors)
-	{
+	private function validateTransactionId($self, $errors) {
 		if (isset($self->transactionId) == FALSE) {
 			$errors['missing value'] = "transactionId is required. Use function setTransactionId() with the SveaOrderId from the createOrder response.";
 		}
@@ -55,8 +51,7 @@ class CreditTransaction extends HostedRequest
 		return $errors;
 	}
 
-	private function validateCreditAmount($self, $errors)
-	{
+	private function validateCreditAmount($self, $errors) {
 		if (isset($self->creditAmount) == FALSE) {
 			$errors['missing value'] = "creditAmount is required. Use function setCreditAmount().";
 		}
@@ -64,8 +59,7 @@ class CreditTransaction extends HostedRequest
 		return $errors;
 	}
 
-	protected function createRequestXml()
-	{
+	protected function createRequestXml() {
 		$XMLWriter = new \XMLWriter();
 
 		$XMLWriter->openMemory();
@@ -81,8 +75,7 @@ class CreditTransaction extends HostedRequest
 		return $XMLWriter->flush();
 	}
 
-	protected function parseResponse($message)
-	{
+	protected function parseResponse($message) {
 		$countryCode = $this->countryCode;
 		$config = $this->config;
 

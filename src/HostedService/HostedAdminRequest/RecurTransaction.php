@@ -15,8 +15,7 @@ use Svea\WebPay\HostedService\HostedResponse\HostedAdminResponse\RecurTransactio
  *
  * @author Kristian Grossman-Madsen
  */
-class RecurTransaction extends HostedRequest
-{
+class RecurTransaction extends HostedRequest {
 	/**
 	 * @var string $subscriptionId Required. This is the subscription id returned with the inital transaction that set up the subscription response.
 	 */
@@ -48,14 +47,12 @@ class RecurTransaction extends HostedRequest
 	 * Optional: $currency
 	 * @param ConfigurationProvider $config instance implementing Svea\WebPay\Config\ConfigurationProvider
 	 */
-	function __construct($config)
-	{
+	function __construct($config) {
 		$this->method = "recur";
 		parent::__construct($config);
 	}
 
-	protected function validateRequestAttributes()
-	{
+	protected function validateRequestAttributes() {
 		$errors = [];
 		$errors = $this->validateAmount($this, $errors);
 		$errors = $this->validateCustomerRefNo($this, $errors);
@@ -64,8 +61,7 @@ class RecurTransaction extends HostedRequest
 		return $errors;
 	}
 
-	private function validateAmount($self, $errors)
-	{
+	private function validateAmount($self, $errors) {
 		if (isset($self->amount) == FALSE) {
 			$errors['missing value'] = "amount is required. Use function setAmount().";
 		}
@@ -73,8 +69,7 @@ class RecurTransaction extends HostedRequest
 		return $errors;
 	}
 
-	private function validateCustomerRefNo($self, $errors)
-	{
+	private function validateCustomerRefNo($self, $errors) {
 		if (isset($self->customerRefNo) == FALSE) {
 			$errors['missing value'] = "customerRefNo is required. Use function setCustomerRefNo (also check setClientOrderNumber in order builder).";
 		}
@@ -82,8 +77,7 @@ class RecurTransaction extends HostedRequest
 		return $errors;
 	}
 
-	private function validateSubscriptionId($self, $errors)
-	{
+	private function validateSubscriptionId($self, $errors) {
 		if (isset($self->subscriptionId) == FALSE) {
 			$errors['missing value'] = "subscriptionId is required. Use function setSubscriptionId() with the subscriptionId from the createOrder response.";
 		}
@@ -91,8 +85,7 @@ class RecurTransaction extends HostedRequest
 		return $errors;
 	}
 
-	protected function createRequestXml()
-	{
+	protected function createRequestXml() {
 		$XMLWriter = new \XMLWriter();
 
 		$XMLWriter->openMemory();
@@ -115,8 +108,7 @@ class RecurTransaction extends HostedRequest
 		return $XMLWriter->flush();
 	}
 
-	protected function parseResponse($message)
-	{
+	protected function parseResponse($message) {
 		$countryCode = $this->countryCode;
 		$config = $this->config;
 

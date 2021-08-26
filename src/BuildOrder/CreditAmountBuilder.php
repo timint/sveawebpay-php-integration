@@ -12,8 +12,7 @@ use Svea\WebPay\BuildOrder\Validator\ValidationException;
  * The Svea\WebPay\WebPayAdmin::creditAmount entrypoint method is used to credit an amount in an order after it has
  * been delivered. Supports Payment Plan order.
  */
-class CreditAmountBuilder extends CheckoutAdminOrderBuilder
-{
+class CreditAmountBuilder extends CheckoutAdminOrderBuilder {
 	/**
 	 * @var ConfigurationProvider $conf
 	 */
@@ -55,8 +54,7 @@ class CreditAmountBuilder extends CheckoutAdminOrderBuilder
 	 * @param float $amountAsFloat
 	 * @return $this
 	 */
-	public function setAmountIncVat($amountAsFloat)
-	{
+	public function setAmountIncVat($amountAsFloat) {
 		$this->amountIncVat = $amountAsFloat;
 
 		return $this;
@@ -71,8 +69,7 @@ class CreditAmountBuilder extends CheckoutAdminOrderBuilder
 	 * @param string $countryCodeAsString
 	 * @return $this
 	 */
-	public function setCountryCode($countryCodeAsString)
-	{
+	public function setCountryCode($countryCodeAsString) {
 		$this->countryCode = $countryCodeAsString;
 
 		return $this;
@@ -86,8 +83,7 @@ class CreditAmountBuilder extends CheckoutAdminOrderBuilder
 	 * @param string $contractNumberAsString
 	 * @return $this
 	 */
-	public function setContractNumber($contractNumberAsString)
-	{
+	public function setContractNumber($contractNumberAsString) {
 		$this->contractNumber = $contractNumberAsString;
 
 		return $this;
@@ -99,8 +95,7 @@ class CreditAmountBuilder extends CheckoutAdminOrderBuilder
 	 * @param string $descriptionAsString
 	 * @return $this
 	 */
-	public function setDescription($descriptionAsString)
-	{
+	public function setDescription($descriptionAsString) {
 		$this->description = $descriptionAsString;
 
 		return $this;
@@ -111,8 +106,7 @@ class CreditAmountBuilder extends CheckoutAdminOrderBuilder
 	 * CreditAmount request
 	 * @return CreditAmountRequest
 	 */
-	public function creditPaymentPlanAmount()
-	{
+	public function creditPaymentPlanAmount() {
 		$this->orderType = ConfigurationProvider::PAYMENTPLAN_TYPE;
 
 		// CreditPaymentPlan amount is really a CancelPaymentPlanAmount in API but wrapped in lib
@@ -125,8 +119,7 @@ class CreditAmountBuilder extends CheckoutAdminOrderBuilder
 	 *
 	 * @return CreditAmountAccountCreditRequest
 	 */
-	public function creditAccountCredit()
-	{
+	public function creditAccountCredit() {
 		$this->orderType = ConfigurationProvider::ACCOUNTCREDIT_TYPE;
 
 		return new CreditAmountAccountCreditRequest($this);
@@ -138,8 +131,7 @@ class CreditAmountBuilder extends CheckoutAdminOrderBuilder
 	 * @throws ValidationException
 	 * @throws \Exception
 	 */
-	public function creditCheckoutAmount()
-	{
+	public function creditCheckoutAmount() {
 		return new CreditOrderAmountService($this);
 	}
 }

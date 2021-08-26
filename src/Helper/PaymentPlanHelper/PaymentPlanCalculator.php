@@ -8,8 +8,7 @@ use Svea\WebPay\Helper\PaymentPlanHelper\CampaignTypeCalculator\InterestFreePaym
 use Svea\WebPay\Helper\PaymentPlanHelper\CampaignTypeCalculator\StandardPaymentPlanCalculator;
 use Svea\WebPay\BuildOrder\Validator\ValidationException;
 
-class PaymentPlanCalculator
-{
+class PaymentPlanCalculator {
 	/**
 	 * Calculates total amount that has to be payed for a single campaign
 	 *
@@ -19,18 +18,15 @@ class PaymentPlanCalculator
 	 * @return int ; Returns total amount that should be paid for the provided campaign
 	 * @throws ValidationException
 	 */
-	public static function getTotalAmountToPay($totalPrice, $campaign, $decimals = 0)
-	{
+	public static function getTotalAmountToPay($totalPrice, $campaign, $decimals = 0) {
 		$campaign = (array)$campaign;
 
 		// The Checkout API returns array keys with the first letter, we have to convert the first letter to lowercase
-		if(array_key_exists('PaymentPlanType', $campaign) == true)
-		{
+		if(array_key_exists('PaymentPlanType', $campaign) == true) {
 			$campaign = self::convertFromCheckoutArray($campaign);
 		}
 
-		switch($campaign['paymentPlanType'])
-		{
+		switch($campaign['paymentPlanType']) {
 			case "InterestAndAmortizationFree":
 				return InterestAndAmortizationFreePaymentPlanCalculator::calculateTotalAmountToPay($totalPrice, $campaign, $decimals);
 				break;
@@ -54,18 +50,15 @@ class PaymentPlanCalculator
 	 * @return int ; Returns monthly amount that should be paid for the provided campaign
 	 * @throws ValidationException
 	 */
-	public static function getMonthlyAmountToPay($totalPrice, $campaign, $decimals = 0)
-	{
+	public static function getMonthlyAmountToPay($totalPrice, $campaign, $decimals = 0) {
 		$campaign = (array)$campaign;
 
 		// The Checkout API returns array keys with the first letter, we have to convert the first letter to lowercase
-		if(array_key_exists('PaymentPlanType', $campaign) == true)
-		{
+		if(array_key_exists('PaymentPlanType', $campaign) == true) {
 			$campaign = self::convertFromCheckoutArray($campaign);
 		}
 
-		switch($campaign['paymentPlanType'])
-		{
+		switch($campaign['paymentPlanType']) {
 			case "InterestAndAmortizationFree":
 				return InterestAndAmortizationFreePaymentPlanCalculator::calculateMonthlyAmountToPay($totalPrice, $campaign, $decimals);
 				break;
@@ -88,18 +81,15 @@ class PaymentPlanCalculator
 	 * @return int ; Returns effective interest rate for the provided campaign
 	 * @throws ValidationException
 	 */
-	public static function getEffectiveInterestRate($totalPrice, $campaign, $decimals = 0)
-	{
+	public static function getEffectiveInterestRate($totalPrice, $campaign, $decimals = 0) {
 		$campaign = (array)$campaign;
 
 		// The Checkout API returns array keys with the first letter, we have to convert the first letter to lowercase
-		if(array_key_exists('PaymentPlanType', $campaign) == true)
-		{
+		if(array_key_exists('PaymentPlanType', $campaign) == true) {
 			$campaign = self::convertFromCheckoutArray($campaign);
 		}
 
-		switch($campaign['paymentPlanType'])
-		{
+		switch($campaign['paymentPlanType']) {
 			case "InterestAndAmortizationFree":
 				return InterestAndAmortizationFreePaymentPlanCalculator::calculateEffectiveInterestRate($totalPrice, $campaign, $decimals);
 				break;
@@ -122,18 +112,15 @@ class PaymentPlanCalculator
 	 * @return array ; Returns array of campaign with effective interest rate, monthly amount to pay and total amount to pay
 	 * @throws ValidationException
 	 */
-	public static function getAllCalculations($totalPrice, $campaign , $decimals = 0)
-	{
+	public static function getAllCalculations($totalPrice, $campaign , $decimals = 0) {
 		$campaign = (array)$campaign;
 
 		// The Checkout API returns array keys with the first letter, we have to convert the first letter to lowercase
-		if(array_key_exists('PaymentPlanType', $campaign) == true)
-		{
+		if(array_key_exists('PaymentPlanType', $campaign) == true) {
 			$campaign = self::convertFromCheckoutArray($campaign);
 		}
 
-		switch($campaign['paymentPlanType'])
-		{
+		switch($campaign['paymentPlanType']) {
 			case "InterestAndAmortizationFree":
 				$campaign['effectiveInterestRate'] = InterestAndAmortizationFreePaymentPlanCalculator::calculateEffectiveInterestRate($totalPrice, $campaign, $decimals);
 				$campaign['monthlyAmountToPay'] = InterestAndAmortizationFreePaymentPlanCalculator::calculateMonthlyAmountToPay($totalPrice, $campaign, $decimals);
@@ -152,8 +139,7 @@ class PaymentPlanCalculator
 			default:
 				throw new ValidationException("paymentPlanType not recognized");
 		}
-		if(array_key_exists('checkout', $campaign) == true)
-		{
+		if(array_key_exists('checkout', $campaign) == true) {
 			$campaign = self::convertToCheckoutArray($campaign);
 		}
 		return $campaign;
@@ -170,15 +156,12 @@ class PaymentPlanCalculator
 	 * @return array ; Returns array of campaigns with their params and total amount to be paid
 	 * @throws ValidationException
 	 */
-	public static function getTotalAmountToPayFromCampaigns($totalPrice, $campaigns, $decimals = 0, $ignoreMinMaxFlag = false)
-	{
+	public static function getTotalAmountToPayFromCampaigns($totalPrice, $campaigns, $decimals = 0, $ignoreMinMaxFlag = false) {
 		$result = [];
 
-		foreach($campaigns as $key => $campaign)
-		{
+		foreach($campaigns as $key => $campaign) {
 			$campaign = (array)$campaign;
-			if(array_key_exists('PaymentPlanType', $campaign) == true)
-			{
+			if(array_key_exists('PaymentPlanType', $campaign) == true) {
 				$campaign = self::convertFromCheckoutArray($campaign);
 			}
 			if($ignoreMinMaxFlag || $campaign['fromAmount'] <= $totalPrice && $campaign['toAmount'] >= $totalPrice) {
@@ -206,15 +189,12 @@ class PaymentPlanCalculator
 	 * @return array ; Returns array of campaigns with their params and monthly amount to be paid
 	 * @throws ValidationException
 	 */
-	public static function getMonthlyAmountToPayFromCampaigns($totalPrice, $campaigns, $decimals = 0, $ignoreMinMaxFlag = false)
-	{
+	public static function getMonthlyAmountToPayFromCampaigns($totalPrice, $campaigns, $decimals = 0, $ignoreMinMaxFlag = false) {
 		$result = [];
 
-		foreach($campaigns as $key => $campaign)
-		{
+		foreach($campaigns as $key => $campaign) {
 			$campaign = (array)$campaign;
-			if(array_key_exists('PaymentPlanType', $campaign) == true)
-			{
+			if(array_key_exists('PaymentPlanType', $campaign) == true) {
 				$campaign = self::convertFromCheckoutArray($campaign);
 			}
 			if($ignoreMinMaxFlag || $campaign['fromAmount'] <= $totalPrice && $campaign['toAmount'] >= $totalPrice) {
@@ -241,15 +221,12 @@ class PaymentPlanCalculator
 	 * @return array ; Returns array of campaigns with their params and their respective effective interest rate
 	 * @throws ValidationException
 	 */
-	public static function getEffectiveInterestRateFromCampaigns($totalPrice, $campaigns, $decimals = 0, $ignoreMinMaxFlag = false)
-	{
+	public static function getEffectiveInterestRateFromCampaigns($totalPrice, $campaigns, $decimals = 0, $ignoreMinMaxFlag = false) {
 		$result = [];
 
-		foreach($campaigns as $key => $campaign)
-		{
+		foreach($campaigns as $key => $campaign) {
 			$campaign = (array)$campaign;
-			if(array_key_exists('PaymentPlanType', $campaign) == true)
-			{
+			if(array_key_exists('PaymentPlanType', $campaign) == true) {
 				$campaign = self::convertFromCheckoutArray($campaign);
 			}
 			if($ignoreMinMaxFlag || $campaign['fromAmount'] <= $totalPrice && $campaign['toAmount'] >= $totalPrice) {
@@ -276,15 +253,12 @@ class PaymentPlanCalculator
 	 * @return array ; Returns array of campaigns with their params and the result of the calculations
 	 * @throws ValidationException
 	 */
-	public static function getAllCalculationsFromCampaigns($totalPrice, $campaigns, $decimals = 0, $ignoreMinMaxFlag = false)
-	{
+	public static function getAllCalculationsFromCampaigns($totalPrice, $campaigns, $decimals = 0, $ignoreMinMaxFlag = false) {
 		$result = [];
 
-		foreach($campaigns as $key => $campaign)
-		{
+		foreach($campaigns as $key => $campaign) {
 			$campaign = (array)$campaign;
-			if(array_key_exists('PaymentPlanType', $campaign) == true)
-			{
+			if(array_key_exists('PaymentPlanType', $campaign) == true) {
 				$campaign = self::convertFromCheckoutArray($campaign);
 			}
 			if($ignoreMinMaxFlag || $campaign['fromAmount'] <= $totalPrice && $campaign['toAmount'] >= $totalPrice) {
@@ -308,12 +282,10 @@ class PaymentPlanCalculator
 	 * @param array ; Campaign returned from GetAvailablePartPaymentCampaigns
 	 * @return array ; converted campaign
 	 */
-	private static function convertFromCheckoutArray($campaign)
-	{
+	private static function convertFromCheckoutArray($campaign) {
 		$campaign = self::convertFirstArrayKeyToLowerCase($campaign);
 		$campaign['checkout'] = true;
-		switch($campaign['paymentPlanType'])
-		{
+		switch($campaign['paymentPlanType']) {
 			case 0:
 				$campaign['paymentPlanType'] = "Standard";
 				break;
@@ -332,12 +304,10 @@ class PaymentPlanCalculator
 	 * @param array
 	 * @return array
 	 */
-	private static function convertToCheckoutArray($campaign)
-	{
+	private static function convertToCheckoutArray($campaign) {
 		$campaign = self::convertFirstArrayKeyToUpperCase($campaign);
 		unset($campaign['Checkout']);
-		switch($campaign['PaymentPlanType'])
-		{
+		switch($campaign['PaymentPlanType']) {
 			case "Standard":
 				$campaign['PaymentPlanType'] = 0;
 				break;
@@ -351,8 +321,7 @@ class PaymentPlanCalculator
 		return $campaign;
 	}
 
-	private static function convertFirstArrayKeyToLowerCase($campaign)
-	{
+	private static function convertFirstArrayKeyToLowerCase($campaign) {
 		$campaign = array_combine(
 			array_map('lcfirst', array_keys($campaign)),
 			array_values($campaign)
@@ -360,8 +329,7 @@ class PaymentPlanCalculator
 		return $campaign;
 	}
 
-	private static function convertFirstArrayKeyToUpperCase($campaign)
-	{
+	private static function convertFirstArrayKeyToUpperCase($campaign) {
 		$campaign = array_combine(
 			array_map('ucfirst', array_keys($campaign)),
 			array_values($campaign)

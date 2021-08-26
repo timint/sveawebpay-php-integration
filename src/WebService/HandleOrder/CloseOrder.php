@@ -13,13 +13,11 @@ use Svea\WebPay\WebService\SveaSoap\SveaCloseOrderInformation;
  * Cancel undelivered Invoice or PaymentPlan orders.
  * @author Anneli Halld'n, Daniel Brolund for Svea Webpay
  */
-class CloseOrder extends HandleOrder
-{
+class CloseOrder extends HandleOrder {
 	/**
 	 * @param CloseOrderBuilder $CloseOrderBuilder
 	 */
-	public function __construct($CloseOrderBuilder)
-	{
+	public function __construct($CloseOrderBuilder) {
 		parent::__construct($CloseOrderBuilder);
 	}
 
@@ -27,8 +25,7 @@ class CloseOrder extends HandleOrder
 	 * Prepare and sends request
 	 * @return type CloseOrderEuResponse
 	 */
-	public function doRequest()
-	{
+	public function doRequest() {
 		$requestObject = $this->prepareRequest();
 		$request = new SveaDoRequest($this->orderBuilder->conf, $this->orderBuilder->orderType, "CloseOrderEu", $requestObject, $this->orderBuilder->logging);
 		$responseObject = new SveaResponse($request->result['requestResult'], "", NULL, NULL, isset($request->result['logs']) ? $request->result['logs'] : NULL);
@@ -40,8 +37,7 @@ class CloseOrder extends HandleOrder
 	 * Returns prepared closeOrder request
 	 * @return SveaRequest
 	 */
-	public function prepareRequest()
-	{
+	public function prepareRequest() {
 		$this->validateRequest();
 
 		$sveaCloseOrder = new SveaCloseOrder;
@@ -56,16 +52,14 @@ class CloseOrder extends HandleOrder
 		return $object;
 	}
 
-	public function validate($order)
-	{
+	public function validate($order) {
 		$errors = [];
 		$errors = $this->validateOrderId($order, $errors);
 
 		return $errors;
 	}
 
-	private function validateOrderId($order, $errors)
-	{
+	private function validateOrderId($order, $errors) {
 		if (isset($order->orderId) == FALSE) {
 			$errors['missing value'] = "OrderId is required. Use function setOrderId() with the SveaOrderId from the createOrder response.";
 		}

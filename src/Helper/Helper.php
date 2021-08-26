@@ -11,8 +11,7 @@ use Svea\WebPay\WebService\GetPaymentPlanParams\PaymentPlanPricePerMonth;
  *
  * @author Kristian Grossman-Madsen
  */
-class Helper
-{
+class Helper {
 
 	/**
 	 * Takes a total discount value ex. vat, a mean tax rate & an array of allowed tax rates.
@@ -23,8 +22,7 @@ class Helper
 	 *
 	 * @deprecated -- use Helper::splitMeanAcrossTaxRates() instead
 	 */
-	static function splitMeanToTwoTaxRates($discountAmountExVat, $discountMeanVat, $discountName, $discountDescription, $allowedTaxRates)
-	{
+	static function splitMeanToTwoTaxRates($discountAmountExVat, $discountMeanVat, $discountName, $discountDescription, $allowedTaxRates) {
 
 		$fixedDiscounts = [];
 
@@ -73,8 +71,7 @@ class Helper
 	 * @param int $iDec
 	 * @return float
 	 */
-	static function bround($dVal, $iDec = 0)
-	{
+	static function bround($dVal, $iDec = 0) {
 		return round($dVal, $iDec, PHP_ROUND_HALF_EVEN);
 	}
 
@@ -82,8 +79,7 @@ class Helper
 	 * Takes a createOrderBuilder object, iterates over its orderRows, and
 	 * returns an array containing the distinct taxrates present in the order
 	 */
-	static function getTaxRatesInOrder($order)
-	{
+	static function getTaxRatesInOrder($order) {
 		$taxRates = [];
 
 		foreach ($order->orderRows as $orderRow) {
@@ -111,8 +107,7 @@ class Helper
 	 * @param string $address --
 	 * @return string -- array with the entire streetaddress in position 0, the streetname in position 1 and housenumber in position 2
 	 */
-	static function splitStreetAddress($address)
-	{
+	static function splitStreetAddress($address) {
 		//Separates the street from the housenumber according to testcases, handles unicode combined code points
 		$pattern =
 			"/^" .					   // start of string
@@ -145,8 +140,7 @@ class Helper
 	 * @param ConfigurationProvider $config
 	 * @return string in json format
 	 */
-	static function getLibraryAndPlatformPropertiesAsJson($config)
-	{
+	static function getLibraryAndPlatformPropertiesAsJson($config) {
 
 		$libraryProperties = Helper::getSveaLibraryProperties();
 		$libraryName = $libraryProperties['library_name'];
@@ -168,8 +162,7 @@ class Helper
 		return $properties_json;
 	}
 
-	static function getSveaLibraryProperties()
-	{
+	static function getSveaLibraryProperties() {
 		if (!defined('SVEA_REQUEST_DIR')) {
 			define('SVEA_REQUEST_DIR', dirname(__FILE__));
 		}
@@ -192,8 +185,7 @@ class Helper
 	 * @param ConfigurationProvider $config
 	 * @return array
 	 */
-	static function getSveaIntegrationProperties($config)
-	{
+	static function getSveaIntegrationProperties($config) {
 		$integrationPlatform =
 			method_exists($config, "getIntegrationPlatform") ? $config->getIntegrationPlatform() : "Integration platform not available";
 		$integrationCompany =
@@ -226,8 +218,7 @@ class Helper
 	 * @param bool $amountExVatFlag
 	 * @return array
 	 */
-	static function splitMeanAcrossTaxRates($discountAmount, $discountMeanVat, $discountName, $discountDescription, $allowedTaxRates, $amountExVatFlag = true)
-	{
+	static function splitMeanAcrossTaxRates($discountAmount, $discountMeanVat, $discountName, $discountDescription, $allowedTaxRates, $amountExVatFlag = true) {
 
 		$fixedDiscounts = [];
 
@@ -307,13 +298,11 @@ class Helper
 	 * @param int $decimals ; optional, defaults to 0
 	 * @return PaymentPlanPricePerMonth
 	 */
-	public static function paymentPlanPricePerMonth($price, $paymentPlanParamsResponseObject, $ignoreMaxAndMinFlag = false, $decimals = 0)
-	{
+	public static function paymentPlanPricePerMonth($price, $paymentPlanParamsResponseObject, $ignoreMaxAndMinFlag = false, $decimals = 0) {
 		return new PaymentPlanPricePerMonth($price, $paymentPlanParamsResponseObject, $ignoreMaxAndMinFlag, $decimals);
 	}
 
-	public static function getCardPayCurrencies()
-	{
+	public static function getCardPayCurrencies() {
 		$currencyList = [
 			"SEK",
 			"NOK",
@@ -326,55 +315,43 @@ class Helper
 		return $currencyList;
 	}
 
-	public static function isCardPayCurrency($currency)
-	{
-		foreach(self::getCardPayCurrencies() as $cardPayCurrency)
-		{
-			if(strtoupper($currency) === $cardPayCurrency)
-			{
+	public static function isCardPayCurrency($currency) {
+		foreach(self::getCardPayCurrencies() as $cardPayCurrency) {
+			if(strtoupper($currency) === $cardPayCurrency) {
 				return true;
 			}
 		}
 		return false;
 	}
 
-	public static function isValidPeppolId($peppolId)
-	{
+	public static function isValidPeppolId($peppolId) {
 
-		if(is_numeric(substr($peppolId,0,4)) == false ) // First 4 characters must be numeric
-		{
+		if(is_numeric(substr($peppolId,0,4)) == false ) // First 4 characters must be numeric {
 			return false;
 		}
 
-		if(substr($peppolId,4,1) != ":") // Fifth character must be ':'.
-		{
+		if(substr($peppolId,4,1) != ":") // Fifth character must be ':'. {
 			return false;
 		}
 
-		if(ctype_alnum(substr($peppolId,6)) == false) // Rest of the characters must be alphanumeric
-		{
+		if(ctype_alnum(substr($peppolId,6)) == false) // Rest of the characters must be alphanumeric {
 			return false;
 		}
 
-		if(strlen($peppolId) > 55) // String cannot be longer 55 characters
-		{
+		if(strlen($peppolId) > 55) // String cannot be longer 55 characters {
 			return false;
 		}
 
-		if(strlen($peppolId) < 6) // String must be longer than 5 characters
-		{
+		if(strlen($peppolId) < 6) // String must be longer than 5 characters {
 			return false;
 		}
 		return true;
 	}
 
-	public static function objectToArray($data)
-	{
-		if (is_array($data) || is_object($data))
-		{
+	public static function objectToArray($data) {
+		if (is_array($data) || is_object($data)) {
 			$result = [];
-			foreach ($data as $key => $value)
-			{
+			foreach ($data as $key => $value) {
 				$result[$key] = Helper::objectToArray($value);
 			}
 			return $result;

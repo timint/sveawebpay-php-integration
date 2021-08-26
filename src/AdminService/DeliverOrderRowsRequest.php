@@ -15,8 +15,7 @@ use Svea\WebPay\Helper\Helper;
  *
  * @author Kristian Grossman-Madsen
  */
-class DeliverOrderRowsRequest extends AdminServiceRequest
-{
+class DeliverOrderRowsRequest extends AdminServiceRequest {
 	/**
 	 * @var DeliverOrderRowsBuilder $orderBuilder
 	 */
@@ -25,8 +24,7 @@ class DeliverOrderRowsRequest extends AdminServiceRequest
 	/**
 	 * @param DeliverOrderRowsBuilder $deliverOrderRowsBuilder
 	 */
-	public function __construct($deliverOrderRowsBuilder)
-	{
+	public function __construct($deliverOrderRowsBuilder) {
 		$this->action = "DeliverPartial";
 		$this->orderBuilder = $deliverOrderRowsBuilder;
 	}
@@ -36,8 +34,7 @@ class DeliverOrderRowsRequest extends AdminServiceRequest
 	 * @return DeliverOrderRowsRequest
 	 * @throws ValidationException
 	 */
-	public function prepareRequest()
-	{
+	public function prepareRequest() {
 		$this->validateRequest();
 
 		foreach ($this->orderBuilder->rowsToDeliver as $rowToDeliver) {
@@ -62,8 +59,7 @@ class DeliverOrderRowsRequest extends AdminServiceRequest
 		return $soapRequest;
 	}
 
-	public function validate()
-	{
+	public function validate() {
 		$errors = [];
 		$errors = $this->validateOrderId($errors);
 		$errors = $this->validateOrderType($errors);
@@ -73,8 +69,7 @@ class DeliverOrderRowsRequest extends AdminServiceRequest
 		return $errors;
 	}
 
-	private function validateOrderId($errors)
-	{
+	private function validateOrderId($errors) {
 		if (isset($this->orderBuilder->orderId) == FALSE) {
 			$errors[] = ['missing value' => "orderId is required."];
 		}
@@ -82,8 +77,7 @@ class DeliverOrderRowsRequest extends AdminServiceRequest
 		return $errors;
 	}
 
-	private function validateOrderType($errors)
-	{
+	private function validateOrderType($errors) {
 		if (isset($this->orderBuilder->orderType) == FALSE) {
 			$errors[] = ['missing value' => "orderType is required."];
 		}
@@ -91,8 +85,7 @@ class DeliverOrderRowsRequest extends AdminServiceRequest
 		return $errors;
 	}
 
-	private function validateCountryCode($errors)
-	{
+	private function validateCountryCode($errors) {
 		if (isset($this->orderBuilder->countryCode) == FALSE) {
 			$errors[] = ['missing value' => "countryCode is required."];
 		}
@@ -100,8 +93,7 @@ class DeliverOrderRowsRequest extends AdminServiceRequest
 		return $errors;
 	}
 
-	private function validateRowsToDeliver($errors)
-	{
+	private function validateRowsToDeliver($errors) {
 		if (isset($this->orderBuilder->rowsToDeliver) == FALSE) {
 			$errors[] = ['missing value' => "rowsToDeliver is required."];
 		}

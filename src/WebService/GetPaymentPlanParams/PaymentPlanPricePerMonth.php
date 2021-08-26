@@ -20,8 +20,7 @@ use Svea\WebPay\Helper\Helper;
  *
  * @author Anneli Halld'n, Daniel Brolund, Kristian Grossman-Madsen for Svea Webpay
  */
-class PaymentPlanPricePerMonth
-{
+class PaymentPlanPricePerMonth {
 	public $values = [];
 
 	/**
@@ -31,8 +30,7 @@ class PaymentPlanPricePerMonth
 	 * @param bool $ignoreMaxAndMinFlag
 	 * @param int decimals
 	 */
-	function __construct($price, $params, $ignoreMaxAndMinFlag = false, $decimals = 0)
-	{
+	function __construct($price, $params, $ignoreMaxAndMinFlag = false, $decimals = 0) {
 		$this->calculate($price, $params, $ignoreMaxAndMinFlag, $decimals);
 	}
 
@@ -42,8 +40,7 @@ class PaymentPlanPricePerMonth
 	 * @param $ignoreMaxAndMinFlag
 	 * @param $decimals
 	 */
-	private function calculate($price, $params, $ignoreMaxAndMinFlag, $decimals)
-	{
+	private function calculate($price, $params, $ignoreMaxAndMinFlag, $decimals) {
 		if (!empty($params)) {
 			foreach ($params->campaignCodes as $key => $value) {
 				if ($ignoreMaxAndMinFlag || ($price >= $value->fromAmount && $price <= $value->toAmount)) {

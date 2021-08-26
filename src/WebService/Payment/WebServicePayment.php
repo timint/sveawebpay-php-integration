@@ -24,8 +24,7 @@ use Svea\WebPay\WebService\WebServiceResponse\CreateOrderResponse;
  * @author Anneli Halld'n, Daniel Brolund, Fredrik Sundell for Svea Webpay
  */
 
-class WebServicePayment
-{
+class WebServicePayment {
 	public $order;
 
 	public $requestObject;
@@ -34,8 +33,7 @@ class WebServicePayment
 	 * WebServicePayment constructor.
 	 * @param $order
 	 */
-	public function __construct($order)
-	{
+	public function __construct($order) {
 		$this->order = $order;
 	}
 
@@ -44,8 +42,7 @@ class WebServicePayment
 	 * @return CreateOrderResponse
 	 * @throws ValidationException
 	 */
-	public function doRequest()
-	{
+	public function doRequest() {
 		$object = $this->prepareRequest();
 
 		$request = new SveaDoRequest($this->order->conf, $this->orderType, "CreateOrderEu", $object, $this->order->logging);
@@ -60,8 +57,7 @@ class WebServicePayment
 	 * @return SveaRequest SveaRequest
 	 * @throws ValidationException
 	 */
-	public function prepareRequest()
-	{
+	public function prepareRequest() {
 		// validate order, throw exception on validation failure
 		$errors = $this->validateOrder();
 		if (count($errors) > 0) {
@@ -90,8 +86,7 @@ class WebServicePayment
 		$orderinformation->CustomerReference = $this->order->customerReference;
 		$orderinformation->PeppolId = $this->order->peppolId;
 
-		if(isset($this->order->orderDeliveryAddress))
-		{
+		if(isset($this->order->orderDeliveryAddress)) {
 			$orderinformation->OrderDeliveryAddress = $this->formatOrderDeliveryAddress();
 
 		}
@@ -106,8 +101,7 @@ class WebServicePayment
 		return $object;
 	}
 
-	public function validateOrder()
-	{
+	public function validateOrder() {
 		$this->order->orderType = $this->orderType;
 		$validator = new WebServiceOrderValidator();
 		$errors = $validator->validate($this->order);
@@ -115,8 +109,7 @@ class WebServicePayment
 		return $errors;
 	}
 
-	private function getPasswordBasedAuthorization()
-	{
+	private function getPasswordBasedAuthorization() {
 		$auth = new SveaAuth();
 		$auth->Username = $this->order->conf->getUsername($this->orderType, $this->order->countryCode);
 		$auth->Password = $this->order->conf->getPassword($this->orderType, $this->order->countryCode);
@@ -128,8 +121,7 @@ class WebServicePayment
 	/*
 	 *
 	 */
-	private function formatOrderDeliveryAddress()
-	{
+	private function formatOrderDeliveryAddress() {
 		$formattedOrderDeliveryAddress = new SveaOrderDeliveryAddress();
 
 		$formattedOrderDeliveryAddress->FullName = isset($this->order->orderDeliveryAddress->fullName) ? $this->order->orderDeliveryAddress->fullName : "";
@@ -147,8 +139,7 @@ class WebServicePayment
 	 * if CustomerIdentity is created by addCustomerDetails()
 	 * @return SveaCustomerIdentity
 	 */
-	public function formatCustomerDetails()
-	{
+	public function formatCustomerDetails() {
 		$isCompany = false;
 		get_class($this->order->customerIdentity) == 'Svea\WebPay\BuildOrder\RowBuilders\CompanyCustomer' ? $isCompany = TRUE : $isCompany = FALSE;
 
@@ -217,8 +208,7 @@ class WebServicePayment
 	 * Format Customer Identity with svea_soap package
 	 * @return SveaCustomerIdentity
 	 */
-	private function formatCustomerIdentity()
-	{
+	private function formatCustomerIdentity() {
 		$isCompany = false;
 		$companyId = "";
 		if (isset($this->order->orgNumber) || isset($this->order->companyVatNumber)) {
@@ -285,8 +275,7 @@ class WebServicePayment
 	 * Returns Array of the rounded sums of all orderrows as it will be sent to Svea
 	 * @returns array
 	 */
-	public function getRequestTotals()
-	{
+	public function getRequestTotals() {
 		$object = $this->prepareRequest();
 		$total_incvat = 0;
 		$total_exvat = 0;
@@ -304,8 +293,7 @@ class WebServicePayment
 
 	}
 
-	private function calculateOrderRowExVat($row)
-	{
+	private function calculateOrderRowExVat($row) {
 		if ($row->PriceIncludingVat == true) {
 			$rowsum_incvat = $this->getRowAmount($row);
 			$rowsum_exvat = $this->convertIncVatToExVat($row, $rowsum_incvat);
@@ -316,20 +304,17 @@ class WebServicePayment
 		return Helper::bround($rowsum_exvat, 2);
 	}
 
-	private function getRowAmount($row)
-	{
+	private function getRowAmount($row) {
 		return Helper::bround($row->NumberOfUnits, 2) *
 		Helper::bround($row->PricePerUnit, 2) *
 		(1 - ($row->DiscountPercent / 100));
 	}
 
-	private function convertIncVatToExVat($row, $rowsum_incvat)
-	{
+	private function convertIncVatToExVat($row, $rowsum_incvat) {
 		return Helper::bround(($rowsum_incvat / (1 + ($row->VatPercent / 100))), 2);
 	}
 
-	private function calculateTotalVatSumOfRows($row)
-	{
+	private function calculateTotalVatSumOfRows($row) {
 		//if amount inc vat
 		$sum = 0;
 		//calculate the exvat sum

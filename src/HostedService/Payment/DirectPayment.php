@@ -14,14 +14,12 @@ use Svea\WebPay\HostedService\Helper\ExcludePayments;
  *
  * @author Anneli Halld'n, Daniel Brolund, Kristian Grossman-Madsen for Svea Svea\WebPay\WebPay
  */
-class DirectPayment extends HostedPayment
-{
+class DirectPayment extends HostedPayment {
 	/**
 	 * Creates a new DirectPayment containing a given order.
 	 * @param CreateOrderBuilder $order
 	 */
-	public function __construct($order)
-	{
+	public function __construct($order) {
 		parent::__construct($order);
 	}
 
@@ -29,8 +27,7 @@ class DirectPayment extends HostedPayment
 	 * calculateRequestValues adds the payment methods not to present on the
 	 * paypage to the request array
 	 */
-	public function calculateRequestValues()
-	{
+	public function calculateRequestValues() {
 		$this->request['excludePaymentMethods'] = $this->configureExcludedPaymentMethods();
 
 		return parent::calculateRequestValues();
@@ -40,8 +37,7 @@ class DirectPayment extends HostedPayment
 	 * configureExcludedPaymentMethods returns a list of payment methods not to present on the paypage for this payment method method class.
 	 * @return string[] the list of excluded payment methods, @see SystemPaymentMethod
 	 */
-	protected function configureExcludedPaymentMethods()
-	{
+	protected function configureExcludedPaymentMethods() {
 		// first, exclude all invoice/paymentplan payment methods
 		$methods = ExcludePayments::excludeInvoicesAndPaymentPlan();
 

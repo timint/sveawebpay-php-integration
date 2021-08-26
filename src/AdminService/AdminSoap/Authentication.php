@@ -2,8 +2,7 @@
 
 namespace Svea\WebPay\AdminService\AdminSoap;
 
-class Authentication
-{
+class Authentication {
 	public $Password;
 	public $Username;
 
@@ -12,8 +11,7 @@ class Authentication
 	 * @param string $username
 	 * @param string $password
 	 */
-	function __construct($username, $password)
-	{
+	function __construct($username, $password) {
 		$this->Password = new \SoapVar( $password, XSD_STRING,"-","--","Password","http://schemas.datacontract.org/2004/07/DataObjects.Admin.Service");
 		$this->Username = new \SoapVar( $username, XSD_STRING,"-","--","Username","http://schemas.datacontract.org/2004/07/DataObjects.Admin.Service");
 	}

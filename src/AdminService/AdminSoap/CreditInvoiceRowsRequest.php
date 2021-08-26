@@ -4,8 +4,7 @@ namespace Svea\WebPay\AdminService\AdminSoap;
 
 use SoapVar;
 
-class CreditInvoiceRowsRequest
-{
+class CreditInvoiceRowsRequest {
 	public $Authentication;	 // note that the order of the attributes matter!
 	public $ClientId;
 	public $InvoiceDistributionType;
@@ -23,8 +22,7 @@ class CreditInvoiceRowsRequest
 	 * @param OrderRow[] $newCreditInvoiceRows
 	 * @param string[] $orderRowNumbers
 	 */
-	function __construct($authentication, $clientId, $invoiceDistributionType, $invoiceId, $newCreditInvoiceRows, $orderRowNumbers)
-	{
+	function __construct($authentication, $clientId, $invoiceDistributionType, $invoiceId, $newCreditInvoiceRows, $orderRowNumbers) {
 		$this->Authentication = new \SoapVar( $authentication, SOAP_ENC_OBJECT,
 			"-","--","Authentication","http://schemas.datacontract.org/2004/07/DataObjects.Admin.Service");
 		// Settings -- optional, not sent by package
@@ -39,8 +37,7 @@ class CreditInvoiceRowsRequest
 			$this->NewCreditInvoiceRows = new \SoapVar( $newCreditInvoiceRows, SOAP_ENC_OBJECT,
 				"-","--","NewCreditInvoiceRows","http://schemas.datacontract.org/2004/07/DataObjects.Admin.Service");
 		}
-		else
-		{
+		else {
 			unset( $this->NewCreditInvoiceRows );
 		}
 

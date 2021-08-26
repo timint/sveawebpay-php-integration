@@ -6,8 +6,7 @@ namespace Svea\WebPay\Constant;
  * Svea\WebPay\Constant\PaymentMethod is a container for the various payment method constant strings
  *
  */
-abstract class PaymentMethod
-{
+abstract class PaymentMethod {
 	const INVOICE = 'INVOICE';
 	const PAYMENTPLAN = 'PAYMENTPLAN';
 

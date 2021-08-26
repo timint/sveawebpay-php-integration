@@ -6,8 +6,7 @@ use Svea\WebPay\BuildOrder\CancelOrderBuilder;
 use Svea\WebPay\BuildOrder\CheckoutAdminOrderBuilder;
 use Svea\WebPay\Helper\Helper;
 
-class CancelOrderService extends AdminImplementationService
-{
+class CancelOrderService extends AdminImplementationService {
 	/**
 	 * @var CancelOrderBuilder $adminBuilder
 	 */
@@ -23,8 +22,7 @@ class CancelOrderService extends AdminImplementationService
 	 * @param CheckoutAdminOrderBuilder $adminBuilder
 	 * @param bool $isCancelAmount
 	 */
-	public function __construct(CheckoutAdminOrderBuilder $adminBuilder, $isCancelAmount = false)
-	{
+	public function __construct(CheckoutAdminOrderBuilder $adminBuilder, $isCancelAmount = false) {
 		parent::__construct($adminBuilder);
 		$this->isCancelAmount = $isCancelAmount;
 	}
@@ -32,8 +30,7 @@ class CancelOrderService extends AdminImplementationService
 	/**
 	 * Validate order data
 	 */
-	public function validate()
-	{
+	public function validate() {
 		$errors = [];
 
 		$orderId = $this->adminBuilder->orderId;
@@ -55,8 +52,7 @@ class CancelOrderService extends AdminImplementationService
 	 * Format given date so that will match data structure required for Admin API
 	 * @return mixed
 	 */
-	public function prepareRequest()
-	{
+	public function prepareRequest() {
 		$this->validate();
 
 		$requestData = [
@@ -75,8 +71,7 @@ class CancelOrderService extends AdminImplementationService
 	/**
 	 * Send call Connection Library
 	 */
-	public function doRequest()
-	{
+	public function doRequest() {
 		$preparedData = $this->prepareRequest();
 		if ($this->isCancelAmount === true) {
 			$response = $this->checkoutAdminConnection->cancelOrderAmount($preparedData);

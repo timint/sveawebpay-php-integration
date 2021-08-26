@@ -2,8 +2,7 @@
 
 namespace Svea\WebPay\WebService\SveaSoap;
 
-class SveaCreateAccountCreditOrderInformation extends CreateOrderInformation
-{
+class SveaCreateAccountCreditOrderInformation extends CreateOrderInformation {
 	/**
 	 * @var array $CreateAccountCreditDetails
 	 */
@@ -13,8 +12,7 @@ class SveaCreateAccountCreditOrderInformation extends CreateOrderInformation
 	 * Sets Variable if contains CampaignCode for AccountCredit
 	 * @param string $CampaignCode
 	 */
-	public function __construct($CampaignCode = "")
-	{
+	public function __construct($CampaignCode = "") {
 		$this->OrderRows['OrderRow'] = [];
 
 		if ($CampaignCode != "") {

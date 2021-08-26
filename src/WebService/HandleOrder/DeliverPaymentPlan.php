@@ -15,13 +15,11 @@ use Svea\WebPay\WebService\SveaSoap\SveaDeliverOrderInformation;
  * Update Created PaymentPlanorder with additional information and prepare it for delivery.
  * @author Anneli Halld'n, Daniel Brolund for Svea Webpay
  */
-class DeliverPaymentPlan extends HandleOrder
-{
+class DeliverPaymentPlan extends HandleOrder {
 	/**
 	 * @param DeliverOrderBuilder $order
 	 */
-	public function __construct($order)
-	{
+	public function __construct($order) {
 		$order->orderType = ConfigurationProvider::PAYMENTPLAN_TYPE;
 		parent::__construct($order);
 	}
@@ -30,8 +28,7 @@ class DeliverPaymentPlan extends HandleOrder
 	 * Prepare and sends request
 	 * @return CloseOrderResult
 	 */
-	public function doRequest()
-	{
+	public function doRequest() {
 		$requestObject = $this->prepareRequest();
 		$request = new SveaDoRequest($this->orderBuilder->conf, $this->orderBuilder->orderType, "DeliverOrderEu", $requestObject, $this->orderBuilder->logging);
 		$responseObject = new SveaResponse($request->result['requestResult'], "", NULL, NULL, isset($request->result['logs']) ? $request->result['logs'] : NULL);
@@ -43,8 +40,7 @@ class DeliverPaymentPlan extends HandleOrder
 	 * Returns prepared request
 	 * @return SveaRequest
 	 */
-	public function prepareRequest()
-	{
+	public function prepareRequest() {
 		$errors = $this->validateRequest();
 
 		$sveaDeliverOrder = new SveaDeliverOrder;
@@ -60,8 +56,7 @@ class DeliverPaymentPlan extends HandleOrder
 		return $object;
 	}
 
-	public function validate($order)
-	{
+	public function validate($order) {
 		$errors = [];
 		$errors = $this->validateCountryCode($order, $errors);
 		$errors = $this->validateOrderId($order, $errors);
@@ -69,8 +64,7 @@ class DeliverPaymentPlan extends HandleOrder
 		return $errors;
 	}
 
-	private function validateCountryCode($order, $errors)
-	{
+	private function validateCountryCode($order, $errors) {
 		if (isset($order->countryCode) == FALSE) {
 			$errors['missing value'] = "CountryCode is required. Use function setCountryCode().";
 		}
@@ -78,8 +72,7 @@ class DeliverPaymentPlan extends HandleOrder
 		return $errors;
 	}
 
-	private function validateOrderId($order, $errors)
-	{
+	private function validateOrderId($order, $errors) {
 		if (isset($order->orderId) == FALSE) {
 			$errors['missing value'] = "OrderId is required. Use function setOrderId() with the SveaOrderId from the createOrder response.";
 		}

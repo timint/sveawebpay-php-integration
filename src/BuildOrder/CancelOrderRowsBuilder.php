@@ -46,8 +46,7 @@ use Svea\WebPay\HostedService\HostedAdminRequest\LowerTransaction;
  *
  * @author Kristian Grossman-Madsen for Svea Svea\WebPay\WebPay
  */
-class CancelOrderRowsBuilder extends CheckoutAdminOrderBuilder
-{
+class CancelOrderRowsBuilder extends CheckoutAdminOrderBuilder {
 
 	/**
 	 * @var ConfigurationProvider $conf
@@ -84,8 +83,7 @@ class CancelOrderRowsBuilder extends CheckoutAdminOrderBuilder
 	 * CancelOrderRowsBuilder constructor.
 	 * @param $config
 	 */
-	public function __construct($config)
-	{
+	public function __construct($config) {
 		parent::__construct($config);
 		$this->rowsToCancel = [];
 		$this->numberedOrderRows = [];
@@ -99,8 +97,7 @@ class CancelOrderRowsBuilder extends CheckoutAdminOrderBuilder
 	 * @param string $orderIdAsString
 	 * @return $this
 	 */
-	public function setTransactionId($orderIdAsString)
-	{
+	public function setTransactionId($orderIdAsString) {
 		return $this->setOrderId($orderIdAsString);
 	}
 
@@ -109,8 +106,7 @@ class CancelOrderRowsBuilder extends CheckoutAdminOrderBuilder
 	 * @param string $countryCodeAsString
 	 * @return $this
 	 */
-	public function setCountryCode($countryCodeAsString)
-	{
+	public function setCountryCode($countryCodeAsString) {
 		$this->countryCode = $countryCodeAsString;
 
 		return $this;
@@ -121,8 +117,7 @@ class CancelOrderRowsBuilder extends CheckoutAdminOrderBuilder
 	 * @param int $rowNumber
 	 * @return $this
 	 */
-	public function setRowToCancel($rowNumber)
-	{
+	public function setRowToCancel($rowNumber) {
 		$this->rowsToCancel[] = $rowNumber;
 
 		return $this;
@@ -133,8 +128,7 @@ class CancelOrderRowsBuilder extends CheckoutAdminOrderBuilder
 	 * @param int[] $rowNumbers
 	 * @return $this
 	 */
-	public function setRowsToCancel($rowNumbers)
-	{
+	public function setRowsToCancel($rowNumbers) {
 		$this->rowsToCancel = array_merge($this->rowsToCancel, $rowNumbers);
 
 		return $this;
@@ -153,8 +147,7 @@ class CancelOrderRowsBuilder extends CheckoutAdminOrderBuilder
 	 * @param NumberedOrderRow $rowNumber - instance of NumberedOrderRow
 	 * @return $this
 	 */
-	public function addNumberedOrderRow($rowNumber)
-	{
+	public function addNumberedOrderRow($rowNumber) {
 		$this->numberedOrderRows[] = $rowNumber;
 
 		return $this;
@@ -166,8 +159,7 @@ class CancelOrderRowsBuilder extends CheckoutAdminOrderBuilder
 	 * @throws ValidationException
 	 * @throws \Exception
 	 */
-	public function cancelCheckoutOrderRows()
-	{
+	public function cancelCheckoutOrderRows() {
 		return new CancelOrderRowService($this);
 	}
 
@@ -177,8 +169,7 @@ class CancelOrderRowsBuilder extends CheckoutAdminOrderBuilder
 	 * @param \Svea\WebPay\BuildOrder\RowBuilders\NumberedOrderRow[] $numberedOrderRows array of NumberedOrderRow
 	 * @return $this
 	 */
-	public function addNumberedOrderRows($numberedOrderRows)
-	{
+	public function addNumberedOrderRows($numberedOrderRows) {
 		$this->numberedOrderRows = array_merge($this->numberedOrderRows, $numberedOrderRows);
 
 		return $this;
@@ -190,8 +181,7 @@ class CancelOrderRowsBuilder extends CheckoutAdminOrderBuilder
 	 * @return LowerTransaction
 	 * @throws ValidationException  if addNumberedOrderRows() has not been used.
 	 */
-	public function cancelCardOrderRows()
-	{
+	public function cancelCardOrderRows() {
 		$this->orderType = ConfigurationProvider::HOSTED_ADMIN_TYPE;
 
 		$this->validateCancelCardOrderRows();
@@ -204,8 +194,7 @@ class CancelOrderRowsBuilder extends CheckoutAdminOrderBuilder
 		return $lowerTransaction;
 	}
 
-	private function validateCancelCardOrderRows()
-	{
+	private function validateCancelCardOrderRows() {
 		if (count($this->numberedOrderRows) == 0) {
 			$exceptionString = "numberedOrderRows is required for cancelCardOrderRows(). Use method addNumberedOrderRows().";
 			throw new ValidationException($exceptionString);
@@ -216,8 +205,7 @@ class CancelOrderRowsBuilder extends CheckoutAdminOrderBuilder
 		}
 	}
 
-	private function calculateSumOfRowAmounts($rowIndexes, $numberedRows)
-	{
+	private function calculateSumOfRowAmounts($rowIndexes, $numberedRows) {
 		$sum = 0.0;
 		$unique_indexes = array_unique($rowIndexes);
 		foreach ($numberedRows as $numberedRow) {
@@ -233,8 +221,7 @@ class CancelOrderRowsBuilder extends CheckoutAdminOrderBuilder
 	 * Use cancelInvoiceOrderRows() to cancel an Invoice order using AdminServiceRequest CancelOrderRows request
 	 * @return CancelOrderRowsRequest
 	 */
-	public function cancelInvoiceOrderRows()
-	{
+	public function cancelInvoiceOrderRows() {
 		$this->orderType = ConfigurationProvider::INVOICE_TYPE;
 
 		return new CancelOrderRowsRequest($this);
@@ -244,8 +231,7 @@ class CancelOrderRowsBuilder extends CheckoutAdminOrderBuilder
 	 * Use cancelPaymentPlanOrderRows() to cancel a PaymentPlan order using AdminServiceRequest CancelOrderRows request
 	 * @return CancelOrderRowsRequest
 	 */
-	public function cancelPaymentPlanOrderRows()
-	{
+	public function cancelPaymentPlanOrderRows() {
 		$this->orderType = ConfigurationProvider::PAYMENTPLAN_TYPE;
 
 		return new CancelOrderRowsRequest($this);
@@ -255,8 +241,7 @@ class CancelOrderRowsBuilder extends CheckoutAdminOrderBuilder
 	 * Use cancelAccountCreditOrderRows() to cancel a AccountCredit order using AdminServiceRequest CancelOrderRows request
 	 * @return CancelOrderRowsRequest
 	 */
-	public function cancelAccountCreditOrderRows()
-	{
+	public function cancelAccountCreditOrderRows() {
 		$this->orderType = ConfigurationProvider::ACCOUNTCREDIT_TYPE;
 
 		return new CancelOrderRowsRequest($this);

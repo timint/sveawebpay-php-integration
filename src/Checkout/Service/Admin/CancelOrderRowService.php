@@ -4,8 +4,7 @@ namespace Svea\WebPay\Checkout\Service\Admin;
 
 use Svea\WebPay\BuildOrder\CancelOrderRowsBuilder;
 
-class CancelOrderRowService extends AdminImplementationService
-{
+class CancelOrderRowService extends AdminImplementationService {
 	/**
 	 * @var CancelOrderRowsBuilder $adminBuilder
 	 */
@@ -14,8 +13,7 @@ class CancelOrderRowService extends AdminImplementationService
 	/**
 	 * Validate order data
 	 */
-	public function validate()
-	{
+	public function validate() {
 		$errors = [];
 
 		$orderId = $this->adminBuilder->orderId;
@@ -46,8 +44,7 @@ class CancelOrderRowService extends AdminImplementationService
 	 * Format given date so that will match data structure required for Admin API
 	 * @return mixed
 	 */
-	public function prepareRequest()
-	{
+	public function prepareRequest() {
 		$this->validate();
 
 		$orderRowId = $this->adminBuilder->rowsToCancel[0];
@@ -62,8 +59,7 @@ class CancelOrderRowService extends AdminImplementationService
 	/**
 	 * Send call Connection Library
 	 */
-	public function doRequest()
-	{
+	public function doRequest() {
 		$preparedData = $this->prepareRequest();
 		$response = $this->checkoutAdminConnection->cancelOrderRow($preparedData);
 

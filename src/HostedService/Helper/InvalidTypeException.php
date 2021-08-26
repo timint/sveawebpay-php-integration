@@ -2,8 +2,7 @@
 
 namespace Svea\WebPay\HostedService\Helper;
 
-class InvalidTypeException extends \Exception
-{
+class InvalidTypeException extends \Exception {
 	// \Exception referes to class Exception outside our \Svea\ namespace
 }
 

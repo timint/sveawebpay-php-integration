@@ -4,10 +4,8 @@ namespace Svea\WebPay\Checkout\Response;
 
 use Svea\WebPay\Checkout\Response\Model\OrderRow;
 
-class CheckoutResponseHelper
-{
-	public static function processData($data)
-	{
+class CheckoutResponseHelper {
+	public static function processData($data) {
 		$response = $data;
 
 		if (isset($response['Cart']['Items']) && is_array($response['Cart']['Items'])) {

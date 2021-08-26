@@ -5,8 +5,7 @@ namespace Svea\WebPay\AdminService;
 use Svea\WebPay\AdminService\AdminSoap\Authentication;
 use Svea\WebPay\AdminService\AdminSoap\SearchOrdersRequest as SearchOrdersSoapRequest;
 
-class SearchOrdersRequest extends AdminServiceRequest
-{
+class SearchOrdersRequest extends AdminServiceRequest {
 	/**
 	 * @var QueryOrderBuilder $orderBuilder
 	 */
@@ -15,15 +14,13 @@ class SearchOrdersRequest extends AdminServiceRequest
 	/**
 	 * @param QueryOrderBuilder $builder
 	 */
-	public function __construct($builder)
-	{
+	public function __construct($builder) {
 		$this->action = "GetAccountCredits";
 		$this->orderBuilder = $builder;
 	}
 
 
-	function prepareRequest()
-	{
+	function prepareRequest() {
 		$this->validateRequest();
 
 		$soapRequest = [];
@@ -38,8 +35,7 @@ class SearchOrdersRequest extends AdminServiceRequest
 		return $soapRequest;
 	}
 
-	public function validate()
-	{
+	public function validate() {
 		$errors = [];
 	   // $errors = $this->validateOrderId($errors);
 	   // $errors = $this->validateOrderType($errors);
@@ -48,8 +44,7 @@ class SearchOrdersRequest extends AdminServiceRequest
 		return $errors;
 	}
 
-	private function validateOrderId($errors)
-	{
+	private function validateOrderId($errors) {
 		if (isset($this->orderBuilder->orderId) == FALSE) {
 			$errors[] = ['missing value' => "orderId is required."];
 		}

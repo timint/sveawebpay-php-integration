@@ -8,8 +8,7 @@ use Svea\WebPay\Config\ConfigurationProvider;
 /**
  * @author anne-hal
  */
-class HostedPaymentResponse extends HostedResponse
-{
+class HostedPaymentResponse extends HostedResponse {
 	/**
 	 * @var string $transactionId -- the order id at Svea
 	 */
@@ -55,8 +54,7 @@ class HostedPaymentResponse extends HostedResponse
 	 * @param string $countryCode two-letter country code
 	 * @param ConfigurationProvider $config
 	 */
-	function __construct($response, $countryCode, $config)
-	{
+	function __construct($response, $countryCode, $config) {
 		if (is_array($response)) {
 			if (array_key_exists("mac", $response)) {
 				if (array_key_exists("response", $response)) {
@@ -87,8 +85,7 @@ class HostedPaymentResponse extends HostedResponse
 		}
 	}
 
-	protected function formatXml($xml)
-	{
+	protected function formatXml($xml) {
 		$xmlElement = new SimpleXMLElement($xml);
 
 		// we set accepted iff xml statuscode is 0;

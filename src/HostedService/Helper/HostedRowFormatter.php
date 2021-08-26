@@ -5,8 +5,7 @@ namespace Svea\WebPay\HostedService\Helper;
 use Svea\WebPay\Helper\Helper;
 use Svea\WebPay\HostedService\Payment\HostedOrderRowBuilder;
 
-class HostedRowFormatter
-{
+class HostedRowFormatter {
 	private $totalAmount;	   // order item rows, rounded to 2 decimals, multiplied by 100 to integer
 	private $totalVat;		  // order item rows, rounded to 2 decimals, multiplied by 100 to integer
 	private $newRows;		   // type HostedOrderRowBuilder -- all order rows, as above
@@ -25,8 +24,7 @@ class HostedRowFormatter
 	/**
 	 * HostedRowFormatter constructor.
 	 */
-	public function __construct()
-	{
+	public function __construct() {
 		$this->totalAmount = 0;
 		$this->totalVat = 0;
 		$this->newRows = [];
@@ -39,8 +37,7 @@ class HostedRowFormatter
 	 * @param type $order
 	 * @return int
 	 */
-	public function formatRows($order)
-	{
+	public function formatRows($order) {
 		foreach ($order->rows as $row) {
 			switch (get_class($row)) {
 				case 'Svea\WebPay\BuildOrder\RowBuilders\OrderRow':
@@ -78,8 +75,7 @@ class HostedRowFormatter
 	 * rounding errors. (See HostedPaymentTest for an example.)
 	 * @param $row
 	 */
-	private function formatOrderRows($row)
-	{
+	private function formatOrderRows($row) {
 		$tempRow = new HostedOrderRowBuilder();	 // new empty object
 
 		if (isset($row->name)) {
@@ -132,8 +128,7 @@ class HostedRowFormatter
 		$this->rawVat += Helper::bround(($rawVat * $row->quantity), 2) * 100;
 	}
 
-	private function formatShippingFeeRows($row)
-	{
+	private function formatShippingFeeRows($row) {
 		$tempRow = new HostedOrderRowBuilder();
 
 		if (isset($row->articleNumber)) {
@@ -185,8 +180,7 @@ class HostedRowFormatter
 
 	}
 
-	public function formatInvoiceFeeRows($row)
-	{
+	public function formatInvoiceFeeRows($row) {
 		$tempRow = new HostedOrderRowBuilder();
 
 		if (isset($row->name)) {
@@ -229,8 +223,7 @@ class HostedRowFormatter
 		$this->invoiceVat += ($tempRow->vat);
 	}
 
-	public function formatFixedDiscountRows($row)
-	{
+	public function formatFixedDiscountRows($row) {
 		$tempRow = new HostedOrderRowBuilder();
 
 		if (isset($row->name)) {
@@ -301,8 +294,7 @@ class HostedRowFormatter
 		$this->discountVat += $tempRow->vat;
 	}
 
-	public function formatRelativeDiscountRows($row)
-	{
+	public function formatRelativeDiscountRows($row) {
 		$tempRow = new HostedOrderRowBuilder();
 
 		if (isset($row->name)) {
@@ -345,8 +337,7 @@ class HostedRowFormatter
 	 * the object rawAmount value, modified by shippinga and discounts
 	 * @return integer total order amount, including vat
 	 */
-	public function formatTotalAmount($rows)
-	{
+	public function formatTotalAmount($rows) {
 		return $this->rawAmount + $this->shippingAmount + $this->discountAmount + $this->invoiceAmount;
 	}
 
@@ -358,8 +349,7 @@ class HostedRowFormatter
 	 * the object rawAmount value, modified by shippinga and discounts
 	 * @return integer total amount of vat due in order
 	 */
-	public function formatTotalVat($rows)
-	{
+	public function formatTotalVat($rows) {
 		return $this->rawVat + $this->shippingVat + $this->discountVat + $this->invoiceVat;
 	}
 }

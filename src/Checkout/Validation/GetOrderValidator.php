@@ -8,12 +8,10 @@ use Svea\WebPay\BuildOrder\Validator\OrderValidator;
  * Class GetCheckoutValidator
  * @package Svea\Svea\WebPay\WebPay\Checkout\Validation
  */
-class GetOrderValidator extends OrderValidator
-{
+class GetOrderValidator extends OrderValidator {
 	public $errors = [];
 
-	public function validate($order)
-	{
+	public function validate($order) {
 		$errors = $this->errors;
 
 		$errors = $this->validateOrderId($order, $errors);

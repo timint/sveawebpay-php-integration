@@ -51,8 +51,7 @@ use Svea\WebPay\BuildOrder\Validator\ValidationException;
  * The Svea Svea\WebPay\WebPay PHP integration package is developed and tested using NetBeans IDE 7.3.1 with the phpunit 3.7.24 plugin.
  * @author Anneli Halld'n, Daniel Brolund, Kristian Grossman-Madsen for Svea Svea\WebPay\WebPay
  */
-class WebPayAdmin
-{
+class WebPayAdmin {
 
 	/**
 	 * The Svea\WebPay\WebPayAdmin::cancelOrder() entrypoint method is used to cancel an order with Svea,
@@ -83,8 +82,7 @@ class WebPayAdmin
 	 * @return \Svea\WebPay\BuildOrder\CancelOrderBuilder
 	 * @throws \Svea\WebPay\BuildOrder\Validator\ValidationException
 	 */
-	public static function cancelOrder($config = null)
-	{
+	public static function cancelOrder($config = null) {
 		if ($config == null) {
 			self::throwMissingConfigException();
 		}
@@ -93,8 +91,7 @@ class WebPayAdmin
 	}
 
 	/** helper function, throws exception if no config is given */
-	private static function throwMissingConfigException()
-	{
+	private static function throwMissingConfigException() {
 		throw new ValidationException('-missing parameter: This method requires an Svea\WebPay\Config\ConfigurationProvider
 		object as parameter. Create a class that implements class Svea\WebPay\Config\ConfigurationProvider.
 		Set returnvalues to configuration values. Create an object from that class.
@@ -132,8 +129,7 @@ class WebPayAdmin
 	 * @return \Svea\WebPay\BuildOrder\QueryOrderBuilder
 	 * @throws \Svea\WebPay\BuildOrder\Validator\ValidationException
 	 */
-	public static function queryOrder($config = null)
-	{
+	public static function queryOrder($config = null) {
 		if ($config == null) {
 			self::throwMissingConfigException();
 		}
@@ -181,8 +177,7 @@ class WebPayAdmin
 	 * @return \Svea\WebPay\BuildOrder\CancelOrderRowsBuilder
 	 * @throws \Svea\WebPay\BuildOrder\Validator\ValidationException
 	 */
-	public static function cancelOrderRows($config = null)
-	{
+	public static function cancelOrderRows($config = null) {
 		if ($config == null) {
 			self::throwMissingConfigException();
 		}
@@ -241,8 +236,7 @@ class WebPayAdmin
 	 *
 	 * @author Kristian Grossman-Madsen for Svea Svea\WebPay\WebPay
 	 */
-	public static function creditOrderRows($config = null)
-	{
+	public static function creditOrderRows($config = null) {
 		if ($config == null) {
 			self::throwMissingConfigException();
 		}
@@ -274,8 +268,7 @@ class WebPayAdmin
 	 *
 	 * @author  ann-hal for Svea Ekonomi Ab | Svea\WebPay\WebPay
 	 */
-	public static function creditAmount($config = null)
-	{
+	public static function creditAmount($config = null) {
 		if ($config == null) {
 			self::throwMissingConfigException();
 		}
@@ -307,8 +300,7 @@ class WebPayAdmin
 	 * @return \Svea\WebPay\BuildOrder\AddOrderRowsBuilder
 	 * @throws \Svea\WebPay\BuildOrder\Validator\ValidationException
 	 */
-	public static function addOrderRows($config = null)
-	{
+	public static function addOrderRows($config = null) {
 		if ($config == null) {
 			self::throwMissingConfigException();
 		}
@@ -357,8 +349,7 @@ class WebPayAdmin
 	 * @return \Svea\WebPay\BuildOrder\UpdateOrderRowsBuilder
 	 * @throws \Svea\WebPay\BuildOrder\Validator\ValidationException
 	 */
-	public static function updateOrderRows($config = null)
-	{
+	public static function updateOrderRows($config = null) {
 		if ($config == null) {
 			self::throwMissingConfigException();
 		}
@@ -401,8 +392,7 @@ class WebPayAdmin
 	 * @return \Svea\WebPay\BuildOrder\UpdateOrderBuilder
 	 * @throws \Svea\WebPay\BuildOrder\Validator\ValidationException
 	 */
-	public static function updateOrder($config = null)
-	{
+	public static function updateOrder($config = null) {
 		if ($config == null) {
 			self::throwMissingConfigException();
 		}
@@ -452,8 +442,7 @@ class WebPayAdmin
 	 * @return \Svea\WebPay\BuildOrder\DeliverOrderRowsBuilder
 	 * @throws \Svea\WebPay\BuildOrder\Validator\ValidationException
 	 */
-	public static function deliverOrderRows($config = null)
-	{
+	public static function deliverOrderRows($config = null) {
 		if ($config == null) {
 			self::throwMissingConfigException();
 		}
@@ -481,8 +470,7 @@ class WebPayAdmin
 	 * @return \Svea\WebPay\BuildOrder\QueryTaskInfoBuilder
 	 * @throws \Svea\WebPay\BuildOrder\Validator\ValidationException
 	 */
-	public static function queryTaskInfo($config = null)
-	{
+	public static function queryTaskInfo($config = null) {
 		if ($config == null) {
 			self::throwMissingConfigException();
 		}
@@ -497,8 +485,7 @@ class WebPayAdmin
 	 * @return \Svea\WebPay\BuildOrder\CancelRecurSubscriptionBuilder
 	 * @throws \Svea\WebPay\BuildOrder\Validator\ValidationException
 	 */
-	public static function cancelRecurSubscription($config = null)
-	{
+	public static function cancelRecurSubscription($config = null) {
 		if ($config == null) {
 			self::throwMissingConfigException();
 		}

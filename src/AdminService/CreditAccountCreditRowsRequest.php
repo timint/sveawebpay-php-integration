@@ -12,8 +12,7 @@ use Svea\WebPay\BuildOrder\Validator\ValidationException;
 use Svea\WebPay\WebService\Helper\WebServiceRowFormatter;
 use Svea\WebPay\AdminService\AdminSoap\CancelPaymentPlanRowsRequest;
 
-class CreditAccountCreditRowsRequest extends AdminServiceRequest
-{
+class CreditAccountCreditRowsRequest extends AdminServiceRequest {
 	/**
 	 * @var CreditOrderRowsBuilder $orderBuilder
 	 */
@@ -27,8 +26,7 @@ class CreditAccountCreditRowsRequest extends AdminServiceRequest
 	/**
 	 * @param CreditOrderRowsBuilder $creditOrderRowsBuilder
 	 */
-	public function __construct($creditOrderRowsBuilder)
-	{
+	public function __construct($creditOrderRowsBuilder) {
 		$this->action = "CancelAccountCreditRows";
 		$this->orderRows = [];
 		$this->orderBuilder = $creditOrderRowsBuilder;
@@ -40,8 +38,7 @@ class CreditAccountCreditRowsRequest extends AdminServiceRequest
 	 * @return CreditOrderRowsRequest
 	 * @throws ValidationException
 	 */
-	public function prepareRequest($resendOrderWithFlippedPriceIncludingVat = false)
-	{
+	public function prepareRequest($resendOrderWithFlippedPriceIncludingVat = false) {
 		$this->validateRequest();
 		$this->orderRows = $this->getAdminSoapOrderRowsFromBuilderOrderRowsUsingVatFlag($this->orderBuilder->creditOrderRows);
 		$soapRequest = new CancelAccountCreditRowsRequest(
@@ -57,8 +54,7 @@ class CreditAccountCreditRowsRequest extends AdminServiceRequest
 		return $soapRequest;
 	}
 
-	protected function getAdminSoapOrderRowsFromBuilderOrderRowsUsingVatFlag($builderOrderRows, $priceIncludingVat = NULL)
-	{
+	protected function getAdminSoapOrderRowsFromBuilderOrderRowsUsingVatFlag($builderOrderRows, $priceIncludingVat = NULL) {
 		$amount = 0;
 		$orderRows = [];
 		//if orderrownumber is set, create an orderrow with dummy values. Will be ignored in Svea\WebPay\WebPay WS
@@ -96,8 +92,7 @@ class CreditAccountCreditRowsRequest extends AdminServiceRequest
 		return $orderRows;
 	}
 
-	public function validate()
-	{
+	public function validate() {
 		$errors = [];
 		$errors = $this->validateOrderId($errors);
 		$errors = $this->validateHasRows($errors);
@@ -109,8 +104,7 @@ class CreditAccountCreditRowsRequest extends AdminServiceRequest
 		return $errors;
 	}
 
-	public function validateOrderId($errors)
-	{
+	public function validateOrderId($errors) {
 		if (isset($this->orderBuilder->orderId) == FALSE) {
 			$errors[] = ['missing value' => "orderId is required, use setOrderId()."];
 		}
@@ -118,8 +112,7 @@ class CreditAccountCreditRowsRequest extends AdminServiceRequest
 		return $errors;
 	}
 
-	private function validateHasRows($errors)
-	{
+	private function validateHasRows($errors) {
 		if ((count($this->orderBuilder->rowsToCredit) == 0) &&
 			(count($this->orderBuilder->creditOrderRows) == 0)
 		) {
@@ -129,8 +122,7 @@ class CreditAccountCreditRowsRequest extends AdminServiceRequest
 		return $errors;
 	}
 
-	private function validateOrderType($errors)
-	{
+	private function validateOrderType($errors) {
 		if (isset($this->orderBuilder->orderType) == FALSE) {
 			$errors[] = ['missing value' => "orderType is required."];
 		}
@@ -138,8 +130,7 @@ class CreditAccountCreditRowsRequest extends AdminServiceRequest
 		return $errors;
 	}
 
-	private function validateCountryCode($errors)
-	{
+	private function validateCountryCode($errors) {
 		if (isset($this->orderBuilder->countryCode) == FALSE) {
 			$errors[] = ['missing value' => "countryCode is required, use setCountryCode()."];
 		}
@@ -147,8 +138,7 @@ class CreditAccountCreditRowsRequest extends AdminServiceRequest
 		return $errors;
 	}
 
-	public function validateDescription($errors)
-	{
+	public function validateDescription($errors) {
 		foreach ($this->orderBuilder->creditOrderRows as $orderRow) {
 			if (!isset($orderRow->description)) {
 				$errors[] = ['missing value' => "Description is required."];
@@ -158,8 +148,7 @@ class CreditAccountCreditRowsRequest extends AdminServiceRequest
 		return $errors;
 	}
 
-	private function validateCreditOrderRowsHasPriceAndVatInformation($errors)
-	{
+	private function validateCreditOrderRowsHasPriceAndVatInformation($errors) {
 		foreach ($this->orderBuilder->creditOrderRows as $orderRow) {
 			if (!isset($orderRow->vatPercent) && (!isset($orderRow->amountIncVat) && !isset($orderRow->amountExVat))) {
 				$errors[] = ['missing order row vat information' => "cannot calculate orderRow vatPercent, need at least two of amountExVat, amountIncVat and vatPercent."];

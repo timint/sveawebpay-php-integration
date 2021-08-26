@@ -4,8 +4,7 @@ namespace Svea\WebPay\AdminService\AdminSoap;
 
 use SoapVar;
 
-class CancellationAccountCreditRow
-{
+class CancellationAccountCreditRow {
 	public $AmountInclVat;
 	public $Description;
 	public $RowNumber;
@@ -18,8 +17,7 @@ class CancellationAccountCreditRow
 	 * @param $vatPercent
 	 * @param null $rowNumber
 	 */
-	function __construct($amount, $description, $vatPercent, $rowNumber = null)
-	{
+	function __construct($amount, $description, $vatPercent, $rowNumber = null) {
 		$this->AmountInclVat = new SoapVar($amount, XSD_DECIMAL,
 			"-", "--", "AmountInclVat", "http://schemas.datacontract.org/2004/07/DataObjects.Admin.Service");
 

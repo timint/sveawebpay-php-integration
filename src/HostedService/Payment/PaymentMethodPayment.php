@@ -8,8 +8,7 @@ use Svea\WebPay\BuildOrder\CreateOrderBuilder;
 /**
  * @author anne-hal, Kristian Grossman-Madsen
  */
-class PaymentMethodPayment extends HostedPayment
-{
+class PaymentMethodPayment extends HostedPayment {
 	public $paymentMethod;
 
 	/**
@@ -17,14 +16,12 @@ class PaymentMethodPayment extends HostedPayment
 	 * @param CreateOrderBuilder $order
 	 * @param string $paymentmethod -- one of the constants defined in Svea\WebPay\Constant\PaymentMethod class @see Svea\WebPay\Constant\PaymentMethod
 	 */
-	public function __construct($order, $paymentmethod)
-	{
+	public function __construct($order, $paymentmethod) {
 		parent::__construct($order);
 		$this->paymentMethod = $paymentmethod;
 	}
 
-	public function calculateRequestValues()
-	{
+	public function calculateRequestValues() {
 		if (isset($this->paymentMethod)) {
 			if ($this->paymentMethod == PaymentMethod::INVOICE) {
 				$this->request['paymentMethod'] = "SVEAINVOICEEU_" . $this->order->countryCode;
@@ -44,8 +41,7 @@ class PaymentMethodPayment extends HostedPayment
 	 * @param string $languageCodeAsISO639
 	 * @return $this
 	 */
-	public function setCardPageLanguage($languageCodeAsISO639)
-	{
+	public function setCardPageLanguage($languageCodeAsISO639) {
 		return $this->setPayPageLanguage($languageCodeAsISO639);
 	}
 }

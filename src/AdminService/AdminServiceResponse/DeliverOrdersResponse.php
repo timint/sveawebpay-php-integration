@@ -9,8 +9,7 @@ use Svea\WebPay\Config\ConfigurationProvider;
  *
  * @author Kristian Grossman-Madsen
  */
-class DeliverOrdersResponse extends AdminServiceResponse
-{
+class DeliverOrdersResponse extends AdminServiceResponse {
 	/**
 	 * @var string $clientId
 	 */
@@ -51,13 +50,11 @@ class DeliverOrdersResponse extends AdminServiceResponse
 	 * @param $message
 	 * @param $logs
 	 */
-	function __construct($message, $logs)
-	{
+	function __construct($message, $logs) {
 		$this->formatObject($message, $logs);
 	}
 
-	protected function formatObject($message, $logs)
-	{
+	protected function formatObject($message, $logs) {
 		parent::formatObject($message, $logs);
 
 		if ($this->accepted == 1) {
@@ -74,8 +71,7 @@ class DeliverOrdersResponse extends AdminServiceResponse
 			}
 
 			// - specific for accountCredit
-			if(property_exists($message->OrdersDelivered->DeliverOrderResult, "DeliveryReferenceNumber"))
-			{
+			if(property_exists($message->OrdersDelivered->DeliverOrderResult, "DeliveryReferenceNumber")) {
 				$this->deliveryReferenceNumber = $message->OrdersDelivered->DeliverOrderResult->DeliveryReferenceNumber;
 			}
 

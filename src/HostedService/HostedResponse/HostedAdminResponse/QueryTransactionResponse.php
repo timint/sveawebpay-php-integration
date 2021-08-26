@@ -19,8 +19,7 @@ use Svea\WebPay\BuildOrder\RowBuilders\NumberedOrderRow;
  *
  * @author Kristian Grossman-Madsen for Svea Svea\WebPay\WebPay
  */
-class QueryTransactionResponse extends HostedAdminResponse
-{
+class QueryTransactionResponse extends HostedAdminResponse {
 
 	/**
 	 * @var string $transactionId -- the order id at Svea
@@ -163,8 +162,7 @@ class QueryTransactionResponse extends HostedAdminResponse
 	 * @param string $countryCode
 	 * @param \Svea\WebPay\Config\SveaConfigurationProvider $config
 	 */
-	function __construct($message, $countryCode, $config)
-	{
+	function __construct($message, $countryCode, $config) {
 		parent::__construct($message, $countryCode, $config);
 	}
 
@@ -174,8 +172,7 @@ class QueryTransactionResponse extends HostedAdminResponse
 	 *
 	 * @param string $hostedAdminResponseXML hostedAdminResponse as xml
 	 */
-	protected function formatXml($hostedAdminResponseXML)
-	{
+	protected function formatXml($hostedAdminResponseXML) {
 		$hostedAdminResponse = new SimpleXMLElement($hostedAdminResponseXML);
 
 		if ((string)$hostedAdminResponse->statuscode == '0') {
@@ -303,8 +300,7 @@ class QueryTransactionResponse extends HostedAdminResponse
 		}
 	}
 
-	function calculateVatPercentFromVatAndAmount($vat, $amount)
-	{
+	function calculateVatPercentFromVatAndAmount($vat, $amount) {
 		$amountExVat = ($amount - $vat);
 		$unroundedVatPercent = ($amountExVat != 0) ? ($vat / $amountExVat) : 0.00; // catch potential divide by zero
 		$vatPercent = Helper::bround($unroundedVatPercent, 2) * 100; // OrderRow has vatpercent as int.

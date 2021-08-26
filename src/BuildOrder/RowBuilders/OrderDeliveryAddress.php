@@ -11,8 +11,7 @@
 namespace Svea\WebPay\BuildOrder\RowBuilders;
 
 
-class OrderDeliveryAddress
-{
+class OrderDeliveryAddress {
 	public $fullName;
 	public $firstName;
 	public $lastName;
@@ -29,8 +28,7 @@ class OrderDeliveryAddress
 	 * @param mixed $fullName
 	 * @return $this
 	 */
-	public function setFullName($fullName)
-	{
+	public function setFullName($fullName) {
 		$this->fullName = $fullName;
 
 		return $this;
@@ -40,8 +38,7 @@ class OrderDeliveryAddress
 	 * @param mixed $firstName
 	 * @return $this
 	 */
-	public function setFirstName($firstName)
-	{
+	public function setFirstName($firstName) {
 		$this->firstName = $firstName;
 
 		return $this;
@@ -51,8 +48,7 @@ class OrderDeliveryAddress
 	 * @param mixed $lastName
 	 * @return $this
 	 */
-	public function setLastName($lastName)
-	{
+	public function setLastName($lastName) {
 		$this->lastName = $lastName;
 
 		return $this;
@@ -62,8 +58,7 @@ class OrderDeliveryAddress
 	 * @param mixed $streetAddress
 	 * @return $this
 	 */
-	public function setStreetAddress($streetAddress)
-	{
+	public function setStreetAddress($streetAddress) {
 		$this->streetAddress = $streetAddress;
 
 		return $this;
@@ -73,8 +68,7 @@ class OrderDeliveryAddress
 	 * @param mixed $coAddress
 	 * @return $this
 	 */
-	public function setCoAddress($coAddress)
-	{
+	public function setCoAddress($coAddress) {
 		$this->coAddress = $coAddress;
 
 		return $this;
@@ -84,8 +78,7 @@ class OrderDeliveryAddress
 	 * @param mixed $zipCode
 	 * @return mixed
 	 */
-	public function setZipCode($zipCode)
-	{
+	public function setZipCode($zipCode) {
 		$this->zipCode = $zipCode;
 
 		return $this;
@@ -95,8 +88,7 @@ class OrderDeliveryAddress
 	 * @param mixed $houseNumber
 	 * @return $this
 	 */
-	public function setHouseNumber($houseNumber)
-	{
+	public function setHouseNumber($houseNumber) {
 		$this->houseNumber = $houseNumber;
 
 		return $this;
@@ -106,8 +98,7 @@ class OrderDeliveryAddress
 	 * @param mixed $locality
 	 * @return $this
 	 */
-	public function setLocality($locality)
-	{
+	public function setLocality($locality) {
 		$this->locality = $locality;
 
 		return $this;
@@ -117,8 +108,7 @@ class OrderDeliveryAddress
 	 * @param mixed $countryCode
 	 * @return $this
 	 */
-	public function setCountryCode($countryCode)
-	{
+	public function setCountryCode($countryCode) {
 		$this->countryCode = $countryCode;
 
 		return $this;

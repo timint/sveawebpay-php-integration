@@ -4,8 +4,7 @@ namespace Svea\WebPay\WebService\SveaSoap;
 
 use Svea\WebPay\Config\ConfigurationProvider;
 
-class SveaDeliverOrderInformation
-{
+class SveaDeliverOrderInformation {
 	public $SveaOrderId;
 	public $OrderType;
 
@@ -13,8 +12,7 @@ class SveaDeliverOrderInformation
 	 * SveaDeliverOrderInformation constructor.
 	 * @param $orderType
 	 */
-	public function __construct($orderType)
-	{
+	public function __construct($orderType) {
 		if ($orderType == ConfigurationProvider::INVOICE_TYPE) {
 			$this->DeliverInvoiceDetails = "";
 		}

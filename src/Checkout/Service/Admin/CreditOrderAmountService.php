@@ -5,8 +5,7 @@ namespace Svea\WebPay\Checkout\Service\Admin;
 use Svea\WebPay\BuildOrder\CreditAmountBuilder;
 use Svea\WebPay\Helper\Helper;
 
-class CreditOrderAmountService extends AdminImplementationService
-{
+class CreditOrderAmountService extends AdminImplementationService {
 	/**
 	 * @var CreditAmountBuilder $adminBuilder
 	 */
@@ -14,8 +13,7 @@ class CreditOrderAmountService extends AdminImplementationService
 	/**
 	 * Validate order data
 	 */
-	public function validate()
-	{
+	public function validate() {
 		$errors = [];
 
 		$orderId = $this->adminBuilder->orderId;
@@ -24,12 +22,10 @@ class CreditOrderAmountService extends AdminImplementationService
 		}
 
 		$deliveryId = $this->adminBuilder->deliveryId;
-		if (is_int($deliveryId) || (is_float($deliveryId) && $deliveryId > 2147483647))
-		{
+		if (is_int($deliveryId) || (is_float($deliveryId) && $deliveryId > 2147483647)) {
 
 		}
-		else
-		{
+		else {
 			$errors['incorrect Delivery Id'] = "Delivery Id can't be empty and must be Integer";
 		}
 
@@ -45,8 +41,7 @@ class CreditOrderAmountService extends AdminImplementationService
 	 * Format given date so that will match data structure required for Admin API
 	 * @return mixed
 	 */
-	public function prepareRequest()
-	{
+	public function prepareRequest() {
 		$this->validate();
 
 		$requestData = [
@@ -63,8 +58,7 @@ class CreditOrderAmountService extends AdminImplementationService
 	/**
 	 * Send call Connection Library
 	 */
-	public function doRequest()
-	{
+	public function doRequest() {
 		$preparedData = $this->prepareRequest();
 		$response = $this->checkoutAdminConnection->creditOrderAmount($preparedData);
 

@@ -7,21 +7,18 @@ namespace Svea\WebPay\WebService\WebServiceResponse;
  *
  * @author anne-hal, Kristian Grossman-Madsen
  */
-class CloseOrderResult extends WebServiceResponse
-{
+class CloseOrderResult extends WebServiceResponse {
 	/**
 	 * CloseOrderResult constructor.
 	 * @param $response
 	 * @param $logs
 	 */
-	public function __construct($response, $logs)
-	{
+	public function __construct($response, $logs) {
 		// was request accepted?
 		$this->accepted = $response->CloseOrderEuResult->Accepted; // false or 1
 		$this->errormessage = isset($response->CloseOrderEuResult->ErrorMessage) ? $response->CloseOrderEuResult->ErrorMessage : "";
 
-		if(isset($logs))
-		{
+		if(isset($logs)) {
 			$this->logs = $logs;
 		}
 

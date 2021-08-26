@@ -14,8 +14,7 @@ use Svea\WebPay\Config\ConfigurationProvider;
  * Raw fields: $xmlMessageBase64, $message, $merchantId, $secretWord, $mac
  * @author Anneli Halld'n, Daniel Brolund for Svea Webpay
  */
-class PaymentForm
-{
+class PaymentForm {
 	public $endPointUrl;
 	public $xmlMessage;
 	public $xmlMessageBase64;
@@ -35,8 +34,7 @@ class PaymentForm
 	 * @param ConfigurationProvider $config
 	 * @param string $countryCode
 	 */
-	function __construct($xmlMessage, $config, $countryCode = NULL)
-	{
+	function __construct($xmlMessage, $config, $countryCode = NULL) {
 		$this->xmlMessage = $xmlMessage;
 		$this->xmlMessageBase64 = base64_encode($xmlMessage);
 		$this->endPointUrl = $config->getEndPoint(ConfigurationProvider::HOSTED_TYPE);
@@ -54,8 +52,7 @@ class PaymentForm
 	/**
 	 * Set complete html-form as string
 	 */
-	public function setForm()
-	{
+	public function setForm() {
 		$formString = "<form name='paymentForm' id='paymentForm' method='post' action='" . $this->endPointUrl . "'>";
 		$formString .= "<input type='hidden' name='merchantid' value='{$this->merchantid}' />";
 		$formString .= "<input type='hidden' name='message' value='{$this->xmlMessageBase64}' />";
@@ -70,8 +67,7 @@ class PaymentForm
 	/**
 	 * Set form elements as Array
 	 */
-	public function setHtmlFields()
-	{
+	public function setHtmlFields() {
 		$this->htmlFormFieldsAsArray['form_start_tag'] = "<form name='paymentForm' id='paymentForm' method='post' action='" . $this->endPointUrl . "'>";
 		$this->htmlFormFieldsAsArray['input_merchantId'] = "<input type='hidden' name='merchantid' value='{$this->merchantid}' />";
 		$this->htmlFormFieldsAsArray['input_message'] = "<input type='hidden' name='message' value='{$this->xmlMessageBase64}' />";
@@ -81,8 +77,7 @@ class PaymentForm
 		$this->htmlFormFieldsAsArray['form_end_tag'] = "</form>";
 	}
 
-	public function setRawFields()
-	{
+	public function setRawFields() {
 		$this->rawFields['merchantid'] = $this->merchantid;
 		$this->rawFields['message'] = $this->xmlMessageBase64;
 		$this->rawFields['mac'] = $this->mac;
@@ -90,8 +85,7 @@ class PaymentForm
 		$this->rawFields['htmlFormAction'] = $this->endPointUrl;
 	}
 
-	public function setSubmitMessage($countryCode = FALSE)
-	{
+	public function setSubmitMessage($countryCode = FALSE) {
 		switch ($countryCode) {
 			case "SE":
 				$this->submitMessage = "Betala";

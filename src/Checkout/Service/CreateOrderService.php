@@ -12,8 +12,7 @@ use Svea\WebPay\Checkout\Validation\CreateOrderValidator;
  *
  * @package Svea\Svea\WebPay\WebPay\Checkout\Service
  */
-class CreateOrderService extends CheckoutService
-{
+class CreateOrderService extends CheckoutService {
 	public $requestObject;
 
 	/**
@@ -21,8 +20,7 @@ class CreateOrderService extends CheckoutService
 	 *
 	 * @return array
 	 */
-	public function doRequest()
-	{
+	public function doRequest() {
 		$requestData = $this->prepareRequest();
 
 		$response = $this->serviceConnection->create($requestData);
@@ -36,8 +34,7 @@ class CreateOrderService extends CheckoutService
 	 * @return array
 	 * @throws \Svea\WebPay\BuildOrder\Validator\ValidationException
 	 */
-	protected function prepareRequest()
-	{
+	protected function prepareRequest() {
 		$errors = $this->validateOrder();
 		$this->processErrors($errors);
 		$data = $this->mapCreateOrderData($this->order);
@@ -50,8 +47,7 @@ class CreateOrderService extends CheckoutService
 	 *
 	 * @return array of errors
 	 */
-	protected function validateOrder()
-	{
+	protected function validateOrder() {
 		$validator = new CreateOrderValidator();
 		$errors = $validator->validate($this->order);
 
@@ -64,8 +60,7 @@ class CreateOrderService extends CheckoutService
 	 * @param CheckoutOrderBuilder $order
 	 * @return array
 	 */
-	protected function mapCreateOrderData(CheckoutOrderBuilder $order)
-	{
+	protected function mapCreateOrderData(CheckoutOrderBuilder $order) {
 		$data = [];
 
 		/**
@@ -91,23 +86,19 @@ class CreateOrderService extends CheckoutService
 			}
 		}
 
-		if ($order->getPartnerKey() != null)
-		{
+		if ($order->getPartnerKey() != null) {
 			$data['partnerKey'] = $order->getPartnerKey();
 		}
 
-		if ($order->getIdentityFlags() != null)
-		{
-			foreach ($order->getIdentityFlags() as $key => $identityFlag)
-			{
+		if ($order->getIdentityFlags() != null) {
+			foreach ($order->getIdentityFlags() as $key => $identityFlag) {
 				$data['identityFlags'][$identityFlag] = true;
 			}
 		}
 
 		$data['merchantData'] = $order->getMerchantData();
 
-		if($order->getRequireElectronicIdAuthentication() != null)
-		{
+		if($order->getRequireElectronicIdAuthentication() != null) {
 			$data['requireElectronicIdAuthentication'] = $order->getRequireElectronicIdAuthentication();
 		}
 

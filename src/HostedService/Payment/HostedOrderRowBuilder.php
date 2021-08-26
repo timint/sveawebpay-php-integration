@@ -2,14 +2,12 @@
 
 namespace Svea\WebPay\HostedService\Payment;
 
-class HostedOrderRowBuilder
-{
+class HostedOrderRowBuilder {
 	/**
 	 * @param string $skuAsString
 	 * @return $this
 	 */
-	public function setSku($skuAsString)
-	{
+	public function setSku($skuAsString) {
 		$this->sku = $skuAsString;
 
 		return $this;
@@ -19,8 +17,7 @@ class HostedOrderRowBuilder
 	 * @param string $nameAsString
 	 * @return $this
 	 */
-	public function setName($nameAsString)
-	{
+	public function setName($nameAsString) {
 		$this->name = $nameAsString;
 
 		return $this;
@@ -30,8 +27,7 @@ class HostedOrderRowBuilder
 	 * @param string $descriptionAsString
 	 * @return $this
 	 */
-	public function setDescription($descriptionAsString)
-	{
+	public function setDescription($descriptionAsString) {
 		$this->description = $descriptionAsString;
 
 		return $this;
@@ -41,8 +37,7 @@ class HostedOrderRowBuilder
 	 * @param int $AmountAsInt
 	 * @return $this
 	 */
-	public function setAmount($AmountAsInt)
-	{
+	public function setAmount($AmountAsInt) {
 		$this->amount = $AmountAsInt;
 
 		return $this;
@@ -52,8 +47,7 @@ class HostedOrderRowBuilder
 	 * @param int $vatAsInt
 	 * @return $this
 	 */
-	public function setVat($vatAsInt)
-	{
+	public function setVat($vatAsInt) {
 		$this->vat = $vatAsInt;
 
 		return $this;
@@ -63,8 +57,7 @@ class HostedOrderRowBuilder
 	 * @param int $quantityAsInt
 	 * @return $this
 	 */
-	public function setQuantity($quantityAsInt)
-	{
+	public function setQuantity($quantityAsInt) {
 		$this->quantity = $quantityAsInt;
 
 		return $this;
@@ -74,8 +67,7 @@ class HostedOrderRowBuilder
 	 * @param string $unitAsString
 	 * @return $this
 	 */
-	public function setUnit($unitAsString)
-	{
+	public function setUnit($unitAsString) {
 		$this->unit = $unitAsString;
 
 		return $this;

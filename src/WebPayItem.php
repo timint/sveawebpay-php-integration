@@ -35,11 +35,9 @@ use Svea\WebPay\Checkout\Model\PresetValue;
  *
  * @author Kristian Grossman-Madsen
  */
-class WebPayItem
-{
+class WebPayItem {
 
-	public static function orderDeliveryAddress()
-	{
+	public static function orderDeliveryAddress() {
 		return new OrderDeliveryAddress();
 	}
 	/**
@@ -66,8 +64,7 @@ class WebPayItem
 	 *
 	 * @return \Svea\WebPay\BuildOrder\RowBuilders\OrderRow
 	 */
-	public static function orderRow()
-	{
+	public static function orderRow() {
 		return new OrderRow();
 	}
 
@@ -75,8 +72,7 @@ class WebPayItem
 	 * Use this only when supplying NumberedOrderRow items for the various Svea\WebPay\WebPayAdmin order row administration functions.
 	 * @return \Svea\WebPay\BuildOrder\RowBuilders\NumberedOrderRow
 	 */
-	public static function numberedOrderRow()
-	{
+	public static function numberedOrderRow() {
 		return new NumberedOrderRow();
 	}
 
@@ -100,8 +96,7 @@ class WebPayItem
 	 *
 	 * @return \Svea\WebPay\BuildOrder\RowBuilders\ShippingFee
 	 */
-	public static function shippingFee()
-	{
+	public static function shippingFee() {
 		return new ShippingFee();
 	}
 
@@ -124,8 +119,7 @@ class WebPayItem
 	 *
 	 * @return \Svea\WebPay\BuildOrder\RowBuilders\InvoiceFee
 	 */
-	public static function invoiceFee()
-	{
+	public static function invoiceFee() {
 		return new InvoiceFee();
 	}
 
@@ -155,8 +149,7 @@ class WebPayItem
 	 *
 	 * @return \Svea\WebPay\BuildOrder\RowBuilders\FixedDiscount
 	 */
-	public static function fixedDiscount()
-	{
+	public static function fixedDiscount() {
 		return new FixedDiscount();
 	}
 
@@ -183,8 +176,7 @@ class WebPayItem
 	 *
 	 * @return \Svea\WebPay\BuildOrder\RowBuilders\RelativeDiscount
 	 */
-	public static function relativeDiscount()
-	{
+	public static function relativeDiscount() {
 		return new RelativeDiscount();
 	}
 
@@ -214,8 +206,7 @@ class WebPayItem
 	 *
 	 * @return \Svea\WebPay\BuildOrder\RowBuilders\IndividualCustomer
 	 */
-	public static function individualCustomer()
-	{
+	public static function individualCustomer() {
 		return new IndividualCustomer();
 	}
 
@@ -244,8 +235,7 @@ class WebPayItem
 	 *
 	 * @return \Svea\WebPay\BuildOrder\RowBuilders\CompanyCustomer
 	 */
-	public static function companyCustomer()
-	{
+	public static function companyCustomer() {
 		return new CompanyCustomer();
 	}
 
@@ -259,8 +249,7 @@ class WebPayItem
 	 *
 	 * @return \Svea\WebPay\Checkout\Model\PresetValue
 	 */
-	public static function presetValue()
-	{
+	public static function presetValue() {
 		return new PresetValue();
 	}
 }

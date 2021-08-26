@@ -12,8 +12,7 @@ use Svea\WebPay\BuildOrder\RowBuilders\IndividualCustomer;
  *
  * @author Kristian Grossman-Madsen, Fredrik Sundell
  */
-class GetOrdersResponse extends AdminServiceResponse
-{
+class GetOrdersResponse extends AdminServiceResponse {
 	// phpdoc attributes below takes its info from admin service api Order structure
 	/**
 	 * @var string $changedDate -- Date when order status was changed, e.g when order was delivered.
@@ -137,13 +136,11 @@ class GetOrdersResponse extends AdminServiceResponse
 	 * @param $message
 	 * @param $logs
 	 */
-	function __construct($message, $logs)
-	{
+	function __construct($message, $logs) {
 		$this->formatObject($message, $logs);
 	}
 
-	protected function formatObject($message, $logs)
-	{
+	protected function formatObject($message, $logs) {
 
 		// was request accepted?
 		parent::formatObject($message, $logs);

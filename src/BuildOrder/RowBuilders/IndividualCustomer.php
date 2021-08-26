@@ -6,8 +6,7 @@ namespace Svea\WebPay\BuildOrder\RowBuilders;
  * Class IndividualCustomer, a customer information container for private individuals.
  * @author anne-hal, Kristian Grossman-Madsen
  */
-class IndividualCustomer
-{
+class IndividualCustomer {
 	/**
 	 * @var string $ssn
 	 */
@@ -89,8 +88,7 @@ class IndividualCustomer
 	 *
 	 * @return $this
 	 */
-	public function setNationalIdNumber($nationalIdNumber)
-	{
+	public function setNationalIdNumber($nationalIdNumber) {
 		$this->ssn = $nationalIdNumber;
 
 		return $this;
@@ -103,8 +101,7 @@ class IndividualCustomer
 	 *
 	 * @return $this
 	 */
-	public function setInitials($initialsAsString)
-	{
+	public function setInitials($initialsAsString) {
 		$this->initials = $initialsAsString;
 
 		return $this;
@@ -120,8 +117,7 @@ class IndividualCustomer
 	 * @return $this
 	 * @throws \InvalidArgumentException in case of bad birthdate string format
 	 */
-	public function setBirthDate($yyyy, $mm = null, $dd = null)
-	{
+	public function setBirthDate($yyyy, $mm = null, $dd = null) {
 		if ($mm == null && $dd == null) { // poor man's overloading
 			$yyyymmdd = $yyyy;
 			if (strlen($yyyymmdd) != 8) {
@@ -151,8 +147,7 @@ class IndividualCustomer
 	 *
 	 * @return $this
 	 */
-	public function setEmail($emailAsString)
-	{
+	public function setEmail($emailAsString) {
 		$this->email = $emailAsString;
 
 		return $this;
@@ -165,8 +160,7 @@ class IndividualCustomer
 	 *
 	 * @return $this
 	 */
-	public function setPhoneNumber($phoneNumberAsInt)
-	{
+	public function setPhoneNumber($phoneNumberAsInt) {
 		$this->phonenumber = $phoneNumberAsInt;
 
 		return $this;
@@ -179,8 +173,7 @@ class IndividualCustomer
 	 *
 	 * @return $this
 	 */
-	public function setIpAddress($ipAddressAsString)
-	{
+	public function setIpAddress($ipAddressAsString) {
 		$this->ipAddress = $ipAddressAsString;
 
 		return $this;
@@ -194,8 +187,7 @@ class IndividualCustomer
 	 *
 	 * @return $this
 	 */
-	public function setName($firstnameAsString, $lastnameAsString = null)
-	{ // = null is poor man's overloading
+	public function setName($firstnameAsString, $lastnameAsString = null) { // = null is poor man's overloading
 		// only one name given, assume fullName;
 		if ($lastnameAsString == null) {
 			$fullNameAsString = $firstnameAsString;
@@ -217,8 +209,7 @@ class IndividualCustomer
 	 *
 	 * @return $this
 	 */
-	public function setStreetAddress($streetAsString, $houseNumberAsInt = null)
-	{ // = null is poor man's overloading
+	public function setStreetAddress($streetAsString, $houseNumberAsInt = null) { // = null is poor man's overloading
 		// only one name given, assume streetName;
 		if ($houseNumberAsInt == null) {
 			$streetAddressAsString = $streetAsString;
@@ -239,8 +230,7 @@ class IndividualCustomer
 	 *
 	 * @return $this
 	 */
-	public function setCoAddress($coAddressAsString)
-	{
+	public function setCoAddress($coAddressAsString) {
 		$this->coAddress = $coAddressAsString;
 
 		return $this;
@@ -253,8 +243,7 @@ class IndividualCustomer
 	 *
 	 * @return $this
 	 */
-	public function setZipCode($zipCodeAsString)
-	{
+	public function setZipCode($zipCodeAsString) {
 		$this->zipCode = $zipCodeAsString;
 
 		return $this;
@@ -267,8 +256,7 @@ class IndividualCustomer
 	 *
 	 * @return $this
 	 */
-	public function setLocality($cityAsString)
-	{
+	public function setLocality($cityAsString) {
 		$this->locality = $cityAsString;
 
 		return $this;
@@ -281,8 +269,7 @@ class IndividualCustomer
 	 *
 	 * @return $this
 	 */
-	public function setPublicKey($publicKeyAsString)
-	{
+	public function setPublicKey($publicKeyAsString) {
 		$this->publicKey = $publicKeyAsString;
 
 		return $this;

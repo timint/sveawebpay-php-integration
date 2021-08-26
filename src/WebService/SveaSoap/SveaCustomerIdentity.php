@@ -2,8 +2,7 @@
 
 namespace Svea\WebPay\WebService\SveaSoap;
 
-class SveaCustomerIdentity
-{
+class SveaCustomerIdentity {
 	/**
 	 * Only include in Nordic countries
 	 */
@@ -25,8 +24,7 @@ class SveaCustomerIdentity
 	 * Dynamically crate an instancevariable depending on Company or Individual
 	 * @param array $identity
 	 */
-	public function __construct($identity = [])
-	{
+	public function __construct($identity = []) {
 		if (isset($identity)) {
 			foreach ($identity as $key => $value) {
 				if ($key == 'IndividualIdentity') {

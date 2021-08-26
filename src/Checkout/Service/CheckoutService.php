@@ -12,8 +12,7 @@ use Svea\WebPay\Checkout\Service\Connection\ServiceConnection;
  * Class CheckoutService
  * @package Svea\Svea\WebPay\WebPay\Checkout\Service
  */
-abstract class CheckoutService
-{
+abstract class CheckoutService {
 	protected $order;
 
 	/**
@@ -26,8 +25,7 @@ abstract class CheckoutService
 	 *
 	 * @param $order
 	 */
-	public function __construct($order)
-	{
+	public function __construct($order) {
 		$this->order = $order;
 		$this->serviceConnection = new CheckoutServiceConnection($this->order->conf, $this->order->getCountryCode());
 	}
@@ -51,8 +49,7 @@ abstract class CheckoutService
 	/**
 	 * @return mixed
 	 */
-	protected function formatOrderInformationWithOrderRows()
-	{
+	protected function formatOrderInformationWithOrderRows() {
 		$formatter = new CheckoutRowFormatter($this->order);
 		$formattedOrderRows = $formatter->formatRows();
 
@@ -65,8 +62,7 @@ abstract class CheckoutService
 	 * @param \Svea\WebPay\WebService\SveaSoap\SveaOrderRow $item
 	 * @return array
 	 */
-	protected function mapOrderItem($item)
-	{
+	protected function mapOrderItem($item) {
 		$checkoutOrderItem = new CheckoutOrderRow();
 
 		if (isset($item->Name)) {
@@ -105,8 +101,7 @@ abstract class CheckoutService
 	 * @param array $errors
 	 * @throws ValidationException
 	 */
-	protected function processErrors(array $errors)
-	{
+	protected function processErrors(array $errors) {
 		if (count($errors) > 0) {
 			$message = '';
 			foreach ($errors as $key => $val) {

@@ -4,8 +4,7 @@ namespace Svea\WebPay\AdminService\AdminSoap;
 
 use SoapVar;
 
-class CancelAccountCreditAmountRequest
-{
+class CancelAccountCreditAmountRequest {
 	public $Authentication;
 	public $AmountIncVat;	 // note that the order of the attributes matter!
 	public $ClientAccountCreditId;  // order id
@@ -21,8 +20,7 @@ class CancelAccountCreditAmountRequest
 	 * @param string $clientId
 	 * @param string $orderId
 	 */
-	function __construct($authentication, $amountIncVat, $description, $clientId, $orderId)
-	{
+	function __construct($authentication, $amountIncVat, $description, $clientId, $orderId) {
 		$regular = 'http://schemas.datacontract.org/2004/07/DataObjects.Admin.Service';
 		$request = 'http://schemas.datacontract.org/2004/07/DataObjects.Admin.Service.Requests';
 

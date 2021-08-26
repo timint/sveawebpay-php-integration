@@ -7,8 +7,7 @@ namespace Svea\WebPay\AdminService\AdminServiceResponse;
  *
  * @author Kristian Grossman-Madsen, Fredrik Sundell
  */
-class CreditInvoiceRowsResponse extends AdminServiceResponse
-{
+class CreditInvoiceRowsResponse extends AdminServiceResponse {
 	/**
 	 * @var float $amount (set iff accepted) the amount credited with this request (a negative amount)
 	 */
@@ -39,8 +38,7 @@ class CreditInvoiceRowsResponse extends AdminServiceResponse
 	 * @param $message
 	 * @param $logs
 	 */
-	function __construct($message, $logs)
-	{
+	function __construct($message, $logs) {
 		$this->formatObject($message, $logs);
 	}
 
@@ -49,8 +47,7 @@ class CreditInvoiceRowsResponse extends AdminServiceResponse
 	 * @param $message
 	 * @param $logs
 	 */
-	protected function formatObject($message, $logs)
-	{
+	protected function formatObject($message, $logs) {
 		parent::formatObject($message, $logs);
 
 		if ($this->accepted == 1) {

@@ -10,8 +10,7 @@ use Svea\WebPay\Config\ConfigurationProvider;
  * Do request
  * - return Response Object
  */
-class SveaDoRequest
-{
+class SveaDoRequest {
 	private $svea_server;
 	private $client;
 
@@ -25,26 +24,24 @@ class SveaDoRequest
 	 * @param object $object Object to pass in soap call
 	 * @param bool $logging
 	 */
-	public function __construct($config, $ordertype, $method, $object, $logging = false)
-	{
+	public function __construct($config, $ordertype, $method, $object, $logging = false) {
 		$this->svea_server = $config->getEndPoint($ordertype);
 		$this->client = $this->SetSoapClient($config);
 		$this->result = $this->CallSoap($method, $object, $logging);
 	}
 
-	private function CallSoap($method, $order, $logging)
-	{
+	private function CallSoap($method, $order, $logging) {
+
 		$headers = new \SoapHeader('http://www.w3.org/2005/08/addressing', 'To', str_replace("/SveaWebPay.asmx?WSDL", "",$this->svea_server) . "/webpay/" . $method);
 		$this->client->__setSoapHeaders($headers);
+
 		$params = (array)$order;
-		if($logging == true)
-		{
+		if($logging == true) {
 			$timestampStart = time();
 			$microtimeStart = microtime(true);
 		}
 		$result = ["requestResult" => $this->client->__soapCall($method, [$params])];
-		if($logging == true)
-		{
+		if($logging == true) {
 			$logs = [
 				"logs" => [
 					"request" => [
@@ -65,8 +62,7 @@ class SveaDoRequest
 		return $result;
 	}
 
-	private function SetSoapClient($config)
-	{
+	private function SetSoapClient($config) {
 		$libraryProperties = Helper::getSveaLibraryProperties();
 		$libraryName = $libraryProperties['library_name'];
 		$libraryVersion = $libraryProperties['library_version'];

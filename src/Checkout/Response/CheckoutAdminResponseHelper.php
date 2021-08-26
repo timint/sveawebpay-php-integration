@@ -2,12 +2,10 @@
 
 namespace Svea\WebPay\Checkout\Response;
 
-class CheckoutAdminResponseHelper
-{
+class CheckoutAdminResponseHelper {
 	const MINOR_CURRENCY = 100;
 
-	public static function processResponse($response)
-	{
+	public static function processResponse($response) {
 		if (isset($response['OrderAmount']) && !empty($response['OrderAmount'])) {
 			$response['OrderAmount'] = $response['OrderAmount'] / self::MINOR_CURRENCY;
 		}
@@ -30,8 +28,7 @@ class CheckoutAdminResponseHelper
 		return $response;
 	}
 
-	private static function convertDeliveries($deliveries)
-	{
+	private static function convertDeliveries($deliveries) {
 		$newDeliveries = [];
 		foreach ($deliveries as $delivery) {
 			if (isset($delivery['DeliveryAmount']) && !empty($delivery['DeliveryAmount'])) {
@@ -63,8 +60,7 @@ class CheckoutAdminResponseHelper
 		return $newDeliveries;
 	}
 
-	private static function convertCredits($credits)
-	{
+	private static function convertCredits($credits) {
 		$newCredits = [];
 
 		foreach ($credits as $credit) {
@@ -88,8 +84,7 @@ class CheckoutAdminResponseHelper
 		return $newCredits;
 	}
 
-	private static function convertOrderRows($orderRows)
-	{
+	private static function convertOrderRows($orderRows) {
 		$newOrderRows = [];
 		foreach ($orderRows as $row) {
 			$newOrderRows[] = self::convertMinorCurrencyValues($row);
@@ -98,8 +93,7 @@ class CheckoutAdminResponseHelper
 		return $newOrderRows;
 	}
 
-	private static function convertMinorCurrencyValues($orderRowData)
-	{
+	private static function convertMinorCurrencyValues($orderRowData) {
 		if (isset($orderRowData['Quantity']) && !empty($orderRowData['Quantity'])) {
 			$orderRowData['Quantity'] = $orderRowData['Quantity'] / self::MINOR_CURRENCY;
 		}

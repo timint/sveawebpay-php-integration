@@ -5,8 +5,7 @@
 
 namespace Svea\WebPay\WebService\SveaSoap;
 
-class SveaAddress
-{
+class SveaAddress {
 	public $Auth;
 
 	public $IsCompany;
@@ -22,8 +21,7 @@ class SveaAddress
 	 * @param string $countryCode
 	 * @param string $securityNumber
 	 */
-	function __construct($auth, $isCompany, $countryCode, $securityNumber)
-	{
+	function __construct($auth, $isCompany, $countryCode, $securityNumber) {
 		$this->Auth = $auth;
 		$this->IsCompany = $isCompany;
 		$this->CountryCode = $countryCode;

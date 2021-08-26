@@ -5,8 +5,7 @@ namespace Svea\WebPay\WebService\SveaSoap;
 /**
  * Include in SveaDeliverOrderInformation for Invoice only
  */
-class SveaDeliverInvoiceDetails
-{
+class SveaDeliverInvoiceDetails {
 	/**
 	 * Already set at Svea, but needs to be included in array
 	 */
@@ -32,8 +31,7 @@ class SveaDeliverInvoiceDetails
 	/**
 	 * SveaDeliverInvoiceDetails constructor.
 	 */
-	public function __construct()
-	{
+	public function __construct() {
 		$this->OrderRows['OrderRow'] = [];
 	}
 
@@ -41,8 +39,7 @@ class SveaDeliverInvoiceDetails
 	 * only use if order is changed
 	 * @param $orderRow
 	 */
-	public function addOrderRow($orderRow)
-	{
+	public function addOrderRow($orderRow) {
 		array_push($this->OrderRows['OrderRow'], $orderRow);
 	}
 }

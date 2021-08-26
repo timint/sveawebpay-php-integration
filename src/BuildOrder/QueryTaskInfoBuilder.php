@@ -5,8 +5,7 @@ namespace Svea\WebPay\BuildOrder;
 use Svea\WebPay\Checkout\Service\Admin\GetTaskInfoService;
 use Svea\WebPay\Checkout\Service\Admin\AdminImplementationService;
 
-class QueryTaskInfoBuilder extends CheckoutAdminOrderBuilder
-{
+class QueryTaskInfoBuilder extends CheckoutAdminOrderBuilder {
 	/**
 	 * @var string $taskUrl
 	 */
@@ -18,8 +17,7 @@ class QueryTaskInfoBuilder extends CheckoutAdminOrderBuilder
 	 * @param string $url
 	 * @return $this
 	 */
-	public function setTaskUrl($url)
-	{
+	public function setTaskUrl($url) {
 		$this->taskUrl = $url;
 
 		return $this;
@@ -28,8 +26,7 @@ class QueryTaskInfoBuilder extends CheckoutAdminOrderBuilder
 	/**
 	 * @return AdminImplementationService
 	 */
-	public function getTaskInfo()
-	{
+	public function getTaskInfo() {
 		return new GetTaskInfoService($this);
 	}
 }

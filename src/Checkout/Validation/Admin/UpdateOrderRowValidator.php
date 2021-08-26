@@ -5,16 +5,14 @@ namespace Svea\WebPay\Checkout\Validation\Admin;
 use Svea\WebPay\BuildOrder\UpdateOrderRowsBuilder;
 use Svea\WebPay\BuildOrder\Validator\OrderValidator;
 
-class UpdateOrderRowValidator extends OrderValidator
-{
+class UpdateOrderRowValidator extends OrderValidator {
 	public $errors = [];
 
 	/**
 	 * @param UpdateOrderRowsBuilder $adminBuilder
 	 * @return array
 	 */
-	public function validate($adminBuilder)
-	{
+	public function validate($adminBuilder) {
 		$errors = $this->errors;
 
 		$orderId = $adminBuilder->orderId;
@@ -46,8 +44,7 @@ class UpdateOrderRowValidator extends OrderValidator
 	 * @param array $errors
 	 * @return array
 	 */
-	protected function validateOrderRows($order, $errors)
-	{
+	protected function validateOrderRows($order, $errors) {
 		$errors = parent::validateOrderRows($order, $errors);
 		$errors = $this->validateCheckoutOrderRows($order, $errors);
 

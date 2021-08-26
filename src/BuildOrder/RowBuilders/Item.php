@@ -11,40 +11,32 @@ use Svea\WebPay\WebPayItem;
  *
  * @author Kristian Grossman-Madsen, anne-hal
  */
-class Item
-{
-	public static function orderRow()
-	{
+class Item {
+	public static function orderRow() {
 		return WebPayItem::orderRow();
 	}
 
-	public static function shippingFee()
-	{
+	public static function shippingFee() {
 		return WebPayItem::shippingFee();
 	}
 
-	public static function invoiceFee()
-	{
+	public static function invoiceFee() {
 		return WebPayItem::invoiceFee();
 	}
 
-	public static function fixedDiscount()
-	{
+	public static function fixedDiscount() {
 		return WebPayItem::fixedDiscount();
 	}
 
-	public static function relativeDiscount()
-	{
+	public static function relativeDiscount() {
 		return WebPayItem::relativeDiscount();
 	}
 
-	public static function individualCustomer()
-	{
+	public static function individualCustomer() {
 		return WebPayItem::individualCustomer();
 	}
 
-	public static function companyCustomer()
-	{
+	public static function companyCustomer() {
 		return WebPayItem::companyCustomer();
 	}
 }

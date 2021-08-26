@@ -9,8 +9,7 @@ use Svea\WebPay\BuildOrder\Validator\ValidationException;
  * that can be set in checkout order
  * @package Svea\Svea\WebPay\WebPay\Checkout\Model
  */
-class PresetValue
-{
+class PresetValue {
 	const NATIONAL_ID = 'nationalId';
 	const EMAIL_ADDRESS = 'emailAddress';
 	const PHONE_NUMBER = 'phoneNumber';
@@ -35,8 +34,7 @@ class PresetValue
 	/**
 	 * @return string
 	 */
-	public function getTypeName()
-	{
+	public function getTypeName() {
 		return $this->typeName;
 	}
 
@@ -45,8 +43,7 @@ class PresetValue
 	 * @return PresetValue
 	 * @throws ValidationException
 	 */
-	public function setTypeName($typeName)
-	{
+	public function setTypeName($typeName) {
 		$this->validateInput($typeName);
 
 		$this->typeName = $typeName;
@@ -58,8 +55,7 @@ class PresetValue
 	 * @param $typeName
 	 * @throws \Svea\WebPay\BuildOrder\Validator\ValidationException
 	 */
-	private function validateInput($typeName)
-	{
+	private function validateInput($typeName) {
 		$constantListValue = $this->getConstantListValues();
 
 		if (!in_array($typeName, $constantListValue)) {
@@ -73,8 +69,7 @@ class PresetValue
 	 *
 	 * @return array
 	 */
-	private function getConstantListValues()
-	{
+	private function getConstantListValues() {
 		$rc = new \ReflectionClass($this);
 		$constantList = array_values($rc->getConstants());
 
@@ -84,8 +79,7 @@ class PresetValue
 	/**
 	 * @return mixed
 	 */
-	public function getValue()
-	{
+	public function getValue() {
 		return $this->value;
 	}
 
@@ -93,8 +87,7 @@ class PresetValue
 	 * @param mixed $value
 	 * @return PresetValue
 	 */
-	public function setValue($value)
-	{
+	public function setValue($value) {
 		$this->value = $value;
 
 		return $this;
@@ -103,8 +96,7 @@ class PresetValue
 	/**
 	 * @return boolean
 	 */
-	public function isIsReadonly()
-	{
+	public function isIsReadonly() {
 		return $this->isReadonly;
 	}
 
@@ -112,8 +104,7 @@ class PresetValue
 	 * @param boolean $isReadonly
 	 * @return PresetValue
 	 */
-	public function setIsReadonly($isReadonly)
-	{
+	public function setIsReadonly($isReadonly) {
 		$this->isReadonly = $isReadonly;
 
 		return $this;
@@ -123,8 +114,7 @@ class PresetValue
 	/**
 	 * @return array
 	 */
-	public function returnPresetArray()
-	{
+	public function returnPresetArray() {
 		return [
 			'typeName' => $this->typeName,
 			'value' => $this->value,

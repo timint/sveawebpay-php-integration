@@ -27,8 +27,7 @@ use Svea\WebPay\HostedService\HostedAdminRequest\QueryTransaction;
  *
  * @author Kristian Grossman-Madsen for Svea Svea\WebPay\WebPay
  */
-class AccountCreditQueryBuilder extends CheckoutAdminOrderBuilder
-{
+class AccountCreditQueryBuilder extends CheckoutAdminOrderBuilder {
 	/**
 	 * @var ConfigurationProvider $conf
 	 */
@@ -49,8 +48,7 @@ class AccountCreditQueryBuilder extends CheckoutAdminOrderBuilder
 	 * @var AccountCreditInformation @info
 	 * @return $this
 	 */
-	public function addClientAccountCreditInformation($info)
-	{
+	public function addClientAccountCreditInformation($info) {
 		$this->clientAccountCreditInformation [] = $info;
 
 		return $this;
@@ -59,13 +57,11 @@ class AccountCreditQueryBuilder extends CheckoutAdminOrderBuilder
 	/**
 	 * Retrieve list of clientAccountCreditInformation
 	 */
-	public function getClientAccountCreditInformation()
-	{
+	public function getClientAccountCreditInformation() {
 		return $this->clientAccountCreditInformation;
 	}
 
-	public function queryAccountCreditOrder()
-	{
+	public function queryAccountCreditOrder() {
 		$this->orderType = ConfigurationProvider::ACCOUNTCREDIT_TYPE;
 		return new SearchOrdersRequest($this);
 	}

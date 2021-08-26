@@ -16,8 +16,7 @@ use Svea\WebPay\WebService\Helper\WebServiceRowFormatter;
  *
  * @author Kristian Grossman-Madsen, Fredrik Sundell
  */
-abstract class AdminServiceRequest
-{
+abstract class AdminServiceRequest {
 	/**
 	 * @var string $action the AdminService soap action called by this class
 	 */
@@ -43,8 +42,7 @@ abstract class AdminServiceRequest
 	 * @param $orderTypeAsConst
 	 * @return string
 	 */
-	public static function CamelCaseOrderType($orderTypeAsConst)
-	{
+	public static function CamelCaseOrderType($orderTypeAsConst) {
 		switch ($orderTypeAsConst) {
 			case ConfigurationProvider::INVOICE_TYPE:
 				return "Invoice";
@@ -66,19 +64,16 @@ abstract class AdminServiceRequest
 	 * @param bool $resendOrderWithFlippedPriceIncludingVat
 	 * @return mixed
 	 */
-	public function doRequest($resendOrderWithFlippedPriceIncludingVat = false)
-	{
+	public function doRequest($resendOrderWithFlippedPriceIncludingVat = false) {
 		$requestObject = $this->prepareRequest($resendOrderWithFlippedPriceIncludingVat);
 
 		$soapClient = new SoapClient($this->orderBuilder->conf, ConfigurationProvider::ADMIN_TYPE);
-		if($this->orderBuilder->logging == true)
-		{
+		if($this->orderBuilder->logging == true) {
 			$timestampStart = time();
 			$microtimeStart = microtime(true);
 		}
 		$soapResponse = $soapClient->doSoapCall($this->action, $requestObject);
-		if($this->orderBuilder->logging == true)
-		{
+		if($this->orderBuilder->logging == true) {
 			$logs = [
 				"logs" => [
 					"request" => [
@@ -124,8 +119,7 @@ abstract class AdminServiceRequest
 	 *
 	 * @throws ValidationException
 	 */
-	public function validateRequest()
-	{
+	public function validateRequest() {
 		// validate sub-class requirements by calling sub-class validate() method
 		$errors = $this->validate();
 
@@ -148,8 +142,7 @@ abstract class AdminServiceRequest
 	 * @param bool $flipPriceIncludingVat
 	 * @return true iff all order rows are specified using amountIncVat, and the $flipPriceIncludingVat flag is omitted or false
 	 */
-	protected function determineVatFlag($orderRows, $flipPriceIncludingVat = false)
-	{
+	protected function determineVatFlag($orderRows, $flipPriceIncludingVat = false) {
 
 		$exVat = 0;
 		$incVat = 0;
@@ -168,8 +161,7 @@ abstract class AdminServiceRequest
 		return $flipPriceIncludingVat ? !$priceIncludingVat : $priceIncludingVat;
 	}
 
-	protected function getAdminSoapOrderRowsFromBuilderOrderRowsUsingVatFlag($builderOrderRows, $priceIncludingVat)
-	{
+	protected function getAdminSoapOrderRowsFromBuilderOrderRowsUsingVatFlag($builderOrderRows, $priceIncludingVat) {
 		$amount = 0;
 		$orderRows = [];
 		foreach ($builderOrderRows as $orderRow) {
@@ -205,15 +197,13 @@ abstract class AdminServiceRequest
 	 * @param OrderRow|ShippingFee|et al . $webPayItemRow  an instance of the order row classes from Svea\WebPay\WebPayItem
 	 * @return string  the combined description string that should be written to Description
 	 */
-	protected function formatRowNameAndDescription($webPayItemRow)
-	{
+	protected function formatRowNameAndDescription($webPayItemRow) {
 		$wsrf = new WebServiceRowFormatter(null, null);
 
 		return $wsrf->formatRowNameAndDescription($webPayItemRow);
 	}
 
-	protected function getAdminSoapNumberedOrderRowsFromBuilderOrderRowsUsingVatFlag($builderOrderRows, $priceIncludingVat)
-	{
+	protected function getAdminSoapNumberedOrderRowsFromBuilderOrderRowsUsingVatFlag($builderOrderRows, $priceIncludingVat) {
 		$amount = 0;
 		$numberedOrderRows = [];
 		foreach ($builderOrderRows as $orderRow) {
@@ -247,8 +237,7 @@ abstract class AdminServiceRequest
 		return $numberedOrderRows;
 	}
 
-	public function enableLogging($logging)
-	{
+	public function enableLogging($logging) {
 		$this->logging = $logging;
 
 		return $this;

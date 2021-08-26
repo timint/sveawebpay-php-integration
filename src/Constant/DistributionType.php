@@ -7,8 +7,7 @@ namespace Svea\WebPay\Constant;
  *
  * @author anne-hal
  */
-abstract class DistributionType
-{
+abstract class DistributionType {
 	const POST = "Post";
 	const EMAIL = "Email";
 	const EINVOICEB2B ="EInvoiceB2B";

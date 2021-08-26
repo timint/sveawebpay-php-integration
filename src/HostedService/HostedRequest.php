@@ -12,8 +12,7 @@ use Svea\WebPay\HostedService\HostedResponse\HostedAdminResponse\HostedAdminResp
  *
  * @author Kristian Grossman-Madsen
  */
-abstract class HostedRequest
-{
+abstract class HostedRequest {
 	/**
 	 * @var string $countryCode used to disambiguate between the various credentials in Svea\WebPay\Config\ConfigurationProvider
 	 */
@@ -31,8 +30,7 @@ abstract class HostedRequest
 	/**
 	 * @param ConfigurationProvider $config
 	 */
-	function __construct($config)
-	{
+	function __construct($config) {
 		$this->config = $config;
 	}
 
@@ -42,8 +40,7 @@ abstract class HostedRequest
 	 *
 	 * @return HostedAdminResponse
 	 */
-	public function doRequest()
-	{
+	public function doRequest() {
 		$fields = $this->prepareRequest();
 		$fieldsString = http_build_query($fields, '', '&');
 
@@ -67,8 +64,7 @@ abstract class HostedRequest
 	/**
 	 * returns the request fields to post to service
 	 */
-	public function prepareRequest()
-	{
+	public function prepareRequest() {
 		$this->validateRequest();
 
 		//$xmlBuilder = new HostedXmlBuilder();
@@ -99,8 +95,7 @@ abstract class HostedRequest
 	 *
 	 * @throws ValidationException
 	 */
-	public function validateRequest()
-	{
+	public function validateRequest() {
 		// validate subclass request required attributes
 		$errors = $this->validateRequestAttributes();
 
@@ -127,8 +122,7 @@ abstract class HostedRequest
 	 * @param $errors
 	 * @return mixed
 	 */
-	private function validateCountryCode($self, $errors)
-	{
+	private function validateCountryCode($self, $errors) {
 		if (isset($this->countryCode) == FALSE) {
 			$errors['missing value'] = 'CountryCode is required. Use function setCountryCode().';
 		}

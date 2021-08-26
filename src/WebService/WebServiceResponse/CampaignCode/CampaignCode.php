@@ -20,8 +20,7 @@ namespace Svea\WebPay\WebService\WebServiceResponse\CampaignCode;
  *
  * @author anne-hal, Kristian Grossman-Madsen
  */
-class CampaignCode
-{
+class CampaignCode {
 	public $campaignCode;
 	public $description;
 	public $paymentPlanType;

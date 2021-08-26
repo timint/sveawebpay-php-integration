@@ -7,8 +7,7 @@ use Svea\WebPay\Config\ConfigurationProvider;
 /**
  * @author Anneli Halld'n, Daniel Brolund, Fredrik Sundell for Svea Webpay
  */
-class WebServiceOrderValidator extends OrderValidator
-{
+class WebServiceOrderValidator extends OrderValidator {
 	public $errors = [];
 
 	protected $isCompany;
@@ -16,8 +15,7 @@ class WebServiceOrderValidator extends OrderValidator
 	/**
 	 * WebServiceOrderValidator constructor.
 	 */
-	function __construct()
-	{
+	function __construct() {
 		$this->isCompany = FALSE;
 	}
 
@@ -28,8 +26,7 @@ class WebServiceOrderValidator extends OrderValidator
 	 * @param instance of CreateOrderBuilder $order
 	 * @return array
 	 */
-	public function validate($order)
-	{
+	public function validate($order) {
 		if (isset($order->orgNumber) || isset($order->companyVatNumber) || isset($order->companyName)) {
 			$this->isCompany = TRUE;
 		}

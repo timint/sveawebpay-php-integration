@@ -14,8 +14,7 @@ use Svea\WebPay\HostedService\HostedResponse\HostedAdminResponse\QueryTransactio
  *
  * @author Fredrik Sundell
  */
-class QueryTransactionByCustomerRefNo extends HostedRequest
-{
+class QueryTransactionByCustomerRefNo extends HostedRequest {
 	/**
 	 * @var string $customerRefNo Required.
 	 */
@@ -26,22 +25,19 @@ class QueryTransactionByCustomerRefNo extends HostedRequest
 	 * Required: $customerRefNo
 	 * @param ConfigurationProvider $config instance implementing Svea\WebPay\Config\ConfigurationProvider
 	 */
-	function __construct($config)
-	{
+	function __construct($config) {
 		$this->method = "querycustomerrefno";
 		parent::__construct($config);
 	}
 
-	protected function validateRequestAttributes()
-	{
+	protected function validateRequestAttributes() {
 		$errors = [];
 		$errors = $this->validateClientOrderNumber($this, $errors);
 
 		return $errors;
 	}
 
-	private function validateClientOrderNumber($self, $errors)
-	{
+	private function validateClientOrderNumber($self, $errors) {
 		if (isset($self->customerRefNo) == FALSE) {
 			$errors['missing value'] = "customerRefNo is required. Use function setClientOrderNumber() with the order number you used when creating the transaction.";
 		}
@@ -49,8 +45,7 @@ class QueryTransactionByCustomerRefNo extends HostedRequest
 		return $errors;
 	}
 
-	protected function createRequestXml()
-	{
+	protected function createRequestXml() {
 		$XMLWriter = new \XMLWriter();
 
 		$XMLWriter->openMemory();
@@ -65,8 +60,7 @@ class QueryTransactionByCustomerRefNo extends HostedRequest
 		return $XMLWriter->flush();
 	}
 
-	protected function parseResponse($message)
-	{
+	protected function parseResponse($message) {
 		$countryCode = $this->countryCode;
 		$config = $this->config;
 

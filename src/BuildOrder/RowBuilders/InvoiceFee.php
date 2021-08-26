@@ -7,8 +7,7 @@ namespace Svea\WebPay\BuildOrder\RowBuilders;
  *
  * @author anne-hal, Kristian Grossman-Madsen
  */
-class InvoiceFee
-{
+class InvoiceFee {
 	/**
 	 * @var float $quantity quantity is always 1
 	 */
@@ -52,8 +51,7 @@ class InvoiceFee
 	/**
 	 * InvoiceFee constructor.
 	 */
-	function __construct()
-	{
+	function __construct() {
 		$this->quantity = 1;	// set to 1, as this attribute is used by WebServiceRowFormatter() and all shipping rows are for one (1) unit
 	}
 
@@ -65,8 +63,7 @@ class InvoiceFee
 	 * @param string $nameAsString
 	 * @return $this
 	 */
-	public function setName($nameAsString)
-	{
+	public function setName($nameAsString) {
 		$this->name = $nameAsString;
 
 		return $this;
@@ -80,8 +77,7 @@ class InvoiceFee
 	 * @param string $descriptionAsString
 	 * @return $this
 	 */
-	public function setDescription($descriptionAsString)
-	{
+	public function setDescription($descriptionAsString) {
 		$this->description = $descriptionAsString;
 
 		return $this;
@@ -98,8 +94,7 @@ class InvoiceFee
 	 * @param float $amountAsFloat
 	 * @return $this
 	 */
-	public function setAmountExVat($amountAsFloat)
-	{
+	public function setAmountExVat($amountAsFloat) {
 		$this->amountExVat = $amountAsFloat;
 
 		return $this;
@@ -122,8 +117,7 @@ class InvoiceFee
 	 * @param float $amountAsFloat
 	 * @return $this
 	 */
-	public function setAmountIncVat($amountAsFloat)
-	{
+	public function setAmountIncVat($amountAsFloat) {
 		$this->amountIncVat = $amountAsFloat;
 
 		return $this;
@@ -138,8 +132,7 @@ class InvoiceFee
 	 * @param int $vatPercentAsInt
 	 * @return $this
 	 */
-	public function setVatPercent($vatPercentAsInt)
-	{
+	public function setVatPercent($vatPercentAsInt) {
 		$this->vatPercent = $vatPercentAsInt;
 
 		return $this;
@@ -150,8 +143,7 @@ class InvoiceFee
 	 * @param string $unitDescriptionAsString
 	 * @return $this
 	 */
-	public function setUnit($unitDescriptionAsString)
-	{
+	public function setUnit($unitDescriptionAsString) {
 		$this->unit = $unitDescriptionAsString;
 
 		return $this;
@@ -163,8 +155,7 @@ class InvoiceFee
 	 * @param int $discountPercentAsInt
 	 * @return $this
 	 */
-	public function setDiscountPercent($discountPercentAsInt)
-	{
+	public function setDiscountPercent($discountPercentAsInt) {
 		$this->discountPercent = $discountPercentAsInt;
 
 		return $this;
@@ -178,8 +169,7 @@ class InvoiceFee
 	 * @param $temporaryReference
 	 * @return $this
 	 */
-	public function setTemporaryReference($temporaryReference)
-	{
+	public function setTemporaryReference($temporaryReference) {
 		$this->temporaryReference = $temporaryReference;
 		return $this;
 	}

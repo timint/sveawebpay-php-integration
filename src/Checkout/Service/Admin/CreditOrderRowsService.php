@@ -7,8 +7,7 @@ use Svea\WebPay\BuildOrder\CreditOrderRowsBuilder;
 use Svea\WebPay\BuildOrder\RowBuilders\OrderRow;
 use Svea\WebPay\Helper\Helper;
 
-class CreditOrderRowsService extends AdminImplementationService
-{
+class CreditOrderRowsService extends AdminImplementationService {
 	/**
 	 * @var CreditOrderRowsBuilder $adminBuilder
 	 */
@@ -19,8 +18,7 @@ class CreditOrderRowsService extends AdminImplementationService
 	 */
 	protected $isNewCreditRow;
 
-	public function __construct(CheckoutAdminOrderBuilder $adminBuilder, $isNewCreditRow = false)
-	{
+	public function __construct(CheckoutAdminOrderBuilder $adminBuilder, $isNewCreditRow = false) {
 		parent::__construct($adminBuilder);
 		$this->isNewCreditRow = $isNewCreditRow;
 	}
@@ -28,8 +26,7 @@ class CreditOrderRowsService extends AdminImplementationService
 	/**
 	 * Validate order data
 	 */
-	public function validate()
-	{
+	public function validate() {
 		$errors = [];
 
 		$orderId = $this->adminBuilder->orderId;
@@ -38,12 +35,10 @@ class CreditOrderRowsService extends AdminImplementationService
 		}
 
 		$deliveryId = $this->adminBuilder->deliveryId;
-		if (is_int($deliveryId) || (is_float($deliveryId) && $deliveryId > 2147483647))
-		{
+		if (is_int($deliveryId) || (is_float($deliveryId) && $deliveryId > 2147483647)) {
 
 		}
-		else
-		{
+		else {
 			$errors['incorrect Delivery Id'] = "Delivery Id can't be empty and must be Integer";
 		}
 
@@ -88,8 +83,7 @@ class CreditOrderRowsService extends AdminImplementationService
 	 * Format given date so that will match data structure required for Admin API
 	 * @return mixed
 	 */
-	public function prepareRequest()
-	{
+	public function prepareRequest() {
 		$this->validate();
 
 		$requestData = [
@@ -119,8 +113,7 @@ class CreditOrderRowsService extends AdminImplementationService
 	/**
 	 * Send call Connection Library
 	 */
-	public function doRequest()
-	{
+	public function doRequest() {
 		$preparedData = $this->prepareRequest();
 		if ($this->isNewCreditRow === true) {
 			$response = $this->checkoutAdminConnection->creditNewOrderRow($preparedData);

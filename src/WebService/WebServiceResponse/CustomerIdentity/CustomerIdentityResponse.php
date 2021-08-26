@@ -7,8 +7,7 @@ namespace Svea\WebPay\WebService\WebServiceResponse\CustomerIdentity;
  *
  * @author Anneli Halld'n, Daniel Brolund, Kristian Grossman-Madsen for Svea Webpay
  */
-class CustomerIdentityResponse
-{
+class CustomerIdentityResponse {
 	/**
 	 * @var string $customerType one of { Person, Business }
 	 */
@@ -59,8 +58,7 @@ class CustomerIdentityResponse
 	 *
 	 * @param object $customer -- response from either legacy GetAddress or CreateOrderEU
 	 */
-	function __construct($customer)
-	{
+	function __construct($customer) {
 		if (isset($customer->BusinessType)) { // GetAddressesResponse (Legacy webservice)
 
 			$this->customerType = $customer->BusinessType;

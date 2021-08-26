@@ -9,16 +9,14 @@ use SimpleXMLElement;
  *
  * @author Fredrik Sundell for Svea WebPay
  */
-class CancelRecurSubscriptionResponse extends HostedAdminResponse
-{
+class CancelRecurSubscriptionResponse extends HostedAdminResponse {
 	/**
 	 * CancelRecurSubscriptionResponse constructor.
 	 * @param \SimpleXMLElement $message
 	 * @param string $countryCode
 	 * @param \Svea\WebPay\Config\SveaConfigurationProvider $config
 	 */
-	function __construct($message, $countryCode, $config)
-	{
+	function __construct($message, $countryCode, $config) {
 		parent::__construct($message, $countryCode, $config);
 	}
 
@@ -28,8 +26,7 @@ class CancelRecurSubscriptionResponse extends HostedAdminResponse
 	 *
 	 * @param string $hostedAdminResponseXML hostedAdminResponse as xml
 	 */
-	protected function formatXml($hostedAdminResponseXML)
-	{
+	protected function formatXml($hostedAdminResponseXML) {
 		$hostedAdminResponse = new SimpleXMLElement($hostedAdminResponseXML);
 
 		if ((string)$hostedAdminResponse->statuscode == '0') {

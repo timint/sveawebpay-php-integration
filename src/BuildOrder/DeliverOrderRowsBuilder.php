@@ -46,8 +46,7 @@ use Svea\WebPay\HostedService\HostedResponse\HostedAdminResponse\ConfirmTransact
  *
  * @author Kristian Grossman-Madsen for Svea Svea\WebPay\WebPay
  */
-class DeliverOrderRowsBuilder extends CheckoutAdminOrderBuilder
-{
+class DeliverOrderRowsBuilder extends CheckoutAdminOrderBuilder {
 	/**
 	 * @var ConfigurationProvider $conf
 	 */
@@ -84,8 +83,7 @@ class DeliverOrderRowsBuilder extends CheckoutAdminOrderBuilder
 	 * DeliverOrderRowsBuilder constructor.
 	 * @param $config
 	 */
-	public function __construct($config)
-	{
+	public function __construct($config) {
 		parent::__construct($config);
 		$this->rowsToDeliver = [];
 		$this->numberedOrderRows = [];
@@ -100,8 +98,7 @@ class DeliverOrderRowsBuilder extends CheckoutAdminOrderBuilder
 	 * @param string $countryCodeAsString
 	 * @return $this
 	 */
-	public function setCountryCode($countryCodeAsString)
-	{
+	public function setCountryCode($countryCodeAsString) {
 		$this->countryCode = $countryCodeAsString;
 
 		return $this;
@@ -115,8 +112,7 @@ class DeliverOrderRowsBuilder extends CheckoutAdminOrderBuilder
 	 * @param string $orderIdAsString
 	 * @return $this
 	 */
-	public function setTransactionId($orderIdAsString)
-	{
+	public function setTransactionId($orderIdAsString) {
 		return $this->setOrderId($orderIdAsString);
 	}
 
@@ -127,8 +123,7 @@ class DeliverOrderRowsBuilder extends CheckoutAdminOrderBuilder
 	 *	 Svea\WebPay\Constant\DistributionType::POST|Svea\WebPay\Constant\DistributionType::EMAIL
 	 * @return $this
 	 */
-	public function setInvoiceDistributionType($distributionTypeAsConst)
-	{
+	public function setInvoiceDistributionType($distributionTypeAsConst) {
 		$this->distributionType = $distributionTypeAsConst;
 
 		return $this;
@@ -148,8 +143,7 @@ class DeliverOrderRowsBuilder extends CheckoutAdminOrderBuilder
 	 * @param string $rowNumber
 	 * @return $this
 	 */
-	public function setRowToDeliver($rowNumber)
-	{
+	public function setRowToDeliver($rowNumber) {
 		$this->rowsToDeliver[] = $rowNumber;
 
 		return $this;
@@ -161,8 +155,7 @@ class DeliverOrderRowsBuilder extends CheckoutAdminOrderBuilder
 	 * @param int[] $rowNumbers
 	 * @return $this
 	 */
-	public function setRowsToDeliver($rowNumbers)
-	{
+	public function setRowsToDeliver($rowNumbers) {
 		$this->rowsToDeliver = array_merge($this->rowsToDeliver, $rowNumbers);
 
 		return $this;
@@ -181,8 +174,7 @@ class DeliverOrderRowsBuilder extends CheckoutAdminOrderBuilder
 	 * @param \Svea\WebPay\BuildOrder\RowBuilders\NumberedOrderRow $numberedOrderRows instance of NumberedOrderRow
 	 * @return $this
 	 */
-	public function addNumberedOrderRow($numberedOrderRow)
-	{
+	public function addNumberedOrderRow($numberedOrderRow) {
 		$this->numberedOrderRows[] = $numberedOrderRow;
 
 		return $this;
@@ -194,8 +186,7 @@ class DeliverOrderRowsBuilder extends CheckoutAdminOrderBuilder
 	 * @param \Svea\WebPay\BuildOrder\RowBuilders\NumberedOrderRow[] $numberedOrderRows array of NumberedOrderRow
 	 * @return $this
 	 */
-	public function addNumberedOrderRows($numberedOrderRows)
-	{
+	public function addNumberedOrderRows($numberedOrderRows) {
 		$this->numberedOrderRows = array_merge($this->numberedOrderRows, $numberedOrderRows);
 
 		return $this;
@@ -206,8 +197,7 @@ class DeliverOrderRowsBuilder extends CheckoutAdminOrderBuilder
 	 * request
 	 * @return DeliverOrderRowsRequest
 	 */
-	public function deliverInvoiceOrderRows()
-	{
+	public function deliverInvoiceOrderRows() {
 		$this->orderType = ConfigurationProvider::INVOICE_TYPE;
 
 		$this->validateDeliverInvoiceOrderRows();
@@ -220,8 +210,7 @@ class DeliverOrderRowsBuilder extends CheckoutAdminOrderBuilder
 	 * request
 	 * @return DeliverOrderRowsRequest
 	 */
-	public function deliverAccountCreditOrderRows()
-	{
+	public function deliverAccountCreditOrderRows() {
 		$this->orderType = ConfigurationProvider::ACCOUNTCREDIT_TYPE;
 
 		$this->validateDeliverInvoiceOrderRows();
@@ -240,8 +229,7 @@ class DeliverOrderRowsBuilder extends CheckoutAdminOrderBuilder
 	 *
 	 * @return ConfirmTransactionResponse
 	 */
-	public function deliverCardOrderRows()
-	{
+	public function deliverCardOrderRows() {
 		$this->orderType = ConfigurationProvider::HOSTED_TYPE;
 
 		$this->validateDeliverCardOrderRows();
@@ -275,8 +263,7 @@ class DeliverOrderRowsBuilder extends CheckoutAdminOrderBuilder
 	 * @throws \Svea\WebPay\BuildOrder\Validator\ValidationException
 	 * @throws \Exception
 	 */
-	public function deliverCheckoutOrderRows()
-	{
+	public function deliverCheckoutOrderRows() {
 		return new DeliverOrderService($this, true);
 	}
 
@@ -286,16 +273,14 @@ class DeliverOrderRowsBuilder extends CheckoutAdminOrderBuilder
 	 * @throws \Svea\WebPay\BuildOrder\Validator\ValidationException
 	 * @throws \Exception
 	 */
-	public function deliverCheckoutOrder()
-	{
+	public function deliverCheckoutOrder() {
 		return new DeliverOrderService($this);
 	}
 
 	/**
 	 * @internal
 	 */
-	private function validateDeliverInvoiceOrderRows()
-	{
+	private function validateDeliverInvoiceOrderRows() {
 		if (!isset($this->orderId)) {
 			$exceptionString = "orderId is required for deliverInvoiceOrderRows(). Use method setOrderId().";
 			throw new ValidationException($exceptionString);
@@ -320,8 +305,7 @@ class DeliverOrderRowsBuilder extends CheckoutAdminOrderBuilder
 	/**
 	 * @internal
 	 */
-	private function validateDeliverCardOrderRows()
-	{
+	private function validateDeliverCardOrderRows() {
 		if (!isset($this->orderId)) {
 			$exceptionString = "orderId is required for deliverInvoiceOrderRows(). Use method setOrderId().";
 			throw new ValidationException($exceptionString);

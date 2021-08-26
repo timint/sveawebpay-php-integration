@@ -9,8 +9,7 @@ use Svea\WebPay\WebService\HandleOrder\CloseOrder;
 /**
  * @author Kristian Grossman-Madsen, Anneli Halld'n, Daniel Brolund for Svea Webpay
  */
-class CloseOrderBuilder extends OrderBuilder
-{
+class CloseOrderBuilder extends OrderBuilder {
 	/**
 	 * @var ConfigurationService
 	 */
@@ -35,8 +34,7 @@ class CloseOrderBuilder extends OrderBuilder
 	 * CloseOrderBuilder constructor.
 	 * @param $config
 	 */
-	public function __construct($config)
-	{
+	public function __construct($config) {
 		$this->conf = $config;
 	}
 
@@ -45,8 +43,7 @@ class CloseOrderBuilder extends OrderBuilder
 	 * @param string $orderIdAsString
 	 * @return $this
 	 */
-	public function setOrderId($orderIdAsString)
-	{
+	public function setOrderId($orderIdAsString) {
 		$this->orderId = $orderIdAsString;
 
 		return $this;
@@ -56,8 +53,7 @@ class CloseOrderBuilder extends OrderBuilder
 	 * @param string $countryCodeAsString
 	 * @return $this
 	 */
-	public function setCountryCode($countryCodeAsString)
-	{
+	public function setCountryCode($countryCodeAsString) {
 		$this->countryCode = $countryCodeAsString;
 
 		return $this;
@@ -67,8 +63,7 @@ class CloseOrderBuilder extends OrderBuilder
 	 * Use closeInvoiceOrder() to close an Invoice order.
 	 * @return CloseOrder
 	 */
-	public function closeInvoiceOrder()
-	{
+	public function closeInvoiceOrder() {
 		$this->orderType = ConfigurationProvider::INVOICE_TYPE;
 
 		return new CloseOrder($this);
@@ -78,8 +73,7 @@ class CloseOrderBuilder extends OrderBuilder
 	 * Use closePaymentPlanOrder() to close a PaymentPlan order.
 	 * @return CloseOrder
 	 */
-	public function closePaymentPlanOrder()
-	{
+	public function closePaymentPlanOrder() {
 		$this->orderType = ConfigurationProvider::PAYMENTPLAN_TYPE;
 
 		return new CloseOrder($this);

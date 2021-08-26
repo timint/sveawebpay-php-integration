@@ -7,8 +7,7 @@ namespace Svea\WebPay\BuildOrder\RowBuilders;
  *
  * @author anne-hal, Kristian Grossman-Madsen
  */
-class FixedDiscount
-{
+class FixedDiscount {
 	/**
 	 * @var string
 	 */
@@ -56,8 +55,7 @@ class FixedDiscount
 	 *
 	 * @return $this
 	 */
-	public function setDiscountId($IdAsString)
-	{
+	public function setDiscountId($IdAsString) {
 		$this->discountId = $IdAsString;
 
 		return $this;
@@ -70,8 +68,7 @@ class FixedDiscount
 	 *
 	 * @return $this
 	 */
-	public function setUnit($unitDescriptionAsString)
-	{
+	public function setUnit($unitDescriptionAsString) {
 		$this->unit = $unitDescriptionAsString;
 
 		return $this;
@@ -84,8 +81,7 @@ class FixedDiscount
 	 *
 	 * @return $this
 	 */
-	public function setName($nameAsString)
-	{
+	public function setName($nameAsString) {
 		$this->name = $nameAsString;
 
 		return $this;
@@ -98,8 +94,7 @@ class FixedDiscount
 	 *
 	 * @return $this
 	 */
-	public function setDescription($descriptionAsString)
-	{
+	public function setDescription($descriptionAsString) {
 		$this->description = $descriptionAsString;
 
 		return $this;
@@ -130,8 +125,7 @@ class FixedDiscount
 	 *
 	 * @return $this
 	 */
-	public function setAmountIncVat($amountIncVatAsFloat)
-	{
+	public function setAmountIncVat($amountIncVatAsFloat) {
 		$this->amount = $amountIncVatAsFloat;
 		$this->amountIncVat = $amountIncVatAsFloat;
 
@@ -165,8 +159,7 @@ class FixedDiscount
 	 *
 	 * @return $this
 	 */
-	public function setAmountExVat($amountExVatAsFloat)
-	{
+	public function setAmountExVat($amountExVatAsFloat) {
 		$this->amountExVat = $amountExVatAsFloat;
 
 		return $this;
@@ -180,8 +173,7 @@ class FixedDiscount
 	 *
 	 * @return $this
 	 */
-	public function setVatPercent($vatPercentAsInt)
-	{
+	public function setVatPercent($vatPercentAsInt) {
 		$this->vatPercent = $vatPercentAsInt;
 
 		return $this;
@@ -195,8 +187,7 @@ class FixedDiscount
 	 * @param $temporaryReference
 	 * @return $this
 	 */
-	public function setTemporaryReference($temporaryReference)
-	{
+	public function setTemporaryReference($temporaryReference) {
 		$this->temporaryReference = $temporaryReference;
 		return $this;
 	}

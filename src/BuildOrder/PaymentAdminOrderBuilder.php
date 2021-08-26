@@ -9,8 +9,7 @@ use Svea\WebPay\BuildOrder\Validator\ValidationException;
  * Class PaymentAdminOrderBuilder
  * @package Svea
  */
-class PaymentAdminOrderBuilder
-{
+class PaymentAdminOrderBuilder {
 	/**
 	 * @var string $orderId
 	 */
@@ -30,8 +29,7 @@ class PaymentAdminOrderBuilder
 	 * PaymentAdminOrderBuilder constructor.
 	 * @param $configProvider
 	 */
-	public function __construct($configProvider)
-	{
+	public function __construct($configProvider) {
 		$this->conf = $configProvider;
 	}
 
@@ -40,16 +38,14 @@ class PaymentAdminOrderBuilder
 	/**
 	 * @param $clientNumber
 	 */
-	private function setClientNumberConfigurationValue($clientNumber)
-	{
+	private function setClientNumberConfigurationValue($clientNumber) {
 		$this->conf->setClientNumber($clientNumber);
 	}
 
 	/**
 	 * @return mixed
 	 */
-	public function getOrderId()
-	{
+	public function getOrderId() {
 		return $this->orderId;
 	}
 
@@ -57,8 +53,7 @@ class PaymentAdminOrderBuilder
 	 * @param mixed $orderId
 	 * @return $this
 	 */
-	public function setOrderId($orderId)
-	{
+	public function setOrderId($orderId) {
 		$this->orderId = $orderId;
 		return $this;
 	}
@@ -66,8 +61,7 @@ class PaymentAdminOrderBuilder
 	/**
 	 * @return string
 	 */
-	public function getCountryCode()
-	{
+	public function getCountryCode() {
 		return $this->countryCode;
 	}
 
@@ -75,8 +69,7 @@ class PaymentAdminOrderBuilder
 	 * @param $countryCodeAsString
 	 * @return $this
 	 */
-	public function setCountryCode($countryCodeAsString)
-	{
+	public function setCountryCode($countryCodeAsString) {
 		$this->countryCode = $countryCodeAsString;
 		return $this;
 	}
@@ -86,8 +79,7 @@ class PaymentAdminOrderBuilder
 	 * @param string $transactionIdAsString
 	 * @return $this
 	 */
-	public function setTransactionId($transactionIdAsString)
-	{
+	public function setTransactionId($transactionIdAsString) {
 		return $this->setOrderId($transactionIdAsString);
 	}
 

@@ -7,8 +7,7 @@ use SoapVar;
 /**
  * Class that support building SOAP requests
  */
-class AddOrderRowsRequest
-{
+class AddOrderRowsRequest {
 	public $Authentication;	 // note that the order of the attributes matter!
 	public $ClientId;
 	public $OrderRows;
@@ -23,8 +22,7 @@ class AddOrderRowsRequest
 	 * @param string $orderType
 	 * @param string $sveaOrderId
 	 */
-	function __construct($authentication, $clientId, $orderRows, $orderType, $sveaOrderId)
-	{
+	function __construct($authentication, $clientId, $orderRows, $orderType, $sveaOrderId) {
 
 		$this->Authentication = new SoapVar($authentication, SOAP_ENC_OBJECT,
 			"-", "--", "Authentication", "http://schemas.datacontract.org/2004/07/DataObjects.Admin.Service");

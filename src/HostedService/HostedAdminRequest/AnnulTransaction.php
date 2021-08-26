@@ -14,8 +14,7 @@ use Svea\WebPay\HostedService\HostedResponse\HostedAdminResponse\AnnulTransactio
  *
  * @author Kristian Grossman-Madsen
  */
-class AnnulTransaction extends HostedRequest
-{
+class AnnulTransaction extends HostedRequest {
 	/**
 	 * @var string $transactionid
 	 */
@@ -26,22 +25,19 @@ class AnnulTransaction extends HostedRequest
 	 * Required: $transactionId
 	 * @param ConfigurationProvider $config instance implementing Svea\WebPay\Config\ConfigurationProvider
 	 */
-	function __construct($config)
-	{
+	function __construct($config) {
 		$this->method = "annul";
 		parent::__construct($config);
 	}
 
-	protected function validateRequestAttributes()
-	{
+	protected function validateRequestAttributes() {
 		$errors = [];
 		$errors = $this->validateTransactionId($this, $errors);
 
 		return $errors;
 	}
 
-	private function validateTransactionId($self, $errors)
-	{
+	private function validateTransactionId($self, $errors) {
 		if (isset($self->transactionId) == FALSE) {
 			$errors['missing value'] = "transactionId is required. Use function setTransactionId() with the SveaOrderId from the createOrder response.";
 		}
@@ -50,8 +46,7 @@ class AnnulTransaction extends HostedRequest
 	}
 
 	/** returns xml for hosted webservice "annul" request */
-	protected function createRequestXml()
-	{
+	protected function createRequestXml() {
 		$XMLWriter = new \XMLWriter();
 
 		$XMLWriter->openMemory();
@@ -66,8 +61,7 @@ class AnnulTransaction extends HostedRequest
 		return $XMLWriter->flush();
 	}
 
-	protected function parseResponse($message)
-	{
+	protected function parseResponse($message) {
 		$countryCode = $this->countryCode;
 		$config = $this->config;
 

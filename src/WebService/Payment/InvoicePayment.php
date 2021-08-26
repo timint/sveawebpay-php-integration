@@ -10,18 +10,15 @@ use Svea\WebPay\WebService\SveaSoap\SveaCreateOrderInformation;
  * Extends WebServicePayment. Creates Invoice order.
  * @author Anneli Halld'n, Daniel Brolund for Svea Webpay
  */
-class InvoicePayment extends WebServicePayment
-{
+class InvoicePayment extends WebServicePayment {
 	public $orderType;
 
-	public function __construct($order)
-	{
+	public function __construct($order) {
 		$this->orderType = ConfigurationProvider::INVOICE_TYPE;
 		parent::__construct($order);
 	}
 
-	public function setOrderType($orderInformation)
-	{
+	public function setOrderType($orderInformation) {
 		$orderInformation->AddressSelector = isset($this->order->customerIdentity->addressSelector) ? $this->order->customerIdentity->addressSelector : "";
 		$orderInformation->OrderType = $this->orderType;
 
@@ -33,8 +30,7 @@ class InvoicePayment extends WebServicePayment
 	 * @param type $rows
 	 * @return \SveaCreateOrderInformation
 	 */
-	protected function formatOrderInformationWithOrderRows($rows)
-	{
+	protected function formatOrderInformationWithOrderRows($rows) {
 		$orderInformation = new SveaCreateOrderInformation(
 			(isset($this->order->campaignCode) ? $this->order->campaignCode : ""),
 			(isset($this->order->sendAutomaticGiroPaymentForm) ? $this->order->sendAutomaticGiroPaymentForm : 0)

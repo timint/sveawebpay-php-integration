@@ -4,8 +4,7 @@ namespace Svea\WebPay\AdminService\AdminSoap;
 
 use SoapVar;
 
-class UpdateOrderRequest
-{
+class UpdateOrderRequest {
 	public $Authentication;	 // note that the order of the attributes matter!
 	public $ClientId;
 	public $ClientOrderNumber;
@@ -21,8 +20,7 @@ class UpdateOrderRequest
 	 * @param $clientOrderNumber
 	 * @param $notes
 	 */
-	function __construct($authentication, $clientId, $orderType, $sveaOrderId, $clientOrderNumber, $notes)
-	{
+	function __construct($authentication, $clientId, $orderType, $sveaOrderId, $clientOrderNumber, $notes) {
 		$this->Authentication = new SoapVar($authentication, SOAP_ENC_OBJECT,
 			"-", "--", "Authentication", "http://schemas.datacontract.org/2004/07/DataObjects.Admin.Service");
 		// Settings -- optional, not sent by package

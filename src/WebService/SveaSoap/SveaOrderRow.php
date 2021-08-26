@@ -5,8 +5,7 @@ namespace Svea\WebPay\WebService\SveaSoap;
 /**
  * Orderrow
  */
-class SveaOrderRow
-{
+class SveaOrderRow {
 	public $ArticleNumber;
 	public $Name;
 	public $Description;

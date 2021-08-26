@@ -12,8 +12,7 @@ use Svea\WebPay\BuildOrder\Validator\ValidationException;
  * Parent of CloseOrder, DeliverInvoice, DeliverPaymentPlan
  * @author Anneli Halld'n, Daniel Brolund for Svea Webpay
  */
-abstract class HandleOrder
-{
+abstract class HandleOrder {
 	/**
 	 * CloseOrderBuilder|DeliverOrderBuilder $handler  object containing the settings for the HandleOrder request
 	 */
@@ -24,8 +23,7 @@ abstract class HandleOrder
 	/**
 	 * @param CloseOrderBuilder|DeliverOrderBuilder $handleOrderBuilder
 	 */
-	public function __construct($handleOrderBuilder)
-	{
+	public function __construct($handleOrderBuilder) {
 		$this->orderBuilder = $handleOrderBuilder;
 	}
 
@@ -36,8 +34,7 @@ abstract class HandleOrder
 	 *
 	 * @throws ValidationException
 	 */
-	public function validateRequest()
-	{
+	public function validateRequest() {
 		$errors = $this->validate($this->orderBuilder);
 		if (count($errors) > 0) {
 			$exceptionString = "";
@@ -55,8 +52,7 @@ abstract class HandleOrder
 	 * creates a SveaAuth object using the passed orderBuilder configuration
 	 * @return SveaAuth
 	 */
-	protected function getStoreAuthorization()
-	{
+	protected function getStoreAuthorization() {
 		return new SveaAuth(
 			$this->orderBuilder->conf->getUsername($this->orderBuilder->orderType, $this->orderBuilder->countryCode),
 			$this->orderBuilder->conf->getPassword($this->orderBuilder->orderType, $this->orderBuilder->countryCode),

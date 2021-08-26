@@ -10,8 +10,7 @@ namespace Svea\WebPay\Checkout\Model;
  * Class CheckoutOrderRow
  * @package Svea\Svea\WebPay\WebPay\Checkout\Model
  */
-class CheckoutOrderRow
-{
+class CheckoutOrderRow {
 	/**
 	 * @var string $articleNumber
 	 */
@@ -60,13 +59,11 @@ class CheckoutOrderRow
 	/**
 	 * @return string
 	 */
-	public function getMerchantData()
-	{
+	public function getMerchantData() {
 		return $this->merchantData;
 	}
 
-	public function setMerchantData($merchantData)
-	{
+	public function setMerchantData($merchantData) {
 		$this->merchantData = $merchantData;
 		return $this;
 	}
@@ -74,8 +71,7 @@ class CheckoutOrderRow
 	/**
 	 * @return string
 	 */
-	public function getArticleNumber()
-	{
+	public function getArticleNumber() {
 		return $this->articleNumber;
 	}
 
@@ -83,8 +79,7 @@ class CheckoutOrderRow
 	 * @param string $articleNumber
 	 * @return CheckoutOrderRow
 	 */
-	public function setArticleNumber($articleNumber)
-	{
+	public function setArticleNumber($articleNumber) {
 		$this->articleNumber = $articleNumber;
 		return $this;
 	}
@@ -92,8 +87,7 @@ class CheckoutOrderRow
 	/**
 	 * @return string
 	 */
-	public function getName()
-	{
+	public function getName() {
 		return $this->name;
 	}
 
@@ -101,8 +95,7 @@ class CheckoutOrderRow
 	 * @param string $name
 	 * @return CheckoutOrderRow
 	 */
-	public function setName($name)
-	{
+	public function setName($name) {
 		$this->name = $name;
 		return $this;
 	}
@@ -110,8 +103,7 @@ class CheckoutOrderRow
 	/**
 	 * @return integer
 	 */
-	public function getQuantity()
-	{
+	public function getQuantity() {
 		return $this->quantity;
 	}
 
@@ -119,8 +111,7 @@ class CheckoutOrderRow
 	 * @param integer $quantity
 	 * @return CheckoutOrderRow
 	 */
-	public function setQuantity($quantity)
-	{
+	public function setQuantity($quantity) {
 		$this->quantity = $quantity * 100;
 		return $this;
 	}
@@ -128,8 +119,7 @@ class CheckoutOrderRow
 	/**
 	 * @return integer
 	 */
-	public function getUnitPrice()
-	{
+	public function getUnitPrice() {
 		return $this->unitPrice;
 	}
 
@@ -137,8 +127,7 @@ class CheckoutOrderRow
 	 * @param integer $unitPrice
 	 * @return CheckoutOrderRow
 	 */
-	public function setUnitPrice($unitPrice)
-	{
+	public function setUnitPrice($unitPrice) {
 		$this->unitPrice = $unitPrice;
 		return $this;
 	}
@@ -146,8 +135,7 @@ class CheckoutOrderRow
 	/**
 	 * @return integer
 	 */
-	public function getDiscountPercent()
-	{
+	public function getDiscountPercent() {
 		return $this->discountPercent;
 	}
 
@@ -155,8 +143,7 @@ class CheckoutOrderRow
 	 * @param integer $discountPercent
 	 * @return CheckoutOrderRow
 	 */
-	public function setDiscountPercent($discountPercent)
-	{
+	public function setDiscountPercent($discountPercent) {
 		$this->discountPercent = $discountPercent;
 		return $this;
 	}
@@ -164,8 +151,7 @@ class CheckoutOrderRow
 	/**
 	 * @return integer
 	 */
-	public function getVatPercent()
-	{
+	public function getVatPercent() {
 		return $this->vatPercent;
 	}
 
@@ -173,8 +159,7 @@ class CheckoutOrderRow
 	 * @param integer $vatPercent
 	 * @return CheckoutOrderRow
 	 */
-	public function setVatPercent($vatPercent)
-	{
+	public function setVatPercent($vatPercent) {
 		$this->vatPercent = $vatPercent;
 		return $this;
 	}
@@ -182,8 +167,7 @@ class CheckoutOrderRow
 	/**
 	 * @return string
 	 */
-	public function getUnit()
-	{
+	public function getUnit() {
 		return $this->unit;
 	}
 
@@ -191,8 +175,7 @@ class CheckoutOrderRow
 	 * @param string $unit
 	 * @return CheckoutOrderRow
 	 */
-	public function setUnit($unit)
-	{
+	public function setUnit($unit) {
 		$this->unit = $unit;
 		return $this;
 	}
@@ -200,16 +183,14 @@ class CheckoutOrderRow
 	/**
 	 * @return string
 	 */
-	public function getTemporaryReference()
-	{
+	public function getTemporaryReference() {
 		return $this->temporaryReference;
 	}
 
 	/**
 	 * @param string $temporaryReference
 	 */
-	public function setTemporaryReference($temporaryReference)
-	{
+	public function setTemporaryReference($temporaryReference) {
 		$this->temporaryReference = $temporaryReference;
 	}
 
@@ -218,8 +199,7 @@ class CheckoutOrderRow
 	 * Convert this object to array, only filled fields
 	 * @return array
 	 */
-	public function toArray()
-	{
+	public function toArray() {
 		$result = [];
 		$properties = get_object_vars($this);
 

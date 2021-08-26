@@ -6,8 +6,7 @@ namespace Svea\WebPay\WebService\SveaSoap;
 /**
  * Abstract class for PaymentPlan, Invoice and AccountCredit for CreatingOrderInformation
  * */
-abstract class CreateOrderInformation
-{
+abstract class CreateOrderInformation {
 	public $CustomerReference;
 	public $OrderType;
 	public $AddressSelector;
@@ -16,8 +15,7 @@ abstract class CreateOrderInformation
 	public $CustomerIdentity;
 	public $OrderDate;
 
-	public function addOrderRow($orderRow)
-	{
+	public function addOrderRow($orderRow) {
 		array_push($this->OrderRows['OrderRow'], $orderRow);
 	}
 }

@@ -9,8 +9,7 @@ use Svea\WebPay\Config\ConfigurationProvider;
  * Update order in a non-delivered invoice or payment plan order.
  * (Card and Direct Bank orders are not supported.)
  */
-class UpdateOrderBuilder extends CheckoutAdminOrderBuilder
-{
+class UpdateOrderBuilder extends CheckoutAdminOrderBuilder {
 	/**
 	 * @var ConfigurationProvider $conf
 	 */
@@ -60,8 +59,7 @@ class UpdateOrderBuilder extends CheckoutAdminOrderBuilder
 	 * @param string $countryCodeAsString
 	 * @return $this
 	 */
-	public function setCountryCode($countryCodeAsString)
-	{
+	public function setCountryCode($countryCodeAsString) {
 		$this->countryCode = $countryCodeAsString;
 
 		return $this;
@@ -72,8 +70,7 @@ class UpdateOrderBuilder extends CheckoutAdminOrderBuilder
 	 * @param string $clientOrderNumberAsString
 	 * @return $this
 	 */
-	public function setClientOrderNumber($clientOrderNumberAsString)
-	{
+	public function setClientOrderNumber($clientOrderNumberAsString) {
 		$this->clientOrderNumber = $clientOrderNumberAsString;
 
 		return $this;
@@ -84,8 +81,7 @@ class UpdateOrderBuilder extends CheckoutAdminOrderBuilder
 	 * @param string $notesAsString (200)
 	 * @return $this
 	 */
-	public function setNotes($notesAsString)
-	{
+	public function setNotes($notesAsString) {
 		$this->notes = $notesAsString;
 
 		return $this;
@@ -95,8 +91,7 @@ class UpdateOrderBuilder extends CheckoutAdminOrderBuilder
 	 * Use updateInvoiceOrder() to update an Invoice order using AdminServiceRequest UpdateOrder request
 	 * @return UpdateOrderRequest
 	 */
-	public function updateInvoiceOrder()
-	{
+	public function updateInvoiceOrder() {
 		$this->orderType = ConfigurationProvider::INVOICE_TYPE;
 
 		return new UpdateOrderRequest($this);
@@ -106,8 +101,7 @@ class UpdateOrderBuilder extends CheckoutAdminOrderBuilder
 	 * Use updatePaymentPlanOrder() to update a PaymentPlan order using AdminServiceRequest UpdateOrder request
 	 * @return UpdateOrderRequest
 	 */
-	public function updatePaymentPlanOrder()
-	{
+	public function updatePaymentPlanOrder() {
 		$this->orderType = ConfigurationProvider::PAYMENTPLAN_TYPE;
 
 		return new UpdateOrderRequest($this);

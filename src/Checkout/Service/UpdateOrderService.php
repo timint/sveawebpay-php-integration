@@ -9,15 +9,13 @@ use Svea\WebPay\Checkout\Validation\UpdateOrderValidator;
  * Class UpdateOrderService
  * @package Svea\Svea\WebPay\WebPay\Checkout\Service
  */
-class UpdateOrderService extends CheckoutService
-{
+class UpdateOrderService extends CheckoutService {
 	public $requestObject;
 
 	/**
 	 * Send call Connection Library
 	 */
-	public function doRequest()
-	{
+	public function doRequest() {
 		$requestData = $this->prepareRequest();
 
 		$response = $this->serviceConnection->update($requestData);
@@ -30,8 +28,7 @@ class UpdateOrderService extends CheckoutService
 	 * @return array
 	 * @throws \Svea\WebPay\BuildOrder\Validator\ValidationException
 	 */
-	protected function prepareRequest()
-	{
+	protected function prepareRequest() {
 		$errors = $this->validateOrder();
 		$this->processErrors($errors);
 		$data = $this->mapCreateOrderData($this->order);
@@ -42,8 +39,7 @@ class UpdateOrderService extends CheckoutService
 	/**
 	 * Validate order data
 	 */
-	protected function validateOrder()
-	{
+	protected function validateOrder() {
 		$validator = new UpdateOrderValidator();
 		$errors = $validator->validate($this->order);
 
@@ -55,8 +51,7 @@ class UpdateOrderService extends CheckoutService
 	 * @param CheckoutOrderBuilder $order
 	 * @return array
 	 */
-	protected function mapCreateOrderData(CheckoutOrderBuilder $order)
-	{
+	protected function mapCreateOrderData(CheckoutOrderBuilder $order) {
 		$data = [];
 		$orderItems = $this->formatOrderInformationWithOrderRows();
 

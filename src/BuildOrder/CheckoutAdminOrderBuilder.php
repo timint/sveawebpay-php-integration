@@ -15,8 +15,7 @@ namespace Svea\WebPay\BuildOrder;
  *
  * @author Savo Garovic for Svea WebPay
  */
-class CheckoutAdminOrderBuilder extends OrderBuilder
-{
+class CheckoutAdminOrderBuilder extends OrderBuilder {
 	/**
 	 * @var string $orderId
 	 */
@@ -32,8 +31,7 @@ class CheckoutAdminOrderBuilder extends OrderBuilder
 	/**
 	 * @return string
 	 */
-	public function getCountryCode()
-	{
+	public function getCountryCode() {
 		return $this->countryCode;
 	}
 
@@ -42,8 +40,7 @@ class CheckoutAdminOrderBuilder extends OrderBuilder
 	 * @param string $transactionIdAsString
 	 * @return $this
 	 */
-	public function setTransactionId($transactionIdAsString)
-	{
+	public function setTransactionId($transactionIdAsString) {
 		return $this->setOrderId($transactionIdAsString);
 	}
 
@@ -52,8 +49,7 @@ class CheckoutAdminOrderBuilder extends OrderBuilder
 	 * @param string $checkoutOrderId
 	 * @return $this
 	 */
-	public function setCheckoutOrderId($checkoutOrderId)
-	{
+	public function setCheckoutOrderId($checkoutOrderId) {
 		return $this->setOrderId($checkoutOrderId);
 	}
 
@@ -61,8 +57,7 @@ class CheckoutAdminOrderBuilder extends OrderBuilder
 	 * @param mixed $orderId
 	 * @return $this
 	 */
-	public function setOrderId($orderId)
-	{
+	public function setOrderId($orderId) {
 		$this->orderId = $orderId;
 		return $this;
 	}
@@ -71,8 +66,7 @@ class CheckoutAdminOrderBuilder extends OrderBuilder
 	 * @param mixed $deliveryId
 	 * @return $this
 	 */
-	public function setDeliveryId($deliveryId)
-	{
+	public function setDeliveryId($deliveryId) {
 		$this->deliveryId = $deliveryId;
 		return $this;
 	}
@@ -81,8 +75,7 @@ class CheckoutAdminOrderBuilder extends OrderBuilder
 	 * @param mixed $amountIncVat
 	 * @return $this
 	 */
-	public function setAmountIncVat($amountIncVat)
-	{
+	public function setAmountIncVat($amountIncVat) {
 		$this->amountIncVat = $amountIncVat;
 		return $this;
 	}

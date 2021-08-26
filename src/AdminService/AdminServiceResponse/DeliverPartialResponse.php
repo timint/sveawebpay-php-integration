@@ -8,7 +8,6 @@ namespace Svea\WebPay\AdminService\AdminServiceResponse;
  *
  * @author Kristian Grossman-Madsen
  */
-class DeliverPartialResponse extends DeliverOrdersResponse
-{
+class DeliverPartialResponse extends DeliverOrdersResponse {
 
 }

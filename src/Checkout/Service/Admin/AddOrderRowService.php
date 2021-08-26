@@ -6,8 +6,7 @@ use Svea\WebPay\Helper\Helper;
 use Svea\WebPay\BuildOrder\AddOrderRowsBuilder;
 use Svea\WebPay\Checkout\Validation\Admin\AddOrderRowValidator;
 
-class AddOrderRowService extends AdminImplementationService
-{
+class AddOrderRowService extends AdminImplementationService {
 	/**
 	 * @var AddOrderRowsBuilder $adminBuilder
 	 */
@@ -16,8 +15,7 @@ class AddOrderRowService extends AdminImplementationService
 	/**
 	 * Validate order data
 	 */
-	public function validate()
-	{
+	public function validate() {
 		$validator = new AddOrderRowValidator();
 		$errors = $validator->validate($this->adminBuilder);
 
@@ -28,8 +26,7 @@ class AddOrderRowService extends AdminImplementationService
 	 * Format given date so that will match data structure required for Admin API
 	 * @return mixed
 	 */
-	public function prepareRequest()
-	{
+	public function prepareRequest() {
 		$this->validate();
 
 		$requestData = [
@@ -43,16 +40,14 @@ class AddOrderRowService extends AdminImplementationService
 	/**
 	 * Send call Connection Library
 	 */
-	public function doRequest()
-	{
+	public function doRequest() {
 		$preparedData = $this->prepareRequest();
 		$response = $this->checkoutAdminConnection->addOrderRow($preparedData);
 
 		return $response;
 	}
 
-	private function formatOrderRowValues()
-	{
+	private function formatOrderRowValues() {
 		$requestOrderRow = [];
 
 		$rowData = $this->adminBuilder->orderRows[0];

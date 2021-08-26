@@ -20,16 +20,14 @@ use Svea\WebPay\WebService\SveaSoap\SveaRequest;
  *
  * @author Svea Webpay
  */
-class GetAccountCreditParams
-{
+class GetAccountCreditParams {
 	public $testmode = false;
 	public $object;
 	public $conf;
 	public $countryCode;
 	public $logging = false;
 
-	function __construct($config)
-	{
+	function __construct($config) {
 		$this->conf = $config;
 	}
 
@@ -39,8 +37,7 @@ class GetAccountCreditParams
 	 * @param string $countryCodeAsString
 	 * @return $this
 	 */
-	public function setCountryCode($countryCodeAsString)
-	{
+	public function setCountryCode($countryCodeAsString) {
 		$this->countryCode = $countryCodeAsString;
 
 		return $this;
@@ -52,8 +49,7 @@ class GetAccountCreditParams
 	 * @param bool $logging
 	 * @return $this
 	 */
-	public function enableLogging($logging)
-	{
+	public function enableLogging($logging) {
 		$this->logging = $logging;
 
 		return $this;
@@ -64,8 +60,7 @@ class GetAccountCreditParams
 	 *
 	 * @return \Svea\WebPay\WebService\WebServiceResponse\PaymentPlanParamsResponse
 	 */
-	public function doRequest()
-	{
+	public function doRequest() {
 		$requestObject = $this->prepareRequest();
 		$request = new SveaDoRequest($this->conf, ConfigurationProvider::ACCOUNTCREDIT_TYPE, "GetAccountCreditParamsEu", $requestObject, $this->logging);
 
@@ -77,8 +72,7 @@ class GetAccountCreditParams
 	/**
 	 * @return SveaRequest
 	 */
-	public function prepareRequest()
-	{
+	public function prepareRequest() {
 		$auth = new SveaAuth(
 			$this->conf->getUsername(ConfigurationProvider::ACCOUNTCREDIT_TYPE, $this->countryCode),
 			$this->conf->getPassword(ConfigurationProvider::ACCOUNTCREDIT_TYPE, $this->countryCode),

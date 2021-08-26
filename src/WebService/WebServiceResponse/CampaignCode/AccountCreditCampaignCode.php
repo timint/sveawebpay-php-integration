@@ -15,8 +15,7 @@ namespace Svea\WebPay\WebService\WebServiceResponse\CampaignCode;
  * @attrib	 ->notificationFee
  *
  */
-class AccountCreditCampaignCode
-{
+class AccountCreditCampaignCode {
 	public $campaignCode;
 	public $description;
 	public $initialFee;

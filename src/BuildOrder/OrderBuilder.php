@@ -10,8 +10,7 @@ use Svea\WebPay\Config\ConfigurationProvider;
  *
  * @author Kristian Grossman-Madsen, Anneli Halld'n, Daniel Brolund, Fredrik Sundell for Svea WebPay
  */
-class OrderBuilder
-{
+class OrderBuilder {
 	/**
 	 * @var boolean  true indicates test mode, false indicates production mode
 	 */
@@ -104,8 +103,7 @@ class OrderBuilder
 	/**
 	 * @param ConfigurationProvider $config
 	 */
-	public function __construct($config)
-	{
+	public function __construct($config) {
 		$this->conf = $config;
 	}
 
@@ -114,8 +112,7 @@ class OrderBuilder
 	 * @param \Svea\WebPay\BuildOrder\RowBuilders\OrderDeliveryAddress
 	 * @return $this
 	 */
-	public function setOrderDeliveryAddress($orderDeliveryAddressObject)
-	{
+	public function setOrderDeliveryAddress($orderDeliveryAddressObject) {
 		$this->orderDeliveryAddress = $orderDeliveryAddressObject;
 
 		return $this;
@@ -134,8 +131,7 @@ class OrderBuilder
 	 * @param \Svea\WebPay\BuildOrder\RowBuilders\IndividualCustomer|\Svea\WebPay\BuildOrder\RowBuilders\CompanyCustomer $itemCustomerObject
 	 * @return $this
 	 */
-	public function addCustomerDetails($itemCustomerObject)
-	{
+	public function addCustomerDetails($itemCustomerObject) {
 		$this->customerIdentity = $itemCustomerObject;
 
 		return $this;
@@ -147,8 +143,7 @@ class OrderBuilder
 	 * @param \Svea\WebPay\BuildOrder\RowBuilders\OrderRow $itemOrderRowObject
 	 * @return $this
 	 */
-	public function addOrderRow($itemOrderRowObject)
-	{
+	public function addOrderRow($itemOrderRowObject) {
 		if (is_array($itemOrderRowObject)) {
 			foreach ($itemOrderRowObject as $row) {
 				array_push($this->orderRows, $row);
@@ -168,8 +163,7 @@ class OrderBuilder
 	 * @param \Svea\WebPay\BuildOrder\RowBuilders\InvoiceFee|\Svea\WebPay\BuildOrder\RowBuilders\ShippingFee $itemFeeObject
 	 * @return $this
 	 */
-	public function addFee($itemFeeObject)
-	{
+	public function addFee($itemFeeObject) {
 		if (is_array($itemFeeObject)) {
 			foreach ($itemFeeObject as $row) {
 				array_push($this->rows, $row);
@@ -205,8 +199,7 @@ class OrderBuilder
 	 *
 	 * @return $this
 	 */
-	public function addDiscount($itemDiscountObject)
-	{
+	public function addDiscount($itemDiscountObject) {
 		if (is_array($itemDiscountObject)) {
 			foreach ($itemDiscountObject as $row) {
 				array_push($this->rows, $row);
@@ -241,8 +234,7 @@ class OrderBuilder
 	 * @param string $countryCodeAsString Country code as described by ISO 3166-1, one of "SE", "NO", "DK", "FI", "DE", "NL"
 	 * @return $this
 	 */
-	public function setCountryCode($countryCodeAsString)
-	{
+	public function setCountryCode($countryCodeAsString) {
 		$this->countryCode = $countryCodeAsString;
 
 		return $this;
@@ -256,8 +248,7 @@ class OrderBuilder
 	 * @param string $currencyAsString in ISO 4217 three-letter format, ex. "SEK", "EUR"
 	 * @return $this
 	 */
-	public function setCurrency($currencyAsString)
-	{
+	public function setCurrency($currencyAsString) {
 		$currency = strtoupper(trim($currencyAsString));
 		$this->currency = $currency;
 
@@ -271,8 +262,7 @@ class OrderBuilder
 	 * @param string $customerReferenceAsString needs to be unique to the order for card and direct bank orders
 	 * @return $this
 	 */
-	public function setCustomerReference($customerReferenceAsString)
-	{
+	public function setCustomerReference($customerReferenceAsString) {
 		$this->customerReference = $customerReferenceAsString;
 
 		return $this;
@@ -287,8 +277,7 @@ class OrderBuilder
 	 * @param string $clientOrderNumberAsString
 	 * @return $this
 	 */
-	public function setClientOrderNumber($clientOrderNumberAsString)
-	{
+	public function setClientOrderNumber($clientOrderNumberAsString) {
 		$this->clientOrderNumber = $clientOrderNumberAsString;
 
 		return $this;
@@ -300,8 +289,7 @@ class OrderBuilder
 	 * @param string $orderDateAsString ISO 8601 date, as produced by php date('c'): "2004-02-12T15:19:21+00:00", also accepts dates like "2004-02-12"
 	 * @return $this
 	 */
-	public function setOrderDate($orderDateAsString)
-	{
+	public function setOrderDate($orderDateAsString) {
 		$this->orderDate = $orderDateAsString;
 
 		return $this;
@@ -313,8 +301,7 @@ class OrderBuilder
 	 * @param boolean $status, if true then raw requests / responses will be logged on the order. Disabled by default.
 	 * @return $this
 	 */
-	public function enableLogging($status)
-	{
+	public function enableLogging($status) {
 		$this->logging = $status;
 
 		return $this;
@@ -325,8 +312,7 @@ class OrderBuilder
 	 * @param string $peppolId
 	 * @return $this
 	 */
-	public function setPeppolId($peppolId)
-	{
+	public function setPeppolId($peppolId) {
 		$this->peppolId = $peppolId;
 
 		return $this;
@@ -337,8 +323,7 @@ class OrderBuilder
 	 * @param string $payerAlias
 	 * @return $this
 	 */
-	public function setPayerAlias($payerAlias)
-	{
+	public function setPayerAlias($payerAlias) {
 		$this->payerAlias = $payerAlias;
 
 		return $this;

@@ -39,8 +39,7 @@ use Svea\WebPay\HostedService\HostedResponse\HostedAdminResponse\RecurTransactio
  *
  * @author Anneli Halld'n, Daniel Brolund, Kristian Grossman-Madsen for Svea Webpay
  */
-class HostedPayment
-{
+class HostedPayment {
 	const RECURRINGCAPTURE = "RECURRINGCAPTURE";
 	const ONECLICKCAPTURE = "ONECLICKCAPTURE";
 	const RECURRING = "RECURRING";
@@ -90,8 +89,7 @@ class HostedPayment
 	 * Creates a HostedPayment, sets default language to english
 	 * @param CreateOrderBuilder $order
 	 */
-	public function __construct($order)
-	{
+	public function __construct($order) {
 		$this->langCode = "en";
 		$this->order = $order;
 		$this->request = [];
@@ -107,8 +105,7 @@ class HostedPayment
 	 * @param string $returnUrlAsString
 	 * @return $this
 	 */
-	public function setReturnUrl($returnUrlAsString)
-	{
+	public function setReturnUrl($returnUrlAsString) {
 		$this->returnUrl = $returnUrlAsString;
 
 		return $this;
@@ -128,8 +125,7 @@ class HostedPayment
 	 * @param string $callbackUrlAsString
 	 * @return $this
 	 */
-	public function setCallbackUrl($callbackUrlAsString)
-	{
+	public function setCallbackUrl($callbackUrlAsString) {
 		$this->callbackUrl = $callbackUrlAsString;
 
 		return $this;
@@ -144,8 +140,7 @@ class HostedPayment
 	 * @param string $cancelUrlAsString
 	 * @return $this
 	 */
-	public function setCancelUrl($cancelUrlAsString)
-	{
+	public function setCancelUrl($cancelUrlAsString) {
 		$this->cancelUrl = $cancelUrlAsString;
 
 		return $this;
@@ -158,8 +153,7 @@ class HostedPayment
 	 * @param string $languageCodeAsISO639
 	 * @return $this
 	 */
-	public function setPayPageLanguage($languageCodeAsISO639)
-	{
+	public function setPayPageLanguage($languageCodeAsISO639) {
 		switch ($languageCodeAsISO639) {
 			case "sv":
 			case "en":
@@ -187,8 +181,7 @@ class HostedPayment
 	 * @return PaymentForm
 	 * @throws ValidationException
 	 */
-	public function getPaymentForm()
-	{
+	public function getPaymentForm() {
 		//validate the order
 		$errors = $this->validateOrder();
 		$exceptionString = "";
@@ -216,8 +209,7 @@ class HostedPayment
 	/**
 	 * @return string[] $errors an array containing the validation errors found
 	 */
-	public function validateOrder()
-	{
+	public function validateOrder() {
 		$validator = new HostedOrderValidator();
 		$errors = $validator->validate($this);
 		if (($this->order->countryCode == "NL" || $this->order->countryCode == "DE") && isset($this->paymentMethod)) {
@@ -234,8 +226,7 @@ class HostedPayment
 	/**
 	 * returns a list of request attributes-value pairs
 	 */
-	public function calculateRequestValues()
-	{
+	public function calculateRequestValues() {
 		// format order data
 		$formatter = new HostedRowFormatter();
 		$this->request['rows'] = $formatter->formatRows($this->order);
@@ -264,8 +255,7 @@ class HostedPayment
 			$this->request['subscriptionId'] = $this->subscriptionId;
 		}
 
-		if (isset($this->order->payerAlias)) // used by Swish
-		{
+		if (isset($this->order->payerAlias)) // used by Swish {
 			$this->request['payerAlias'] = $this->order->payerAlias;
 		}
 
@@ -290,8 +280,7 @@ class HostedPayment
 	 * [testurl] => https://webpaypaymentgatewaystage.svea.com/webpay/preparedpayment/xxxxx Deprecated! Not valid if the order is created in prod.
 	 * @throws ValidationException
 	 */
-	public function getPaymentUrl()
-	{
+	public function getPaymentUrl() {
 
 		// follow the procedure set out in getPaymentForm, then
 		//
@@ -394,8 +383,7 @@ class HostedPayment
 	 * @param string $subscriptionType @see CardPayment constants
 	 * @return $this
 	 */
-	public function setSubscriptionType($subscriptionType)
-	{
+	public function setSubscriptionType($subscriptionType) {
 		$this->subscriptionType = $subscriptionType;
 
 		return $this;
@@ -412,8 +400,7 @@ class HostedPayment
 	 * @param string $subscriptionType
 	 * @return $this
 	 */
-	public function setSubscriptionId($subscriptionId)
-	{
+	public function setSubscriptionId($subscriptionId) {
 		$this->subscriptionId = $subscriptionId;
 
 		return $this;
@@ -432,8 +419,7 @@ class HostedPayment
 	 *
 	 * @return RecurTransactionResponse
 	 */
-	public function doRecur()
-	{
+	public function doRecur() {
 		// calculate amount from order rows
 		$formatter = new HostedRowFormatter();
 		$this->request['rows'] = $formatter->formatRows($this->order);

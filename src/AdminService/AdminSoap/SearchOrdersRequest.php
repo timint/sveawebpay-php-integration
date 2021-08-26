@@ -4,8 +4,7 @@ namespace Svea\WebPay\AdminService\AdminSoap;
 
 use SoapVar;
 
-class SearchOrdersRequest
-{
+class SearchOrdersRequest {
 	public $Authentication;	 // note that the order of the attributes matter!
 	public $AccountCreditsToRetrieve;
 
@@ -14,15 +13,13 @@ class SearchOrdersRequest
 	 * @param Authentication $authentication
 	 * @param OrdersToRetrieve $ordersToRetrieve
 	 */
-	function __construct($authentication, $accountsToRetrieve)
-	{
+	function __construct($authentication, $accountsToRetrieve) {
 		$this->Authentication = new SoapVar($authentication, SOAP_ENC_OBJECT,
 			"-", "--", "Authentication", "http://schemas.datacontract.org/2004/07/DataObjects.Admin.Service");
 		// Settings -- optional, not sent by package
 
 		$list = [];
-		foreach($accountsToRetrieve as $accountInfo)
-		{
+		foreach($accountsToRetrieve as $accountInfo) {
 			$clientAccountCreditId = new SoapVar($accountInfo->clientAccountCreditId, XSD_LONG,
 				"-", "--", "ClientAccountCreditId", "http://schemas.datacontract.org/2004/07/DataObjects.Admin.Service.Account");
 

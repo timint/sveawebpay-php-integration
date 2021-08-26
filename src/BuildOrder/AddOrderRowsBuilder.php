@@ -31,8 +31,7 @@ use Svea\WebPay\BuildOrder\Validator\ValidationException;
  *
  * @author Kristian Grossman-Madsen for Svea Svea\WebPay\WebPay
  */
-class AddOrderRowsBuilder extends CheckoutAdminOrderBuilder
-{
+class AddOrderRowsBuilder extends CheckoutAdminOrderBuilder {
 	/**
 	 * @var ConfigurationProvider $conf
 	 */
@@ -64,8 +63,7 @@ class AddOrderRowsBuilder extends CheckoutAdminOrderBuilder
 	 * AddOrderRowsBuilder constructor.
 	 * @param $config
 	 */
-	public function __construct($config)
-	{
+	public function __construct($config) {
 		parent::__construct($config);
 		$this->orderRows = [];
 	}
@@ -85,8 +83,7 @@ class AddOrderRowsBuilder extends CheckoutAdminOrderBuilder
 	 * @param $countryCodeAsString
 	 * @return $this
 	 */
-	public function setCountryCode($countryCodeAsString)
-	{
+	public function setCountryCode($countryCodeAsString) {
 		$this->countryCode = $countryCodeAsString;
 		return $this;
 	}
@@ -96,8 +93,7 @@ class AddOrderRowsBuilder extends CheckoutAdminOrderBuilder
 	 * @param OrderRow $row
 	 * @return $this
 	 */
-	public function addOrderRow($row)
-	{
+	public function addOrderRow($row) {
 		$this->orderRows[] = $row;
 		return $this;
 	}
@@ -107,8 +103,7 @@ class AddOrderRowsBuilder extends CheckoutAdminOrderBuilder
 	 * @param \Svea\WebPay\BuildOrder\RowBuilders\OrderRow[] $rows
 	 * @return $this
 	 */
-	public function addOrderRows($rows)
-	{
+	public function addOrderRows($rows) {
 		$this->orderRows = array_merge($this->orderRows, $rows);
 		return $this;
 	}
@@ -117,8 +112,7 @@ class AddOrderRowsBuilder extends CheckoutAdminOrderBuilder
 	 * Use addInvoiceOrderRows() to add rows to an Invoice order using AdminServiceRequest AddOrderRows request
 	 * @return AddOrderRowsRequest
 	 */
-	public function addInvoiceOrderRows()
-	{
+	public function addInvoiceOrderRows() {
 		$this->orderType = ConfigurationProvider::INVOICE_TYPE;
 		return new AddOrderRowsRequest($this);
 	}
@@ -127,8 +121,7 @@ class AddOrderRowsBuilder extends CheckoutAdminOrderBuilder
 	 * Use addPaymentPlanOrderRows() to add rows to a PaymentPlan order using AdminServiceRequest AddOrderRows request
 	 * @return AddOrderRowsRequest
 	 */
-	public function addPaymentPlanOrderRows()
-	{
+	public function addPaymentPlanOrderRows() {
 		$this->orderType = ConfigurationProvider::PAYMENTPLAN_TYPE;
 		return new AddOrderRowsRequest($this);
 	}
@@ -139,8 +132,7 @@ class AddOrderRowsBuilder extends CheckoutAdminOrderBuilder
 	 * @throws ValidationException
 	 * @throws \Exception
 	 */
-	public function addCheckoutOrderRows()
-	{
+	public function addCheckoutOrderRows() {
 		return new AddOrderRowService($this);
 	}
 }

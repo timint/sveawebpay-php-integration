@@ -15,8 +15,7 @@ use XMLWriter;
  *
  * @author Kristian Grossman-Madsen
  */
-class HostedXmlBuilder
-{
+class HostedXmlBuilder {
 	/**
 	 * @var XMLWriter $XMLWriter
 	 */
@@ -33,8 +32,7 @@ class HostedXmlBuilder
 	 * This method expect UTF-8 input
 	 * @return string
 	 */
-	public function getOrderXML($request, $order)
-	{
+	public function getOrderXML($request, $order) {
 		return $this->getPaymentXML($request, $order);
 	}
 
@@ -47,8 +45,7 @@ class HostedXmlBuilder
 	 * @return string
 	 * This method expect UTF-8 input
 	 */
-	public function getPaymentXML($request, $order)
-	{
+	public function getPaymentXML($request, $order) {
 		$this->setBaseXML($order->conf);
 		$this->XMLWriter->startElement("payment");
 
@@ -93,12 +90,10 @@ class HostedXmlBuilder
 		$this->serializeOrderRows($request['rows']); // orderrows
 
 		// customer -- optional
-		if(isset($request['paymentMethod']))
-		{
+		if(isset($request['paymentMethod'])) {
 			$this->serializeCustomer($order, $request['paymentMethod']);		  // customer		  // -- used by Invoice payment
 		}
-		else
-		{
+		else {
 			$this->serializeCustomer($order);		  // customer		  // -- used by Invoice payment
 		}
 
@@ -113,8 +108,7 @@ class HostedXmlBuilder
 			$this->XMLWriter->writeElement("ipaddress", $request['ipAddress']);
 		}
 
-		if(isset($request['payerAlias']))
-		{
+		if(isset($request['payerAlias'])) {
 			$this->XMLWriter->writeElement("payeralias", $request['payerAlias']);
 		}
 
@@ -124,8 +118,7 @@ class HostedXmlBuilder
 		return $this->XMLWriter->flush();
 	}
 
-	private function setBaseXML($config)
-	{
+	private function setBaseXML($config) {
 		$this->XMLWriter = new XMLWriter();
 		$this->XMLWriter->openMemory();
 		$this->XMLWriter->setIndent(true);
@@ -133,8 +126,7 @@ class HostedXmlBuilder
 		$this->XMLWriter->writeComment(Helper::getLibraryAndPlatformPropertiesAsJson($config));
 	}
 
-	private function serializeExcludePayments($payMethods)
-	{
+	private function serializeExcludePayments($payMethods) {
 		if (count($payMethods) > 0) {
 			$this->XMLWriter->startElement("excludepaymentmethods");
 
@@ -146,8 +138,7 @@ class HostedXmlBuilder
 		}
 	}
 
-	private function serializeOrderRows($orderRows)
-	{
+	private function serializeOrderRows($orderRows) {
 		if (count($orderRows) > 0) {
 			$this->XMLWriter->startElement("orderrows");
 
@@ -159,8 +150,7 @@ class HostedXmlBuilder
 		}
 	}
 
-	private function serializeOrderRow($orderRow)
-	{
+	private function serializeOrderRow($orderRow) {
 		$this->XMLWriter->startElement("row");
 
 		if (!empty($orderRow->sku) && $orderRow->sku != null) {
@@ -204,12 +194,10 @@ class HostedXmlBuilder
 		$this->XMLWriter->endElement();
 	}
 
-	private function serializeCustomer($order, $paymentMethod = NULL)
-	{
+	private function serializeCustomer($order, $paymentMethod = NULL) {
 		$this->XMLWriter->startElement("customer");
 
-		if(isset($paymentMethod) && $paymentMethod == "SVEACARDPAY_PF")
-		{
+		if(isset($paymentMethod) && $paymentMethod == "SVEACARDPAY_PF") {
 			$this->XMLWriter->writeElement("unknowncustomer", "true");
 			$this->XMLWriter->writeElement("country", $order->countryCode);
 		}
@@ -297,8 +285,7 @@ class HostedXmlBuilder
 	 * @return type
 	 * This method expect UTF-8 input
 	 */
-	public function getPreparePaymentXML($request, $order)
-	{
+	public function getPreparePaymentXML($request, $order) {
 		$this->setBaseXML($order->conf);
 		$this->XMLWriter->startElement("payment");
 
@@ -346,8 +333,7 @@ class HostedXmlBuilder
 	 * @param $merchantId
 	 * @return mixed
 	 */
-	public function getPaymentMethodsXML($merchantId)
-	{
+	public function getPaymentMethodsXML($merchantId) {
 		$this->setBaseXML();
 		$this->XMLWriter->startElement("getpaymentmethods");
 		$this->XMLWriter->writeElement("merchantid", $merchantId);

@@ -9,8 +9,7 @@ use SimpleXMLElement;
  *
  * @author Kristian Grossman-Madsen for Svea Svea\WebPay\WebPay
  */
-class RecurTransactionResponse extends HostedAdminResponse
-{
+class RecurTransactionResponse extends HostedAdminResponse {
 	/**
 	 * @var string $transactionId -- the order id at Svea
 	 */
@@ -77,8 +76,7 @@ class RecurTransactionResponse extends HostedAdminResponse
 	public $decimalamount;
 
 
-	function __construct($message, $countryCode, $config)
-	{
+	function __construct($message, $countryCode, $config) {
 		parent::__construct($message, $countryCode, $config);
 	}
 
@@ -88,8 +86,7 @@ class RecurTransactionResponse extends HostedAdminResponse
 	 *
 	 * @param string $hostedAdminResponseXML hostedAdminResponse as xml
 	 */
-	protected function formatXml($hostedAdminResponseXML)
-	{
+	protected function formatXml($hostedAdminResponseXML) {
 
 		$hostedAdminResponse = new SimpleXMLElement($hostedAdminResponseXML);
 

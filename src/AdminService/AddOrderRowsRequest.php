@@ -15,8 +15,7 @@ use Svea\WebPay\Helper\Helper;
  *
  * @author Kristian Grossman-Madsen
  */
-class AddOrderRowsRequest extends AdminServiceRequest
-{
+class AddOrderRowsRequest extends AdminServiceRequest {
 	/**
 	 * @var AddOrderRowsBuilder $orderBuilder
 	 */
@@ -27,8 +26,7 @@ class AddOrderRowsRequest extends AdminServiceRequest
 	/**
 	 * @param AddOrderRowsBuilder $addOrderRowsBuilder
 	 */
-	public function __construct($addOrderRowsBuilder)
-	{
+	public function __construct($addOrderRowsBuilder) {
 		$this->action = "AddOrderRows";
 		$this->orderBuilder = $addOrderRowsBuilder;
 	}
@@ -39,8 +37,7 @@ class AddOrderRowsRequest extends AdminServiceRequest
 	 * @return AdminSoap\AddOrderRowsRequest
 	 * @throws \Svea\WebPay\BuildOrder\Validator\ValidationException
 	 */
-	public function prepareRequest($resendOrderWithFlippedPriceIncludingVat = false)
-	{
+	public function prepareRequest($resendOrderWithFlippedPriceIncludingVat = false) {
 		$this->validateRequest();
 
 		$this->priceIncludingVat = $this->determineVatFlag($this->orderBuilder->orderRows, $resendOrderWithFlippedPriceIncludingVat);
@@ -60,8 +57,7 @@ class AddOrderRowsRequest extends AdminServiceRequest
 		return $soapRequest;
 	}
 
-	public function validate()
-	{
+	public function validate() {
 		$errors = [];
 		$errors = $this->validateOrderId($errors);
 		$errors = $this->validateOrderType($errors);
@@ -72,8 +68,7 @@ class AddOrderRowsRequest extends AdminServiceRequest
 		return $errors;
 	}
 
-	private function validateOrderId($errors)
-	{
+	private function validateOrderId($errors) {
 		if (isset($this->orderBuilder->orderId) == FALSE) {
 			$errors[] = ['missing value' => "orderId is required."];
 		}
@@ -81,8 +76,7 @@ class AddOrderRowsRequest extends AdminServiceRequest
 		return $errors;
 	}
 
-	private function validateOrderType($errors)
-	{
+	private function validateOrderType($errors) {
 		if (isset($this->orderBuilder->orderType) == FALSE) {
 			$errors[] = ['missing value' => "orderType is required."];
 		}
@@ -90,8 +84,7 @@ class AddOrderRowsRequest extends AdminServiceRequest
 		return $errors;
 	}
 
-	private function validateCountryCode($errors)
-	{
+	private function validateCountryCode($errors) {
 		if (isset($this->orderBuilder->countryCode) == FALSE) {
 			$errors[] = ['missing value' => "countryCode is required."];
 		}
@@ -99,8 +92,7 @@ class AddOrderRowsRequest extends AdminServiceRequest
 		return $errors;
 	}
 
-	private function validateRowsToAdd($errors)
-	{
+	private function validateRowsToAdd($errors) {
 		if (isset($this->orderBuilder->orderRows) == FALSE) {
 			$errors[] = ['missing value' => "orderRows is required."];
 		}
@@ -108,8 +100,7 @@ class AddOrderRowsRequest extends AdminServiceRequest
 		return $errors;
 	}
 
-	private function validateRowsHasPriceAndVatInformation($errors)
-	{
+	private function validateRowsHasPriceAndVatInformation($errors) {
 		if (isset($this->orderBuilder->orderRows)) {
 			foreach ($this->orderBuilder->orderRows as $orderRow) {
 				if (!isset($orderRow->vatPercent) && (!isset($orderRow->amountIncVat) && !isset($orderRow->amountExVat))) {

@@ -5,8 +5,7 @@ namespace Svea\WebPay\WebService\WebServiceResponse;
 /**
  * @author anne-hal, Kristian Grossman-Madsen
  */
-class DeliverOrderResult extends WebServiceResponse
-{
+class DeliverOrderResult extends WebServiceResponse {
 	/**
 	 * @var float $amount The sum of all the provided order rows.
 	 */
@@ -58,13 +57,11 @@ class DeliverOrderResult extends WebServiceResponse
 	 * @param $response
 	 * @param $logs
 	 */
-	public function __construct($response, $logs)
-	{
+	public function __construct($response, $logs) {
 		$this->accepted = $response->DeliverOrderEuResult->Accepted;
 		$this->resultcode = $response->DeliverOrderEuResult->ResultCode;
 
-		if(isset($logs))
-		{
+		if(isset($logs)) {
 			$this->logs = $logs;
 		}
 
@@ -86,8 +83,7 @@ class DeliverOrderResult extends WebServiceResponse
 				$this->contractNumber = $response->DeliverOrderEuResult->DeliverOrderResult->PaymentPlanResultDetails->ContractNumber;
 			}
 			// - specific for accountCredit
-			if(property_exists($response->DeliverOrderEuResult->DeliverOrderResult, "DeliveryReferenceNumber"))
-			{
+			if(property_exists($response->DeliverOrderEuResult->DeliverOrderResult, "DeliveryReferenceNumber")) {
 				$this->deliveryReferenceNumber = $response->DeliverOrderEuResult->DeliverOrderResult->DeliveryReferenceNumber;
 			}
 		}

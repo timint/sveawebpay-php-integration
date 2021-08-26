@@ -30,8 +30,7 @@ use Svea\WebPay\HostedService\Helper\InvalidCountryException;
  *
  * @author anne-hal
  */
-interface ConfigurationProvider
-{
+interface ConfigurationProvider {
 
 	const HOSTED_TYPE = 'HOSTED';
 	const INVOICE_TYPE = 'Invoice';

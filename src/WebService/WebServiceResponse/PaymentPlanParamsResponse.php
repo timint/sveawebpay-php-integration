@@ -32,8 +32,7 @@ use Svea\WebPay\WebService\WebServiceResponse\CampaignCode\CampaignCode;
  *
  * @author anne-hal, Kristian Grossman-Madsen
  */
-class PaymentPlanParamsResponse extends WebServiceResponse
-{
+class PaymentPlanParamsResponse extends WebServiceResponse {
 	/**
 	 * @var CampaignCode[] $campaignCodes - array of CampaignCode
 	 */
@@ -44,13 +43,11 @@ class PaymentPlanParamsResponse extends WebServiceResponse
 	 * @param $response
 	 * @param $logs
 	 */
-	public function __construct($response, $logs)
-	{
+	public function __construct($response, $logs) {
 		// was request accepted?
 		$this->accepted = $response->GetPaymentPlanParamsEuResult->Accepted;
 
-		if(isset($logs))
-		{
+		if(isset($logs)) {
 			$this->logs = $logs;
 		}
 

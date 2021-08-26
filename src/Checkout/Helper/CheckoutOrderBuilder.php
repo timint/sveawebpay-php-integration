@@ -18,8 +18,7 @@ use Svea\WebPay\Checkout\Service\GetAvailablePartPaymentCampaignsService;
  * Class CheckoutOrderBuilder
  * @package Svea\Svea\WebPay\WebPay\Checkout\Helper
  */
-class CheckoutOrderBuilder extends OrderBuilder
-{
+class CheckoutOrderBuilder extends OrderBuilder {
 	/**
 	 * @var float $id
 	 */
@@ -64,8 +63,7 @@ class CheckoutOrderBuilder extends OrderBuilder
 	 * CheckoutOrderBuilder constructor.
 	 * @param \Svea\WebPay\Config\ConfigurationProvider $config
 	 */
-	public function __construct($config)
-	{
+	public function __construct($config) {
 		parent::__construct($config);
 
 		$this->merchantSettings = new MerchantSettings();
@@ -77,8 +75,7 @@ class CheckoutOrderBuilder extends OrderBuilder
 	 *
 	 * @return array
 	 */
-	public function createOrder()
-	{
+	public function createOrder() {
 		$createService = new CreateOrderService($this);
 
 		return $createService->doRequest();
@@ -90,8 +87,7 @@ class CheckoutOrderBuilder extends OrderBuilder
 	 *
 	 * @return array
 	 */
-	public function getOrder()
-	{
+	public function getOrder() {
 		$getOrderService = new GetOrderService($this);
 
 		return $getOrderService->doRequest();
@@ -103,8 +99,7 @@ class CheckoutOrderBuilder extends OrderBuilder
 	 *
 	 * @return array
 	 */
-	public function updateOrder()
-	{
+	public function updateOrder() {
 		$updateOrderService = new UpdateOrderService($this);
 
 		return $updateOrderService->doRequest();
@@ -115,8 +110,7 @@ class CheckoutOrderBuilder extends OrderBuilder
 	 *
 	 * @return array
 	 */
-	public function getAvailablePartPaymentCampaigns()
-	{
+	public function getAvailablePartPaymentCampaigns() {
 		$getAvailablePartPaymentCampaigns = new GetAvailablePartPaymentCampaignsService($this);
 
 		return $getAvailablePartPaymentCampaigns->doRequest();
@@ -128,8 +122,7 @@ class CheckoutOrderBuilder extends OrderBuilder
 	 * @param $merchantSettings
 	 * @return $this
 	 */
-	public function setMerchantSettings($merchantSettings)
-	{
+	public function setMerchantSettings($merchantSettings) {
 		$this->merchantSettings = $merchantSettings;
 
 		return $this;
@@ -138,8 +131,7 @@ class CheckoutOrderBuilder extends OrderBuilder
 	/**
 	 * @return MerchantSettings
 	 */
-	public function getMerchantSettings()
-	{
+	public function getMerchantSettings() {
 		return $this->merchantSettings;
 	}
 
@@ -147,8 +139,7 @@ class CheckoutOrderBuilder extends OrderBuilder
 	 * @param string $checkoutUri
 	 * @return $this
 	 */
-	public function setCheckoutUri($checkoutUri)
-	{
+	public function setCheckoutUri($checkoutUri) {
 		$this->merchantSettings->setCheckoutUri($checkoutUri);
 
 		return $this;
@@ -158,8 +149,7 @@ class CheckoutOrderBuilder extends OrderBuilder
 	 * @param string $confirmationUri
 	 * @return $this
 	 */
-	public function setConfirmationUri($confirmationUri)
-	{
+	public function setConfirmationUri($confirmationUri) {
 		$this->merchantSettings->setConfirmationUri($confirmationUri);
 
 		return $this;
@@ -169,8 +159,7 @@ class CheckoutOrderBuilder extends OrderBuilder
 	 * @param string $pushUri
 	 * @return $this
 	 */
-	public function setPushUri($pushUri)
-	{
+	public function setPushUri($pushUri) {
 		$this->merchantSettings->setPushUri($pushUri);
 
 		return $this;
@@ -180,8 +169,7 @@ class CheckoutOrderBuilder extends OrderBuilder
 	 * @param string $termsUri
 	 * @return $this
 	 */
-	public function setTermsUri($termsUri)
-	{
+	public function setTermsUri($termsUri) {
 		$this->merchantSettings->setTermsUri($termsUri);
 
 		return $this;
@@ -191,8 +179,7 @@ class CheckoutOrderBuilder extends OrderBuilder
 	 * @param string $validationCallbackUri
 	 * @return $this
 	 */
-	public function setValidationCallbackUri($validationCallbackUri)
-	{
+	public function setValidationCallbackUri($validationCallbackUri) {
 		$this->merchantSettings->setValidationCallbackUri($validationCallbackUri);
 		return $this;
 	}
@@ -200,8 +187,7 @@ class CheckoutOrderBuilder extends OrderBuilder
 	/**
 	 * @return string
 	 */
-	public function getLocale()
-	{
+	public function getLocale() {
 		return $this->locale;
 	}
 
@@ -209,8 +195,7 @@ class CheckoutOrderBuilder extends OrderBuilder
 	 * @param string $locale
 	 * @return $this
 	 */
-	public function setLocale($locale)
-	{
+	public function setLocale($locale) {
 		$this->locale = $locale;
 
 		return $this;
@@ -219,8 +204,7 @@ class CheckoutOrderBuilder extends OrderBuilder
 	/**
 	 * @return float
 	 */
-	public function getId()
-	{
+	public function getId() {
 		return $this->id;
 	}
 
@@ -228,8 +212,7 @@ class CheckoutOrderBuilder extends OrderBuilder
 	 * @param $id
 	 * @return $this
 	 */
-	public function setId($id)
-	{
+	public function setId($id) {
 		$this->id = $id;
 
 		return $this;
@@ -241,8 +224,7 @@ class CheckoutOrderBuilder extends OrderBuilder
 	 *
 	 * @return string
 	 */
-	public function getCountryCode()
-	{
+	public function getCountryCode() {
 		$countryCode = $this->countryCode != null ? $this->countryCode : "SE";
 
 		return $countryCode;
@@ -251,8 +233,7 @@ class CheckoutOrderBuilder extends OrderBuilder
 	/**
 	 * @return string
 	 */
-	public function getCurrency()
-	{
+	public function getCurrency() {
 		return $this->currency;
 	}
 
@@ -260,8 +241,7 @@ class CheckoutOrderBuilder extends OrderBuilder
 	 * @param string $clientOrderNumber
 	 * @return CheckoutOrderBuilder
 	 */
-	public function setClientOrderNumber($clientOrderNumber)
-	{
+	public function setClientOrderNumber($clientOrderNumber) {
 		$this->clientOrderNumber = $clientOrderNumber;
 
 		return $this;
@@ -270,8 +250,7 @@ class CheckoutOrderBuilder extends OrderBuilder
 	/**
 	 * @return string
 	 */
-	public function getClientOrderNumber()
-	{
+	public function getClientOrderNumber() {
 		return $this->clientOrderNumber;
 	}
 
@@ -280,8 +259,7 @@ class CheckoutOrderBuilder extends OrderBuilder
 	 *
 	 * @return PresetValue []
 	 */
-	public function getPresetValues()
-	{
+	public function getPresetValues() {
 		return $this->presetValues;
 	}
 
@@ -291,8 +269,7 @@ class CheckoutOrderBuilder extends OrderBuilder
 	 * @param PresetValue $presetValues
 	 * @return $this
 	 */
-	public function addPresetValue($presetValues)
-	{
+	public function addPresetValue($presetValues) {
 		$this->presetValues [] = $presetValues;
 
 		return $this;
@@ -304,8 +281,7 @@ class CheckoutOrderBuilder extends OrderBuilder
 	 * @param string $partnerKey
 	 * @return $this
 	 */
-	public function setPartnerKey($partnerKey)
-	{
+	public function setPartnerKey($partnerKey) {
 		$this->partnerKey = $partnerKey;
 
 		return $this;
@@ -315,8 +291,7 @@ class CheckoutOrderBuilder extends OrderBuilder
 	 * Returns a partnerKey
 	 * @return string
 	 */
-	public function getPartnerKey()
-	{
+	public function getPartnerKey() {
 		return $this->partnerKey;
 	}
 
@@ -325,8 +300,7 @@ class CheckoutOrderBuilder extends OrderBuilder
 	 *
 	 * @return IdentityFlags []
 	 */
-	public function getIdentityFlags()
-	{
+	public function getIdentityFlags() {
 		return $this->identityFlags;
 	}
 
@@ -336,21 +310,18 @@ class CheckoutOrderBuilder extends OrderBuilder
 	 * @param string $identityFlag
 	 * @return $this
 	 */
-	public function addIdentityFlag($identityFlag)
-	{
+	public function addIdentityFlag($identityFlag) {
 		$this->identityFlags [] = $identityFlag;
 
 		return $this;
 	}
 
-	public function setMerchantData($merchantData)
-	{
+	public function setMerchantData($merchantData) {
 		$this->merchantData = $merchantData;
 		return $this;
 	}
 
-	public function getMerchantData()
-	{
+	public function getMerchantData() {
 		return $this->merchantData;
 	}
 
@@ -360,14 +331,12 @@ class CheckoutOrderBuilder extends OrderBuilder
 	 * @param bool $enabled
 	 * @return $this
 	 */
-	public function setRequireElectronicIdAuthentication($enabled)
-	{
+	public function setRequireElectronicIdAuthentication($enabled) {
 		$this->requireElectronicIdAuthentication = $enabled;
 		return $this;
 	}
 
-	public function getRequireElectronicIdAuthentication()
-	{
+	public function getRequireElectronicIdAuthentication() {
 		return $this->requireElectronicIdAuthentication;
 	}
 

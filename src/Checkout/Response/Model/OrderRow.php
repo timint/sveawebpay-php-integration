@@ -2,8 +2,7 @@
 
 namespace Svea\WebPay\Checkout\Response\Model;
 
-class OrderRow
-{
+class OrderRow {
 	const MINOR_CURRENCY = 100;
 
 	/**
@@ -52,8 +51,7 @@ class OrderRow
 	private $temporaryReference;
 
 
-	public function map($data)
-	{
+	public function map($data) {
 		$this->articleNumber = $data['ArticleNumber'];
 		$this->name = $data['Name'];
 		$this->quantity = $data['Quantity'];
@@ -65,8 +63,7 @@ class OrderRow
 		$this->rowId = $data['RowNumber'];
 	}
 
-	public function getRefactoredData()
-	{
+	public function getRefactoredData() {
 		return [
 			'ArticleNumber' => $this->articleNumber,
 			'Name' => $this->name,

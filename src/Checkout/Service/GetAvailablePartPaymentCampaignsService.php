@@ -10,28 +10,23 @@ use Svea\WebPay\Checkout\Validation\GetAvailablePartPaymentCampaignsValidator;
  * Class GetAvailablePartPaymentCampaignsService
  * @package Svea\Svea\WebPay\WebPay\Checkout\Service
  */
-class GetAvailablePartPaymentCampaignsService extends CheckoutService
-{
+class GetAvailablePartPaymentCampaignsService extends CheckoutService {
 	/*
 	 * Send call Connection Library
 	 * @return mixed
 	 */
-	public function doRequest()
-	{
+	public function doRequest() {
 		$requestData = $this->prepareRequest();
 
-		foreach($requestData['presetValues'] as $presetValue)
-		{
-			if(strtolower($presetValue['typeName']) == 'iscompany')
-			{
+		foreach($requestData['presetValues'] as $presetValue) {
+			if(strtolower($presetValue['typeName']) == 'iscompany') {
 				$requestData = [
 					'isCompany' => $presetValue['value']
 				];
 			}
 		}
 
-		if(!isset($requestData))
-		{
+		if(!isset($requestData)) {
 			$requestData = null;
 		}
 
@@ -44,8 +39,7 @@ class GetAvailablePartPaymentCampaignsService extends CheckoutService
 	 * Validate order data
 	 * @return array|mixed
 	 */
-	protected function validateOrder()
-	{
+	protected function validateOrder() {
 		$validator = new GetAvailablePartPaymentCampaignsValidator();
 		$errors = $validator->validate($this->order);
 
@@ -55,8 +49,7 @@ class GetAvailablePartPaymentCampaignsService extends CheckoutService
 	/**
 	 * @throws \Svea\WebPay\BuildOrder\Validator\ValidationException
 	 */
-	protected function prepareRequest()
-	{
+	protected function prepareRequest() {
 		$errors = $this->validateOrder();
 		$this->processErrors($errors);
 		$data = $this->mapPresetValue($this->order);
@@ -64,8 +57,7 @@ class GetAvailablePartPaymentCampaignsService extends CheckoutService
 		return $data;
 	}
 
-	protected function mapPresetValue(CheckoutOrderBuilder $request)
-	{
+	protected function mapPresetValue(CheckoutOrderBuilder $request) {
 		$data = [];
 		if (count($request->getPresetValues()) > 0) {
 			foreach ($request->getPresetValues() as $presetValue) {

@@ -4,8 +4,7 @@ namespace Svea\WebPay\AdminService\AdminSoap;
 
 use SoapVar;
 
-class OrderRow
-{
+class OrderRow {
 	public $ArticleNumber;
 	public $Description;
 	public $DiscountPercent;
@@ -26,8 +25,7 @@ class OrderRow
 	 * @param $vatPercent
 	 * @param $priceIncludingVat
 	 */
-	function __construct($articleNumber, $description, $discountPercent, $quantity, $amount, $unit, $vatPercent, $priceIncludingVat)
-	{
+	function __construct($articleNumber, $description, $discountPercent, $quantity, $amount, $unit, $vatPercent, $priceIncludingVat) {
 		$this->ArticleNumber = new SoapVar($articleNumber, XSD_STRING,
 			"-", "--", "ArticleNumber", "http://schemas.datacontract.org/2004/07/DataObjects.Webservice");
 		$this->Description = new SoapVar($description, XSD_STRING,

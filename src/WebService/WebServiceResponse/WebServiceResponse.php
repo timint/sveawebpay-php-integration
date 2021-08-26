@@ -9,8 +9,7 @@ namespace Svea\WebPay\WebService\WebServiceResponse;
  *
  * @author Anneli Halld'n, Daniel Brolund, Kristian Grossman-Madsen, Fredrik Sundell for Svea Webpay
  */
-abstract class WebServiceResponse
-{
+abstract class WebServiceResponse {
 	/**
 	 * @var bool $accepted true if the request succeeded, else false
 	 */

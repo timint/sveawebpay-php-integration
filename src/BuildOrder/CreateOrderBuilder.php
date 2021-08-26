@@ -24,8 +24,7 @@ use Svea\WebPay\HostedService\Payment\PaymentMethodPayment;
  *
  * @author Kristian Grossman-Madsen, Anneli Halld'n, Daniel Brolund for Svea Webpay
  */
-class CreateOrderBuilder extends OrderBuilder
-{
+class CreateOrderBuilder extends OrderBuilder {
 
 	/**
 	 * Use useInvoicePayment to initiate an invoice payment.
@@ -34,8 +33,7 @@ class CreateOrderBuilder extends OrderBuilder
 	 *
 	 * @return InvoicePayment
 	 */
-	public function useInvoicePayment()
-	{
+	public function useInvoicePayment() {
 		return new InvoicePayment($this);
 	}
 
@@ -52,8 +50,7 @@ class CreateOrderBuilder extends OrderBuilder
 	 * @param int $sendAutomaticGiroPaymentFormAsBool (optional boolean)
 	 * @return PaymentPlanPayment
 	 */
-	public function usePaymentPlanPayment($campaignCodeAsString, $sendAutomaticGiroPaymentFormAsBool = 0)
-	{
+	public function usePaymentPlanPayment($campaignCodeAsString, $sendAutomaticGiroPaymentFormAsBool = 0) {
 		$this->campaignCode = $campaignCodeAsString;
 		$this->sendAutomaticGiroPaymentForm = $sendAutomaticGiroPaymentFormAsBool;
 
@@ -71,8 +68,7 @@ class CreateOrderBuilder extends OrderBuilder
 	 * @param string $campaignCode
 	 * @return AccountCredit
 	 */
-	public function useAccountCredit($campaignCode)
-	{
+	public function useAccountCredit($campaignCode) {
 		$this->campaignCode = $campaignCode;
 
 		return new AccountCredit($this);
@@ -94,8 +90,7 @@ class CreateOrderBuilder extends OrderBuilder
 	 * @param string $paymentMethodAsConst i.e. Svea\WebPay\Constant\PaymentMethod::SEB_SE et al
 	 * @return PaymentMethodPayment
 	 */
-	public function usePaymentMethod($paymentMethodAsConst)
-	{
+	public function usePaymentMethod($paymentMethodAsConst) {
 		return new PaymentMethodPayment($this, $paymentMethodAsConst);
 	}
 
@@ -105,8 +100,7 @@ class CreateOrderBuilder extends OrderBuilder
 	 * Set additional attributes using CardPayment methods.
 	 * @return CardPayment
 	 */
-	public function usePayPageCardOnly()
-	{
+	public function usePayPageCardOnly() {
 		return new CardPayment($this);
 	}
 
@@ -117,8 +111,7 @@ class CreateOrderBuilder extends OrderBuilder
 	 * Set additional attributes using DirectPayment methods.
 	 * @return DirectPayment
 	 */
-	public function usePayPageDirectBankOnly()
-	{
+	public function usePayPageDirectBankOnly() {
 		return new DirectPayment($this);
 	}
 
@@ -128,8 +121,7 @@ class CreateOrderBuilder extends OrderBuilder
 	 * Set additional attributes using PayPagePayment methods.
 	 * @return PayPagePayment
 	 */
-	public function usePayPage()
-	{
+	public function usePayPage() {
 		$paypagepayment = new PayPagePayment($this);
 
 		return $paypagepayment;
@@ -138,8 +130,7 @@ class CreateOrderBuilder extends OrderBuilder
 	/**
 	 * @param \Svea\WebPay\Config\ConfigurationProvider $config
 	 */
-	public function __construct($config)
-	{
+	public function __construct($config) {
 		parent::__construct($config);
 	}
 
@@ -148,8 +139,7 @@ class CreateOrderBuilder extends OrderBuilder
 	 * @param type $func
 	 * @return $this
 	 */
-	public function run($func)
-	{
+	public function run($func) {
 		call_user_func($func, $this);
 
 		return $this;

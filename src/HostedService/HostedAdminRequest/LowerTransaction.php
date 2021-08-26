@@ -17,8 +17,7 @@ use Svea\WebPay\HostedService\HostedResponse\HostedAdminResponse\ConfirmTransact
  *
  * @author Kristian Grossman-Madsen
  */
-class LowerTransaction extends HostedRequest
-{
+class LowerTransaction extends HostedRequest {
 	/**
 	 * @var string $transactionId Required.
 	 */
@@ -40,8 +39,7 @@ class LowerTransaction extends HostedRequest
 	 * Option: $alsoDoRequest
 	 * @param ConfigurationProvider $config instance implementing Svea\WebPay\Config\ConfigurationProvider
 	 */
-	function __construct($config)
-	{
+	function __construct($config) {
 		$this->method = "loweramount";
 		parent::__construct($config);
 	}
@@ -55,8 +53,7 @@ class LowerTransaction extends HostedRequest
 	 * @return \Svea\WebPay\HostedService\HostedResponse\HostedAdminResponse\HostedAdminResponse
 	 * @override
 	 */
-	public function doRequest()
-	{
+	public function doRequest() {
 		$fields = $this->prepareRequest();
 
 		$fieldsString = "";
@@ -110,16 +107,14 @@ class LowerTransaction extends HostedRequest
 		return $returnResponse;
 	}
 
-	protected function parseResponse($message)
-	{
+	protected function parseResponse($message) {
 		$countryCode = $this->countryCode;
 		$config = $this->config;
 
 		return new LowerTransactionResponse($message, $countryCode, $config);
 	}
 
-	protected function validateRequestAttributes()
-	{
+	protected function validateRequestAttributes() {
 		$errors = [];
 		$errors = $this->validateTransactionId($this, $errors);
 		$errors = $this->validateAmountToLower($this, $errors);
@@ -127,8 +122,7 @@ class LowerTransaction extends HostedRequest
 		return $errors;
 	}
 
-	private function validateTransactionId($self, $errors)
-	{
+	private function validateTransactionId($self, $errors) {
 		if (isset($self->transactionId) == FALSE) {
 			$errors['missing value'] = "transactionId is required. Use function setTransactionId() with the SveaOrderId from the createOrder response.";
 		}
@@ -136,8 +130,7 @@ class LowerTransaction extends HostedRequest
 		return $errors;
 	}
 
-	private function validateAmountToLower($self, $errors)
-	{
+	private function validateAmountToLower($self, $errors) {
 		if (isset($self->amountToLower) == FALSE) {
 			$errors['missing value'] = "amountToLower is required. Use function setAmountToLower().";
 		}
@@ -145,8 +138,7 @@ class LowerTransaction extends HostedRequest
 		return $errors;
 	}
 
-	protected function createRequestXml()
-	{
+	protected function createRequestXml() {
 		$XMLWriter = new \XMLWriter();
 
 		$XMLWriter->openMemory();

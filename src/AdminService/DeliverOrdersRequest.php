@@ -15,8 +15,7 @@ use Svea\WebPay\Helper\Helper;
  *
  * @author Kristian Grossman-Madsen
  */
-class DeliverOrdersRequest extends AdminServiceRequest
-{
+class DeliverOrdersRequest extends AdminServiceRequest {
 	/**
 	 * @var DeliverOrderBuilder $orderBuilder
 	 */
@@ -25,8 +24,7 @@ class DeliverOrdersRequest extends AdminServiceRequest
 	/**
 	 * @param deliverOrderBuilder $deliverOrderBuilder
 	 */
-	public function __construct($deliverOrderBuilder)
-	{
+	public function __construct($deliverOrderBuilder) {
 		$this->action = "DeliverOrders";
 		$this->orderBuilder = $deliverOrderBuilder;
 	}
@@ -35,8 +33,7 @@ class DeliverOrdersRequest extends AdminServiceRequest
 	 * populate and return soap request contents using AdminSoap helper classes to get the correct data format
 	 * @return \Svea\WebPay\AdminService\AdminSoap\DeliverOrdersRequest
 	 */
-	public function prepareRequest()
-	{
+	public function prepareRequest() {
 		$this->validateRequest();
 
 		$soapRequest = new \Svea\WebPay\AdminService\AdminSoap\DeliverOrdersRequest(
@@ -57,8 +54,7 @@ class DeliverOrdersRequest extends AdminServiceRequest
 		return $soapRequest;
 	}
 
-	public function validate()
-	{
+	public function validate() {
 		$errors = [];
 		$errors = $this->validateDistributionType($errors);
 		$errors = $this->validateOrderId($errors);
@@ -68,17 +64,13 @@ class DeliverOrdersRequest extends AdminServiceRequest
 		return $errors;
 	}
 
-	private function validateDistributionType($errors)
-	{
+	private function validateDistributionType($errors) {
 		if (isset($this->orderBuilder->distributionType) == FALSE) {
 			$errors[] = ['missing value' => "distributionType is required."];
 		}
-		else
-		{
-			if(isset($this->orderBuilder->orderType) == TRUE && $this->orderBuilder->orderType == ConfigurationProvider::INVOICE_TYPE)
-			{
-				if(isset($this->orderBuilder->distributionType) == TRUE && $this->orderBuilder->distributionType == DistributionType::EINVOICEB2B && $this->orderBuilder->countryCode != "NO")
-				{
+		else {
+			if(isset($this->orderBuilder->orderType) == TRUE && $this->orderBuilder->orderType == ConfigurationProvider::INVOICE_TYPE) {
+				if(isset($this->orderBuilder->distributionType) == TRUE && $this->orderBuilder->distributionType == DistributionType::EINVOICEB2B && $this->orderBuilder->countryCode != "NO") {
 					$errors[] = ['incorrect value' => "distributionType EInvoiceB2B is only allowed for Norway."];
 				}
 			}
@@ -87,8 +79,7 @@ class DeliverOrdersRequest extends AdminServiceRequest
 		return $errors;
 	}
 
-	private function validateOrderId($errors)
-	{
+	private function validateOrderId($errors) {
 		if (isset($this->orderBuilder->orderId) == FALSE) {
 			$errors[] = ['missing value' => "orderId is required."];
 		}
@@ -96,8 +87,7 @@ class DeliverOrdersRequest extends AdminServiceRequest
 		return $errors;
 	}
 
-	private function validateOrderType($errors)
-	{
+	private function validateOrderType($errors) {
 		if (isset($this->orderBuilder->orderType) == FALSE) {
 			$errors[] = ['missing value' => "orderType is required."];
 		}
@@ -105,8 +95,7 @@ class DeliverOrdersRequest extends AdminServiceRequest
 		return $errors;
 	}
 
-	private function validateCountryCode($errors)
-	{
+	private function validateCountryCode($errors) {
 		if (isset($this->orderBuilder->countryCode) == FALSE) {
 			$errors[] = ['missing value' => "countryCode is required."];
 		}

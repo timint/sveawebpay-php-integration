@@ -7,15 +7,13 @@ namespace Svea\WebPay\AdminService\AdminServiceResponse;
  *
  * @author Kristian Grossman-Madsen, Fredrik Sundell
  */
-class CancelOrderRowsResponse extends AdminServiceResponse
-{
+class CancelOrderRowsResponse extends AdminServiceResponse {
 	/**
 	 * CancelOrderRowsResponse constructor.
 	 * @param $message
 	 * @param $logs
 	 */
-	function __construct($message, $logs)
-	{
+	function __construct($message, $logs) {
 		$this->formatObject($message, $logs);
 	}
 
@@ -24,8 +22,7 @@ class CancelOrderRowsResponse extends AdminServiceResponse
 	 * @param $message
 	 * @param $logs
 	 */
-	protected function formatObject($message, $logs)
-	{
+	protected function formatObject($message, $logs) {
 		parent::formatObject($message, $logs);
 
 		if ($this->accepted == 1) {

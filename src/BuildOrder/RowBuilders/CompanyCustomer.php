@@ -6,8 +6,7 @@ namespace Svea\WebPay\BuildOrder\RowBuilders;
  * Class CompanyCustomer, a customer information container for legal entities.
  * @author anne-hal, Kristian Grossman-Madsen
  */
-class CompanyCustomer
-{
+class CompanyCustomer {
 	/**
 	 * @var string $orgNumber
 	 */
@@ -96,8 +95,7 @@ class CompanyCustomer
 	 * @param string $companyIdNumberAsString
 	 * @return $this
 	 */
-	public function setNationalIdNumber($companyIdNumberAsString)
-	{
+	public function setNationalIdNumber($companyIdNumberAsString) {
 		$this->orgNumber = $companyIdNumberAsString;
 
 		return $this;
@@ -109,8 +107,7 @@ class CompanyCustomer
 	 * Required for NL and DE
 	 * @return $this
 	 */
-	public function setVatNumber($vatNumberAsString)
-	{
+	public function setVatNumber($vatNumberAsString) {
 		$this->companyVatNumber = $vatNumberAsString;
 
 		return $this;
@@ -121,8 +118,7 @@ class CompanyCustomer
 	 * @param type $emailAsString
 	 * @return $this
 	 */
-	public function setEmail($emailAsString)
-	{
+	public function setEmail($emailAsString) {
 		$this->email = $emailAsString;
 
 		return $this;
@@ -133,8 +129,7 @@ class CompanyCustomer
 	 * @param int $phoneNumberAsInt
 	 * @return $this
 	 */
-	public function setPhoneNumber($phoneNumberAsInt)
-	{
+	public function setPhoneNumber($phoneNumberAsInt) {
 		$this->phonenumber = $phoneNumberAsInt;
 
 		return $this;
@@ -145,8 +140,7 @@ class CompanyCustomer
 	 * @param type $ipAddressAsString
 	 * @return $this
 	 */
-	public function setIpAddress($ipAddressAsString)
-	{
+	public function setIpAddress($ipAddressAsString) {
 		$this->ipAddress = $ipAddressAsString;
 
 		return $this;
@@ -158,8 +152,7 @@ class CompanyCustomer
 	 * @param int $houseNumberAsInt , or omitted if setting streetAddress
 	 * @return $this
 	 */
-	public function setStreetAddress($streetAsString, $houseNumberAsInt = null)
-	{ // = null is poor man's overloading
+	public function setStreetAddress($streetAsString, $houseNumberAsInt = null) { // = null is poor man's overloading
 		// only one name given, assume streetName;
 		if ($houseNumberAsInt == null) {
 			$streetAddressAsString = $streetAsString;
@@ -178,8 +171,7 @@ class CompanyCustomer
 	 * @param type $coAddressAsString
 	 * @return $this
 	 */
-	public function setCoAddress($coAddressAsString)
-	{
+	public function setCoAddress($coAddressAsString) {
 		$this->coAddress = $coAddressAsString;
 
 		return $this;
@@ -190,8 +182,7 @@ class CompanyCustomer
 	 * @param type $zipCodeAsString
 	 * @return $this
 	 */
-	public function setZipCode($zipCodeAsString)
-	{
+	public function setZipCode($zipCodeAsString) {
 		$this->zipCode = $zipCodeAsString;
 
 		return $this;
@@ -202,8 +193,7 @@ class CompanyCustomer
 	 * @param type $cityAsString
 	 * @return $this
 	 */
-	public function setLocality($cityAsString)
-	{
+	public function setLocality($cityAsString) {
 		$this->locality = $cityAsString;
 
 		return $this;
@@ -214,8 +204,7 @@ class CompanyCustomer
 	 * @param string $nameAsString
 	 * @return $this
 	 */
-	public function setCompanyName($nameAsString)
-	{
+	public function setCompanyName($nameAsString) {
 		$this->companyName = $nameAsString;
 
 		return $this;
@@ -227,8 +216,7 @@ class CompanyCustomer
 	 * @param type $addressSelectorAsString
 	 * @return $this
 	 */
-	public function setAddressSelector($addressSelectorAsString)
-	{
+	public function setAddressSelector($addressSelectorAsString) {
 		$this->addressSelector = $addressSelectorAsString;
 
 		return $this;
@@ -239,8 +227,7 @@ class CompanyCustomer
 	 * @param type $publicKeyAsString
 	 * @return $this
 	 */
-	public function setPublicKey($publicKeyAsString)
-	{
+	public function setPublicKey($publicKeyAsString) {
 		$this->publicKey = $publicKeyAsString;
 
 		return $this;

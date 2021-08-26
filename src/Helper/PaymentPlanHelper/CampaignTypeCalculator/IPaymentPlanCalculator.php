@@ -4,8 +4,7 @@
 namespace Svea\WebPay\Helper\PaymentPlanHelper\CampaignTypeCalculator;
 
 
-interface IPaymentPlanCalculator
-{
+interface IPaymentPlanCalculator {
 	static public function calculateTotalAmountToPay($totalPrice, $campaign, $decimals = 0);
 	static public function calculateMonthlyAmountToPay($totalPrice, $campaign, $decimals = 0);
 	static public function calculateEffectiveInterestRate($totalPrice, $campaign, $decimals = 0);

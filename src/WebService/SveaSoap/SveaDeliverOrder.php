@@ -5,8 +5,7 @@ namespace Svea\WebPay\WebService\SveaSoap;
 /**
  * Order object
  */
-class SveaDeliverOrder
-{
+class SveaDeliverOrder {
 	public $Auth;
 	public $DeliverOrderInformation;
 }

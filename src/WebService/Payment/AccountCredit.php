@@ -7,17 +7,14 @@ namespace Svea\WebPay\WebService\Payment;
 use Svea\WebPay\WebService\Helper\WebServiceRowFormatter;
 use Svea\WebPay\WebService\SveaSoap\SveaCreateAccountCreditOrderInformation;
 
-class AccountCredit extends WebServicePayment
-{
+class AccountCredit extends WebServicePayment {
 	public $orderType = 'AccountCredit';
 
-	public function __construct($order)
-	{
+	public function __construct($order) {
 		parent::__construct($order);
 	}
 
-	public function setOrderType($orderInformation)
-	{
+	public function setOrderType($orderInformation) {
 		$orderInformation->AddressSelector = isset($this->order->customerIdentity->addressSelector) ? $this->order->customerIdentity->addressSelector : "";
 		$orderInformation->OrderType = $this->orderType;
 
@@ -29,8 +26,7 @@ class AccountCredit extends WebServicePayment
 	 * @param type $rows
 	 * @return \SveaCreateOrderInformation
 	 */
-	protected function formatOrderInformationWithOrderRows($rows)
-	{
+	protected function formatOrderInformationWithOrderRows($rows) {
 		$orderInformation = new SveaCreateAccountCreditOrderInformation(
 			(isset($this->order->campaignCode) ? $this->order->campaignCode : "")
 		);

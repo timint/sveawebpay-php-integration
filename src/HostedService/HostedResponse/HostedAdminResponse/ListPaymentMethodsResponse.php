@@ -14,8 +14,7 @@ use Svea\WebPay\HostedService\Helper\InvalidTypeException;
  *
  * @author Kristian Grossman-Madsen for Svea Svea\WebPay\WebPay
  */
-class ListPaymentMethodsResponse extends HostedAdminResponse
-{
+class ListPaymentMethodsResponse extends HostedAdminResponse {
 	/**
 	 * string[] $paymentmethods  array containing available paymentmethods for this merchantid, @see PaymentMethod
 	 */
@@ -32,8 +31,7 @@ class ListPaymentMethodsResponse extends HostedAdminResponse
 	 * @param string $countryCode
 	 * @param \Svea\WebPay\Config\SveaConfigurationProvider $config
 	 */
-	function __construct($message, $countryCode, $config)
-	{
+	function __construct($message, $countryCode, $config) {
 		$this->config = $config;
 		$this->countryCode = $countryCode;
 		parent::__construct($message, $countryCode, $config);
@@ -45,8 +43,7 @@ class ListPaymentMethodsResponse extends HostedAdminResponse
 	 *
 	 * @param string $hostedAdminResponseXML hostedAdminResponse as xml
 	 */
-	protected function formatXml($hostedAdminResponseXML)
-	{
+	protected function formatXml($hostedAdminResponseXML) {
 		$hostedAdminResponse = new SimpleXMLElement($hostedAdminResponseXML);
 
 		if ((string)$hostedAdminResponse->statuscode == '0') {

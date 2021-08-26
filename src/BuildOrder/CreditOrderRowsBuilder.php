@@ -52,8 +52,7 @@ use Svea\WebPay\HostedService\HostedAdminRequest\CreditTransaction;
  *
  * @author Kristian Grossman-Madsen for Svea Svea\WebPay\WebPay
  */
-class CreditOrderRowsBuilder extends CheckoutAdminOrderBuilder
-{
+class CreditOrderRowsBuilder extends CheckoutAdminOrderBuilder {
 	/**
 	 * @var ConfigurationProvider $conf
 	 */
@@ -109,8 +108,7 @@ class CreditOrderRowsBuilder extends CheckoutAdminOrderBuilder
 	 * CreditOrderRowsBuilder constructor.
 	 * @param $config
 	 */
-	public function __construct($config)
-	{
+	public function __construct($config) {
 		$this->conf = $config;
 		$this->creditOrderRows = [];
 		$this->rowsToCredit = [];
@@ -126,8 +124,7 @@ class CreditOrderRowsBuilder extends CheckoutAdminOrderBuilder
 	 * @param string $countryCodeAsString
 	 * @return $this
 	 */
-	public function setCountryCode($countryCodeAsString)
-	{
+	public function setCountryCode($countryCodeAsString) {
 		$this->countryCode = $countryCodeAsString;
 		return $this;
 	}
@@ -139,8 +136,7 @@ class CreditOrderRowsBuilder extends CheckoutAdminOrderBuilder
 	 * @param string $invoiceIdAsString
 	 * @return $this
 	 */
-	public function setInvoiceId($invoiceIdAsString)
-	{
+	public function setInvoiceId($invoiceIdAsString) {
 		$this->invoiceId = $invoiceIdAsString;
 		return $this;
 	}
@@ -149,8 +145,7 @@ class CreditOrderRowsBuilder extends CheckoutAdminOrderBuilder
 	 * @param mixed $amountIncVat
 	 * @return $this
 	 */
-	public function setAmountIncVat($amountIncVat)
-	{
+	public function setAmountIncVat($amountIncVat) {
 		$this->amountIncVat = $amountIncVat;
 		return $this;
 	}
@@ -162,8 +157,7 @@ class CreditOrderRowsBuilder extends CheckoutAdminOrderBuilder
 	 * @param string $contractNumberAsString
 	 * @return $this
 	 */
-	public function setContractNumber($contractNumberAsString)
-	{
+	public function setContractNumber($contractNumberAsString) {
 		$this->contractNumber = $contractNumberAsString;
 		return $this;
 	}
@@ -174,8 +168,7 @@ class CreditOrderRowsBuilder extends CheckoutAdminOrderBuilder
 	 * @param string $orderIdAsString
 	 * @return $this
 	 */
-	public function setOrderId($orderIdAsString)
-	{
+	public function setOrderId($orderIdAsString) {
 		$this->orderId = $orderIdAsString;
 		return $this;
 	}
@@ -188,8 +181,7 @@ class CreditOrderRowsBuilder extends CheckoutAdminOrderBuilder
 	 * @param string $orderIdAsString
 	 * @return $this
 	 */
-	public function setTransactionId($orderIdAsString)
-	{
+	public function setTransactionId($orderIdAsString) {
 		return $this->setOrderId($orderIdAsString);
 	}
 
@@ -200,8 +192,7 @@ class CreditOrderRowsBuilder extends CheckoutAdminOrderBuilder
 	 *				  i.e. Svea\WebPay\Constant\DistributionType::POST|Svea\WebPay\Constant\DistributionType::EMAIL
 	 * @return $this
 	 */
-	public function setInvoiceDistributionType($distributionTypeAsConst)
-	{
+	public function setInvoiceDistributionType($distributionTypeAsConst) {
 		$this->distributionType = $distributionTypeAsConst;
 		return $this;
 	}
@@ -215,8 +206,7 @@ class CreditOrderRowsBuilder extends CheckoutAdminOrderBuilder
 	 * @param string $rowNumber
 	 * @return $this
 	 */
-	public function setRowToCredit($rowNumber)
-	{
+	public function setRowToCredit($rowNumber) {
 		$this->rowsToCredit[] = $rowNumber;
 		return $this;
 	}
@@ -227,8 +217,7 @@ class CreditOrderRowsBuilder extends CheckoutAdminOrderBuilder
 	 * @param int[] $rowNumbers
 	 * @return $this
 	 */
-	public function setRowsToCredit($rowNumbers)
-	{
+	public function setRowsToCredit($rowNumbers) {
 		$this->rowsToCredit = array_merge($this->rowsToCredit, $rowNumbers);
 		return $this;
 	}
@@ -241,8 +230,7 @@ class CreditOrderRowsBuilder extends CheckoutAdminOrderBuilder
 	 * @param OrderRow $row
 	 * @return $this
 	 */
-	public function addCreditOrderRow($row)
-	{
+	public function addCreditOrderRow($row) {
 		$this->creditOrderRows[] = $row;
 		return $this;
 	}
@@ -253,8 +241,7 @@ class CreditOrderRowsBuilder extends CheckoutAdminOrderBuilder
 	 * @param OrderRow[] $rows
 	 * @return $this
 	 */
-	public function addCreditOrderRows($rows)
-	{
+	public function addCreditOrderRows($rows) {
 		$this->creditOrderRows = array_merge($this->creditOrderRows, $rows);
 		return $this;
 	}
@@ -278,8 +265,7 @@ class CreditOrderRowsBuilder extends CheckoutAdminOrderBuilder
 	 * @param \Svea\WebPay\BuildOrder\RowBuilders\NumberedOrderRow $numberedOrderRow instance of NumberedOrderRow
 	 * @return $this
 	 */
-	public function addNumberedOrderRow($numberedOrderRow)
-	{
+	public function addNumberedOrderRow($numberedOrderRow) {
 		$this->numberedOrderRows[] = $numberedOrderRow;
 		return $this;
 	}
@@ -290,8 +276,7 @@ class CreditOrderRowsBuilder extends CheckoutAdminOrderBuilder
 	 * @param \Svea\WebPay\BuildOrder\RowBuilders\NumberedOrderRow[] $numberedOrderRows array of NumberedOrderRow
 	 * @return $this
 	 */
-	public function addNumberedOrderRows($numberedOrderRows)
-	{
+	public function addNumberedOrderRows($numberedOrderRows) {
 		$this->numberedOrderRows = array_merge($this->numberedOrderRows, $numberedOrderRows);
 		return $this;
 	}
@@ -300,8 +285,7 @@ class CreditOrderRowsBuilder extends CheckoutAdminOrderBuilder
 	 * Use creditInvoiceOrderRows() to credit rows to an Invoice order using AdminServiceRequest CreditOrderRows request
 	 * @return CreditInvoiceRowsRequest
 	 */
-	public function creditInvoiceOrderRows()
-	{
+	public function creditInvoiceOrderRows() {
 		$this->orderType = ConfigurationProvider::INVOICE_TYPE;
 
 		// validation is done in CreditInvoiceRowsRequest
@@ -313,8 +297,7 @@ class CreditOrderRowsBuilder extends CheckoutAdminOrderBuilder
 	 * Use CreditPaymentPlanOrderRows() to cancel rows to a delivered Payment plan using AdminServiceRequest CreditOrderRows request
 	 * @return CreditPaymentPlanRowsRequest
 	 */
-	public function creditPaymentPlanOrderRows()
-	{
+	public function creditPaymentPlanOrderRows() {
 		$this->orderType = ConfigurationProvider::PAYMENTPLAN_TYPE;
 
 		//Credit Paymentplan request is really cancelPaymentPlanRows but wrapped as creditPaymentPlanRows
@@ -325,8 +308,7 @@ class CreditOrderRowsBuilder extends CheckoutAdminOrderBuilder
 	 * Use creditAccountCreditOrderRows() to cancel rows to a delivered Account Credit using AdminServiceRequest CreditOrderRows request
 	 * @return CreditAccountCreditRowsRequest
 	 */
-	public function creditAccountCreditOrderRows()
-	{
+	public function creditAccountCreditOrderRows() {
 		$this->orderType = ConfigurationProvider::ACCOUNTCREDIT_TYPE;
 
 		return new CreditAccountCreditRowsRequest($this);
@@ -338,8 +320,7 @@ class CreditOrderRowsBuilder extends CheckoutAdminOrderBuilder
 	 * @return CreditTransaction
 	 * @throws ValidationException  if addNumberedOrderRows() has not been used.
 	 */
-	public function creditCardOrderRows()
-	{
+	public function creditCardOrderRows() {
 		$this->orderType = ConfigurationProvider::HOSTED_ADMIN_TYPE;
 
 		// we need to validate card on this level before translating attributes to those relevant to hosted admin functions
@@ -360,8 +341,7 @@ class CreditOrderRowsBuilder extends CheckoutAdminOrderBuilder
 	 * @throws ValidationException
 	 * @throws \Exception
 	 */
-	public function creditCheckoutOrderRows()
-	{
+	public function creditCheckoutOrderRows() {
 		return new CreditOrderRowsService($this);
 	}
 
@@ -371,8 +351,7 @@ class CreditOrderRowsBuilder extends CheckoutAdminOrderBuilder
 	 * @throws ValidationException
 	 * @throws \Exception
 	 */
-	public function creditCheckoutOrderWithNewOrderRow()
-	{
+	public function creditCheckoutOrderWithNewOrderRow() {
 		return new CreditOrderRowsService($this, true);
 	}
 
@@ -382,16 +361,14 @@ class CreditOrderRowsBuilder extends CheckoutAdminOrderBuilder
 	 * @return CreditTransaction
 	 * @throws \Svea\WebPay\BuildOrder\Validator\ValidationException  if addNumberedOrderRows() has not been used.
 	 */
-	public function creditDirectBankOrderRows()
-	{
+	public function creditDirectBankOrderRows() {
 		return $this->creditCardOrderRows();
 	}
 
 	/**
 	 * @internal
 	 */
-	private function validateCreditCardOrderRows()
-	{
+	private function validateCreditCardOrderRows() {
 		if (!isset($this->orderId)) {
 			$exceptionString = "orderId is required for creditCardOrderRows(). Use method setOrderId().";
 			throw new ValidationException($exceptionString);
@@ -443,8 +420,7 @@ class CreditOrderRowsBuilder extends CheckoutAdminOrderBuilder
 	 * @param $creditOrderRows
 	 * @return float
 	 */
-	private function calculateSumOfRowAmounts($rowIndexes, $numberedRows, $creditOrderRows)
-	{
+	private function calculateSumOfRowAmounts($rowIndexes, $numberedRows, $creditOrderRows) {
 		$sum = 0.0;
 		$unique_indexes = array_unique($rowIndexes);
 		foreach ($numberedRows as $numberedRow) {

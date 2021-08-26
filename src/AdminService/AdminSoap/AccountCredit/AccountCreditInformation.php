@@ -2,8 +2,7 @@
 
 namespace Svea\WebPay\AdminService\AdminSoap\AccountCredit;
 
-class AccountCreditInformation
-{
+class AccountCreditInformation {
 	public $clientAccountCreditId;
 	public $clientId;
 
@@ -12,8 +11,7 @@ class AccountCreditInformation
 	 * @param $clientAccountCreditId
 	 * @param $clientId
 	 */
-	public function __construct($clientAccountCreditId = null, $clientId = null)
-	{
+	public function __construct($clientAccountCreditId = null, $clientId = null) {
 		$this->clientAccountCreditId = $clientAccountCreditId;
 		$this->clientId = $clientId;
 	}
@@ -21,8 +19,7 @@ class AccountCreditInformation
 	/**
 	 * @return mixed
 	 */
-	public function getClientId()
-	{
+	public function getClientId() {
 		return $this->clientId;
 	}
 
@@ -30,8 +27,7 @@ class AccountCreditInformation
 	 * @param mixed $clientId
 	 * @return $this
 	 */
-	public function setClientId($clientId)
-	{
+	public function setClientId($clientId) {
 		$this->clientId = $clientId;
 
 		return $this;
@@ -40,8 +36,7 @@ class AccountCreditInformation
 	/**
 	 * @return mixed
 	 */
-	public function getClientAccountCreditId()
-	{
+	public function getClientAccountCreditId() {
 		return $this->clientAccountCreditId;
 	}
 
@@ -49,8 +44,7 @@ class AccountCreditInformation
 	 * @param mixed $clientAccountCreditId
 	 * @return $this
 	 */
-	public function setClientAccountCreditId($clientAccountCreditId)
-	{
+	public function setClientAccountCreditId($clientAccountCreditId) {
 		$this->clientAccountCreditId = $clientAccountCreditId;
 
 		return $this;

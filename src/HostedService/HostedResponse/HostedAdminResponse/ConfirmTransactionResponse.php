@@ -11,8 +11,7 @@ use Svea\WebPay\Config\SveaConfigurationProvider;
  *
  * @author Kristian Grossman-Madsen for Svea Svea\WebPay\WebPay
  */
-class ConfirmTransactionResponse extends HostedAdminResponse
-{
+class ConfirmTransactionResponse extends HostedAdminResponse {
 	/**
 	 * @var string $transactionId transaction id that uniquely identifies the order at Svea
 	 */
@@ -35,8 +34,7 @@ class ConfirmTransactionResponse extends HostedAdminResponse
 	 * @param string $countryCode
 	 * @param SveaConfigurationProvider $config
 	 */
-	function __construct($message, $countryCode, $config)
-	{
+	function __construct($message, $countryCode, $config) {
 		parent::__construct($message, $countryCode, $config);
 	}
 
@@ -46,8 +44,7 @@ class ConfirmTransactionResponse extends HostedAdminResponse
 	 *
 	 * @param string $hostedAdminResponseXML hostedAdminResponse as xml
 	 */
-	protected function formatXml($hostedAdminResponseXML)
-	{
+	protected function formatXml($hostedAdminResponseXML) {
 		$hostedAdminResponse = new SimpleXMLElement($hostedAdminResponseXML);
 
 		if ((string)$hostedAdminResponse->statuscode == '0') {

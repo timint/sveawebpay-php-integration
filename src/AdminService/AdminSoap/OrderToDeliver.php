@@ -4,8 +4,7 @@ namespace Svea\WebPay\AdminService\AdminSoap;
 
 use SoapVar;
 
-class OrderToDeliver
-{
+class OrderToDeliver {
 	public $ClientId;
 	public $OrderType;
 	public $SveaOrderId;
@@ -16,8 +15,7 @@ class OrderToDeliver
 	 * @param string $orderType -- one of [Invoice|PaymentPlan]
 	 * @param long $sveaOrderId
 	 */
-	function __construct($clientId, $orderType, $sveaOrderId)
-	{
+	function __construct($clientId, $orderType, $sveaOrderId) {
 		$this->ClientId = new SoapVar($clientId, XSD_LONG,
 			"-", "--", "ClientId", "http://schemas.datacontract.org/2004/07/DataObjects.Admin.Service");
 		$this->OrderType = new SoapVar($orderType, XSD_STRING,

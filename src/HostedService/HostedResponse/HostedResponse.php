@@ -5,8 +5,7 @@ namespace Svea\WebPay\HostedService\HostedResponse;
 /**
  * @author anne-hal, Kristian Grossman-Madsen for Svea Svea\WebPay\WebPay
  */
-class HostedResponse
-{
+class HostedResponse {
 
 	/**
 	 * @var int $accepted Set to 1 iff transaction was accepted by Svea. A value of 0 may indicate that the request failed, see $resultcode.
@@ -33,8 +32,7 @@ class HostedResponse
 	 * @param string $secret
 	 * @return boolean  true iff the mac can be validated
 	 */
-	public function validateMac($messageEncoded, $mac, $secret)
-	{
+	public function validateMac($messageEncoded, $mac, $secret) {
 
 		$macKey = hash("sha512", $messageEncoded . $secret);
 
@@ -45,8 +43,7 @@ class HostedResponse
 		return FALSE;
 	}
 
-	protected function setErrorParams($resultcode)
-	{
+	protected function setErrorParams($resultcode) {
 		switch ($resultcode) {
 
 			case '1':

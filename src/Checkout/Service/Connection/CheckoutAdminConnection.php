@@ -7,8 +7,7 @@ use Svea\Checkout\Transport\Connector;
 use Svea\WebPay\Checkout\Response\CheckoutAdminResponseHelper;
 use Svea\WebPay\Config\ConfigurationProvider;
 
-class CheckoutAdminConnection
-{
+class CheckoutAdminConnection {
 	/**
 	 * @var \Svea\WebPay\Config\ConfigurationProvider
 	 */
@@ -33,8 +32,7 @@ class CheckoutAdminConnection
 	 * CheckoutServiceConnection constructor.
 	 * @param $config
 	 */
-	public function __construct(ConfigurationProvider $config, $countryCode = NULL)
-	{
+	public function __construct(ConfigurationProvider $config, $countryCode = NULL) {
 		$this->config = $config;
 		$this->countryCode = $countryCode;
 
@@ -42,64 +40,52 @@ class CheckoutAdminConnection
 		$this->setClient();
 	}
 
-	public function getOrder($requestData)
-	{
+	public function getOrder($requestData) {
 		return CheckoutAdminResponseHelper::processResponse($this->checkoutClient->getOrder($requestData));
 	}
 
-	public function deliverOrder($requestData)
-	{
+	public function deliverOrder($requestData) {
 		return $this->checkoutClient->deliverOrder($requestData);
 	}
 
-	public function cancelOrder($requestData)
-	{
+	public function cancelOrder($requestData) {
 		return $this->checkoutClient->cancelOrder($requestData);
 	}
 
-	public function cancelOrderAmount($requestData)
-	{
+	public function cancelOrderAmount($requestData) {
 		return $this->checkoutClient->cancelOrderAmount($requestData);
 	}
 
-	public function cancelOrderRow($requestData)
-	{
+	public function cancelOrderRow($requestData) {
 		return $this->checkoutClient->cancelOrderRow($requestData);
 	}
 
 	/* Credit */
-	public function creditOrderRows($requestData)
-	{
+	public function creditOrderRows($requestData) {
 		return $this->checkoutClient->creditOrderRows($requestData);
 	}
 
-	public function creditNewOrderRow($requestData)
-	{
+	public function creditNewOrderRow($requestData) {
 		return $this->checkoutClient->creditNewOrderRow($requestData);
 	}
 
-	public function creditOrderAmount($requestData)
-	{
+	public function creditOrderAmount($requestData) {
 		return $this->checkoutClient->creditOrderAmount($requestData);
 	}
 
-	public function addOrderRow($requestData)
-	{
+	public function addOrderRow($requestData) {
 		return $this->checkoutClient->addOrderRow($requestData);
 	}
 
-	public function updateOrderRow($requestData)
-	{
+	public function updateOrderRow($requestData) {
 		return $this->checkoutClient->updateOrderRow($requestData);
 	}
 
-	public function getTask($requestData)
-	{
+	public function getTask($requestData) {
 		return $this->checkoutClient->getTask($requestData);
 	}
 
-	private function setConnector()
-	{
+	private function setConnector() {
 		$this->connector = Connector::init(
 			$this->config->getCheckoutMerchantId($this->countryCode),
 			$this->config->getCheckoutSecret($this->countryCode),
@@ -107,8 +93,7 @@ class CheckoutAdminConnection
 		);
 	}
 
-	private function setClient()
-	{
+	private function setClient() {
 		$this->checkoutClient = new CheckoutAdminClient($this->connector);
 	}
 }

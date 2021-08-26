@@ -11,8 +11,7 @@ use Svea\WebPay\Checkout\Response\CheckoutResponseHelper;
  * Class CheckoutServiceConnection
  * @package Svea\Svea\WebPay\WebPay\Checkout\Service\Connection
  */
-class CheckoutServiceConnection implements ServiceConnection
-{
+class CheckoutServiceConnection implements ServiceConnection {
 	/**
 	 * @var \Svea\WebPay\Config\ConfigurationProvider
 	 */
@@ -38,8 +37,7 @@ class CheckoutServiceConnection implements ServiceConnection
 	 * @param		$config
 	 * @param string $countryCode
 	 */
-	public function __construct(ConfigurationProvider $config, $countryCode)
-	{
+	public function __construct(ConfigurationProvider $config, $countryCode) {
 		$this->config	  = $config;
 		$this->countryCode = $countryCode;
 
@@ -48,8 +46,7 @@ class CheckoutServiceConnection implements ServiceConnection
 	}
 
 
-	private function setConnector()
-	{
+	private function setConnector() {
 		$this->connector = Connector::init(
 			$this->config->getCheckoutMerchantId(strtolower($this->countryCode)),
 			$this->config->getCheckoutSecret(strtolower($this->countryCode)),
@@ -57,8 +54,7 @@ class CheckoutServiceConnection implements ServiceConnection
 		);
 	}
 
-	private function setClient()
-	{
+	private function setClient() {
 		$this->checkoutClient = new CheckoutClient($this->connector);
 	}
 
@@ -66,8 +62,7 @@ class CheckoutServiceConnection implements ServiceConnection
 	 * @param mixed $requestData
 	 * @return mixed
 	 */
-	public function create($requestData)
-	{
+	public function create($requestData) {
 		return CheckoutResponseHelper::processData($this->checkoutClient->create($requestData));
 	}
 
@@ -75,8 +70,7 @@ class CheckoutServiceConnection implements ServiceConnection
 	 * @param mixed $requestData
 	 * @return mixed
 	 */
-	public function get($requestData)
-	{
+	public function get($requestData) {
 		return CheckoutResponseHelper::processData($this->checkoutClient->get($requestData));
 	}
 
@@ -84,8 +78,7 @@ class CheckoutServiceConnection implements ServiceConnection
 	 * @param mixed $requestData
 	 * @return mixed
 	 */
-	public function update($requestData)
-	{
+	public function update($requestData) {
 		$data = $this->checkoutClient->update($requestData);
 
 		return CheckoutResponseHelper::processData($data);
@@ -95,8 +88,7 @@ class CheckoutServiceConnection implements ServiceConnection
 	 * @param mixed $requestData
 	 * @return mixed
 	 */
-	public function getAvailablePartPaymentCampaigns($requestData)
-	{
+	public function getAvailablePartPaymentCampaigns($requestData) {
 		return CheckoutResponseHelper::processData($this->checkoutClient->getAvailablePartPaymentCampaigns($requestData));
 	}
 }

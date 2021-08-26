@@ -6,26 +6,20 @@ namespace Svea\WebPay\Checkout\Validation;
  * Class IdentityFlagValidator
  * @package Svea\Svea\WebPay\WebPay\Checkout\Validation
  */
-class IdentityFlagValidator
-{
-	public function validate($flags, $errors)
-	{
+class IdentityFlagValidator {
+	public function validate($flags, $errors) {
 		$reflection = new \ReflectionClass('Svea\WebPay\Checkout\Model\IdentityFlags');
 		$consts = $reflection->getConstants();
 
-		foreach($flags as $flag)
-		{
+		foreach($flags as $flag) {
 			$valid = false;
-			foreach($consts as $const)
-			{
-				if($const == $flag)
-				{
+			foreach($consts as $const) {
+				if($const == $flag) {
 					$valid = true;
 					break;
 				}
 			}
-			if($valid == false)
-			{
+			if($valid == false) {
 				$errors['NonValidIdentityFlag'] = $flag . " is not a valid identity flag.";
 			}
 		}

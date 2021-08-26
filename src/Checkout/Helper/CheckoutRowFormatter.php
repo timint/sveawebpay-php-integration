@@ -13,16 +13,14 @@ use Svea\WebPay\WebService\SveaSoap\SveaOrderRow;
  * Class CheckoutRowFormatter
  * @package Svea\Svea\WebPay\WebPay\Checkout\Helper
  */
-class CheckoutRowFormatter extends WebServiceRowFormatter
-{
+class CheckoutRowFormatter extends WebServiceRowFormatter {
 	/**
 	 * Go through list of passed Order Rows and
 	 * call appropriate format methods.
 	 *
 	 * @return array
 	 */
-	public function formatRows()
-	{
+	public function formatRows() {
 		$this->newRows = [];
 
 		$this->calculateTotals();
@@ -64,8 +62,7 @@ class CheckoutRowFormatter extends WebServiceRowFormatter
 	 * Format OrderRow
 	 * @param $row
 	 */
-	protected function formatOrderRows($row)
-	{
+	protected function formatOrderRows($row) {
 		$tempRow = new SveaOrderRow();	 // new empty object
 
 		if (isset($row->name)) {
@@ -103,8 +100,7 @@ class CheckoutRowFormatter extends WebServiceRowFormatter
 		$this->newRows[] = $tempRow;
 	}
 
-	private function formatValues($row)
-	{
+	private function formatValues($row) {
 		if (isset($row->PricePerUnit)) {
 			$row->PricePerUnit = Helper::bround($row->PricePerUnit, 2) * 100;
 		}
@@ -119,8 +115,7 @@ class CheckoutRowFormatter extends WebServiceRowFormatter
 		}
 	}
 
-	private function handleOtherOrderRow($row)
-	{
+	private function handleOtherOrderRow($row) {
 		$type = get_class($row);
 		throw new \Exception("This functionality currently does not support this Order type ($type)");
 	}
