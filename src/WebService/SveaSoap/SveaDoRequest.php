@@ -36,7 +36,7 @@ class SveaDoRequest
     {
         $headers = new \SoapHeader('http://www.w3.org/2005/08/addressing', 'To', str_replace("/SveaWebPay.asmx?WSDL", "",$this->svea_server) . "/webpay/" . $method);
         $this->client->__setSoapHeaders($headers);
-        $params = (array)$order;
+        $params = json_decode(json_encode($order), true);
         if($logging == true)
         {
             $timestampStart = time();
