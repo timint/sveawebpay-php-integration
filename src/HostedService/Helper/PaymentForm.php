@@ -53,13 +53,13 @@ class PaymentForm {
 	 * Set complete html-form as string
 	 */
 	public function setForm() {
-		$formString = "<form name='paymentForm' id='paymentForm' method='post' action='" . $this->endPointUrl . "'>";
-		$formString .= "<input type='hidden' name='merchantid' value='{$this->merchantid}' />";
-		$formString .= "<input type='hidden' name='message' value='{$this->xmlMessageBase64}' />";
-		$formString .= "<input type='hidden' name='mac' value='{$this->mac}' />";
-		$formString .= "<noscript><p>" . $this->noScriptMessage . "</p></noscript>";
-		$formString .= "<input type='submit' name='submit' value='" . $this->submitMessage . "' />";
-		$formString .= "</form>";
+		$formString = '<form name="paymentForm" id="paymentForm" method="post" action="' . htmlspecialchars($this->endPointUrl) . '">' . PHP_EOL
+					. '  <input type="hidden" name="merchantid" value="' . htmlspecialchars($this->merchantid) . '" />' . PHP_EOL
+					. '  <input type="hidden" name="message" value="'. htmlspecialchars($this->xmlMessageBase64) .'" />' . PHP_EOL
+					. '  <input type="hidden" name="mac" value="'. htmlspecialchars($this->mac) .'" />' . PHP_EOL
+					. '  <noscript><p>' . $this->noScriptMessage . '</p></noscript>' . PHP_EOL
+					. '  <input type="submit" name="submit" value="' . htmlspecialchars($this->submitMessage) . '" />' . PHP_EOL
+					. '</form>';
 
 		$this->completeHtmlFormWithSubmitButton = $formString;
 	}
@@ -68,13 +68,13 @@ class PaymentForm {
 	 * Set form elements as Array
 	 */
 	public function setHtmlFields() {
-		$this->htmlFormFieldsAsArray['form_start_tag'] = "<form name='paymentForm' id='paymentForm' method='post' action='" . $this->endPointUrl . "'>";
-		$this->htmlFormFieldsAsArray['input_merchantId'] = "<input type='hidden' name='merchantid' value='{$this->merchantid}' />";
-		$this->htmlFormFieldsAsArray['input_message'] = "<input type='hidden' name='message' value='{$this->xmlMessageBase64}' />";
-		$this->htmlFormFieldsAsArray['input_mac'] = "<input type='hidden' name='mac' value='{$this->mac}' />";
-		$this->htmlFormFieldsAsArray['noscript_p_tag'] = "<noscript><p>" . $this->noScriptMessage . "</p></noscript>";
-		$this->htmlFormFieldsAsArray['input_submit'] = "<input type='submit' name='submit' value='" . $this->submitMessage . "' />";
-		$this->htmlFormFieldsAsArray['form_end_tag'] = "</form>";
+		$this->htmlFormFieldsAsArray['form_start_tag']   = '<form name="paymentForm" id="paymentForm" method="post" action="' . htmlspecialchars($this->endPointUrl) . '">';
+		$this->htmlFormFieldsAsArray['input_merchantId'] = '<input type="hidden" name="merchantid" value="' . htmlspecialchars($this->merchantid) . '" />';
+		$this->htmlFormFieldsAsArray['input_message']    = '<input type="hidden" name="message" value="'. htmlspecialchars($this->xmlMessageBase64) .'" />';
+		$this->htmlFormFieldsAsArray['input_mac']        = '<input type="hidden" name="mac" value="'. htmlspecialchars($this->mac) .'" />';
+		$this->htmlFormFieldsAsArray['noscript_p_tag']   = '<noscript><p>' . $this->noScriptMessage . '</p></noscript>';
+		$this->htmlFormFieldsAsArray['input_submit']     = '<input type="submit" name="submit" value="' . htmlspecialchars($this->submitMessage) . '" />';
+		$this->htmlFormFieldsAsArray['form_end_tag']     = '</form>';
 	}
 
 	public function setRawFields() {
