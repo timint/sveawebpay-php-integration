@@ -28,6 +28,7 @@ class CreateOrderBuilder extends OrderBuilder {
 
 	public $orderType;
 	public $campaignCode;
+	public $sendAutomaticGiroPaymentForm;
 
 	/**
 	 * Use useInvoicePayment to initiate an invoice payment.
