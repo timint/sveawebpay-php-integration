@@ -26,6 +26,8 @@ use Svea\WebPay\HostedService\Payment\PaymentMethodPayment;
  */
 class CreateOrderBuilder extends OrderBuilder {
 
+	public $orderType;
+
 	/**
 	 * Use useInvoicePayment to initiate an invoice payment.
 	 *
