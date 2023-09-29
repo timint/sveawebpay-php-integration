@@ -47,7 +47,7 @@ class PaymentPlanParamsResponse extends WebServiceResponse {
 		// was request accepted?
 		$this->accepted = $response->GetPaymentPlanParamsEuResult->Accepted;
 
-		if(isset($logs)) {
+		if (isset($logs)) {
 			$this->logs = $logs;
 		}
 

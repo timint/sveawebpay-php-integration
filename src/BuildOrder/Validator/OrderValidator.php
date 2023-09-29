@@ -22,27 +22,27 @@ abstract class OrderValidator {
 	public function validatePeppolId($order, $errors) {
 		if (isset($order->peppolId)) {
 
-			if($this->isCompany == false) {
+			if ($this->isCompany == false) {
 				$errors['incorrect value'] = "CustomerType must be a company when using PeppolId.";
 			}
 
-			if(is_numeric(substr($order->peppolId,0,4)) == false ) {
+			if (is_numeric(substr($order->peppolId,0,4)) == false ) {
 				$errors['incorrect value'] = "First 4 characters of PeppolId must be numeric.";
 			}
 
-			if(ctype_alnum(substr($order->peppolId,6)) == false) {
+			if (ctype_alnum(substr($order->peppolId,6)) == false) {
 				$errors['incorrect value'] = "All characters after the fifth character in PeppolId must be alphanumeric.";
 			}
 
-			if(substr($order->peppolId,4,1) != ":") {
+			if (substr($order->peppolId,4,1) != ":") {
 				$errors['incorrect value'] = "The fifth character of PeppolId must be \":\".";
 			}
 
-			if(strlen($order->peppolId) > 55) {
+			if (strlen($order->peppolId) > 55) {
 				$errors['incorrect value'] = "PeppolId is too long, must be 55 characters or fewer.";
 			}
 
-			if(strlen($order->peppolId) < 6) {
+			if (strlen($order->peppolId) < 6) {
 				$errors['incorrect value'] = "PeppolId is too short, must be 6 characters or longer.";
 			}
 		}
@@ -174,8 +174,8 @@ abstract class OrderValidator {
 	protected function validatePresetIsCompanyIsBoolean($request, $errors) {
 		if (count($request->getPresetValues()) > 0) {
 			foreach ($request->getPresetValues() as $presetValue) {
-				if(strtolower($presetValue->getTypeName()) == 'iscompany') {
-					if(!is_bool($presetValue->getValue())) {
+				if (strtolower($presetValue->getTypeName()) == 'iscompany') {
+					if (!is_bool($presetValue->getValue())) {
 						$errors['incorrect type'] = "isCompany must be of type boolean";
 					}
 				}
@@ -190,7 +190,7 @@ abstract class OrderValidator {
 	 * @return array
 	 */
 	protected function validatePresetIsCompanyIsSet($request, $errors) {
-		if(count($request->getPresetValues()) == 0) {
+		if (count($request->getPresetValues()) == 0) {
 			$errors['missing value'] = "isCompany presetValue is not set";
 		}
 		else {

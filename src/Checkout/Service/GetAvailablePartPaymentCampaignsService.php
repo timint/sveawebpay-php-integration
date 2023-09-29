@@ -19,14 +19,14 @@ class GetAvailablePartPaymentCampaignsService extends CheckoutService {
 		$requestData = $this->prepareRequest();
 
 		foreach($requestData['presetValues'] as $presetValue) {
-			if(strtolower($presetValue['typeName']) == 'iscompany') {
+			if (strtolower($presetValue['typeName']) == 'iscompany') {
 				$requestData = [
 					'isCompany' => $presetValue['value']
 				];
 			}
 		}
 
-		if(!isset($requestData)) {
+		if (!isset($requestData)) {
 			$requestData = null;
 		}
 

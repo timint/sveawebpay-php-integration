@@ -317,7 +317,7 @@ class Helper {
 
 	public static function isCardPayCurrency($currency) {
 		foreach(self::getCardPayCurrencies() as $cardPayCurrency) {
-			if(strtoupper($currency) === $cardPayCurrency) {
+			if (strtoupper($currency) === $cardPayCurrency) {
 				return true;
 			}
 		}
@@ -326,23 +326,23 @@ class Helper {
 
 	public static function isValidPeppolId($peppolId) {
 
-		if(is_numeric(substr($peppolId,0,4)) == false ) { // First 4 characters must be numeric
+		if (is_numeric(substr($peppolId,0,4)) == false ) { // First 4 characters must be numeric
 			return false;
 		}
 
-		if(substr($peppolId,4,1) != ":") { // Fifth character must be ':'.
+		if (substr($peppolId,4,1) != ":") { // Fifth character must be ':'.
 			return false;
 		}
 
-		if(ctype_alnum(substr($peppolId,6)) == false) { // Rest of the characters must be alphanumeric
+		if (ctype_alnum(substr($peppolId,6)) == false) { // Rest of the characters must be alphanumeric
 			return false;
 		}
 
-		if(strlen($peppolId) > 55) { // String cannot be longer 55 characters
+		if (strlen($peppolId) > 55) { // String cannot be longer 55 characters
 			return false;
 		}
 
-		if(strlen($peppolId) < 6) { // String must be longer than 5 characters
+		if (strlen($peppolId) < 6) { // String must be longer than 5 characters
 			return false;
 		}
 		return true;

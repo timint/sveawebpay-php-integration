@@ -14,12 +14,12 @@ class IdentityFlagValidator {
 		foreach($flags as $flag) {
 			$valid = false;
 			foreach($consts as $const) {
-				if($const == $flag) {
+				if ($const == $flag) {
 					$valid = true;
 					break;
 				}
 			}
-			if($valid == false) {
+			if ($valid == false) {
 				$errors['NonValidIdentityFlag'] = $flag . " is not a valid identity flag.";
 			}
 		}

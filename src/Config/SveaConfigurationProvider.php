@@ -195,7 +195,7 @@ class SveaConfigurationProvider implements ConfigurationProvider {
 	 * @return string
 	 */
 	public function getCheckoutMerchantId($country = NULL) {
-		if($country != NULL) {
+		if ($country != NULL) {
 			return $this->getCredentialsProperty('checkoutMerchantId', ConfigurationProvider::CHECKOUT, $country);
 		}
 		else {
@@ -209,7 +209,7 @@ class SveaConfigurationProvider implements ConfigurationProvider {
 	 * @return string
 	 */
 	public function getCheckoutSecret($country = NULL) {
-		if($country != NULL) {
+		if ($country != NULL) {
 			return $this->getCredentialsProperty('checkoutSecret', ConfigurationProvider::CHECKOUT, $country);
 		}
 		else {

@@ -39,7 +39,7 @@ class AdminServiceResponse {
 		$this->errormessage = isset($message->ErrorMessage) ? $message->ErrorMessage : "";
 		$this->resultcode = $message->ResultCode;
 
-		if(isset($logs)) {
+		if (isset($logs)) {
 			$this->logs = $logs;
 		}
 	}

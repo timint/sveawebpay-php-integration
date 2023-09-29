@@ -61,7 +61,7 @@ class DeliverOrderResult extends WebServiceResponse {
 		$this->accepted = $response->DeliverOrderEuResult->Accepted;
 		$this->resultcode = $response->DeliverOrderEuResult->ResultCode;
 
-		if(isset($logs)) {
+		if (isset($logs)) {
 			$this->logs = $logs;
 		}
 
@@ -83,7 +83,7 @@ class DeliverOrderResult extends WebServiceResponse {
 				$this->contractNumber = $response->DeliverOrderEuResult->DeliverOrderResult->PaymentPlanResultDetails->ContractNumber;
 			}
 			// - specific for accountCredit
-			if(property_exists($response->DeliverOrderEuResult->DeliverOrderResult, "DeliveryReferenceNumber")) {
+			if (property_exists($response->DeliverOrderEuResult->DeliverOrderResult, "DeliveryReferenceNumber")) {
 				$this->deliveryReferenceNumber = $response->DeliverOrderEuResult->DeliverOrderResult->DeliveryReferenceNumber;
 			}
 		}

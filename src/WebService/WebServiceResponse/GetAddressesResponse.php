@@ -52,7 +52,7 @@ class GetAddressesResponse extends WebServiceResponse {
 			$this->accepted = $response->GetAddressesResult->Accepted;
 		}
 
-		if(isset($logs)) {
+		if (isset($logs)) {
 			$this->logs = $logs;
 		}
 

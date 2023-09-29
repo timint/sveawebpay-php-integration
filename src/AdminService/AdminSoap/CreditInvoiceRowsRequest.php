@@ -33,7 +33,7 @@ class CreditInvoiceRowsRequest {
 		$this->InvoiceId = new \SoapVar( $invoiceId, XSD_LONG,
 			"-","--","InvoiceId","http://schemas.datacontract.org/2004/07/DataObjects.Admin.Service");
 
-		if( count($newCreditInvoiceRows) > 0) {
+		if ( count($newCreditInvoiceRows) > 0) {
 			$this->NewCreditInvoiceRows = new \SoapVar( $newCreditInvoiceRows, SOAP_ENC_OBJECT,
 				"-","--","NewCreditInvoiceRows","http://schemas.datacontract.org/2004/07/DataObjects.Admin.Service");
 		}

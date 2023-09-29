@@ -33,12 +33,12 @@ class SveaDoRequest {
 	private function CallSoap($method, $order, $logging) {
 
 		$params = (array)$order;
-		if($logging == true) {
+		if ($logging == true) {
 			$timestampStart = time();
 			$microtimeStart = microtime(true);
 		}
 		$result = ["requestResult" => $this->client->__soapCall($method, [$params])];
-		if($logging == true) {
+		if ($logging == true) {
 			$logs = [
 				"logs" => [
 					"request" => [

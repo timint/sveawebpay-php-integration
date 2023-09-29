@@ -44,8 +44,8 @@ class CreateOrderValidator extends OrderValidator {
 	 * @return array
 	 */
 	private function validateRequireElectronicIdAuthentication($order, $errors) {
-		if($order->getRequireElectronicIdAuthentication() != null) {
-			if(!is_bool($order->getRequireElectronicIdAuthentication())) {
+		if ($order->getRequireElectronicIdAuthentication() != null) {
+			if (!is_bool($order->getRequireElectronicIdAuthentication())) {
 				$errors['invalid type'] = "requireElectronicIdAuthentication field isn't a boolean type, use setRequireElectronicIdAuthentication(true)";
 			}
 		}
@@ -59,7 +59,7 @@ class CreateOrderValidator extends OrderValidator {
 	 */
 	private function validatePartnerKey($order, $errors) {
 		$guid = $order->getPartnerKey();
-		if($guid != null) {
+		if ($guid != null) {
 			if (!preg_match('/^\{?[A-Z0-9]{8}-[A-Z0-9]{4}-[A-Z0-9]{4}-[A-Z0-9]{4}-[A-Z0-9]{12}\}?$/', $guid)) {
 				$errors['invalidFormatPartnerKey'] = "partnerKey is not in guid-format. The partnerKey is provided by Svea. If you're a partner to Svea and wish to use the partnerKey, please contact Svea in order to receive a guid.";
 			}

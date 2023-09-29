@@ -110,7 +110,7 @@ class QueryOrderBuilder extends CheckoutAdminOrderBuilder {
 	 */
 	public function queryCardOrder() {
 		$this->orderType = ConfigurationProvider::HOSTED_ADMIN_TYPE;
-		if(isset($this->clientOrderNumber)) {
+		if (isset($this->clientOrderNumber)) {
 			$queryTransaction = new QueryTransactionByCustomerRefNo($this->conf);
 			$queryTransaction->customerRefNo = $this->clientOrderNumber;
 		}
@@ -128,7 +128,7 @@ class QueryOrderBuilder extends CheckoutAdminOrderBuilder {
 	 */
 	public function queryDirectBankOrder() {
 		$this->orderType = ConfigurationProvider::HOSTED_ADMIN_TYPE;
-		if(isset($this->clientOrderNumber)) {
+		if (isset($this->clientOrderNumber)) {
 			$queryTransaction = new QueryTransactionByCustomerRefNo($this->conf);
 			$queryTransaction->customerRefNo = $this->clientOrderNumber;
 		}

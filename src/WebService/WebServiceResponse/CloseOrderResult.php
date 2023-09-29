@@ -18,7 +18,7 @@ class CloseOrderResult extends WebServiceResponse {
 		$this->accepted = $response->CloseOrderEuResult->Accepted; // false or 1
 		$this->errormessage = isset($response->CloseOrderEuResult->ErrorMessage) ? $response->CloseOrderEuResult->ErrorMessage : "";
 
-		if(isset($logs)) {
+		if (isset($logs)) {
 			$this->logs = $logs;
 		}
 

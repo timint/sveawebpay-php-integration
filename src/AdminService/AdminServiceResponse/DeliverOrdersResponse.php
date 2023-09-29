@@ -71,7 +71,7 @@ class DeliverOrdersResponse extends AdminServiceResponse {
 			}
 
 			// - specific for accountCredit
-			if(property_exists($message->OrdersDelivered->DeliverOrderResult, "DeliveryReferenceNumber")) {
+			if (property_exists($message->OrdersDelivered->DeliverOrderResult, "DeliveryReferenceNumber")) {
 				$this->deliveryReferenceNumber = $message->OrdersDelivered->DeliverOrderResult->DeliveryReferenceNumber;
 			}
 

@@ -22,7 +22,7 @@ class PaymentPlanCalculator {
 		$campaign = (array)$campaign;
 
 		// The Checkout API returns array keys with the first letter, we have to convert the first letter to lowercase
-		if(array_key_exists('PaymentPlanType', $campaign) == true) {
+		if (array_key_exists('PaymentPlanType', $campaign) == true) {
 			$campaign = self::convertFromCheckoutArray($campaign);
 		}
 
@@ -54,7 +54,7 @@ class PaymentPlanCalculator {
 		$campaign = (array)$campaign;
 
 		// The Checkout API returns array keys with the first letter, we have to convert the first letter to lowercase
-		if(array_key_exists('PaymentPlanType', $campaign) == true) {
+		if (array_key_exists('PaymentPlanType', $campaign) == true) {
 			$campaign = self::convertFromCheckoutArray($campaign);
 		}
 
@@ -85,7 +85,7 @@ class PaymentPlanCalculator {
 		$campaign = (array)$campaign;
 
 		// The Checkout API returns array keys with the first letter, we have to convert the first letter to lowercase
-		if(array_key_exists('PaymentPlanType', $campaign) == true) {
+		if (array_key_exists('PaymentPlanType', $campaign) == true) {
 			$campaign = self::convertFromCheckoutArray($campaign);
 		}
 
@@ -116,7 +116,7 @@ class PaymentPlanCalculator {
 		$campaign = (array)$campaign;
 
 		// The Checkout API returns array keys with the first letter, we have to convert the first letter to lowercase
-		if(array_key_exists('PaymentPlanType', $campaign) == true) {
+		if (array_key_exists('PaymentPlanType', $campaign) == true) {
 			$campaign = self::convertFromCheckoutArray($campaign);
 		}
 
@@ -139,7 +139,7 @@ class PaymentPlanCalculator {
 			default:
 				throw new ValidationException("paymentPlanType not recognized");
 		}
-		if(array_key_exists('checkout', $campaign) == true) {
+		if (array_key_exists('checkout', $campaign) == true) {
 			$campaign = self::convertToCheckoutArray($campaign);
 		}
 		return $campaign;
@@ -161,10 +161,10 @@ class PaymentPlanCalculator {
 
 		foreach($campaigns as $key => $campaign) {
 			$campaign = (array)$campaign;
-			if(array_key_exists('PaymentPlanType', $campaign) == true) {
+			if (array_key_exists('PaymentPlanType', $campaign) == true) {
 				$campaign = self::convertFromCheckoutArray($campaign);
 			}
-			if($ignoreMinMaxFlag || $campaign['fromAmount'] <= $totalPrice && $campaign['toAmount'] >= $totalPrice) {
+			if ($ignoreMinMaxFlag || $campaign['fromAmount'] <= $totalPrice && $campaign['toAmount'] >= $totalPrice) {
 
 
 				$campaign['totalAmountToPay'] = self::getTotalAmountToPay($totalPrice, $campaign, $decimals);
@@ -194,10 +194,10 @@ class PaymentPlanCalculator {
 
 		foreach($campaigns as $key => $campaign) {
 			$campaign = (array)$campaign;
-			if(array_key_exists('PaymentPlanType', $campaign) == true) {
+			if (array_key_exists('PaymentPlanType', $campaign) == true) {
 				$campaign = self::convertFromCheckoutArray($campaign);
 			}
-			if($ignoreMinMaxFlag || $campaign['fromAmount'] <= $totalPrice && $campaign['toAmount'] >= $totalPrice) {
+			if ($ignoreMinMaxFlag || $campaign['fromAmount'] <= $totalPrice && $campaign['toAmount'] >= $totalPrice) {
 
 
 				$campaign['monthlyAmountToPay'] = self::getMonthlyAmountToPay($totalPrice, $campaign, $decimals);
@@ -226,10 +226,10 @@ class PaymentPlanCalculator {
 
 		foreach($campaigns as $key => $campaign) {
 			$campaign = (array)$campaign;
-			if(array_key_exists('PaymentPlanType', $campaign) == true) {
+			if (array_key_exists('PaymentPlanType', $campaign) == true) {
 				$campaign = self::convertFromCheckoutArray($campaign);
 			}
-			if($ignoreMinMaxFlag || $campaign['fromAmount'] <= $totalPrice && $campaign['toAmount'] >= $totalPrice) {
+			if ($ignoreMinMaxFlag || $campaign['fromAmount'] <= $totalPrice && $campaign['toAmount'] >= $totalPrice) {
 
 
 				$campaign['effectiveInterestRate'] = self::getEffectiveInterestRate($totalPrice, $campaign, $decimals);
@@ -258,10 +258,10 @@ class PaymentPlanCalculator {
 
 		foreach($campaigns as $key => $campaign) {
 			$campaign = (array)$campaign;
-			if(array_key_exists('PaymentPlanType', $campaign) == true) {
+			if (array_key_exists('PaymentPlanType', $campaign) == true) {
 				$campaign = self::convertFromCheckoutArray($campaign);
 			}
-			if($ignoreMinMaxFlag || $campaign['fromAmount'] <= $totalPrice && $campaign['toAmount'] >= $totalPrice) {
+			if ($ignoreMinMaxFlag || $campaign['fromAmount'] <= $totalPrice && $campaign['toAmount'] >= $totalPrice) {
 
 
 				$campaign['totalAmountToPay'] = self::getTotalAmountToPay($totalPrice, $campaign, $decimals);

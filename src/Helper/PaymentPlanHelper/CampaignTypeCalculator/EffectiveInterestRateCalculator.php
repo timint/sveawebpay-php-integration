@@ -28,10 +28,10 @@ class EffectiveInterestRateCalculator {
 	 * @throws ValidationException
 	 */
 	public function calculate($sizeOfLoan, $firstPayment, $monthlyPayment, $contactLengthInMonths, $deferralPeriodInMonths) {
-		if($monthlyPayment < 0) {
+		if ($monthlyPayment < 0) {
 			throw new ValidationException("Monthly payment can not be below 0");
 		}
-		if($contactLengthInMonths < 1) {
+		if ($contactLengthInMonths < 1) {
 			throw new ValidationException("Contract length must be at least 1 month");
 		}
 
@@ -42,7 +42,7 @@ class EffectiveInterestRateCalculator {
 			$this->addPayment($this->oneMonth * $month, $monthlyPayment);
 		}
 
-		if(array_sum(array_column($this->payments, 'amount')) - $sizeOfLoan < 0.1) {
+		if (array_sum(array_column($this->payments, 'amount')) - $sizeOfLoan < 0.1) {
 			return 0;
 		}
 
@@ -59,7 +59,7 @@ class EffectiveInterestRateCalculator {
 
 		while($upperBound - $lowerBound > $this->tolerance) {
 			$newPoint = $lowerBound + ($upperBound - $lowerBound) / 2;
-			if($this->sign($this->evaluate($lowerBound)) == $this->sign($this->evaluate($newPoint))) {
+			if ($this->sign($this->evaluate($lowerBound)) == $this->sign($this->evaluate($newPoint))) {
 				$lowerBound = $newPoint;
 			}
 			else {
@@ -67,7 +67,7 @@ class EffectiveInterestRateCalculator {
 			}
 		}
 
-		if(abs($lowerBound - $this->initialLowerBound) < 2 * $this->tolerance || abs($upperBound - $this->initialUpperBound) < 2 * $this->tolerance) {
+		if (abs($lowerBound - $this->initialLowerBound) < 2 * $this->tolerance || abs($upperBound - $this->initialUpperBound) < 2 * $this->tolerance) {
 			throw new ValidationException("No solution found");
 		}
 		return $lowerBound;

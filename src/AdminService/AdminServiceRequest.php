@@ -68,12 +68,12 @@ abstract class AdminServiceRequest {
 		$requestObject = $this->prepareRequest($resendOrderWithFlippedPriceIncludingVat);
 
 		$soapClient = new SoapClient($this->orderBuilder->conf, ConfigurationProvider::ADMIN_TYPE);
-		if($this->orderBuilder->logging == true) {
+		if ($this->orderBuilder->logging == true) {
 			$timestampStart = time();
 			$microtimeStart = microtime(true);
 		}
 		$soapResponse = $soapClient->doSoapCall($this->action, $requestObject);
-		if($this->orderBuilder->logging == true) {
+		if ($this->orderBuilder->logging == true) {
 			$logs = [
 				"logs" => [
 					"request" => [

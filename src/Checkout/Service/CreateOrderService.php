@@ -98,7 +98,7 @@ class CreateOrderService extends CheckoutService {
 
 		$data['merchantData'] = $order->getMerchantData();
 
-		if($order->getRequireElectronicIdAuthentication() != null) {
+		if ($order->getRequireElectronicIdAuthentication() != null) {
 			$data['requireElectronicIdAuthentication'] = $order->getRequireElectronicIdAuthentication();
 		}
 

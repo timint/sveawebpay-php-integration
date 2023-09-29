@@ -73,7 +73,7 @@ class CreateOrderResponse extends WebServiceResponse {
 		// set response resultcode
 		$this->resultcode = $response->CreateOrderEuResult->ResultCode;
 
-		if(isset($logs)) {
+		if (isset($logs)) {
 			$this->logs = $logs;
 		}
 

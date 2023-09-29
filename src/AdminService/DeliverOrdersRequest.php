@@ -69,8 +69,8 @@ class DeliverOrdersRequest extends AdminServiceRequest {
 			$errors[] = ['missing value' => "distributionType is required."];
 		}
 		else {
-			if(isset($this->orderBuilder->orderType) == TRUE && $this->orderBuilder->orderType == ConfigurationProvider::INVOICE_TYPE) {
-				if(isset($this->orderBuilder->distributionType) == TRUE && $this->orderBuilder->distributionType == DistributionType::EINVOICEB2B && $this->orderBuilder->countryCode != "NO") {
+			if (isset($this->orderBuilder->orderType) == TRUE && $this->orderBuilder->orderType == ConfigurationProvider::INVOICE_TYPE) {
+				if (isset($this->orderBuilder->distributionType) == TRUE && $this->orderBuilder->distributionType == DistributionType::EINVOICEB2B && $this->orderBuilder->countryCode != "NO") {
 					$errors[] = ['incorrect value' => "distributionType EInvoiceB2B is only allowed for Norway."];
 				}
 			}

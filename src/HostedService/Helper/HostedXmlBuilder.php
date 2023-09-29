@@ -90,7 +90,7 @@ class HostedXmlBuilder {
 		$this->serializeOrderRows($request['rows']); // orderrows
 
 		// customer -- optional
-		if(isset($request['paymentMethod'])) {
+		if (isset($request['paymentMethod'])) {
 			$this->serializeCustomer($order, $request['paymentMethod']);		  // customer		  // -- used by Invoice payment
 		}
 		else {
@@ -108,7 +108,7 @@ class HostedXmlBuilder {
 			$this->XMLWriter->writeElement("ipaddress", $request['ipAddress']);
 		}
 
-		if(isset($request['payerAlias'])) {
+		if (isset($request['payerAlias'])) {
 			$this->XMLWriter->writeElement("payeralias", $request['payerAlias']);
 		}
 
@@ -197,7 +197,7 @@ class HostedXmlBuilder {
 	private function serializeCustomer($order, $paymentMethod = NULL) {
 		$this->XMLWriter->startElement("customer");
 
-		if(isset($paymentMethod) && $paymentMethod == "SVEACARDPAY_PF") {
+		if (isset($paymentMethod) && $paymentMethod == "SVEACARDPAY_PF") {
 			$this->XMLWriter->writeElement("unknowncustomer", "true");
 			$this->XMLWriter->writeElement("country", $order->countryCode);
 		}

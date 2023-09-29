@@ -67,7 +67,7 @@ class GetAccountCreditsResponse {
 			$this->clientOrderId = $order->ClientOrderId;
 			$this->createdDate = $order->CreatedDate;
 
-			if(isset($order->CreditReportStatus->Accepted)) {
+			if (isset($order->CreditReportStatus->Accepted)) {
 				$this->creditReportStatusAccepted = ($order->CreditReportStatus->Accepted === "true") ? true : false;
 				$this->creditReportStatusCreationDate = $order->CreditReportStatus->CreationDate;
 			}

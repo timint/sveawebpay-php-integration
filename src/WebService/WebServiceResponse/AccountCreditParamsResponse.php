@@ -45,7 +45,7 @@ class AccountCreditParamsResponse extends WebServiceResponse {
 
 		$this->errormessage = isset($response->GetAccountCreditParamsEuResult->ErrorMessage) ? $response->GetAccountCreditParamsEuResult->ErrorMessage : "";
 
-		if(isset($logs)) {
+		if (isset($logs)) {
 			$this->logs = $logs;
 		}
 
