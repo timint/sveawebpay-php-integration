@@ -12,7 +12,7 @@ use Svea\WebPay\Test\UnitTest\Checkout\TestCase;
 class CheckoutPresetValueTest extends TestCase
 {
 
-	public function setUp()
+	public function setup(): void
 	{
 		parent::setUp();
 	}
@@ -56,7 +56,7 @@ class CheckoutPresetValueTest extends TestCase
 			->setIsReadonly($readonly);
 
 		$array = $pv->returnPresetArray();
-
+		
 		$this->assertEquals($array['typeName'], $pv::POSTAL_CODE);
 		$this->assertEquals($array['value'], $postalCode);
 		$this->assertEquals($array['isReadonly'], $readonly);

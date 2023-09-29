@@ -20,7 +20,7 @@ class QueryTransactionTest extends \PHPUnit\Framework\TestCase
 	protected $queryObject;
 
 	// fixture, run once before each test method
-	protected function setUp()
+	protected function setup(): void
 	{
 		$this->configObject = ConfigurationService::getDefaultConfig();
 		$this->queryObject = new QueryTransaction($this->configObject);
@@ -83,7 +83,7 @@ class QueryTransactionTest extends \PHPUnit\Framework\TestCase
 		// check annul request message contents
 		$xmlMessage = new SimpleXMLElement(base64_decode(urldecode($form['message'])));
 
-		$this->assertEquals("query", $xmlMessage->getName());   // root node
+		$this->assertEquals("query", $xmlMessage->getName());   // root node        
 		$this->assertEquals((string)$transactionId, $xmlMessage->transactionid);
 	}
 
@@ -99,3 +99,5 @@ class QueryTransactionTest extends \PHPUnit\Framework\TestCase
 		$form = $this->queryObject->prepareRequest();
 	}
 }
+
+?>

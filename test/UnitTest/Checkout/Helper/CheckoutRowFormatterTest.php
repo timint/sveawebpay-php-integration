@@ -16,7 +16,7 @@ class CheckoutRowFormatterTest extends TestCase
 	 */
 	protected $formatter;
 
-	public function setUp()
+	public function setup(): void
 	{
 		parent::setUp();
 
@@ -30,7 +30,7 @@ class CheckoutRowFormatterTest extends TestCase
 	{
 		$row = $this->returnOrderRow();
 
-		$this->invokeMethod($this->formatter, 'formatOrderRows', [$row]);
+		$this->invokeMethod($this->formatter, 'formatOrderRows', array($row));
 
 		$newRows = $this->getPrivateProperty($this->formatter, 'newRows');
 

@@ -20,7 +20,7 @@ class ListPaymentMethodsTest extends \PHPUnit\Framework\TestCase
 	protected $listpaymentmethodsObject;
 
 	// fixture, run once before each test method
-	protected function setUp()
+	protected function setup(): void
 	{
 		$this->configObject = ConfigurationService::getDefaultConfig();
 		$this->listpaymentmethodObject = new ListPaymentMethods($this->configObject);
@@ -69,7 +69,9 @@ class ListPaymentMethodsTest extends \PHPUnit\Framework\TestCase
 		// check request message contents
 		$xmlMessage = new SimpleXMLElement(base64_decode(urldecode($form['message'])));
 
-		$this->assertEquals("getpaymentmethods", $xmlMessage->getName());   // root node
+		$this->assertEquals("getpaymentmethods", $xmlMessage->getName());   // root node        
 		$this->assertEquals((string)$merchantid, $xmlMessage->merchantid);
 	}
 }
+
+?>

@@ -17,7 +17,7 @@ class HostedXmlBuilderTest extends \PHPUnit\Framework\TestCase
 
 	private $order;
 
-	protected function setUp()
+	protected function setup(): void
 	{
 		$this->order = WebPay::createOrder(ConfigurationService::getDefaultConfig());
 
@@ -151,39 +151,39 @@ class HostedXmlBuilderTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals(1, substr_count($xml, "http://www.cancel.com"));
 	}
 
-//	public function test_getCreditTransactionXML() {
+//    public function test_getCreditTransactionXML() {
+//        
+//        // example from webservice api docs
+//        $elements = array( 
+//            "transactionid" => 521527,
+//            "amounttocredit" => 100
+//        );
+//        
+//        // generate the request XML
+//        $xmlBuilder = new HostedXmlBuilder();
+//        $requestXML = $xmlBuilder->getCreditTransactionXML( $elements );
 //
-//		// example from webservice api docs
-//		$elements = array(
-//			"transactionid" => 521527,
-//			"amounttocredit" => 100
-//		);
-//
-//		// generate the request XML
-//		$xmlBuilder = new HostedXmlBuilder();
-//		$requestXML = $xmlBuilder->getCreditTransactionXML( $elements );
-//
-//		// parse the generated request XML
-//		$xmlMessage = new \SimpleXMLElement($requestXML);
-//
-//		$this->assertEquals((string)$elements["transactionid"], $xmlMessage->transactionid);
-//		$this->assertEquals((string)$elements["amounttocredit"], $xmlMessage->amounttocredit);
-//	}
+//        // parse the generated request XML
+//        $xmlMessage = new \SimpleXMLElement($requestXML);
+//  
+//        $this->assertEquals((string)$elements["transactionid"], $xmlMessage->transactionid);
+//        $this->assertEquals((string)$elements["amounttocredit"], $xmlMessage->amounttocredit);
+//    }  
 
-//	public function test_getQueryTransactionXML() {
+//    public function test_getQueryTransactionXML() {
+//        
+//        // example from webservice api docs
+//        $elements = array( 
+//            "transactionid" => 521527,
+//        );
+//        
+//        // generate the request XML
+//        $xmlBuilder = new HostedXmlBuilder();
+//        $requestXML = $xmlBuilder->getQueryTransactionXML( $elements );
 //
-//		// example from webservice api docs
-//		$elements = array(
-//			"transactionid" => 521527,
-//		);
-//
-//		// generate the request XML
-//		$xmlBuilder = new HostedXmlBuilder();
-//		$requestXML = $xmlBuilder->getQueryTransactionXML( $elements );
-//
-//		// parse the generated request XML
-//		$xmlMessage = new \SimpleXMLElement($requestXML);
-//
-//		$this->assertEquals((string)$elements["transactionid"], $xmlMessage->transactionid);
-//	}
+//        // parse the generated request XML
+//        $xmlMessage = new \SimpleXMLElement($requestXML);
+//  
+//        $this->assertEquals((string)$elements["transactionid"], $xmlMessage->transactionid);
+//    }  
 }

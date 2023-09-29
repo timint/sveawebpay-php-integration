@@ -20,7 +20,7 @@ class CreditTransactionTest extends \PHPUnit\Framework\TestCase
 	protected $creditObject;
 
 	// fixture, run once before each test method
-	protected function setUp()
+	protected function setup(): void
 	{
 		$this->configObject = ConfigurationService::getDefaultConfig();
 		$this->creditObject = new CreditTransaction($this->configObject);
@@ -82,7 +82,7 @@ class CreditTransactionTest extends \PHPUnit\Framework\TestCase
 		// check credit request message contents
 		$xmlMessage = new SimpleXMLElement(base64_decode(urldecode($form['message'])));
 
-		$this->assertEquals("credit", $xmlMessage->getName());   // root node
+		$this->assertEquals("credit", $xmlMessage->getName());   // root node        
 		$this->assertEquals((string)$transactionId, $xmlMessage->transactionid);
 		$this->assertEquals((string)$creditAmount, $xmlMessage->amounttocredit);
 
@@ -118,3 +118,5 @@ class CreditTransactionTest extends \PHPUnit\Framework\TestCase
 		$form = $this->creditObject->prepareRequest();
 	}
 }
+
+?>

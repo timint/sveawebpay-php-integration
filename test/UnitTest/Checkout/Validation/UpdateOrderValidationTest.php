@@ -17,7 +17,7 @@ class UpdateOrderValidationTest extends TestCase
 	 */
 	protected $validator;
 
-	public function setUp()
+	public function setup(): void
 	{
 		parent::setUp();
 		$this->validator = new UpdateOrderValidator();
@@ -30,7 +30,7 @@ class UpdateOrderValidationTest extends TestCase
 	{
 		$this->order->setId(123);
 
-		$errors = $this->invokeMethod($this->validator, 'validate', [$this->order, []]);
+		$errors = $this->invokeMethod($this->validator, 'validate', array($this->order, array()));
 
 		$errorsNum = count($errors);
 
@@ -44,7 +44,7 @@ class UpdateOrderValidationTest extends TestCase
 	{
 		$this->order->addOrderRow($this->returnOrderRow());
 
-		$errors = $this->invokeMethod($this->validator, 'validateOrderRows', [$this->order, []]);
+		$errors = $this->invokeMethod($this->validator, 'validateOrderRows', array($this->order, array()));
 
 		$errorsNum = count($errors);
 

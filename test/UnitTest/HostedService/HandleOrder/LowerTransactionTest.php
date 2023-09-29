@@ -20,7 +20,7 @@ class LowerTransactionTest extends \PHPUnit\Framework\TestCase
 	protected $lowerTransactionObject;
 
 	// fixture, run once before each test method
-	protected function setUp()
+	protected function setup(): void
 	{
 		$this->configObject = ConfigurationService::getDefaultConfig();
 		$this->lowerTransactionObject = new LowerTransaction($this->configObject);
@@ -89,7 +89,7 @@ class LowerTransactionTest extends \PHPUnit\Framework\TestCase
 		// check credit request message contents
 		$xmlMessage = new SimpleXMLElement(base64_decode(urldecode($form['message'])));
 
-		$this->assertEquals("loweramount", $xmlMessage->getName());   // root node
+		$this->assertEquals("loweramount", $xmlMessage->getName());   // root node        
 		$this->assertEquals((string)$transactionId, $xmlMessage->transactionid);
 		$this->assertEquals((string)$amountToLower, $xmlMessage->amounttolower);
 	}
@@ -125,3 +125,5 @@ class LowerTransactionTest extends \PHPUnit\Framework\TestCase
 	}
 
 }
+
+?>

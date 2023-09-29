@@ -17,7 +17,7 @@ class UpdateCheckoutServiceTest extends TestCase
 	 */
 	protected $service;
 
-	public function setUp()
+	public function setup(): void
 	{
 		parent::setUp();
 
@@ -49,7 +49,7 @@ class UpdateCheckoutServiceTest extends TestCase
 			->addOrderRow($this->returnOrderRow())
 			->addOrderRow($this->returnOrderRow());
 
-		$formattedOrderRows = $this->invokeMethod($this->service, 'mapCreateOrderData', [$this->order]);
+		$formattedOrderRows = $this->invokeMethod($this->service, 'mapCreateOrderData', array($this->order));
 
 		$this->assertArrayHasKey('cart', $formattedOrderRows);
 		$this->assertArrayHasKey('orderId', $formattedOrderRows);

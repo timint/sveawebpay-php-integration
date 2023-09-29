@@ -17,7 +17,7 @@ class HostedRowFormatterTest extends \PHPUnit\Framework\TestCase
 
 	private $order;
 
-	protected function SetUp()
+	protected function setup(): void
 	{
 		$this->order = WebPay::createOrder(ConfigurationService::getDefaultConfig());
 	}
@@ -505,7 +505,7 @@ class HostedRowFormatterTest extends \PHPUnit\Framework\TestCase
 // ------------------------
 
 	// TODO! move these to Svea\WebPay\Test\UnitTest\WebService\Helper\WebServiceRowFormatterTest as well (as in java package
-	// ported over tests of discounts from WebserviceRowFormatterTest
+	// ported over tests of discounts from WebserviceRowFormatterTest 
 
 	/// fixed discount
 	// iff no specified vatPercent => split discount excl. vat over the diffrent tax rates present in order
@@ -599,7 +599,7 @@ class HostedRowFormatterTest extends \PHPUnit\Framework\TestCase
 		//	newRows.get(1).PricePerUnit * newRows.get(1).NumberOfUnits  +	// 106.00
 		//	newRows.get(2).PricePerUnit * newRows.get(2).NumberOfUnits  +	// -83.34
 		//	newRows.get(3).PricePerUnit * newRows.get(3).NumberOfUnits 		// -35.33
-		//assertEquals( 237.33, Double.valueOf(String.format(Locale.ENGLISH,"%.2f",total)), 0.001 );
+		//assertEquals( 237.33, Double.valueOf(String.format(Locale.ENGLISH,"%.2f",total)), 0.001 );		    
 		$this->assertRegexp('/<amount>23733<\/amount>/', $paymentXml);
 		$this->assertRegexp('/<vat>3733<\/vat>/', $paymentXml);
 	}
@@ -677,8 +677,8 @@ class HostedRowFormatterTest extends \PHPUnit\Framework\TestCase
 		$formatter = new HostedRowFormatter();
 		$newRows = $formatter->formatRows($order);  // of type HostedOrderRowBuilder
 
-		// 100*250/356 = 70.22 incl. 25% vat => 14.04 vat as amount
-		// 100*106/356 = 29.78 incl. 6% vat => 1.69 vat as amount
+		// 100*250/356 = 70.22 incl. 25% vat => 14.04 vat as amount 
+		// 100*106/356 = 29.78 incl. 6% vat => 1.69 vat as amount 
 		// => total discount is 100.00 (incl 15.73 vat)
 		$newRow = $newRows[2];
 		$this->assertEquals("f100e", $newRow->sku);
@@ -706,7 +706,7 @@ class HostedRowFormatterTest extends \PHPUnit\Framework\TestCase
 		$this->assertRegexp('/<vat>4027<\/vat>/', $paymentXml);
 	}
 
-	// iff specified vatPercent => add as single row with specified vat rate only honouring specified amount and vatPercent
+	// iff specified vatPercent => add as single row with specified vat rate only honouring specified amount and vatPercent 
 	public function test_FixedDiscount_specified_using_IncVat_and_vatPercent_is_added_as_single_discount_row()
 	{
 		$order = WebPay::createOrder(ConfigurationService::getDefaultConfig())
@@ -948,8 +948,8 @@ class HostedRowFormatterTest extends \PHPUnit\Framework\TestCase
 		$formatter = new HostedRowFormatter();
 		$newRows = $formatter->formatRows($order);  // of type HostedOrderRowBuilder
 
-		// 100*250/356 = 70.22 incl. 25% vat => 14.04 vat as amount
-		// 100*106/356 = 29.78 incl. 6% vat => 1.69 vat as amount
+		// 100*250/356 = 70.22 incl. 25% vat => 14.04 vat as amount 
+		// 100*106/356 = 29.78 incl. 6% vat => 1.69 vat as amount 
 		// => total discount is 100.00 (incl 15.73 vat)
 
 		// validate HostedOrderRowBuilder row contents
@@ -982,7 +982,7 @@ class HostedRowFormatterTest extends \PHPUnit\Framework\TestCase
 		$this->assertRegexp('/<vat>4907<\/vat>/', $paymentXml);
 	}
 
-	/// relative discount
+	/// relative discount    
 	// iff no specified discount vat rate, check that calculated vat rate is split correctly across vat rates
 	public function test_RelativeDiscount_in_order_with_single_vat_rate()
 	{
@@ -1112,7 +1112,7 @@ class HostedRowFormatterTest extends \PHPUnit\Framework\TestCase
 		$formatter = new HostedRowFormatter();
 		$newRows = $formatter->formatRows($order);  // of type HostedOrderRowBuilder
 
-		// 10% of (250 (50) + 106 (6)) = 356 (56) => -35.6 (5.6)
+		// 10% of (250 (50) + 106 (6)) = 356 (56) => -35.6 (5.6)	    
 		$newRow = $newRows[4];
 		$this->assertEquals(-3560, $newRow->amount);
 		$this->assertEquals(-560, $newRow->vat);
@@ -1128,7 +1128,7 @@ class HostedRowFormatterTest extends \PHPUnit\Framework\TestCase
 			->getPaymentForm();
 		$paymentXml = $paymentForm->xmlMessage;
 
-		// 250 (50) + 106 (6) +53 (3) + 29 (5.8) -35.6 (-5.6) => 402.4 (59.2)
+		// 250 (50) + 106 (6) +53 (3) + 29 (5.8) -35.6 (-5.6) => 402.4 (59.2)	    
 		$this->assertRegexp('/<amount>40240<\/amount>/', $paymentXml);
 		$this->assertRegexp('/<vat>5920<\/vat>/', $paymentXml);
 	}
@@ -1223,10 +1223,10 @@ class HostedRowFormatterTest extends \PHPUnit\Framework\TestCase
 				->setAmountExVat(50.00)
 				->setVatPercent(6)
 			)
-//				->addFee(\Svea\WebPay\WebPayItem::invoiceFee()	// Invoice fees are not processed by HostedRowFormatter
-//				->setAmountExVat(23.20)
-//				->setVatPercent(25)
-//				)
+//                ->addFee(\Svea\WebPay\WebPayItem::invoiceFee()    // Invoice fees are not processed by HostedRowFormatter
+//                ->setAmountExVat(23.20)
+//                ->setVatPercent(25)
+//                )
 			->addDiscount(WebPayItem::fixedDiscount()
 				->setDiscountId("f100i")
 				->setName("couponName")
@@ -1247,11 +1247,11 @@ class HostedRowFormatterTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals(-2000, $testedRow->vat);
 
 		// order total should be 250-100+53+29 = 232 kr
-//		$total = HostedRowFormatter::convertExVatToIncVat( $resultRows[0]->PricePerUnit, $resultRows[0]->VatPercent ) * $resultRows[0]->NumberOfUnits +
-//				HostedRowFormatter::convertExVatToIncVat( $resultRows[1]->PricePerUnit, $resultRows[1]->VatPercent )  * $resultRows[1]->NumberOfUnits +
-//				HostedRowFormatter::convertExVatToIncVat( $resultRows[2]->PricePerUnit, $resultRows[2]->VatPercent )  * $resultRows[2]->NumberOfUnits +
-//				HostedRowFormatter::convertExVatToIncVat( $resultRows[3]->PricePerUnit, $resultRows[3]->VatPercent ) * $resultRows[3]->NumberOfUnits;
-//		$this->assertEquals(232.00, $total);
+//        $total = HostedRowFormatter::convertExVatToIncVat( $resultRows[0]->PricePerUnit, $resultRows[0]->VatPercent ) * $resultRows[0]->NumberOfUnits +
+//                HostedRowFormatter::convertExVatToIncVat( $resultRows[1]->PricePerUnit, $resultRows[1]->VatPercent )  * $resultRows[1]->NumberOfUnits +
+//                HostedRowFormatter::convertExVatToIncVat( $resultRows[2]->PricePerUnit, $resultRows[2]->VatPercent )  * $resultRows[2]->NumberOfUnits +
+//                HostedRowFormatter::convertExVatToIncVat( $resultRows[3]->PricePerUnit, $resultRows[3]->VatPercent ) * $resultRows[3]->NumberOfUnits;
+//        $this->assertEquals(232.00, $total);
 //
 	}
 
@@ -1316,18 +1316,18 @@ class HostedRowFormatterTest extends \PHPUnit\Framework\TestCase
 			->getPaymentForm();
 		$paymentXml = $paymentForm->xmlMessage;
 
-		//				// 250.00 (50.00)
-		//				// 106.00 (6.00)
-		//				// 53.00 (3.00)
-		//				// 29.00 (5.80)
-		//				// -118.67 (-18.67)
-		//				// => 319.33 (46.13)
+		//	    		// 250.00 (50.00)
+		//	    		// 106.00 (6.00)
+		//	    		// 53.00 (3.00)
+		//	    		// 29.00 (5.80)
+		//		    	// -118.67 (-18.67)
+		//		    	// => 319.33 (46.13)
 		$this->assertRegexp('/<amount>31933<\/amount>/', $paymentXml);
 		$this->assertRegexp('/<vat>4613<\/vat>/', $paymentXml);
 	}
 
 
-// ---------------------------------
+// ---------------------------------    
 
 	public function test_RelativeDiscount_in_order_with_single_vat_rate_php_original_version()
 	{
