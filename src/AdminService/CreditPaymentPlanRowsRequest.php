@@ -108,7 +108,7 @@ class CreditPaymentPlanRowsRequest extends AdminServiceRequest {
 	}
 
 	public function validateContractNumber($errors) {
-		if (isset($this->orderBuilder->contractNumber) == FALSE) {
+		if (isset($this->orderBuilder->contractNumber) == false) {
 			$errors[] = ['missing value' => "contractNumber is required, use setContractNumber()."];
 		}
 
@@ -126,7 +126,7 @@ class CreditPaymentPlanRowsRequest extends AdminServiceRequest {
 	}
 
 	private function validateOrderType($errors) {
-		if (isset($this->orderBuilder->orderType) == FALSE) {
+		if (isset($this->orderBuilder->orderType) == false) {
 			$errors[] = ['missing value' => "orderType is required."];
 		}
 
@@ -134,7 +134,7 @@ class CreditPaymentPlanRowsRequest extends AdminServiceRequest {
 	}
 
 	private function validateCountryCode($errors) {
-		if (isset($this->orderBuilder->countryCode) == FALSE) {
+		if (isset($this->orderBuilder->countryCode) == false) {
 			$errors[] = ['missing value' => "countryCode is required, use setCountryCode()."];
 		}
 

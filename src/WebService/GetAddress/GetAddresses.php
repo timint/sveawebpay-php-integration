@@ -225,7 +225,7 @@ class GetAddresses {
 	}
 
 	private function validateCountryCode($getaddressesrequest, $errors) {
-		if (isset($getaddressesrequest->countryCode) == FALSE) {
+		if (isset($getaddressesrequest->countryCode) == false) {
 			$errors[] = "countryCode is required. Use function setCountryCode().";
 		}
 

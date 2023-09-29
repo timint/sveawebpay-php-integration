@@ -53,7 +53,7 @@ class IdentityValidator {
 	 * @return array of string $errors -- updated validator errors array
 	 */
 	public function validateNordicIdentity($order, $errors) {
-		if ($this->isCompany == FALSE) {
+		if ($this->isCompany == false) {
 			if (!isset($order->customerIdentity->ssn) || empty($order->customerIdentity->ssn)) {
 				$errors['missing value'] = "NationalIdNumber is required for individual customers when countrycode is SE, NO, DK or FI. Use function setNationalIdNumber().";
 			}
@@ -73,15 +73,15 @@ class IdentityValidator {
 	 * @return type
 	 */
 	public function validateNLidentity($order, $errors) {
-		if ($this->isCompany == FALSE && isset($order->customerIdentity->initials) == false) {
+		if ($this->isCompany == false && isset($order->customerIdentity->initials) == false) {
 			$errors['missing value'] = "Initials is required for individual customers when countrycode is NL. Use function setInitials().";
 		}
 
-		if ($this->isCompany == FALSE && isset($order->customerIdentity->birthDate) == false) {
+		if ($this->isCompany == false && isset($order->customerIdentity->birthDate) == false) {
 			$errors['missing value'] = "BirthDate is required for individual customers when countrycode is NL. Use function setBirthDate().";
 		}
 
-		if ($this->isCompany == FALSE && (isset($order->customerIdentity->firstname) == false || isset($order->customerIdentity->lastname) == false)) {
+		if ($this->isCompany == false && (isset($order->customerIdentity->firstname) == false || isset($order->customerIdentity->lastname) == false)) {
 			$errors['missing value'] = "Name is required for individual customers when countrycode is NL. Use function setName().";
 		}
 
@@ -115,11 +115,11 @@ class IdentityValidator {
 	 * @return type
 	 */
 	public function validateDEidentity($order, $errors) {
-		if ($this->isCompany == FALSE && isset($order->customerIdentity->birthDate) == false) {
+		if ($this->isCompany == false && isset($order->customerIdentity->birthDate) == false) {
 			$errors['missing value'] = "BirthDate is required for individual customers when countrycode is DE. Use function setBirthDate().";
 		}
 
-		if ($this->isCompany == FALSE && (isset($order->customerIdentity->firstname) == false || isset($order->customerIdentity->lastname) == false)) {
+		if ($this->isCompany == false && (isset($order->customerIdentity->firstname) == false || isset($order->customerIdentity->lastname) == false)) {
 			$errors['missing value'] = "Name is required for individual customers when countrycode is DE. Use function setName().";
 		}
 

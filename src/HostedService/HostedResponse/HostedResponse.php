@@ -37,10 +37,10 @@ class HostedResponse {
 		$macKey = hash("sha512", $messageEncoded . $secret);
 
 		if ($mac == $macKey) {
-			return TRUE;
+			return true;
 		}
 
-		return FALSE;
+		return false;
 	}
 
 	protected function setErrorParams($resultcode) {

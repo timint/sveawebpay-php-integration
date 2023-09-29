@@ -70,7 +70,7 @@ class DeliverOrderRowsRequest extends AdminServiceRequest {
 	}
 
 	private function validateOrderId($errors) {
-		if (isset($this->orderBuilder->orderId) == FALSE) {
+		if (isset($this->orderBuilder->orderId) == false) {
 			$errors[] = ['missing value' => "orderId is required."];
 		}
 
@@ -78,7 +78,7 @@ class DeliverOrderRowsRequest extends AdminServiceRequest {
 	}
 
 	private function validateOrderType($errors) {
-		if (isset($this->orderBuilder->orderType) == FALSE) {
+		if (isset($this->orderBuilder->orderType) == false) {
 			$errors[] = ['missing value' => "orderType is required."];
 		}
 
@@ -86,7 +86,7 @@ class DeliverOrderRowsRequest extends AdminServiceRequest {
 	}
 
 	private function validateCountryCode($errors) {
-		if (isset($this->orderBuilder->countryCode) == FALSE) {
+		if (isset($this->orderBuilder->countryCode) == false) {
 			$errors[] = ['missing value' => "countryCode is required."];
 		}
 
@@ -94,7 +94,7 @@ class DeliverOrderRowsRequest extends AdminServiceRequest {
 	}
 
 	private function validateRowsToDeliver($errors) {
-		if (isset($this->orderBuilder->rowsToDeliver) == FALSE) {
+		if (isset($this->orderBuilder->rowsToDeliver) == false) {
 			$errors[] = ['missing value' => "rowsToDeliver is required."];
 		}
 

@@ -17,7 +17,7 @@ class HostedOrderValidator extends OrderValidator {
 	 */
 	public function validate($order) {
 		if (isset($order->order->orgNumber) || isset($order->order->companyVatNumber) || isset($order->order->companyName)) {
-			$this->isCompany = TRUE;
+			$this->isCompany = true;
 		}
 
 		$this->errors = $this->validateClientOrderNumber($order->order, $this->errors);
@@ -101,13 +101,13 @@ class HostedOrderValidator extends OrderValidator {
 	}
 
 	public function validateEuroCustomer($order, $errors) {
-		if (isset($order->customerIdentity->initials) == false && $this->isCompany == FALSE && $order->countryCode == "NL") {
+		if (isset($order->customerIdentity->initials) == false && $this->isCompany == false && $order->countryCode == "NL") {
 			$errors['missing value'] = "Initials is required for INVOICE and PAYMENTPLAN payments for individual customers when countrycode is NL. Use function setInitials().";
 		}
-		if (isset($order->customerIdentity->birthDate) == false && $this->isCompany == FALSE) {
+		if (isset($order->customerIdentity->birthDate) == false && $this->isCompany == false) {
 			$errors['missing value'] = "BirthDate is required for INVOICE and PAYMENTPLAN payments for individual customers when countrycode is NL. Use function setBirthDate().";
 		}
-		if (isset($order->customerIdentity->firstname) == false || isset($order->customerIdentity->lastname) == false && $this->isCompany == FALSE) {
+		if (isset($order->customerIdentity->firstname) == false || isset($order->customerIdentity->lastname) == false && $this->isCompany == false) {
 			$errors['missing value'] = "Name is required for INVOICE and PAYMENTPLAN payments for individual customers when countrycode is NL. Use function setName().";
 		}
 		if (isset($order->customerIdentity->companyVatNumber) == false && $this->isCompany == true) {

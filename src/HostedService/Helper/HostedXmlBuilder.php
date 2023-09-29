@@ -21,7 +21,7 @@ class HostedXmlBuilder {
 	 */
 	private $XMLWriter;
 
-	private $isCompany = "FALSE";   // set to true by serializeCustomer if needed.
+	private $isCompany = "false";   // set to true by serializeCustomer if needed.
 
 	/**
 	 * Returns the webservice payment request message xml
@@ -98,7 +98,7 @@ class HostedXmlBuilder {
 		}
 
 		$this->XMLWriter->writeElement("iscompany", $this->isCompany);  // -- used by invoice payment
-		$this->XMLWriter->writeElement("addinvoicefee", "FALSE");	   // -- used by invoice payment
+		$this->XMLWriter->writeElement("addinvoicefee", "false");	   // -- used by invoice payment
 		// iscompany -- optional
 		// addinvoicefee -- optional
 		// addressid -- optional										// -- used by invoice payment
@@ -265,7 +265,7 @@ class HostedXmlBuilder {
 				// companyname	  // -- used by Invoice payment
 				// companyid		// -- used by Invoice payment
 
-				$this->isCompany = "TRUE";
+				$this->isCompany = "true";
 			}
 
 			$this->XMLWriter->endElement();
@@ -319,7 +319,7 @@ class HostedXmlBuilder {
 
 		$this->serializeCustomer($order); // customer		  // -- used by Invoice payment
 		$this->XMLWriter->writeElement("iscompany", $this->isCompany);  // -- used by invoice payment
-		$this->XMLWriter->writeElement("addinvoicefee", "FALSE");	   // -- used by invoice payment
+		$this->XMLWriter->writeElement("addinvoicefee", "false");	   // -- used by invoice payment
 		// addressid													// -- used by invoice payment
 
 		$this->XMLWriter->endElement();

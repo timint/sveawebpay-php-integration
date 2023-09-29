@@ -123,7 +123,7 @@ class LowerTransaction extends HostedRequest {
 	}
 
 	private function validateTransactionId($self, $errors) {
-		if (isset($self->transactionId) == FALSE) {
+		if (isset($self->transactionId) == false) {
 			$errors['missing value'] = "transactionId is required. Use function setTransactionId() with the SveaOrderId from the createOrder response.";
 		}
 
@@ -131,7 +131,7 @@ class LowerTransaction extends HostedRequest {
 	}
 
 	private function validateAmountToLower($self, $errors) {
-		if (isset($self->amountToLower) == FALSE) {
+		if (isset($self->amountToLower) == false) {
 			$errors['missing value'] = "amountToLower is required. Use function setAmountToLower().";
 		}
 

@@ -38,7 +38,7 @@ class QueryTransactionByCustomerRefNo extends HostedRequest {
 	}
 
 	private function validateClientOrderNumber($self, $errors) {
-		if (isset($self->customerRefNo) == FALSE) {
+		if (isset($self->customerRefNo) == false) {
 			$errors['missing value'] = "customerRefNo is required. Use function setClientOrderNumber() with the order number you used when creating the transaction.";
 		}
 

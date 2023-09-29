@@ -47,7 +47,7 @@ class ConfirmTransaction extends HostedRequest {
 	}
 
 	private function validateTransactionId($self, $errors) {
-		if (isset($self->transactionId) == FALSE) {
+		if (isset($self->transactionId) == false) {
 			$errors['missing value'] = "transactionId is required. Use function setTransactionId() with the SveaOrderId from the createOrder response.";
 		}
 
@@ -56,7 +56,7 @@ class ConfirmTransaction extends HostedRequest {
 
 	// this is optional coming through the api, as the orderbuilder deliverCardOrder sets a default capturedate
 	private function validateCaptureDate($self, $errors) {
-		if (isset($self->captureDate) == FALSE) {
+		if (isset($self->captureDate) == false) {
 			$errors['missing value'] = "captureDate is required. Use function setCaptureDate().";
 		}
 

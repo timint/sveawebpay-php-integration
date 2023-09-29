@@ -65,12 +65,12 @@ class DeliverOrdersRequest extends AdminServiceRequest {
 	}
 
 	private function validateDistributionType($errors) {
-		if (isset($this->orderBuilder->distributionType) == FALSE) {
+		if (isset($this->orderBuilder->distributionType) == false) {
 			$errors[] = ['missing value' => "distributionType is required."];
 		}
 		else {
-			if (isset($this->orderBuilder->orderType) == TRUE && $this->orderBuilder->orderType == ConfigurationProvider::INVOICE_TYPE) {
-				if (isset($this->orderBuilder->distributionType) == TRUE && $this->orderBuilder->distributionType == DistributionType::EINVOICEB2B && $this->orderBuilder->countryCode != "NO") {
+			if (isset($this->orderBuilder->orderType) == true && $this->orderBuilder->orderType == ConfigurationProvider::INVOICE_TYPE) {
+				if (isset($this->orderBuilder->distributionType) == true && $this->orderBuilder->distributionType == DistributionType::EINVOICEB2B && $this->orderBuilder->countryCode != "NO") {
 					$errors[] = ['incorrect value' => "distributionType EInvoiceB2B is only allowed for Norway."];
 				}
 			}
@@ -80,7 +80,7 @@ class DeliverOrdersRequest extends AdminServiceRequest {
 	}
 
 	private function validateOrderId($errors) {
-		if (isset($this->orderBuilder->orderId) == FALSE) {
+		if (isset($this->orderBuilder->orderId) == false) {
 			$errors[] = ['missing value' => "orderId is required."];
 		}
 
@@ -88,7 +88,7 @@ class DeliverOrdersRequest extends AdminServiceRequest {
 	}
 
 	private function validateOrderType($errors) {
-		if (isset($this->orderBuilder->orderType) == FALSE) {
+		if (isset($this->orderBuilder->orderType) == false) {
 			$errors[] = ['missing value' => "orderType is required."];
 		}
 
@@ -96,7 +96,7 @@ class DeliverOrdersRequest extends AdminServiceRequest {
 	}
 
 	private function validateCountryCode($errors) {
-		if (isset($this->orderBuilder->countryCode) == FALSE) {
+		if (isset($this->orderBuilder->countryCode) == false) {
 			$errors[] = ['missing value' => "countryCode is required."];
 		}
 

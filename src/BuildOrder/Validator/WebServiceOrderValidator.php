@@ -16,7 +16,7 @@ class WebServiceOrderValidator extends OrderValidator {
 	 * WebServiceOrderValidator constructor.
 	 */
 	function __construct() {
-		$this->isCompany = FALSE;
+		$this->isCompany = false;
 	}
 
 	/**
@@ -28,7 +28,7 @@ class WebServiceOrderValidator extends OrderValidator {
 	 */
 	public function validate($order) {
 		if (isset($order->orgNumber) || isset($order->companyVatNumber) || isset($order->companyName)) {
-			$this->isCompany = TRUE;
+			$this->isCompany = true;
 		}
 
 		if (!isset($order->customerIdentity)) {
@@ -40,12 +40,12 @@ class WebServiceOrderValidator extends OrderValidator {
 			isset($order->customerIdentity->companyName)
 		) {
 
-			$this->isCompany = TRUE;
+			$this->isCompany = true;
 		}
 
 		$identityValidator = new IdentityValidator($this->isCompany);
 
-		if ($order->orderType == ConfigurationProvider::PAYMENTPLAN_TYPE && $this->isCompany == TRUE) {
+		if ($order->orderType == ConfigurationProvider::PAYMENTPLAN_TYPE && $this->isCompany == true) {
 			$this->errors["Wrong customer type"] = "PaymentPlanPayment not allowed for Company customer.";
 		}
 

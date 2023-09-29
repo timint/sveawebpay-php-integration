@@ -62,7 +62,7 @@ class RecurTransaction extends HostedRequest {
 	}
 
 	private function validateAmount($self, $errors) {
-		if (isset($self->amount) == FALSE) {
+		if (isset($self->amount) == false) {
 			$errors['missing value'] = "amount is required. Use function setAmount().";
 		}
 
@@ -70,7 +70,7 @@ class RecurTransaction extends HostedRequest {
 	}
 
 	private function validateCustomerRefNo($self, $errors) {
-		if (isset($self->customerRefNo) == FALSE) {
+		if (isset($self->customerRefNo) == false) {
 			$errors['missing value'] = "customerRefNo is required. Use function setCustomerRefNo (also check setClientOrderNumber in order builder).";
 		}
 
@@ -78,7 +78,7 @@ class RecurTransaction extends HostedRequest {
 	}
 
 	private function validateSubscriptionId($self, $errors) {
-		if (isset($self->subscriptionId) == FALSE) {
+		if (isset($self->subscriptionId) == false) {
 			$errors['missing value'] = "subscriptionId is required. Use function setSubscriptionId() with the subscriptionId from the createOrder response.";
 		}
 

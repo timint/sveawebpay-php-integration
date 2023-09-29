@@ -105,7 +105,7 @@ class CreditAccountCreditRowsRequest extends AdminServiceRequest {
 	}
 
 	public function validateOrderId($errors) {
-		if (isset($this->orderBuilder->orderId) == FALSE) {
+		if (isset($this->orderBuilder->orderId) == false) {
 			$errors[] = ['missing value' => "orderId is required, use setOrderId()."];
 		}
 
@@ -123,7 +123,7 @@ class CreditAccountCreditRowsRequest extends AdminServiceRequest {
 	}
 
 	private function validateOrderType($errors) {
-		if (isset($this->orderBuilder->orderType) == FALSE) {
+		if (isset($this->orderBuilder->orderType) == false) {
 			$errors[] = ['missing value' => "orderType is required."];
 		}
 
@@ -131,7 +131,7 @@ class CreditAccountCreditRowsRequest extends AdminServiceRequest {
 	}
 
 	private function validateCountryCode($errors) {
-		if (isset($this->orderBuilder->countryCode) == FALSE) {
+		if (isset($this->orderBuilder->countryCode) == false) {
 			$errors[] = ['missing value' => "countryCode is required, use setCountryCode()."];
 		}
 

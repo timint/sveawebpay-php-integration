@@ -41,7 +41,7 @@ class CancelRecurSubscription extends HostedRequest {
 	}
 
 	private function validateSubscriptionId($self, $errors) {
-		if (isset($self->subscriptionId) == FALSE) {
+		if (isset($self->subscriptionId) == false) {
 			$errors['missing value'] = "subscriptionId is required. Use function setSubscriptionId() with the subscriptionId from the createOrder response.";
 		}
 

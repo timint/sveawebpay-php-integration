@@ -9,7 +9,7 @@ class SveaIdentity {
 	 */
 	public function __construct($bool = false) {
 		//if Individual
-		if ($bool == FALSE) {
+		if ($bool == false) {
 			$this->FirstName = "";
 			$this->LastName = "";
 			$this->Initials = "";

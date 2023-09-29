@@ -82,7 +82,7 @@ class CreditInvoiceRowsRequest extends AdminServiceRequest {
 	}
 
 	private function validateInvoiceId($errors) {
-		if (isset($this->orderBuilder->invoiceId) == FALSE) {
+		if (isset($this->orderBuilder->invoiceId) == false) {
 			$errors[] = ['missing value' => "invoiceId is required, use setInvoiceId()."];
 		}
 
@@ -90,7 +90,7 @@ class CreditInvoiceRowsRequest extends AdminServiceRequest {
 	}
 
 	private function validateInvoiceDistributionType($errors) {
-		if (isset($this->orderBuilder->distributionType) == FALSE) {
+		if (isset($this->orderBuilder->distributionType) == false) {
 			$errors[] = ['missing value' => "distributionType is required, use setInvoiceDistributionType()."];
 		}
 
@@ -98,7 +98,7 @@ class CreditInvoiceRowsRequest extends AdminServiceRequest {
 	}
 
 	private function validateOrderType($errors) {
-		if (isset($this->orderBuilder->orderType) == FALSE) {
+		if (isset($this->orderBuilder->orderType) == false) {
 			$errors[] = ['missing value' => "orderType is required."];
 		}
 
@@ -106,7 +106,7 @@ class CreditInvoiceRowsRequest extends AdminServiceRequest {
 	}
 
 	private function validateCountryCode($errors) {
-		if (isset($this->orderBuilder->countryCode) == FALSE) {
+		if (isset($this->orderBuilder->countryCode) == false) {
 			$errors[] = ['missing value' => "countryCode is required, use setCountryCode()."];
 		}
 

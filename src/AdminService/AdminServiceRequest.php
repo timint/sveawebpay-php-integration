@@ -156,7 +156,7 @@ abstract class AdminServiceRequest {
 			}
 		}
 		//if at least one of the rows are set as exVat, set priceIncludingVat flag to false
-		$priceIncludingVat = ($exVat >= 1) ? FALSE : TRUE;
+		$priceIncludingVat = ($exVat >= 1) ? false : true;
 
 		return $flipPriceIncludingVat ? !$priceIncludingVat : $priceIncludingVat;
 	}

@@ -67,9 +67,9 @@ class SveaConfigurationProvider implements ConfigurationProvider {
 	private function getCredentialsPropertyByCountry($property, $type, $country) {
 		$uCountry = strtoupper($country);
 
-		if (array_key_exists($uCountry, $this->conf['credentials']) == FALSE) {
+		if (array_key_exists($uCountry, $this->conf['credentials']) == false) {
 			$this->throwInvalidCountryException();
-		} elseif (array_key_exists($type, $this->conf['credentials'][$uCountry]['auth']) == FALSE) {
+		} elseif (array_key_exists($type, $this->conf['credentials'][$uCountry]['auth']) == false) {
 			$this->throwInvalidTypeException($type);
 		}
 
@@ -144,7 +144,7 @@ class SveaConfigurationProvider implements ConfigurationProvider {
 	 * @throws Exception
 	 */
 	public function getEndPoint($type) {
-		if (array_key_exists($type, $this->conf['url']) == FALSE) {
+		if (array_key_exists($type, $this->conf['url']) == false) {
 			$this->throwInvalidTypeException($type);
 		}
 
@@ -162,7 +162,7 @@ class SveaConfigurationProvider implements ConfigurationProvider {
 	}
 
 	private function getIntegrationProperty($property) {
-		if (array_key_exists('integrationproperties', $this->conf) == FALSE) {
+		if (array_key_exists('integrationproperties', $this->conf) == false) {
 			throw new InvalidTypeException("integration properties not set");
 		}
 

@@ -85,7 +85,7 @@ class PaymentForm {
 		$this->rawFields['htmlFormAction'] = $this->endPointUrl;
 	}
 
-	public function setSubmitMessage($countryCode = FALSE) {
+	public function setSubmitMessage($countryCode = false) {
 		switch ($countryCode) {
 			case "SE":
 				$this->submitMessage = "Betala";

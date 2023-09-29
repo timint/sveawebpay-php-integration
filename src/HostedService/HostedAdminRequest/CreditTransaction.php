@@ -44,7 +44,7 @@ class CreditTransaction extends HostedRequest {
 	}
 
 	private function validateTransactionId($self, $errors) {
-		if (isset($self->transactionId) == FALSE) {
+		if (isset($self->transactionId) == false) {
 			$errors['missing value'] = "transactionId is required. Use function setTransactionId() with the SveaOrderId from the createOrder response.";
 		}
 
@@ -52,7 +52,7 @@ class CreditTransaction extends HostedRequest {
 	}
 
 	private function validateCreditAmount($self, $errors) {
-		if (isset($self->creditAmount) == FALSE) {
+		if (isset($self->creditAmount) == false) {
 			$errors['missing value'] = "creditAmount is required. Use function setCreditAmount().";
 		}
 

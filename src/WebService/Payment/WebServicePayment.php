@@ -141,7 +141,7 @@ class WebServicePayment {
 	 */
 	public function formatCustomerDetails() {
 		$isCompany = false;
-		get_class($this->order->customerIdentity) == 'Svea\WebPay\BuildOrder\RowBuilders\CompanyCustomer' ? $isCompany = TRUE : $isCompany = FALSE;
+		get_class($this->order->customerIdentity) == 'Svea\WebPay\BuildOrder\RowBuilders\CompanyCustomer' ? $isCompany = true : $isCompany = false;
 
 		$companyId = "";
 		if (isset($this->order->customerIdentity->orgNumber) || isset($this->order->customerIdentity->companyVatNumber)) {

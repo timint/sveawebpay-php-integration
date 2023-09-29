@@ -45,7 +45,7 @@ class SearchOrdersRequest extends AdminServiceRequest {
 	}
 
 	private function validateOrderId($errors) {
-		if (isset($this->orderBuilder->orderId) == FALSE) {
+		if (isset($this->orderBuilder->orderId) == false) {
 			$errors[] = ['missing value' => "orderId is required."];
 		}
 

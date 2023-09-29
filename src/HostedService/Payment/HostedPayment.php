@@ -185,8 +185,8 @@ class HostedPayment {
 		//validate the order
 		$errors = $this->validateOrder();
 		$exceptionString = "";
-		if (count($errors) > 0 || (isset($this->returnUrl) == FALSE && isset($this->paymentMethod) == FALSE)) {
-			if (isset($this->returnUrl) == FALSE) {
+		if (count($errors) > 0 || (isset($this->returnUrl) == false && isset($this->paymentMethod) == false)) {
+			if (isset($this->returnUrl) == false) {
 				$exceptionString .= "-missing value : ReturnUrl is required. Use function setReturnUrl().\n";
 			}
 
@@ -296,8 +296,8 @@ class HostedPayment {
 		}
 
 		$exceptionString = "";
-		if (count($errors) > 0 || (isset($this->returnUrl) == FALSE && isset($this->paymentMethod) == FALSE)) {
-			if (isset($this->returnUrl) == FALSE) {
+		if (count($errors) > 0 || (isset($this->returnUrl) == false && isset($this->paymentMethod) == false)) {
+			if (isset($this->returnUrl) == false) {
 				$exceptionString .= "-missing value : ReturnUrl is required. Use function setReturnUrl().\n";
 			}
 
