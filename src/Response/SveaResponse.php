@@ -82,7 +82,7 @@ class SveaResponse {
 			if (property_exists($message, "CreateOrderEuResult")) {
 				$this->response = new CreateOrderResponse($message, $log);
 			}
-			elseif (property_exists($message, "GetAddressesResult")) // also legacy getAddresses result {
+			elseif (property_exists($message, "GetAddressesResult")) { // also legacy getAddresses result
 				$this->response = new GetAddressesResponse($message, $log);
 			}
 			elseif (property_exists($message, "GetPaymentPlanParamsEuResult")) {

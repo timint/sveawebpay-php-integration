@@ -57,7 +57,7 @@ class IdentityValidator {
 			if (!isset($order->customerIdentity->ssn) || empty($order->customerIdentity->ssn)) {
 				$errors['missing value'] = "NationalIdNumber is required for individual customers when countrycode is SE, NO, DK or FI. Use function setNationalIdNumber().";
 			}
-		} else	// is company customer {
+		} else { // is company customer
 			if (!isset($order->customerIdentity->orgNumber) || empty($order->customerIdentity->orgNumber)) {
 				$errors['missing value'] = "OrgNumber is required for company customers when countrycode is SE, NO, DK or FI. Use function setNationalIdNumber().";
 			}

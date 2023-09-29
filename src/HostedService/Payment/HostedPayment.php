@@ -255,7 +255,7 @@ class HostedPayment {
 			$this->request['subscriptionId'] = $this->subscriptionId;
 		}
 
-		if (isset($this->order->payerAlias)) // used by Swish {
+		if (isset($this->order->payerAlias)) { // used by Swish
 			$this->request['payerAlias'] = $this->order->payerAlias;
 		}
 
