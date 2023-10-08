@@ -134,16 +134,15 @@ class GetOrdersResponse extends AdminServiceResponse {
 	/**
 	 * GetOrdersResponse constructor.
 	 * @param $message
-	 * @param $logs
 	 */
-	function __construct($message, $logs) {
-		$this->formatObject($message, $logs);
+	function __construct($message) {
+		$this->formatObject($message);
 	}
 
-	protected function formatObject($message, $logs) {
+	protected function formatObject($message) {
 
 		// was request accepted?
-		parent::formatObject($message, $logs);
+		parent::formatObject($message);
 
 		// if successful, set deliverOrderResult, using the same attributes as for DeliverOrderEU?
 		if ($this->accepted == 1) {

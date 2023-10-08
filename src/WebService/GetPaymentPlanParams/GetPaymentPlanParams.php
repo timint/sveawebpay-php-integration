@@ -25,7 +25,7 @@ class GetPaymentPlanParams {
 	public $object;
 	public $conf;
 	public $countryCode;
-	public $logging;
+	public $logFile;
 
 	function __construct($config) {
 		$this->conf = $config;
@@ -34,8 +34,8 @@ class GetPaymentPlanParams {
 	/*
 	 * Enables raw HTTP logs
 	 */
-	public function enableLogging($logging) {
-		$this->logging = $logging;
+	public function setLogFile($file) {
+		$this->logFile = $file;
 
 		return $this;
 	}
@@ -58,9 +58,9 @@ class GetPaymentPlanParams {
 	 */
 	public function doRequest() {
 		$requestObject = $this->prepareRequest();
-		$request = new SveaDoRequest($this->conf, ConfigurationProvider::PAYMENTPLAN_TYPE, "GetPaymentPlanParamsEu", $requestObject, $this->logging);
+		$request = new SveaDoRequest($this->conf, ConfigurationProvider::PAYMENTPLAN_TYPE, "GetPaymentPlanParamsEu", $requestObject, $this->logFile);
 
-		$responseObject = new SveaResponse($request->result['requestResult'], "", null, null, isset($request->result['logs']) ? $request->result['logs'] : null);
+		$responseObject = new SveaResponse($request->result['requestResult'], "", null, null);
 
 		return $responseObject->response;
 	}

@@ -17,9 +17,9 @@ class OrderBuilder {
 	public $testmode = false;
 
 	/**
-	 * @var boolean
+	 * @var string
 	 */
-	public $logging = false;
+	public $logFile;
 	/**
 	 * @var ConfigurationProvider $conf
 	 */
@@ -322,11 +322,11 @@ class OrderBuilder {
 	/**
 	 * Enables/disables logging for raw HTTP requests / responses
 	 *
-	 * @param boolean $status, if true then raw requests / responses will be logged on the order. Disabled by default.
+	 * @param string $file, if set then raw requests / responses will be saved to log file. Unset by default.
 	 * @return $this
 	 */
-	public function enableLogging($status) {
-		$this->logging = $status;
+	public function setLogFile($file) {
+		$this->logFile = $file;
 
 		return $this;
 	}

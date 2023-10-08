@@ -24,9 +24,4 @@ abstract class WebServiceResponse {
 	 * @var int $resultcode response specific result code
 	 */
 	public $resultcode;
-
-	/**
-	 * @var array $logs Raw HTTP request / response logs
-	 */
-	public $logs;
 }

@@ -36,13 +36,12 @@ class GetAccountCreditsResponse {
 	/**
 	 * GetOrdersResponse constructor.
 	 * @param $message
-	 * @param $logs
 	 */
-	function __construct($message, $logs) {
-		$this->formatObject($message, $logs);
+	function __construct($message) {
+		$this->formatObject($message);
 	}
 
-	protected function formatObject($message, $logs) {
+	protected function formatObject($message) {
 		$this->errormessage = isset($message->ErrorMessage) ? $message->ErrorMessage : "";
 		$this->resultcode = $message->ResultCode;
 

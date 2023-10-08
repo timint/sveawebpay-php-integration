@@ -24,23 +24,14 @@ class AdminServiceResponse {
 	public $errormessage;
 
 	/**
-	 * @var $logs
-	 */
-	public $logs;
-
-	/**
 	 * Parses response and sets basic attributes.
 	 * @param $message
 	 * @param $logs
 	 */
-	protected function formatObject($message, $logs) {
+	protected function formatObject($message) {
 		// was request accepted?
 		$this->accepted = $message->ResultCode == 0 ? 1 : 0; // ResultCode of 0 means all went well.
 		$this->errormessage = isset($message->ErrorMessage) ? $message->ErrorMessage : "";
 		$this->resultcode = $message->ResultCode;
-
-		if (isset($logs)) {
-			$this->logs = $logs;
-		}
 	}
 }

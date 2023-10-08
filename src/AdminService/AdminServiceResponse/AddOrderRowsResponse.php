@@ -11,10 +11,9 @@ class AddOrderRowsResponse extends AdminServiceResponse {
 	/**
 	 * AddOrderRowsResponse constructor.
 	 * @param $message
-	 * @param $logs
 	 */
-	function __construct($message, $logs) {
-		$this->formatObject($message, $logs);
+	function __construct($message) {
+		$this->formatObject($message);
 	}
 
 	/**
@@ -22,8 +21,8 @@ class AddOrderRowsResponse extends AdminServiceResponse {
 	 * @param $message
 	 * @param $logs
 	 */
-	protected function formatObject($message, $logs) {
-		parent::formatObject($message, $logs);
+	protected function formatObject($message) {
+		parent::formatObject($message);
 
 		if ($this->accepted == 1) {
 			// nothing to do for cancelOrderRequest response

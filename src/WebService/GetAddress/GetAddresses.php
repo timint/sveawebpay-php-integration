@@ -34,7 +34,7 @@ class GetAddresses {
 	public $companyId;
 	public $ssn;
 	public $testmode = false;
-	public $logging = false;
+	public $logFile;
 	public $request;
 
 	/**
@@ -44,8 +44,9 @@ class GetAddresses {
 		$this->conf = $config;
 	}
 
-	public function enableLogging($logging) {
-		$this->logging = $logging;
+	public function setLogFile($file) {
+		$this->logFile = $file;
+
 		return $this;
 	}
 

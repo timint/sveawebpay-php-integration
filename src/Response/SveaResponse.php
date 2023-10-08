@@ -73,73 +73,73 @@ class SveaResponse {
 	 * @param array $log array of logs from AdminService or WebpayWS
 	 * @throws Exception
 	 */
-	public function __construct($message, $countryCode, $config = null, $method = null, $log = null) {
+	public function __construct($message, $countryCode, $config = null, $method = null) {
 
 		// WebService requests get a stdClass object back from the SoapClient instance
 		if (is_object($message)) {
 
 			// Web Service EU responses
 			if (property_exists($message, "CreateOrderEuResult")) {
-				$this->response = new CreateOrderResponse($message, $log);
+				$this->response = new CreateOrderResponse($message);
 			}
 			elseif (property_exists($message, "GetAddressesResult")) { // also legacy getAddresses result
-				$this->response = new GetAddressesResponse($message, $log);
+				$this->response = new GetAddressesResponse($message);
 			}
 			elseif (property_exists($message, "GetPaymentPlanParamsEuResult")) {
-				$this->response = new PaymentPlanParamsResponse($message, $log);
+				$this->response = new PaymentPlanParamsResponse($message);
 			}
 			elseif (property_exists($message, "DeliverOrderEuResult")) {
-				$this->response = new DeliverOrderResult($message, $log);
+				$this->response = new DeliverOrderResult($message);
 			}
 			elseif (property_exists($message, "GetAccountCreditParamsEuResult")) {
-				$this->response = new AccountCreditParamsResponse($message, $log);
+				$this->response = new AccountCreditParamsResponse($message);
 			}
 			elseif (property_exists($message, "CloseOrderEuResult")) {
-				$this->response = new CloseOrderResult($message, $log);
+				$this->response = new CloseOrderResult($message);
 			} // $method is set for i.e. AdminService requests
 			elseif (isset($method)) {
 				switch ($method) {
 					case "CancelOrder":
-						$this->response = new CancelOrderResponse($message, $log);
+						$this->response = new CancelOrderResponse($message);
 						break;
 					case "DeliverOrders":
-						$this->response = new DeliverOrdersResponse($message, $log);
+						$this->response = new DeliverOrdersResponse($message);
 						break;
 					case "GetOrders":
-						$this->response = new GetOrdersResponse($message, $log);
+						$this->response = new GetOrdersResponse($message);
 						break;
 					case "GetAccountCredits":
-						$this->response = new GetAccountCreditsResponse($message, $log);
+						$this->response = new GetAccountCreditsResponse($message);
 						break;
 					case "CancelOrderRows":
-						$this->response = new CancelOrderRowsResponse($message, $log);
+						$this->response = new CancelOrderRowsResponse($message);
 						break;
 					case "AddOrderRows":
-						$this->response = new AddOrderRowsResponse($message, $log);
+						$this->response = new AddOrderRowsResponse($message);
 						break;
 					case "UpdateOrderRows":
-						$this->response = new UpdateOrderRowsResponse($message, $log);
+						$this->response = new UpdateOrderRowsResponse($message);
 						break;
 					case "UpdateOrder":
-						$this->response = new UpdateOrderResponse($message, $log);
+						$this->response = new UpdateOrderResponse($message);
 						break;
 					case "CreditInvoiceRows":
-						$this->response = new CreditInvoiceRowsResponse($message, $log);
+						$this->response = new CreditInvoiceRowsResponse($message);
 						break;
 					case "DeliverPartial":
-						$this->response = new DeliverPartialResponse($message, $log);
+						$this->response = new DeliverPartialResponse($message);
 						break;
 					case "CancelPaymentPlanRows":
-						$this->response = new CreditPaymentPlanResponse($message, $log);
+						$this->response = new CreditPaymentPlanResponse($message);
 						break;
 					case "CancelPaymentPlanAmount":
-						$this->response = new CreditPaymentPlanResponse($message, $log);
+						$this->response = new CreditPaymentPlanResponse($message);
 						break;
 					case "CancelAccountCreditAmount":
-						$this->response = new CancelAccountCreditAmount($message, $log);
+						$this->response = new CancelAccountCreditAmount($message);
 						break;
 					case "CancelAccountCreditRows":
-						$this->response = new CancelAccountCreditRows($message, $log);
+						$this->response = new CancelAccountCreditRows($message);
 						break;
 					default:
 						throw new Exception("unknown method: $method");

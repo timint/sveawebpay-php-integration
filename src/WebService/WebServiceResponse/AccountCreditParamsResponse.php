@@ -34,9 +34,8 @@ class AccountCreditParamsResponse extends WebServiceResponse {
 	/**
 	 * AccountCreditParamsResponse constructor.
 	 * @param $response
-	 * @param $logs
 	 */
-	public function __construct($response, $logs) {
+	public function __construct($response) {
 		// was request accepted?
 		$this->accepted = $response->GetAccountCreditParamsEuResult->Accepted;
 
@@ -44,10 +43,6 @@ class AccountCreditParamsResponse extends WebServiceResponse {
 		$this->resultcode = $response->GetAccountCreditParamsEuResult->ResultCode;
 
 		$this->errormessage = isset($response->GetAccountCreditParamsEuResult->ErrorMessage) ? $response->GetAccountCreditParamsEuResult->ErrorMessage : "";
-
-		if (isset($logs)) {
-			$this->logs = $logs;
-		}
 
 		// set response attributes
 		if ($this->accepted == 1) {

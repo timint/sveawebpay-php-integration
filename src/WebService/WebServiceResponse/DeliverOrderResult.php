@@ -57,13 +57,9 @@ class DeliverOrderResult extends WebServiceResponse {
 	 * @param $response
 	 * @param $logs
 	 */
-	public function __construct($response, $logs) {
+	public function __construct($response) {
 		$this->accepted = $response->DeliverOrderEuResult->Accepted;
 		$this->resultcode = $response->DeliverOrderEuResult->ResultCode;
-
-		if (isset($logs)) {
-			$this->logs = $logs;
-		}
 
 		if (isset($response->DeliverOrderEuResult->ErrorMessage)) {
 			$this->errormessage = $response->DeliverOrderEuResult->ErrorMessage;

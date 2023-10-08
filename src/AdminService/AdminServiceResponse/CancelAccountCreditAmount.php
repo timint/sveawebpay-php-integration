@@ -11,9 +11,8 @@ class CancelAccountCreditAmount extends AdminServiceResponse {
 	/**
 	 * CreditPaymentPlanResponse constructor.
 	 * @param $message
-	 * @param $logs
 	 */
-	function __construct($message, $logs) {
-		$this->formatObject($message, $logs);
+	function __construct($message) {
+		$this->formatObject($message);
 	}
 }

@@ -2955,7 +2955,7 @@ Which is about as exact as we can get. (Unfortunately there is no way to introdu
 
 ### 9.4 Logging Raw HTTP Requests <a name="i9-4"></a>
 
-You're able to fetch raw http logs to help debug problems that might occur, to enable logging you just have to call the enableLogging method on the request that you're building like this:
+You're able to fetch raw http logs to help debug problems that might occur, to enable logging you just have to call the setLogFile method on the request that you're building like this:
 
 Request:
 ```php
@@ -2965,7 +2965,7 @@ $svea_order_id = 1048731;
 $svea_query = WebPayAdmin::queryOrder(ConfigurationService::getTestConfig())
     ->setOrderId($svea_order_id)
     ->setCountryCode('SE')
-    ->enableLogging(true)
+    ->setLogFile('/path/to/file.log')
     ->queryAccountCreditOrder()
     ->doRequest();
 ```

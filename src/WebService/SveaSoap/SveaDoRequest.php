@@ -22,40 +22,59 @@ class SveaDoRequest {
 	 * @param string $ordertype -- see Svea\WebPay\Config\ConfigurationProvider:: constants
 	 * @param string $method Method to call by soap
 	 * @param object $object Object to pass in soap call
-	 * @param bool $logging
+	 * @param string $logFile
 	 */
-	public function __construct($config, $ordertype, $method, $object, $logging = false) {
+	public function __construct($config, $ordertype, $method, $object, $logFile) {
 		$this->svea_server = $config->getEndPoint($ordertype);
 		$this->client = $this->SetSoapClient($config);
-		$this->result = $this->CallSoap($method, $object, $logging);
+		$this->result = $this->CallSoap($method, $object, $logFile);
 	}
 
-	private function CallSoap($method, $order, $logging) {
+	private function CallSoap($method, $order, $logFile) {
 
 		$params = (array)$order;
-		if ($logging == true) {
+
+		if ($logFile) {
 			$timestampStart = time();
 			$microtimeStart = microtime(true);
 		}
-		$result = ["requestResult" => $this->client->__soapCall($method, [$params])];
-		if ($logging == true) {
-			$logs = [
-				"logs" => [
-					"request" => [
-						"timestamp" => $timestampStart,
-						"headers" => $this->client->__getLastRequestHeaders(),
-						"body" => htmlentities($this->client->__getLastRequest())
-					],
-					"response" => [
-						"timestamp" => time(),
-						"headers" => $this->client->__getLastResponseHeaders(),
-						"body" => htmlentities($this->client->__getLastResponse()),
-						"dataAmount" => strlen($this->client->__getLastResponseHeaders()) + strlen($this->client->__getLastResponse()),
-						"duration" => round(microtime(true) - $microtimeStart, 3)
-					]
-				]];
-			$result = array_merge($result, $logs);
+
+		try {
+			$result = ["requestResult" => $this->client->__soapCall($method, [$params])];
+		} catch (\SoapFault $soapFault) {
+			$error = $soapFault;
 		}
+
+		if ($logFile) {
+			$log = [
+				"request" => [
+					"timestamp" => $timestampStart,
+					"headers" => $this->client->__getLastRequestHeaders(),
+					"body" => $this->prettyPrintXml($this->client->__getLastRequest())
+				],
+				"response" => [
+					"timestamp" => time(),
+					"headers" => $this->client->__getLastResponseHeaders(),
+					"body" => $this->prettyPrintXml($this->client->__getLastResponse()),
+					"dataAmount" => strlen($this->client->__getLastResponseHeaders()) + strlen($this->client->__getLastResponse()),
+					"duration" => round(microtime(true) - $microtimeStart, 3)
+				]
+			];
+
+			file_put_contents($logFile,
+				'##'. str_pad(' ['. date('Y-m-d H:i:s', $log['request']['timestamp']) .'] Request ', 70, '#', STR_PAD_RIGHT) . "\r\n\r\n" .
+				$log['request']['headers'] . "\r\n" .
+				$log['request']['body'] . "\r\n\r\n" .
+				'##'. str_pad(' ['. date('Y-m-d H:i:s', $log['response']['timestamp']) .'] Response — '. $log['response']['dataAmount'] .' bytes transferred in '. $log['response']['duration'] .' s ', 72, '#', STR_PAD_RIGHT) . "\r\n\r\n" .
+				$log['response']['headers'] . "\r\n" .
+				$log['response']['body']
+			);
+		}
+
+		if (!empty($error)) {
+			throw $error;
+		}
+
 		return $result;
 	}
 
@@ -84,5 +103,16 @@ class SveaDoRequest {
 			]
 		);
 		return $client;
+	}
+
+	private function prettyPrintXml(string $xml) {
+
+		$dom = new \DOMDocument('1.0');
+		$dom->preserveWhiteSpace = false;
+		$dom->formatOutput = true;
+		$dom->loadXML($xml);
+		$xml = $dom->saveXML();
+
+		return $xml;
 	}
 }

@@ -36,19 +36,17 @@ class CreditInvoiceRowsResponse extends AdminServiceResponse {
 	/**
 	 * CreditInvoiceRowsResponse constructor.
 	 * @param $message
-	 * @param $logs
 	 */
-	function __construct($message, $logs) {
-		$this->formatObject($message, $logs);
+	function __construct($message) {
+		$this->formatObject($message);
 	}
 
 	/**
 	 * Parses response and sets attributes.
 	 * @param $message
-	 * @param $logs
 	 */
-	protected function formatObject($message, $logs) {
-		parent::formatObject($message, $logs);
+	protected function formatObject($message) {
+		parent::formatObject($message);
 
 		if ($this->accepted == 1) {
 			$this->amount = (-1) * $message->OrdersDelivered->DeliverOrderResult->DeliveredAmount;

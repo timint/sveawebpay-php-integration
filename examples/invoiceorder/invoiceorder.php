@@ -132,7 +132,6 @@ Svea\WebPay\WebService\WebServiceResponse\CreateOrderResponse Object {
 	[accepted] => true
 	[errormessage] =>
 	[resultcode] => 0
-	[logs] => NULL
   }
 </pre>";
 

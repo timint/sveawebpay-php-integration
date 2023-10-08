@@ -48,14 +48,13 @@ class DeliverOrdersResponse extends AdminServiceResponse {
 	/**
 	 * DeliverOrdersResponse constructor.
 	 * @param $message
-	 * @param $logs
 	 */
-	function __construct($message, $logs) {
-		$this->formatObject($message, $logs);
+	function __construct($message) {
+		$this->formatObject($message);
 	}
 
-	protected function formatObject($message, $logs) {
-		parent::formatObject($message, $logs);
+	protected function formatObject($message) {
+		parent::formatObject($message);
 
 		if ($this->accepted == 1) {
 

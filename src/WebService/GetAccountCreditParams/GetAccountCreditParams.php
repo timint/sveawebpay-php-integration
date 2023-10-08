@@ -25,7 +25,7 @@ class GetAccountCreditParams {
 	public $object;
 	public $conf;
 	public $countryCode;
-	public $logging = false;
+	public $logFile;
 
 	function __construct($config) {
 		$this->conf = $config;
@@ -46,11 +46,11 @@ class GetAccountCreditParams {
 	/**
 	 * Optional
 	 *
-	 * @param bool $logging
+	 * @param string $file
 	 * @return $this
 	 */
-	public function enableLogging($logging) {
-		$this->logging = $logging;
+	public function setLogFile($file) {
+		$this->logFile = $file;
 
 		return $this;
 	}
