@@ -30,7 +30,6 @@ class ConfigurationService {
 	const CHECKOUT_ADMIN_TEST_BASE_URL = Connector::TEST_ADMIN_BASE_URL;
 	const CHECKOUT_ADMIN_PROD_BASE_URL = Connector::PROD_ADMIN_BASE_URL;
 
-
 	/**
 	 * @return SveaConfigurationProvider
 	 */
@@ -183,10 +182,10 @@ class ConfigurationService {
 
 	private static function retrieveConfigFile($isProd) {
 		if ($isProd === true) {
-			$config = require 'config_prod.php';
+			$config = require rtrim(__DIR__,'/').'/../../config_prod.php';;
 			$urls = self::getProdUrls();
 		} else {
-			$config = require 'config_test.php';
+			$config = require rtrim(__DIR__,'/').'/../../config_test.php';;
 			$urls = self::getTestUrls();
 		}
 
