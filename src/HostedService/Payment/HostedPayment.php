@@ -97,7 +97,6 @@ class HostedPayment {
 	public function __construct($order) {
 		$this->langCode = "en";
 		$this->order = $order;
-		$this->logFile = $logFile;
 		$this->request = [];
 	}
 
@@ -367,6 +366,12 @@ class HostedPayment {
 		//returns a html page with redirecting to bank...
 		$response = curl_exec($ch);
 
+		$responseXML = substr($response, curl_getinfo($ch, CURLINFO_HEADER_SIZE));
+
+		// create Svea\WebPay\Response\SveaResponse to handle response
+		$responseObj = new SimpleXMLElement($responseXML);
+		$sveaResponse = new SveaResponse($responseObj, $this->countryCode, $this->config);
+
 		if ($this->order->logFile) {
 			$log = [
 				'request' => [
@@ -392,17 +397,13 @@ class HostedPayment {
 			  $log['request']['body'] . PHP_EOL . PHP_EOL .
 			  '##'. str_pad(' ['. date('Y-m-d H:i:s', $log['response']['timestamp']) .'] Response — '. (float)$log['response']['dataAmount'] .' bytes transferred in '. round((float)$log['response']['duration'], 3) .' s ', 72, '#', STR_PAD_RIGHT) . PHP_EOL . PHP_EOL .
 			  $log['response']['headers'] .
-			  $log['response']['body'] . PHP_EOL . PHP_EOL
+			  $log['response']['body'] . PHP_EOL . PHP_EOL .
+			  '## '. str_pad(' Decoded Message ', 70, '#', STR_PAD_RIGHT) . PHP_EOL . PHP_EOL .
+			  $this->prettyPrintXml(base64_decode($responseObj->message)) . PHP_EOL . PHP_EOL
 			);
 		}
 
-		$responseXML = substr($response, curl_getinfo($ch, CURLINFO_HEADER_SIZE));
-
 		curl_close($ch);
-
-		// create Svea\WebPay\Response\SveaResponse to handle response
-		$responseObj = new SimpleXMLElement($responseXML);
-		$sveaResponse = new SveaResponse($responseObj, $this->countryCode, $this->config);
 
 		return $sveaResponse->response;
 	}
