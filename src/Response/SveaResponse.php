@@ -73,7 +73,7 @@ class SveaResponse {
 	 * @param array $log array of logs from AdminService or WebpayWS
 	 * @throws Exception
 	 */
-	public function __construct($message, $countryCode, $config = NULL, $method = NULL, $log = NULL) {
+	public function __construct($message, $countryCode, $config = null, $method = null, $log = null) {
 
 		// WebService requests get a stdClass object back from the SoapClient instance
 		if (is_object($message)) {
@@ -150,7 +150,7 @@ class SveaResponse {
 				$this->response = new HostedAdminResponse($message, $countryCode, $config);
 			}
 		} // webservice hosted payment
-		elseif ($message != NULL) {
+		elseif ($message != null) {
 			$this->response = new HostedPaymentResponse($message, $countryCode, $config);
 		}
 		else {

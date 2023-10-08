@@ -31,7 +31,7 @@ class DeliverPaymentPlan extends HandleOrder {
 	public function doRequest() {
 		$requestObject = $this->prepareRequest();
 		$request = new SveaDoRequest($this->orderBuilder->conf, $this->orderBuilder->orderType, "DeliverOrderEu", $requestObject, $this->orderBuilder->logging);
-		$responseObject = new SveaResponse($request->result['requestResult'], "", NULL, NULL, isset($request->result['logs']) ? $request->result['logs'] : NULL);
+		$responseObject = new SveaResponse($request->result['requestResult'], "", null, null, isset($request->result['logs']) ? $request->result['logs'] : null);
 
 		return $responseObject->response;
 	}

@@ -162,7 +162,7 @@ class GetAddresses {
 	public function doRequest() {
 		$preparedRequest = $this->prepareRequest();
 		$request = new SveaDoRequest($this->conf, $this->orderType, "GetAddresses", $preparedRequest, $this->logging);
-		$response = new SveaResponse($request->result['requestResult'], "", NULL, NULL, isset($request->result['logs']) ? $request->result['logs'] : NULL);
+		$response = new SveaResponse($request->result['requestResult'], "", null, null, isset($request->result['logs']) ? $request->result['logs'] : null);
 
 		return $response->response;
 	}

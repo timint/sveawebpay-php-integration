@@ -34,7 +34,7 @@ class PaymentForm {
 	 * @param ConfigurationProvider $config
 	 * @param string $countryCode
 	 */
-	function __construct($xmlMessage, $config, $countryCode = NULL) {
+	function __construct($xmlMessage, $config, $countryCode = null) {
 		$this->xmlMessage = $xmlMessage;
 		$this->xmlMessageBase64 = base64_encode($xmlMessage);
 		$this->endPointUrl = $config->getEndPoint(ConfigurationProvider::HOSTED_TYPE);

@@ -29,7 +29,7 @@ class WebServiceRowFormatter {
 	 * @param $order
 	 * @param $resendOrderVat
 	 */
-	public function __construct($order, $resendOrderVat = NULL) {
+	public function __construct($order, $resendOrderVat = null) {
 		$this->order = $order;
 		$this->resendOrderVat = $resendOrderVat;
 
@@ -42,7 +42,7 @@ class WebServiceRowFormatter {
 
 		$this->calculateTotals();
 
-		if ($this->resendOrderVat === NULL) {
+		if ($this->resendOrderVat === null) {
 			$this->determineVatFlag();
 		} else {
 			$this->priceIncludingVat = $this->resendOrderVat ? false : true;

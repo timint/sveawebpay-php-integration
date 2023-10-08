@@ -22,7 +22,7 @@ class SveaAuth {
 	 * @param string $Password
 	 * @param string $ClientNumber
 	 */
-	function __construct($Username = NULL, $Password = NULL, $ClientNumber = NULL) {
+	function __construct($Username = null, $Password = null, $ClientNumber = null) {
 		if ($Username) $this->Username = $Username;
 		if ($Password) $this->Password = $Password;
 		if ($ClientNumber) $this->ClientNumber = $ClientNumber;

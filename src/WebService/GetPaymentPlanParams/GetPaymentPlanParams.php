@@ -60,7 +60,7 @@ class GetPaymentPlanParams {
 		$requestObject = $this->prepareRequest();
 		$request = new SveaDoRequest($this->conf, ConfigurationProvider::PAYMENTPLAN_TYPE, "GetPaymentPlanParamsEu", $requestObject, $this->logging);
 
-		$responseObject = new SveaResponse($request->result['requestResult'], "", NULL, NULL, isset($request->result['logs']) ? $request->result['logs'] : NULL);
+		$responseObject = new SveaResponse($request->result['requestResult'], "", null, null, isset($request->result['logs']) ? $request->result['logs'] : null);
 
 		return $responseObject->response;
 	}

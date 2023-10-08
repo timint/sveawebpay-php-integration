@@ -47,7 +47,7 @@ class WebServicePayment {
 		$object = $this->prepareRequest();
 
 		$request = new SveaDoRequest($this->order->conf, $this->orderType, "CreateOrderEu", $object, $this->order->logging);
-		$response = new SveaResponse($request->result['requestResult'], "", NULL, NULL, isset($request->result['logs']) ? $request->result['logs'] : NULL);
+		$response = new SveaResponse($request->result['requestResult'], "", null, null, isset($request->result['logs']) ? $request->result['logs'] : null);
 
 
 		return $response->getResponse();

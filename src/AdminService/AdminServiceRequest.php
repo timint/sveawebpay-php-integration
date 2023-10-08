@@ -32,7 +32,7 @@ abstract class AdminServiceRequest {
 	 */
 	protected $priceIncludingVat;
 
-	protected $resendOrderVat = NULL;
+	protected $resendOrderVat = null;
 
 	public $logging = false;
 
@@ -90,7 +90,7 @@ abstract class AdminServiceRequest {
 					]
 				]];
 		}
-		$sveaResponse = new SveaResponse($soapResponse, null, null, $this->action, isset($logs['logs']) ? $logs['logs'] : NULL);
+		$sveaResponse = new SveaResponse($soapResponse, null, null, $this->action, isset($logs['logs']) ? $logs['logs'] : null);
 		$response = $sveaResponse->getResponse();
 
 		// iff error 50036, flip priceIncludingVat and resend enforcing flipped value

@@ -194,7 +194,7 @@ class HostedXmlBuilder {
 		$this->XMLWriter->endElement();
 	}
 
-	private function serializeCustomer($order, $paymentMethod = NULL) {
+	private function serializeCustomer($order, $paymentMethod = null) {
 		$this->XMLWriter->startElement("customer");
 
 		if (isset($paymentMethod) && $paymentMethod == "SVEACARDPAY_PF") {

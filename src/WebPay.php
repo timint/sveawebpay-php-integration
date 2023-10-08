@@ -90,8 +90,8 @@ class WebPay {
 	 * @throws \Svea\WebPay\BuildOrder\Validator\ValidationException
 	 *
 	 */
-	public static function createOrder($config = NULL) {
-		if ($config == NULL) {
+	public static function createOrder($config = null) {
+		if ($config == null) {
 			WebPay::throwMissingConfigException();
 		}
 
@@ -154,8 +154,8 @@ class WebPay {
 	 * @return \Svea\WebPay\BuildOrder\DeliverOrderBuilder
 	 * @throws \Svea\WebPay\BuildOrder\Validator\ValidationException
 	 */
-	public static function deliverOrder($config = NULL) {
-		if ($config == NULL) {
+	public static function deliverOrder($config = null) {
+		if ($config == null) {
 			WebPay::throwMissingConfigException();
 		}
 
@@ -209,8 +209,8 @@ class WebPay {
 	 * @param ConfigurationProvider $config instance implementing Svea\WebPay\Config\ConfigurationProvider Interface
 	 * @throws \Svea\WebPay\BuildOrder\Validator\ValidationException
 	 */
-	public static function getAddresses($config = NULL) {
-		if ($config == NULL) {
+	public static function getAddresses($config = null) {
+		if ($config == null) {
 			WebPay::throwMissingConfigException();
 		}
 
@@ -227,8 +227,8 @@ class WebPay {
 	 * @param ConfigurationProvider $config instance implementing Svea\WebPay\Config\ConfigurationProvider
 	 * @throws \Svea\WebPay\BuildOrder\Validator\ValidationException
 	 */
-	public static function getPaymentPlanParams($config = NULL) {
-		if ($config == NULL) {
+	public static function getPaymentPlanParams($config = null) {
+		if ($config == null) {
 			WebPay::throwMissingConfigException();
 		}
 
@@ -245,8 +245,8 @@ class WebPay {
 	 * @param ConfigurationProvider $config instance implementing Svea\WebPay\Config\ConfigurationProvider
 	 * @throws \Svea\WebPay\BuildOrder\Validator\ValidationException
 	 */
-	public static function getAccountCreditParams($config = NULL) {
-		if ($config == NULL) {
+	public static function getAccountCreditParams($config = null) {
+		if ($config == null) {
 			WebPay::throwMissingConfigException();
 		}
 
@@ -266,8 +266,8 @@ class WebPay {
 	 * @return string[] array of available paymentmethods for this Svea\WebPay\Config\ConfigurationProvider
 	 * @throws \Svea\WebPay\BuildOrder\Validator\ValidationException
 	 */
-	public static function getPaymentMethods($config = NULL) {
-		if ($config == NULL) {
+	public static function getPaymentMethods($config = null) {
+		if ($config == null) {
 			WebPay::throwMissingConfigException();
 		}
 
@@ -286,8 +286,8 @@ class WebPay {
 	 * @return \Svea\WebPay\BuildOrder\CloseOrderBuilder
 	 * @throws \Svea\WebPay\BuildOrder\Validator\ValidationException
 	 */
-	public static function closeOrder($config = NULL) {
-		if ($config == NULL) {
+	public static function closeOrder($config = null) {
+		if ($config == null) {
 			WebPay::throwMissingConfigException();
 		}
 
@@ -330,7 +330,7 @@ class WebPay {
 	 * @throws \Svea\WebPay\BuildOrder\Validator\ValidationException
 	 */
 	static function listPaymentMethods($config) {
-		if ($config == NULL) {
+		if ($config == null) {
 			WebPay::throwMissingConfigException();
 		}
 

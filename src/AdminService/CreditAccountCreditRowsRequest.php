@@ -54,7 +54,7 @@ class CreditAccountCreditRowsRequest extends AdminServiceRequest {
 		return $soapRequest;
 	}
 
-	protected function getAdminSoapOrderRowsFromBuilderOrderRowsUsingVatFlag($builderOrderRows, $priceIncludingVat = NULL) {
+	protected function getAdminSoapOrderRowsFromBuilderOrderRowsUsingVatFlag($builderOrderRows, $priceIncludingVat = null) {
 		$amount = 0;
 		$orderRows = [];
 		//if orderrownumber is set, create an orderrow with dummy values. Will be ignored in Svea\WebPay\WebPay WS

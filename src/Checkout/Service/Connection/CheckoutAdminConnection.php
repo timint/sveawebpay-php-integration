@@ -32,7 +32,7 @@ class CheckoutAdminConnection {
 	 * CheckoutServiceConnection constructor.
 	 * @param $config
 	 */
-	public function __construct(ConfigurationProvider $config, $countryCode = NULL) {
+	public function __construct(ConfigurationProvider $config, $countryCode = null) {
 		$this->config = $config;
 		$this->countryCode = $countryCode;
 

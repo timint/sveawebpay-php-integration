@@ -43,7 +43,7 @@ class DeliverAccountCredit extends HandleOrder {
 
 		$request = new SveaDoRequest($this->orderBuilder->conf, $this->orderBuilder->orderType, "DeliverOrderEu", $requestObject, $this->orderBuilder->logging);
 
-		$responseObject = new SveaResponse($request->result['requestResult'], "", NULL, NULL, isset($request->result['logs']) ? $request->result['logs'] : NULL);
+		$responseObject = new SveaResponse($request->result['requestResult'], "", null, null, isset($request->result['logs']) ? $request->result['logs'] : null);
 
 		if ($responseObject->response->resultcode == "50036") {
 			$requestObject = $this->prepareRequest($priceIncludingVat);
@@ -58,7 +58,7 @@ class DeliverAccountCredit extends HandleOrder {
 	 * Returns prepared request
 	 * @return SveaRequest
 	 */
-	public function prepareRequest($priceIncludingVat = NULL) {
+	public function prepareRequest($priceIncludingVat = null) {
 		$errors = $this->validateRequest();
 
 		$sveaDeliverOrder = new SveaDeliverOrder;

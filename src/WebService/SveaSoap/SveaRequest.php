@@ -16,7 +16,7 @@ class SveaRequest {
 	/**
 	 * @param mixed $request if not set, will do nothing
 	 */
-	function __construct($request = NULL) {
+	function __construct($request = null) {
 		if ($request) {
 			$this->request = $request;
 		}

@@ -99,7 +99,7 @@ class CreditAmountRequest extends AdminServiceRequest {
 		return $errors;
 	}
 
-	protected function getAdminSoapOrderRowsFromBuilderOrderRowsUsingVatFlag($builderOrderRows, $priceIncludingVat = NULL) {
+	protected function getAdminSoapOrderRowsFromBuilderOrderRowsUsingVatFlag($builderOrderRows, $priceIncludingVat = null) {
 		$amount = 0;
 		$orderRows = [];
 		foreach ($builderOrderRows as $orderRow) {
