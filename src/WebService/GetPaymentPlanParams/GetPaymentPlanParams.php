@@ -36,6 +36,8 @@ class GetPaymentPlanParams {
 	 */
 	public function enableLogging($logging) {
 		$this->logging = $logging;
+
+		return $this;
 	}
 	/**
 	 * Required
