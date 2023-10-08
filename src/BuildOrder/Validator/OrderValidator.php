@@ -222,7 +222,7 @@ abstract class OrderValidator {
 	 *
 	 * @param string $url
 	 * @return bool
-	 */ 
+	 */
 	public function validUrl($url) {
 		return (bool) filter_var($url, FILTER_VALIDATE_URL);
 	}

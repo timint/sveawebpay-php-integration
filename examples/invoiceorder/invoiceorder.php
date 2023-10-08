@@ -106,9 +106,9 @@ Svea\WebPay\WebService\WebServiceResponse\CreateOrderResponse Object {
 	[customerIdentity] => Svea\WebPay\WebService\WebServiceResponse\CustomerIdentity\CreateOrderIdentity) Object
 		(
 			[email] => email@address.se
-			[ipAddress] => 
+			[ipAddress] =>
 			[countryCode] => SE
-			[houseNumber] => 
+			[houseNumber] =>
 			[customerType] => Individual
 			[nationalIdNumber] => 194605092222
 			[phoneNumber] => 070123456789
@@ -117,7 +117,7 @@ Svea\WebPay\WebService\WebServiceResponse\CreateOrderResponse Object {
 			[coAddress] => c/o Eriksson, Erik
 			[zipCode] => 99999
 			[locality] => Stan
-			[publicKey] => 
+			[publicKey] =>
 		)
 	}
 	[expirationDate] => 2023-01-01T00:00:00+01:00

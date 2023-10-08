@@ -586,8 +586,8 @@ You can customise which payment methods to display, using the PayPagePayment met
 Available payment methods are listed in the PaymentMethod class and the [Appendix](#appendix).
 
 ### 4.6 Svea Checkout <a name="i4-6"></a>
-The checkout offers a complete solution with a variety of payment methods. The underlying systems for the checkout is our payment plan, invoice and account payments. 
-Also including our own payment gateway with PCI level 1 for card payments. 
+The checkout offers a complete solution with a variety of payment methods. The underlying systems for the checkout is our payment plan, invoice and account payments.
+Also including our own payment gateway with PCI level 1 for card payments.
 The checkout supports both B2C and B2B payments, fast customer identification and caches customers behaviour.
 
 #### 4.6.1 Create Checkout Order <a name="i4-6-1"></a>
@@ -886,7 +886,7 @@ Array
             [PaymentPlanType] => 2
             [ToAmount] => 50000
         )
-        
+
     [1] => Array
         (
             [CampaignCode] => 223065
@@ -977,7 +977,7 @@ If you're testing Swish payments in stage, you can set any valid number and the 
         ->usePaymentMethod(PaymentMethod::SWISH)            //Set payment method to SWISH
         ->setReturnUrl("http://myurl.se")                   //Required, this is where the user will be redirected after a successful payment
         ->setCallbackUrl("http://myurl.se/callback")        //Optional, however VERY recommended as redirects from Swish to returnUrl might fail
-        ->getPaymentForm();                                 
+        ->getPaymentForm();
 ...
 ```
 ### 4.9 Examples  <a name="i4-9"></a>
@@ -1718,7 +1718,7 @@ $response = WebPayAdmin::queryTaskInfo($testConfig)
         ->setTaskUrl($taskUrl)
         ->getTaskInfo()
         ->doRequest();
-        
+
 ...
 ```
 
@@ -1727,7 +1727,7 @@ $response = WebPayAdmin::queryTaskInfo($testConfig)
 The WebPayAdmin::cancelOrder() entrypoint method is used to cancel an order with Svea,
 that has not yet been delivered (invoice, payment plan) or confirmed (card).
 
-Supports Invoice, Payment Plan, Card orders and also orders made in the checkout using those payment methods. 
+Supports Invoice, Payment Plan, Card orders and also orders made in the checkout using those payment methods.
 
 Direct Bank orders need to be credited instead, see [7.5 WebPayAdmin::creditOrderRows()](#i7-5).
 
@@ -1759,7 +1759,7 @@ For Checkout, cancelOrder() supports and canceling amount of an order.
             ->setCheckoutOrderId($sveaCheckoutOrderId)
             ->setAmountIncVat(5.00)
             ->cancelCheckoutOrderAmount();
-    
+
     $response = $request->doRequest();
 ...
 ```
@@ -1897,7 +1897,7 @@ transaction and send the request using the creditOrderRowsBuilder methods:
 ...
 $request = WebPayAdmin::creditOrderRows($config)
   ->setCheckoutOrderId()          // required for checkout orders
-  ->setDeliveryId()               // required for checkout orders, found in the response from a delivery action    
+  ->setDeliveryId()               // required for checkout orders, found in the response from a delivery action
   ->setInvoiceId()                // required for invoice
   ->setInvoiceDistributionType()  // required for invoice
   ->setContractNumber()           // required for payment plan
@@ -2127,7 +2127,7 @@ transaction and send the request using the CreditAmountBuilder methods:
 ...
 $request = WebPayAdmin::creditAmount($myConfig)
         ->setCheckoutOrderId($sveaCheckoutOrderId) // required
-        ->setDeliveryId(1) // required for checkout orders, found in the response from a delivery action   
+        ->setDeliveryId(1) // required for checkout orders, found in the response from a delivery action
         ->setAmountIncVat(20.00)
         ->creditCheckoutAmount()
         ->doRequest();
@@ -2142,9 +2142,9 @@ WebPayAdmin::creditOrderRows is used to credit a single order row or several
 ...
 $creditOrderRowsBuilder = WebPayAdmin::creditOrderRows($testConfig)
     ->setCheckoutOrderId($sveaCheckoutOrderId) // Set the checkout order id
-    ->setDeliveryId(1)      // required for checkout orders, found in the response from a delivery action   
+    ->setDeliveryId(1)      // required for checkout orders, found in the response from a delivery action
     ->setRowsToCredit(2);   // This will credit the second order row, can also be an array of rows
-            
+
 $response = $creditOrderRowsBuilder->creditCheckoutOrderRows()->doRequest();
 ...
 ```
@@ -2157,7 +2157,7 @@ If you want to create a new order row in which you wish to specify an amount whi
 ...
 $creditOrderRowsBuilder = WebPayAdmin::creditOrderRows($testConfig)
         ->setCheckoutOrderId($sveaCheckoutOrderId)
-        ->setDeliveryId(1) // required for checkout orders, found in the response from a delivery action   
+        ->setDeliveryId(1) // required for checkout orders, found in the response from a delivery action
 
     $myCreditRow = WebPayItem::orderRow()
         ->setAmountIncVat(300.00)
@@ -2993,7 +2993,7 @@ if(Helper::isValidPeppolId($var))
 }
 else
 {
-    // Not Valid Peppol-ID    
+    // Not Valid Peppol-ID
 }
 
 
