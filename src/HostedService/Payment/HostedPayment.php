@@ -345,8 +345,11 @@ class HostedPayment {
 		curl_setopt($ch, CURLOPT_POST, count($fields));
 		curl_setopt($ch, CURLOPT_POSTFIELDS, $fieldsString);
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+
 		//force curl to trust https
-		curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+		// !! Security vulnerability !!
+		//curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+
 		//returns a html page with redirecting to bank...
 		$responseXML = curl_exec($ch);
 		curl_close($ch);
