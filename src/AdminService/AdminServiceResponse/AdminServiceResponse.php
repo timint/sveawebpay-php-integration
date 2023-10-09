@@ -26,7 +26,6 @@ class AdminServiceResponse {
 	/**
 	 * Parses response and sets basic attributes.
 	 * @param $message
-	 * @param $logs
 	 */
 	protected function formatObject($message) {
 		// was request accepted?

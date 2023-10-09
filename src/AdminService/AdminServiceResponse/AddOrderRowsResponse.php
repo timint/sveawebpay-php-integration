@@ -19,7 +19,6 @@ class AddOrderRowsResponse extends AdminServiceResponse {
 	/**
 	 * Parses response and sets attributes.
 	 * @param $message
-	 * @param $logs
 	 */
 	protected function formatObject($message) {
 		parent::formatObject($message);

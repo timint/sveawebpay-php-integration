@@ -62,9 +62,9 @@ class GetAccountCreditParams {
 	 */
 	public function doRequest() {
 		$requestObject = $this->prepareRequest();
-		$request = new SveaDoRequest($this->conf, ConfigurationProvider::ACCOUNTCREDIT_TYPE, 'GetAccountCreditParamsEu', $requestObject, $this->logging);
+		$request = new SveaDoRequest($this->conf, ConfigurationProvider::ACCOUNTCREDIT_TYPE, 'GetAccountCreditParamsEu', $requestObject, $this->logFile);
 
-		$responseObject = new SveaResponse($request->result['requestResult'], '', NULL, NULL,isset($request->result['logs']) ? $request->result['logs'] : NULL);
+		$responseObject = new SveaResponse($request->result['requestResult'], '', null, null);
 
 		return $responseObject->response;
 	}

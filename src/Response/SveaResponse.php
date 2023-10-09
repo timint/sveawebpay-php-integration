@@ -70,7 +70,6 @@ class SveaResponse {
 	 * @param string $countryCode needed along with $config to decode response
 	 * @param SveaConfigurationProvider $config
 	 * @param string $method set for i.e. HostedAdmin, AdminService requests
-	 * @param array $log array of logs from AdminService or WebpayWS
 	 * @throws Exception
 	 */
 	public function __construct($message, $countryCode, $config = null, $method = null) {

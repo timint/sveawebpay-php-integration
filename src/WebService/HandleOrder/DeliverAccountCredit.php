@@ -41,9 +41,9 @@ class DeliverAccountCredit extends HandleOrder {
 
 		$priceIncludingVat = $requestObject->request->DeliverOrderInformation->DeliverAccountCreditDetails->OrderRows['OrderRow'][0]->PriceIncludingVat;
 
-		$request = new SveaDoRequest($this->orderBuilder->conf, $this->orderBuilder->orderType, 'DeliverOrderEu', $requestObject, $this->orderBuilder->logging);
+		$request = new SveaDoRequest($this->orderBuilder->conf, $this->orderBuilder->orderType, 'DeliverOrderEu', $requestObject, $this->orderBuilder->logFile);
 
-		$responseObject = new SveaResponse($request->result['requestResult'], '', null, null, isset($request->result['logs']) ? $request->result['logs'] : null);
+		$responseObject = new SveaResponse($request->result['requestResult'], '', null, null);
 
 		if ($responseObject->response->resultcode == '50036') {
 			$requestObject = $this->prepareRequest($priceIncludingVat);

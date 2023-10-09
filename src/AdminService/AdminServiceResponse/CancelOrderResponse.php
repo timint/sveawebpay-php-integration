@@ -12,7 +12,7 @@ class CancelOrderResponse extends AdminServiceResponse {
 	 * CancelOrderResponse constructor.
 	 * @param $message
 	 */
-	function __construct($message, $logs) {
+	function __construct($message) {
 		$this->formatObject($message);
 	}
 

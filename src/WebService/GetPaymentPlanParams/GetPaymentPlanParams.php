@@ -32,7 +32,7 @@ class GetPaymentPlanParams {
 	}
 
 	/*
-	 * Enables raw HTTP logs
+	 * Enables logging of raw HTTP request and response to file
 	 */
 	public function setLogFile($file) {
 		$this->logFile = $file;

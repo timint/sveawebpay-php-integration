@@ -55,7 +55,6 @@ class DeliverOrderResult extends WebServiceResponse {
 	/**
 	 * DeliverOrderResult constructor.
 	 * @param $response
-	 * @param $logs
 	 */
 	public function __construct($response) {
 		$this->accepted = $response->DeliverOrderEuResult->Accepted;
