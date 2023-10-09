@@ -111,8 +111,8 @@ abstract class AdminServiceRequest {
 		$sveaResponse = new SveaResponse($soapResponse, null, null, $this->action);
 		$response = $sveaResponse->getResponse();
 
-		// iff error 50036, flip priceIncludingVat and resend enforcing flipped value
-		if ($response->resultcode == "50036") {
+		// if error 50036, flip priceIncludingVat and resend enforcing flipped value
+		if ($response->resultcode == '50036') {
 			if (property_exists($requestObject, 'OrderRows')) {
 				$priceIncludingVat = $requestObject->OrderRows->enc_value->enc_value[0]->enc_value->PriceIncludingVat->enc_value;
 			} elseif (property_exists($requestObject, 'UpdatedOrderRows')) {
