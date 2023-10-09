@@ -21,14 +21,14 @@ class CreateCheckoutServiceTest extends TestCase
 	{
 		parent::setUp();
 
-		$this->order->setCountryCode("SE")
+		$this->order->setCountryCode('SE')
 			->setCurrency('SEK')
 			->setCheckoutUri('http://localhost:51925/')
 			->setConfirmationUri('http://localhost:51925/checkout/confirm')
 			->setPushUri('https://svea.com/push.aspx?sid=123&svea_order=123')
 			->setTermsUri('http://localhost:51898/terms')
 			->setLocale('sv-Se')
-			->setMerchantData("Test string");
+			->setMerchantData('Test string');
 
 		$this->service = new CreateOrderService($this->order);
 	}

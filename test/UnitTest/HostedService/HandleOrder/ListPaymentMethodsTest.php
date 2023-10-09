@@ -30,14 +30,14 @@ class ListPaymentMethodsTest extends \PHPUnit\Framework\TestCase
 	function test_class_exists()
 	{
 		$this->assertInstanceOf("Svea\WebPay\HostedService\HostedAdminRequest\ListPaymentMethods", $this->listpaymentmethodObject);
-		$this->assertEquals("getpaymentmethods", \PHPUnit\Framework\Assert::readAttribute($this->listpaymentmethodObject, 'method'));
+		$this->assertEquals('getpaymentmethods', \PHPUnit\Framework\Assert::readAttribute($this->listpaymentmethodObject, 'method'));
 	}
 
 	function test_prepareRequest_array_contains_mac_merchantid_message()
 	{
 
 		// set up ListPaymentMethods object & get request form
-		$countryCode = "SE";
+		$countryCode = 'SE';
 		$this->listpaymentmethodObject->countryCode = $countryCode;
 
 		$form = $this->listpaymentmethodObject->prepareRequest();
@@ -51,7 +51,7 @@ class ListPaymentMethodsTest extends \PHPUnit\Framework\TestCase
 	function test_prepareRequest_request_has_correct_merchantid_mac_and_ListPaymentMethods_request_message_contents()
 	{
 
-		$countryCode = "SE";
+		$countryCode = 'SE';
 		$this->listpaymentmethodObject->countryCode = $countryCode;
 
 		$form = $this->listpaymentmethodObject->prepareRequest();
@@ -64,12 +64,12 @@ class ListPaymentMethodsTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals($merchantid, urldecode($form['merchantid']));
 
 		// check valid mac
-		$this->assertEquals(hash("sha512", urldecode($form['message']) . $secret), urldecode($form['mac']));
+		$this->assertEquals(hash('sha512', urldecode($form['message']) . $secret), urldecode($form['mac']));
 
 		// check request message contents
 		$xmlMessage = new SimpleXMLElement(base64_decode(urldecode($form['message'])));
 
-		$this->assertEquals("getpaymentmethods", $xmlMessage->getName());   // root node
+		$this->assertEquals('getpaymentmethods', $xmlMessage->getName());   // root node
 		$this->assertEquals((string)$merchantid, $xmlMessage->merchantid);
 	}
 }

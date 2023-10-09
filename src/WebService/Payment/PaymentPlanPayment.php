@@ -16,7 +16,7 @@ class PaymentPlanPayment extends WebServicePayment {
 	}
 
 	protected function setOrderType($orderInformation) {
-		$orderInformation->AddressSelector = "";
+		$orderInformation->AddressSelector = '';
 		$orderInformation->OrderType = $this->orderType;
 
 		return $orderInformation;
@@ -29,7 +29,7 @@ class PaymentPlanPayment extends WebServicePayment {
 	 */
 	protected function formatOrderInformationWithOrderRows($rows) {
 		$orderInformation = new SveaCreateOrderInformation(
-			(isset($this->order->campaignCode) ? $this->order->campaignCode : ""),
+			(isset($this->order->campaignCode) ? $this->order->campaignCode : ''),
 			(isset($this->order->sendAutomaticGiroPaymentForm) ? $this->order->sendAutomaticGiroPaymentForm : 0)
 		);
 

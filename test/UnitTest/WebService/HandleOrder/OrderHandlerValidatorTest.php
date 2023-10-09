@@ -38,14 +38,14 @@ class OrderHandlerValidatorTest extends \PHPUnit\Framework\TestCase
 			$builder = WebPay::deliverOrder($config);
 			$request = $builder
 				->setOrderId(123456)
-				->setCountryCode("SE")
+				->setCountryCode('SE')
 				->addOrderRow(TestUtil::createOrderRow())
 				->deliverPaymentPlanOrder()
 				->prepareRequest();
 			$this->assertTrue(true);
 		} catch (Exception $e) {
 			// fail on validation error
-			$this->fail("Unexpected validation exception: " . $e->getMessage());
+			$this->fail('Unexpected validation exception: ' . $e->getMessage());
 		}
 
 	}
@@ -60,7 +60,7 @@ class OrderHandlerValidatorTest extends \PHPUnit\Framework\TestCase
 		$builder = WebPay::deliverOrder($config);
 		$request = $builder
 			->setOrderId(123456)
-			->setCountryCode("SE")
+			->setCountryCode('SE')
 			->addOrderRow(TestUtil::createOrderRow())
 			->deliverInvoiceOrder()
 			->prepareRequest();
@@ -79,9 +79,9 @@ class OrderHandlerValidatorTest extends \PHPUnit\Framework\TestCase
 			->addFee(WebPayItem::shippingFee()
 				->setShippingId('33')
 				->setName('shipping')
-				->setDescription("Specification")
+				->setDescription('Specification')
 				->setAmountExVat(50)
-				->setUnit("st")
+				->setUnit('st')
 				->setVatPercent(25)
 				->setDiscountPercent(0)
 			)

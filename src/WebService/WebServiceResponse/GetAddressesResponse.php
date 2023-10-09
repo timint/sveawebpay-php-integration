@@ -45,17 +45,17 @@ class GetAddressesResponse extends WebServiceResponse {
 	 */
 	public function __construct($response) {
 		// was request accepted?
-		if ($response->GetAddressesResult->RejectionCode == "Error") {
+		if ($response->GetAddressesResult->RejectionCode == 'Error') {
 			$this->accepted = 0;
 		} else {
 			$this->accepted = $response->GetAddressesResult->Accepted;
 		}
 
 		$this->resultcode = $response->GetAddressesResult->RejectionCode;
-		$this->errormessage = isset($response->GetAddressesResult->ErrorMessage) ? $response->GetAddressesResult->ErrorMessage : "";
+		$this->errormessage = isset($response->GetAddressesResult->ErrorMessage) ? $response->GetAddressesResult->ErrorMessage : '';
 
 		// set response attributes
-		if (property_exists($response->GetAddressesResult, "Addresses") && $this->accepted == 1) {
+		if (property_exists($response->GetAddressesResult, 'Addresses') && $this->accepted == 1) {
 			$this->formatCustomerIdentity($response->GetAddressesResult->Addresses);
 		}
 	}

@@ -24,7 +24,7 @@ class CreditOrderRowsBuilderIntegrationTest extends \PHPUnit\Framework\TestCase
 
 	protected function setUp(): void
 	{
-		$this->country = "SE";
+		$this->country = 'SE';
 		$this->invoiceIdToTest = 1028204;   // set this to the approved invoice set up by test_manual_setup_CreditOrderRows_testdata()
 		$this->successfulTransactionToTest = 583628; // set to a card transaction w/status success, see test_manual_setup_CreditCardOrderRows_testdata
 	}
@@ -45,53 +45,53 @@ class CreditOrderRowsBuilderIntegrationTest extends \PHPUnit\Framework\TestCase
 		// create order
 		$order = TestUtil::createOrderWithoutOrderRows(TestUtil::createIndividualCustomer($this->country));
 		$order->addOrderRow(WebPayItem::orderRow()
-			->setArticleNumber("1")
+			->setArticleNumber('1')
 			->setQuantity(1)
 			->setAmountExVat(100.00)
 			->setVatPercent(25)
-			->setDescription("A Specification")
+			->setDescription('A Specification')
 			->setName('A Name')
-			->setUnit("st")
+			->setUnit('st')
 			->setDiscountPercent(0)
 		);
 		$order->addOrderRow(WebPayItem::orderRow()
-			->setArticleNumber("2")
+			->setArticleNumber('2')
 			->setQuantity(1)
 			->setAmountExVat(100.00)
 			->setVatPercent(12)
-			->setDescription("B Specification")
+			->setDescription('B Specification')
 			->setName('B Name')
-			->setUnit("st")
+			->setUnit('st')
 			->setDiscountPercent(0)
 		);
 		$order->addOrderRow(WebPayItem::orderRow()
-			->setArticleNumber("3")
+			->setArticleNumber('3')
 			->setQuantity(1)
 			->setAmountExVat(1.00)
 			->setVatPercent(25)
-			->setDescription("C Specification")
+			->setDescription('C Specification')
 			->setName('C Name')
-			->setUnit("st")
+			->setUnit('st')
 			->setDiscountPercent(0)
 		);
 		$order->addOrderRow(WebPayItem::orderRow()
-			->setArticleNumber("4")
+			->setArticleNumber('4')
 			->setQuantity(1)
 			->setAmountExVat(100.00)
 			->setVatPercent(0)
-			->setDescription("D Specification")
+			->setDescription('D Specification')
 			->setName('D Name')
-			->setUnit("st")
+			->setUnit('st')
 			->setDiscountPercent(0)
 		);
 		$order->addOrderRow(WebPayItem::orderRow()
-			->setArticleNumber("5")
+			->setArticleNumber('5')
 			->setQuantity(1)
 			->setAmountExVat(100.00)
 			->setVatPercent(0)
-			->setDescription("E Specification")
+			->setDescription('E Specification')
 			->setName('E Name')
-			->setUnit("st")
+			->setUnit('st')
 			->setDiscountPercent(0)
 		);
 		$orderResponse = $order->useInvoicePayment()->doRequest();
@@ -164,13 +164,13 @@ class CreditOrderRowsBuilderIntegrationTest extends \PHPUnit\Framework\TestCase
 			->setInvoiceDistributionType(DistributionType::POST)
 			->setCountryCode($this->country)
 			->addCreditOrderRow(WebPayItem::orderRow()
-				->setArticleNumber("101")
+				->setArticleNumber('101')
 				->setQuantity(1)
 				->setAmountExVat(10.00)
 				->setVatPercent(25)
-				->setDescription("101 Specification")
+				->setDescription('101 Specification')
 				->setName('101 Name')
-				->setUnit("st")
+				->setUnit('st')
 				->setDiscountPercent(0)
 			)
 			->creditInvoiceOrderRows()
@@ -195,23 +195,23 @@ class CreditOrderRowsBuilderIntegrationTest extends \PHPUnit\Framework\TestCase
 			->setInvoiceDistributionType(DistributionType::POST)
 			->setCountryCode($this->country)
 			->addCreditOrderRow(WebPayItem::orderRow()
-				->setArticleNumber("101")
+				->setArticleNumber('101')
 				->setQuantity(1)
 				->setAmountExVat(10.00)
 				->setVatPercent(25)
-				->setDescription("101 Specification")
+				->setDescription('101 Specification')
 				->setName('101 Name')
-				->setUnit("st")
+				->setUnit('st')
 				->setDiscountPercent(0)
 			)
 			->addCreditOrderRow(WebPayItem::orderRow()
-				->setArticleNumber("101")
+				->setArticleNumber('101')
 				->setQuantity(1)
 				->setAmountExVat(10.00)
 				->setVatPercent(25)
-				->setDescription("101 Specification")
+				->setDescription('101 Specification')
 				->setName('101 Name')
-				->setUnit("st")
+				->setUnit('st')
 				->setDiscountPercent(0)
 			)
 			->creditInvoiceOrderRows()
@@ -237,13 +237,13 @@ class CreditOrderRowsBuilderIntegrationTest extends \PHPUnit\Framework\TestCase
 			->setCountryCode($this->country)
 			->setRowToCredit(4)
 			->addCreditOrderRow(WebPayItem::orderRow()
-				->setArticleNumber("104")
+				->setArticleNumber('104')
 				->setQuantity(1)
 				->setAmountExVat(10.00)
 				->setVatPercent(25)
-				->setDescription("104 Specification")
+				->setDescription('104 Specification')
 				->setName('104 Name')
-				->setUnit("st")
+				->setUnit('st')
 				->setDiscountPercent(0)
 			)
 			->creditInvoiceOrderRows()
@@ -276,7 +276,7 @@ class CreditOrderRowsBuilderIntegrationTest extends \PHPUnit\Framework\TestCase
 		//print_r( $creditOrderRowsResponse );
 		$this->assertEquals(0, $creditOrderRowsResponse->accepted);
 		$this->assertEquals(24502, $creditOrderRowsResponse->resultcode);
-		$this->assertEquals("Credit amount exceeds invoiced amount", $creditOrderRowsResponse->errormessage);
+		$this->assertEquals('Credit amount exceeds invoiced amount', $creditOrderRowsResponse->errormessage);
 	}
 
 	// CreditCardOrderRows
@@ -299,78 +299,78 @@ class CreditOrderRowsBuilderIntegrationTest extends \PHPUnit\Framework\TestCase
 
 		);
 
-		$orderLanguage = "sv";
-		$returnUrl = "http://127.0.0.1";
-		$ipAddress = "127.0.0.1";
+		$orderLanguage = 'sv';
+		$returnUrl = 'http://127.0.0.1';
+		$ipAddress = '127.0.0.1';
 
 		// create order
 		$order = WebPay::createOrder(ConfigurationService::getDefaultConfig())
 			->setCountryCode($this->country)
-			->setCurrency("SEK")
-			->setCustomerReference("CreditCardOrderRows_testdata" . date('c'))
-			->setClientOrderNumber("CreditCardOrderRows_testdata" . date('c'))
+			->setCurrency('SEK')
+			->setCustomerReference('CreditCardOrderRows_testdata' . date('c'))
+			->setClientOrderNumber('CreditCardOrderRows_testdata' . date('c'))
 			->setOrderDate(date('c'));
 
 		$order->addCustomerDetails(
 			WebPayItem::individualCustomer()
-				->setNationalIdNumber("194605092222")
+				->setNationalIdNumber('194605092222')
 				->setBirthDate(1946, 05, 9)
-				->setName("Tess T", "Persson")
-				->setStreetAddress("Testgatan", 1)
-				->setCoAddress("c/o Eriksson, Erik")
-				->setLocality("Stan")
-				->setZipCode("99999")
+				->setName('Tess T', 'Persson')
+				->setStreetAddress('Testgatan', 1)
+				->setCoAddress('c/o Eriksson, Erik')
+				->setLocality('Stan')
+				->setZipCode('99999')
 				->setIpAddress($ipAddress)
 		);
 
 		$order->addOrderRow(WebPayItem::orderRow()
-			->setArticleNumber("1")
+			->setArticleNumber('1')
 			->setQuantity(1)
 			->setAmountExVat(100.00)
 			->setVatPercent(25)
-			->setDescription("A Specification")
+			->setDescription('A Specification')
 			->setName('A Name')
-			->setUnit("st")
+			->setUnit('st')
 			->setDiscountPercent(0)
 		);
 		$order->addOrderRow(WebPayItem::orderRow()
-			->setArticleNumber("2")
+			->setArticleNumber('2')
 			->setQuantity(1)
 			->setAmountExVat(100.00)
 			->setVatPercent(12)
-			->setDescription("B Specification")
+			->setDescription('B Specification')
 			->setName('B Name')
-			->setUnit("st")
+			->setUnit('st')
 			->setDiscountPercent(0)
 		);
 		$order->addOrderRow(WebPayItem::orderRow()
-			->setArticleNumber("3")
+			->setArticleNumber('3')
 			->setQuantity(1)
 			->setAmountExVat(1.00)
 			->setVatPercent(25)
-			->setDescription("C Specification")
+			->setDescription('C Specification')
 			->setName('C Name')
-			->setUnit("st")
+			->setUnit('st')
 			->setDiscountPercent(0)
 		);
 		$order->addOrderRow(WebPayItem::orderRow()
-			->setArticleNumber("4")
+			->setArticleNumber('4')
 			->setQuantity(1)
 			->setAmountExVat(100.00)
 			->setVatPercent(0)
-			->setDescription("D Specification")
+			->setDescription('D Specification')
 			->setName('D Name')
-			->setUnit("st")
+			->setUnit('st')
 			->setDiscountPercent(0)
 		);
 		$order->addOrderRow(WebPayItem::orderRow()
-			->setArticleNumber("5")
+			->setArticleNumber('5')
 			->setQuantity(1)
 			->setAmountExVat(100.00)
 			->setVatPercent(0)
-			->setDescription("E Specification")
+			->setDescription('E Specification')
 			->setName('E Name')
-			->setUnit("st")
+			->setUnit('st')
 			->setDiscountPercent(0)
 		);
 
@@ -498,13 +498,13 @@ class CreditOrderRowsBuilderIntegrationTest extends \PHPUnit\Framework\TestCase
 			->addNumberedOrderRows($queryResponse->numberedOrderRows)// use the queried order rows as base for what amount to credit
 			->setRowToCredit(4)
 			->addCreditOrderRow(WebPayItem::orderRow()
-				->setArticleNumber("104")
+				->setArticleNumber('104')
 				->setQuantity(1)
 				->setAmountExVat(10.00)
 				->setVatPercent(25)
-				->setDescription("104 Specification")
+				->setDescription('104 Specification')
 				->setName('104 Name')
-				->setUnit("st")
+				->setUnit('st')
 				->setDiscountPercent(0)
 			)
 			->creditCardOrderRows();
@@ -557,6 +557,6 @@ class CreditOrderRowsBuilderIntegrationTest extends \PHPUnit\Framework\TestCase
 		//print_r("test_CreditOrderRows_creditCardOrderRows_addCreditOrderRow_setRowToCredit_exceeds_original_order_fails:\n");
 		//print_r( $creditOrderRowsResponse );
 		$this->assertEquals(0, $creditOrderRowsResponse->accepted);
-		$this->assertEquals("119 (ILLEGAL_CREDITED_AMOUNT)", $creditOrderRowsResponse->resultcode);
+		$this->assertEquals('119 (ILLEGAL_CREDITED_AMOUNT)', $creditOrderRowsResponse->resultcode);
 	}
 }

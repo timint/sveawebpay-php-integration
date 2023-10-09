@@ -79,66 +79,66 @@ class SveaResponse {
 		if (is_object($message)) {
 
 			// Web Service EU responses
-			if (property_exists($message, "CreateOrderEuResult")) {
+			if (property_exists($message, 'CreateOrderEuResult')) {
 				$this->response = new CreateOrderResponse($message);
 			}
-			elseif (property_exists($message, "GetAddressesResult")) { // also legacy getAddresses result
+			elseif (property_exists($message, 'GetAddressesResult')) { // also legacy getAddresses result
 				$this->response = new GetAddressesResponse($message);
 			}
-			elseif (property_exists($message, "GetPaymentPlanParamsEuResult")) {
+			elseif (property_exists($message, 'GetPaymentPlanParamsEuResult')) {
 				$this->response = new PaymentPlanParamsResponse($message);
 			}
-			elseif (property_exists($message, "DeliverOrderEuResult")) {
+			elseif (property_exists($message, 'DeliverOrderEuResult')) {
 				$this->response = new DeliverOrderResult($message);
 			}
-			elseif (property_exists($message, "GetAccountCreditParamsEuResult")) {
+			elseif (property_exists($message, 'GetAccountCreditParamsEuResult')) {
 				$this->response = new AccountCreditParamsResponse($message);
 			}
-			elseif (property_exists($message, "CloseOrderEuResult")) {
+			elseif (property_exists($message, 'CloseOrderEuResult')) {
 				$this->response = new CloseOrderResult($message);
 			} // $method is set for i.e. AdminService requests
 			elseif (isset($method)) {
 				switch ($method) {
-					case "CancelOrder":
+					case 'CancelOrder':
 						$this->response = new CancelOrderResponse($message);
 						break;
-					case "DeliverOrders":
+					case 'DeliverOrders':
 						$this->response = new DeliverOrdersResponse($message);
 						break;
-					case "GetOrders":
+					case 'GetOrders':
 						$this->response = new GetOrdersResponse($message);
 						break;
-					case "GetAccountCredits":
+					case 'GetAccountCredits':
 						$this->response = new GetAccountCreditsResponse($message);
 						break;
-					case "CancelOrderRows":
+					case 'CancelOrderRows':
 						$this->response = new CancelOrderRowsResponse($message);
 						break;
-					case "AddOrderRows":
+					case 'AddOrderRows':
 						$this->response = new AddOrderRowsResponse($message);
 						break;
-					case "UpdateOrderRows":
+					case 'UpdateOrderRows':
 						$this->response = new UpdateOrderRowsResponse($message);
 						break;
-					case "UpdateOrder":
+					case 'UpdateOrder':
 						$this->response = new UpdateOrderResponse($message);
 						break;
-					case "CreditInvoiceRows":
+					case 'CreditInvoiceRows':
 						$this->response = new CreditInvoiceRowsResponse($message);
 						break;
-					case "DeliverPartial":
+					case 'DeliverPartial':
 						$this->response = new DeliverPartialResponse($message);
 						break;
-					case "CancelPaymentPlanRows":
+					case 'CancelPaymentPlanRows':
 						$this->response = new CreditPaymentPlanResponse($message);
 						break;
-					case "CancelPaymentPlanAmount":
+					case 'CancelPaymentPlanAmount':
 						$this->response = new CreditPaymentPlanResponse($message);
 						break;
-					case "CancelAccountCreditAmount":
+					case 'CancelAccountCreditAmount':
 						$this->response = new CancelAccountCreditAmount($message);
 						break;
-					case "CancelAccountCreditRows":
+					case 'CancelAccountCreditRows':
 						$this->response = new CancelAccountCreditRows($message);
 						break;
 					default:
@@ -146,7 +146,7 @@ class SveaResponse {
 						break;
 				}
 			} // legacy fallback -- webservice from hosted_admin -- used by preparedpayment
-			elseif (property_exists($message, "message")) {
+			elseif (property_exists($message, 'message')) {
 				$this->response = new HostedAdminResponse($message, $countryCode, $config);
 			}
 		} // webservice hosted payment
@@ -154,7 +154,7 @@ class SveaResponse {
 			$this->response = new HostedPaymentResponse($message, $countryCode, $config);
 		}
 		else {
-			$this->response = "Response is not recognized.";
+			$this->response = 'Response is not recognized.';
 		}
 	}
 

@@ -26,7 +26,7 @@ class QueryTransactionByCustomerRefNo extends HostedRequest {
 	 * @param ConfigurationProvider $config instance implementing Svea\WebPay\Config\ConfigurationProvider
 	 */
 	function __construct($config) {
-		$this->method = "querycustomerrefno";
+		$this->method = 'querycustomerrefno';
 		parent::__construct($config);
 	}
 
@@ -39,7 +39,7 @@ class QueryTransactionByCustomerRefNo extends HostedRequest {
 
 	private function validateClientOrderNumber($self, $errors) {
 		if (isset($self->customerRefNo) == false) {
-			$errors['missing value'] = "customerRefNo is required. Use function setClientOrderNumber() with the order number you used when creating the transaction.";
+			$errors['missing value'] = 'customerRefNo is required. Use function setClientOrderNumber() with the order number you used when creating the transaction.';
 		}
 
 		return $errors;
@@ -50,10 +50,10 @@ class QueryTransactionByCustomerRefNo extends HostedRequest {
 
 		$XMLWriter->openMemory();
 		$XMLWriter->setIndent(true);
-		$XMLWriter->startDocument("1.0", "UTF-8");
+		$XMLWriter->startDocument('1.0', 'UTF-8');
 		$XMLWriter->writeComment(Helper::getLibraryAndPlatformPropertiesAsJson($this->config));
-		$XMLWriter->startElement("query");  // note, not the same as $this->method above
-		$XMLWriter->writeElement("customerrefno", $this->customerRefNo);
+		$XMLWriter->startElement('query');  // note, not the same as $this->method above
+		$XMLWriter->writeElement('customerrefno', $this->customerRefNo);
 		$XMLWriter->endElement();
 		$XMLWriter->endDocument();
 

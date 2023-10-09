@@ -32,7 +32,7 @@ class GetOrdersRequestIntegrationTest extends \PHPUnit\Framework\TestCase
 			'skeleton for test_manual_GetOrdersRequest_for_invoice_individual_customer_order'
 		);
 
-		$countryCode = "SE";
+		$countryCode = 'SE';
 		$sveaOrderIdToGet = 348629;
 		$orderType = ConfigurationProvider::INVOICE_TYPE;
 
@@ -186,35 +186,35 @@ class GetOrdersRequestIntegrationTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals(null, $getOrdersResponse->changedDate);  // TODO add test for changed order later
 		$this->assertEquals(79021, $getOrdersResponse->clientId);
 		$this->assertEquals(449, $getOrdersResponse->clientOrderId);
-		$this->assertEquals("2014-05-19T16:04:54.787", $getOrdersResponse->createdDate);
+		$this->assertEquals('2014-05-19T16:04:54.787', $getOrdersResponse->createdDate);
 
 		$this->assertEquals(true, $getOrdersResponse->creditReportStatusAccepted);
-		$this->assertEquals("2014-05-19T16:04:54.893", $getOrdersResponse->creditReportStatusCreationDate);
+		$this->assertEquals('2014-05-19T16:04:54.893', $getOrdersResponse->creditReportStatusCreationDate);
 
-		$this->assertEquals("SEK", $getOrdersResponse->currency);
+		$this->assertEquals('SEK', $getOrdersResponse->currency);
 
 		$this->assertInstanceOf("Svea\WebPay\BuildOrder\RowBuilders\IndividualCustomer", $getOrdersResponse->customer);
-		$this->assertEquals("194605092222", $getOrdersResponse->customer->ssn);
+		$this->assertEquals('194605092222', $getOrdersResponse->customer->ssn);
 		$this->assertEquals(null, $getOrdersResponse->customer->initials);
 		$this->assertEquals(null, $getOrdersResponse->customer->birthDate);
 		$this->assertEquals(null, $getOrdersResponse->customer->firstname);
 		$this->assertEquals(null, $getOrdersResponse->customer->lastname);
-		//$this->assertEquals( "test@svea.com", $getOrdersResponse->customer->email );  // -- returns current customer stats, may change
+		//$this->assertEquals( 'test@svea.com', $getOrdersResponse->customer->email );  // -- returns current customer stats, may change
 		//$this->assertEquals( null, $getOrdersResponse->customer->phonenumber ); // -- returns current customer stats, may change
-		$this->assertEquals("Persson, Tess T", $getOrdersResponse->customer->name);   // FullName
-		$this->assertEquals("Testgatan 1", $getOrdersResponse->customer->streetAddress);
-		$this->assertEquals("Testgatan 1", $getOrdersResponse->customer->street);
-		$this->assertEquals("c/o Eriksson, Erik", $getOrdersResponse->customer->coAddress);
-		$this->assertEquals("99999", $getOrdersResponse->customer->zipCode);
-		$this->assertEquals("Stan", $getOrdersResponse->customer->locality);
+		$this->assertEquals('Persson, Tess T', $getOrdersResponse->customer->name);   // FullName
+		$this->assertEquals('Testgatan 1', $getOrdersResponse->customer->streetAddress);
+		$this->assertEquals('Testgatan 1', $getOrdersResponse->customer->street);
+		$this->assertEquals('c/o Eriksson, Erik', $getOrdersResponse->customer->coAddress);
+		$this->assertEquals('99999', $getOrdersResponse->customer->zipCode);
+		$this->assertEquals('Stan', $getOrdersResponse->customer->locality);
 
-		$this->assertEquals("1000117", $getOrdersResponse->customerId);
+		$this->assertEquals('1000117', $getOrdersResponse->customerId);
 		$this->assertEquals(null, $getOrdersResponse->customerReference);
-		$this->assertClassNotHasAttribute("deliveryAddress", "\Svea\AdminService\GetOrdersResponse"); // deliveryAddress field is not supported
+		$this->assertClassNotHasAttribute('deliveryAddress', "\Svea\AdminService\GetOrdersResponse"); // deliveryAddress field is not supported
 		$this->assertEquals(false, $getOrdersResponse->isPossibleToAdminister);
 		$this->assertEquals(true, $getOrdersResponse->isPossibleToCancel);
 		$this->assertEquals(null, $getOrdersResponse->notes);
-		$this->assertEquals("Created", $getOrdersResponse->orderDeliveryStatus);
+		$this->assertEquals('Created', $getOrdersResponse->orderDeliveryStatus);
 
 		$this->assertInstanceOf("Svea\WebPay\BuildOrder\RowBuilders\NumberedOrderRow", $getOrdersResponse->numberedOrderRows[0]);
 		$this->assertEquals(1, $getOrdersResponse->numberedOrderRows[0]->rowNumber);
@@ -224,15 +224,15 @@ class GetOrdersRequestIntegrationTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals(2000.00, $getOrdersResponse->numberedOrderRows[0]->amountExVat);
 		$this->assertEquals(25.00, $getOrdersResponse->numberedOrderRows[0]->vatPercent);
 		$this->assertEquals(null, $getOrdersResponse->numberedOrderRows[0]->name);
-		$this->assertEquals("Dyr produkt 25%", $getOrdersResponse->numberedOrderRows[0]->description);
+		$this->assertEquals('Dyr produkt 25%', $getOrdersResponse->numberedOrderRows[0]->description);
 		$this->assertEquals(0, $getOrdersResponse->numberedOrderRows[0]->vatDiscount);
 
 		// only check attributes of first row
 		$this->assertInstanceOf("Svea\WebPay\BuildOrder\RowBuilders\NumberedOrderRow", $getOrdersResponse->numberedOrderRows[3]);
 		$this->assertEquals(4, $getOrdersResponse->numberedOrderRows[3]->rowNumber);
 
-		$this->assertEquals("Active", $getOrdersResponse->orderStatus);
-		$this->assertEquals("Invoice", $getOrdersResponse->orderType);
+		$this->assertEquals('Active', $getOrdersResponse->orderStatus);
+		$this->assertEquals('Invoice', $getOrdersResponse->orderType);
 		$this->assertEquals(null, $getOrdersResponse->paymentPlanDetailsContractLengthMonths);
 		$this->assertEquals(null, $getOrdersResponse->paymentPlanDetailsContractNumber);
 		$this->assertEquals(null, $getOrdersResponse->pendingReasons);
@@ -243,23 +243,23 @@ class GetOrdersRequestIntegrationTest extends \PHPUnit\Framework\TestCase
 	public function test_GetOrdersRequest_for_invoice_sets_individual_customer_correctly()
 	{
 		// create order
-		$country = "SE";
+		$country = 'SE';
 		$order = TestUtil::createOrder(TestUtil::createIndividualCustomer($country));
-		//case( "SE" ):
+		//case( 'SE' ):
 		//	return Svea\WebPay\WebPayItem::individualCustomer()
-		//		->setNationalIdNumber("194605092222")
+		//		->setNationalIdNumber('194605092222')
 		//		->setBirthDate(1946, 05, 09)
-		//		->setName("Tess T", "Persson")
-		//		->setStreetAddress("Testgatan", 1)
-		//		->setCoAddress("c/o Eriksson, Erik")
-		//		->setLocality("Stan")
-		//		->setZipCode("99999");
+		//		->setName('Tess T', 'Persson')
+		//		->setStreetAddress('Testgatan', 1)
+		//		->setCoAddress('c/o Eriksson, Erik')
+		//		->setLocality('Stan')
+		//		->setZipCode('99999');
 		//	break;
 		$order->addOrderRow(TestUtil::createOrderRow(1000.00));
 		$orderResponse = $order->useInvoicePayment()->doRequest();
 		$this->assertEquals(1, $orderResponse->accepted);
 
-		$countryCode = "SE";
+		$countryCode = 'SE';
 		$sveaOrderIdToGet = $orderResponse->sveaOrderId;
 		$orderType = ConfigurationProvider::INVOICE_TYPE;
 
@@ -309,40 +309,40 @@ class GetOrdersRequestIntegrationTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals(null, $getOrdersResponse->errormessage);
 
 		$this->assertInstanceOf("Svea\WebPay\BuildOrder\RowBuilders\IndividualCustomer", $getOrdersResponse->customer);
-		$this->assertEquals("194605092222", $getOrdersResponse->customer->ssn);
+		$this->assertEquals('194605092222', $getOrdersResponse->customer->ssn);
 		$this->assertEquals(null, $getOrdersResponse->customer->initials);
 		$this->assertEquals(null, $getOrdersResponse->customer->birthDate);
-		$this->assertEquals("Tess", $getOrdersResponse->customer->firstname);		   // not set for SE order
-		$this->assertEquals("Persson", $getOrdersResponse->customer->lastname);
+		$this->assertEquals('Tess', $getOrdersResponse->customer->firstname);		   // not set for SE order
+		$this->assertEquals('Persson', $getOrdersResponse->customer->lastname);
 		//$this->assertEquals( null, $getOrdersResponse->customer->email );
 		//$this->assertEquals( null, $getOrdersResponse->customer->phonenumber );
-		$this->assertEquals("Persson Tess T", $getOrdersResponse->customer->name);   // FullName
-		$this->assertEquals("Testgatan 1", $getOrdersResponse->customer->streetAddress);
-		$this->assertEquals("Testgatan 1", $getOrdersResponse->customer->street);
-		$this->assertEquals("c/o Eriksson, Erik", $getOrdersResponse->customer->coAddress);
-		$this->assertEquals("99999", $getOrdersResponse->customer->zipCode);
-		$this->assertEquals("Stan", $getOrdersResponse->customer->locality);
+		$this->assertEquals('Persson Tess T', $getOrdersResponse->customer->name);   // FullName
+		$this->assertEquals('Testgatan 1', $getOrdersResponse->customer->streetAddress);
+		$this->assertEquals('Testgatan 1', $getOrdersResponse->customer->street);
+		$this->assertEquals('c/o Eriksson, Erik', $getOrdersResponse->customer->coAddress);
+		$this->assertEquals('99999', $getOrdersResponse->customer->zipCode);
+		$this->assertEquals('Stan', $getOrdersResponse->customer->locality);
 	}
 
 	public function test_GetOrdersRequest_for_invoice_sets_company_customer_correctly()
 	{
 		// create order
-		$country = "SE";
+		$country = 'SE';
 		$order = TestUtil::createOrder(TestUtil::createCompanyCustomer($country));
-		//case( "SE" ):
+		//case( 'SE' ):
 		//	return Svea\WebPay\WebPayItem::companyCustomer()
-		//		->setNationalIdNumber("4608142222")
-		//		->setCompanyName("Tess T", "Persson")
-		//		->setStreetAddress("Testgatan", 1)
-		//		->setCoAddress("c/o Eriksson, Erik")
-		//		->setLocality("Stan")
-		//		->setZipCode("99999");
+		//		->setNationalIdNumber('4608142222')
+		//		->setCompanyName('Tess T', 'Persson')
+		//		->setStreetAddress('Testgatan', 1)
+		//		->setCoAddress('c/o Eriksson, Erik')
+		//		->setLocality('Stan')
+		//		->setZipCode('99999');
 		//	break;
 		$order->addOrderRow(TestUtil::createOrderRow(1000.00));
 		$orderResponse = $order->useInvoicePayment()->doRequest();
 		$this->assertEquals(1, $orderResponse->accepted);
 
-		$countryCode = "SE";
+		$countryCode = 'SE';
 		$sveaOrderIdToGet = $orderResponse->sveaOrderId;
 		$orderType = ConfigurationProvider::INVOICE_TYPE;
 
@@ -391,16 +391,16 @@ class GetOrdersRequestIntegrationTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals(null, $getOrdersResponse->errormessage);
 
 		$this->assertInstanceOf("Svea\WebPay\BuildOrder\RowBuilders\CompanyCustomer", $getOrdersResponse->customer);
-		$this->assertEquals("194608142222", $getOrdersResponse->customer->orgNumber);
+		$this->assertEquals('194608142222', $getOrdersResponse->customer->orgNumber);
 		$this->assertEquals(null, $getOrdersResponse->customer->companyVatNumber);
-		$this->assertEquals("Test", $getOrdersResponse->customer->companyName);
+		$this->assertEquals('Test', $getOrdersResponse->customer->companyName);
 		$this->assertEquals(null, $getOrdersResponse->customer->email);
 		$this->assertEquals(null, $getOrdersResponse->customer->phonenumber);
-		$this->assertEquals("Testaregatan 1", $getOrdersResponse->customer->streetAddress);
-		$this->assertEquals("Testaregatan 1", $getOrdersResponse->customer->street);
+		$this->assertEquals('Testaregatan 1', $getOrdersResponse->customer->streetAddress);
+		$this->assertEquals('Testaregatan 1', $getOrdersResponse->customer->street);
 		$this->assertEquals(null, $getOrdersResponse->customer->coAddress);
-		$this->assertEquals("11111", $getOrdersResponse->customer->zipCode);
-		$this->assertEquals("Solna", $getOrdersResponse->customer->locality);
+		$this->assertEquals('11111', $getOrdersResponse->customer->zipCode);
+		$this->assertEquals('Solna', $getOrdersResponse->customer->locality);
 	}
 
 	public function test_manual_GetOrdersRequest_for_paymentplan_order()
@@ -412,7 +412,7 @@ class GetOrdersRequestIntegrationTest extends \PHPUnit\Framework\TestCase
 	);
 
 		// create order
-		$country = "SE";
+		$country = 'SE';
 		//		$order = Svea\WebPay\Test\TestUtil::createOrder( Svea\WebPay\Test\TestUtil::createIndividualCustomer($country) );
 		//		$order->addOrderRow( Svea\WebPay\Test\TestUtil::createOrderRow( 1000.00 ) );
 		//		$orderResponse = $order->usePaymentPlanPayment( Svea\WebPay\Test\TestUtil::getGetPaymentPlanParamsForTesting($country) )->doRequest();
@@ -543,30 +543,30 @@ class GetOrdersRequestIntegrationTest extends \PHPUnit\Framework\TestCase
 
 		$this->assertEquals(null, $getOrdersResponse->changedDate);  // TODO add test for changed order later
 		$this->assertEquals(59999, $getOrdersResponse->clientId);
-		$this->assertEquals("clientOrderNumber:2014-09-11T17:57:07+02:00", $getOrdersResponse->clientOrderId);
-		$this->assertEquals("2014-09-11T17:57:08.777", $getOrdersResponse->createdDate);
+		$this->assertEquals('clientOrderNumber:2014-09-11T17:57:07+02:00', $getOrdersResponse->clientOrderId);
+		$this->assertEquals('2014-09-11T17:57:08.777', $getOrdersResponse->createdDate);
 
 		$this->assertEquals(true, $getOrdersResponse->creditReportStatusAccepted);
-		$this->assertEquals("2014-09-11T17:57:08.87", $getOrdersResponse->creditReportStatusCreationDate);
+		$this->assertEquals('2014-09-11T17:57:08.87', $getOrdersResponse->creditReportStatusCreationDate);
 
-		$this->assertEquals("SEK", $getOrdersResponse->currency);
+		$this->assertEquals('SEK', $getOrdersResponse->currency);
 
 		$this->assertInstanceOf("Svea\WebPay\BuildOrder\RowBuilders\IndividualCustomer", $getOrdersResponse->customer);
 		// asserting customer attributes in other testcases
 		//$this->assertEquals( null, $getOrdersResponse->customer->email );  // -- returns current customer id email, may change
 
-		$this->assertEquals("1000013", $getOrdersResponse->customerId);
-		$this->assertEquals("created by TestUtil::createOrder()", $getOrdersResponse->customerReference);
+		$this->assertEquals('1000013', $getOrdersResponse->customerId);
+		$this->assertEquals('created by TestUtil::createOrder()', $getOrdersResponse->customerReference);
 		$this->assertEquals(false, $getOrdersResponse->isPossibleToAdminister);
 		$this->assertEquals(true, $getOrdersResponse->isPossibleToCancel);
 		$this->assertEquals(null, $getOrdersResponse->notes);
-		$this->assertEquals("Created", $getOrdersResponse->orderDeliveryStatus);
+		$this->assertEquals('Created', $getOrdersResponse->orderDeliveryStatus);
 
 		$this->assertInstanceOf("Svea\WebPay\BuildOrder\RowBuilders\NumberedOrderRow", $getOrdersResponse->numberedOrderRows[0]);
 		// asserting order row attributes in invoice testcase
 
-		$this->assertEquals("Active", $getOrdersResponse->orderStatus);
-		$this->assertEquals("PaymentPlan", $getOrdersResponse->orderType);
+		$this->assertEquals('Active', $getOrdersResponse->orderStatus);
+		$this->assertEquals('PaymentPlan', $getOrdersResponse->orderType);
 		$this->assertEquals(3, $getOrdersResponse->paymentPlanDetailsContractLengthMonths);
 		$this->assertEquals(null, $getOrdersResponse->paymentPlanDetailsContractNumber);
 		$this->assertEquals(null, $getOrdersResponse->pendingReasons);
@@ -584,10 +584,10 @@ class GetOrdersRequestIntegrationTest extends \PHPUnit\Framework\TestCase
 					->setVatPercent(24)
 					->setQuantity(1)
 			)
-			->addCustomerDetails(TestUtil::createIndividualCustomer("SE"))
-			->setCountryCode("SE")
-			->setCurrency("SEK")
-			->setOrderDate("2012-12-12")
+			->addCustomerDetails(TestUtil::createIndividualCustomer('SE'))
+			->setCountryCode('SE')
+			->setCurrency('SEK')
+			->setOrderDate('2012-12-12')
 			->useInvoicePayment()
 			->doRequest();
 
@@ -613,10 +613,10 @@ class GetOrdersRequestIntegrationTest extends \PHPUnit\Framework\TestCase
 					->setVatPercent(24)
 					->setQuantity(1)
 			)
-			->addCustomerDetails(TestUtil::createIndividualCustomer("SE"))
-			->setCountryCode("SE")
-			->setCurrency("SEK")
-			->setOrderDate("2012-12-12")
+			->addCustomerDetails(TestUtil::createIndividualCustomer('SE'))
+			->setCountryCode('SE')
+			->setCurrency('SEK')
+			->setOrderDate('2012-12-12')
 			->useInvoicePayment()
 			->doRequest();
 

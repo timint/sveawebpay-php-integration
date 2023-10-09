@@ -26,21 +26,21 @@ class CancelOrderRowsBuilderTest extends \PHPUnit\Framework\TestCase
 
 	public function test_cancelOrderRowsBuilder_setOrderId()
 	{
-		$orderId = "123456";
+		$orderId = '123456';
 		$this->cancelOrderRowsObject->setOrderId($orderId);
 		$this->assertEquals($orderId, $this->cancelOrderRowsObject->orderId);
 	}
 
 	public function test_cancelOrderRowsBuilder_setTransactionId()
 	{
-		$orderId = "123456";
+		$orderId = '123456';
 		$this->cancelOrderRowsObject->setTransactionId($orderId);
 		$this->assertEquals($orderId, $this->cancelOrderRowsObject->orderId);
 	}
 
 	public function test_cancelOrderRowsBuilder_setCountryCode()
 	{
-		$country = "SE";
+		$country = 'SE';
 		$this->cancelOrderRowsObject->setCountryCode($country);
 		$this->assertEquals($country, $this->cancelOrderRowsObject->countryCode);
 	}
@@ -79,7 +79,7 @@ class CancelOrderRowsBuilderTest extends \PHPUnit\Framework\TestCase
 
 	public function test_cancelOrderRowsBuilder_cancelInvoiceOrderRowsBuilder_returns_CancelOrderRowsRequest()
 	{
-		$orderId = "123456";
+		$orderId = '123456';
 		$cancelOrderRowsObject = $this->cancelOrderRowsObject->setOrderId($orderId)->cancelInvoiceOrderRows();
 
 		$this->assertInstanceOf("Svea\WebPay\AdminService\CancelOrderRowsRequest", $cancelOrderRowsObject);
@@ -87,7 +87,7 @@ class CancelOrderRowsBuilderTest extends \PHPUnit\Framework\TestCase
 
 	public function test_cancelOrderRowsBuilder_cancelPaymentPlanOrderRowsBuilder_returns_CancelOrderRowsRequest()
 	{
-		$orderId = "123456";
+		$orderId = '123456';
 		$cancelOrderRowsObject = $this->cancelOrderRowsObject->setOrderId($orderId)->cancelPaymentPlanOrderRows();
 
 		$this->assertInstanceOf("Svea\WebPay\AdminService\CancelOrderRowsRequest", $cancelOrderRowsObject);
@@ -95,7 +95,7 @@ class CancelOrderRowsBuilderTest extends \PHPUnit\Framework\TestCase
 
 	public function test_cancelOrderRowsBuilder_cancelAccountCreditOrderRowsBuilder_returns_CancelOrderRowsRequest()
 	{
-		$orderId = "123456";
+		$orderId = '123456';
 		$cancelOrderRowsObject = $this->cancelOrderRowsObject->setOrderId($orderId)->cancelAccountCreditOrderRows();
 
 		$this->assertInstanceOf("Svea\WebPay\AdminService\CancelOrderRowsRequest", $cancelOrderRowsObject);
@@ -103,7 +103,7 @@ class CancelOrderRowsBuilderTest extends \PHPUnit\Framework\TestCase
 
 	public function test_cancelOrderRowsBuilder_cancelCardOrderRowsBuilder_returns_LowerTransaction()
 	{
-		$orderId = "123456";
+		$orderId = '123456';
 		$mockedNumberedOrderRow = new NumberedOrderRow();
 		$mockedNumberedOrderRow
 			->setAmountExVat(100.00)// recommended to specify price using AmountExVat & VatPercent
@@ -123,7 +123,7 @@ class CancelOrderRowsBuilderTest extends \PHPUnit\Framework\TestCase
 
 	public function test_cancelOrderRowsBuilder_cancelAccountCreditRowsBuilder_returns_LowerTransaction()
 	{
-		$orderId = "123456";
+		$orderId = '123456';
 		$mockedNumberedOrderRow = new NumberedOrderRow();
 		$mockedNumberedOrderRow
 			->setAmountExVat(100.00)// recommended to specify price using AmountExVat & VatPercent

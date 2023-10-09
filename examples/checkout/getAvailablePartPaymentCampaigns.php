@@ -27,7 +27,7 @@ try {
 		->addPresetValue($presetValueIsCompany);
 
 	$response = $request->getAvailablePartPaymentCampaigns();
-	echo "<pre>" . print_r($response, true) . "</pre>";
+	echo '<pre>' . print_r($response, true) . '</pre>';
 } catch (\Exception $e) {
-	echo "<pre>" . print_r($e->getMessage(), true) . "</pre>";
+	echo '<pre>' . print_r($e->getMessage(), true) . '</pre>';
 }

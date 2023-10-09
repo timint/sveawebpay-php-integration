@@ -28,14 +28,14 @@ class LowerTransactionIntegrationTest extends \PHPUnit\Framework\TestCase
 		$request = new LowerTransaction(ConfigurationService::getDefaultConfig());
 		$request->transactionId = $transactionId;
 		$request->amountToLower = $amountToLower;
-		$request->countryCode = "SE";
+		$request->countryCode = 'SE';
 		$response = $request->doRequest();
 
 		$this->assertInstanceOf("Svea\WebPay\HostedService\HostedResponse\HostedAdminResponse\LowerTransactionResponse", $response);
 
 		// if we receive an error from the service, the integration test passes
 		$this->assertEquals(0, $response->accepted);
-		$this->assertEquals("128 (NO_SUCH_TRANS)", $response->resultcode);
+		$this->assertEquals('128 (NO_SUCH_TRANS)', $response->resultcode);
 	}
 
 	/**
@@ -65,21 +65,21 @@ class LowerTransactionIntegrationTest extends \PHPUnit\Framework\TestCase
 		);
 
 		// Set the below to match the transaction, then run the test.
-		$clientOrderNumber = "800";
+		$clientOrderNumber = '800';
 		$transactionId = 587951;
 		$amountToLower = 100;   // TODO also check that status if lower by entire amount == ANNULLED
 
 		$request = new LowerTransaction(ConfigurationService::getDefaultConfig());
 		$request->transactionId = $transactionId;
 		$request->amountToLower = $amountToLower;
-		$request->countryCode = "SE";
+		$request->countryCode = 'SE';
 		$response = $request->doRequest();
 
 
 		print_r($response);
 		$this->assertInstanceOf("Svea\WebPay\HostedService\HostedResponse\HostedAdminResponse\LowerTransactionResponse", $response);
 		$this->assertEquals(1, $response->accepted);
-		$this->assertStringMatchesFormat("%d", $response->transactionId);   // %d => an unsigned integer value
+		$this->assertStringMatchesFormat('%d', $response->transactionId);   // %d => an unsigned integer value
 		$this->assertEquals($clientOrderNumber, $response->clientOrderNumber);
 
 	}
@@ -105,9 +105,9 @@ class LowerTransactionIntegrationTest extends \PHPUnit\Framework\TestCase
 		$transactionId = 586184;
 
 		$lowerTransactionRequest = new LowerTransaction(ConfigurationService::getDefaultConfig());
-		$lowerTransactionRequest->countryCode = "SE";
+		$lowerTransactionRequest->countryCode = 'SE';
 		$lowerTransactionRequest->transactionId = $transactionId;
-		$lowerTransactionRequest->amountToLower = "1";
+		$lowerTransactionRequest->amountToLower = '1';
 		$lowerTransactionRequest->alsoDoConfirm = true;
 
 		$response = $lowerTransactionRequest->doRequest();

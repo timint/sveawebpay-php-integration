@@ -20,7 +20,7 @@ class DeliverOrderRowsRequestTest extends \PHPUnit\Framework\TestCase
 		$this->builderObject = new OrderBuilder(ConfigurationService::getDefaultConfig());
 		$this->builderObject->orderId = 123456;
 		$this->builderObject->orderType = ConfigurationProvider::INVOICE_TYPE;
-		$this->builderObject->countryCode = "SE";
+		$this->builderObject->countryCode = 'SE';
 		$this->builderObject->rowsToDeliver = [1];
 	}
 

@@ -33,14 +33,14 @@ class CreditAmountRequestIntegrationTest extends \PHPUnit\Framework\TestCase
 	public static function getCustomer()
 	{
 		return WebPayItem::individualCustomer()
-			->setNationalIdNumber("194605092222")
+			->setNationalIdNumber('194605092222')
 			->setBirthDate(1986, 03, 31)
-			->setName("Janko", "Stevanovic")
-			->setStreetAddress("Neka tamo", 1)
-			->setCoAddress("c/o BB, Batajnica")
-			->setLocality("Okrug Beograda")
+			->setName('Janko', 'Stevanovic')
+			->setStreetAddress('Neka tamo', 1)
+			->setCoAddress('c/o BB, Batajnica')
+			->setLocality('Okrug Beograda')
 			->setEmail('batajarules@svea.com')
-			->setZipCode("99999");
+			->setZipCode('99999');
 	}
 
 	/** helper function, returns invoice for delivered order with one row, sent with PriceIncludingVat flag set to true */
@@ -56,11 +56,11 @@ class CreditAmountRequestIntegrationTest extends \PHPUnit\Framework\TestCase
 					->setAmountIncVat($amount)
 					->setVatPercent($vat)
 					->setQuantity($quantity)
-					->setDescription("IntegrationTest from php-integration")
+					->setDescription('IntegrationTest from php-integration')
 			)
 			->addCustomerDetails(self::getCustomer())
-			->setCountryCode("SE")
-			->setOrderDate("2012-12-12");
+			->setCountryCode('SE')
+			->setOrderDate('2012-12-12');
 
 
 		$orderResponse = $orderResponse->useAccountCredit($campaignCode)
@@ -101,11 +101,11 @@ class CreditAmountRequestIntegrationTest extends \PHPUnit\Framework\TestCase
 					->setAmountExVat($amount)
 					->setVatPercent($vat)
 					->setQuantity($quantity)
-					->setDescription("IntegrationTest from php-integration")
+					->setDescription('IntegrationTest from php-integration')
 			)
 			->addCustomerDetails(self::getCustomer())
-			->setCountryCode("SE")
-			->setOrderDate("2012-12-12");
+			->setCountryCode('SE')
+			->setOrderDate('2012-12-12');
 
 
 		$orderResponse = $orderResponse->useAccountCredit($campaignCode)

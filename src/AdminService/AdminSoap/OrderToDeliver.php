@@ -17,10 +17,10 @@ class OrderToDeliver {
 	 */
 	function __construct($clientId, $orderType, $sveaOrderId) {
 		$this->ClientId = new SoapVar($clientId, XSD_LONG,
-			"-", "--", "ClientId", "http://schemas.datacontract.org/2004/07/DataObjects.Admin.Service");
+			'-', '--', 'ClientId', 'http://schemas.datacontract.org/2004/07/DataObjects.Admin.Service');
 		$this->OrderType = new SoapVar($orderType, XSD_STRING,
-			"-", "--", "OrderType", "http://schemas.datacontract.org/2004/07/DataObjects.Admin.Service");
+			'-', '--', 'OrderType', 'http://schemas.datacontract.org/2004/07/DataObjects.Admin.Service');
 		$this->SveaOrderId = new SoapVar($sveaOrderId, XSD_LONG,
-			"-", "--", "SveaOrderId", "http://schemas.datacontract.org/2004/07/DataObjects.Admin.Service");
+			'-', '--', 'SveaOrderId', 'http://schemas.datacontract.org/2004/07/DataObjects.Admin.Service');
 	}
 }

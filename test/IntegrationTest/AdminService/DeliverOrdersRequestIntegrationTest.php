@@ -30,7 +30,7 @@ class DeliverOrdersRequestIntegrationTest extends \PHPUnit\Framework\TestCase
 //			'skeleton for test_manual_DeliverOrdersRequest'
 //		);
 
-		$countryCode = "SE";
+		$countryCode = 'SE';
 		$sveaOrderIdToDeliver = 349699; // need to exist, be closed
 		$orderType = ConfigurationProvider::INVOICE_TYPE;
 
@@ -54,7 +54,7 @@ class DeliverOrdersRequestIntegrationTest extends \PHPUnit\Framework\TestCase
 	{
 
 		// create order
-		$country = "SE";
+		$country = 'SE';
 
 		$order = TestUtil::createOrder(TestUtil::createIndividualCustomer($country));
 
@@ -81,7 +81,7 @@ class DeliverOrdersRequestIntegrationTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals(1, $response->accepted);	   // equals literal 1
 		$this->assertEquals(0, $response->resultcode);
 		$this->assertEquals(250.00, $response->amount);
-		$this->assertEquals("Invoice", $response->orderType);
+		$this->assertEquals('Invoice', $response->orderType);
 		$this->assertNotNull($response->invoiceId);
 		$this->assertNull($response->contractNumber);
 	}

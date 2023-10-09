@@ -28,28 +28,28 @@ class CreditOrderRowsBuilderTest extends \PHPUnit\Framework\TestCase
 
 	public function test_creditOrderRowsBuilder_setOrderId()
 	{
-		$orderId = "123456";
+		$orderId = '123456';
 		$this->creditOrderRowsObject->setOrderId($orderId);
 		$this->assertEquals($orderId, $this->creditOrderRowsObject->orderId);
 	}
 
 	public function test_creditOrderRowsBuilder_setTransactionId()
 	{
-		$orderId = "123456";
+		$orderId = '123456';
 		$this->creditOrderRowsObject->setTransactionId($orderId);
 		$this->assertEquals($orderId, $this->creditOrderRowsObject->orderId);
 	}
 
 	public function test_creditOrderRowsBuilder_setInvoiceId()
 	{
-		$orderId = "123456";
+		$orderId = '123456';
 		$this->creditOrderRowsObject->setInvoiceId($orderId);
 		$this->assertEquals($orderId, $this->creditOrderRowsObject->invoiceId);
 	}
 
 	public function test_creditOrderRowsBuilder_setCountryCode()
 	{
-		$country = "SE";
+		$country = 'SE';
 		$this->creditOrderRowsObject->setCountryCode($country);
 		$this->assertEquals($country, $this->creditOrderRowsObject->countryCode);
 	}
@@ -95,7 +95,7 @@ class CreditOrderRowsBuilderTest extends \PHPUnit\Framework\TestCase
 
 	public function test_creditOrderRowsBuilder_creditInvoiceOrderRowsBuilder_returns_CreditOrderRowsRequest()
 	{
-		$orderId = "123456";
+		$orderId = '123456';
 		$creditOrderRowsObject = $this->creditOrderRowsObject->setOrderId($orderId)->creditInvoiceOrderRows();
 
 		$this->assertInstanceOf("Svea\WebPay\AdminService\CreditInvoiceRowsRequest", $creditOrderRowsObject);
@@ -103,7 +103,7 @@ class CreditOrderRowsBuilderTest extends \PHPUnit\Framework\TestCase
 
 	public function test_creditOrderRowsBuilder_creditCardOrderRowsBuilder_returns_LowerTransaction()
 	{
-		$orderId = "123456";
+		$orderId = '123456';
 		$mockedNumberedOrderRow = new NumberedOrderRow();
 		$mockedNumberedOrderRow
 			->setAmountExVat(100.00)// recommended to specify price using AmountExVat & VatPercent
@@ -112,7 +112,7 @@ class CreditOrderRowsBuilderTest extends \PHPUnit\Framework\TestCase
 			->setRowNumber(1);
 
 		$creditOrderRowsObject = $this->creditOrderRowsObject
-			->setCountryCode("SE")
+			->setCountryCode('SE')
 			->setOrderId($orderId)
 			->addNumberedOrderRow($mockedNumberedOrderRow)
 			->setRowToCredit(1);
@@ -124,7 +124,7 @@ class CreditOrderRowsBuilderTest extends \PHPUnit\Framework\TestCase
 
 	public function test_creditOrderRowsBuilder_creditDirectBankOrderRowsBuilder_returns_LowerTransaction()
 	{
-		$orderId = "123456";
+		$orderId = '123456';
 		$mockedNumberedOrderRow = new NumberedOrderRow();
 		$mockedNumberedOrderRow
 			->setAmountExVat(100.00)// recommended to specify price using AmountExVat & VatPercent
@@ -133,7 +133,7 @@ class CreditOrderRowsBuilderTest extends \PHPUnit\Framework\TestCase
 			->setRowNumber(1);
 
 		$creditOrderRowsObject = $this->creditOrderRowsObject
-			->setCountryCode("SE")
+			->setCountryCode('SE')
 			->setOrderId($orderId)
 			->addNumberedOrderRow($mockedNumberedOrderRow)
 			->setRowToCredit(1);
@@ -159,7 +159,7 @@ class CreditOrderRowsBuilderTest extends \PHPUnit\Framework\TestCase
 
 	public function test_if_creditAccountCreditOrderRows_returns_appropriate_class()
 	{
-		$orderId = "123456";
+		$orderId = '123456';
 		$creditOrderRowsObject = $this->creditOrderRowsObject->setOrderId($orderId)->creditPaymentPlanOrderRows();
 
 		$this->assertInstanceOf("Svea\WebPay\AdminService\CreditPaymentPlanRowsRequest", $creditOrderRowsObject);

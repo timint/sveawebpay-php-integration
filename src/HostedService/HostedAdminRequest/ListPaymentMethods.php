@@ -16,7 +16,7 @@ class ListPaymentMethods extends HostedRequest {
 	 * Then provide more information about the transaction and send the request using ListPaymentMethod methods.
 	 *
 	 *	   $methods = Svea\WebPay\WebPay::listPaymentMethods( $config )
-	 *		  ->setCountryCode("SE")	  // required
+	 *		  ->setCountryCode('SE')	  // required
 	 *		  ->doRequest()
 	 *	   ;
 	 *
@@ -25,7 +25,7 @@ class ListPaymentMethods extends HostedRequest {
 	 * @param ConfigurationProvider $config instance implementing Svea\WebPay\Config\ConfigurationProvider
 	 */
 	function __construct($config) {
-		$this->method = "getpaymentmethods";
+		$this->method = 'getpaymentmethods';
 		parent::__construct($config);
 	}
 
@@ -51,10 +51,10 @@ class ListPaymentMethods extends HostedRequest {
 
 		$XMLWriter->openMemory();
 		$XMLWriter->setIndent(true);
-		$XMLWriter->startDocument("1.0", "UTF-8");
+		$XMLWriter->startDocument('1.0', 'UTF-8');
 		$XMLWriter->writeComment(Helper::getLibraryAndPlatformPropertiesAsJson($this->config));
 		$XMLWriter->startElement($this->method);
-		$XMLWriter->writeElement("merchantid", $this->config->getMerchantId(ConfigurationProvider::HOSTED_TYPE, $this->countryCode));
+		$XMLWriter->writeElement('merchantid', $this->config->getMerchantId(ConfigurationProvider::HOSTED_TYPE, $this->countryCode));
 		$XMLWriter->endElement();
 		$XMLWriter->endDocument();
 

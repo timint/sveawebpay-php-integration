@@ -23,11 +23,11 @@ class CancelOrderRowService extends AdminImplementationService {
 
 		$orderRowIds = $this->adminBuilder->rowsToCancel;
 		if (!is_array($orderRowIds)) {
-			$errors['incorrect Order Row Ids'] = "Order Row Ids must be not empty array";
+			$errors['incorrect Order Row Ids'] = 'Order Row Ids must be not empty array';
 		}
 
 		if (count($orderRowIds) > 1) {
-			$errors['incorrect Order Row Id'] = "You can Cancel just one Order Row";
+			$errors['incorrect Order Row Id'] = 'You can Cancel just one Order Row';
 		}
 
 		if (is_array($orderRowIds) && count($orderRowIds) > 0) {

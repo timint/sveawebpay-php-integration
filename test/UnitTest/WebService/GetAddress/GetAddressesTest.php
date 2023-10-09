@@ -19,11 +19,11 @@ class GetAddressesTest extends \PHPUnit\Framework\TestCase
 		$config = ConfigurationService::getDefaultConfig();
 		$addressRequest = WebPay::getAddresses($config);
 		$addressRequest
-			->setCountryCode("SE")
-			->setCustomerIdentifier("SE460509")
+			->setCountryCode('SE')
+			->setCustomerIdentifier('SE460509')
 			->getCompanyAddresses();
-		$this->assertEquals("SE", $addressRequest->countryCode);
-		$this->assertEquals("SE460509", $addressRequest->companyId);
+		$this->assertEquals('SE', $addressRequest->countryCode);
+		$this->assertEquals('SE460509', $addressRequest->companyId);
 	}
 
 	public function testPrepareRequestPrivate()
@@ -32,16 +32,16 @@ class GetAddressesTest extends \PHPUnit\Framework\TestCase
 		$addressRequest = WebPay::getAddresses($config);
 		$request = $addressRequest
 			->setOrderTypeInvoice()
-			->setCountryCode("SE")
+			->setCountryCode('SE')
 			->setCustomerIdentifier(194605092222)
 			->getIndividualAddresses()
 			->prepareRequest();
 
 		$this->assertEquals(79021, $request->request->Auth->ClientNumber); //Check all in identity
-		$this->assertEquals("sverigetest", $request->request->Auth->Username); //Check all in identity
-		$this->assertEquals("sverigetest", $request->request->Auth->Password); //Check all in identity
+		$this->assertEquals('sverigetest', $request->request->Auth->Username); //Check all in identity
+		$this->assertEquals('sverigetest', $request->request->Auth->Password); //Check all in identity
 		$this->assertEquals(FALSE, $request->request->IsCompany);
-		$this->assertEquals("SE", $request->request->CountryCode);
+		$this->assertEquals('SE', $request->request->CountryCode);
 		$this->assertEquals(194605092222, $request->request->SecurityNumber);
 	}
 
@@ -51,16 +51,16 @@ class GetAddressesTest extends \PHPUnit\Framework\TestCase
 		$addressRequest = WebPay::getAddresses($config);
 		$request = $addressRequest
 			->setOrderTypeInvoice()
-			->setCountryCode("SE")
+			->setCountryCode('SE')
 			->setCustomerIdentifier(4608142222)
 			->getCompanyAddresses()
 			->prepareRequest();
 
 		$this->assertEquals(79021, $request->request->Auth->ClientNumber); //Check all in identity
-		$this->assertEquals("sverigetest", $request->request->Auth->Username); //Check all in identity
-		$this->assertEquals("sverigetest", $request->request->Auth->Password); //Check all in identity
+		$this->assertEquals('sverigetest', $request->request->Auth->Username); //Check all in identity
+		$this->assertEquals('sverigetest', $request->request->Auth->Password); //Check all in identity
 		$this->assertEquals(true, $request->request->IsCompany);
-		$this->assertEquals("SE", $request->request->CountryCode);
+		$this->assertEquals('SE', $request->request->CountryCode);
 		$this->assertEquals(4608142222, $request->request->SecurityNumber);
 	}
 
@@ -72,8 +72,8 @@ class GetAddressesTest extends \PHPUnit\Framework\TestCase
 	public function test_missing_countryCode_throws_exception()
 	{
 		$request = WebPay::getAddresses(ConfigurationService::getDefaultConfig())
-			//->setCountryCode( "SE" )
-			->setCustomerIdentifier("4605092222")
+			//->setCountryCode( 'SE' )
+			->setCustomerIdentifier('4605092222')
 			->getIndividualAddresses()
 			->prepareRequest();
 	}
@@ -85,8 +85,8 @@ class GetAddressesTest extends \PHPUnit\Framework\TestCase
 	public function test_getIndividualAddresses_with_missing_customerIdentifier_throws_exception()
 	{
 		$request = WebPay::getAddresses(ConfigurationService::getDefaultConfig())
-			->setCountryCode("SE")
-			//->setCustomerIdentifier("4605092222")
+			->setCountryCode('SE')
+			//->setCustomerIdentifier('4605092222')
 			->getIndividualAddresses()
 			->prepareRequest();
 	}
@@ -98,8 +98,8 @@ class GetAddressesTest extends \PHPUnit\Framework\TestCase
 	public function test_getCompanyAddresses_with_missing_customerIdentifier_throws_exception()
 	{
 		$request = WebPay::getAddresses(ConfigurationService::getDefaultConfig())
-			->setCountryCode("SE")
-			//->setCustomerIdentifier("4605092222")
+			->setCountryCode('SE')
+			//->setCustomerIdentifier('4605092222')
 			->getCompanyAddresses()
 			->prepareRequest();
 	}
@@ -124,8 +124,8 @@ class GetAddressesTest extends \PHPUnit\Framework\TestCase
 		$request->conf->conf['credentials']['SE']['auth']['AccountCredit']['clientNumber'] = null;
 
 		$request
-			->setCountryCode("SE")
-			->setCustomerIdentifier("4605092222")
+			->setCountryCode('SE')
+			->setCustomerIdentifier('4605092222')
 			->getIndividualAddresses()
 			->prepareRequest();
 	}
@@ -136,8 +136,8 @@ class GetAddressesTest extends \PHPUnit\Framework\TestCase
 		$request = WebPay::getAddresses(ConfigurationService::getDefaultConfig());
 
 		// clear both payment method credentials for SE
-		$request->conf->conf['credentials']['SE']['auth']['Invoice']['username'] = "sverigetest";
-		$request->conf->conf['credentials']['SE']['auth']['Invoice']['password'] = "sverigetest";
+		$request->conf->conf['credentials']['SE']['auth']['Invoice']['username'] = 'sverigetest';
+		$request->conf->conf['credentials']['SE']['auth']['Invoice']['password'] = 'sverigetest';
 		$request->conf->conf['credentials']['SE']['auth']['Invoice']['clientNumber'] = 79021;
 //		$request->conf->conf['credentials']['SE']['auth']['PaymentPlan']['username'] = null;
 //		$request->conf->conf['credentials']['SE']['auth']['PaymentPlan']['password'] = null;
@@ -147,8 +147,8 @@ class GetAddressesTest extends \PHPUnit\Framework\TestCase
 //		$request->conf->conf['credentials']['SE']['auth']['AccountCredit']['clientNumber'] = null;
 
 		$request
-			->setCountryCode("SE")
-			->setCustomerIdentifier("4605092222")
+			->setCountryCode('SE')
+			->setCustomerIdentifier('4605092222')
 			->getIndividualAddresses()
 			->prepareRequest();
 
@@ -164,16 +164,16 @@ class GetAddressesTest extends \PHPUnit\Framework\TestCase
 		$request->conf->conf['credentials']['SE']['auth']['Invoice']['username'] = null;
 		$request->conf->conf['credentials']['SE']['auth']['Invoice']['password'] = null;
 		$request->conf->conf['credentials']['SE']['auth']['Invoice']['clientNumber'] = null;
-		$request->conf->conf['credentials']['SE']['auth']['PaymentPlan']['username'] = "sverigetest";
-		$request->conf->conf['credentials']['SE']['auth']['PaymentPlan']['password'] = "sverigetest";
+		$request->conf->conf['credentials']['SE']['auth']['PaymentPlan']['username'] = 'sverigetest';
+		$request->conf->conf['credentials']['SE']['auth']['PaymentPlan']['password'] = 'sverigetest';
 		$request->conf->conf['credentials']['SE']['auth']['PaymentPlan']['clientNumber'] = 59999;
 		$request->conf->conf['credentials']['SE']['auth']['AccountCredit']['username'] = null;
 		$request->conf->conf['credentials']['SE']['auth']['AccountCredit']['password'] = null;
 		$request->conf->conf['credentials']['SE']['auth']['AccountCredit']['clientNumber'] = null;
 
 		$request
-			->setCountryCode("SE")
-			->setCustomerIdentifier("4605092222")
+			->setCountryCode('SE')
+			->setCustomerIdentifier('4605092222')
 			->getIndividualAddresses()
 			->prepareRequest();
 
@@ -193,13 +193,13 @@ class GetAddressesTest extends \PHPUnit\Framework\TestCase
 		$request->conf->conf['credentials']['SE']['auth']['PaymentPlan']['username'] = null;
 		$request->conf->conf['credentials']['SE']['auth']['PaymentPlan']['password'] = null;
 		$request->conf->conf['credentials']['SE']['auth']['PaymentPlan']['clientNumber'] = null;
-		$request->conf->conf['credentials']['SE']['auth']['AccountCredit']['username'] = "sverigetest";
-		$request->conf->conf['credentials']['SE']['auth']['AccountCredit']['password'] = "sverigetest";
+		$request->conf->conf['credentials']['SE']['auth']['AccountCredit']['username'] = 'sverigetest';
+		$request->conf->conf['credentials']['SE']['auth']['AccountCredit']['password'] = 'sverigetest';
 		$request->conf->conf['credentials']['SE']['auth']['AccountCredit']['clientNumber'] = 58702;
 
 		$request
-			->setCountryCode("SE")
-			->setCustomerIdentifier("4605092222")
+			->setCountryCode('SE')
+			->setCustomerIdentifier('4605092222')
 			->getIndividualAddresses()
 			->prepareRequest();
 

@@ -25,7 +25,7 @@ class TestUtil
 
 		// poor man's overloading
 		if ($customer == NULL) {
-			$customer = TestUtil::createIndividualCustomer("SE");
+			$customer = TestUtil::createIndividualCustomer('SE');
 		}
 
 		$config = ConfigurationService::getDefaultConfig();
@@ -33,8 +33,8 @@ class TestUtil
 		$orderObject = WebPay::createOrder($config)
 			->addOrderRow(TestUtil::createOrderRow())
 			->addCustomerDetails($customer)
-			->setCountryCode("SE")
-			->setCurrency("SEK")
+			->setCountryCode('SE')
+			->setCurrency('SEK')
 			->setOrderDate(date('c'));
 
 		return $orderObject;
@@ -51,7 +51,7 @@ class TestUtil
 	 * @return \Svea\WebPay\BuildOrder\RowBuilders\IndividualCustomer
 	 * @throws Exception
 	 */
-	public static function createIndividualCustomer($country = "SE")
+	public static function createIndividualCustomer($country = 'SE')
 	{
 		switch (strtoupper($country)) {
 
@@ -60,42 +60,42 @@ class TestUtil
 			//->addCustomerDetails(
 			//	Svea\WebPay\WebPayItem::individualCustomer()
 			//	->setNationalIdNumber(194605092222) //Required for individual customers in SE, NO, DK, FI
-			//	->setInitials("SB")				 //Required for individual customers in NL
+			//	->setInitials('SB')				 //Required for individual customers in NL
 			//	->setBirthDate(1923, 12, 20)		//Required for individual customers in NL and DE
-			//	->setName("Tess", "Testson")		//Required for individual customers in NL and DE
-			//	->setStreetAddress("Gatan", 23)	 //Required in NL and DE
+			//	->setName('Tess', 'Testson')		//Required for individual customers in NL and DE
+			//	->setStreetAddress('Gatan', 23)	 //Required in NL and DE
 			//	->setZipCode(9999)				  //Required in NL and DE
-			//	->setLocality("Stan")			   //Required in NL and DE
-			//	->setEmail("test@svea.com")		 //Optional but desirable
-			//	->setIpAddress("123.123.123")	   //Optional but desirable
-			//	->setCoAddress("c/o Eriksson")	  //Optional
+			//	->setLocality('Stan')			   //Required in NL and DE
+			//	->setEmail('test@svea.com')		 //Optional but desirable
+			//	->setIpAddress('123.123.123')	   //Optional but desirable
+			//	->setCoAddress('c/o Eriksson')	  //Optional
 			//	->setPhoneNumber(999999)			//Optional
 			//	)
 
-			case("NL"):
+			case('NL'):
 				return WebPayItem::individualCustomer()
 					->setBirthDate(1955, 03, 07)
-					->setName("Sneider", "Boasman")
-					->setStreetAddress("Gate", 42)
+					->setName('Sneider', 'Boasman')
+					->setStreetAddress('Gate', 42)
 					->setCoAddress(138)
-					->setLocality("BARENDRECHT")
-					->setZipCode("1102 HG")
-					->setInitials("SB");
+					->setLocality('BARENDRECHT')
+					->setZipCode('1102 HG')
+					->setInitials('SB');
 				break;
 
-			case("SE"):
+			case('SE'):
 				return WebPayItem::individualCustomer()
-					->setNationalIdNumber("194605092222")
+					->setNationalIdNumber('194605092222')
 					->setBirthDate(1946, 05, 9)
-					->setName("Tess T", "Persson")
-					->setStreetAddress("Testgatan", 1)
-					->setCoAddress("c/o Eriksson, Erik")
-					->setLocality("Stan")
-					->setZipCode("99999");
+					->setName('Tess T', 'Persson')
+					->setStreetAddress('Testgatan', 1)
+					->setCoAddress('c/o Eriksson, Erik')
+					->setLocality('Stan')
+					->setZipCode('99999');
 				break;
-			case("FI"):
+			case('FI'):
 				return WebPayItem::individualCustomer()
-					->setNationalIdNumber("160264-999N");
+					->setNationalIdNumber('160264-999N');
 				break;
 
 			default:
@@ -114,12 +114,12 @@ class TestUtil
 	public static function createOrderRow($amount = 100.00, $quantity = 2)
 	{
 		return WebPayItem::orderRow()
-			->setArticleNumber("1")
+			->setArticleNumber('1')
 			->setQuantity($quantity)
 			->setAmountExVat($amount)
-			->setDescription("Specification")
+			->setDescription('Specification')
 			->setName('Product')
-			->setUnit("st")
+			->setUnit('st')
 			->setVatPercent(25)
 			->setDiscountPercent(0);
 	}
@@ -135,15 +135,15 @@ class TestUtil
 
 		// poor man's overloading
 		if ($customer == NULL) {
-			$customer = TestUtil::createIndividualCustomer("SE");
+			$customer = TestUtil::createIndividualCustomer('SE');
 		}
 
 		$config = ConfigurationService::getDefaultConfig();
 
 		$orderObject = WebPay::createOrder($config)
 			->addCustomerDetails($customer)
-			->setCountryCode("SE")
-			->setCurrency("SEK")
+			->setCountryCode('SE')
+			->setCurrency('SEK')
 			->setOrderDate(date('c'));
 
 		return $orderObject;
@@ -159,18 +159,18 @@ class TestUtil
 	public static function createNumberedOrderRow($amount = 100.00, $quantity = 1, $number = 1)
 	{
 		return WebPayItem::numberedOrderRow()
-			->setArticleNumber("1")
+			->setArticleNumber('1')
 			->setQuantity($quantity)
 			->setAmountExVat($amount)
-			->setDescription("Specification")
+			->setDescription('Specification')
 			->setName('Product')
-			->setUnit("st")
+			->setUnit('st')
 			->setVatPercent(25)
 			->setDiscountPercent(0)
 			->setRowNumber($number);
 	}
 
-	public static function createCompanyCustomer($country = "SE")
+	public static function createCompanyCustomer($country = 'SE')
 	{
 		switch (strtoupper($country)) {
 
@@ -179,26 +179,26 @@ class TestUtil
 			//->addCustomerDetails(
 			//	Svea\WebPay\WebPayItem::companyCustomer()
 			//	->setNationalIdNumber(2345234)	   //Required in SE, NO, DK, FI
-			//	->setVatNumber("NL2345234")		 //Required in NL and DE
-			//	->setCompanyName("TestCompagniet")  //Required in NL and DE
-			//	->setStreetAddress("Gatan", 23)	 //Required in NL and DE
+			//	->setVatNumber('NL2345234')		 //Required in NL and DE
+			//	->setCompanyName('TestCompagniet')  //Required in NL and DE
+			//	->setStreetAddress('Gatan', 23)	 //Required in NL and DE
 			//	->setZipCode(9999)				  //Required in NL and DE
-			//	->setLocality("Stan")			   //Required in NL and DE
-			//	->setEmail("test@svea.com")		 //Optional but desirable
-			//	->setIpAddress("123.123.123")	   //Optional but desirable
-			//	->setCoAddress("c/o Eriksson")	  //Optional
+			//	->setLocality('Stan')			   //Required in NL and DE
+			//	->setEmail('test@svea.com')		 //Optional but desirable
+			//	->setIpAddress('123.123.123')	   //Optional but desirable
+			//	->setCoAddress('c/o Eriksson')	  //Optional
 			//	->setPhoneNumber(999999)			//Optional
-			//	->setAddressSelector("7fd7768")	 //Optional, string recieved from Svea\WebPay\WebPay::getAddress() request
+			//	->setAddressSelector('7fd7768')	 //Optional, string recieved from Svea\WebPay\WebPay::getAddress() request
 			//	)
 
-			case("SE"):
+			case('SE'):
 				return WebPayItem::companyCustomer()
-					->setNationalIdNumber("4608142222")
-					->setCompanyName("Tess T", "Persson")
-					->setStreetAddress("Testgatan", 1)
-					->setCoAddress("c/o Eriksson, Erik")
-					->setLocality("Stan")
-					->setZipCode("99999");
+					->setNationalIdNumber('4608142222')
+					->setCompanyName('Tess T', 'Persson')
+					->setStreetAddress('Testgatan', 1)
+					->setCoAddress('c/o Eriksson, Erik')
+					->setLocality('Stan')
+					->setZipCode('99999');
 				break;
 
 			default:
@@ -216,12 +216,12 @@ class TestUtil
 	public static function createOrderRowWithVat($vatPercent = 25)
 	{
 		return WebPayItem::orderRow()
-			->setArticleNumber("1")
+			->setArticleNumber('1')
 			->setQuantity(1)
 			->setAmountExVat(100.00)
-			->setDescription("Specification")
+			->setDescription('Specification')
 			->setName('Prod')
-			->setUnit("st")
+			->setUnit('st')
 			->setVatPercent($vatPercent)
 			->setDiscountPercent(0);
 	}
@@ -239,7 +239,7 @@ class TestUtil
 	 * @param string $country
 	 * @return string the first available campaignCode
 	 */
-	public static function getGetPaymentPlanParamsForTesting($country = "SE")
+	public static function getGetPaymentPlanParamsForTesting($country = 'SE')
 	{
 		$addressRequest = WebPay::getPaymentPlanParams(ConfigurationService::getDefaultConfig());
 		$response = $addressRequest
@@ -262,9 +262,9 @@ class TestUtil
 					WebPayItem::shippingFee()
 						->setShippingId('33')
 						->setName('shipping')
-						->setDescription("Specification")
+						->setDescription('Specification')
 						->setAmountExVat(50)
-						->setUnit("st")
+						->setUnit('st')
 						->setVatPercent(25)
 						->setDiscountPercent(0)
 				);
@@ -283,9 +283,9 @@ class TestUtil
 				->addFee(
 					WebPayItem::invoiceFee()
 						->setName('Svea fee')
-						->setDescription("Fee for invoice")
+						->setDescription('Fee for invoice')
 						->setAmountExVat(50)
-						->setUnit("st")
+						->setUnit('st')
 						->setVatPercent(25)
 						->setDiscountPercent(0)
 				);

@@ -42,11 +42,11 @@ class GetAccountCreditsResponse {
 	}
 
 	protected function formatObject($message) {
-		$this->errormessage = isset($message->ErrorMessage) ? $message->ErrorMessage : "";
+		$this->errormessage = isset($message->ErrorMessage) ? $message->ErrorMessage : '';
 		$this->resultcode = $message->ResultCode;
 
 		// if successful, set deliverOrderResult, using the same attributes as for DeliverOrderEU?
-		if (property_exists($message, "AccountCredits")) {
+		if (property_exists($message, 'AccountCredits')) {
 
 			// @todo  -this is for searching AccountCredit orders and for formatting response, it will be implemented in the future
 			foreach($message->AccountCredits as $accountCredit) {
@@ -67,14 +67,14 @@ class GetAccountCreditsResponse {
 			$this->createdDate = $order->CreatedDate;
 
 			if (isset($order->CreditReportStatus->Accepted)) {
-				$this->creditReportStatusAccepted = ($order->CreditReportStatus->Accepted === "true") ? true : false;
+				$this->creditReportStatusAccepted = ($order->CreditReportStatus->Accepted === 'true') ? true : false;
 				$this->creditReportStatusCreationDate = $order->CreditReportStatus->CreationDate;
 			}
 
 			$this->currency = $order->Currency;
 
 			//individual customer?
-			if ($order->Customer->CustomerType === "Individual") {
+			if ($order->Customer->CustomerType === 'Individual') {
 
 				$this->customer = new IndividualCustomer;
 
@@ -94,7 +94,7 @@ class GetAccountCreditsResponse {
 				$this->customer->setLocality($order->Customer->Locality);
 			}
 
-			if ($order->Customer->CustomerType === "Company") {
+			if ($order->Customer->CustomerType === 'Company') {
 
 				$this->customer = new CompanyCustomer;
 
@@ -113,13 +113,13 @@ class GetAccountCreditsResponse {
 			$this->customerId = $order->CustomerId;
 			$this->customerReference = $order->CustomerReference;
 			//$this->deliveryAddress = $order->DeliveryAddress; // not supported
-			$this->isPossibleToAdminister = ($order->IsPossibleToAdminister === "true") ? true : false;
+			$this->isPossibleToAdminister = ($order->IsPossibleToAdminister === 'true') ? true : false;
 			$this->isPossibleToCancel = ($order->IsPossibleToCancel === 'true') ? true : false;
 			$this->notes = $order->Notes;
 			$this->orderDeliveryStatus = $order->OrderDeliveryStatus;
 
 			// a single order row is returned as type stdClass
-			if (is_a($order->OrderRows->NumberedOrderRow, "stdClass")) {
+			if (is_a($order->OrderRows->NumberedOrderRow, 'stdClass')) {
 				$row = $order->OrderRows->NumberedOrderRow;
 				$newrow = new NumberedOrderRow(); // webpay orderrow
 				$newrow
@@ -201,18 +201,18 @@ class GetAccountCreditsResponse {
 			$this->orderStatus = $order->OrderStatus;
 			$this->orderType = $order->OrderType;
 
-			if (is_a($order->PaymentPlanDetails, "stdClass") && property_exists($order->PaymentPlanDetails, "ContractLengthMonths")) {
+			if (is_a($order->PaymentPlanDetails, 'stdClass') && property_exists($order->PaymentPlanDetails, 'ContractLengthMonths')) {
 				$this->paymentPlanDetailsContractLengthMonths = $order->PaymentPlanDetails->ContractLengthMonths;
 			}
-			if (is_a($order->PaymentPlanDetails, "stdClass") && property_exists($order->PaymentPlanDetails, "ContractNumber")) {
+			if (is_a($order->PaymentPlanDetails, 'stdClass') && property_exists($order->PaymentPlanDetails, 'ContractNumber')) {
 				$this->paymentPlanDetailsContractNumber = $order->PaymentPlanDetails->ContractNumber;
 			}
 
 			$this->pendingReasons = $order->PendingReasons;
-			if (is_a($order->PendingReasons, "stdClass") && property_exists($order->PendingReasons, "PendingType")) {
+			if (is_a($order->PendingReasons, 'stdClass') && property_exists($order->PendingReasons, 'PendingType')) {
 				$this->pendingReasonsPendingType = $order->PendingReasons->PendingType;
 			}
-			if (is_a($order->PendingReasons, "stdClass") && property_exists($order->PendingReasons, "CreatedDate")) {
+			if (is_a($order->PendingReasons, 'stdClass') && property_exists($order->PendingReasons, 'CreatedDate')) {
 				$this->PendingReasonsCreatedDate = $order->PendingReasons->CreatedDate;
 			}
 

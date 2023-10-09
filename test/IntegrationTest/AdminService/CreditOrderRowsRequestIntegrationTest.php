@@ -34,9 +34,9 @@ class CreditOrderRowsRequestIntegrationTest extends \PHPUnit\Framework\TestCase
 					->setVatPercent($vat)
 					->setQuantity($quantity)
 			)
-			->addCustomerDetails(TestUtil::createIndividualCustomer("SE"))
-			->setCountryCode("SE")
-			->setOrderDate("2012-12-12");
+			->addCustomerDetails(TestUtil::createIndividualCustomer('SE'))
+			->setCountryCode('SE')
+			->setOrderDate('2012-12-12');
 		if ($is_paymentplan) {
 			$orderResponse = $orderResponse->usePaymentPlanPayment($campaignCode)
 				->doRequest();
@@ -79,9 +79,9 @@ class CreditOrderRowsRequestIntegrationTest extends \PHPUnit\Framework\TestCase
 					->setVatPercent($vat)
 					->setQuantity($quantity)
 			)
-			->addCustomerDetails(TestUtil::createIndividualCustomer("SE"))
-			->setCountryCode("SE")
-			->setOrderDate("2012-12-12");
+			->addCustomerDetails(TestUtil::createIndividualCustomer('SE'))
+			->setCountryCode('SE')
+			->setOrderDate('2012-12-12');
 		if ($is_paymentplan) {
 			$orderResponse = $orderResponse->usePaymentPlanPayment($campaignCode)
 				->doRequest();
@@ -153,8 +153,8 @@ class CreditOrderRowsRequestIntegrationTest extends \PHPUnit\Framework\TestCase
 			->setCountryCode('SE')
 			->queryInvoiceOrder()->doRequest();
 		$this->assertEquals(1, $query->accepted);
-		$this->assertEquals("99.99", $query->numberedOrderRows[0]->amountExVat);
-		$this->assertEquals("24", $query->numberedOrderRows[0]->vatPercent);
+		$this->assertEquals('99.99', $query->numberedOrderRows[0]->amountExVat);
+		$this->assertEquals('24', $query->numberedOrderRows[0]->vatPercent);
 
 		$credit = WebPayAdmin::creditOrderRows($config)
 			->setInvoiceId($orderInfo->invoiceId)
@@ -178,8 +178,8 @@ class CreditOrderRowsRequestIntegrationTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals(1, $query->accepted);
 		// NOTE the order row status/amount does not reflect that the corresponding invoice row has been credited
 		// TODO implement queryInvoice and recurse invoices to get the current order row status
-		$this->assertEquals("99.99", $query->numberedOrderRows[0]->amountExVat);   // sent 99.99 ex * 1.24 => sent 123.9876 inc => 123.99 queried
-		$this->assertEquals("24", $query->numberedOrderRows[0]->vatPercent);
+		$this->assertEquals('99.99', $query->numberedOrderRows[0]->amountExVat);   // sent 99.99 ex * 1.24 => sent 123.9876 inc => 123.99 queried
+		$this->assertEquals('24', $query->numberedOrderRows[0]->vatPercent);
 	}
 
 	public function test_creditOrderRows_creditInvoiceOrderRows_credit_row_using_original_exvat_new_order_incvat()
@@ -194,8 +194,8 @@ class CreditOrderRowsRequestIntegrationTest extends \PHPUnit\Framework\TestCase
 			->setCountryCode('SE')
 			->queryInvoiceOrder()->doRequest();
 		$this->assertEquals(1, $query->accepted);
-		$this->assertEquals("99.99", $query->numberedOrderRows[0]->amountExVat);
-		$this->assertEquals("24", $query->numberedOrderRows[0]->vatPercent);
+		$this->assertEquals('99.99', $query->numberedOrderRows[0]->amountExVat);
+		$this->assertEquals('24', $query->numberedOrderRows[0]->vatPercent);
 
 		$credit = WebPayAdmin::creditOrderRows($config)
 			->setInvoiceId($orderInfo->invoiceId)
@@ -212,8 +212,8 @@ class CreditOrderRowsRequestIntegrationTest extends \PHPUnit\Framework\TestCase
 			->setCountryCode('SE')
 			->queryInvoiceOrder()->doRequest();
 		$this->assertEquals(1, $query->accepted);
-		$this->assertEquals("99.99", $query->numberedOrderRows[0]->amountExVat);   // sent 99.99 ex * 1.24 => sent 123.9876 inc => 123.99 queried
-		$this->assertEquals("24", $query->numberedOrderRows[0]->vatPercent);
+		$this->assertEquals('99.99', $query->numberedOrderRows[0]->amountExVat);   // sent 99.99 ex * 1.24 => sent 123.9876 inc => 123.99 queried
+		$this->assertEquals('24', $query->numberedOrderRows[0]->vatPercent);
 	}
 
 	/// characterizing unit tests for INTG-551
@@ -221,9 +221,9 @@ class CreditOrderRowsRequestIntegrationTest extends \PHPUnit\Framework\TestCase
 	{
 		// needs either setRow(s)ToCredit or addCreditOrderRow(s)
 		$creditOrder = WebPayAdmin::creditOrderRows(ConfigurationService::getDefaultConfig())
-			->setInvoiceId("123456789")
+			->setInvoiceId('123456789')
 			->setInvoiceDistributionType(DistributionType::POST)
-			->setCountryCode("SE")
+			->setCountryCode('SE')
 			->addCreditOrderRow(
 				WebPayItem::orderRow()
 					->setAmountExVat(10.00)
@@ -232,8 +232,8 @@ class CreditOrderRowsRequestIntegrationTest extends \PHPUnit\Framework\TestCase
 			);
 		$request = $creditOrder->creditInvoiceOrderRows()->prepareRequest();
 
-		$this->assertEquals("10", $request->NewCreditInvoiceRows->enc_value[0]->enc_value->PricePerUnit->enc_value);
-		$this->assertEquals("25", $request->NewCreditInvoiceRows->enc_value[0]->enc_value->VatPercent->enc_value);
+		$this->assertEquals('10', $request->NewCreditInvoiceRows->enc_value[0]->enc_value->PricePerUnit->enc_value);
+		$this->assertEquals('25', $request->NewCreditInvoiceRows->enc_value[0]->enc_value->VatPercent->enc_value);
 		$this->assertEquals(null, $request->NewCreditInvoiceRows->enc_value[0]->enc_value->PriceIncludingVat->enc_value);
 	}
 
@@ -241,9 +241,9 @@ class CreditOrderRowsRequestIntegrationTest extends \PHPUnit\Framework\TestCase
 	{
 		// needs either setRow(s)ToCredit or addCreditOrderRow(s)
 		$creditOrder = WebPayAdmin::creditOrderRows(ConfigurationService::getDefaultConfig())
-			->setInvoiceId("123456789")
+			->setInvoiceId('123456789')
 			->setInvoiceDistributionType(DistributionType::POST)
-			->setCountryCode("SE")
+			->setCountryCode('SE')
 			->addCreditOrderRow(
 				WebPayItem::orderRow()
 					->setAmountIncVat(10.00)
@@ -252,8 +252,8 @@ class CreditOrderRowsRequestIntegrationTest extends \PHPUnit\Framework\TestCase
 			);
 		$request = $creditOrder->creditInvoiceOrderRows()->prepareRequest();
 
-		$this->assertEquals("10", $request->NewCreditInvoiceRows->enc_value[0]->enc_value->PricePerUnit->enc_value);
-		$this->assertEquals("25", $request->NewCreditInvoiceRows->enc_value[0]->enc_value->VatPercent->enc_value);
+		$this->assertEquals('10', $request->NewCreditInvoiceRows->enc_value[0]->enc_value->PricePerUnit->enc_value);
+		$this->assertEquals('25', $request->NewCreditInvoiceRows->enc_value[0]->enc_value->VatPercent->enc_value);
 		$this->assertEquals(true, $request->NewCreditInvoiceRows->enc_value[0]->enc_value->PriceIncludingVat->enc_value);
 	}
 
@@ -261,9 +261,9 @@ class CreditOrderRowsRequestIntegrationTest extends \PHPUnit\Framework\TestCase
 	{
 		// needs either setRow(s)ToCredit or addCreditOrderRow(s)
 		$creditOrder = WebPayAdmin::creditOrderRows(ConfigurationService::getDefaultConfig())
-			->setInvoiceId("123456789")
+			->setInvoiceId('123456789')
 			->setInvoiceDistributionType(DistributionType::POST)
-			->setCountryCode("SE")
+			->setCountryCode('SE')
 			->addCreditOrderRow(
 				WebPayItem::orderRow()
 					->setAmountIncVat(12.50)
@@ -272,8 +272,8 @@ class CreditOrderRowsRequestIntegrationTest extends \PHPUnit\Framework\TestCase
 			);
 		$request = $creditOrder->creditInvoiceOrderRows()->prepareRequest();
 
-		$this->assertEquals("12.50", $request->NewCreditInvoiceRows->enc_value[0]->enc_value->PricePerUnit->enc_value);
-		$this->assertEquals("25", $request->NewCreditInvoiceRows->enc_value[0]->enc_value->VatPercent->enc_value);
+		$this->assertEquals('12.50', $request->NewCreditInvoiceRows->enc_value[0]->enc_value->PricePerUnit->enc_value);
+		$this->assertEquals('25', $request->NewCreditInvoiceRows->enc_value[0]->enc_value->VatPercent->enc_value);
 		$this->assertEquals(true, $request->NewCreditInvoiceRows->enc_value[0]->enc_value->PriceIncludingVat->enc_value);
 	}
 
@@ -290,15 +290,15 @@ class CreditOrderRowsRequestIntegrationTest extends \PHPUnit\Framework\TestCase
 			->setCountryCode('SE')
 			->queryInvoiceOrder()->doRequest();
 		$this->assertEquals(1, $query->accepted);
-		$this->assertEquals("100.00", $query->numberedOrderRows[0]->amountExVat);
+		$this->assertEquals('100.00', $query->numberedOrderRows[0]->amountExVat);
 		$this->assertEquals(null, $query->numberedOrderRows[0]->amountIncVat);
-		$this->assertEquals("25", $query->numberedOrderRows[0]->vatPercent);
-		$this->assertEquals("2.00", $query->numberedOrderRows[0]->quantity);
+		$this->assertEquals('25', $query->numberedOrderRows[0]->vatPercent);
+		$this->assertEquals('2.00', $query->numberedOrderRows[0]->quantity);
 
 		$creditOrder = WebPayAdmin::creditOrderRows($config)
 			->setInvoiceId($orderInfo->invoiceId)
 			->setInvoiceDistributionType(DistributionType::POST)
-			->setCountryCode("SE")
+			->setCountryCode('SE')
 			->addCreditOrderRow(
 				WebPayItem::orderRow()
 					->setAmountIncVat(20.00)
@@ -307,8 +307,8 @@ class CreditOrderRowsRequestIntegrationTest extends \PHPUnit\Framework\TestCase
 			);
 		$request = $creditOrder->creditInvoiceOrderRows()->prepareRequest();
 
-		$this->assertEquals("20", $request->NewCreditInvoiceRows->enc_value[0]->enc_value->PricePerUnit->enc_value);
-		$this->assertEquals("25", $request->NewCreditInvoiceRows->enc_value[0]->enc_value->VatPercent->enc_value);
+		$this->assertEquals('20', $request->NewCreditInvoiceRows->enc_value[0]->enc_value->PricePerUnit->enc_value);
+		$this->assertEquals('25', $request->NewCreditInvoiceRows->enc_value[0]->enc_value->VatPercent->enc_value);
 		$this->assertEquals(true, $request->NewCreditInvoiceRows->enc_value[0]->enc_value->PriceIncludingVat->enc_value);
 
 		$response = $creditOrder->creditInvoiceOrderRows()->doRequest();
@@ -323,13 +323,13 @@ class CreditOrderRowsRequestIntegrationTest extends \PHPUnit\Framework\TestCase
 
 		// NOTE the order row status/amount does not reflect that the corresponding invoice row has been credited
 		// TODO implement queryInvoice and recurse invoices to get the current order row status
-		$this->assertEquals("100.00", $query2->numberedOrderRows[0]->amountExVat);
+		$this->assertEquals('100.00', $query2->numberedOrderRows[0]->amountExVat);
 		$this->assertEquals(null, $query2->numberedOrderRows[0]->amountIncVat);
-		$this->assertEquals("25", $query2->numberedOrderRows[0]->vatPercent);
-		$this->assertEquals("2.00", $query2->numberedOrderRows[0]->quantity);
+		$this->assertEquals('25', $query2->numberedOrderRows[0]->vatPercent);
+		$this->assertEquals('2.00', $query2->numberedOrderRows[0]->quantity);
 		// nope, can't be seen in the order, only in backoffice in delivered invoice as cumulative discount amount
-		// $this->assertEquals("-10.00", $query->numberedOrderRows[1]->amountExVat);
-		// $this->assertEquals("25", $query->numberedOrderRows[1]->vatPercent);
+		// $this->assertEquals('-10.00', $query->numberedOrderRows[1]->amountExVat);
+		// $this->assertEquals('25', $query->numberedOrderRows[1]->vatPercent);
 	}
 
 	public function test_credit_row_sent_inc_credit_sent_incandex()
@@ -345,14 +345,14 @@ class CreditOrderRowsRequestIntegrationTest extends \PHPUnit\Framework\TestCase
 			->queryInvoiceOrder()->doRequest();
 		$this->assertEquals(1, $query->accepted);
 		$this->assertEquals(null, $query->numberedOrderRows[0]->amountExVat);
-		$this->assertEquals("125.00", $query->numberedOrderRows[0]->amountIncVat);
-		$this->assertEquals("25", $query->numberedOrderRows[0]->vatPercent);
-		$this->assertEquals("2.00", $query->numberedOrderRows[0]->quantity);
+		$this->assertEquals('125.00', $query->numberedOrderRows[0]->amountIncVat);
+		$this->assertEquals('25', $query->numberedOrderRows[0]->vatPercent);
+		$this->assertEquals('2.00', $query->numberedOrderRows[0]->quantity);
 
 		$creditOrder = WebPayAdmin::creditOrderRows($config)
 			->setInvoiceId($orderInfo->invoiceId)
 			->setInvoiceDistributionType(DistributionType::POST)
-			->setCountryCode("SE")
+			->setCountryCode('SE')
 			->addCreditOrderRow(
 				WebPayItem::orderRow()
 					->setAmountIncVat(20.00)
@@ -360,8 +360,8 @@ class CreditOrderRowsRequestIntegrationTest extends \PHPUnit\Framework\TestCase
 					->setQuantity(1)
 			);
 		$request = $creditOrder->creditInvoiceOrderRows()->prepareRequest();
-		$this->assertEquals("20", $request->NewCreditInvoiceRows->enc_value[0]->enc_value->PricePerUnit->enc_value);
-		$this->assertEquals("25", $request->NewCreditInvoiceRows->enc_value[0]->enc_value->VatPercent->enc_value);
+		$this->assertEquals('20', $request->NewCreditInvoiceRows->enc_value[0]->enc_value->PricePerUnit->enc_value);
+		$this->assertEquals('25', $request->NewCreditInvoiceRows->enc_value[0]->enc_value->VatPercent->enc_value);
 		$this->assertEquals(true, $request->NewCreditInvoiceRows->enc_value[0]->enc_value->PriceIncludingVat->enc_value);
 
 		$response = $creditOrder->creditInvoiceOrderRows()->doRequest();
@@ -377,12 +377,12 @@ class CreditOrderRowsRequestIntegrationTest extends \PHPUnit\Framework\TestCase
 		// NOTE the order row status/amount does not reflect that the corresponding invoice row has been credited
 		// TODO implement queryInvoice and recurse invoices to get the current order row status
 		$this->assertEquals(null, $query2->numberedOrderRows[0]->amountExVat);
-		$this->assertEquals("125.00", $query2->numberedOrderRows[0]->amountIncVat);
-		$this->assertEquals("25", $query2->numberedOrderRows[0]->vatPercent);
-		$this->assertEquals("2.00", $query2->numberedOrderRows[0]->quantity);
+		$this->assertEquals('125.00', $query2->numberedOrderRows[0]->amountIncVat);
+		$this->assertEquals('25', $query2->numberedOrderRows[0]->vatPercent);
+		$this->assertEquals('2.00', $query2->numberedOrderRows[0]->quantity);
 		// nope, can't be seen in the order, only in backoffice in delivered invoice as cumulative discount amount
-		// $this->assertEquals("-20.00", $query->numberedOrderRows[1]->amountExVat);
-		// $this->assertEquals("25", $query->numberedOrderRows[1]->vatPercent);
+		// $this->assertEquals('-20.00', $query->numberedOrderRows[1]->amountExVat);
+		// $this->assertEquals('25', $query->numberedOrderRows[1]->vatPercent);
 	}
 
 	/// characterising integration test for INTG-576
@@ -465,7 +465,7 @@ class CreditOrderRowsRequestIntegrationTest extends \PHPUnit\Framework\TestCase
 					->setAmountIncVat(10)
 					->setVatPercent(25)
 					->setQuantity(1)
-					->setDescription("row")
+					->setDescription('row')
 			)
 			->creditPaymentplanOrderRows()->doRequest();
 
@@ -517,7 +517,7 @@ class CreditOrderRowsRequestIntegrationTest extends \PHPUnit\Framework\TestCase
 					->setAmountExVat(8)
 					->setVatPercent(25)
 					->setQuantity(1)
-					->setDescription("row")
+					->setDescription('row')
 			)
 			->creditPaymentplanOrderRows()->doRequest();
 		// logs should createOrderEU (w/priceIncludingVat = true) => deliverOrderRows
@@ -536,12 +536,12 @@ class CreditOrderRowsRequestIntegrationTest extends \PHPUnit\Framework\TestCase
 			->setAmountIncVat(10.00)
 			->setVatPercent(25)
 			->setQuantity(1)
-			->setDescription("row 1");
+			->setDescription('row 1');
 		$orderRows[] = WebPayItem::orderRow()
 			->setAmountIncVat(10.00)
 			->setVatPercent(25)
 			->setQuantity(1)
-			->setDescription("row 2");
+			->setDescription('row 2');
 
 		$credit = WebPayAdmin::creditOrderRows($config)
 			->setInvoiceId($orderInfo->invoiceId)
@@ -563,12 +563,12 @@ class CreditOrderRowsRequestIntegrationTest extends \PHPUnit\Framework\TestCase
 			->setAmountIncVat(10.00)
 			->setVatPercent(25)
 			->setQuantity(1)
-			->setDescription("row 1");
+			->setDescription('row 1');
 		$orderRows[] = WebPayItem::orderRow()
 			->setAmountIncVat(10.00)
 			->setVatPercent(25)
 			->setQuantity(1)
-			->setDescription("row 2");
+			->setDescription('row 2');
 		$credit = WebPayAdmin::creditOrderRows($config)
 			->setContractNumber($orderInfo->contractNumber)
 			->setCountryCode('SE')

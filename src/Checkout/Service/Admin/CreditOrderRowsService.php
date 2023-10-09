@@ -46,7 +46,7 @@ class CreditOrderRowsService extends AdminImplementationService {
 			$creditOrderRows = $this->adminBuilder->creditOrderRows;
 
 			if (count($creditOrderRows) > 1) {
-				$errors['incorrect New Credit Row'] = "Only one Credit row can be set!";
+				$errors['incorrect New Credit Row'] = 'Only one Credit row can be set!';
 			}
 
 			$newCreditRow = $creditOrderRows[0];
@@ -55,11 +55,11 @@ class CreditOrderRowsService extends AdminImplementationService {
 			} else {
 				foreach ($creditOrderRows as $orderRow) {
 					if (!isset($orderRow->vatPercent)) {
-						$errors['missing order row vat information'] = "cannot calculate orderRow vatPercent, need to set vatPercent.";
+						$errors['missing order row vat information'] = 'cannot calculate orderRow vatPercent, need to set vatPercent.';
 					}
 
 					if (!is_float($orderRow->amountIncVat) && $orderRow->amountIncVat !== 0) {
-						$errors['missing order row amount information'] = "cannot calculate orderRow amount, need to set value for amountIncVat.";
+						$errors['missing order row amount information'] = 'cannot calculate orderRow amount, need to set value for amountIncVat.';
 					}
 				}
 			}
@@ -72,7 +72,7 @@ class CreditOrderRowsService extends AdminImplementationService {
 					}
 				}
 			} else {
-				$errors['missing order rows'] = "must be at least one Order row set.";
+				$errors['missing order rows'] = 'must be at least one Order row set.';
 			}
 		}
 

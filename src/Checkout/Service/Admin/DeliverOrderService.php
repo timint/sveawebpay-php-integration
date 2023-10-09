@@ -40,7 +40,7 @@ class DeliverOrderService extends AdminImplementationService {
 		if ($this->isDeliverOrderRows === true) {
 			$orderRowIds = $this->adminBuilder->rowsToDeliver;
 			if (!is_array($orderRowIds) || count($orderRowIds) === 0) {
-				$errors['incorrect Order Row Ids'] = "Order Row Ids must be array of integers!";
+				$errors['incorrect Order Row Ids'] = 'Order Row Ids must be array of integers!';
 			}
 			foreach ($orderRowIds as $orderRowId) {
 				if (empty($orderRowId) || !is_int($orderRowId)) {

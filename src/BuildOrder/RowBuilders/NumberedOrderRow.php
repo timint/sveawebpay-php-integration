@@ -16,10 +16,10 @@ namespace Svea\WebPay\BuildOrder\RowBuilders;
  *	  ->setVatPercent(25)					 // recommended to specify price using AmountExVat & VatPercent
  *	  ->setAmountIncVat(125.00)			   // optional, need to use two out of three of the price specification methods
  *	  ->setQuantity(2)						// required
- *	  ->setUnit("st")						 // optional
+ *	  ->setUnit('st')						 // optional
  *	  ->setName('Prod')					   // optional
- *	  ->setDescription("Specification")	   // optional
- *	  ->setArticleNumber("1")				 // optional
+ *	  ->setDescription('Specification')	   // optional
+ *	  ->setArticleNumber('1')				 // optional
  *	  ->setDiscountPercent(0)				 // optional
  *
  *	  //numberedOrderRow

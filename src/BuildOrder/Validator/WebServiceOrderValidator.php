@@ -32,7 +32,7 @@ class WebServiceOrderValidator extends OrderValidator {
 		}
 
 		if (!isset($order->customerIdentity)) {
-			$this->errors['missing customerIdentity'] = "customerIdentity is required. Use function addCustomerDetails().";
+			$this->errors['missing customerIdentity'] = 'customerIdentity is required. Use function addCustomerDetails().';
 		}
 
 		if (isset($order->customerIdentity->orgNumber) ||
@@ -46,7 +46,7 @@ class WebServiceOrderValidator extends OrderValidator {
 		$identityValidator = new IdentityValidator($this->isCompany);
 
 		if ($order->orderType == ConfigurationProvider::PAYMENTPLAN_TYPE && $this->isCompany == true) {
-			$this->errors["Wrong customer type"] = "PaymentPlanPayment not allowed for Company customer.";
+			$this->errors['Wrong customer type'] = 'PaymentPlanPayment not allowed for Company customer.';
 		}
 
 		// Require the order to contain identication urls for swedish customers using invoice payment
@@ -56,29 +56,29 @@ class WebServiceOrderValidator extends OrderValidator {
 			strtoupper($order->countryCode) === 'SE'
 		) {
 			if (!$this->validUrl($order->identificationConfirmationUrl)) {
-				$this->errors['Confirmation URL not valid'] = "The confirmation url is not set or is not valid.";
+				$this->errors['Confirmation URL not valid'] = 'The confirmation url is not set or is not valid.';
 			}
 			if (!$this->validUrl($order->identificationRejectionUrl)) {
-				$this->errors['Rejection URL not valid'] = "The rejection url is not set or is not valid.";
+				$this->errors['Rejection URL not valid'] = 'The rejection url is not set or is not valid.';
 			}
 		}
 
 		if (isset($order->countryCode)) {
-			if ($order->countryCode == "SE"
-				|| $order->countryCode == "NO"
-				|| $order->countryCode == "DK"
-				|| $order->countryCode == "FI"
+			if ($order->countryCode == 'SE'
+				|| $order->countryCode == 'NO'
+				|| $order->countryCode == 'DK'
+				|| $order->countryCode == 'FI'
 			) {
 				$this->errors = $identityValidator->validateNordicIdentity($order, $this->errors);
-			} elseif ($order->countryCode == "NL") {
+			} elseif ($order->countryCode == 'NL') {
 				$this->errors = $identityValidator->validateNLidentity($order, $this->errors);
-			} elseif ($order->countryCode == "DE") {
+			} elseif ($order->countryCode == 'DE') {
 				$this->errors = $identityValidator->validateDEidentity($order, $this->errors);
 			} else {
-				$this->errors['not valid'] = "Given countrycode does not exist in our system.";
+				$this->errors['not valid'] = 'Given countrycode does not exist in our system.';
 			}
 		} else {
-			$this->errors['missing value'] = "CountryCode is required. Use function setCountryCode().";
+			$this->errors['missing value'] = 'CountryCode is required. Use function setCountryCode().';
 		}
 
 		$this->errors = $identityValidator->validateDoubleIdentity($order, $this->errors);
@@ -87,7 +87,7 @@ class WebServiceOrderValidator extends OrderValidator {
 		$this->errors = $this->validateOrderRows($order, $this->errors);
 
 		if (isset($order->orderDate) == false) {
-			$this->errors["missing value"] = "OrderDate is Required. Use function setOrderDate().";
+			$this->errors['missing value'] = 'OrderDate is Required. Use function setOrderDate().';
 		}
 
 		return $this->errors;

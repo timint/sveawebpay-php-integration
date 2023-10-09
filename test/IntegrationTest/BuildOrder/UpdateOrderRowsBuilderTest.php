@@ -20,34 +20,34 @@ class UpdateOrderRowsBuilderIntegrationTest extends \PHPUnit\Framework\TestCase
 
 	protected function setUp(): void
 	{
-		$this->country = "SE";
+		$this->country = 'SE';
 		$this->invoiceIdToTest = 583004;   // set this to the approved invoice set up by test_manual_setup_CreditOrderRows_testdata()
 	}
 
 	function test_UpdateOrderRows_updateInvoiceOrderRows_single_row_success()
 	{
-		$country = "SE";
+		$country = 'SE';
 
 		// create order
 		$order = TestUtil::createOrderWithoutOrderRows(TestUtil::createIndividualCustomer($country));
 		$order->addOrderRow(WebPayItem::orderRow()
-			->setArticleNumber("1")
+			->setArticleNumber('1')
 			->setQuantity(1)
 			->setAmountExVat(1.00)
 			->setVatPercent(25)
-			->setDescription("A Specification")
+			->setDescription('A Specification')
 			->setName('A Name')
-			->setUnit("st")
+			->setUnit('st')
 			->setDiscountPercent(0)
 		);
 		$order->addOrderRow(WebPayItem::orderRow()
-			->setArticleNumber("2")
+			->setArticleNumber('2')
 			->setQuantity(1)
 			->setAmountExVat(2.00)
 			->setVatPercent(25)
-			->setDescription("B Specification")
+			->setDescription('B Specification')
 			->setName('B Name')
-			->setUnit("st")
+			->setUnit('st')
 			->setDiscountPercent(0)
 		);
 
@@ -59,13 +59,13 @@ class UpdateOrderRowsBuilderIntegrationTest extends \PHPUnit\Framework\TestCase
 			->setOrderId($orderResponse->sveaOrderId)
 			->setCountryCode($country)
 			->updateOrderRow(WebPayItem::numberedOrderRow()
-				->setArticleNumber("10")
+				->setArticleNumber('10')
 				->setQuantity(1)
 				->setAmountExVat(10.00)
 				->setVatPercent(26)
-				->setDescription("K Specification")
+				->setDescription('K Specification')
 				->setName('K Name')
-				->setUnit("st")
+				->setUnit('st')
 				->setDiscountPercent(1)
 				->setRowNumber(1)
 				->setStatus(NumberedOrderRow::ORDERROWSTATUS_NOTDELIVERED)
@@ -74,45 +74,45 @@ class UpdateOrderRowsBuilderIntegrationTest extends \PHPUnit\Framework\TestCase
 			->doRequest();
 
 		////print_r( $updateOrderRowsResponse );
-		////print_r("test_UpdateOrderRows_updateInvoiceOrderRows_single_row_success: "); //print_r( $orderResponse->sveaOrderId );
+		////print_r('test_UpdateOrderRows_updateInvoiceOrderRows_single_row_success: '); //print_r( $orderResponse->sveaOrderId );
 		$this->assertEquals(1, $updateOrderRowsResponse->accepted);
 		// todo query result & check amounts, description automatically
 	}
 
 	function test_UpdateOrderRows_updateInvoiceOrderRows_multiple_row_success()
 	{
-		$country = "SE";
+		$country = 'SE';
 
 		// create order
 		$order = TestUtil::createOrderWithoutOrderRows(TestUtil::createIndividualCustomer($country));
 		$order->addOrderRow(WebPayItem::orderRow()
-			->setArticleNumber("1")
+			->setArticleNumber('1')
 			->setQuantity(1)
 			->setAmountExVat(1.00)
 			->setVatPercent(25)
-			->setDescription("A Specification")
+			->setDescription('A Specification')
 			->setName('A Name')
-			->setUnit("st")
+			->setUnit('st')
 			->setDiscountPercent(0)
 		);
 		$order->addOrderRow(WebPayItem::orderRow()
-			->setArticleNumber("2")
+			->setArticleNumber('2')
 			->setQuantity(1)
 			->setAmountExVat(2.00)
 			->setVatPercent(25)
-			->setDescription("B Specification")
+			->setDescription('B Specification')
 			->setName('B Name')
-			->setUnit("st")
+			->setUnit('st')
 			->setDiscountPercent(0)
 		);
 		$order->addOrderRow(WebPayItem::orderRow()
-			->setArticleNumber("3")
+			->setArticleNumber('3')
 			->setQuantity(1)
 			->setAmountExVat(3.00)
 			->setVatPercent(25)
-			->setDescription("C Specification")
+			->setDescription('C Specification')
 			->setName('C Name')
-			->setUnit("st")
+			->setUnit('st')
 			->setDiscountPercent(0)
 		);
 		$orderResponse = $order->useInvoicePayment()->doRequest();
@@ -123,13 +123,13 @@ class UpdateOrderRowsBuilderIntegrationTest extends \PHPUnit\Framework\TestCase
 			->setOrderId($orderResponse->sveaOrderId)
 			->setCountryCode($country)
 			->updateOrderRow(WebPayItem::numberedOrderRow()
-				->setArticleNumber("10")
+				->setArticleNumber('10')
 				->setQuantity(1)
 				->setAmountExVat(10.00)
 				->setVatPercent(25)
-				->setDescription("K Specification")
+				->setDescription('K Specification')
 				->setName('K Name')
-				->setUnit("st")
+				->setUnit('st')
 				->setDiscountPercent(1)
 				->setRowNumber(1)
 				->setStatus(NumberedOrderRow::ORDERROWSTATUS_NOTDELIVERED)
@@ -137,25 +137,25 @@ class UpdateOrderRowsBuilderIntegrationTest extends \PHPUnit\Framework\TestCase
 			->updateOrderRows(
 				[
 					WebPayItem::numberedOrderRow()
-						->setArticleNumber("20")
+						->setArticleNumber('20')
 						->setQuantity(2)
 						->setAmountExVat(20.00)
 						->setVatPercent(25)
-						->setDescription("K2 Specification")
+						->setDescription('K2 Specification')
 						->setName('K2 Name')
-						->setUnit("st")
+						->setUnit('st')
 						->setDiscountPercent(1)
 						->setRowNumber(2)
 						->setStatus(NumberedOrderRow::ORDERROWSTATUS_NOTDELIVERED)
 					,
 					WebPayItem::numberedOrderRow()
-						->setArticleNumber("30")
+						->setArticleNumber('30')
 						->setQuantity(3)
 						->setAmountExVat(30.00)
 						->setVatPercent(25)
-						->setDescription("K3 Specification")
+						->setDescription('K3 Specification')
 						->setName('K3 Name')
-						->setUnit("st")
+						->setUnit('st')
 						->setDiscountPercent(1)
 						->setRowNumber(3)
 						->setStatus(NumberedOrderRow::ORDERROWSTATUS_NOTDELIVERED)
@@ -165,45 +165,45 @@ class UpdateOrderRowsBuilderIntegrationTest extends \PHPUnit\Framework\TestCase
 			->doRequest();
 
 		////print_r( $updateOrderRowsResponse );
-		////print_r("test_UpdateOrderRows_updateInvoiceOrderRows_single_row_success: "); //print_r( $orderResponse->sveaOrderId );
+		////print_r('test_UpdateOrderRows_updateInvoiceOrderRows_single_row_success: '); //print_r( $orderResponse->sveaOrderId );
 		$this->assertEquals(1, $updateOrderRowsResponse->accepted);
 		// todo query result & check amounts, description automatically
 	}
 
 	function test_UpdateOrderRows_updatePaymentPlanOrderRows_multiple_row_success()
 	{
-		$country = "SE";
+		$country = 'SE';
 
 		// create order
 		$order = TestUtil::createOrderWithoutOrderRows(TestUtil::createIndividualCustomer($country));
 		$order->addOrderRow(WebPayItem::orderRow()
-			->setArticleNumber("1")
+			->setArticleNumber('1')
 			->setQuantity(1)
 			->setAmountExVat(1000.00)
 			->setVatPercent(25)
-			->setDescription("A Specification")
+			->setDescription('A Specification')
 			->setName('A Name')
-			->setUnit("st")
+			->setUnit('st')
 			->setDiscountPercent(0)
 		);
 		$order->addOrderRow(WebPayItem::orderRow()
-			->setArticleNumber("2")
+			->setArticleNumber('2')
 			->setQuantity(1)
 			->setAmountExVat(2000.00)
 			->setVatPercent(25)
-			->setDescription("B Specification")
+			->setDescription('B Specification')
 			->setName('B Name')
-			->setUnit("st")
+			->setUnit('st')
 			->setDiscountPercent(0)
 		);
 		$order->addOrderRow(WebPayItem::orderRow()
-			->setArticleNumber("3")
+			->setArticleNumber('3')
 			->setQuantity(1)
 			->setAmountExVat(3000.00)
 			->setVatPercent(25)
-			->setDescription("C Specification")
+			->setDescription('C Specification')
 			->setName('C Name')
-			->setUnit("st")
+			->setUnit('st')
 			->setDiscountPercent(0)
 		);
 		$orderResponse = $order->usePaymentPlanPayment(TestUtil::getGetPaymentPlanParamsForTesting())->doRequest();
@@ -214,13 +214,13 @@ class UpdateOrderRowsBuilderIntegrationTest extends \PHPUnit\Framework\TestCase
 			->setOrderId($orderResponse->sveaOrderId)
 			->setCountryCode($country)
 			->updateOrderRow(WebPayItem::numberedOrderRow()
-				->setArticleNumber("10")
+				->setArticleNumber('10')
 				->setQuantity(1)
 				->setAmountExVat(10.00)
 				->setVatPercent(25)
-				->setDescription("K Specification")
+				->setDescription('K Specification')
 				->setName('K Name')
-				->setUnit("st")
+				->setUnit('st')
 				->setDiscountPercent(1)
 				->setRowNumber(1)
 				->setStatus(NumberedOrderRow::ORDERROWSTATUS_NOTDELIVERED)
@@ -228,25 +228,25 @@ class UpdateOrderRowsBuilderIntegrationTest extends \PHPUnit\Framework\TestCase
 			->updateOrderRows(
 				[
 					WebPayItem::numberedOrderRow()
-						->setArticleNumber("20")
+						->setArticleNumber('20')
 						->setQuantity(2)
 						->setAmountExVat(20.00)
 						->setVatPercent(25)
-						->setDescription("K2 Specification")
+						->setDescription('K2 Specification')
 						->setName('K2 Name')
-						->setUnit("st")
+						->setUnit('st')
 						->setDiscountPercent(1)
 						->setRowNumber(2)
 						->setStatus(NumberedOrderRow::ORDERROWSTATUS_NOTDELIVERED)
 					,
 					WebPayItem::numberedOrderRow()
-						->setArticleNumber("30")
+						->setArticleNumber('30')
 						->setQuantity(3)
 						->setAmountExVat(500.00)
 						->setVatPercent(25)
-						->setDescription("K3 Specification")
+						->setDescription('K3 Specification')
 						->setName('K3 Name')
-						->setUnit("st")
+						->setUnit('st')
 						->setDiscountPercent(1)
 						->setRowNumber(3)
 						->setStatus(NumberedOrderRow::ORDERROWSTATUS_NOTDELIVERED)
@@ -256,45 +256,45 @@ class UpdateOrderRowsBuilderIntegrationTest extends \PHPUnit\Framework\TestCase
 			->doRequest();
 
 		////print_r( $updateOrderRowsResponse );
-		////print_r("test_UpdateOrderRows_updateInvoiceOrderRows_single_row_success: "); //print_r( $orderResponse->sveaOrderId );
+		////print_r('test_UpdateOrderRows_updateInvoiceOrderRows_single_row_success: '); //print_r( $orderResponse->sveaOrderId );
 		$this->assertEquals(1, $updateOrderRowsResponse->accepted);
 		// todo query result & check amounts, description automatically
 	}
 
 	function _test_UpdateOrderRows_manually_created_paymentplan()
 	{
-		$country = "SE";
+		$country = 'SE';
 
 //		// create order
 //		$order = Svea\WebPay\Test\TestUtil::createOrderWithoutOrderRows( Svea\WebPay\Test\TestUtil::createIndividualCustomer($country) );
 //		$order->addOrderRow( Svea\WebPay\WebPayItem::orderRow()
-//			->setArticleNumber("1")
+//			->setArticleNumber('1')
 //			->setQuantity( 1 )
 //			->setAmountExVat( 1000.00 )
 //			->setVatPercent(25)
-//			->setDescription("A Specification")
+//			->setDescription('A Specification')
 //			->setName('A Name')
-//			->setUnit("st")
+//			->setUnit('st')
 //			->setDiscountPercent(0)
 //		);
 //		$order->addOrderRow( Svea\WebPay\WebPayItem::orderRow()
-//			->setArticleNumber("2")
+//			->setArticleNumber('2')
 //			->setQuantity( 1 )
 //			->setAmountExVat( 2000.00 )
 //			->setVatPercent(25)
-//			->setDescription("B Specification")
+//			->setDescription('B Specification')
 //			->setName('B Name')
-//			->setUnit("st")
+//			->setUnit('st')
 //			->setDiscountPercent(0)
 //		);
 //		$order->addOrderRow( Svea\WebPay\WebPayItem::orderRow()
-//			->setArticleNumber("3")
+//			->setArticleNumber('3')
 //			->setQuantity( 1 )
 //			->setAmountExVat( 3000.00 )
 //			->setVatPercent(25)
-//			->setDescription("C Specification")
+//			->setDescription('C Specification')
 //			->setName('C Name')
-//			->setUnit("st")
+//			->setUnit('st')
 //			->setDiscountPercent(0)
 //		);
 //		$orderResponse = $order->usePaymentPlanPayment( Svea\WebPay\Test\TestUtil::getGetPaymentPlanParamsForTesting() )->doRequest();
@@ -305,13 +305,13 @@ class UpdateOrderRowsBuilderIntegrationTest extends \PHPUnit\Framework\TestCase
 			->setOrderId(364183)
 			->setCountryCode($country)
 			->updateOrderRow(WebPayItem::numberedOrderRow()
-				->setArticleNumber("10")
+				->setArticleNumber('10')
 				->setQuantity(1)
 				->setAmountExVat(1000.00)
 				->setVatPercent(25)
-				->setDescription("K Specification")
+				->setDescription('K Specification')
 				->setName('K Name')
-				->setUnit("st")
+				->setUnit('st')
 				->setDiscountPercent(1)
 				->setRowNumber(1)
 				->setStatus(NumberedOrderRow::ORDERROWSTATUS_NOTDELIVERED)
@@ -320,7 +320,7 @@ class UpdateOrderRowsBuilderIntegrationTest extends \PHPUnit\Framework\TestCase
 			->doRequest();
 
 		//print_r( $updateOrderRowsResponse );
-		////print_r("test_UpdateOrderRows_updateInvoiceOrderRows_single_row_success: "); //print_r( $orderResponse->sveaOrderId );
+		////print_r('test_UpdateOrderRows_updateInvoiceOrderRows_single_row_success: '); //print_r( $orderResponse->sveaOrderId );
 		$this->assertEquals(1, $updateOrderRowsResponse->accepted);
 		// todo query result & check amounts, description automatically
 	}

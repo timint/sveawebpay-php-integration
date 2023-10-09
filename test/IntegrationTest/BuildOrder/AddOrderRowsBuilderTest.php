@@ -20,13 +20,13 @@ class AddOrderRowsBuilderIntegrationTest extends \PHPUnit\Framework\TestCase
 
 	protected function setUp(): void
 	{
-		$this->country = "SE";
+		$this->country = 'SE';
 		$this->invoiceIdToTest = 123456;   // set this to the approved invoice set up by test_manual_setup_CreditOrderRows_testdata()
 	}
 
 	function test_AddOrderRows_addInvoiceOrderRows_single_row_success()
 	{
-		$country = "SE";
+		$country = 'SE';
 		$order = TestUtil::createOrderWithoutOrderRows(TestUtil::createIndividualCustomer($country));
 		$order->addOrderRow(TestUtil::createOrderRow(1.00));
 		$orderResponse = $order->useInvoicePayment()->doRequest();
@@ -35,10 +35,10 @@ class AddOrderRowsBuilderIntegrationTest extends \PHPUnit\Framework\TestCase
 		$b_quantity = 1;
 		$b_amountExVat = 100.00;
 		$b_vatPercent = 12;
-		$b_articleNumber = "1071e";
-		$b_unit = "pcs.";
-		$b_name = "B Name";
-		$b_description = "B Description";
+		$b_articleNumber = '1071e';
+		$b_unit = 'pcs.';
+		$b_name = 'B Name';
+		$b_description = 'B Description';
 		$b_discount = 0;
 
 		$addOrderRowsBuilder = new AddOrderRowsBuilder(ConfigurationService::getDefaultConfig());
@@ -60,7 +60,7 @@ class AddOrderRowsBuilderIntegrationTest extends \PHPUnit\Framework\TestCase
 
 		$this->assertEquals(1, $addOrderRowsResponse->accepted);
 		$createdOrderId = $orderResponse->sveaOrderId;
-		////print_r("test_AddOrderRows_addInvoiceOrderRows_single_row_success: "); //print_r( $createdOrderId );
+		////print_r('test_AddOrderRows_addInvoiceOrderRows_single_row_success: '); //print_r( $createdOrderId );
 
 		// query orderrows
 		$queryOrderBuilder = WebPayAdmin::queryOrder(ConfigurationService::getDefaultConfig())
@@ -86,7 +86,7 @@ class AddOrderRowsBuilderIntegrationTest extends \PHPUnit\Framework\TestCase
 
 	function test_AddOrderRows_addInvoiceOrderRows_multiple_rows_success()
 	{
-		$country = "SE";
+		$country = 'SE';
 		$order = TestUtil::createOrderWithoutOrderRows(TestUtil::createIndividualCustomer($country));
 		$order->addOrderRow(TestUtil::createOrderRow(1.00, 1));
 		$orderResponse = $order->useInvoicePayment()->doRequest();
@@ -95,10 +95,10 @@ class AddOrderRowsBuilderIntegrationTest extends \PHPUnit\Framework\TestCase
 		$b_quantity = 1;
 		$b_amountExVat = 100.00;
 		$b_vatPercent = 12;
-		$b_articleNumber = "1071e";
-		$b_unit = "pcs.";
-		$b_name = "B Name";
-		$b_description = "B Description";
+		$b_articleNumber = '1071e';
+		$b_unit = 'pcs.';
+		$b_name = 'B Name';
+		$b_description = 'B Description';
 		$b_discount = 0;
 
 		$addOrderRowsBuilder = new AddOrderRowsBuilder(ConfigurationService::getDefaultConfig());
@@ -121,7 +121,7 @@ class AddOrderRowsBuilderIntegrationTest extends \PHPUnit\Framework\TestCase
 
 		$this->assertEquals(1, $addOrderRowsResponse->accepted);
 		$createdOrderId = $orderResponse->sveaOrderId;
-		////print_r("test_AddOrderRows_addInvoiceOrderRows_multiple_rows_success: "); //print_r( $createdOrderId );
+		////print_r('test_AddOrderRows_addInvoiceOrderRows_multiple_rows_success: '); //print_r( $createdOrderId );
 
 		// query orderrows
 		$queryOrderBuilder = WebPayAdmin::queryOrder(ConfigurationService::getDefaultConfig())
@@ -141,13 +141,13 @@ class AddOrderRowsBuilderIntegrationTest extends \PHPUnit\Framework\TestCase
 		$this->assertStringStartsWith($b_name, $queryResponse->numberedOrderRows[2]->description);
 		$this->assertStringEndsWith($b_description, $queryResponse->numberedOrderRows[2]->description);
 		$this->assertEquals($b_discount, $queryResponse->numberedOrderRows[2]->discountPercent);
-		$this->assertEquals("NotDelivered", $queryResponse->numberedOrderRows[2]->status);
+		$this->assertEquals('NotDelivered', $queryResponse->numberedOrderRows[2]->status);
 		$this->assertEquals(3, $queryResponse->numberedOrderRows[2]->rowNumber);
 	}
 
 	function test_AddOrderRows_addPaymentPlanOrderRows_multiple_rows_success()
 	{
-		$country = "SE";
+		$country = 'SE';
 		$order = TestUtil::createOrderWithoutOrderRows(TestUtil::createIndividualCustomer($country));
 		$order->addOrderRow(TestUtil::createOrderRow(1000.00, 1));
 		$orderResponse = $order->usePaymentPlanPayment(TestUtil::getGetPaymentPlanParamsForTesting())->doRequest();
@@ -156,10 +156,10 @@ class AddOrderRowsBuilderIntegrationTest extends \PHPUnit\Framework\TestCase
 		$b_quantity = 1;
 		$b_amountExVat = 100.00;
 		$b_vatPercent = 12;
-		$b_articleNumber = "1071e";
-		$b_unit = "pcs.";
-		$b_name = "B Name";
-		$b_description = "B Description";
+		$b_articleNumber = '1071e';
+		$b_unit = 'pcs.';
+		$b_name = 'B Name';
+		$b_description = 'B Description';
 		$b_discount = 0;
 
 		$addOrderRowsBuilder = new AddOrderRowsBuilder(ConfigurationService::getDefaultConfig());
@@ -182,7 +182,7 @@ class AddOrderRowsBuilderIntegrationTest extends \PHPUnit\Framework\TestCase
 
 		$this->assertEquals(1, $addOrderRowsResponse->accepted);
 		$createdOrderId = $orderResponse->sveaOrderId;
-		////print_r("test_AddOrderRows_addPaymentPlanOrderRows_multiple_rows_success: "); //print_r( $createdOrderId );
+		////print_r('test_AddOrderRows_addPaymentPlanOrderRows_multiple_rows_success: '); //print_r( $createdOrderId );
 
 		// query orderrows
 		$queryOrderBuilder = WebPayAdmin::queryOrder(ConfigurationService::getDefaultConfig())
@@ -202,22 +202,22 @@ class AddOrderRowsBuilderIntegrationTest extends \PHPUnit\Framework\TestCase
 		$this->assertStringStartsWith($b_name, $queryResponse->numberedOrderRows[2]->description);
 		$this->assertStringEndsWith($b_description, $queryResponse->numberedOrderRows[2]->description);
 		$this->assertEquals($b_discount, $queryResponse->numberedOrderRows[2]->discountPercent);
-		$this->assertEquals("NotDelivered", $queryResponse->numberedOrderRows[2]->status);
+		$this->assertEquals('NotDelivered', $queryResponse->numberedOrderRows[2]->status);
 		$this->assertEquals(3, $queryResponse->numberedOrderRows[2]->rowNumber);
 	}
 
 	function test_AddOrderRows_addInvoiceOrderRows_specified_with_price_specified_using_inc_vat_and_ex_vat()
 	{
-		$country = "SE";
+		$country = 'SE';
 		$order = TestUtil::createOrderWithoutOrderRows(TestUtil::createIndividualCustomer($country));
 		$order->addOrderRow(WebPayItem::orderRow()
-			->setArticleNumber("1")
+			->setArticleNumber('1')
 			->setQuantity(1)
 			->setAmountExVat(100.00)
 			->setVatPercent(25)
-			->setDescription("Specification")
+			->setDescription('Specification')
 			->setName('Product')
-			->setUnit("st")
+			->setUnit('st')
 			->setDiscountPercent(0)
 		);
 		$orderResponse = $order->useInvoicePayment()->doRequest();
@@ -228,25 +228,25 @@ class AddOrderRowsBuilderIntegrationTest extends \PHPUnit\Framework\TestCase
 			->setOrderId($orderResponse->sveaOrderId)
 			->setCountryCode($country)
 			->addOrderRow(WebPayItem::orderRow()
-				->setArticleNumber("1")
+				->setArticleNumber('1')
 				->setQuantity(1)
 				//->setAmountExVat( 1.00 )
 				->setAmountIncVat(1.00 * 1.25)
 				->setVatPercent(25)
-				->setDescription("Specification")
+				->setDescription('Specification')
 				->setName('Product')
-				->setUnit("st")
+				->setUnit('st')
 				->setDiscountPercent(0)
 			)
 			->addOrderRow(WebPayItem::orderRow()
-				->setArticleNumber("1")
+				->setArticleNumber('1')
 				->setQuantity(1)
 				->setAmountExVat(4.00)
 				->setAmountIncVat(4.00 * 1.25)
 				//->setVatPercent(25)
-				->setDescription("Specification")
+				->setDescription('Specification')
 				->setName('Product')
-				->setUnit("st")
+				->setUnit('st')
 				->setDiscountPercent(0)
 			)
 			->addInvoiceOrderRows()

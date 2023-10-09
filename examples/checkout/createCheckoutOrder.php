@@ -30,8 +30,8 @@ $orderBuilder->setCountryCode('SE')// customer country, we recommend basing this
 	->setPushUri('https://svea.com/push.aspx?sid=123&svea_order=123')
 	->setTermsUri('http://localhost:51898/terms')
   //->setValidationCallbackUri('http://localhost:51898/validation-callback')
-  //->setPartnerKey("77FB33EC-505D-4CCF-AA21-D9DF50DC8344")
-  //->setMerchantData("merchantData")
+  //->setPartnerKey('77FB33EC-505D-4CCF-AA21-D9DF50DC8344')
+  //->setMerchantData('merchantData')
   //->setRequireElectronicIdAuthentication(true)
 	->setLocale($locale);
 
@@ -92,7 +92,7 @@ $orderBuilder->addFee($shippingItem);
 
 try {
 	$response = $orderBuilder->createOrder();
-	echo "<pre>" . print_r($response, true) . "</pre>";
+	echo '<pre>' . print_r($response, true) . '</pre>';
 } catch (\Exception $e) {
-	echo "<pre>" . print_r($e->getMessage(), true) . "</pre>";
+	echo '<pre>' . print_r($e->getMessage(), true) . '</pre>';
 }

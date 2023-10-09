@@ -20,7 +20,7 @@ class IdentityFlagValidator {
 				}
 			}
 			if ($valid == false) {
-				$errors['NonValidIdentityFlag'] = $flag . " is not a valid identity flag.";
+				$errors['NonValidIdentityFlag'] = $flag . ' is not a valid identity flag.';
 			}
 		}
 

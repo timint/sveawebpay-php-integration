@@ -22,17 +22,17 @@ class UpdateOrderRequest {
 	 */
 	function __construct($authentication, $clientId, $orderType, $sveaOrderId, $clientOrderNumber, $notes) {
 		$this->Authentication = new SoapVar($authentication, SOAP_ENC_OBJECT,
-			"-", "--", "Authentication", "http://schemas.datacontract.org/2004/07/DataObjects.Admin.Service");
+			'-', '--', 'Authentication', 'http://schemas.datacontract.org/2004/07/DataObjects.Admin.Service');
 		// Settings -- optional, not sent by package
 		$this->ClientId = new SoapVar($clientId, XSD_LONG,
-			"-", "--", "ClientId", "http://schemas.datacontract.org/2004/07/DataObjects.Admin.Service");
+			'-', '--', 'ClientId', 'http://schemas.datacontract.org/2004/07/DataObjects.Admin.Service');
 		$this->OrderType = new SoapVar($orderType, XSD_STRING,
-			"-", "--", "OrderType", "http://schemas.datacontract.org/2004/07/DataObjects.Admin.Service");
+			'-', '--', 'OrderType', 'http://schemas.datacontract.org/2004/07/DataObjects.Admin.Service');
 		$this->SveaOrderId = new SoapVar($sveaOrderId, XSD_LONG,
-			"-", "--", "SveaOrderId", "http://schemas.datacontract.org/2004/07/DataObjects.Admin.Service");
+			'-', '--', 'SveaOrderId', 'http://schemas.datacontract.org/2004/07/DataObjects.Admin.Service');
 		$this->ClientOrderNumber = new SoapVar($clientOrderNumber, XSD_STRING,
-			"-", "--", "ClientOrderNumber", "http://schemas.datacontract.org/2004/07/DataObjects.Admin.Service");
+			'-', '--', 'ClientOrderNumber', 'http://schemas.datacontract.org/2004/07/DataObjects.Admin.Service');
 		$this->Notes = new SoapVar($notes, XSD_STRING,
-			"-", "--", "Notes", "http://schemas.datacontract.org/2004/07/DataObjects.Admin.Service");
+			'-', '--', 'Notes', 'http://schemas.datacontract.org/2004/07/DataObjects.Admin.Service');
 	}
 }

@@ -86,12 +86,12 @@ class CreditOrderRowsRequestTest extends \PHPUnit\Framework\TestCase
 			->setAmountIncVat(123.9876)
 			->setVatPercent(25)
 			->setQuantity(1)
-			->setDescription("row 1");
+			->setDescription('row 1');
 		$orderRows[] = WebPayItem::orderRow()
 			->setAmountIncVat(10.00)
 			->setVatPercent(25)
 			->setQuantity(1)
-			->setDescription("row 2");
+			->setDescription('row 2');
 		$request = WebPayAdmin::creditOrderRows($config)
 			->setContractNumber('123132')
 			->setCountryCode('SE')
@@ -116,7 +116,7 @@ class CreditOrderRowsRequestTest extends \PHPUnit\Framework\TestCase
 			->setAmountIncVat($amount_inc_vat)
 			->setVatPercent($vat_percent)
 			->setQuantity($quantity)
-			->setDescription("row 1");
+			->setDescription('row 1');
 
 		$request = WebPayAdmin::creditOrderRows($config)
 			->setTransactionId(987654)
@@ -141,7 +141,7 @@ class CreditOrderRowsRequestTest extends \PHPUnit\Framework\TestCase
 			->setAmountExVat($amount_ex_vat)
 			->setVatPercent($vat_percent)
 			->setQuantity($quantity)
-			->setDescription("row 1");
+			->setDescription('row 1');
 
 		$request = WebPayAdmin::creditOrderRows($config)
 			->setTransactionId(987654)
@@ -168,7 +168,7 @@ class CreditOrderRowsRequestTest extends \PHPUnit\Framework\TestCase
 		$orderRows[] = WebPayItem::orderRow()
 			->setAmountExVat($amount_ex_vat)
 			->setQuantity($quantity)
-			->setDescription("row 1");
+			->setDescription('row 1');
 
 		WebPayAdmin::creditOrderRows($config)
 			->setTransactionId(987654)
@@ -190,7 +190,7 @@ class CreditOrderRowsRequestTest extends \PHPUnit\Framework\TestCase
 			->setAmountExVat($amount_ex_vat)
 			->setVatPercent(25)
 			->setQuantity($quantity)
-			->setDescription("row 1");
+			->setDescription('row 1');
 
 		$request = WebPayAdmin::creditOrderRows($config)
 			->setTransactionId(987654)
@@ -214,7 +214,7 @@ class CreditOrderRowsRequestTest extends \PHPUnit\Framework\TestCase
 
 		$orderRows[] = WebPayItem::orderRow()
 			->setQuantity(1)
-			->setDescription("row 1");
+			->setDescription('row 1');
 
 		WebPayAdmin::creditOrderRows($config)
 			->setTransactionId(987654)

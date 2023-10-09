@@ -15,16 +15,16 @@ class SearchOrdersRequest {
 	 */
 	function __construct($authentication, $accountsToRetrieve) {
 		$this->Authentication = new SoapVar($authentication, SOAP_ENC_OBJECT,
-			"-", "--", "Authentication", "http://schemas.datacontract.org/2004/07/DataObjects.Admin.Service");
+			'-', '--', 'Authentication', 'http://schemas.datacontract.org/2004/07/DataObjects.Admin.Service');
 		// Settings -- optional, not sent by package
 
 		$list = [];
 		foreach($accountsToRetrieve as $accountInfo) {
 			$clientAccountCreditId = new SoapVar($accountInfo->clientAccountCreditId, XSD_LONG,
-				"-", "--", "ClientAccountCreditId", "http://schemas.datacontract.org/2004/07/DataObjects.Admin.Service.Account");
+				'-', '--', 'ClientAccountCreditId', 'http://schemas.datacontract.org/2004/07/DataObjects.Admin.Service.Account');
 
 			$clientId = new SoapVar($accountInfo->clientId, XSD_LONG,
-				"-", "--", "ClientId", "http://schemas.datacontract.org/2004/07/DataObjects.Admin.Service.Account");
+				'-', '--', 'ClientId', 'http://schemas.datacontract.org/2004/07/DataObjects.Admin.Service.Account');
 
 			$obj = new \stdClass();
 			$obj->ClientAccountCreditId = $clientAccountCreditId;
@@ -32,10 +32,10 @@ class SearchOrdersRequest {
 
 
 			$list [] = new SoapVar($obj, SOAP_ENC_OBJECT,
-				"-", "--", "GetAccountCreditInformation", "http://schemas.datacontract.org/2004/07/DataObjects.Admin.Service.Account");
+				'-', '--', 'GetAccountCreditInformation', 'http://schemas.datacontract.org/2004/07/DataObjects.Admin.Service.Account');
 		}
 
 		$this->AccountCreditsToRetrieve = new SoapVar($list, SOAP_ENC_OBJECT,
-			"-", "--", "AccountCreditsToRetrieve", "http://schemas.datacontract.org/2004/07/DataObjects.Admin.Service");
+			'-', '--', 'AccountCreditsToRetrieve', 'http://schemas.datacontract.org/2004/07/DataObjects.Admin.Service');
 	}
 }

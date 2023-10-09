@@ -22,19 +22,19 @@ class PaymentMethodTest extends \PHPUnit\Framework\TestCase{
 			->addOrderRow(TestUtil::createOrderRow())
 			->run($rowFactory->buildShippingFee())
 			->addDiscount(WebPayItem::relativeDiscount()
-					->setDiscountId("1")
+					->setDiscountId('1')
 					->setDiscountPercent(50)
-					->setUnit("st")
+					->setUnit('st')
 					->setName('Relative')
-					->setDescription("RelativeDiscount")
+					->setDescription('RelativeDiscount')
 			)
 			->addCustomerDetails(WebPayItem::individualCustomer()->setNationalIdNumber(194605092222))
-			->setCountryCode("SE")
-			->setClientOrderNumber("33")
-			->setOrderDate("2012-12-12")
-			->setCurrency("SEK")
+			->setCountryCode('SE')
+			->setClientOrderNumber('33')
+			->setOrderDate('2012-12-12')
+			->setCurrency('SEK')
 			->usePaymentMethod(PaymentMethod::KORTCERT)
-			->setReturnUrl("http://myurl.se")
+			->setReturnUrl('http://myurl.se')
 			->getPaymentForm();
 
 		$xmlMessage = new \SimpleXMLElement($form->xmlMessage);
@@ -48,25 +48,25 @@ class PaymentMethodTest extends \PHPUnit\Framework\TestCase{
 			->addOrderRow(TestUtil::createOrderRow())
 			->run($rowFactory->buildShippingFee())
 			->addDiscount(WebPayItem::relativeDiscount()
-					->setDiscountId("1")
+					->setDiscountId('1')
 					->setDiscountPercent(50)
-					->setUnit("st")
+					->setUnit('st')
 					->setName('Relative')
-					->setDescription("RelativeDiscount")
+					->setDescription('RelativeDiscount')
 			)
 			->addCustomerDetails(WebPayItem::companyCustomer()->setNationalIdNumber(4608142222))
-			->setCountryCode("SE")
-			->setClientOrderNumber("33")
-			->setOrderDate("2012-12-12")
-			->setCurrency("SEK")
+			->setCountryCode('SE')
+			->setClientOrderNumber('33')
+			->setOrderDate('2012-12-12')
+			->setCurrency('SEK')
 			->usePaymentMethod(PaymentMethod::INVOICE)
-				->setReturnUrl("http://myurl.se")
+				->setReturnUrl('http://myurl.se')
 				->getPaymentForm();
 
 		$xmlMessage = new \SimpleXMLElement($form->xmlMessage);
 		$this->assertEquals(SystemPaymentMethod::INVOICE_SE, $xmlMessage->paymentmethod[0]);
-		$this->assertEquals("TRUE", $xmlMessage->iscompany);
-		$this->assertEquals("4608142222", $xmlMessage->customer->ssn);
+		$this->assertEquals('TRUE', $xmlMessage->iscompany);
+		$this->assertEquals('4608142222', $xmlMessage->customer->ssn);
 	}
 
 	public function testPaymentMethodInvoiceNL() {
@@ -74,55 +74,55 @@ class PaymentMethodTest extends \PHPUnit\Framework\TestCase{
 		$form = WebPay::createOrder($config)
 			->addOrderRow(TestUtil::createOrderRow())
 			->addCustomerDetails(WebPayItem::individualCustomer()
-					->setInitials("SB")
+					->setInitials('SB')
 					->setBirthDate(1923, 12, 12)
-					->setName("Sneider", "Boasman")
-					->setEmail("test@svea.com")
+					->setName('Sneider', 'Boasman')
+					->setEmail('test@svea.com')
 					->setPhoneNumber(999999)
-					->setIpAddress("123.123.123")
-					->setStreetAddress("Gatan", 23)
-					->setCoAddress("c/o Eriksson")
+					->setIpAddress('123.123.123')
+					->setStreetAddress('Gatan', 23)
+					->setCoAddress('c/o Eriksson')
 					->setZipCode(9999)
-					->setLocality("Stan")
+					->setLocality('Stan')
 			)
-			->setCountryCode("NL")
-			->setClientOrderNumber("33")
-			->setOrderDate("2012-12-12")
-			->setCurrency("SEK")
+			->setCountryCode('NL')
+			->setClientOrderNumber('33')
+			->setOrderDate('2012-12-12')
+			->setCurrency('SEK')
 			->usePaymentMethod(PaymentMethod::INVOICE)
-				->setReturnUrl("http://myurl.se")
+				->setReturnUrl('http://myurl.se')
 				->getPaymentForm();
 
 		$xmlMessage = new \SimpleXMLElement($form->xmlMessage);
-		$this->assertEquals("FALSE", $xmlMessage->iscompany);
-		$this->assertEquals("Sneider", $xmlMessage->customer->firstname);
+		$this->assertEquals('FALSE', $xmlMessage->iscompany);
+		$this->assertEquals('Sneider', $xmlMessage->customer->firstname);
 	}
 	public function testPaymentMethodInvoiceNLCallbackUrl() {
 		$config = ConfigurationService::getDefaultConfig();
 		$form = WebPay::createOrder($config)
 			->addOrderRow(TestUtil::createOrderRow())
 			->addCustomerDetails(WebPayItem::individualCustomer()
-					->setInitials("SB")
+					->setInitials('SB')
 					->setBirthDate(1923, 12, 12)
-					->setName("Sneider", "Boasman")
-					->setEmail("test@svea.com")
+					->setName('Sneider', 'Boasman')
+					->setEmail('test@svea.com')
 					->setPhoneNumber(999999)
-					->setIpAddress("123.123.123")
-					->setStreetAddress("Gatan", 23)
-					->setCoAddress("c/o Eriksson")
+					->setIpAddress('123.123.123')
+					->setStreetAddress('Gatan', 23)
+					->setCoAddress('c/o Eriksson')
 					->setZipCode(9999)
-					->setLocality("Stan")
+					->setLocality('Stan')
 			)
-			->setCountryCode("NL")
-			->setClientOrderNumber("33")
-			->setOrderDate("2012-12-12")
-			->setCurrency("SEK")
+			->setCountryCode('NL')
+			->setClientOrderNumber('33')
+			->setOrderDate('2012-12-12')
+			->setCurrency('SEK')
 			->usePaymentMethod(PaymentMethod::INVOICE)
-			->setReturnUrl("http://myurl.se")
-			->setCallbackUrl("http://myurl.se")
+			->setReturnUrl('http://myurl.se')
+			->setCallbackUrl('http://myurl.se')
 			->getPaymentForm();
 
 		$xmlMessage = new \SimpleXMLElement($form->xmlMessage);
-		$this->assertEquals("http://myurl.se", $xmlMessage->callbackurl);
+		$this->assertEquals('http://myurl.se', $xmlMessage->callbackurl);
 	}
 }

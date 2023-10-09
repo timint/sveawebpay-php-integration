@@ -30,12 +30,12 @@ class QueryTransactionTest extends \PHPUnit\Framework\TestCase
 	function test_class_exists()
 	{
 		$this->assertInstanceOf("Svea\WebPay\HostedService\HostedAdminRequest\QueryTransaction", $this->queryObject);
-		$this->assertEquals("querytransactionid", \PHPUnit\Framework\Assert::readAttribute($this->queryObject, 'method'));
+		$this->assertEquals('querytransactionid', \PHPUnit\Framework\Assert::readAttribute($this->queryObject, 'method'));
 	}
 
 	function test_setCountryCode()
 	{
-		$countryCode = "SE";
+		$countryCode = 'SE';
 		$this->queryObject->countryCode = $countryCode;
 		$this->assertEquals($countryCode, \PHPUnit\Framework\Assert::readAttribute($this->queryObject, 'countryCode'));
 	}
@@ -47,7 +47,7 @@ class QueryTransactionTest extends \PHPUnit\Framework\TestCase
 		$transactionId = 987654;
 		$this->queryObject->transactionId = $transactionId;
 
-		$countryCode = "SE";
+		$countryCode = 'SE';
 		$this->queryObject->countryCode = $countryCode;
 
 		$form = $this->queryObject->prepareRequest();
@@ -65,7 +65,7 @@ class QueryTransactionTest extends \PHPUnit\Framework\TestCase
 		$transactionId = 987654;
 		$this->queryObject->transactionId = $transactionId;
 
-		$countryCode = "SE";
+		$countryCode = 'SE';
 		$this->queryObject->countryCode = $countryCode;
 
 		$form = $this->queryObject->prepareRequest();
@@ -78,12 +78,12 @@ class QueryTransactionTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals($merchantid, urldecode($form['merchantid']));
 
 		// check valid mac
-		$this->assertEquals(hash("sha512", urldecode($form['message']) . $secret), urldecode($form['mac']));
+		$this->assertEquals(hash('sha512', urldecode($form['message']) . $secret), urldecode($form['mac']));
 
 		// check annul request message contents
 		$xmlMessage = new SimpleXMLElement(base64_decode(urldecode($form['message'])));
 
-		$this->assertEquals("query", $xmlMessage->getName());   // root node
+		$this->assertEquals('query', $xmlMessage->getName());   // root node
 		$this->assertEquals((string)$transactionId, $xmlMessage->transactionid);
 	}
 
@@ -93,7 +93,7 @@ class QueryTransactionTest extends \PHPUnit\Framework\TestCase
 	 */
 	function test_prepareRequest_missing_transactionId_throws_exception()
 	{
-		$countryCode = "SE";
+		$countryCode = 'SE';
 		$this->queryObject->countryCode = $countryCode;
 
 		$form = $this->queryObject->prepareRequest();

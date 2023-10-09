@@ -31,7 +31,7 @@ class CreditTransaction extends HostedRequest {
 	 * @param ConfigurationProvider $config instance implementing Svea\WebPay\Config\ConfigurationProvider
 	 */
 	function __construct($config) {
-		$this->method = "credit";
+		$this->method = 'credit';
 		parent::__construct($config);
 	}
 
@@ -45,7 +45,7 @@ class CreditTransaction extends HostedRequest {
 
 	private function validateTransactionId($self, $errors) {
 		if (isset($self->transactionId) == false) {
-			$errors['missing value'] = "transactionId is required. Use function setTransactionId() with the SveaOrderId from the createOrder response.";
+			$errors['missing value'] = 'transactionId is required. Use function setTransactionId() with the SveaOrderId from the createOrder response.';
 		}
 
 		return $errors;
@@ -53,7 +53,7 @@ class CreditTransaction extends HostedRequest {
 
 	private function validateCreditAmount($self, $errors) {
 		if (isset($self->creditAmount) == false) {
-			$errors['missing value'] = "creditAmount is required. Use function setCreditAmount().";
+			$errors['missing value'] = 'creditAmount is required. Use function setCreditAmount().';
 		}
 
 		return $errors;
@@ -64,11 +64,11 @@ class CreditTransaction extends HostedRequest {
 
 		$XMLWriter->openMemory();
 		$XMLWriter->setIndent(true);
-		$XMLWriter->startDocument("1.0", "UTF-8");
+		$XMLWriter->startDocument('1.0', 'UTF-8');
 		$XMLWriter->writeComment(Helper::getLibraryAndPlatformPropertiesAsJson($this->config));
 		$XMLWriter->startElement($this->method);
-		$XMLWriter->writeElement("transactionid", $this->transactionId);
-		$XMLWriter->writeElement("amounttocredit", $this->creditAmount);
+		$XMLWriter->writeElement('transactionid', $this->transactionId);
+		$XMLWriter->writeElement('amounttocredit', $this->creditAmount);
 		$XMLWriter->endElement();
 		$XMLWriter->endDocument();
 

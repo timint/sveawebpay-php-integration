@@ -16,19 +16,19 @@ class MerchantValidator {
 		$pushUri = $merchant->getPushUri();
 
 		if (!isset($termsUri) || trim($termsUri) === '') {
-			$errors['incorrectMerchantTermsUri'] = "termsUri must be defined";
+			$errors['incorrectMerchantTermsUri'] = 'termsUri must be defined';
 		}
 
 		if (!isset($checkoutUri) || trim($checkoutUri) === '') {
-			$errors['incorrectMerchantCheckoutUri'] = "checkoutUri must be defined";
+			$errors['incorrectMerchantCheckoutUri'] = 'checkoutUri must be defined';
 		}
 
 		if (!isset($confirmationUri) || trim($confirmationUri) === '') {
-			$errors['incorrectMerchantConfirmationUri'] = "confirmationUri must be defined";
+			$errors['incorrectMerchantConfirmationUri'] = 'confirmationUri must be defined';
 		}
 
 		if (!isset($pushUri) || trim($pushUri) === '') {
-			$errors['incorrectMerchantPushUri'] = "pushUri must be defined";
+			$errors['incorrectMerchantPushUri'] = 'pushUri must be defined';
 		}
 
 		return $errors;

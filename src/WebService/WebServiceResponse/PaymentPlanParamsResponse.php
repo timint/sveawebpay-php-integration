@@ -48,7 +48,7 @@ class PaymentPlanParamsResponse extends WebServiceResponse {
 
 		// set response resultcode & errormessage, if any
 		$this->resultcode = $response->GetPaymentPlanParamsEuResult->ResultCode;
-		$this->errormessage = isset($response->GetPaymentPlanParamsEuResult->ErrorMessage) ? $response->GetPaymentPlanParamsEuResult->ErrorMessage : "";
+		$this->errormessage = isset($response->GetPaymentPlanParamsEuResult->ErrorMessage) ? $response->GetPaymentPlanParamsEuResult->ErrorMessage : '';
 
 		// set response attributes
 		if ($this->accepted == 1) {

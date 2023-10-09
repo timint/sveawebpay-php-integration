@@ -21,17 +21,17 @@ class DeliverOrderRowsRequestIntegrationTest extends \PHPUnit\Framework\TestCase
 	{
 
 		// create order
-		$country = "SE";
+		$country = 'SE';
 
 		$order = TestUtil::createOrder(TestUtil::createIndividualCustomer($country))
 			->addOrderRow(WebPayItem::orderRow()
-				->setDescription("second row")
+				->setDescription('second row')
 				->setQuantity(1)
 				->setAmountExVat(16.00)
 				->setVatPercent(25)
 			)
 			->addOrderRow(WebPayItem::orderRow()
-				->setDescription("third row")
+				->setDescription('third row')
 				->setQuantity(1)
 				->setAmountExVat(24.00)
 				->setVatPercent(25)
@@ -95,27 +95,27 @@ class DeliverOrderRowsRequestIntegrationTest extends \PHPUnit\Framework\TestCase
 
 		$this->assertEquals(79021, $deliverOrderRowsResponse->clientId);
 		$this->assertEquals(250.00, $deliverOrderRowsResponse->amount);
-		$this->assertStringMatchesFormat("%d", $deliverOrderRowsResponse->invoiceId);   // %d => an unsigned integer value
+		$this->assertStringMatchesFormat('%d', $deliverOrderRowsResponse->invoiceId);   // %d => an unsigned integer value
 		$this->assertEquals(null, $deliverOrderRowsResponse->contractNumber);
-		$this->assertEquals("Invoice", $deliverOrderRowsResponse->orderType);
-		$this->assertStringMatchesFormat("%d", $deliverOrderRowsResponse->orderId);   // %d => an unsigned integer value
+		$this->assertEquals('Invoice', $deliverOrderRowsResponse->orderType);
+		$this->assertStringMatchesFormat('%d', $deliverOrderRowsResponse->orderId);   // %d => an unsigned integer value
 	}
 
 	public function test_deliver_multiple_invoice_orderRows_returns_accepted_with_invoiceId()
 	{
 
 		// create order
-		$country = "SE";
+		$country = 'SE';
 
 		$order = TestUtil::createOrder(TestUtil::createIndividualCustomer($country))
 			->addOrderRow(WebPayItem::orderRow()
-				->setDescription("second row")
+				->setDescription('second row')
 				->setQuantity(1)
 				->setAmountExVat(16.00)
 				->setVatPercent(25)
 			)
 			->addOrderRow(WebPayItem::orderRow()
-				->setDescription("third row")
+				->setDescription('third row')
 				->setQuantity(1)
 				->setAmountExVat(24.00)
 				->setVatPercent(25)
@@ -141,7 +141,7 @@ class DeliverOrderRowsRequestIntegrationTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals(1, $deliverOrderRowsResponse->accepted);	   // equals literal 1
 		$this->assertEquals(0, $deliverOrderRowsResponse->resultcode);
 		$this->assertEquals(270.00, $deliverOrderRowsResponse->amount);
-		$this->assertEquals("Invoice", $deliverOrderRowsResponse->orderType);
+		$this->assertEquals('Invoice', $deliverOrderRowsResponse->orderType);
 		$this->assertNotNull($deliverOrderRowsResponse->invoiceId);
 	}
 
@@ -180,17 +180,17 @@ class DeliverOrderRowsRequestIntegrationTest extends \PHPUnit\Framework\TestCase
 		$transactionId = 586223;
 
 		$queryRequest = WebPayAdmin::queryOrder(ConfigurationService::getDefaultConfig());
-		$queryResponse = $queryRequest->setCountryCode("SE")->setTransactionId($transactionId)->queryCardOrder()->doRequest();
+		$queryResponse = $queryRequest->setCountryCode('SE')->setTransactionId($transactionId)->queryCardOrder()->doRequest();
 
 		////print_r( $queryResponse );
 		$this->assertEquals(1, $queryResponse->accepted);
-		$this->assertEquals("AUTHORIZED", $queryResponse->status);
+		$this->assertEquals('AUTHORIZED', $queryResponse->status);
 		$this->assertEquals(600, $queryResponse->amount);
 		$this->assertEquals(600, $queryResponse->authorizedamount); // not manipulated post creation
 		$this->assertEquals(0, $queryResponse->creditedamount); // not manipulated post creation
 
 		$deliverRequest = WebPayAdmin::deliverOrderRows(ConfigurationService::getDefaultConfig());
-		$deliverRequest->setCountryCode("SE")->setOrderId($transactionId);
+		$deliverRequest->setCountryCode('SE')->setOrderId($transactionId);
 		$deliverRequest->setRowToDeliver(1)->addNumberedOrderRows($queryResponse->numberedOrderRows);
 		$deliverResponse = $deliverRequest->deliverCardOrderRows()->doRequest();
 
@@ -200,11 +200,11 @@ class DeliverOrderRowsRequestIntegrationTest extends \PHPUnit\Framework\TestCase
 
 		// query orderrows
 		$queryResponse2 = WebPayAdmin::queryOrder(ConfigurationService::getDefaultConfig())
-			->setOrderId($transactionId)->setCountryCode("SE")->queryCardOrder()->doRequest();
+			->setOrderId($transactionId)->setCountryCode('SE')->queryCardOrder()->doRequest();
 
 		//print_r( $queryResponse2);
 		$this->assertEquals(1, $queryResponse2->accepted);
-		$this->assertEquals("CONFIRMED", $queryResponse2->status);
+		$this->assertEquals('CONFIRMED', $queryResponse2->status);
 		$this->assertEquals(100, $queryResponse2->authorizedamount);
 
 	}
@@ -244,13 +244,13 @@ class DeliverOrderRowsRequestIntegrationTest extends \PHPUnit\Framework\TestCase
 		$transactionId = 586256;
 
 		$queryRequest = WebPayAdmin::queryOrder(ConfigurationService::getDefaultConfig());
-		$queryResponse = $queryRequest->setCountryCode("SE")->setTransactionId($transactionId)->queryCardOrder()->doRequest();
+		$queryResponse = $queryRequest->setCountryCode('SE')->setTransactionId($transactionId)->queryCardOrder()->doRequest();
 
 		////print_r( $queryResponse );
 		$this->assertEquals(1, $queryResponse->accepted);
 
 		$deliverRequest = WebPayAdmin::deliverOrderRows(ConfigurationService::getDefaultConfig());
-		$deliverRequest->setCountryCode("SE")->setOrderId($transactionId);
+		$deliverRequest->setCountryCode('SE')->setOrderId($transactionId);
 		$deliverRequest->setRowToDeliver(1)->addNumberedOrderRows($queryResponse->numberedOrderRows);
 		$deliverResponse = $deliverRequest->deliverCardOrderRows()->doRequest();
 
@@ -260,16 +260,16 @@ class DeliverOrderRowsRequestIntegrationTest extends \PHPUnit\Framework\TestCase
 
 		// again (i.e. lower too large an amount)
 		$deliver2Request = WebPayAdmin::deliverOrderRows(ConfigurationService::getDefaultConfig());
-		$deliver2Request->setCountryCode("SE")->setOrderId($transactionId);
+		$deliver2Request->setCountryCode('SE')->setOrderId($transactionId);
 		$deliver2Request->setRowToDeliver(1)->addNumberedOrderRows($queryResponse->numberedOrderRows);
 		$deliver2Response = $deliver2Request->deliverCardOrderRows()->doRequest();
 
 		////print_r( $deliver2Response );
 		$this->assertInstanceOf("Svea\WebPay\HostedService\HostedResponse\HostedAdminResponse\ConfirmTransactionResponse", $deliver2Response);
 		$this->assertEquals(0, $deliver2Response->accepted);
-		$this->assertEquals("100", $deliver2Response->resultcode);
+		$this->assertEquals('100', $deliver2Response->resultcode);
 		$this->assertEquals(
-			"IntegrationPackage: LowerAmount request with flag alsoDoConfirm failed:305 (BAD_AMOUNT) Invalid value for amount.",
+			'IntegrationPackage: LowerAmount request with flag alsoDoConfirm failed:305 (BAD_AMOUNT) Invalid value for amount.',
 			$deliver2Response->errormessage
 		);
 
@@ -313,7 +313,7 @@ class DeliverOrderRowsRequestIntegrationTest extends \PHPUnit\Framework\TestCase
 		$confirmRequest = new ConfirmTransaction(ConfigurationService::getDefaultConfig());
 		$confirmRequest->transactionId = $transactionId;
 		$confirmRequest->captureDate = date('c');
-		$confirmRequest->countryCode = "SE";
+		$confirmRequest->countryCode = 'SE';
 		$confirmResponse = $confirmRequest->doRequest();
 
 		////print_r( $confirmResponse );
@@ -321,21 +321,21 @@ class DeliverOrderRowsRequestIntegrationTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals(1, $confirmResponse->accepted);
 
 		$queryRequest = WebPayAdmin::queryOrder(ConfigurationService::getDefaultConfig());
-		$queryResponse = $queryRequest->setCountryCode("SE")->setTransactionId($transactionId)->queryCardOrder()->doRequest();
+		$queryResponse = $queryRequest->setCountryCode('SE')->setTransactionId($transactionId)->queryCardOrder()->doRequest();
 
 		//print_r( $queryResponse );
 		$this->assertEquals(1, $queryResponse->accepted);
-		$this->assertEquals("CONFIRMED", $queryResponse->status);
+		$this->assertEquals('CONFIRMED', $queryResponse->status);
 
 		$deliverRequest = WebPayAdmin::deliverOrderRows(ConfigurationService::getDefaultConfig());
-		$deliverRequest->setCountryCode("SE")->setOrderId($transactionId);
+		$deliverRequest->setCountryCode('SE')->setOrderId($transactionId);
 		$deliverRequest->setRowToDeliver(1)->addNumberedOrderRows($queryResponse->numberedOrderRows);
 		$deliverResponse = $deliverRequest->deliverCardOrderRows()->doRequest();
 
 		//print_r( $deliverResponse );
 		$this->assertInstanceOf("Svea\WebPay\HostedService\HostedResponse\HostedAdminResponse\ConfirmTransactionResponse", $deliverResponse);
 		$this->assertEquals(0, $deliverResponse->accepted);
-		$this->assertEquals("105 (ILLEGAL_TRANSACTIONSTATUS)", $deliverResponse->resultcode);   // confirm of confirmed order
-		$this->assertEquals("Invalid transaction status.", $deliverResponse->errormessage);
+		$this->assertEquals('105 (ILLEGAL_TRANSACTIONSTATUS)', $deliverResponse->resultcode);   // confirm of confirmed order
+		$this->assertEquals('Invalid transaction status.', $deliverResponse->errormessage);
 	}
 }

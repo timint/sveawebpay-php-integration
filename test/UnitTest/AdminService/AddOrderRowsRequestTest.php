@@ -24,7 +24,7 @@ class AddOrderRowsRequestTest extends \PHPUnit\Framework\TestCase
 		$this->builderObject = new OrderBuilder(ConfigurationService::getDefaultConfig());
 		$this->builderObject->orderId = 123456;
 		$this->builderObject->orderType = ConfigurationProvider::INVOICE_TYPE;
-		$this->builderObject->countryCode = "SE";
+		$this->builderObject->countryCode = 'SE';
 		$this->builderObject->orderRows = [TestUtil::createOrderRow(10.00)];
 	}
 
@@ -85,14 +85,14 @@ class AddOrderRowsRequestTest extends \PHPUnit\Framework\TestCase
 	public function test_validate_throws_exception_on_orderRows_missing_vat_information_none()
 	{
 		$this->builderObject->orderRows[] = WebPayItem::orderRow()
-			->setArticleNumber("1")
+			->setArticleNumber('1')
 			->setQuantity(1)
 			//->setAmountExVat( 1.00 )
 			//->setAmountIncVat( 1.00 * 1.25 )
 			//->setVatPercent(25)
-			->setDescription("Specification")
+			->setDescription('Specification')
 			->setName('Product')
-			->setUnit("st")
+			->setUnit('st')
 			->setDiscountPercent(0);
 		$AddOrderRowsRequestObject = new AddOrderRowsRequest($this->builderObject);
 		$request = $AddOrderRowsRequestObject->prepareRequest();

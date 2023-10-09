@@ -10,14 +10,14 @@ class SveaIdentity {
 	public function __construct($bool = false) {
 		//if Individual
 		if ($bool == false) {
-			$this->FirstName = "";
-			$this->LastName = "";
-			$this->Initials = "";
-			$this->BirthDate = "";
+			$this->FirstName = '';
+			$this->LastName = '';
+			$this->Initials = '';
+			$this->BirthDate = '';
 
 		} //if Company
 		else {
-			$this->CompanyVatNumber = "";
+			$this->CompanyVatNumber = '';
 		}
 	}
 }

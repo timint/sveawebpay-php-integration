@@ -27,7 +27,7 @@ class AddOrderRowsRequest extends AdminServiceRequest {
 	 * @param AddOrderRowsBuilder $addOrderRowsBuilder
 	 */
 	public function __construct($addOrderRowsBuilder) {
-		$this->action = "AddOrderRows";
+		$this->action = 'AddOrderRows';
 		$this->orderBuilder = $addOrderRowsBuilder;
 	}
 
@@ -70,7 +70,7 @@ class AddOrderRowsRequest extends AdminServiceRequest {
 
 	private function validateOrderId($errors) {
 		if (isset($this->orderBuilder->orderId) == false) {
-			$errors[] = ['missing value' => "orderId is required."];
+			$errors[] = ['missing value' => 'orderId is required.'];
 		}
 
 		return $errors;
@@ -78,7 +78,7 @@ class AddOrderRowsRequest extends AdminServiceRequest {
 
 	private function validateOrderType($errors) {
 		if (isset($this->orderBuilder->orderType) == false) {
-			$errors[] = ['missing value' => "orderType is required."];
+			$errors[] = ['missing value' => 'orderType is required.'];
 		}
 
 		return $errors;
@@ -86,7 +86,7 @@ class AddOrderRowsRequest extends AdminServiceRequest {
 
 	private function validateCountryCode($errors) {
 		if (isset($this->orderBuilder->countryCode) == false) {
-			$errors[] = ['missing value' => "countryCode is required."];
+			$errors[] = ['missing value' => 'countryCode is required.'];
 		}
 
 		return $errors;
@@ -94,7 +94,7 @@ class AddOrderRowsRequest extends AdminServiceRequest {
 
 	private function validateRowsToAdd($errors) {
 		if (isset($this->orderBuilder->orderRows) == false) {
-			$errors[] = ['missing value' => "orderRows is required."];
+			$errors[] = ['missing value' => 'orderRows is required.'];
 		}
 
 		return $errors;
@@ -104,7 +104,7 @@ class AddOrderRowsRequest extends AdminServiceRequest {
 		if (isset($this->orderBuilder->orderRows)) {
 			foreach ($this->orderBuilder->orderRows as $orderRow) {
 				if (!isset($orderRow->vatPercent) && (!isset($orderRow->amountIncVat) && !isset($orderRow->amountExVat))) {
-					$errors[] = ['missing order row vat information' => "cannot calculate orderRow vatPercent, need at least two of amountExVat, amountIncVat and vatPercent."];
+					$errors[] = ['missing order row vat information' => 'cannot calculate orderRow vatPercent, need at least two of amountExVat, amountIncVat and vatPercent.'];
 				}
 			}
 		}

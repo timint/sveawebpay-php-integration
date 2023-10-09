@@ -24,7 +24,7 @@ class PaymentPlanTest extends \PHPUnit\Framework\TestCase
 		$config = ConfigurationService::getDefaultConfig();
 		$addressRequest = WebPay::getPaymentPlanParams($config);
 		$response = $addressRequest
-			->setCountryCode("SE")
+			->setCountryCode('SE')
 			->doRequest();
 
 		return $response->campaignCodes[0]->campaignCode;
@@ -38,12 +38,12 @@ class PaymentPlanTest extends \PHPUnit\Framework\TestCase
 			->addOrderRow(TestUtil::createOrderRow())
 			->run($rowFactory->buildShippingFee())
 			->addCustomerDetails(WebPayItem::individualCustomer()->setNationalIdNumber(194605092222))
-			->setCountryCode("SE")
-			->setCustomerReference("33")
-			->setClientOrderNumber("nr26")
-			->setOrderDate("2012-12-12")
-			->setCurrency("SEK")
-			->usePaymentPlanPayment("camp1")// returnerar InvoiceOrder object
+			->setCountryCode('SE')
+			->setCustomerReference('33')
+			->setClientOrderNumber('nr26')
+			->setOrderDate('2012-12-12')
+			->setCurrency('SEK')
+			->usePaymentPlanPayment('camp1')// returnerar InvoiceOrder object
 			->prepareRequest();
 
 		$this->assertEquals('camp1', $request->request->CreateOrderInformation->CreatePaymentPlanDetails['CampaignCode']);
@@ -55,22 +55,22 @@ class PaymentPlanTest extends \PHPUnit\Framework\TestCase
 		$config = ConfigurationService::getDefaultConfig();
 		$request = WebPay::createOrder($config)
 			->addOrderRow(WebPayItem::orderRow()
-				->setArticleNumber("1")
+				->setArticleNumber('1')
 				->setQuantity(2)
 				->setAmountExVat(240.00)
 				->setAmountIncVat(300.00)
-				->setDescription("CD")
+				->setDescription('CD')
 			)
 			->addDiscount(WebPayItem::relativeDiscount()
-				->setDiscountId("1")
+				->setDiscountId('1')
 				->setDiscountPercent(10)
-				->setDescription("RelativeDiscount")
+				->setDescription('RelativeDiscount')
 			)
 			->addCustomerDetails(WebPayItem::individualCustomer()->setNationalIdNumber(194605092222))
-			->setCountryCode("SE")
-			->setCustomerReference("33")
-			->setOrderDate("2012-12-12")
-			->setCurrency("SEK")
+			->setCountryCode('SE')
+			->setCustomerReference('33')
+			->setOrderDate('2012-12-12')
+			->setCurrency('SEK')
 			->useInvoicePayment()
 			->prepareRequest();
 		//couponrow
@@ -88,17 +88,17 @@ class PaymentPlanTest extends \PHPUnit\Framework\TestCase
 		$config = ConfigurationService::getDefaultConfig();
 		$request = WebPay::createOrder($config)
 			->addOrderRow(WebPayItem::orderRow()
-				->setArticleNumber("1")
+				->setArticleNumber('1')
 				->setQuantity(2)
 				->setAmountExVat(240.00)
 				->setAmountIncVat(300.00)
-				->setDescription("CD")
+				->setDescription('CD')
 			)
 			->addCustomerDetails(WebPayItem::individualCustomer()->setNationalIdNumber(194605092222))
-			->setCountryCode("SE")
-			->setCustomerReference("33")
-			->setOrderDate("2012-12-12")
-			->setCurrency("SEK")
+			->setCountryCode('SE')
+			->setCustomerReference('33')
+			->setOrderDate('2012-12-12')
+			->setCurrency('SEK')
 			->usePaymentPlanPayment('111111')
 			->prepareRequest();
 		//couponrow
@@ -124,9 +124,9 @@ class PaymentPlanTest extends \PHPUnit\Framework\TestCase
 					->setQuantity(1)
 			)
 			->addDiscount(WebPayItem::fixedDiscount()->setAmountExVat(8))
-			->addCustomerDetails(TestUtil::createIndividualCustomer("SE"))
-			->setCountryCode("SE")
-			->setOrderDate("2012-12-12")
+			->addCustomerDetails(TestUtil::createIndividualCustomer('SE'))
+			->setCountryCode('SE')
+			->setOrderDate('2012-12-12')
 			->usePaymentPlanPayment('111111')
 			->prepareRequest();
 		$this->assertEquals(80, $request->request->CreateOrderInformation->OrderRows['OrderRow'][0]->PricePerUnit);
@@ -150,9 +150,9 @@ class PaymentPlanTest extends \PHPUnit\Framework\TestCase
 			->addDiscount(WebPayItem::fixedDiscount()
 				->setAmountExVat(8)
 				->setVatPercent(0))
-			->addCustomerDetails(TestUtil::createIndividualCustomer("SE"))
-			->setCountryCode("SE")
-			->setOrderDate("2012-12-12")
+			->addCustomerDetails(TestUtil::createIndividualCustomer('SE'))
+			->setCountryCode('SE')
+			->setOrderDate('2012-12-12')
 			->usePaymentPlanPayment('111111')
 			->prepareRequest();
 		$this->assertEquals(80, $request->request->CreateOrderInformation->OrderRows['OrderRow'][0]->PricePerUnit);
@@ -176,9 +176,9 @@ class PaymentPlanTest extends \PHPUnit\Framework\TestCase
 			->addDiscount(WebPayItem::relativeDiscount()
 				->setDiscountPercent(10)
 			)
-			->addCustomerDetails(TestUtil::createIndividualCustomer("SE"))
-			->setCountryCode("SE")
-			->setOrderDate("2012-12-12")
+			->addCustomerDetails(TestUtil::createIndividualCustomer('SE'))
+			->setCountryCode('SE')
+			->setOrderDate('2012-12-12')
 			->usePaymentPlanPayment('111111')
 			->prepareRequest();
 		$this->assertEquals(80, $request->request->CreateOrderInformation->OrderRows['OrderRow'][0]->PricePerUnit);
@@ -203,9 +203,9 @@ class PaymentPlanTest extends \PHPUnit\Framework\TestCase
 				->setAmountExVat(80.00)
 				->setVatPercent(24)
 			)
-			->addCustomerDetails(TestUtil::createIndividualCustomer("SE"))
-			->setCountryCode("SE")
-			->setOrderDate("2012-12-12")
+			->addCustomerDetails(TestUtil::createIndividualCustomer('SE'))
+			->setCountryCode('SE')
+			->setOrderDate('2012-12-12')
 			->usePaymentPlanPayment('111111')
 			->prepareRequest();
 
@@ -227,9 +227,9 @@ class PaymentPlanTest extends \PHPUnit\Framework\TestCase
 					->setVatPercent(24)
 					->setQuantity(1)
 			)
-			->addCustomerDetails(TestUtil::createIndividualCustomer("SE"))
-			->setCountryCode("SE")
-			->setOrderDate("2012-12-12")
+			->addCustomerDetails(TestUtil::createIndividualCustomer('SE'))
+			->setCountryCode('SE')
+			->setOrderDate('2012-12-12')
 			->usePaymentPlanPayment('111111')
 			->prepareRequest();
 
@@ -257,9 +257,9 @@ class PaymentPlanTest extends \PHPUnit\Framework\TestCase
 				->setAmountIncVat(100.00)
 				->setVatPercent(24)
 			)
-			->addCustomerDetails(TestUtil::createIndividualCustomer("SE"))
-			->setCountryCode("SE")
-			->setOrderDate("2012-12-12")
+			->addCustomerDetails(TestUtil::createIndividualCustomer('SE'))
+			->setCountryCode('SE')
+			->setOrderDate('2012-12-12')
 			->usePaymentPlanPayment('111111')
 			->prepareRequest();
 
@@ -285,9 +285,9 @@ class PaymentPlanTest extends \PHPUnit\Framework\TestCase
 					->setQuantity(1)
 			)
 			->addDiscount(WebPayItem::fixedDiscount()->setAmountIncVat(10))
-			->addCustomerDetails(TestUtil::createIndividualCustomer("SE"))
-			->setCountryCode("SE")
-			->setOrderDate("2012-12-12")
+			->addCustomerDetails(TestUtil::createIndividualCustomer('SE'))
+			->setCountryCode('SE')
+			->setOrderDate('2012-12-12')
 			->usePaymentPlanPayment('111111')
 			->prepareRequest();
 		$this->assertEquals(123.9876, $request->request->CreateOrderInformation->OrderRows['OrderRow'][0]->PricePerUnit);
@@ -314,9 +314,9 @@ class PaymentPlanTest extends \PHPUnit\Framework\TestCase
 			->addDiscount(WebPayItem::fixedDiscount()
 				->setAmountIncVat(10)
 				->setVatPercent(0))
-			->addCustomerDetails(TestUtil::createIndividualCustomer("SE"))
-			->setCountryCode("SE")
-			->setOrderDate("2012-12-12")
+			->addCustomerDetails(TestUtil::createIndividualCustomer('SE'))
+			->setCountryCode('SE')
+			->setOrderDate('2012-12-12')
 			->usePaymentPlanPayment('111111')
 			->prepareRequest();
 		$this->assertEquals(123.9876, $request->request->CreateOrderInformation->OrderRows['OrderRow'][0]->PricePerUnit);
@@ -343,9 +343,9 @@ class PaymentPlanTest extends \PHPUnit\Framework\TestCase
 			->addDiscount(WebPayItem::relativeDiscount()
 				->setDiscountPercent(10)
 			)
-			->addCustomerDetails(TestUtil::createIndividualCustomer("SE"))
-			->setCountryCode("SE")
-			->setOrderDate("2012-12-12")
+			->addCustomerDetails(TestUtil::createIndividualCustomer('SE'))
+			->setCountryCode('SE')
+			->setOrderDate('2012-12-12')
 			->useInvoicePayment()
 			->prepareRequest();
 		$this->assertEquals(123.9876, $request->request->CreateOrderInformation->OrderRows['OrderRow'][0]->PricePerUnit);

@@ -21,7 +21,7 @@ class QueryOrderBuilderIntegrationTest extends \PHPUnit\Framework\TestCase
 	function test_queryOrder_queryInvoiceOrder_multiple_order_rows()
 	{
 		// create invoice order w/three rows (2xA, 1xB)
-		$country = "SE";
+		$country = 'SE';
 
 		$a_quantity = 2;
 		$a_amountExVat = 1000.00;
@@ -30,10 +30,10 @@ class QueryOrderBuilderIntegrationTest extends \PHPUnit\Framework\TestCase
 		$b_quantity = 1;
 		$b_amountExVat = 100.00;
 		$b_vatPercent = 12;
-		$b_articleNumber = "1071e";
-		$b_unit = "pcs.";
-		$b_name = "B Name";
-		$b_description = "B Description";
+		$b_articleNumber = '1071e';
+		$b_unit = 'pcs.';
+		$b_name = 'B Name';
+		$b_description = 'B Description';
 		$b_discount = 0;
 
 		$order = TestUtil::createOrderWithoutOrderRows(TestUtil::createIndividualCustomer($country))
@@ -82,13 +82,13 @@ class QueryOrderBuilderIntegrationTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals(null, $queryResponse->numberedOrderRows[1]->creditInvoiceId); // not set
 		$this->assertEquals(null, $queryResponse->numberedOrderRows[1]->invoiceId); // not set
 		$this->assertEquals(2, $queryResponse->numberedOrderRows[1]->rowNumber);  // rows are 1-indexed
-		$this->assertEquals("NotDelivered", $queryResponse->numberedOrderRows[1]->status);
+		$this->assertEquals('NotDelivered', $queryResponse->numberedOrderRows[1]->status);
 	}
 
 	function test_queryOrder_queryInvoiceOrder_single_order_row()
 	{
 		// create invoice order w/three rows (2xA, 1xB)
-		$country = "SE";
+		$country = 'SE';
 
 		$a_quantity = 2;
 		$a_amountExVat = 1000.00;
@@ -125,7 +125,7 @@ class QueryOrderBuilderIntegrationTest extends \PHPUnit\Framework\TestCase
 	function test_queryOrder_queryPaymentPlanOrder_order()
 	{
 		// create order w/three rows (2xA, 1xB)
-		$country = "SE";
+		$country = 'SE';
 
 		$a_quantity = 2;
 		$a_amountExVat = 1000.00;
@@ -134,10 +134,10 @@ class QueryOrderBuilderIntegrationTest extends \PHPUnit\Framework\TestCase
 		$b_quantity = 1;
 		$b_amountExVat = 100.00;
 		$b_vatPercent = 12;
-		$b_articleNumber = "1071e";
-		$b_unit = "pcs.";
-		$b_name = "B Name";
-		$b_description = "B Description";
+		$b_articleNumber = '1071e';
+		$b_unit = 'pcs.';
+		$b_name = 'B Name';
+		$b_description = 'B Description';
 		$b_discount = 0;
 
 		$order = TestUtil::createOrderWithoutOrderRows(TestUtil::createIndividualCustomer($country))
@@ -186,7 +186,7 @@ class QueryOrderBuilderIntegrationTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals(null, $queryResponse->numberedOrderRows[1]->creditInvoiceId); // not set
 		$this->assertEquals(null, $queryResponse->numberedOrderRows[1]->invoiceId); // not set
 		$this->assertEquals(2, $queryResponse->numberedOrderRows[1]->rowNumber);  // rows are 1-indexed
-		$this->assertEquals("NotDelivered", $queryResponse->numberedOrderRows[1]->status);
+		$this->assertEquals('NotDelivered', $queryResponse->numberedOrderRows[1]->status);
 	}
 
 	/**
@@ -206,15 +206,15 @@ class QueryOrderBuilderIntegrationTest extends \PHPUnit\Framework\TestCase
 		// 3. go to the paymenturl and complete the transaction manually, making note of the response transactionid
 		// 4. enter the transactionid into test_manual_queryOrder_queryCard_order_step_12() below and run the test
 
-		$orderLanguage = "sv";
-		$returnUrl = "http://foo.bar.com";
-		$ipAddress = "127.0.0.1";
+		$orderLanguage = 'sv';
+		$returnUrl = 'http://foo.bar.com';
+		$ipAddress = '127.0.0.1';
 
 		// create order
-		$order = TestUtil::createOrderWithoutOrderRows(TestUtil::createIndividualCustomer("SE")->setIpAddress($ipAddress));
+		$order = TestUtil::createOrderWithoutOrderRows(TestUtil::createIndividualCustomer('SE')->setIpAddress($ipAddress));
 
 		// create order w/three rows (2xA, 1xB)
-		$country = "SE";
+		$country = 'SE';
 
 		$a_quantity = 2;
 		$a_amountExVat = 1000.00;
@@ -223,10 +223,10 @@ class QueryOrderBuilderIntegrationTest extends \PHPUnit\Framework\TestCase
 		$b_quantity = 1;
 		$b_amountExVat = 100.00;
 		$b_vatPercent = 12;
-		$b_articleNumber = "1071e";
-		$b_unit = "pcs.";
-		$b_name = "B Name";
-		$b_description = "B Description";
+		$b_articleNumber = '1071e';
+		$b_unit = 'pcs.';
+		$b_name = 'B Name';
+		$b_description = 'B Description';
 		$b_discount = 0;
 
 		$order
@@ -258,7 +258,7 @@ class QueryOrderBuilderIntegrationTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals(1, $response->accepted);
 
 		// print the url to use to confirm the transaction
-		//print_r( " test_manual_queryOrder_queryCard_order_step_1(): " . $response->testurl ." ");
+		//print_r( ' test_manual_queryOrder_queryCard_order_step_1(): ' . $response->testurl .' ');
 	}
 
 	/**
@@ -281,7 +281,7 @@ class QueryOrderBuilderIntegrationTest extends \PHPUnit\Framework\TestCase
 		$createdOrderId = 582616;
 
 		// create order w/three rows (2xA, 1xB) (from step 1 above)
-		$country = "SE";
+		$country = 'SE';
 
 		$a_quantity = 2;
 		$a_amountExVat = 1000.00;
@@ -290,10 +290,10 @@ class QueryOrderBuilderIntegrationTest extends \PHPUnit\Framework\TestCase
 		$b_quantity = 1;
 		$b_amountExVat = 100.00;
 		$b_vatPercent = 12;
-		$b_articleNumber = "1071e";
-		$b_unit = "pcs.";
-		$b_name = "B Name";
-		$b_description = "B Description";
+		$b_articleNumber = '1071e';
+		$b_unit = 'pcs.';
+		$b_name = 'B Name';
+		$b_description = 'B Description';
 		$b_discount = 0;
 
 		// query orderrows
@@ -337,15 +337,15 @@ class QueryOrderBuilderIntegrationTest extends \PHPUnit\Framework\TestCase
 		// 3. go to the paymenturl and complete the transaction manually, making note of the response transactionid
 		// 4. enter the transactionid into test_manual_queryOrder_queryCard_order_step_12() below and run the test
 
-		$orderLanguage = "sv";
-		$returnUrl = "http://foo.bar.com";
-		$ipAddress = "127.0.0.1";
+		$orderLanguage = 'sv';
+		$returnUrl = 'http://foo.bar.com';
+		$ipAddress = '127.0.0.1';
 
 		// create order
-		$order = TestUtil::createOrderWithoutOrderRows(TestUtil::createIndividualCustomer("SE")->setIpAddress($ipAddress));
+		$order = TestUtil::createOrderWithoutOrderRows(TestUtil::createIndividualCustomer('SE')->setIpAddress($ipAddress));
 
 		// create order w/three rows (2xA, 1xB)
-		$country = "SE";
+		$country = 'SE';
 
 		$a_quantity = 2;
 		$a_amountExVat = 1000.00;
@@ -354,10 +354,10 @@ class QueryOrderBuilderIntegrationTest extends \PHPUnit\Framework\TestCase
 		$b_quantity = 1;
 		$b_amountExVat = 100.00;
 		$b_vatPercent = 12;
-		$b_articleNumber = "Red 5";
-		$b_unit = "pcs.";
-		$b_name = "B Name";
-		$b_description = "B Description";
+		$b_articleNumber = 'Red 5';
+		$b_unit = 'pcs.';
+		$b_name = 'B Name';
+		$b_description = 'B Description';
 		$b_discount = 0;
 
 		$order
@@ -389,7 +389,7 @@ class QueryOrderBuilderIntegrationTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals(1, $response->accepted);
 
 		// print the url to use to confirm the transaction
-		//print_r( " test_manual_queryOrder_queryDirectBank_order_step_1(): " . $response->testurl ." ");
+		//print_r( ' test_manual_queryOrder_queryDirectBank_order_step_1(): ' . $response->testurl .' ');
 	}
 
 	/**
@@ -412,7 +412,7 @@ class QueryOrderBuilderIntegrationTest extends \PHPUnit\Framework\TestCase
 		$createdOrderId = 583556;
 
 		// create order w/three rows (2xA, 1xB) (from step 1 above)
-		$country = "SE";
+		$country = 'SE';
 
 		$a_quantity = 2;
 		$a_amountExVat = 1000.00;
@@ -421,10 +421,10 @@ class QueryOrderBuilderIntegrationTest extends \PHPUnit\Framework\TestCase
 		$b_quantity = 1;
 		$b_amountExVat = 100.00;
 		$b_vatPercent = 12;
-		$b_articleNumber = "Red 5";
-		$b_unit = "pcs.";
-		$b_name = "B Name";
-		$b_description = "B Description";
+		$b_articleNumber = 'Red 5';
+		$b_unit = 'pcs.';
+		$b_name = 'B Name';
+		$b_description = 'B Description';
 		$b_discount = 0;
 
 		// query orderrows
@@ -516,10 +516,10 @@ class QueryOrderBuilderIntegrationTest extends \PHPUnit\Framework\TestCase
 		// 2. set $createdOrderId to the transactionid from the transaction log of the request done by following the url from step 1 above.
 		// 3. below is an example of the xml generated by paypage for the request in step 1 above, along with the transaction id, for reference.
 
-		$createdClientOrderNumber = "clientOrderNumber:2014-06-17T14:18:38 02:00";
+		$createdClientOrderNumber = 'clientOrderNumber:2014-06-17T14:18:38 02:00';
 
 		// create order w/three rows (2xA, 1xB) (from step 1 above)
-		$country = "SE";
+		$country = 'SE';
 
 		$a_quantity = 2;
 		$a_amountExVat = 1000.00;
@@ -528,10 +528,10 @@ class QueryOrderBuilderIntegrationTest extends \PHPUnit\Framework\TestCase
 		$b_quantity = 1;
 		$b_amountExVat = 100.00;
 		$b_vatPercent = 12;
-		$b_articleNumber = "Red 5";
-		$b_unit = "pcs.";
-		$b_name = "B Name";
-		$b_description = "B Description";
+		$b_articleNumber = 'Red 5';
+		$b_unit = 'pcs.';
+		$b_name = 'B Name';
+		$b_description = 'B Description';
 		$b_discount = 0;
 
 		// query orderrows
@@ -613,9 +613,9 @@ class QueryOrderBuilderIntegrationTest extends \PHPUnit\Framework\TestCase
 
 	function test_queryOrder_card_by_customerrefno()
 	{
-		$createdClientOrderNumber = "clientOrderNumber:2014-05-20T17:10:35 02:00";
+		$createdClientOrderNumber = 'clientOrderNumber:2014-05-20T17:10:35 02:00';
 
-		$country = "SE";
+		$country = 'SE';
 
 		$a_quantity = 2;
 		$a_amountExVat = 1000.00;
@@ -624,10 +624,10 @@ class QueryOrderBuilderIntegrationTest extends \PHPUnit\Framework\TestCase
 		$b_quantity = 1;
 		$b_amountExVat = 100.00;
 		$b_vatPercent = 12;
-		$b_articleNumber = "1071e";
-		$b_unit = "pcs.";
-		$b_name = "B Name";
-		$b_description = "B Description";
+		$b_articleNumber = '1071e';
+		$b_unit = 'pcs.';
+		$b_name = 'B Name';
+		$b_description = 'B Description';
 		$b_discount = 0;
 
 		// query orderrows

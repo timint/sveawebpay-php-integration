@@ -28,14 +28,14 @@ class CancelRecurSubscriptionIntegrationTest extends \PHPUnit\Framework\TestCase
 		$request = new CancelRecurSubscription(ConfigurationService::getDefaultConfig());
 		$request->subscriptionId = $subscriptionId;
 
-		$request->countryCode = "SE";
+		$request->countryCode = 'SE';
 		$response = $request->doRequest();
 
 		$this->assertInstanceOf("Svea\WebPay\HostedService\HostedResponse\HostedAdminResponse\CancelRecurSubscriptionResponse", $response);
 
 		// if we receive an error from the service, the integration test passes
 		$this->assertEquals(0, $response->accepted);
-		$this->assertEquals("128 (NO_SUCH_TRANS)", $response->resultcode);
+		$this->assertEquals('128 (NO_SUCH_TRANS)', $response->resultcode);
 	}
 
 	/**
@@ -59,7 +59,7 @@ class CancelRecurSubscriptionIntegrationTest extends \PHPUnit\Framework\TestCase
 		// <paymentmethod>SVEACARDPAY</paymentmethod><subscriptiontype>RECURRINGCAPTURE</subscriptiontype><currency>SEK</currency><amount>500</amount><vat>100</vat><customerrefno>test_recur_NN</customerrefno><returnurl>https://webpaypaymentgatewaystage.svea.com/webpay-admin/admin/merchantresponsetest.xhtml</returnurl>
 		// 5. the result should be:
 		//<response>
-		//<transaction id="690341">
+		//<transaction id='690341'>
 		//<paymentmethod>SVEACARDPAY</paymentmethod>
 		//<merchantid>1130</merchantid>
 		//<customerrefno>test_recur_5958696</customerrefno>
@@ -85,7 +85,7 @@ class CancelRecurSubscriptionIntegrationTest extends \PHPUnit\Framework\TestCase
 		$request = new CancelRecurSubscription(ConfigurationService::getDefaultConfig());
 		$request->subscriptionId = $subscriptionId;
 
-		$request->countryCode = "SE";
+		$request->countryCode = 'SE';
 		$response = $request->doRequest();
 
 		$this->assertInstanceOf("Svea\WebPay\HostedService\HostedResponse\HostedAdminResponse\CancelRecurSubscriptionResponse", $response);

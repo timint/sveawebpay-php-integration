@@ -46,8 +46,8 @@ class WebServicePayment {
 	public function doRequest() {
 		$object = $this->prepareRequest();
 
-		$request = new SveaDoRequest($this->order->conf, $this->orderType, "CreateOrderEu", $object, $this->order->logging);
-		$response = new SveaResponse($request->result['requestResult'], "", null, null, isset($request->result['logs']) ? $request->result['logs'] : null);
+		$request = new SveaDoRequest($this->order->conf, $this->orderType, 'CreateOrderEu', $object, $this->order->logging);
+		$response = new SveaResponse($request->result['requestResult'], '', null, null, isset($request->result['logs']) ? $request->result['logs'] : null);
 
 
 		return $response->getResponse();
@@ -62,9 +62,9 @@ class WebServicePayment {
 		// validate order, throw exception on validation failure
 		$errors = $this->validateOrder();
 		if (count($errors) > 0) {
-			$exceptionString = "";
+			$exceptionString = '';
 			foreach ($errors as $key => $value) {
-				$exceptionString .= "-" . $key . " : " . $value . "\n";
+				$exceptionString .= '-' . $key . ' : ' . $value . "\n";
 			}
 			throw new ValidationException($exceptionString);
 		}
@@ -139,14 +139,14 @@ class WebServicePayment {
 	private function formatOrderDeliveryAddress() {
 		$formattedOrderDeliveryAddress = new SveaOrderDeliveryAddress();
 
-		$formattedOrderDeliveryAddress->FullName = isset($this->order->orderDeliveryAddress->fullName) ? $this->order->orderDeliveryAddress->fullName : "";
-		$formattedOrderDeliveryAddress->FirstName = isset($this->order->orderDeliveryAddress->firstName) ? $this->order->orderDeliveryAddress->firstName : "";
-		$formattedOrderDeliveryAddress->LastName = isset($this->order->orderDeliveryAddress->lastName) ? $this->order->orderDeliveryAddress->lastName : "";
-		$formattedOrderDeliveryAddress->CoAddress = isset($this->order->orderDeliveryAddress->coAddress) ? $this->order->orderDeliveryAddress->coAddress : "";
-		$formattedOrderDeliveryAddress->ZipCode = isset($this->order->orderDeliveryAddress->zipCode) ? $this->order->orderDeliveryAddress->zipCode : "";
-		$formattedOrderDeliveryAddress->HouseNumber = isset($this->order->orderDeliveryAddress->houseNumber) ? $this->order->orderDeliveryAddress->houseNumber : "";
-		$formattedOrderDeliveryAddress->Locality = isset($this->order->orderDeliveryAddress->locality) ? $this->order->orderDeliveryAddress->locality : "";
-		$formattedOrderDeliveryAddress->CountryCode = isset($this->order->orderDeliveryAddress->countryCode) ? $this->order->orderDeliveryAddress->countryCode : "";
+		$formattedOrderDeliveryAddress->FullName = isset($this->order->orderDeliveryAddress->fullName) ? $this->order->orderDeliveryAddress->fullName : '';
+		$formattedOrderDeliveryAddress->FirstName = isset($this->order->orderDeliveryAddress->firstName) ? $this->order->orderDeliveryAddress->firstName : '';
+		$formattedOrderDeliveryAddress->LastName = isset($this->order->orderDeliveryAddress->lastName) ? $this->order->orderDeliveryAddress->lastName : '';
+		$formattedOrderDeliveryAddress->CoAddress = isset($this->order->orderDeliveryAddress->coAddress) ? $this->order->orderDeliveryAddress->coAddress : '';
+		$formattedOrderDeliveryAddress->ZipCode = isset($this->order->orderDeliveryAddress->zipCode) ? $this->order->orderDeliveryAddress->zipCode : '';
+		$formattedOrderDeliveryAddress->HouseNumber = isset($this->order->orderDeliveryAddress->houseNumber) ? $this->order->orderDeliveryAddress->houseNumber : '';
+		$formattedOrderDeliveryAddress->Locality = isset($this->order->orderDeliveryAddress->locality) ? $this->order->orderDeliveryAddress->locality : '';
+		$formattedOrderDeliveryAddress->CountryCode = isset($this->order->orderDeliveryAddress->countryCode) ? $this->order->orderDeliveryAddress->countryCode : '';
 
 		return $formattedOrderDeliveryAddress;
 	}
@@ -158,7 +158,7 @@ class WebServicePayment {
 		$isCompany = false;
 		get_class($this->order->customerIdentity) == 'Svea\WebPay\BuildOrder\RowBuilders\CompanyCustomer' ? $isCompany = true : $isCompany = false;
 
-		$companyId = "";
+		$companyId = '';
 		if (isset($this->order->customerIdentity->orgNumber) || isset($this->order->customerIdentity->companyVatNumber)) {
 			$isCompany = true;
 			$companyId = isset($this->order->customerIdentity->orgNumber) ? $this->order->customerIdentity->orgNumber : $this->order->customerIdentity->companyVatNumber;
@@ -185,7 +185,7 @@ class WebServicePayment {
 				$euIdentity->BirthDate = $this->order->customerIdentity->birthDate;
 			}
 
-			$type = ($isCompany ? "CompanyIdentity" : "IndividualIdentity");
+			$type = ($isCompany ? 'CompanyIdentity' : 'IndividualIdentity');
 			$idValues[$type] = $euIdentity;
 		}
 
@@ -197,23 +197,23 @@ class WebServicePayment {
 		}
 
 		if ($isCompany) {
-			$individualCustomerIdentity->FullName = isset($this->order->customerIdentity->companyName) ? $this->order->customerIdentity->companyName : "";
+			$individualCustomerIdentity->FullName = isset($this->order->customerIdentity->companyName) ? $this->order->customerIdentity->companyName : '';
 		} else {
-			$individualCustomerIdentity->FullName = isset($this->order->customerIdentity->firstname) && isset($this->order->customerIdentity->lastname) ? $this->order->customerIdentity->firstname . ' ' . $this->order->customerIdentity->lastname : "";
+			$individualCustomerIdentity->FullName = isset($this->order->customerIdentity->firstname) && isset($this->order->customerIdentity->lastname) ? $this->order->customerIdentity->firstname . ' ' . $this->order->customerIdentity->lastname : '';
 		}
 
-		$individualCustomerIdentity->PhoneNumber = isset($this->order->customerIdentity->phonenumber) ? $this->order->customerIdentity->phonenumber : "";
-		$individualCustomerIdentity->Street = isset($this->order->customerIdentity->street) ? $this->order->customerIdentity->street : "";
-		$individualCustomerIdentity->HouseNumber = isset($this->order->customerIdentity->housenumber) ? $this->order->customerIdentity->housenumber : "";
-		$individualCustomerIdentity->CoAddress = isset($this->order->customerIdentity->coAddress) ? $this->order->customerIdentity->coAddress : "";
-		$individualCustomerIdentity->ZipCode = isset($this->order->customerIdentity->zipCode) ? $this->order->customerIdentity->zipCode : "";
-		$individualCustomerIdentity->Locality = isset($this->order->customerIdentity->locality) ? $this->order->customerIdentity->locality : "";
-		$individualCustomerIdentity->Email = isset($this->order->customerIdentity->email) ? $this->order->customerIdentity->email : "";
-		$individualCustomerIdentity->IpAddress = isset($this->order->customerIdentity->ipAddress) ? $this->order->customerIdentity->ipAddress : "";
+		$individualCustomerIdentity->PhoneNumber = isset($this->order->customerIdentity->phonenumber) ? $this->order->customerIdentity->phonenumber : '';
+		$individualCustomerIdentity->Street = isset($this->order->customerIdentity->street) ? $this->order->customerIdentity->street : '';
+		$individualCustomerIdentity->HouseNumber = isset($this->order->customerIdentity->housenumber) ? $this->order->customerIdentity->housenumber : '';
+		$individualCustomerIdentity->CoAddress = isset($this->order->customerIdentity->coAddress) ? $this->order->customerIdentity->coAddress : '';
+		$individualCustomerIdentity->ZipCode = isset($this->order->customerIdentity->zipCode) ? $this->order->customerIdentity->zipCode : '';
+		$individualCustomerIdentity->Locality = isset($this->order->customerIdentity->locality) ? $this->order->customerIdentity->locality : '';
+		$individualCustomerIdentity->Email = isset($this->order->customerIdentity->email) ? $this->order->customerIdentity->email : '';
+		$individualCustomerIdentity->IpAddress = isset($this->order->customerIdentity->ipAddress) ? $this->order->customerIdentity->ipAddress : '';
 
 		$individualCustomerIdentity->CountryCode = $this->order->countryCode;
-		$individualCustomerIdentity->CustomerType = $isCompany ? "Company" : "Individual";
-		$individualCustomerIdentity->PublicKey = isset($this->order->customerIdentity->publicKey) ? $this->order->customerIdentity->publicKey : "";
+		$individualCustomerIdentity->CustomerType = $isCompany ? 'Company' : 'Individual';
+		$individualCustomerIdentity->PublicKey = isset($this->order->customerIdentity->publicKey) ? $this->order->customerIdentity->publicKey : '';
 
 
 		return $individualCustomerIdentity;
@@ -225,7 +225,7 @@ class WebServicePayment {
 	 */
 	private function formatCustomerIdentity() {
 		$isCompany = false;
-		$companyId = "";
+		$companyId = '';
 		if (isset($this->order->orgNumber) || isset($this->order->companyVatNumber)) {
 			$isCompany = true;
 			$companyId = isset($this->order->orgNumber) ? $this->order->orgNumber : $this->order->companyVatNumber;
@@ -252,7 +252,7 @@ class WebServicePayment {
 				$euIdentity->BirthDate = $this->order->birthDate;
 			}
 
-			$type = ($isCompany ? "CompanyIdentity" : "IndividualIdentity");
+			$type = ($isCompany ? 'CompanyIdentity' : 'IndividualIdentity');
 			$idValues[$type] = $euIdentity;
 		}
 
@@ -264,23 +264,23 @@ class WebServicePayment {
 		}
 
 		if ($isCompany) {
-			$individualCustomerIdentity->FullName = isset($this->order->companyName) ? $this->order->companyName : "";
+			$individualCustomerIdentity->FullName = isset($this->order->companyName) ? $this->order->companyName : '';
 		} else {
-			$individualCustomerIdentity->FullName = isset($this->order->firstname) && isset($this->order->lastname) ? $this->order->firstname . ' ' . $this->order->lastname : "";
+			$individualCustomerIdentity->FullName = isset($this->order->firstname) && isset($this->order->lastname) ? $this->order->firstname . ' ' . $this->order->lastname : '';
 		}
 
-		$individualCustomerIdentity->PhoneNumber = isset($this->order->phonenumber) ? $this->order->phonenumber : "";
-		$individualCustomerIdentity->Street = isset($this->order->street) ? $this->order->street : "";
-		$individualCustomerIdentity->HouseNumber = isset($this->order->housenumber) ? $this->order->housenumber : "";
-		$individualCustomerIdentity->CoAddress = isset($this->order->coAddress) ? $this->order->coAddress : "";
-		$individualCustomerIdentity->ZipCode = isset($this->order->zipCode) ? $this->order->zipCode : "";
-		$individualCustomerIdentity->Locality = isset($this->order->locality) ? $this->order->locality : "";
-		$individualCustomerIdentity->Email = isset($this->order->email) ? $this->order->email : "";
-		$individualCustomerIdentity->IpAddress = isset($this->order->ipAddress) ? $this->order->ipAddress : "";
+		$individualCustomerIdentity->PhoneNumber = isset($this->order->phonenumber) ? $this->order->phonenumber : '';
+		$individualCustomerIdentity->Street = isset($this->order->street) ? $this->order->street : '';
+		$individualCustomerIdentity->HouseNumber = isset($this->order->housenumber) ? $this->order->housenumber : '';
+		$individualCustomerIdentity->CoAddress = isset($this->order->coAddress) ? $this->order->coAddress : '';
+		$individualCustomerIdentity->ZipCode = isset($this->order->zipCode) ? $this->order->zipCode : '';
+		$individualCustomerIdentity->Locality = isset($this->order->locality) ? $this->order->locality : '';
+		$individualCustomerIdentity->Email = isset($this->order->email) ? $this->order->email : '';
+		$individualCustomerIdentity->IpAddress = isset($this->order->ipAddress) ? $this->order->ipAddress : '';
 
 		$individualCustomerIdentity->CountryCode = $this->order->countryCode;
-		$individualCustomerIdentity->CustomerType = $isCompany ? "Company" : "Individual";
-		$individualCustomerIdentity->PublicKey = isset($this->order->publicKey) ? $this->order->publicKey : "";
+		$individualCustomerIdentity->CustomerType = $isCompany ? 'Company' : 'Individual';
+		$individualCustomerIdentity->PublicKey = isset($this->order->publicKey) ? $this->order->publicKey : '';
 
 		return $individualCustomerIdentity;
 	}

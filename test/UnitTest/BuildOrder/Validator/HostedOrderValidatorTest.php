@@ -23,10 +23,10 @@ class HostedOrderValidatorTest extends \PHPUnit\Framework\TestCase
 		$builder = WebPay::createOrder($config);
 		$order = $builder
 			->addOrderRow(TestUtil::createHostedOrderRow())
-			->setCountryCode("SE")
-			->setCurrency("SEK")
+			->setCountryCode('SE')
+			->setCurrency('SEK')
 			->usePayPageCardOnly()
-			->setReturnUrl("myurl.se");
+			->setReturnUrl('myurl.se');
 
 		$order->getPaymentForm();
 	}
@@ -41,11 +41,11 @@ class HostedOrderValidatorTest extends \PHPUnit\Framework\TestCase
 		$builder = WebPay::createOrder($config);
 		$order = $builder
 			->addOrderRow(TestUtil::createHostedOrderRow())
-			->setCountryCode("SE")
-			->setCurrency("SEK")
-			->setClientOrderNumber("")
+			->setCountryCode('SE')
+			->setCurrency('SEK')
+			->setClientOrderNumber('')
 			->usePayPageCardOnly()
-			->setReturnUrl("myurl.se");
+			->setReturnUrl('myurl.se');
 
 		$order->getPaymentForm();
 	}
@@ -66,11 +66,11 @@ class HostedOrderValidatorTest extends \PHPUnit\Framework\TestCase
 		$builder = WebPay::createOrder($config);
 		$order = $builder
 			->addOrderRow(TestUtil::createHostedOrderRow())
-			->setCountryCode("NL")
-			->setCurrency("SEK")
-			->setClientOrderNumber("55")
+			->setCountryCode('NL')
+			->setCurrency('SEK')
+			->setClientOrderNumber('55')
 			->usePaymentMethod(PaymentMethod::INVOICE)
-			->setReturnUrl("myurl.se");
+			->setReturnUrl('myurl.se');
 
 		$order->getPaymentForm();
 	}
@@ -90,11 +90,11 @@ class HostedOrderValidatorTest extends \PHPUnit\Framework\TestCase
 		$builder = WebPay::createOrder($config);
 		$order = $builder
 			->addOrderRow(TestUtil::createHostedOrderRow())
-			->setCountryCode("NL")
-			->setCurrency("SEK")
-			->setClientOrderNumber("55")
+			->setCountryCode('NL')
+			->setCurrency('SEK')
+			->setClientOrderNumber('55')
 			->usePaymentMethod(PaymentMethod::INVOICE)
-			->setReturnUrl("myurl.se");
+			->setReturnUrl('myurl.se');
 
 		$order->getPaymentForm();
 	}
@@ -109,10 +109,10 @@ class HostedOrderValidatorTest extends \PHPUnit\Framework\TestCase
 		$builder = WebPay::createOrder($config);
 		$order = $builder
 			->addOrderRow(TestUtil::createHostedOrderRow())
-			->setCountryCode("SE")
-			->setClientOrderNumber("34")
+			->setCountryCode('SE')
+			->setClientOrderNumber('34')
 			->usePayPageCardOnly()
-			->setReturnUrl("myurl.se");
+			->setReturnUrl('myurl.se');
 
 		$order->getPaymentForm();
 	}
@@ -127,11 +127,11 @@ class HostedOrderValidatorTest extends \PHPUnit\Framework\TestCase
 		$builder = WebPay::createOrder($config);
 		$order = $builder
 			->addOrderRow(TestUtil::createHostedOrderRow())
-			->setCountryCode("SE")
-			->setCurrency("SEK")
-			->setClientOrderNumber("34")
+			->setCountryCode('SE')
+			->setCurrency('SEK')
+			->setClientOrderNumber('34')
 			->usePayPage();
-		// ->setReturnUrl("myurl.se")
+		// ->setReturnUrl('myurl.se')
 
 		$order->getPaymentForm();
 	}
@@ -146,9 +146,9 @@ class HostedOrderValidatorTest extends \PHPUnit\Framework\TestCase
 		$builder = WebPay::createOrder($config);
 		$order = $builder
 			->addOrderRow(TestUtil::createHostedOrderRow())
-			->setCurrency("XXX")
-			->setClientOrderNumber("34")
-			->usePaymentMethod("SVEACARDPAY");
+			->setCurrency('XXX')
+			->setClientOrderNumber('34')
+			->usePaymentMethod('SVEACARDPAY');
 
 		$order->getPaymentForm();
 	}
@@ -163,9 +163,9 @@ class HostedOrderValidatorTest extends \PHPUnit\Framework\TestCase
 		$builder = WebPay::createOrder($config);
 		$order = $builder
 			->addOrderRow(TestUtil::createHostedOrderRow())
-			->setCurrency("SEK")
-			->setClientOrderNumber("34")
-			->usePaymentMethod("SVEACARDPAY_PF");
+			->setCurrency('SEK')
+			->setClientOrderNumber('34')
+			->usePaymentMethod('SVEACARDPAY_PF');
 
 		$order->getPaymentForm();
 	}

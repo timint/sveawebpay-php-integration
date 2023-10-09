@@ -28,7 +28,7 @@ try {
 		->setAmountIncVat(300.00)
 		->setVatPercent(25)
 		->setQuantity(1)
-		->setDescription("Credited order with new Order row");
+		->setDescription('Credited order with new Order row');
 
 	/**
 	 * If client wants to credit order with new order row, he can use code snippet above for that.

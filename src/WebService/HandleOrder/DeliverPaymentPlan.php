@@ -30,8 +30,8 @@ class DeliverPaymentPlan extends HandleOrder {
 	 */
 	public function doRequest() {
 		$requestObject = $this->prepareRequest();
-		$request = new SveaDoRequest($this->orderBuilder->conf, $this->orderBuilder->orderType, "DeliverOrderEu", $requestObject, $this->orderBuilder->logging);
-		$responseObject = new SveaResponse($request->result['requestResult'], "", null, null, isset($request->result['logs']) ? $request->result['logs'] : null);
+		$request = new SveaDoRequest($this->orderBuilder->conf, $this->orderBuilder->orderType, 'DeliverOrderEu', $requestObject, $this->orderBuilder->logging);
+		$responseObject = new SveaResponse($request->result['requestResult'], '', null, null, isset($request->result['logs']) ? $request->result['logs'] : null);
 
 		return $responseObject->response;
 	}
@@ -66,7 +66,7 @@ class DeliverPaymentPlan extends HandleOrder {
 
 	private function validateCountryCode($order, $errors) {
 		if (isset($order->countryCode) == false) {
-			$errors['missing value'] = "CountryCode is required. Use function setCountryCode().";
+			$errors['missing value'] = 'CountryCode is required. Use function setCountryCode().';
 		}
 
 		return $errors;
@@ -74,7 +74,7 @@ class DeliverPaymentPlan extends HandleOrder {
 
 	private function validateOrderId($order, $errors) {
 		if (isset($order->orderId) == false) {
-			$errors['missing value'] = "OrderId is required. Use function setOrderId() with the SveaOrderId from the createOrder response.";
+			$errors['missing value'] = 'OrderId is required. Use function setOrderId() with the SveaOrderId from the createOrder response.';
 		}
 
 		return $errors;

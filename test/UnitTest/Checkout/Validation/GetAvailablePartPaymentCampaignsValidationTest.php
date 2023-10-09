@@ -38,7 +38,7 @@ class GetAvailablePartPaymentCampaignsValidationTest extends TestCase
 	{
 		$presetValueIsCompany = \Svea\WebPay\WebPayItem::presetValue()
 			->setTypeName(\Svea\WebPay\Checkout\Model\PresetValue::IS_COMPANY)
-			->setValue("false")
+			->setValue('false')
 			->setIsReadonly(true);
 
 		$presetRequest = new CheckoutOrderBuilder(ConfigurationService::getTestConfig());

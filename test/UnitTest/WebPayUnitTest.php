@@ -60,7 +60,7 @@ class WebPayUnitTest extends \PHPUnit\Framework\TestCase
 	public function test_createOrder_usePaymentMethod_returns_PaymentMethodPayment()
 	{
 		$createOrder = WebPay::createOrder(ConfigurationService::getDefaultConfig());
-		$request = $createOrder->usePaymentMethod("mocked_paymentMethod");
+		$request = $createOrder->usePaymentMethod('mocked_paymentMethod');
 		$this->assertInstanceOf("Svea\WebPay\HostedService\Payment\PaymentMethodPayment", $request);
 	}
 
@@ -87,9 +87,9 @@ class WebPayUnitTest extends \PHPUnit\Framework\TestCase
 			//)
 			->addCustomerDetails(
 				WebPayItem::individualCustomer()
-					->setNationalIdNumber("4605092222")
+					->setNationalIdNumber('4605092222')
 			)
-			->setCountryCode("SE")
+			->setCountryCode('SE')
 			->setOrderDate(date('c'));
 
 		// prepareRequest() validates the order and throws SveaWebPayException on validation failure
@@ -111,9 +111,9 @@ class WebPayUnitTest extends \PHPUnit\Framework\TestCase
 			)
 			//->addCustomerDetails(
 			//	Svea\WebPay\WebPayItem::individualCustomer()
-			//		->setNationalIdNumber("4605092222")
+			//		->setNationalIdNumber('4605092222')
 			//)
-			->setCountryCode("SE")
+			->setCountryCode('SE')
 			->setOrderDate(date('c'));
 
 		// prepareRequest() validates the order and throws SveaWebPayException on validation failure
@@ -135,9 +135,9 @@ class WebPayUnitTest extends \PHPUnit\Framework\TestCase
 			)
 			->addCustomerDetails(
 				WebPayItem::individualCustomer()
-					->setNationalIdNumber("4605092222")
+					->setNationalIdNumber('4605092222')
 			)
-			//->setCountryCode("SE")
+			//->setCountryCode('SE')
 			->setOrderDate(date('c'));
 
 		// prepareRequest() validates the order and throws SveaWebPayException on validation failure
@@ -159,9 +159,9 @@ class WebPayUnitTest extends \PHPUnit\Framework\TestCase
 			)
 			->addCustomerDetails(
 				WebPayItem::individualCustomer()
-					->setNationalIdNumber("4605092222")
+					->setNationalIdNumber('4605092222')
 			)
-			->setCountryCode("SE")//->setOrderDate(date('c'))
+			->setCountryCode('SE')//->setOrderDate(date('c'))
 		;
 
 		// prepareRequest() validates the order and throws SveaWebPayException on validation failure
@@ -181,9 +181,9 @@ class WebPayUnitTest extends \PHPUnit\Framework\TestCase
 			)
 			->addCustomerDetails(
 				WebPayItem::individualCustomer()
-					->setNationalIdNumber("4605092222")
+					->setNationalIdNumber('4605092222')
 			)
-			->setCountryCode("SE")
+			->setCountryCode('SE')
 			->setOrderDate(date('c'));
 		// prepareRequest() validates the order and throws SveaWebPayException on validation failure
 		try {
@@ -191,7 +191,7 @@ class WebPayUnitTest extends \PHPUnit\Framework\TestCase
 			$this->assertTrue(true);
 		} catch (Exception $e) {
 			// fail on validation error
-			$this->fail("Unexpected validation exception: " . $e->getMessage());
+			$this->fail('Unexpected validation exception: ' . $e->getMessage());
 		}
 	}
 
@@ -210,11 +210,11 @@ class WebPayUnitTest extends \PHPUnit\Framework\TestCase
 			)
 			->addCustomerDetails(
 				WebPayItem::individualCustomer()
-			//missing ->setNationalIdNumber("4605092222")
-			//or if we use ->setNationalIdNumber("")
+			//missing ->setNationalIdNumber('4605092222')
+			//or if we use ->setNationalIdNumber('")
 			//or if we use ->setNationalIdNumber(null)
 			)
-			->setCountryCode("SE")
+			->setCountryCode('SE')
 			->setOrderDate(date('c'));
 
 		// prepareRequest() validates the order and throws SveaWebPayException on validation failure
@@ -236,9 +236,9 @@ class WebPayUnitTest extends \PHPUnit\Framework\TestCase
 			)
 			->addCustomerDetails(
 				WebPayItem::individualCustomer()
-					->setNationalIdNumber("17054512066")
+					->setNationalIdNumber('17054512066')
 			)
-			->setCountryCode("NO")
+			->setCountryCode('NO')
 			->setOrderDate(date('c'));
 		// prepareRequest() validates the order and throws SveaWebPayException on validation failure
 		try {
@@ -246,7 +246,7 @@ class WebPayUnitTest extends \PHPUnit\Framework\TestCase
 			$this->assertTrue(true);
 		} catch (Exception $e) {
 			// fail on validation error
-			$this->fail("Unexpected validation exception: " . $e->getMessage());
+			$this->fail('Unexpected validation exception: ' . $e->getMessage());
 		}
 	}
 
@@ -265,9 +265,9 @@ class WebPayUnitTest extends \PHPUnit\Framework\TestCase
 			)
 			->addCustomerDetails(
 				WebPayItem::individualCustomer()
-			//->setNationalIdNumber("17054512066")
+			//->setNationalIdNumber('17054512066')
 			)
-			->setCountryCode("NO")
+			->setCountryCode('NO')
 			->setOrderDate(date('c'));
 
 		// prepareRequest() validates the order and throws SveaWebPayException on validation failure
@@ -289,9 +289,9 @@ class WebPayUnitTest extends \PHPUnit\Framework\TestCase
 			)
 			->addCustomerDetails(
 				WebPayItem::individualCustomer()
-					->setNationalIdNumber("2603692503")
+					->setNationalIdNumber('2603692503')
 			)
-			->setCountryCode("DK")
+			->setCountryCode('DK')
 			->setOrderDate(date('c'));
 		// prepareRequest() validates the order and throws SveaWebPayException on validation failure
 		try {
@@ -299,7 +299,7 @@ class WebPayUnitTest extends \PHPUnit\Framework\TestCase
 			$this->assertTrue(true);
 		} catch (Exception $e) {
 			// fail on validation error
-			$this->fail("Unexpected validation exception: " . $e->getMessage());
+			$this->fail('Unexpected validation exception: ' . $e->getMessage());
 		}
 	}
 
@@ -318,9 +318,9 @@ class WebPayUnitTest extends \PHPUnit\Framework\TestCase
 			)
 			->addCustomerDetails(
 				WebPayItem::individualCustomer()
-			//->setNationalIdNumber("2603692503")
+			//->setNationalIdNumber('2603692503')
 			)
-			->setCountryCode("DK")
+			->setCountryCode('DK')
 			->setOrderDate(date('c'));
 
 		// prepareRequest() validates the order and throws SveaWebPayException on validation failure
@@ -342,9 +342,9 @@ class WebPayUnitTest extends \PHPUnit\Framework\TestCase
 			)
 			->addCustomerDetails(
 				WebPayItem::individualCustomer()
-					->setNationalIdNumber("160264-999N")
+					->setNationalIdNumber('160264-999N')
 			)
-			->setCountryCode("FI")
+			->setCountryCode('FI')
 			->setOrderDate(date('c'));
 		// prepareRequest() validates the order and throws SveaWebPayException on validation failure
 		try {
@@ -352,7 +352,7 @@ class WebPayUnitTest extends \PHPUnit\Framework\TestCase
 			$this->assertTrue(true);
 		} catch (Exception $e) {
 			// fail on validation error
-			$this->fail("Unexpected validation exception: " . $e->getMessage());
+			$this->fail('Unexpected validation exception: ' . $e->getMessage());
 		}
 	}
 
@@ -371,9 +371,9 @@ class WebPayUnitTest extends \PHPUnit\Framework\TestCase
 			)
 			->addCustomerDetails(
 				WebPayItem::individualCustomer()
-			//->setNationalIdNumber("160264-999N")
+			//->setNationalIdNumber('160264-999N')
 			)
-			->setCountryCode("FI")
+			->setCountryCode('FI')
 			->setOrderDate(date('c'));
 
 		// prepareRequest() validates the order and throws SveaWebPayException on validation failure
@@ -395,13 +395,13 @@ class WebPayUnitTest extends \PHPUnit\Framework\TestCase
 			)
 			->addCustomerDetails(
 				WebPayItem::individualCustomer()
-					->setBirthDate("19680403")
-					->setName("Theo", "Giebel")
-					->setStreetAddress("Zörgiebelweg", 21)
-					->setZipCode("13591")
-					->setLocality("BERLIN")
+					->setBirthDate('19680403')
+					->setName('Theo', 'Giebel')
+					->setStreetAddress('Zörgiebelweg', 21)
+					->setZipCode('13591')
+					->setLocality('BERLIN')
 			)
-			->setCountryCode("DE")
+			->setCountryCode('DE')
 			->setOrderDate(date('c'));
 		// prepareRequest() validates the order and throws SveaWebPayException on validation failure
 		try {
@@ -409,7 +409,7 @@ class WebPayUnitTest extends \PHPUnit\Framework\TestCase
 			$this->assertTrue(true);
 		} catch (Exception $e) {
 			// fail on validation error
-			$this->fail("Unexpected validation exception: " . $e->getMessage());
+			$this->fail('Unexpected validation exception: ' . $e->getMessage());
 			//-missing value : BirthDate is required for individual customers when countrycode is DE. Use function setBirthDate().
 			//-missing value : Name is required for individual customers when countrycode is DE. Use function setName().
 			//-missing value : StreetAddress is required for all customers when countrycode is DE. Use function setStreetAddress().
@@ -433,13 +433,13 @@ class WebPayUnitTest extends \PHPUnit\Framework\TestCase
 			)
 			->addCustomerDetails(
 				WebPayItem::individualCustomer()
-			//->setBirthDate("19680403")
-			//->setName("Theo", "Giebel")
-			//->setStreetAddress("Zörgiebelweg", 21)
-			//->setZipCode("13591")
-			//->setLocality("BERLIN")
+			//->setBirthDate('19680403')
+			//->setName('Theo', 'Giebel')
+			//->setStreetAddress('Zörgiebelweg', 21)
+			//->setZipCode('13591')
+			//->setLocality('BERLIN')
 			)
-			->setCountryCode("DE")
+			->setCountryCode('DE')
 			->setOrderDate(date('c'));
 
 		// prepareRequest() validates the order and throws SveaWebPayException on validation failure
@@ -461,14 +461,14 @@ class WebPayUnitTest extends \PHPUnit\Framework\TestCase
 			)
 			->addCustomerDetails(
 				WebPayItem::individualCustomer()
-					->setBirthDate("19550307")
-					->setInitials("SB")
-					->setName("Sneider", "Boasman")
-					->setStreetAddress("Gate 42", 23)
-					->setZipCode("1102 HG")
-					->setLocality("BARENDRECHT")
+					->setBirthDate('19550307')
+					->setInitials('SB')
+					->setName('Sneider', 'Boasman')
+					->setStreetAddress('Gate 42', 23)
+					->setZipCode('1102 HG')
+					->setLocality('BARENDRECHT')
 			)
-			->setCountryCode("NL")
+			->setCountryCode('NL')
 			->setOrderDate(date('c'));
 		// prepareRequest() validates the order and throws SveaWebPayException on validation failure
 		try {
@@ -482,7 +482,7 @@ class WebPayUnitTest extends \PHPUnit\Framework\TestCase
 			//-missing value : StreetAddress is required for all customers when countrycode is NL. Use function setStreetAddress().
 			//-missing value : ZipCode is required for all customers when countrycode is NL. Use function setZipCode().
 			//-missing value : Locality is required for all customers when countrycode is NL. Use function setLocality().
-			$this->fail("Unexpected validation exception: " . $e->getMessage());
+			$this->fail('Unexpected validation exception: ' . $e->getMessage());
 		}
 	}
 
@@ -501,14 +501,14 @@ class WebPayUnitTest extends \PHPUnit\Framework\TestCase
 			)
 			->addCustomerDetails(
 				WebPayItem::individualCustomer()
-			//->setBirthDate("19550307")
-			//->setInitials("SB")
-			//->setName("Sneider", "Boasman")
-			//->setStreetAddress("Gate 42", 23)
-			//->setZipCode("1102 HG")
-			//->setLocality("BARENDRECHT")
+			//->setBirthDate('19550307')
+			//->setInitials('SB')
+			//->setName('Sneider', 'Boasman')
+			//->setStreetAddress('Gate 42', 23)
+			//->setZipCode('1102 HG')
+			//->setLocality('BARENDRECHT')
 			)
-			->setCountryCode("NL")
+			->setCountryCode('NL')
 			->setOrderDate(date('c'));
 
 		// prepareRequest() validates the order and throws SveaWebPayException on validation failure
@@ -526,7 +526,7 @@ class WebPayUnitTest extends \PHPUnit\Framework\TestCase
 		$deliverOrder = WebPay::deliverOrder(ConfigurationService::getDefaultConfig());
 		$request = $deliverOrder->deliverInvoiceOrder();
 		$this->assertInstanceOf("Svea\WebPay\AdminService\DeliverOrdersRequest", $request);
-		$this->assertEquals("Invoice", $request->orderBuilder->orderType);
+		$this->assertEquals('Invoice', $request->orderBuilder->orderType);
 	}
 
 	public function test_deliverOrder_deliverInvoiceOrder_with_order_rows_goes_against_DeliverOrderEU()
@@ -543,7 +543,7 @@ class WebPayUnitTest extends \PHPUnit\Framework\TestCase
 		$deliverOrder = WebPay::deliverOrder(ConfigurationService::getDefaultConfig());
 		$request = $deliverOrder->deliverPaymentPlanOrder();
 		$this->assertInstanceOf("Svea\WebPay\WebService\HandleOrder\DeliverPaymentPlan", $request);
-		$this->assertEquals("PaymentPlan", $request->orderBuilder->orderType);
+		$this->assertEquals('PaymentPlan', $request->orderBuilder->orderType);
 	}
 
 	public function test_deliverOrder_deliverPaymentPlanOrder_with_order_rows_goes_against_DeliverOrderEU()
@@ -576,13 +576,13 @@ class WebPayUnitTest extends \PHPUnit\Framework\TestCase
 	function test_validates_all_required_methods_for_listPaymentMethods()
 	{
 		$order = WebPay::listPaymentMethods(ConfigurationService::getDefaultConfig())
-			->setCountryCode("SE");
+			->setCountryCode('SE');
 		try {
 			$order->prepareRequest();
 			$this->assertTrue(true);
 		} catch (Exception $e) {
 			// fail on validation error
-			$this->fail("Unexpected validation exception: " . $e->getMessage());
+			$this->fail('Unexpected validation exception: ' . $e->getMessage());
 		}
 	}
 
@@ -592,7 +592,7 @@ class WebPayUnitTest extends \PHPUnit\Framework\TestCase
 	 */
 	function test_validates_missing_required_method_for_listPaymentMethods_setCountryCode()
 	{
-		$order = WebPay::listPaymentMethods(ConfigurationService::getDefaultConfig())//->setCountryCode("SE")
+		$order = WebPay::listPaymentMethods(ConfigurationService::getDefaultConfig())//->setCountryCode('SE')
 		;
 		$order->prepareRequest();
 	}
@@ -624,9 +624,9 @@ class WebPayUnitTest extends \PHPUnit\Framework\TestCase
 			)
 			->addCustomerDetails(
 				WebPayItem::individualCustomer()
-					->setNationalIdNumber("4605092222")
+					->setNationalIdNumber('4605092222')
 			)
-			->setCountryCode("SE")
+			->setCountryCode('SE')
 			->setOrderDate(date('c'));
 
 		$request = $createOrder->useInvoicePayment();
@@ -637,7 +637,7 @@ class WebPayUnitTest extends \PHPUnit\Framework\TestCase
 			$this->assertTrue(true);
 		} catch (Exception $e) {
 			// fail on validation error
-			$this->fail("Unexpected validation exception: " . $e->getMessage());
+			$this->fail('Unexpected validation exception: ' . $e->getMessage());
 		}
 	}
 
@@ -652,9 +652,9 @@ class WebPayUnitTest extends \PHPUnit\Framework\TestCase
 			)
 			->addCustomerDetails(
 				WebPayItem::individualCustomer()
-					->setNationalIdNumber("4605092222")
+					->setNationalIdNumber('4605092222')
 			)
-			->setCountryCode("SE")
+			->setCountryCode('SE')
 			->setOrderDate(date('c'));
 
 		$request = $createOrder->usePaymentPlanPayment('111111');
@@ -665,7 +665,7 @@ class WebPayUnitTest extends \PHPUnit\Framework\TestCase
 			$this->assertTrue(true);
 		} catch (Exception $e) {
 			// fail on validation error
-			$this->fail("Unexpected validation exception: " . $e->getMessage());
+			$this->fail('Unexpected validation exception: ' . $e->getMessage());
 		}
 	}
 
@@ -680,19 +680,19 @@ class WebPayUnitTest extends \PHPUnit\Framework\TestCase
 			)
 			->addCustomerDetails(
 				WebPayItem::individualCustomer()
-					->setNationalIdNumber("4605092222")
+					->setNationalIdNumber('4605092222')
 			)
-			->setCountryCode("SE")
+			->setCountryCode('SE')
 			->setOrderDate(date('c'))
-			->setCurrency("SEK")
+			->setCurrency('SEK')
 			->setClientOrderNumber(date('c'));
 		// prepareRequest() validates the order and throws SveaWebPayException on validation failure
 		try {
-			$request = $createOrder->usePaymentMethod(PaymentMethod::KORTCERT)->setReturnUrl("http://myurl.se")->getPaymentForm();
+			$request = $createOrder->usePaymentMethod(PaymentMethod::KORTCERT)->setReturnUrl('http://myurl.se')->getPaymentForm();
 			$this->assertTrue(true);
 		} catch (Exception $e) {
 			// fail on validation error
-			$this->fail("Unexpected validation exception: " . $e->getMessage());
+			$this->fail('Unexpected validation exception: ' . $e->getMessage());
 		}
 	}
 
@@ -702,7 +702,7 @@ class WebPayUnitTest extends \PHPUnit\Framework\TestCase
 		$dummyorderid = 123456;
 		$deliverOrderBuilder = WebPay::deliverOrder(ConfigurationService::getDefaultConfig())
 			->setOrderId($dummyorderid)
-			->setCountryCode("SE")
+			->setCountryCode('SE')
 			->setInvoiceDistributionType(DistributionType::POST)
 			->addOrderRow(
 				WebPayItem::orderRow()
@@ -716,7 +716,7 @@ class WebPayUnitTest extends \PHPUnit\Framework\TestCase
 			$this->assertTrue(true);
 		} catch (Exception $e) {
 			// fail on validation error
-			$this->fail("Unexpected validation exception: " . $e->getMessage());
+			$this->fail('Unexpected validation exception: ' . $e->getMessage());
 		}
 	}
 
@@ -725,7 +725,7 @@ class WebPayUnitTest extends \PHPUnit\Framework\TestCase
 		$dummyorderid = 123456;
 		$deliverOrderBuilder = WebPay::deliverOrder(ConfigurationService::getDefaultConfig())
 			->setOrderId($dummyorderid)
-			->setCountryCode("SE")
+			->setCountryCode('SE')
 			->setInvoiceDistributionType(DistributionType::POST)
 			->addOrderRow(
 				WebPayItem::orderRow()
@@ -739,7 +739,7 @@ class WebPayUnitTest extends \PHPUnit\Framework\TestCase
 			$this->assertTrue(true);
 		} catch (Exception $e) {
 			// fail on validation error
-			$this->fail("Unexpected validation exception: " . $e->getMessage());
+			$this->fail('Unexpected validation exception: ' . $e->getMessage());
 		}
 	}
 
@@ -748,7 +748,7 @@ class WebPayUnitTest extends \PHPUnit\Framework\TestCase
 		$dummyorderid = 123456;
 		$deliverOrderBuilder = WebPay::deliverOrder(ConfigurationService::getDefaultConfig())
 			->setOrderId($dummyorderid)
-			->setCountryCode("SE")
+			->setCountryCode('SE')
 			->setInvoiceDistributionType(DistributionType::POST)
 			->addOrderRow(
 				WebPayItem::orderRow()
@@ -762,7 +762,7 @@ class WebPayUnitTest extends \PHPUnit\Framework\TestCase
 			$this->assertTrue(true);
 		} catch (Exception $e) {
 			// fail on validation error
-			$this->fail("Unexpected validation exception: " . $e->getMessage());
+			$this->fail('Unexpected validation exception: ' . $e->getMessage());
 		}
 	}
 }

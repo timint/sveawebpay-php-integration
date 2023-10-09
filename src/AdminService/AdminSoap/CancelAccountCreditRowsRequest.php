@@ -20,19 +20,19 @@ class CancelAccountCreditRowsRequest {
 	 */
 	function __construct($authentication, $newCancellationRows, $clientId, $orderId) {
 		$this->Authentication = new SoapVar($authentication, SOAP_ENC_OBJECT,
-			"-", "--", "Authentication", "http://schemas.datacontract.org/2004/07/DataObjects.Admin.Service");
+			'-', '--', 'Authentication', 'http://schemas.datacontract.org/2004/07/DataObjects.Admin.Service');
 		// Settings -- optional, not sent by package
 		if (count($newCancellationRows) > 0) {
 			$this->CancellationRows = new SoapVar($newCancellationRows, SOAP_ENC_OBJECT,
-				"-", "--", "NewCancellationRows", "http://schemas.datacontract.org/2004/07/DataObjects.Admin.Service.Requests");
+				'-', '--', 'NewCancellationRows', 'http://schemas.datacontract.org/2004/07/DataObjects.Admin.Service.Requests');
 		} else {
 			unset($this->NewCancellationRows);
 		}
 
 		$this->ClientId = new SoapVar($clientId, XSD_LONG,
-			"-", "--", "ClientId", "http://schemas.datacontract.org/2004/07/DataObjects.Admin.Service.Requests");
+			'-', '--', 'ClientId', 'http://schemas.datacontract.org/2004/07/DataObjects.Admin.Service.Requests');
 		$this->ClientAccountCreditId = new SoapVar($orderId, XSD_LONG,
-			"-", "--", "ClientAccountCreditId", "http://schemas.datacontract.org/2004/07/DataObjects.Admin.Service.Requests");
+			'-', '--', 'ClientAccountCreditId', 'http://schemas.datacontract.org/2004/07/DataObjects.Admin.Service.Requests');
 
 	}
 }

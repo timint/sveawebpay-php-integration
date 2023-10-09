@@ -12,13 +12,13 @@ class SveaCreateOrderInformation extends CreateOrderInformation {
 	 * @param string $CampaignCode
 	 * @param int $sendAutomaticGiroPaymentForm
 	 */
-	public function __construct($CampaignCode = "", $sendAutomaticGiroPaymentForm = 0) {
+	public function __construct($CampaignCode = '', $sendAutomaticGiroPaymentForm = 0) {
 		$this->OrderRows['OrderRow'] = [];
 
-		if ($CampaignCode != "") {
+		if ($CampaignCode != '') {
 			$this->CreatePaymentPlanDetails = [
-				"CampaignCode" => $CampaignCode,
-				"SendAutomaticGiroPaymentForm" => $sendAutomaticGiroPaymentForm
+				'CampaignCode' => $CampaignCode,
+				'SendAutomaticGiroPaymentForm' => $sendAutomaticGiroPaymentForm
 			];
 		}
 	}

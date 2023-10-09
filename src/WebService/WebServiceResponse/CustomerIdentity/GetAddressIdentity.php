@@ -28,7 +28,7 @@ class GetAddressIdentity extends CustomerIdentityResponse {
 	 * @param object $customer
 	 */
 	function __construct($customer) {
-		$this->addressSelector = isset($customer->AddressSelector) ? $customer->AddressSelector : "";
+		$this->addressSelector = isset($customer->AddressSelector) ? $customer->AddressSelector : '';
 		parent::__construct($customer);
 	}
 }

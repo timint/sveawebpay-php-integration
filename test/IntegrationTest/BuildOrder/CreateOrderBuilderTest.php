@@ -35,9 +35,9 @@ class CreateOrderBuilderIntegrationTest extends \PHPUnit\Framework\TestCase
 				->setAmountExVat(1000.00)
 				->setVatPercent(25)
 			)
-			->addCustomerDetails(TestUtil::createIndividualCustomer("SE"))
-			->setCountryCode("SE")
-			->setCurrency("SEK")
+			->addCustomerDetails(TestUtil::createIndividualCustomer('SE'))
+			->setCountryCode('SE')
+			->setCurrency('SEK')
 			->setOrderDate(date('c'));
 		$response = $order->usePaymentPlanPayment(TestUtil::getGetPaymentPlanParamsForTesting())->doRequest();
 

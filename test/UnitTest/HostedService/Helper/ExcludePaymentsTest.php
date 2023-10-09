@@ -16,7 +16,7 @@ class ExcludePaymentsTest extends \PHPUnit\Framework\TestCase
 	{
 
 		$exclude = new ExcludePayments();
-		$excludedPaymentMethods = $exclude->excludeInvoicesAndPaymentPlan("SE");
+		$excludedPaymentMethods = $exclude->excludeInvoicesAndPaymentPlan('SE');
 
 		$this->assertEquals(14, count((array)$excludedPaymentMethods));
 

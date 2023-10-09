@@ -17,24 +17,24 @@ class SwishPaymentIntegrationTest extends \PHPUnit\Framework\TestCase
 	public function testCreateOrderWithSwish()
 	{
 
-		$clientOrderNumber = "test_swish_". rand(100000,300000);
+		$clientOrderNumber = 'test_swish_'. rand(100000,300000);
 
 		$config = ConfigurationService::getDefaultConfig();
 		$form = WebPay::createOrder($config)
 			->addOrderRow(TestUtil::createOrderRow())
-			->setCountryCode("SE")
+			->setCountryCode('SE')
 			->setClientOrderNumber($clientOrderNumber)
-			->setCurrency("SEK")
-			->setPayerAlias("46701234567")
+			->setCurrency('SEK')
+			->setPayerAlias('46701234567')
 			->usePaymentMethod(PaymentMethod::SWISH)
-			->setReturnUrl("https://eeeeeeeeeeeeeeeeeeeeeeeeeeeeeee.se")
+			->setReturnUrl('https://eeeeeeeeeeeeeeeeeeeeeeeeeeeeeee.se')
 			->getPaymentForm();
 
-		$url = "https://webpaypaymentgatewaystage.svea.com/webpay/payment";
+		$url = 'https://webpaypaymentgatewaystage.svea.com/webpay/payment';
 
 
 		$fields = ['merchantid' => urlencode($form->merchantid), 'message' => urlencode($form->xmlMessageBase64), 'mac' => urlencode($form->mac)];
-		$fieldsString = "";
+		$fieldsString = '';
 		foreach ($fields as $key => $value) {
 			$fieldsString .= $key . '=' . $value . '&';
 		}
@@ -55,12 +55,12 @@ class SwishPaymentIntegrationTest extends \PHPUnit\Framework\TestCase
 		curl_close($ch);
 
 		$swishOrder = WebpayAdmin::queryOrder($config)
-			->setCountryCode("SE")
+			->setCountryCode('SE')
 			->setClientOrderNumber($clientOrderNumber)
 			->queryCardOrder()
 			->doRequest();
 
-		$this->assertEquals("SWISH", $swishOrder->paymentMethod);
-		$this->assertEquals("VALID", $swishOrder->status);
+		$this->assertEquals('SWISH', $swishOrder->paymentMethod);
+		$this->assertEquals('VALID', $swishOrder->status);
 	}
 }

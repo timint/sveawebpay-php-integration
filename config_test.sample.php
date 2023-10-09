@@ -8,9 +8,9 @@ namespace Svea\WebPay\Config;
  */
 return [
 	'integrationParams' => [
-		'integrationcompany' => "myIntegrationCompany",
-		'integrationversion' => "myIntegrationVersion",
-		'integrationplatform' => "myIntegrationPlatform"
+		'integrationcompany' => 'myIntegrationCompany',
+		'integrationversion' => 'myIntegrationVersion',
+		'integrationplatform' => 'myIntegrationPlatform'
 	],
 	'commonCredentials' => [
 		'merchantId' => '1130',

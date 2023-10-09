@@ -15,12 +15,12 @@ class SwishPaymentTest extends \PHPUnit\Framework\TestCase
 		$config = ConfigurationService::getDefaultConfig();
 		$form = WebPay::createOrder($config)
 			->addOrderRow(TestUtil::createOrderRow())
-			->setCountryCode("SE")
-			->setClientOrderNumber("33")
-			->setCurrency("SEK")
-			->setPayerAlias("46701234567")
+			->setCountryCode('SE')
+			->setClientOrderNumber('33')
+			->setCurrency('SEK')
+			->setPayerAlias('46701234567')
 			->usePaymentMethod(PaymentMethod::SWISH)
-			->setReturnUrl("http://myurl.se")
+			->setReturnUrl('http://myurl.se')
 			->getPaymentForm();
 
 		$xmlMessage = new \SimpleXMLElement($form->xmlMessage);
@@ -38,12 +38,12 @@ class SwishPaymentTest extends \PHPUnit\Framework\TestCase
 		$config = ConfigurationService::getDefaultConfig();
 		$form = WebPay::createOrder($config)
 			->addOrderRow(TestUtil::createOrderRow())
-			->setCountryCode("SE")
-			->setClientOrderNumber("33")
-			->setCurrency("SEK")
-			->setPayerAlias("4670123456a")
+			->setCountryCode('SE')
+			->setClientOrderNumber('33')
+			->setCurrency('SEK')
+			->setPayerAlias('4670123456a')
 			->usePaymentMethod(PaymentMethod::SWISH)
-			->setReturnUrl("http://myurl.se")
+			->setReturnUrl('http://myurl.se')
 			->getPaymentForm();
 	}
 
@@ -56,12 +56,12 @@ class SwishPaymentTest extends \PHPUnit\Framework\TestCase
 		$config = ConfigurationService::getDefaultConfig();
 		$form = WebPay::createOrder($config)
 			->addOrderRow(TestUtil::createOrderRow())
-			->setCountryCode("SE")
-			->setClientOrderNumber("33")
-			->setCurrency("SEK")
-			->setPayerAlias("4670123456")
+			->setCountryCode('SE')
+			->setClientOrderNumber('33')
+			->setCurrency('SEK')
+			->setPayerAlias('4670123456')
 			->usePaymentMethod(PaymentMethod::SWISH)
-			->setReturnUrl("http://myurl.se")
+			->setReturnUrl('http://myurl.se')
 			->getPaymentForm();
 	}
 
@@ -74,30 +74,30 @@ class SwishPaymentTest extends \PHPUnit\Framework\TestCase
 		$config = ConfigurationService::getDefaultConfig();
 		$form = WebPay::createOrder($config)
 			->addOrderRow(TestUtil::createOrderRow())
-			->setCountryCode("SE")
-			->setClientOrderNumber("33")
-			->setCurrency("SEK")
-			->setPayerAlias("4670123456789")
+			->setCountryCode('SE')
+			->setClientOrderNumber('33')
+			->setCurrency('SEK')
+			->setPayerAlias('4670123456789')
 			->usePaymentMethod(PaymentMethod::SWISH)
-			->setReturnUrl("http://myurl.se")
+			->setReturnUrl('http://myurl.se')
 			->getPaymentForm();
 	}
 
 	/**
 	 * @expectedException Svea\WebPay\BuildOrder\Validator\ValidationException
-	 * @expectedExceptionMessage -incorrect value : countryCode must be set to "SE" if payment method is SWISH
+	 * @expectedExceptionMessage -incorrect value : countryCode must be set to 'SE' if payment method is SWISH
 	 */
 	public function testSwishValidationWrongCountryCode()
 	{
 		$config = ConfigurationService::getDefaultConfig();
 		$form = WebPay::createOrder($config)
 			->addOrderRow(TestUtil::createOrderRow())
-			->setCountryCode("NO")
-			->setClientOrderNumber("33")
-			->setCurrency("SEK")
-			->setPayerAlias("4670123456789")
+			->setCountryCode('NO')
+			->setClientOrderNumber('33')
+			->setCurrency('SEK')
+			->setPayerAlias('4670123456789')
 			->usePaymentMethod(PaymentMethod::SWISH)
-			->setReturnUrl("http://myurl.se")
+			->setReturnUrl('http://myurl.se')
 			->getPaymentForm();
 	}
 
@@ -110,11 +110,11 @@ class SwishPaymentTest extends \PHPUnit\Framework\TestCase
 		$config = ConfigurationService::getDefaultConfig();
 		$form = WebPay::createOrder($config)
 			->addOrderRow(TestUtil::createOrderRow())
-			->setCountryCode("SE")
-			->setClientOrderNumber("33")
-			->setCurrency("SEK")
+			->setCountryCode('SE')
+			->setClientOrderNumber('33')
+			->setCurrency('SEK')
 			->usePaymentMethod(PaymentMethod::SWISH)
-			->setReturnUrl("http://myurl.se")
+			->setReturnUrl('http://myurl.se')
 			->getPaymentForm();
 	}
 
@@ -127,11 +127,11 @@ class SwishPaymentTest extends \PHPUnit\Framework\TestCase
 		$config = ConfigurationService::getDefaultConfig();
 		$form = WebPay::createOrder($config)
 			->addOrderRow(TestUtil::createOrderRow())
-			->setCountryCode("SE")
-			->setClientOrderNumber("3311111111111111111111111")
-			->setCurrency("SEK")
+			->setCountryCode('SE')
+			->setClientOrderNumber('3311111111111111111111111')
+			->setCurrency('SEK')
 			->usePaymentMethod(PaymentMethod::SWISH)
-			->setReturnUrl("http://myurl.se")
+			->setReturnUrl('http://myurl.se')
 			->getPaymentForm();
 	}*/
 }

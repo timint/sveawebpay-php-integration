@@ -29,10 +29,10 @@ class EffectiveInterestRateCalculator {
 	 */
 	public function calculate($sizeOfLoan, $firstPayment, $monthlyPayment, $contactLengthInMonths, $deferralPeriodInMonths) {
 		if ($monthlyPayment < 0) {
-			throw new ValidationException("Monthly payment can not be below 0");
+			throw new ValidationException('Monthly payment can not be below 0');
 		}
 		if ($contactLengthInMonths < 1) {
-			throw new ValidationException("Contract length must be at least 1 month");
+			throw new ValidationException('Contract length must be at least 1 month');
 		}
 
 		$firstPaymentMonth = min($contactLengthInMonths, $deferralPeriodInMonths + 1);
@@ -68,7 +68,7 @@ class EffectiveInterestRateCalculator {
 		}
 
 		if (abs($lowerBound - $this->initialLowerBound) < 2 * $this->tolerance || abs($upperBound - $this->initialUpperBound) < 2 * $this->tolerance) {
-			throw new ValidationException("No solution found");
+			throw new ValidationException('No solution found');
 		}
 		return $lowerBound;
 	}

@@ -22,7 +22,7 @@ class CancelOrderRequest extends AdminServiceRequest {
 	 * @param $cancelOrderBuilder
 	 */
 	public function __construct($cancelOrderBuilder) {
-		$this->action = "CancelOrder";
+		$this->action = 'CancelOrder';
 		$this->orderBuilder = $cancelOrderBuilder;
 	}
 
@@ -57,21 +57,21 @@ class CancelOrderRequest extends AdminServiceRequest {
 
 	private function validateOrderId($errors) {
 		if (isset($this->orderBuilder->orderId) == false) {
-			$errors[] = ['missing value' => "orderId is required."];
+			$errors[] = ['missing value' => 'orderId is required.'];
 		}
 		return $errors;
 	}
 
 	private function validateOrderType($errors) {
 		if (isset($this->orderBuilder->orderType) == false) {
-			$errors[] = ['missing value' => "orderType is required."];
+			$errors[] = ['missing value' => 'orderType is required.'];
 		}
 		return $errors;
 	}
 
 	private function validateCountryCode($errors) {
 		if (isset($this->orderBuilder->countryCode) == false) {
-			$errors[] = ['missing value' => "countryCode is required."];
+			$errors[] = ['missing value' => 'countryCode is required.'];
 		}
 		return $errors;
 	}

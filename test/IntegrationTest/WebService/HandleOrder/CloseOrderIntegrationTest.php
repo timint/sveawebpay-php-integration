@@ -23,12 +23,12 @@ class CloseOrderIntegrationTest extends \PHPUnit\Framework\TestCase
 		$request = WebPay::createOrder($config)
 			->addOrderRow(TestUtil::createOrderRow())
 			->addCustomerDetails(WebPayItem::individualCustomer()->setNationalIdNumber(194605092222))
-			->setCountryCode("SE")
-			->setCustomerReference("33")
-			->setOrderDate("2012-12-12")
-			->setCurrency("SEK")
+			->setCountryCode('SE')
+			->setCustomerReference('33')
+			->setOrderDate('2012-12-12')
+			->setCurrency('SEK')
 			->useInvoicePayment()// returnerar InvoiceOrder object
-			//->setPasswordBasedAuthorization("sverigetest", "sverigetest", 79021)
+			//->setPasswordBasedAuthorization('sverigetest', 'sverigetest', 79021)
 			->doRequest();
 
 		return $request->sveaOrderId;
@@ -41,7 +41,7 @@ class CloseOrderIntegrationTest extends \PHPUnit\Framework\TestCase
 		$orderBuilder = WebPay::closeOrder($config);
 		$request = $orderBuilder
 			->setOrderId($orderId)
-			->setCountryCode("SE")
+			->setCountryCode('SE')
 			->closeInvoiceOrder()
 			->doRequest();
 
@@ -59,7 +59,7 @@ class CloseOrderIntegrationTest extends \PHPUnit\Framework\TestCase
 		$orderBuilder = WebPay::closeOrder($config);
 		$request = $orderBuilder
 //				->setOrderId($orderId)
-			->setCountryCode("SE")
+			->setCountryCode('SE')
 			->closeInvoiceOrder()
 			->doRequest();
 	}

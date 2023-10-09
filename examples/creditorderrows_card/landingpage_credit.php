@@ -15,7 +15,7 @@ ini_set('display_errors', 'On');
 // get config object
 $myConfig = \Svea\WebPay\Config\ConfigurationService::getTestConfig();
 
-$countryCode = "SE"; // should match request countryCode
+$countryCode = 'SE'; // should match request countryCode
 
 // the raw request response is posted to the returnurl (this page) from Svea.
 $rawResponse = $_POST;
@@ -25,7 +25,7 @@ $myResponse = new SveaResponse( $rawResponse, $countryCode, $myConfig );
 
 // abort if request failed
 if( $myResponse->getResponse()->accepted == 0 ) {
-	echo "<pre>Request failed. aborting";
+	echo '<pre>Request failed. aborting';
 	print_r( $myResponse->getResponse() );
 	die;
 }
@@ -37,9 +37,9 @@ print_r( $myResponse->getResponse() );
 
 // save the subscriptionid to a file, for use in recurorder.php
 $myTransactionId = $myResponse->getResponse()->transactionId;
-file_put_contents("transactionid.txt", $myTransactionId);
+file_put_contents('transactionid.txt', $myTransactionId);
 
-$creditorderrowsUrl = "http://localhost/".getPath()."/creditorderrows.php";
+$creditorderrowsUrl = 'http://localhost/'.getPath().'/creditorderrows.php';
 
 echo "\nFollow the link to credit all rows in this order ($myTransactionId):\n";
 print_r("<a href=\"$creditorderrowsUrl\">$creditorderrowsUrl</a>");

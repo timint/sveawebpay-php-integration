@@ -162,8 +162,8 @@ class GetAddresses {
 	 */
 	public function doRequest() {
 		$preparedRequest = $this->prepareRequest();
-		$request = new SveaDoRequest($this->conf, $this->orderType, "GetAddresses", $preparedRequest, $this->logFile);
-		$response = new SveaResponse($request->result['requestResult'], "", null, null);
+		$request = new SveaDoRequest($this->conf, $this->orderType, 'GetAddresses', $preparedRequest, $this->logFile);
+		$response = new SveaResponse($request->result['requestResult'], '', null, null);
 
 		return $response->response;
 	}
@@ -202,9 +202,9 @@ class GetAddresses {
 	public function validateRequest() {
 		$errors = $this->validate($this);
 		if (count($errors) > 0) {
-			$exceptionString = "";
+			$exceptionString = '';
 			foreach ($errors as $key => $value) {
-				$exceptionString .= "-" . $key . " : " . $value . "\n";
+				$exceptionString .= '-' . $key . ' : ' . $value . "\n";
 			}
 
 			throw new ValidationException($exceptionString);
@@ -227,7 +227,7 @@ class GetAddresses {
 
 	private function validateCountryCode($getaddressesrequest, $errors) {
 		if (isset($getaddressesrequest->countryCode) == false) {
-			$errors[] = "countryCode is required. Use function setCountryCode().";
+			$errors[] = 'countryCode is required. Use function setCountryCode().';
 		}
 
 		// TODO add validation of accepted countries
@@ -236,7 +236,7 @@ class GetAddresses {
 
 	private function validateCustomerIdentifier($getaddressesrequest, $errors) {
 		if (!isset($getaddressesrequest->ssn) && !isset($getaddressesrequest->companyId)) {
-			$errors[] = "customerIdentifier is required. Use function setCustomerIdentifer().";
+			$errors[] = 'customerIdentifier is required. Use function setCustomerIdentifer().';
 		}
 
 		return $errors;
@@ -289,7 +289,7 @@ class GetAddresses {
 
 	private function validateCountryCodeConfigurationExists($getaddressesrequest, $errors) {
 		if (!isset($getaddressesrequest->orderType)) {
-			$errors[] = "missing authentication credentials. Check configuration.";
+			$errors[] = 'missing authentication credentials. Check configuration.';
 		}
 
 		return $errors;

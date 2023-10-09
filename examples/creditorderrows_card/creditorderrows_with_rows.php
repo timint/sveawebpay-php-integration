@@ -27,21 +27,21 @@ $myConfig = ConfigurationService::getTestConfig(); // add your Svea credentials 
 $firstCreditOrderRowsBuilder = WebPayAdmin::creditOrderRows( $myConfig );
 
 // To credit the order, we need its transactionid, which we received with the order request response and wrote to file.
-$myTransactionId = file_get_contents("transactionid.txt");
+$myTransactionId = file_get_contents('transactionid.txt');
 if( ! $myTransactionId ) {
-	echo "<pre>Error: transactionid.txt not found, first run cardorder_credit.php to set up the card order. aborting.";
+	echo '<pre>Error: transactionid.txt not found, first run cardorder_credit.php to set up the card order. aborting.';
 	die;
 }
 $firstCreditOrderRowsBuilder
 	->setOrderId( $myTransactionId )
-	->setCountryCode( "SE" )
+	->setCountryCode( 'SE' )
 ;
 
 $secondCreditOrderRowsBuilder = WebPayAdmin::creditOrderRows( $myConfig );
 
 $secondCreditOrderRowsBuilder
 	->setOrderId( $myTransactionId )
-	->setCountryCode( "SE" )
+	->setCountryCode( 'SE' )
 ;
 
 // To credit specific order rows, you pass the order rows numbers you wish to credit using setRowsToCredit().
@@ -53,13 +53,13 @@ $secondCreditOrderRowsBuilder
 //
 $queryOrderBuilder = WebPayAdmin::queryOrder( $myConfig )
 	->setOrderId( $myTransactionId )
-	->setCountryCode( "SE" )
+	->setCountryCode( 'SE' )
 ;
 
 // query orderrows to pass in creditOrderRows->setNumberedOrderRows()
 $queryResponse = $queryOrderBuilder->queryCardOrder()->doRequest();
 if( ! $queryResponse->accepted ) {
-	echo "<pre>Error: queryOrder failed. aborting.";
+	echo '<pre>Error: queryOrder failed. aborting.';
 	die;
 }
 
@@ -81,8 +81,8 @@ $myCreditResponse = $myCreditRequest->doRequest();
 
 
 // The response is an instance of LowerTransactionResponse
-echo "<pre>";
-print_r( "the creditCardOrderRows() response:");
+echo '<pre>';
+print_r( 'the creditCardOrderRows() response:');
 print_r( $myCreditResponse );
 
 echo "\n</pre><font color='red'><pre>\n\n

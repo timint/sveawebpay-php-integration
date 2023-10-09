@@ -34,7 +34,7 @@ class ConfirmTransaction extends HostedRequest {
 	 * @param ConfigurationProvider $config instance implementing Svea\WebPay\Config\ConfigurationProvider
 	 */
 	function __construct($config) {
-		$this->method = "confirm";
+		$this->method = 'confirm';
 		parent::__construct($config);
 	}
 
@@ -48,7 +48,7 @@ class ConfirmTransaction extends HostedRequest {
 
 	private function validateTransactionId($self, $errors) {
 		if (isset($self->transactionId) == false) {
-			$errors['missing value'] = "transactionId is required. Use function setTransactionId() with the SveaOrderId from the createOrder response.";
+			$errors['missing value'] = 'transactionId is required. Use function setTransactionId() with the SveaOrderId from the createOrder response.';
 		}
 
 		return $errors;
@@ -57,7 +57,7 @@ class ConfirmTransaction extends HostedRequest {
 	// this is optional coming through the api, as the orderbuilder deliverCardOrder sets a default capturedate
 	private function validateCaptureDate($self, $errors) {
 		if (isset($self->captureDate) == false) {
-			$errors['missing value'] = "captureDate is required. Use function setCaptureDate().";
+			$errors['missing value'] = 'captureDate is required. Use function setCaptureDate().';
 		}
 
 		return $errors;
@@ -69,11 +69,11 @@ class ConfirmTransaction extends HostedRequest {
 
 		$XMLWriter->openMemory();
 		$XMLWriter->setIndent(true);
-		$XMLWriter->startDocument("1.0", "UTF-8");
+		$XMLWriter->startDocument('1.0', 'UTF-8');
 		$XMLWriter->writeComment(Helper::getLibraryAndPlatformPropertiesAsJson($this->config));
 		$XMLWriter->startElement($this->method);
-		$XMLWriter->writeElement("transactionid", $this->transactionId);
-		$XMLWriter->writeElement("capturedate", $this->captureDate);
+		$XMLWriter->writeElement('transactionid', $this->transactionId);
+		$XMLWriter->writeElement('capturedate', $this->captureDate);
 		$XMLWriter->endElement();
 		$XMLWriter->endDocument();
 

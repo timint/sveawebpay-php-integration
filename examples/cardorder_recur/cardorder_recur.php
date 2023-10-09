@@ -23,9 +23,9 @@ $myOrder = WebPay::createOrder( $myConfig );
 
 // You then add information to the order object by using the methods in the Svea\WebPay\BuildOrder\CreateOrderBuilder class.
 // For a Card order, the following methods are required:
-$myOrder->setCountryCode("SE");						 // customer country, we recommend basing this on the customer billing address
-$myOrder->setCurrency("SEK");						   // order currency
-$myOrder->setClientOrderNumber( "order #".date('c') );  // required - use a not previously sent client side order identifier, i.e. "order #20140519-371"
+$myOrder->setCountryCode('SE');						 // customer country, we recommend basing this on the customer billing address
+$myOrder->setCurrency('SEK');						   // order currency
+$myOrder->setClientOrderNumber( 'order #'.date('c') );  // required - use a not previously sent client side order identifier, i.e. "order #20140519-371"
 
 // Add order item in a fluent fashion
 $myOrder->addOrderRow(
@@ -33,7 +33,7 @@ $myOrder->addOrderRow(
 				->setAmountExVat( 100.00 )
 				->setVatPercent( 25 )
 				->setQuantity( 1 )
-				->setDescription( "Månadsavgift" )
+				->setDescription( 'Månadsavgift' )
 );
 
 // We have now completed specifying the order, and wish to send the payment request to Svea. To do so, we first select a payment method.
@@ -45,15 +45,15 @@ $myCardOrderRequest->setSubscriptionType(\Svea\WebPay\HostedService\Payment\Host
 
 // Then set any additional required request attributes as detailed below. (See Svea\PaymentMethodPayment and Svea\HostedPayment classes for details.)
 $myCardOrderRequest
-	->setCardPageLanguage("SV")									 // ISO639 language code, i.e. "SV", "EN" etc. Defaults to English.
-	->setReturnUrl("http://localhost/".getPath()."/landingpage_recur.php"); // The return url where we receive and process the finished request response
+	->setCardPageLanguage('SV')									 // ISO639 language code, i.e. "SV", "EN" etc. Defaults to English.
+	->setReturnUrl('http://localhost/'.getPath().'/landingpage_recur.php'); // The return url where we receive and process the finished request response
 
 // Get a payment form object which we can use to send the payment request to Svea
 $myCardOrderPaymentForm = $myCardOrderRequest->getPaymentForm();
 
 // Then send the form to Svea, and receive the response on the landingpage after the customer has completed the card checkout at SveaCardPay
-echo "<pre>";
-echo "Press submit to send the inital card order request to Svea, and receive a subscription id for use in future recur order requests.";
+echo '<pre>';
+echo 'Press submit to send the inital card order request to Svea, and receive a subscription id for use in future recur order requests.';
 print_r( $myCardOrderPaymentForm->completeHtmlFormWithSubmitButton );
 
 /**

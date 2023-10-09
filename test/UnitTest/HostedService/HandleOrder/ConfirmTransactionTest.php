@@ -29,7 +29,7 @@ class ConfirmTransactionTest extends \PHPUnit\Framework\TestCase
 	function test_class_exists()
 	{
 		$this->assertInstanceOf("Svea\WebPay\HostedService\HostedAdminRequest\ConfirmTransaction", $this->confirmObject);
-		$this->assertEquals("confirm", \PHPUnit\Framework\Assert::readAttribute($this->confirmObject, 'method'));
+		$this->assertEquals('confirm', \PHPUnit\Framework\Assert::readAttribute($this->confirmObject, 'method'));
 	}
 
 	function test_prepareRequest_array_contains_mac_merchantid_message()
@@ -39,10 +39,10 @@ class ConfirmTransactionTest extends \PHPUnit\Framework\TestCase
 		$transactionId = 987654;
 		$this->confirmObject->transactionId = $transactionId;
 
-		$captureDate = "2014-03-21";
+		$captureDate = '2014-03-21';
 		$this->confirmObject->captureDate = $captureDate;
 
-		$countryCode = "SE";
+		$countryCode = 'SE';
 		$this->confirmObject->countryCode = $countryCode;
 
 		$form = $this->confirmObject->prepareRequest();
@@ -60,10 +60,10 @@ class ConfirmTransactionTest extends \PHPUnit\Framework\TestCase
 		$transactionId = 987654;
 		$this->confirmObject->transactionId = $transactionId;
 
-		$captureDate = "2014-03-21";
+		$captureDate = '2014-03-21';
 		$this->confirmObject->captureDate = $captureDate;
 
-		$countryCode = "SE";
+		$countryCode = 'SE';
 		$this->confirmObject->countryCode = $countryCode;
 
 		$form = $this->confirmObject->prepareRequest();
@@ -76,12 +76,12 @@ class ConfirmTransactionTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals($merchantid, urldecode($form['merchantid']));
 
 		// check valid mac
-		$this->assertEquals(hash("sha512", urldecode($form['message']) . $secret), urldecode($form['mac']));
+		$this->assertEquals(hash('sha512', urldecode($form['message']) . $secret), urldecode($form['mac']));
 
 		// check confirm request message contents
 		$xmlMessage = new SimpleXMLElement(base64_decode(urldecode($form['message'])));
 
-		$this->assertEquals("confirm", $xmlMessage->getName());   // root node
+		$this->assertEquals('confirm', $xmlMessage->getName());   // root node
 		$this->assertEquals((string)$transactionId, $xmlMessage->transactionid);
 		$this->assertEquals((string)$captureDate, $xmlMessage->capturedate);
 	}
@@ -92,10 +92,10 @@ class ConfirmTransactionTest extends \PHPUnit\Framework\TestCase
 	 */
 	function test_prepareRequest_missing_transactionId_throws_exception()
 	{
-		$captureDate = "2014-03-21";
+		$captureDate = '2014-03-21';
 		$this->confirmObject->captureDate = $captureDate;
 
-		$countryCode = "SE";
+		$countryCode = 'SE';
 		$this->confirmObject->countryCode = $countryCode;
 
 		$form = $this->confirmObject->prepareRequest();
@@ -110,7 +110,7 @@ class ConfirmTransactionTest extends \PHPUnit\Framework\TestCase
 		$transactionId = 987654;
 		$this->confirmObject->transactionId = $transactionId;
 
-		$countryCode = "SE";
+		$countryCode = 'SE';
 		$this->confirmObject->countryCode = $countryCode;
 
 		$form = $this->confirmObject->prepareRequest();
@@ -126,7 +126,7 @@ class ConfirmTransactionTest extends \PHPUnit\Framework\TestCase
 		$transactionId = 987654;
 		$this->confirmObject->transactionId = $transactionId;
 
-		$captureDate = "2014-03-21";
+		$captureDate = '2014-03-21';
 		$this->confirmObject->captureDate = $captureDate;
 
 		$form = $this->confirmObject->prepareRequest();

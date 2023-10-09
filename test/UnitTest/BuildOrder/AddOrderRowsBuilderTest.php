@@ -27,21 +27,21 @@ class AddOrderRowsBuilderTest extends \PHPUnit\Framework\TestCase
 
 	public function test_addOrderRowsBuilder_setOrderId()
 	{
-		$orderId = "123456";
+		$orderId = '123456';
 		$this->addOrderRowsObject->setOrderId($orderId);
 		$this->assertEquals($orderId, $this->addOrderRowsObject->orderId);
 	}
 
 	public function test_addOrderRowsBuilder_setCountryCode()
 	{
-		$country = "SE";
+		$country = 'SE';
 		$this->addOrderRowsObject->setCountryCode($country);
 		$this->assertEquals($country, $this->addOrderRowsObject->countryCode);
 	}
 
 	public function test_addOrderRowsBuilder_addInvoiceOrderRowsBuilder_returns_AddOrderRowsRequest()
 	{
-		$orderId = "123456";
+		$orderId = '123456';
 		$addOrderRowsObject = $this->addOrderRowsObject
 			->setOrderId($orderId)
 			->addOrderRow(TestUtil::createOrderRow(1.00))
@@ -52,7 +52,7 @@ class AddOrderRowsBuilderTest extends \PHPUnit\Framework\TestCase
 
 	public function test_addOrderRowsBuilder_addPaymentPlanOrderRowsBuilder_returns_AddOrderRowsRequest()
 	{
-		$orderId = "123456";
+		$orderId = '123456';
 		$addOrderRowsObject = $this->addOrderRowsObject
 			->setOrderId($orderId)
 			->addOrderRow(TestUtil::createOrderRow(1.00))
@@ -66,7 +66,7 @@ class AddOrderRowsBuilderTest extends \PHPUnit\Framework\TestCase
 	 */
 	public function test_addOrderRowsBuilder_missing_orderRows_throws_exception()
 	{
-		$orderId = "123456";
+		$orderId = '123456';
 		$addOrderRowsObject = $this->addOrderRowsObject
 			->setOrderId($orderId)
 			//->addOrderRow( \Svea\WebPay\Test\TestUtil::createOrderRow(1.00) )

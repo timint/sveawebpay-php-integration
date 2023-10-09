@@ -24,9 +24,9 @@ class PaymentMethodPayment extends HostedPayment {
 	public function calculateRequestValues() {
 		if (isset($this->paymentMethod)) {
 			if ($this->paymentMethod == PaymentMethod::INVOICE) {
-				$this->request['paymentMethod'] = "SVEAINVOICEEU_" . $this->order->countryCode;
+				$this->request['paymentMethod'] = 'SVEAINVOICEEU_' . $this->order->countryCode;
 			} elseif ($this->paymentMethod == PaymentMethod::PAYMENTPLAN) {
-				$this->request['paymentMethod'] = "PAYMENTPLAN_" . $this->order->countryCode;
+				$this->request['paymentMethod'] = 'PAYMENTPLAN_' . $this->order->countryCode;
 			} else {
 				$this->request['paymentMethod'] = $this->paymentMethod;
 			}

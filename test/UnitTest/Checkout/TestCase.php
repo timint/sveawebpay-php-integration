@@ -74,7 +74,7 @@ class TestCase extends \PHPUnit\Framework\TestCase
 			->setVatPercent($this->getRandVatPercent())// - required
 			->setQuantity($this->getRandQuantity())
 			->setDiscountPercent($this->getRandDiscountPercent())
-			->setArticleNumber("123456")
+			->setArticleNumber('123456')
 			->setName('Fork');
 
 		return $orderRow;
@@ -87,7 +87,7 @@ class TestCase extends \PHPUnit\Framework\TestCase
 	{
 		$presetValue = new PresetValue();
 		$presetValue->setTypeName(PresetValue::EMAIL_ADDRESS)
-			->setValue("email@mail.com")
+			->setValue('email@mail.com')
 			->setIsReadonly(true);
 
 		return $presetValue;

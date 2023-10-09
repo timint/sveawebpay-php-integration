@@ -15,18 +15,18 @@ class CardPaymentTest extends \PHPUnit\Framework\TestCase {
 
 	public function testSetAuthorization() {
 		$form = WebPay::createOrder(new TestConf())
-				->addCustomerDetails(WebPayItem::individualCustomer()->setNationalIdNumber(194605092222)->setIpAddress("123.123.123"))
+				->addCustomerDetails(WebPayItem::individualCustomer()->setNationalIdNumber(194605092222)->setIpAddress('123.123.123'))
 				->addOrderRow(TestUtil::createOrderRow())
-				->setCountryCode("SE")
-				->setClientOrderNumber("33")
-				->setOrderDate("2012-12-12")
-				->setCurrency("SEK")
+				->setCountryCode('SE')
+				->setClientOrderNumber('33')
+				->setOrderDate('2012-12-12')
+				->setCurrency('SEK')
 				->usePayPageCardOnly() // PayPageObject
-				->setPayPageLanguage("sv")
-				->setReturnUrl("http://myurl.se")
+				->setPayPageLanguage('sv')
+				->setReturnUrl('http://myurl.se')
 				->getPaymentForm();
 
-		$this->assertEquals("1130", $form->merchantid);
+		$this->assertEquals('1130', $form->merchantid);
 		$this->assertEquals('8a9cece566e808da63c6f07ff415ff9e127909d000d259aba24daa2fed6d9e3f8b0b62e8ad1fa91c7d7cd6fc3352deaae66cdb533123edf127ad7d1f4c77e7a3', $form->secretWord);
 	}
 
@@ -37,21 +37,21 @@ class CardPaymentTest extends \PHPUnit\Framework\TestCase {
 				->addOrderRow(TestUtil::createOrderRow())
 				->run($rowFactory->buildShippingFee())
 				->addDiscount(WebPayItem::relativeDiscount()
-					->setDiscountId("1")
+					->setDiscountId('1')
 					->setDiscountPercent(50)
-					->setUnit("st")
+					->setUnit('st')
 					->setName('Relative')
-					->setDescription("RelativeDiscount")
+					->setDescription('RelativeDiscount')
 				)
 				->addCustomerDetails(WebPayItem::companyCustomer()
-					->setNationalIdNumber("2345234")
+					->setNationalIdNumber('2345234')
 				)
-				->setCountryCode("SE")
-				->setClientOrderNumber("33")
-				->setOrderDate("2012-12-12")
-				->setCurrency("SEK")
+				->setCountryCode('SE')
+				->setClientOrderNumber('33')
+				->setOrderDate('2012-12-12')
+				->setCurrency('SEK')
 				->usePayPageCardOnly() // PayPageObject
-					->setReturnUrl("http://myurl.se")
+					->setReturnUrl('http://myurl.se')
 					->getPaymentForm();
 
 		$xmlMessage = new \SimpleXMLElement($form->xmlMessage);
@@ -72,12 +72,12 @@ class CardPaymentTest extends \PHPUnit\Framework\TestCase {
 		$rowFactory = new TestUtil();
 		$form = WebPay::createOrder($config)
 				->addOrderRow(TestUtil::createOrderRow())
-				->setCountryCode("SE")
-				->setClientOrderNumber("33")
-				->setOrderDate("2012-12-12")
-				->setCurrency("GBP")
+				->setCountryCode('SE')
+				->setClientOrderNumber('33')
+				->setOrderDate('2012-12-12')
+				->setCurrency('GBP')
 				->usePayPageCardOnly() // PayPageObject
-				->setReturnUrl("http://myurl.se")
+				->setReturnUrl('http://myurl.se')
 				->getPaymentForm();
 
 		$xmlMessage = new \SimpleXMLElement($form->xmlMessage);
@@ -92,33 +92,33 @@ class CardPaymentTest extends \PHPUnit\Framework\TestCase {
 		$config = ConfigurationService::getDefaultConfig();
 		$form = WebPay::createOrder($config)
 				->addOrderRow(WebPayItem::orderRow()
-					->setArticleNumber("1")
+					->setArticleNumber('1')
 					->setQuantity(1)
 					->setAmountExVat(240.00)
-					->setDescription("CD")
+					->setDescription('CD')
 					->setVatPercent(25)
 				)
 				->addOrderRow(WebPayItem::orderRow()
-					->setArticleNumber("1")
+					->setArticleNumber('1')
 					->setQuantity(1)
 					->setAmountExVat(188.68)
-					->setDescription("Bok")
+					->setDescription('Bok')
 					->setVatPercent(6)
 				)
 				->addDiscount(WebPayItem::fixedDiscount()
-					->setDiscountId("1")
+					->setDiscountId('1')
 					->setAmountIncVat(100.00)
-					->setUnit("st")
-					->setDescription("testBuildCardPaymentWithDiffrentProductVatAndDiscount")
-					->setName("Fixed")
+					->setUnit('st')
+					->setDescription('testBuildCardPaymentWithDiffrentProductVatAndDiscount')
+					->setName('Fixed')
 				)
-				->setCountryCode("SE")
-				->setClientOrderNumber("33")
-				->setOrderDate("2012-12-12")
-				->setCurrency("SEK")
+				->setCountryCode('SE')
+				->setClientOrderNumber('33')
+				->setOrderDate('2012-12-12')
+				->setCurrency('SEK')
 				->usePayPageCardOnly() // PayPageObject
-				->setReturnUrl("http://myurl.se")
-				->setPayPageLanguage("sv")
+				->setReturnUrl('http://myurl.se')
+				->setPayPageLanguage('sv')
 				->getPaymentForm();
 		$xmlMessage = new \SimpleXMLElement($form->xmlMessage);
 
@@ -130,42 +130,42 @@ class CardPaymentTest extends \PHPUnit\Framework\TestCase {
 		$config = ConfigurationService::getDefaultConfig();
 		$form = WebPay::createOrder($config)
 				->addOrderRow(WebPayItem::orderRow()
-					->setArticleNumber("1")
+					->setArticleNumber('1')
 					->setQuantity(1)
 					->setAmountIncVat(300.00)
 					//->setAmountExVat(240.00)
-					->setDescription("CD")
+					->setDescription('CD')
 					->setVatPercent(25)
 				)
 				->addOrderRow(WebPayItem::orderRow()
-					->setArticleNumber("1")
+					->setArticleNumber('1')
 					->setQuantity(1)
 					->setAmountIncVat(200.00)
-					->setDescription("Bok")
+					->setDescription('Bok')
 					->setVatPercent(6)
 				)
 				->addDiscount(WebPayItem::fixedDiscount()
-					->setDiscountId("1")
+					->setDiscountId('1')
 					->setAmountIncVat(100.00)
-					->setUnit("st")
-					->setDescription("testBuildCardPaymentWithAmountIncVatWithVatPercent")
-					->setName("Fixed")
+					->setUnit('st')
+					->setDescription('testBuildCardPaymentWithAmountIncVatWithVatPercent')
+					->setName('Fixed')
 				)
 				->addFee(WebPayItem::shippingFee()
 					->setShippingId('33')
 					->setName('shipping')
-					->setDescription("Specification")
+					->setDescription('Specification')
 					->setAmountIncVat(62.50)
-					->setUnit("st")
+					->setUnit('st')
 					->setVatPercent(25)
 					->setDiscountPercent(0)
 				)
-				->setCountryCode("SE")
-				->setClientOrderNumber("33")
-				->setOrderDate("2012-12-12")
-				->setCurrency("SEK")
+				->setCountryCode('SE')
+				->setClientOrderNumber('33')
+				->setOrderDate('2012-12-12')
+				->setCurrency('SEK')
 				->usePayPageCardOnly() // PayPageObject
-				->setReturnUrl("http://myurl.se")
+				->setReturnUrl('http://myurl.se')
 				->getPaymentForm();
 
 		$xmlMessage = new \SimpleXMLElement($form->xmlMessage);
@@ -178,34 +178,34 @@ class CardPaymentTest extends \PHPUnit\Framework\TestCase {
 		$config = ConfigurationService::getDefaultConfig();
 		$form = WebPay::createOrder($config)
 				->addOrderRow(WebPayItem::orderRow()
-					->setArticleNumber("1")
+					->setArticleNumber('1')
 					->setQuantity(1)
 					->setAmountExVat(240.00)
 					->setAmountIncVat(300.00)
-					->setDescription("CD")
+					->setDescription('CD')
 					//->setVatPercent(25)
 				)
 				->addOrderRow(WebPayItem::orderRow()
-					->setArticleNumber("1")
+					->setArticleNumber('1')
 					->setQuantity(1)
 					->setAmountExVat(188.68)
 					->setAmountIncVat(200.00)
-					->setDescription("Bok")
+					->setDescription('Bok')
 					//->setVatPercent(6)
 				)
 				->addDiscount(WebPayItem::fixedDiscount()
-					->setDiscountId("1")
+					->setDiscountId('1')
 					->setAmountIncVat(100.00)
-					->setUnit("st")
-					->setDescription("testBuildCardPaymentWithAmountExVatWithAmountIncVat")
-					->setName("Fixed")
+					->setUnit('st')
+					->setDescription('testBuildCardPaymentWithAmountExVatWithAmountIncVat')
+					->setName('Fixed')
 				)
-				->setCountryCode("SE")
-				->setClientOrderNumber("33")
-				->setOrderDate("2012-12-12")
-				->setCurrency("SEK")
+				->setCountryCode('SE')
+				->setClientOrderNumber('33')
+				->setOrderDate('2012-12-12')
+				->setCurrency('SEK')
 				->usePayPageCardOnly() // PayPageObject
-				->setReturnUrl("http://myurl.se")
+				->setReturnUrl('http://myurl.se')
 				->getPaymentForm();
 
 		$xmlMessage = new \SimpleXMLElement($form->xmlMessage);
@@ -221,17 +221,17 @@ class CardPaymentTest extends \PHPUnit\Framework\TestCase {
 		$config = ConfigurationService::getDefaultConfig();
 		$form = WebPay::createOrder($config)
 				->addOrderRow(WebPayItem::orderRow()
-						->setArticleNumber("1")
+						->setArticleNumber('1')
 						->setQuantity(1)
 						->setAmountExVat(240.00)
 						->setAmountIncVat(300.00)
-						->setDescription("CD")
+						->setDescription('CD')
 				)
-				->setClientOrderNumber("33")
-				->setCurrency(" sek")
-				->setCountryCode("SE")
+				->setClientOrderNumber('33')
+				->setCurrency(' sek')
+				->setCountryCode('SE')
 				->usePayPageCardOnly() // PayPageObject
-				->setReturnUrl("http://myurl.se")
+				->setReturnUrl('http://myurl.se')
 				->getPaymentForm();
 
 		$xmlMessage = new \SimpleXMLElement($form->xmlMessage);
@@ -243,93 +243,93 @@ class CardPaymentTest extends \PHPUnit\Framework\TestCase {
 		$config = ConfigurationService::getDefaultConfig();
 		$form = WebPay::createOrder($config)
 				->addOrderRow(WebPayItem::orderRow()
-						->setArticleNumber("1")
+						->setArticleNumber('1')
 						->setQuantity(1)
 						->setAmountExVat(240.00)
 						->setAmountIncVat(300.00)
-						->setDescription("CD")
+						->setDescription('CD')
 				)
 				->addFee(WebPayItem::shippingFee()
 						->setAmountExVat(80)
 						->setAmountIncVat(100)
 				)
-				->setClientOrderNumber("33")
-				->setCurrency("sek")
-				->setCountryCode("SE")
+				->setClientOrderNumber('33')
+				->setCurrency('sek')
+				->setCountryCode('SE')
 				->usePayPageCardOnly() // PayPageObject
-				->setReturnUrl("http://myurl.se")
+				->setReturnUrl('http://myurl.se')
 				->getPaymentForm();
 
 		$xmlMessage = new \SimpleXMLElement($form->xmlMessage);
 
-		$this->assertEquals("8000", $xmlMessage->vat);
-		$this->assertEquals("40000", $xmlMessage->amount);
+		$this->assertEquals('8000', $xmlMessage->vat);
+		$this->assertEquals('40000', $xmlMessage->amount);
 	}
 
 	public function testBuildCardPaymentWithDecimalLongPrice() {
 		$config = ConfigurationService::getDefaultConfig();
 		$form = WebPay::createOrder($config)
 				->addOrderRow(WebPayItem::orderRow()
-						->setArticleNumber("1")
+						->setArticleNumber('1')
 						->setQuantity(1)
 						->setAmountExVat(240.303030)
 						->setAmountIncVat(300.00)
-						->setDescription("CD")
+						->setDescription('CD')
 				)
-				->setClientOrderNumber("33")
-				->setCurrency("sek")
-				->setCountryCode("SE")
+				->setClientOrderNumber('33')
+				->setCurrency('sek')
+				->setCountryCode('SE')
 				->usePayPageCardOnly() // PayPageObject
-				->setReturnUrl("http://myurl.se")
+				->setReturnUrl('http://myurl.se')
 				->getPaymentForm();
 
 		$xmlMessage = new \SimpleXMLElement($form->xmlMessage);
-		$this->assertEquals("5970", $xmlMessage->vat);
-		$this->assertEquals("30000", $xmlMessage->amount);
+		$this->assertEquals('5970', $xmlMessage->vat);
+		$this->assertEquals('30000', $xmlMessage->amount);
 	}
 
 	public function testBuildCardPaymentNLCustomer() {
 		$config = ConfigurationService::getDefaultConfig();
 		$form = WebPay::createOrder($config)
 				->addOrderRow(WebPayItem::orderRow()
-						->setArticleNumber("1")
+						->setArticleNumber('1')
 						->setQuantity(1)
 						->setAmountExVat(240.303030)
 						->setAmountIncVat(300.00)
-						->setDescription("CD")
+						->setDescription('CD')
 				)
-				->setClientOrderNumber("33")
-				->setCurrency("sek")
-				->setCountryCode("NL")
+				->setClientOrderNumber('33')
+				->setCurrency('sek')
+				->setCountryCode('NL')
 				->usePayPageCardOnly() // PayPageObject
-				->setReturnUrl("http://myurl.se")
+				->setReturnUrl('http://myurl.se')
 				->getPaymentForm();
 
 		$xmlMessage = new \SimpleXMLElement($form->xmlMessage);
-		$this->assertEquals("5970", $xmlMessage->vat);
-		$this->assertEquals("30000", $xmlMessage->amount);
+		$this->assertEquals('5970', $xmlMessage->vat);
+		$this->assertEquals('30000', $xmlMessage->amount);
 	}
 
 	public function testBuildCardPaymentWithAmountAndVatCero() {
 		$config = ConfigurationService::getDefaultConfig();
 		$form = WebPay::createOrder($config)
 				->addOrderRow(WebPayItem::orderRow()
-						->setArticleNumber("1")
+						->setArticleNumber('1')
 						->setQuantity(1)
 						->setAmountExVat(0.00)
 						->setAmountIncVat(0.00)
-						->setDescription("Free shipping")
+						->setDescription('Free shipping')
 				)
-				->setClientOrderNumber("33")
-				->setCurrency("sek")
-				->setCountryCode("NL")
-				->usePaymentMethod("KORTCERT")
-				->setReturnUrl("http://myurl.se")
+				->setClientOrderNumber('33')
+				->setCurrency('sek')
+				->setCountryCode('NL')
+				->usePaymentMethod('KORTCERT')
+				->setReturnUrl('http://myurl.se')
 				->getPaymentForm();
 
 		$xmlMessage = new \SimpleXMLElement($form->xmlMessage);
-		$this->assertEquals("0", $xmlMessage->orderrows->row->vat);
-		$this->assertEquals("0", $xmlMessage->orderrows->row->amount);
+		$this->assertEquals('0', $xmlMessage->orderrows->row->vat);
+		$this->assertEquals('0', $xmlMessage->orderrows->row->amount);
 	}
 
 	/*
@@ -339,97 +339,97 @@ class CardPaymentTest extends \PHPUnit\Framework\TestCase {
 		$config = ConfigurationService::getDefaultConfig();
 		$form = WebPay::createOrder($config)
 				->addOrderRow(WebPayItem::orderRow()
-						->setArticleNumber("1")
+						->setArticleNumber('1')
 						->setQuantity(1)
 						->setAmountExVat(100.00)
 						->setAmountIncVat(125.00)
-						->setDescription("Free shipping")
+						->setDescription('Free shipping')
 				)
-				->setClientOrderNumber("33")
-				->setCurrency("sek")
-				->setCountryCode("SE")
-				->usePaymentMethod("KORTCERT")
-					->setCardPageLanguage("sv")
-					->setReturnUrl("http://myurl.se")
+				->setClientOrderNumber('33')
+				->setCurrency('sek')
+				->setCountryCode('SE')
+				->usePaymentMethod('KORTCERT')
+					->setCardPageLanguage('sv')
+					->setReturnUrl('http://myurl.se')
 					->getPaymentForm();
 
 
 		$xmlMessage = new \SimpleXMLElement($form->xmlMessage);
-		$this->assertEquals("sv", $xmlMessage->lang);
+		$this->assertEquals('sv', $xmlMessage->lang);
 	}
 	public function testCallbackUrl() {
 		$config = ConfigurationService::getDefaultConfig();
 		$form = WebPay::createOrder($config)
 				->addOrderRow(WebPayItem::orderRow()
-						->setArticleNumber("1")
+						->setArticleNumber('1')
 						->setQuantity(1)
 						->setAmountExVat(100.00)
 						->setAmountIncVat(125.00)
-						->setDescription("Free shipping")
+						->setDescription('Free shipping')
 				)
-				->setClientOrderNumber("33")
-				->setCurrency("sek")
-				->setCountryCode("SE")
-				->usePaymentMethod("KORTCERT")
-					->setCallbackUrl("http://myurl.se")
-					->setReturnUrl("http://myurl.se")
+				->setClientOrderNumber('33')
+				->setCurrency('sek')
+				->setCountryCode('SE')
+				->usePaymentMethod('KORTCERT')
+					->setCallbackUrl('http://myurl.se')
+					->setReturnUrl('http://myurl.se')
 					->getPaymentForm();
 
 		$xmlMessage = new \SimpleXMLElement($form->xmlMessage);
-		 $this->assertEquals("http://myurl.se", $xmlMessage->callbackurl);
+		 $this->assertEquals('http://myurl.se', $xmlMessage->callbackurl);
 
 	}
 	public function testNegativeOrderrow() {
 		$config = ConfigurationService::getDefaultConfig();
 		$form = WebPay::createOrder($config)
 				->addOrderRow(WebPayItem::orderRow()
-						->setArticleNumber("1")
+						->setArticleNumber('1')
 						->setQuantity(1)
 						->setAmountExVat(-100.00)
 						->setVatPercent(25)
-						->setDescription("Free shipping")
+						->setDescription('Free shipping')
 				)
-				->setClientOrderNumber("33")
-				->setCurrency("sek")
-				->setCountryCode("SE")
-				->usePaymentMethod("KORTCERT")
-					->setCallbackUrl("http://myurl.se")
-					->setReturnUrl("http://myurl.se")
+				->setClientOrderNumber('33')
+				->setCurrency('sek')
+				->setCountryCode('SE')
+				->usePaymentMethod('KORTCERT')
+					->setCallbackUrl('http://myurl.se')
+					->setReturnUrl('http://myurl.se')
 					->getPaymentForm();
 
 		$xmlMessage = new \SimpleXMLElement($form->xmlMessage);
-		 $this->assertEquals("-12500", $xmlMessage->amount);
-		 $this->assertEquals("-2500", $xmlMessage->vat);
+		 $this->assertEquals('-12500', $xmlMessage->amount);
+		 $this->assertEquals('-2500', $xmlMessage->vat);
 	}
 
 	public function test_BuildCardPayment_With_InvoiceFee_ExVat_IncVat() {
 		$config = ConfigurationService::getDefaultConfig();
 		$form = WebPay::createOrder($config)
 				->addOrderRow(WebPayItem::orderRow()
-						->setArticleNumber("1")
+						->setArticleNumber('1')
 						->setQuantity(1)
 						->setAmountExVat(240.00)
 						->setAmountIncVat(300.00)
-						->setDescription("CD")
+						->setDescription('CD')
 				)
 				->addFee(WebPayItem::invoiceFee()
 						->setAmountExVat(80)
 						->setAmountIncVat(100)
-						->setName("test_BuildCardPayment_With_InvoiceFee title")
-						->setDescription("test_BuildCardPayment_With_InvoiceFee description")
-						->setUnit("kr")
+						->setName('test_BuildCardPayment_With_InvoiceFee title')
+						->setDescription('test_BuildCardPayment_With_InvoiceFee description')
+						->setUnit('kr')
 				)
-				->setClientOrderNumber("33")
-				->setCurrency("SEK")
-				->setCountryCode("SE")
+				->setClientOrderNumber('33')
+				->setCurrency('SEK')
+				->setCountryCode('SE')
 				->usePayPageCardOnly() // PayPageObject
-					->setReturnUrl("http://myurl.se")
+					->setReturnUrl('http://myurl.se')
 					->getPaymentForm();
 
 		$xmlMessage = new \SimpleXMLElement($form->xmlMessage);
 
-		$this->assertEquals("8000", $xmlMessage->vat);
-		$this->assertEquals("40000", $xmlMessage->amount);
+		$this->assertEquals('8000', $xmlMessage->vat);
+		$this->assertEquals('40000', $xmlMessage->amount);
 	}
 
 
@@ -447,19 +447,19 @@ class CardPaymentTest extends \PHPUnit\Framework\TestCase {
 	 * test that <subscriptiontype> is included in payment request xml
 	 */
 	public function test_cardPayment_request_xml_includes_subscriptiontype() {
-		$cardPayment = new CardPayment(TestUtil::createOrder()->setClientOrderNumber("33"));
+		$cardPayment = new CardPayment(TestUtil::createOrder()->setClientOrderNumber('33'));
 		$cardPayment
 			->setSubscriptionType(CardPayment::RECURRINGCAPTURE)
-			->setCallbackUrl("http://myurl.se")
-			->setReturnUrl("http://myurl.se")
+			->setCallbackUrl('http://myurl.se')
+			->setReturnUrl('http://myurl.se')
 		;
 		$paymentForm = $cardPayment->getPaymentForm();
 
 		$subscriptiontype = "<subscriptiontype>RECURRINGCAPTURE<\/subscriptiontype>"; // remember to escape <_/_subscriptiontype>
-		//$this->assertRegExp("/[a-zA-Z0-9<>]*".$subscriptiontype."[a-zA-Z0-9<>]*/","foo<subscriptiontype>RECURRINGCAPTURE</subscriptiontype>bar");
+		//$this->assertRegExp('/[a-zA-Z0-9<>]*'.$subscriptiontype.'[a-zA-Z0-9<>]*/','foo<subscriptiontype>RECURRINGCAPTURE</subscriptiontype>bar');
 
 		////print_r($paymentForm->xmlMessage);
-		$this->assertRegExp("/[a-zA-Z0-9<>]*".$subscriptiontype."[a-zA-Z0-9<>]*/", $paymentForm->xmlMessage );
+		$this->assertRegExp('/[a-zA-Z0-9<>]*'.$subscriptiontype.'[a-zA-Z0-9<>]*/', $paymentForm->xmlMessage );
 	}
 }
 

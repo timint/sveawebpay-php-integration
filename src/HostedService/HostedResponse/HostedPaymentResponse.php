@@ -56,32 +56,32 @@ class HostedPaymentResponse extends HostedResponse {
 	 */
 	function __construct($response, $countryCode, $config) {
 		if (is_array($response)) {
-			if (array_key_exists("mac", $response)) {
-				if (array_key_exists("response", $response)) {
-					$decodedXml = base64_decode($response["response"]);
+			if (array_key_exists('mac', $response)) {
+				if (array_key_exists('response', $response)) {
+					$decodedXml = base64_decode($response['response']);
 					$secret = $config->getSecret(ConfigurationProvider::HOSTED_TYPE, $countryCode);
-					if ($this->validateMac($response["response"], $response['mac'], $secret)) {
+					if ($this->validateMac($response['response'], $response['mac'], $secret)) {
 						$this->formatXml($decodedXml);
 					} else {
 						$this->accepted = 0;
 						$this->resultcode = '0';
-						$this->errormessage = "Response failed authorization. MAC not valid.";
+						$this->errormessage = 'Response failed authorization. MAC not valid.';
 					}
 				} else {
 					$this->accepted = 0;
 					$this->resultcode = '0';
-					$this->errormessage = "Response is not recognized.";
+					$this->errormessage = 'Response is not recognized.';
 
 				}
 			} else {
 				$this->accepted = 0;
 				$this->resultcode = '0';
-				$this->errormessage = "Response is not recognized.";
+				$this->errormessage = 'Response is not recognized.';
 			}
 		} else {
 			$this->accepted = 0;
 			$this->resultcode = '0';
-			$this->errormessage = "Response is not recognized.";
+			$this->errormessage = 'Response is not recognized.';
 		}
 	}
 
@@ -101,14 +101,14 @@ class HostedPaymentResponse extends HostedResponse {
 		$this->merchantId = (string)$xmlElement->transaction->merchantid;
 		$this->clientOrderNumber = (string)$xmlElement->transaction->customerrefno;
 		$minorAmount = (int)($xmlElement->transaction->amount);
-		$this->amount = number_format(($minorAmount * 0.01), 2, ".", "");
+		$this->amount = number_format(($minorAmount * 0.01), 2, '.', '');
 		$this->currency = (string)$xmlElement->transaction->currency;
 
-		if (property_exists($xmlElement->transaction, "subscriptionid")) {
+		if (property_exists($xmlElement->transaction, 'subscriptionid')) {
 			$this->subscriptionId = (string)$xmlElement->transaction->subscriptionid;
 		}
 
-		if (property_exists($xmlElement->transaction, "cardtype")) {
+		if (property_exists($xmlElement->transaction, 'cardtype')) {
 			$this->cardType = (string)$xmlElement->transaction->cardtype;
 			$this->maskedCardNumber = (string)$xmlElement->transaction->maskedcardno;
 			$this->expiryMonth = (string)$xmlElement->transaction->expirymonth;

@@ -100,7 +100,7 @@ class CreditOrderRowsBuilder extends CheckoutAdminOrderBuilder {
 	public $countryCode;
 
 	/**
-	 * @var string  "Post" or "Email"
+	 * @var string  'Post' or 'Email'
 	 */
 	public $distributionType;
 
@@ -370,22 +370,22 @@ class CreditOrderRowsBuilder extends CheckoutAdminOrderBuilder {
 	 */
 	private function validateCreditCardOrderRows() {
 		if (!isset($this->orderId)) {
-			$exceptionString = "orderId is required for creditCardOrderRows(). Use method setOrderId().";
+			$exceptionString = 'orderId is required for creditCardOrderRows(). Use method setOrderId().';
 			throw new ValidationException($exceptionString);
 		}
 
 		if (!isset($this->countryCode)) {
-			$exceptionString = "countryCode is required for creditCardOrderRows(). Use method setCountryCode().";
+			$exceptionString = 'countryCode is required for creditCardOrderRows(). Use method setCountryCode().';
 			throw new ValidationException($exceptionString);
 		}
 
 		if ((count($this->rowsToCredit) == 0) && (count($this->creditOrderRows) == 0)) {
-			$exceptionString = "at least one of rowsToCredit or creditOrderRows must be set. Use setRowToCredit() or addCreditOrderRow().";
+			$exceptionString = 'at least one of rowsToCredit or creditOrderRows must be set. Use setRowToCredit() or addCreditOrderRow().';
 			throw new ValidationException($exceptionString);
 		}
 
 		if ((count($this->rowsToCredit) > 0) && ((count($this->rowsToCredit) != count($this->numberedOrderRows)))) {
-			$exceptionString = "every entry in rowsToCredit must have a corresponding numberedOrderRows. Use setRowsToCredit() and addNumberedOrderRow().";
+			$exceptionString = 'every entry in rowsToCredit must have a corresponding numberedOrderRows. Use setRowsToCredit() and addNumberedOrderRow().';
 			throw new ValidationException($exceptionString);
 		}
 
@@ -396,19 +396,19 @@ class CreditOrderRowsBuilder extends CheckoutAdminOrderBuilder {
 
 		foreach ($this->rowsToCredit as $index) {
 			if (!in_array($index, $numberedOrderRowNumbers)) {
-				$exceptionString = "every entry in rowsToCredit must match a numberedOrderRows. Use setRowsToCredit() and addNumberedOrderRow().";
+				$exceptionString = 'every entry in rowsToCredit must match a numberedOrderRows. Use setRowsToCredit() and addNumberedOrderRow().';
 				throw new ValidationException($exceptionString);
 			}
 		}
 
 		foreach ($this->creditOrderRows as $orderRow) {
 			if ($orderRow->amountExVat && !isset($orderRow->vatPercent) && !isset($orderRow->amountIncVat)) {
-				$exceptionString = "Order with amountExVat must have vatPercent";
+				$exceptionString = 'Order with amountExVat must have vatPercent';
 				throw new ValidationException($exceptionString);
 			}
 
 			if (!isset($orderRow->amountExVat) && !isset($orderRow->amountIncVat)) {
-				$exceptionString = "amountExVat or amountIncVat must be set";
+				$exceptionString = 'amountExVat or amountIncVat must be set';
 				throw new ValidationException($exceptionString);
 			}
 		}

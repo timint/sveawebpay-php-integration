@@ -29,7 +29,7 @@ class AnnulTransactionTest extends \PHPUnit\Framework\TestCase
 	function test_class_exists()
 	{
 		$this->assertInstanceOf("Svea\WebPay\HostedService\HostedAdminRequest\AnnulTransaction", $this->annulObject);
-		$this->assertEquals("annul", \PHPUnit\Framework\Assert::readAttribute($this->annulObject, 'method'));
+		$this->assertEquals('annul', \PHPUnit\Framework\Assert::readAttribute($this->annulObject, 'method'));
 	}
 
 	function test_prepareRequest_array_contains_mac_merchantid_message()
@@ -39,7 +39,7 @@ class AnnulTransactionTest extends \PHPUnit\Framework\TestCase
 		$transactionId = 987654;
 		$this->annulObject->transactionId = $transactionId;
 
-		$countryCode = "SE";
+		$countryCode = 'SE';
 		$this->annulObject->countryCode = $countryCode;
 
 		$form = $this->annulObject->prepareRequest();
@@ -57,7 +57,7 @@ class AnnulTransactionTest extends \PHPUnit\Framework\TestCase
 		$transactionId = 987654;
 		$this->annulObject->transactionId = $transactionId;
 
-		$countryCode = "SE";
+		$countryCode = 'SE';
 		$this->annulObject->countryCode = $countryCode;
 
 		$form = $this->annulObject->prepareRequest();
@@ -70,12 +70,12 @@ class AnnulTransactionTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals($merchantid, urldecode($form['merchantid']));
 
 		// check valid mac
-		$this->assertEquals(hash("sha512", urldecode($form['message']) . $secret), urldecode($form['mac']));
+		$this->assertEquals(hash('sha512', urldecode($form['message']) . $secret), urldecode($form['mac']));
 
 		// check annul request message contents
 		$xmlMessage = new SimpleXMLElement(base64_decode(urldecode($form['message'])));
 
-		$this->assertEquals("annul", $xmlMessage->getName());   // root node
+		$this->assertEquals('annul', $xmlMessage->getName());   // root node
 		$this->assertEquals((string)$transactionId, $xmlMessage->transactionid);
 	}
 
@@ -85,7 +85,7 @@ class AnnulTransactionTest extends \PHPUnit\Framework\TestCase
 	 */
 	function test_prepareRequest_missing_transactionId_throws_exception()
 	{
-		$countryCode = "SE";
+		$countryCode = 'SE';
 		$this->annulObject->countryCode = $countryCode;
 
 		$form = $this->annulObject->prepareRequest();

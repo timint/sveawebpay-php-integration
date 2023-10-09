@@ -27,7 +27,7 @@ class WebServiceOrderValidatorTest extends \PHPUnit\Framework\TestCase
 	 * ->setVatPercent(20)
 	 * ->setQuantity(1)
 	 * ->endOrderRow()
-	 * ->setCountryCode("SE")
+	 * ->setCountryCode('SE')
 	 * ->useInvoicePayment();
 	 * $order->prepareRequest();
 	 *
@@ -45,8 +45,8 @@ class WebServiceOrderValidatorTest extends \PHPUnit\Framework\TestCase
 		$builder = WebPay::createOrder($config);
 		$order = $builder
 			->addOrderRow(TestUtil::createHostedOrderRow())
-			->setCountryCode("SE")
-			->setOrderDate("Mon, 15 Aug 05 15:52:01 +0000")
+			->setCountryCode('SE')
+			->setOrderDate('Mon, 15 Aug 05 15:52:01 +0000')
 			->addCustomerDetails(WebPayItem::individualCustomer()->setNationalIdNumber(194605092222))
 			->addCustomerDetails(WebPayItem::companyCustomer()->setNationalIdNumber(4608142222))
 			->useInvoicePayment();
@@ -64,8 +64,8 @@ class WebServiceOrderValidatorTest extends \PHPUnit\Framework\TestCase
 		$builder = WebPay::CreateOrder($config);
 		$order = $builder
 			->addOrderRow(TestUtil::createHostedOrderRow())
-			->setCountryCode("SE")
-			->setOrderDate("Mon, 15 Aug 05 15:52:01 +0000")
+			->setCountryCode('SE')
+			->setOrderDate('Mon, 15 Aug 05 15:52:01 +0000')
 			->addCustomerDetails(WebPayItem::companyCustomer()->setNationalIdNumber(4608142222))
 			->usePaymentPlanPayment('5454');
 
@@ -82,8 +82,8 @@ class WebServiceOrderValidatorTest extends \PHPUnit\Framework\TestCase
 		$builder = WebPay::createOrder($config);
 		$order = $builder
 			->addOrderRow(TestUtil::createHostedOrderRow())
-			->setCountryCode("ZZ")
-			->setOrderDate("Mon, 15 Aug 05 15:52:01 +0000")
+			->setCountryCode('ZZ')
+			->setOrderDate('Mon, 15 Aug 05 15:52:01 +0000')
 			->addCustomerDetails(WebPayItem::individualCustomer()->setNationalIdNumber(111111))
 			->useInvoicePayment();
 
@@ -101,7 +101,7 @@ class WebServiceOrderValidatorTest extends \PHPUnit\Framework\TestCase
 		$order = $builder
 			->addOrderRow(TestUtil::createHostedOrderRow())
 			->addCustomerDetails(WebPayItem::individualCustomer()->setNationalIdNumber(111111))
-			->setOrderDate("Mon, 15 Aug 05 15:52:01 +0000")
+			->setOrderDate('Mon, 15 Aug 05 15:52:01 +0000')
 			->useInvoicePayment();
 
 		$order->prepareRequest();
@@ -116,9 +116,9 @@ class WebServiceOrderValidatorTest extends \PHPUnit\Framework\TestCase
 		$config = ConfigurationService::getDefaultConfig();
 		$builder = WebPay::createOrder($config);
 		$order = $builder
-			->setCountryCode("SE")
-			->setOrderDate("Mon, 15 Aug 05 15:52:01 +0000")
-			->addCustomerDetails(WebPayItem::individualCustomer()->setName("Tess", "Testson"))
+			->setCountryCode('SE')
+			->setOrderDate('Mon, 15 Aug 05 15:52:01 +0000')
+			->addCustomerDetails(WebPayItem::individualCustomer()->setName('Tess', 'Testson'))
 			->useInvoicePayment();
 
 		$order->prepareRequest();
@@ -133,9 +133,9 @@ class WebServiceOrderValidatorTest extends \PHPUnit\Framework\TestCase
 		$config = ConfigurationService::getDefaultConfig();
 		$builder = WebPay::createOrder($config);
 		$order = $builder
-			->setCountryCode("SE")
+			->setCountryCode('SE')
 			->setOrderDate(date('c'))
-			->addCustomerDetails(WebPayItem::individualCustomer()->setNationalIdNumber(""))
+			->addCustomerDetails(WebPayItem::individualCustomer()->setNationalIdNumber(''))
 			->useInvoicePayment();
 
 		$order->prepareRequest();
@@ -150,9 +150,9 @@ class WebServiceOrderValidatorTest extends \PHPUnit\Framework\TestCase
 		$config = ConfigurationService::getDefaultConfig();
 		$builder = WebPay::createOrder($config);
 		$order = $builder
-			->setCountryCode("SE")
-			->setOrderDate("Mon, 15 Aug 05 15:52:01 +0000")
-			->addCustomerDetails(WebPayItem::companyCustomer()->setCompanyName("Mycompany"))
+			->setCountryCode('SE')
+			->setOrderDate('Mon, 15 Aug 05 15:52:01 +0000')
+			->addCustomerDetails(WebPayItem::companyCustomer()->setCompanyName('Mycompany'))
 			->useInvoicePayment();
 
 		$order->prepareRequest();
@@ -172,8 +172,8 @@ class WebServiceOrderValidatorTest extends \PHPUnit\Framework\TestCase
 		$config = ConfigurationService::getDefaultConfig();
 		$builder = WebPay::createOrder($config);
 		$order = $builder
-			->setCountryCode("DE")
-			->setOrderDate("Mon, 15 Aug 05 15:52:01 +0000")
+			->setCountryCode('DE')
+			->setOrderDate('Mon, 15 Aug 05 15:52:01 +0000')
 			->usePaymentPlanPayment(213060);
 
 		$order->prepareRequest();
@@ -188,14 +188,14 @@ class WebServiceOrderValidatorTest extends \PHPUnit\Framework\TestCase
 		$config = ConfigurationService::getDefaultConfig();
 		$builder = WebPay::createOrder($config);
 		$order = $builder
-			->setCountryCode("DE")
-			->setOrderDate("Mon, 15 Aug 05 15:52:01 +0000")
+			->setCountryCode('DE')
+			->setOrderDate('Mon, 15 Aug 05 15:52:01 +0000')
 			->addCustomerDetails(WebPayItem::individualCustomer()
 				//->setBirthDate(1923, 12, 12)
-				->setName("Tess", "Testson")
-				->setStreetAddress("Gatan", 23)
+				->setName('Tess', 'Testson')
+				->setStreetAddress('Gatan', 23)
 				->setZipCode(9999)
-				->setLocality("Stan")
+				->setLocality('Stan')
 			)
 			->useInvoicePayment();
 		$order->prepareRequest();
@@ -217,8 +217,8 @@ class WebServiceOrderValidatorTest extends \PHPUnit\Framework\TestCase
 		$builder = WebPay::createOrder($config);
 		$order = $builder
 			->addOrderRow(TestUtil::createHostedOrderRow())
-			->setCountryCode("NL")
-			->setOrderDate("Mon, 15 Aug 05 15:52:01 +0000")
+			->setCountryCode('NL')
+			->setOrderDate('Mon, 15 Aug 05 15:52:01 +0000')
 			->useInvoicePayment();
 		//$errorArray = $order->validateOrder();
 		////print_r($errorArray);
@@ -234,15 +234,15 @@ class WebServiceOrderValidatorTest extends \PHPUnit\Framework\TestCase
 		$config = ConfigurationService::getDefaultConfig();
 		$builder = WebPay::createOrder($config);
 		$order = $builder
-			->setCountryCode("NL")
-			->setOrderDate("Mon, 15 Aug 05 15:52:01 +0000")
+			->setCountryCode('NL')
+			->setOrderDate('Mon, 15 Aug 05 15:52:01 +0000')
 			->addCustomerDetails(WebPayItem::individualCustomer()
-				//->setInitials("SB")
+				//->setInitials('SB')
 				->setBirthDate(1923, 12, 12)
-				->setName("Tess", "Testson")
-				->setStreetAddress("Gatan", 23)
+				->setName('Tess', 'Testson')
+				->setStreetAddress('Gatan', 23)
 				->setZipCode(9999)
-				->setLocality("Stan")
+				->setLocality('Stan')
 			)
 			->useInvoicePayment();
 		$order->prepareRequest();
@@ -257,8 +257,8 @@ class WebServiceOrderValidatorTest extends \PHPUnit\Framework\TestCase
 		$config = ConfigurationService::getDefaultConfig();
 		$builder = WebPay::createOrder($config);
 		$order = $builder
-			->setCountryCode("SE")
-			->setOrderDate("Mon, 15 Aug 05 15:52:01 +0000")
+			->setCountryCode('SE')
+			->setOrderDate('Mon, 15 Aug 05 15:52:01 +0000')
 			->addCustomerDetails(WebPayItem::individualCustomer()->setNationalIdNumber(46111111))
 			->useInvoicePayment();
 		$order->prepareRequest();
@@ -273,8 +273,8 @@ class WebServiceOrderValidatorTest extends \PHPUnit\Framework\TestCase
 //		$builder = \Svea\WebPay\WebPay::createOrder($config);
 //		$order = $builder
 //				->addOrderRow(\Svea\WebPay\WebPayItem::orderRow())
-//				->setCountryCode("SE")
-//				->setOrderDate("Mon, 15 Aug 05 15:52:01 +0000")
+//				->setCountryCode('SE')
+//				->setOrderDate('Mon, 15 Aug 05 15:52:01 +0000')
 //				->addCustomerDetails(\Svea\WebPay\WebPayItem::individualCustomer()->setNationalIdNumber(46111111))
 //				->useInvoicePayment();
 //		$order->prepareRequest();
@@ -292,8 +292,8 @@ class WebServiceOrderValidatorTest extends \PHPUnit\Framework\TestCase
 			->addOrderRow(WebPayItem::orderRow()
 				->setQuantity(1)
 			)
-			->setCountryCode("SE")
-			->setOrderDate("Mon, 15 Aug 05 15:52:01 +0000")
+			->setCountryCode('SE')
+			->setOrderDate('Mon, 15 Aug 05 15:52:01 +0000')
 			->addCustomerDetails(WebPayItem::individualCustomer()->setNationalIdNumber(46111111))
 			->useInvoicePayment();
 		$order->prepareRequest();
@@ -314,8 +314,8 @@ class WebServiceOrderValidatorTest extends \PHPUnit\Framework\TestCase
 				->setVatPercent(25)
 				->setQuantity(1)
 			)
-			->setCountryCode("SE")
-			->setOrderDate("Mon, 15 Aug 05 15:52:01 +0000")
+			->setCountryCode('SE')
+			->setOrderDate('Mon, 15 Aug 05 15:52:01 +0000')
 			->addCustomerDetails(WebPayItem::individualCustomer()->setNationalIdNumber(46111111))
 			->useInvoicePayment();
 		$order->prepareRequest();
@@ -332,8 +332,8 @@ class WebServiceOrderValidatorTest extends \PHPUnit\Framework\TestCase
 		$builder = WebPay::createOrder($config);
 		$order = $builder
 			->addOrderRow(TestUtil::createHostedOrderRow())
-			->setCountryCode("SE")
-			// ->setOrderDate("Mon, 15 Aug 05 15:52:01 +0000")
+			->setCountryCode('SE')
+			// ->setOrderDate('Mon, 15 Aug 05 15:52:01 +0000')
 			->addCustomerDetails(WebPayItem::individualCustomer()->setNationalIdNumber(46111111))
 			->useInvoicePayment();
 		$order->prepareRequest();
@@ -356,8 +356,8 @@ class WebServiceOrderValidatorTest extends \PHPUnit\Framework\TestCase
 				->setQuantity(1)
 				->setArticleNumber(42)
 			)
-			->setCountryCode("SE")
-			->setOrderDate("Mon, 15 Aug 05 15:52:01 +0000")
+			->setCountryCode('SE')
+			->setOrderDate('Mon, 15 Aug 05 15:52:01 +0000')
 			->addCustomerDetails(WebPayItem::individualCustomer()->setNationalIdNumber(46111111))
 			->useInvoicePayment();
 		$order->prepareRequest();
@@ -375,10 +375,10 @@ class WebServiceOrderValidatorTest extends \PHPUnit\Framework\TestCase
 			->addOrderRow(WebPayItem::orderRow()
 				->setAmountExVat(100.00)
 				->setVatPercent(20)
-				->setQuantity("1,25")	// note that i.e. "1,25" is numeric 1, so exclude strings for safety
+				->setQuantity('1,25')	// note that i.e. '1,25' is numeric 1, so exclude strings for safety
 			)
-			->setCountryCode("SE")
-			->setOrderDate("Mon, 15 Aug 05 15:52:01 +0000")
+			->setCountryCode('SE')
+			->setOrderDate('Mon, 15 Aug 05 15:52:01 +0000')
 			->addCustomerDetails(WebPayItem::individualCustomer()->setNationalIdNumber(46111111))
 			->useInvoicePayment();
 		$order->prepareRequest();
@@ -399,8 +399,8 @@ class WebServiceOrderValidatorTest extends \PHPUnit\Framework\TestCase
 				->setQuantity(1)
 				->setUnit(1)
 			)
-			->setCountryCode("SE")
-			->setOrderDate("Mon, 15 Aug 05 15:52:01 +0000")
+			->setCountryCode('SE')
+			->setOrderDate('Mon, 15 Aug 05 15:52:01 +0000')
 			->addCustomerDetails(WebPayItem::individualCustomer()->setNationalIdNumber(46111111))
 			->useInvoicePayment();
 		$order->prepareRequest();
@@ -416,12 +416,12 @@ class WebServiceOrderValidatorTest extends \PHPUnit\Framework\TestCase
 		$builder = WebPay::createOrder($config);
 		$order = $builder
 			->addOrderRow(WebPayItem::orderRow()
-				->setAmountExVat("100.00")
+				->setAmountExVat('100.00')
 				->setVatPercent(20)
 				->setQuantity(1)
 			)
-			->setCountryCode("SE")
-			->setOrderDate("Mon, 15 Aug 05 15:52:01 +0000")
+			->setCountryCode('SE')
+			->setOrderDate('Mon, 15 Aug 05 15:52:01 +0000')
 			->addCustomerDetails(WebPayItem::individualCustomer()->setNationalIdNumber(46111111))
 			->useInvoicePayment();
 		$order->prepareRequest();
@@ -437,12 +437,12 @@ class WebServiceOrderValidatorTest extends \PHPUnit\Framework\TestCase
 		$builder = WebPay::createOrder($config);
 		$order = $builder
 			->addOrderRow(WebPayItem::orderRow()
-				->setAmountIncVat("100.00")
+				->setAmountIncVat('100.00')
 				->setVatPercent(20)
 				->setQuantity(1)
 			)
-			->setCountryCode("SE")
-			->setOrderDate("Mon, 15 Aug 05 15:52:01 +0000")
+			->setCountryCode('SE')
+			->setOrderDate('Mon, 15 Aug 05 15:52:01 +0000')
 			->addCustomerDetails(WebPayItem::individualCustomer()->setNationalIdNumber(46111111))
 			->useInvoicePayment();
 		$order->prepareRequest();
@@ -463,8 +463,8 @@ class WebServiceOrderValidatorTest extends \PHPUnit\Framework\TestCase
 				->setName(1701)
 				->setQuantity(1)
 			)
-			->setCountryCode("SE")
-			->setOrderDate("Mon, 15 Aug 05 15:52:01 +0000")
+			->setCountryCode('SE')
+			->setOrderDate('Mon, 15 Aug 05 15:52:01 +0000')
 			->addCustomerDetails(WebPayItem::individualCustomer()->setNationalIdNumber(46111111))
 			->useInvoicePayment();
 		$order->prepareRequest();
@@ -485,8 +485,8 @@ class WebServiceOrderValidatorTest extends \PHPUnit\Framework\TestCase
 				->setDescription(1701)
 				->setQuantity(1)
 			)
-			->setCountryCode("SE")
-			->setOrderDate("Mon, 15 Aug 05 15:52:01 +0000")
+			->setCountryCode('SE')
+			->setOrderDate('Mon, 15 Aug 05 15:52:01 +0000')
 			->addCustomerDetails(WebPayItem::individualCustomer()->setNationalIdNumber(46111111))
 			->useInvoicePayment();
 		$order->prepareRequest();
@@ -511,8 +511,8 @@ class WebServiceOrderValidatorTest extends \PHPUnit\Framework\TestCase
 				->setVatPercent(20.33)
 				->setQuantity(1)
 			)
-			->setCountryCode("SE")
-			->setOrderDate("Mon, 15 Aug 05 15:52:01 +0000")
+			->setCountryCode('SE')
+			->setOrderDate('Mon, 15 Aug 05 15:52:01 +0000')
 			->addCustomerDetails(WebPayItem::individualCustomer()->setNationalIdNumber(46111111))
 			->useInvoicePayment();
 		$order->prepareRequest();
@@ -583,7 +583,7 @@ class WebServiceOrderValidatorTest extends \PHPUnit\Framework\TestCase
 	{
 		$config = ConfigurationService::getDefaultConfig();
 		$object = WebPay::deliverOrder($config)
-			->setCountryCode("SE")
+			->setCountryCode('SE')
 			->setInvoiceDistributionType(DistributionType::EINVOICEB2B)
 			->setOrderId(1)
 			->deliverInvoiceOrder()
@@ -592,7 +592,7 @@ class WebServiceOrderValidatorTest extends \PHPUnit\Framework\TestCase
 
 	/**
 	 * @expectedException Svea\WebPay\BuildOrder\Validator\ValidationException
-	 * @expectedExceptionMessage -incorrect value : The fifth character of PeppolId must be ":"
+	 * @expectedExceptionMessage -incorrect value : The fifth character of PeppolId must be ':'
 	 */
 	public function testFailOnIncorrectFormatPeppolIdFifthCharacter()
 	 {
@@ -603,9 +603,9 @@ class WebServiceOrderValidatorTest extends \PHPUnit\Framework\TestCase
 					WebPayItem::companyCustomer()
 						->setNationalIdNumber(194608142222)
 				)
-				->setOrderDate("2019-04-01")
-				->setPeppolId("12345678")
-				->setCountryCode("SE")
+				->setOrderDate('2019-04-01')
+				->setPeppolId('12345678')
+				->setCountryCode('SE')
 				->useInvoicePayment()
 				->prepareRequest();
 	}
@@ -622,9 +622,9 @@ class WebServiceOrderValidatorTest extends \PHPUnit\Framework\TestCase
 			->addCustomerDetails(
 				WebPayItem::companyCustomer()
 					->setNationalIdNumber(194608142222))
-			->setOrderDate("2019-04-01")
-			->setPeppolId("12a4:1sdf")
-			->setCountryCode("SE")
+			->setOrderDate('2019-04-01')
+			->setPeppolId('12a4:1sdf')
+			->setCountryCode('SE')
 			->useInvoicePayment()
 			->prepareRequest();
 	}
@@ -641,9 +641,9 @@ class WebServiceOrderValidatorTest extends \PHPUnit\Framework\TestCase
 			->addCustomerDetails(
 				WebPayItem::companyCustomer()
 					->setNationalIdNumber(194608142222))
-			->setOrderDate("2019-04-01")
-			->setPeppolId("1234:....")
-			->setCountryCode("SE")
+			->setOrderDate('2019-04-01')
+			->setPeppolId('1234:....')
+			->setCountryCode('SE')
 			->useInvoicePayment()
 			->prepareRequest();
 	}
@@ -660,9 +660,9 @@ class WebServiceOrderValidatorTest extends \PHPUnit\Framework\TestCase
 			->addCustomerDetails(
 				WebPayItem::companyCustomer()
 					->setNationalIdNumber(194608142222))
-			->setOrderDate("2019-04-01")
-			->setPeppolId("1234")
-			->setCountryCode("SE")
+			->setOrderDate('2019-04-01')
+			->setPeppolId('1234')
+			->setCountryCode('SE')
 			->useInvoicePayment()
 			->prepareRequest();
 	}
@@ -679,9 +679,9 @@ class WebServiceOrderValidatorTest extends \PHPUnit\Framework\TestCase
 			->addCustomerDetails(
 				WebPayItem::companyCustomer()
 					->setNationalIdNumber(194608142222))
-			->setOrderDate("2019-04-01")
-			->setPeppolId("1234:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")
-			->setCountryCode("SE")
+			->setOrderDate('2019-04-01')
+			->setPeppolId('1234:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa')
+			->setCountryCode('SE')
 			->useInvoicePayment()
 			->prepareRequest();
 	}
@@ -698,9 +698,9 @@ class WebServiceOrderValidatorTest extends \PHPUnit\Framework\TestCase
 			->addCustomerDetails(
 				WebPayItem::individualCustomer()
 					->setNationalIdNumber(194605092222))
-			->setOrderDate("2019-04-01")
-			->setPeppolId("1234:asdf")
-			->setCountryCode("SE")
+			->setOrderDate('2019-04-01')
+			->setPeppolId('1234:asdf')
+			->setCountryCode('SE')
 			->useInvoicePayment()
 			->prepareRequest();
 	}

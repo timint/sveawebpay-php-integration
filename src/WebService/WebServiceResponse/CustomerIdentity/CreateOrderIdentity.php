@@ -16,10 +16,10 @@ class CreateOrderIdentity extends CustomerIdentityResponse {
 	 * @param object $customer
 	 */
 	function __construct($customer) {
-		$this->email = isset($customer->Email) ? $customer->Email : "";
-		$this->ipAddress = isset($customer->IpAddress) ? $customer->IpAddress : "";
-		$this->countryCode = isset($customer->CountryCode) ? $customer->CountryCode : "";
-		$this->houseNumber = isset($customer->HouseNumber) ? $customer->HouseNumber : "";
+		$this->email = isset($customer->Email) ? $customer->Email : '';
+		$this->ipAddress = isset($customer->IpAddress) ? $customer->IpAddress : '';
+		$this->countryCode = isset($customer->CountryCode) ? $customer->CountryCode : '';
+		$this->houseNumber = isset($customer->HouseNumber) ? $customer->HouseNumber : '';
 
 		parent::__construct($customer);
 	}

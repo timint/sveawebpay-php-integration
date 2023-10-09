@@ -30,9 +30,9 @@ class UpdateOrderRequestIntegrationTest extends \PHPUnit\Framework\TestCase
 					->setVatPercent(24)
 					->setQuantity(1)
 			)
-			->addCustomerDetails(TestUtil::createIndividualCustomer("SE"))
-			->setCountryCode("SE")
-			->setOrderDate("2012-12-12")
+			->addCustomerDetails(TestUtil::createIndividualCustomer('SE'))
+			->setCountryCode('SE')
+			->setOrderDate('2012-12-12')
 			->useInvoicePayment()
 			->doRequest();
 		$this->assertEquals(1, $orderResponse->accepted);
@@ -64,9 +64,9 @@ class UpdateOrderRequestIntegrationTest extends \PHPUnit\Framework\TestCase
 					->setVatPercent(24)
 					->setQuantity(1)
 			)
-			->addCustomerDetails(TestUtil::createIndividualCustomer("SE"))
-			->setCountryCode("SE")
-			->setOrderDate("2012-12-12")
+			->addCustomerDetails(TestUtil::createIndividualCustomer('SE'))
+			->setCountryCode('SE')
+			->setOrderDate('2012-12-12')
 			->useInvoicePayment()
 			->doRequest();
 		$this->assertEquals(1, $orderResponse->accepted);

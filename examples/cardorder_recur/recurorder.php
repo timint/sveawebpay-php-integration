@@ -24,9 +24,9 @@ $myOrder = WebPay::createOrder($myConfig);
 
 // You then add information to the order object by using the methods in the Svea\CreateOrderBuilder class.
 // For a Card order, the following methods are required:
-$myOrder->setCountryCode("SE");						 // customer country, we recommend basing this on the customer billing address
-$myOrder->setCurrency("SEK");						   // order currency
-$myOrder->setClientOrderNumber("order #" . date('c'));  // required - use a not previously sent client side order identifier, i.e. "order #20140519-371"
+$myOrder->setCountryCode('SE');						 // customer country, we recommend basing this on the customer billing address
+$myOrder->setCurrency('SEK');						   // order currency
+$myOrder->setClientOrderNumber('order #' . date('c'));  // required - use a not previously sent client side order identifier, i.e. 'order #20140519-371'
 
 // Add order item in a fluent fashion
 $myOrder->addOrderRow(
@@ -34,14 +34,14 @@ $myOrder->addOrderRow(
 		->setAmountExVat(100.00)
 		->setVatPercent(25)
 		->setQuantity(1)
-		->setDescription("Monthly recurring fee")
+		->setDescription('Monthly recurring fee')
 );
 
 // We have now completed specifying the order, and wish to send the payment request to Svea. To do so, we first select a payment method.
 $myRecurOrderRequest = $myOrder->usePaymentMethod(PaymentMethod::SVEACARDPAY);
 
 // We now need to setSubscriptionId() on the request object, using the subscription id from the initial request response
-$mySubscriptionId = file_get_contents("subscription.txt");
+$mySubscriptionId = file_get_contents('subscription.txt');
 
 if ($mySubscriptionId)
 {
@@ -49,15 +49,15 @@ if ($mySubscriptionId)
 }
 else // or, abort if subscription.txt is missing
 {
-	echo "<pre>Error: subscription.txt not found, first run cardorder_recur.php to set up the card order subscription. aborting.";
+	echo '<pre>Error: subscription.txt not found, first run cardorder_recur.php to set up the card order subscription. aborting.';
 	die;
 }
 
 // Send the recur payment request to Svea
 $myRecurOrderResponse = $myRecurOrderRequest->doRecur();
 
-echo "<pre>";
-print_r("the recur order response");
+echo '<pre>';
+print_r('the recur order response');
 print_r($myRecurOrderResponse);
 
 /**

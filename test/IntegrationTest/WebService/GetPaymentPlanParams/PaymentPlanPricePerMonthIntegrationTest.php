@@ -18,7 +18,7 @@ class PaymentPlanPricePerMonthTest extends \PHPUnit\Framework\TestCase
 		$config = ConfigurationService::getDefaultConfig();
 		$addressRequest = new GetPaymentPlanParams($config);
 		$response = $addressRequest
-			->setCountryCode("SE")
+			->setCountryCode('SE')
 			->doRequest();
 
 		return $response;
@@ -50,6 +50,6 @@ class PaymentPlanPricePerMonthTest extends \PHPUnit\Framework\TestCase
 	{
 		$params = $this->getGetPaymentPlanParamsResponseForTesting();
 		$response = new PaymentPlanPricePerMonth(200, $params, true);
-		$this->assertArrayHasKey("paymentPlanType", $response->values[0]);
+		$this->assertArrayHasKey('paymentPlanType', $response->values[0]);
 	}
 }

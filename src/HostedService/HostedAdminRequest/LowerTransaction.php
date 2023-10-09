@@ -40,7 +40,7 @@ class LowerTransaction extends HostedRequest {
 	 * @param ConfigurationProvider $config instance implementing Svea\WebPay\Config\ConfigurationProvider
 	 */
 	function __construct($config) {
-		$this->method = "loweramount";
+		$this->method = 'loweramount';
 		parent::__construct($config);
 	}
 
@@ -56,7 +56,7 @@ class LowerTransaction extends HostedRequest {
 	public function doRequest() {
 		$fields = $this->prepareRequest();
 
-		$fieldsString = "";
+		$fieldsString = '';
 		foreach ($fields as $key => $value) {
 			$fieldsString .= $key . '=' . $value . '&';
 		}
@@ -90,8 +90,8 @@ class LowerTransaction extends HostedRequest {
 				$confirmTransactionResponse->accepted = 0;
 				$confirmTransactionResponse->resultcode = '100';  //INTERNAL_ERROR
 				$confirmTransactionResponse->errormessage =
-					"IntegrationPackage: LowerAmount request with flag alsoDoConfirm failed:" .
-					$lowerTransactionResponse->resultcode . " " . $lowerTransactionResponse->errormessage;
+					'IntegrationPackage: LowerAmount request with flag alsoDoConfirm failed:' .
+					$lowerTransactionResponse->resultcode . ' ' . $lowerTransactionResponse->errormessage;
 				$returnResponse = $confirmTransactionResponse;
 			} // lowerTransaction request went well, do confirmTransaction request
 			else {
@@ -99,7 +99,7 @@ class LowerTransaction extends HostedRequest {
 				$confirmTransactionRequest->countryCode = $this->countryCode;
 				$confirmTransactionRequest->transactionId = $this->transactionId;
 
-				$defaultCaptureDate = explode("T", date('c')); // [0] contains date part
+				$defaultCaptureDate = explode('T', date('c')); // [0] contains date part
 				$confirmTransactionRequest->captureDate = $defaultCaptureDate[0];
 				$confirmTransactionResponse = $confirmTransactionRequest->doRequest();
 
@@ -127,7 +127,7 @@ class LowerTransaction extends HostedRequest {
 
 	private function validateTransactionId($self, $errors) {
 		if (isset($self->transactionId) == false) {
-			$errors['missing value'] = "transactionId is required. Use function setTransactionId() with the SveaOrderId from the createOrder response.";
+			$errors['missing value'] = 'transactionId is required. Use function setTransactionId() with the SveaOrderId from the createOrder response.';
 		}
 
 		return $errors;
@@ -135,7 +135,7 @@ class LowerTransaction extends HostedRequest {
 
 	private function validateAmountToLower($self, $errors) {
 		if (isset($self->amountToLower) == false) {
-			$errors['missing value'] = "amountToLower is required. Use function setAmountToLower().";
+			$errors['missing value'] = 'amountToLower is required. Use function setAmountToLower().';
 		}
 
 		return $errors;
@@ -146,11 +146,11 @@ class LowerTransaction extends HostedRequest {
 
 		$XMLWriter->openMemory();
 		$XMLWriter->setIndent(true);
-		$XMLWriter->startDocument("1.0", "UTF-8");
+		$XMLWriter->startDocument('1.0', 'UTF-8');
 		$XMLWriter->writeComment(Helper::getLibraryAndPlatformPropertiesAsJson($this->config));
 		$XMLWriter->startElement($this->method);
-		$XMLWriter->writeElement("transactionid", $this->transactionId);
-		$XMLWriter->writeElement("amounttolower", $this->amountToLower);
+		$XMLWriter->writeElement('transactionid', $this->transactionId);
+		$XMLWriter->writeElement('amounttolower', $this->amountToLower);
 		$XMLWriter->endElement();
 		$XMLWriter->endDocument();
 

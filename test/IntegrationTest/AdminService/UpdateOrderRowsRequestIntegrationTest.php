@@ -26,10 +26,10 @@ class UpdateOrderRowsRequestIntegrationTest extends \PHPUnit\Framework\TestCase
 					->setVatPercent(24)
 					->setQuantity(1)
 			)
-			->addCustomerDetails(TestUtil::createIndividualCustomer("SE"))
-			->setCountryCode("SE")
-			->setCurrency("SEK")
-			->setOrderDate("2012-12-12")
+			->addCustomerDetails(TestUtil::createIndividualCustomer('SE'))
+			->setCountryCode('SE')
+			->setCurrency('SEK')
+			->setOrderDate('2012-12-12')
 			->useInvoicePayment()
 			->doRequest();
 		$this->assertEquals(1, $orderResponse->accepted);
@@ -52,8 +52,8 @@ class UpdateOrderRowsRequestIntegrationTest extends \PHPUnit\Framework\TestCase
 			->setCountryCode('SE')
 			->queryInvoiceOrder()->doRequest();
 		$this->assertEquals(1, $query->accepted);
-		$this->assertEquals("80.00", $query->numberedOrderRows[0]->amountExVat);
-		$this->assertEquals("24", $query->numberedOrderRows[0]->vatPercent);
+		$this->assertEquals('80.00', $query->numberedOrderRows[0]->amountExVat);
+		$this->assertEquals('24', $query->numberedOrderRows[0]->vatPercent);
 	}
 
 	public function test_update_orderRow_as_incvat_and_vatpercent()
@@ -66,10 +66,10 @@ class UpdateOrderRowsRequestIntegrationTest extends \PHPUnit\Framework\TestCase
 					->setVatPercent(24)
 					->setQuantity(1)
 			)
-			->addCustomerDetails(TestUtil::createIndividualCustomer("SE"))
-			->setCountryCode("SE")
-			->setCurrency("SEK")
-			->setOrderDate("2012-12-12")
+			->addCustomerDetails(TestUtil::createIndividualCustomer('SE'))
+			->setCountryCode('SE')
+			->setCurrency('SEK')
+			->setOrderDate('2012-12-12')
 			->useInvoicePayment()
 			->doRequest();
 		$this->assertEquals(1, $orderResponse->accepted);
@@ -92,8 +92,8 @@ class UpdateOrderRowsRequestIntegrationTest extends \PHPUnit\Framework\TestCase
 			->setCountryCode('SE')
 			->queryInvoiceOrder()->doRequest();
 		$this->assertEquals(1, $query->accepted);
-		$this->assertEquals("80.00", $query->numberedOrderRows[0]->amountIncVat);
-		$this->assertEquals("24", $query->numberedOrderRows[0]->vatPercent);
+		$this->assertEquals('80.00', $query->numberedOrderRows[0]->amountIncVat);
+		$this->assertEquals('24', $query->numberedOrderRows[0]->vatPercent);
 	}
 
 	public function test_update_orderRow_as_incvat_and_exvat()
@@ -106,10 +106,10 @@ class UpdateOrderRowsRequestIntegrationTest extends \PHPUnit\Framework\TestCase
 					->setAmountExVat(99.99)
 					->setQuantity(1)
 			)
-			->addCustomerDetails(TestUtil::createIndividualCustomer("SE"))
-			->setCountryCode("SE")
-			->setCurrency("SEK")
-			->setOrderDate("2012-12-12")
+			->addCustomerDetails(TestUtil::createIndividualCustomer('SE'))
+			->setCountryCode('SE')
+			->setCurrency('SEK')
+			->setOrderDate('2012-12-12')
 			->useInvoicePayment()
 			->doRequest();
 		$this->assertEquals(1, $orderResponse->accepted);
@@ -120,8 +120,8 @@ class UpdateOrderRowsRequestIntegrationTest extends \PHPUnit\Framework\TestCase
 			->setCountryCode('SE')
 			->queryInvoiceOrder()->doRequest();
 		$this->assertEquals(1, $query->accepted);
-		$this->assertEquals("123.99", $query->numberedOrderRows[0]->amountIncVat);	  // 123.9876 => 123.99
-		$this->assertEquals("24", $query->numberedOrderRows[0]->vatPercent);
+		$this->assertEquals('123.99', $query->numberedOrderRows[0]->amountIncVat);	  // 123.9876 => 123.99
+		$this->assertEquals('24', $query->numberedOrderRows[0]->vatPercent);
 
 		$response = WebPayAdmin::updateOrderRows($config)
 			->setCountryCode('SE')
@@ -143,8 +143,8 @@ class UpdateOrderRowsRequestIntegrationTest extends \PHPUnit\Framework\TestCase
 			->setCountryCode('SE')
 			->queryInvoiceOrder()->doRequest();
 		$this->assertEquals(1, $query2->accepted);
-		$this->assertEquals("123.99", $query2->numberedOrderRows[0]->amountIncVat);
-		$this->assertEquals("24", $query2->numberedOrderRows[0]->vatPercent);
+		$this->assertEquals('123.99', $query2->numberedOrderRows[0]->amountIncVat);
+		$this->assertEquals('24', $query2->numberedOrderRows[0]->vatPercent);
 	}
 
 	public function test_UpdateOrderRows_created_exvat_updated_incvat()
@@ -157,10 +157,10 @@ class UpdateOrderRowsRequestIntegrationTest extends \PHPUnit\Framework\TestCase
 					->setVatPercent(24)
 					->setQuantity(1)
 			)
-			->addCustomerDetails(TestUtil::createIndividualCustomer("SE"))
-			->setCountryCode("SE")
-			->setCurrency("SEK")
-			->setOrderDate("2012-12-12")
+			->addCustomerDetails(TestUtil::createIndividualCustomer('SE'))
+			->setCountryCode('SE')
+			->setCurrency('SEK')
+			->setOrderDate('2012-12-12')
 			->useInvoicePayment()
 			->doRequest();
 		$this->assertEquals(1, $orderResponse->accepted);
@@ -183,8 +183,8 @@ class UpdateOrderRowsRequestIntegrationTest extends \PHPUnit\Framework\TestCase
 			->setCountryCode('SE')
 			->queryInvoiceOrder()->doRequest();
 		$this->assertEquals(1, $query->accepted);
-		$this->assertEquals("99.99", $query->numberedOrderRows[0]->amountExVat);   // 123.99/1.24 = 99.99
-		$this->assertEquals("24", $query->numberedOrderRows[0]->vatPercent);
+		$this->assertEquals('99.99', $query->numberedOrderRows[0]->amountExVat);   // 123.99/1.24 = 99.99
+		$this->assertEquals('24', $query->numberedOrderRows[0]->vatPercent);
 	}
 
 	public function test_UpdateOrderRows_created_exvat_updated_exvat()
@@ -197,10 +197,10 @@ class UpdateOrderRowsRequestIntegrationTest extends \PHPUnit\Framework\TestCase
 					->setAmountIncVat(123.9876)
 					->setQuantity(1)
 			)
-			->addCustomerDetails(TestUtil::createIndividualCustomer("SE"))
-			->setCountryCode("SE")
-			->setCurrency("SEK")
-			->setOrderDate("2012-12-12")
+			->addCustomerDetails(TestUtil::createIndividualCustomer('SE'))
+			->setCountryCode('SE')
+			->setCurrency('SEK')
+			->setOrderDate('2012-12-12')
 			->useInvoicePayment()
 			->doRequest();
 		$this->assertEquals(1, $orderResponse->accepted);
@@ -223,8 +223,8 @@ class UpdateOrderRowsRequestIntegrationTest extends \PHPUnit\Framework\TestCase
 			->setCountryCode('SE')
 			->queryInvoiceOrder()->doRequest();
 		$this->assertEquals(1, $query->accepted);
-		$this->assertEquals("123.99", $query->numberedOrderRows[0]->amountIncVat);
-		$this->assertEquals("24", $query->numberedOrderRows[0]->vatPercent);
+		$this->assertEquals('123.99', $query->numberedOrderRows[0]->amountIncVat);
+		$this->assertEquals('24', $query->numberedOrderRows[0]->vatPercent);
 	}
 
 	public function test_UpdateOrderRows_created_incvat_updated_exvat()
@@ -237,10 +237,10 @@ class UpdateOrderRowsRequestIntegrationTest extends \PHPUnit\Framework\TestCase
 					->setVatPercent(24)
 					->setQuantity(1)
 			)
-			->addCustomerDetails(TestUtil::createIndividualCustomer("SE"))
-			->setCountryCode("SE")
-			->setCurrency("SEK")
-			->setOrderDate("2012-12-12")
+			->addCustomerDetails(TestUtil::createIndividualCustomer('SE'))
+			->setCountryCode('SE')
+			->setCurrency('SEK')
+			->setOrderDate('2012-12-12')
 			->useInvoicePayment()->doRequest();
 		$this->assertEquals(1, $orderResponse->accepted);
 
@@ -250,8 +250,8 @@ class UpdateOrderRowsRequestIntegrationTest extends \PHPUnit\Framework\TestCase
 			->setCountryCode('SE')
 			->queryInvoiceOrder()->doRequest();
 		$this->assertEquals(1, $query->accepted);
-		$this->assertEquals("123.99", $query->numberedOrderRows[0]->amountIncVat);  // sent 123.9876 inc => 123.99 queried
-		$this->assertEquals("24", $query->numberedOrderRows[0]->vatPercent);
+		$this->assertEquals('123.99', $query->numberedOrderRows[0]->amountIncVat);  // sent 123.9876 inc => 123.99 queried
+		$this->assertEquals('24', $query->numberedOrderRows[0]->vatPercent);
 
 		$response = WebPayAdmin::updateOrderRows($config)
 			->setCountryCode('SE')
@@ -271,8 +271,8 @@ class UpdateOrderRowsRequestIntegrationTest extends \PHPUnit\Framework\TestCase
 			->setCountryCode('SE')
 			->queryInvoiceOrder()->doRequest();
 		$this->assertEquals(1, $query2->accepted);
-		$this->assertEquals("123.99", $query2->numberedOrderRows[0]->amountIncVat);   // sent 99.99 ex * 1.24 => sent 123.9876 inc => 123.99 queried
-		$this->assertEquals("24", $query2->numberedOrderRows[0]->vatPercent);
+		$this->assertEquals('123.99', $query2->numberedOrderRows[0]->amountIncVat);   // sent 99.99 ex * 1.24 => sent 123.9876 inc => 123.99 queried
+		$this->assertEquals('24', $query2->numberedOrderRows[0]->vatPercent);
 		//print_r($orderResponse->sveaOrderId);
 	}
 
@@ -286,10 +286,10 @@ class UpdateOrderRowsRequestIntegrationTest extends \PHPUnit\Framework\TestCase
 					->setAmountIncVat(123.9876)
 					->setQuantity(1)
 			)
-			->addCustomerDetails(TestUtil::createIndividualCustomer("SE"))
-			->setCountryCode("SE")
-			->setCurrency("SEK")
-			->setOrderDate("2012-12-12")
+			->addCustomerDetails(TestUtil::createIndividualCustomer('SE'))
+			->setCountryCode('SE')
+			->setCurrency('SEK')
+			->setOrderDate('2012-12-12')
 			->useInvoicePayment()
 			->doRequest();
 		$this->assertEquals(1, $orderResponse->accepted);
@@ -319,10 +319,10 @@ class UpdateOrderRowsRequestIntegrationTest extends \PHPUnit\Framework\TestCase
 					->setVatPercent(24)
 					->setQuantity(1)
 			)
-			->addCustomerDetails(TestUtil::createIndividualCustomer("SE"))
-			->setCountryCode("SE")
-			->setCurrency("SEK")
-			->setOrderDate("2012-12-12")
+			->addCustomerDetails(TestUtil::createIndividualCustomer('SE'))
+			->setCountryCode('SE')
+			->setCurrency('SEK')
+			->setOrderDate('2012-12-12')
 			->useInvoicePayment()->doRequest();
 		$this->assertEquals(1, $orderResponse->accepted);
 
@@ -332,8 +332,8 @@ class UpdateOrderRowsRequestIntegrationTest extends \PHPUnit\Framework\TestCase
 			->setCountryCode('SE')
 			->queryInvoiceOrder()->doRequest();
 		$this->assertEquals(1, $query->accepted);
-		$this->assertEquals("123.99", $query->numberedOrderRows[0]->amountIncVat);  // sent 123.9876 inc => 123.99 queried
-		$this->assertEquals("24", $query->numberedOrderRows[0]->vatPercent);
+		$this->assertEquals('123.99', $query->numberedOrderRows[0]->amountIncVat);  // sent 123.9876 inc => 123.99 queried
+		$this->assertEquals('24', $query->numberedOrderRows[0]->vatPercent);
 
 		$response = WebPayAdmin::updateOrderRows($config)
 			->setCountryCode('SE')
@@ -353,8 +353,8 @@ class UpdateOrderRowsRequestIntegrationTest extends \PHPUnit\Framework\TestCase
 			->setCountryCode('SE')
 			->queryInvoiceOrder()->doRequest();
 		$this->assertEquals(1, $query2->accepted);
-		$this->assertEquals("123.99", $query2->numberedOrderRows[0]->amountIncVat);   // sent 99.99 ex * 1.24 => sent 123.9876 inc => 123.99 queried
-		$this->assertEquals("24", $query2->numberedOrderRows[0]->vatPercent);
+		$this->assertEquals('123.99', $query2->numberedOrderRows[0]->amountIncVat);   // sent 99.99 ex * 1.24 => sent 123.9876 inc => 123.99 queried
+		$this->assertEquals('24', $query2->numberedOrderRows[0]->vatPercent);
 		//print_r($orderResponse->sveaOrderId);
 	}
 

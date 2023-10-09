@@ -19,17 +19,17 @@ class CancelOrderRowsRequestIntegrationTest extends \PHPUnit\Framework\TestCase
 	{
 
 		// create order
-		$country = "SE";
+		$country = 'SE';
 
 		$order = TestUtil::createOrder(TestUtil::createIndividualCustomer($country))
 			->addOrderRow(WebPayItem::orderRow()
-				->setDescription("second row")
+				->setDescription('second row')
 				->setQuantity(1)
 				->setAmountExVat(16.00)
 				->setVatPercent(25)
 			)
 			->addOrderRow(WebPayItem::orderRow()
-				->setDescription("third row")
+				->setDescription('third row')
 				->setQuantity(1)
 				->setAmountExVat(24.00)
 				->setVatPercent(25)
@@ -57,18 +57,18 @@ class CancelOrderRowsRequestIntegrationTest extends \PHPUnit\Framework\TestCase
 	{
 
 		// create order
-		$country = "SE";
+		$country = 'SE';
 		$campaigncode = TestUtil::getGetPaymentPlanParamsForTesting();
 
 		$order = TestUtil::createOrder(TestUtil::createIndividualCustomer($country))
 			->addOrderRow(WebPayItem::orderRow()
-				->setDescription("second row")
+				->setDescription('second row')
 				->setQuantity(1)
 				->setAmountExVat(1600.00)
 				->setVatPercent(25)
 			)
 			->addOrderRow(WebPayItem::orderRow()
-				->setDescription("third row")
+				->setDescription('third row')
 				->setQuantity(1)
 				->setAmountExVat(2400.00)
 				->setVatPercent(25)
@@ -96,18 +96,18 @@ class CancelOrderRowsRequestIntegrationTest extends \PHPUnit\Framework\TestCase
 	{
 
 		// create order
-		$country = "SE";
+		$country = 'SE';
 		$campaigncode = TestUtil::getGetPaymentPlanParamsForTesting();
 
 		$order = TestUtil::createOrder(TestUtil::createIndividualCustomer($country))
 			->addOrderRow(WebPayItem::orderRow()
-				->setDescription("second row")
+				->setDescription('second row')
 				->setQuantity(1)
 				->setAmountExVat(1600.00)
 				->setVatPercent(25)
 			)
 			->addOrderRow(WebPayItem::orderRow()
-				->setDescription("third row")
+				->setDescription('third row')
 				->setQuantity(1)
 				->setAmountExVat(2400.00)
 				->setVatPercent(25)

@@ -28,6 +28,11 @@ abstract class HostedRequest {
 	protected $method;
 
 	/**
+	 * @var string $method set by the subclass, defines a file for loggin the request and response
+	 */
+	protected $logFile;
+
+	/**
 	 * @param ConfigurationProvider $config
 	 */
 	function __construct($config) {
@@ -43,30 +48,85 @@ abstract class HostedRequest {
 	public function doRequest() {
 		$fields = $this->prepareRequest();
 
-        $fieldsString = "";
+		// Proper way that we cannot use (see below)
+		//$fieldsString = http_build_query($fields, '', '&');
+
+		// Strange workaround providing non-urlencoded keys and values
+		// !! This is a reported security vulnerability allowing users inject params in the query parameters !!
+		// !! This has been reported to Svea but development team keeps ignoring it !!
+        $fieldsString = '';
         foreach ($fields as $key => $value) {
             $fieldsString .= $key . '=' . $value . '&';
         }
         rtrim($fieldsString, '&');
+
+		if ($this->config->logFile) {
+			$timestamp = time();
+			$microtime = microtime(true);
+		}
 
 		$ch = curl_init();
 		curl_setopt($ch, CURLOPT_URL, $this->config->getEndPoint(SveaConfigurationProvider::HOSTED_ADMIN_TYPE) . $this->method);
 		curl_setopt($ch, CURLOPT_POST, count($fields));
 		curl_setopt($ch, CURLOPT_POSTFIELDS, $fieldsString);
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+		curl_setopt($ch, CURLOPT_HEADER, 1);
+		curl_setopt($ch, CURLINFO_HEADER_OUT, 1);
+		curl_setopt($ch, CURLOPT_VERBOSE, 1);
 
 		//force curl to trust https
 		// !! Security vulnerability !! !!
 		//curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
 
 		//returns a html page with redirecting to bank...
-		$responseXML = curl_exec($ch);
+		$response = curl_exec($ch);
+
+		if ($this->config->logFile) {
+			$log = [
+				'request' => [
+					'timestamp' => $timestamp,
+					'headers' => curl_getinfo($ch, CURLINFO_HEADER_OUT),
+					'body' => !empty($request) ? json_encode($request, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES) : '',
+				],
+				'response' => [
+					'timestamp' => time(),
+					//'status_code' => curl_getinfo($ch, CURLINFO_HTTP_CODE),
+					'headers' => substr($response, 0, curl_getinfo($ch, CURLINFO_HEADER_SIZE)),
+					'body' => substr($response, curl_getinfo($ch, CURLINFO_HEADER_SIZE)),
+					'dataAmount' => curl_getinfo($ch, CURLINFO_REQUEST_SIZE),
+					'duration' => microtime(true) - $microtime,
+				]
+			];
+
+			file_put_contents($logFile,
+			  '##'. str_pad(' ['. date('Y-m-d H:i:s', $log['request']['timestamp']) .'] Request ', 70, '#', STR_PAD_RIGHT) . PHP_EOL . PHP_EOL .
+			  $log['request']['headers'] .
+			  $log['request']['body'] . PHP_EOL . PHP_EOL .
+			  '##'. str_pad(' ['. date('Y-m-d H:i:s', $log['response']['timestamp']) .'] Response — '. (float)$log['response']['dataAmount'] .' bytes transferred in '. (float)$log['response']['duration'] .' s ', 72, '#', STR_PAD_RIGHT) . PHP_EOL . PHP_EOL .
+			  $log['response']['headers'] .
+			  $log['response']['body'] . PHP_EOL . PHP_EOL
+			);
+		}
+
+		$responseXML = substr($response, curl_getinfo($ch, CURLINFO_HEADER_SIZE));
+
 		curl_close($ch);
 
 		// create Svea\WebPay\Response\SveaResponse to handle response
 		$responseObj = new \SimpleXMLElement($responseXML);
 
 		return $this->parseResponse($responseObj);
+	}
+
+	private function prettyPrintXml(string $xml) {
+
+		$dom = new \DOMDocument('1.0');
+		$dom->preserveWhiteSpace = false;
+		$dom->formatOutput = true;
+		$dom->loadXML($xml);
+		$xml = $dom->saveXML();
+
+		return $xml;
 	}
 
 	/**
@@ -84,7 +144,7 @@ abstract class HostedRequest {
 		$message = $this->createRequestXml();
 
 		// calculate mac
-		$mac = hash("sha512", base64_encode($message) . $secret);
+		$mac = hash('sha512', base64_encode($message) . $secret);
 
 		// encode the request elements
 		$request_fields = [
@@ -111,9 +171,9 @@ abstract class HostedRequest {
 		$errors = $this->validateCountryCode($this, $errors);
 
 		if (count($errors) > 0) {
-			$exceptionString = "";
+			$exceptionString = '';
 			foreach ($errors as $key => $value) {
-				$exceptionString .= "-" . $key . " : " . $value . "\n";
+				$exceptionString .= '-' . $key . ' : ' . $value . "\n";
 			}
 
 			throw new ValidationException($exceptionString);
@@ -139,7 +199,7 @@ abstract class HostedRequest {
 	}
 
 	/**
-	 * implemented by child classes, should return the request xml for the method (i.e. "message" in the HostedAdminRequest request wrapper)
+	 * implemented by child classes, should return the request xml for the method (i.e. 'message' in the HostedAdminRequest request wrapper)
 	 */
 	abstract protected function createRequestXml();
 

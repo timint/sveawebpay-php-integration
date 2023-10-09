@@ -17,7 +17,7 @@ class CreditAccountCreditRowsTest extends  \PHPUnit\Framework\TestCase
 		$this->builderObject = new CreditOrderRowsBuilder(ConfigurationService::getDefaultConfig());
 		$this->builderObject->orderId = 123456;
 		$this->builderObject->orderType = ConfigurationProvider::ACCOUNTCREDIT_TYPE;
-		$this->builderObject->countryCode = "SE";
+		$this->builderObject->countryCode = 'SE';
 		$this->builderObject->rowsToCredit = [TestUtil::createOrderRow(10.00)];
 		$this->builderObject->creditOrderRows = [TestUtil::createOrderRow(10.00)];
 	}

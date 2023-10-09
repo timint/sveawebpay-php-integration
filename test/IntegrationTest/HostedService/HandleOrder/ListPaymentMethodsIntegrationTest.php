@@ -22,14 +22,14 @@ class ListPaymentMethodsIntegrationTest extends \PHPUnit\Framework\TestCase
 		$this->markTestSkipped('deprecated');
 
 		$request = new ListPaymentMethods(ConfigurationService::getDefaultConfig());
-		$request->countryCode = "SE";
+		$request->countryCode = 'SE';
 		$response = $request->doRequest();
 
 		$this->assertInstanceOf("Svea\WebPay\HostedService\HostedResponse\HostedAdminResponse\ListPaymentMethodsResponse", $response);
 
-		//print_r( "test_listPaymentMethods_request_success: "); //print_r( $response );
+		//print_r( 'test_listPaymentMethods_request_success: '); //print_r( $response );
 		$this->assertEquals(1, $response->accepted);
-		$this->assertInternalType("array", $response->paymentmethods);
+		$this->assertInternalType('array', $response->paymentmethods);
 
 		// from getpaymentmethods call, tied to merchantid
 		$this->assertEquals(PaymentMethod::BANKAXESS, $response->paymentmethods[0]);

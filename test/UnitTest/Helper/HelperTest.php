@@ -22,7 +22,7 @@ class HelperTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals(2, Helper::bround(1.500000000000000000000000000000000000000000));
 		$this->assertEquals(1, Helper::bround(1.0));
 		$this->assertEquals(1, Helper::bround(1));
-		//$this->assert( 1, bround("1") );	 raise illegalArgumentException??
+		//$this->assert( 1, bround('1') );	 raise illegalArgumentException??
 
 		$this->assertEquals(4, Helper::bround(4.5));
 		$this->assertEquals(6, Helper::bround(5.5));
@@ -172,9 +172,9 @@ class HelperTest extends \PHPUnit\Framework\TestCase
 	function test_getSveaLibraryProperties()
 	{
 		$libraryPropertiesArray = Helper::getSveaLibraryProperties();
-		$this->assertTrue(array_key_exists("library_name", $libraryPropertiesArray));
-		$this->assertTrue(array_key_exists("library_version", $libraryPropertiesArray));
+		$this->assertTrue(array_key_exists('library_name', $libraryPropertiesArray));
+		$this->assertTrue(array_key_exists('library_version', $libraryPropertiesArray));
 	}
 
 	/// new implementation of splitMeanAcrossTaxRates helper method
-	//  1u. mean ex to single tax rate: 10e @20% -> 12i @25%
+	//  1u. mean ex to single tax rate: 10e @20% -> 12i @25%}

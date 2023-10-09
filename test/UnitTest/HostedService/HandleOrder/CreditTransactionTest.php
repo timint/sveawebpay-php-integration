@@ -30,7 +30,7 @@ class CreditTransactionTest extends \PHPUnit\Framework\TestCase
 	function test_class_exists()
 	{
 		$this->assertInstanceOf("Svea\WebPay\HostedService\HostedAdminRequest\CreditTransaction", $this->creditObject);
-		$this->assertEquals("credit", \PHPUnit\Framework\Assert::readAttribute($this->creditObject, 'method'));
+		$this->assertEquals('credit', \PHPUnit\Framework\Assert::readAttribute($this->creditObject, 'method'));
 	}
 
 	function test_prepareRequest_array_contains_mac_merchantid_message()
@@ -43,7 +43,7 @@ class CreditTransactionTest extends \PHPUnit\Framework\TestCase
 		$creditAmount = 100;
 		$this->creditObject->creditAmount = $creditAmount;
 
-		$countryCode = "SE";
+		$countryCode = 'SE';
 		$this->creditObject->countryCode = $countryCode;
 
 		$form = $this->creditObject->prepareRequest();
@@ -64,7 +64,7 @@ class CreditTransactionTest extends \PHPUnit\Framework\TestCase
 		$creditAmount = 100;
 		$this->creditObject->creditAmount = $creditAmount;
 
-		$countryCode = "SE";
+		$countryCode = 'SE';
 		$this->creditObject->countryCode = $countryCode;
 
 		$form = $this->creditObject->prepareRequest();
@@ -77,12 +77,12 @@ class CreditTransactionTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals($merchantid, urldecode($form['merchantid']));
 
 		// check valid mac
-		$this->assertEquals(hash("sha512", urldecode($form['message']) . $secret), urldecode($form['mac']));
+		$this->assertEquals(hash('sha512', urldecode($form['message']) . $secret), urldecode($form['mac']));
 
 		// check credit request message contents
 		$xmlMessage = new SimpleXMLElement(base64_decode(urldecode($form['message'])));
 
-		$this->assertEquals("credit", $xmlMessage->getName());   // root node
+		$this->assertEquals('credit', $xmlMessage->getName());   // root node
 		$this->assertEquals((string)$transactionId, $xmlMessage->transactionid);
 		$this->assertEquals((string)$creditAmount, $xmlMessage->amounttocredit);
 
@@ -97,7 +97,7 @@ class CreditTransactionTest extends \PHPUnit\Framework\TestCase
 		$creditAmount = 100;
 		$this->creditObject->creditAmount = $creditAmount;
 
-		$countryCode = "SE";
+		$countryCode = 'SE';
 		$this->creditObject->countryCode = $countryCode;
 
 		$form = $this->creditObject->prepareRequest();
@@ -112,7 +112,7 @@ class CreditTransactionTest extends \PHPUnit\Framework\TestCase
 		$transactionId = 987654;
 		$this->creditObject->transactionId = $transactionId;
 
-		$countryCode = "SE";
+		$countryCode = 'SE';
 		$this->creditObject->countryCode = $countryCode;
 
 		$form = $this->creditObject->prepareRequest();

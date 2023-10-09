@@ -21,9 +21,9 @@ class CardPaymentURLIntegrationTest extends \PHPUnit\Framework\TestCase
 	 */
 	public function test_CardPayment_getPaymentURL_throws_validationException_if_missing_ipAddress()
 	{
-		$orderLanguage = "sv";
-		$returnUrl = "returnUrl";
-		$ipAddress = "127.0.0.1";
+		$orderLanguage = 'sv';
+		$returnUrl = 'returnUrl';
+		$ipAddress = '127.0.0.1';
 
 		// create order
 		$order = TestUtil::createOrder(); // default customer has no ipAddress set
@@ -40,13 +40,13 @@ class CardPaymentURLIntegrationTest extends \PHPUnit\Framework\TestCase
 
 	public function test_CardPayment_getPaymentURL_returns_HostedResponse()
 	{
-		$orderLanguage = "sv";
-		$returnUrl = "http://foo.bar.com";
-		$ipAddress = "127.0.0.1";
+		$orderLanguage = 'sv';
+		$returnUrl = 'http://foo.bar.com';
+		$ipAddress = '127.0.0.1';
 
 		// create order
-		$order = TestUtil::createOrder(TestUtil::createIndividualCustomer("SE")->setIpAddress($ipAddress));
-		$order->setClientOrderNumber("foobar" . date('c'));
+		$order = TestUtil::createOrder(TestUtil::createIndividualCustomer('SE')->setIpAddress($ipAddress));
+		$order->setClientOrderNumber('foobar' . date('c'));
 		// set payment method
 		// call getPaymentURL
 		$response = $order
@@ -65,13 +65,13 @@ class CardPaymentURLIntegrationTest extends \PHPUnit\Framework\TestCase
 			'skeleton for manual test of card payment'
 		);
 
-		$orderLanguage = "sv";
-		$returnUrl = "http://foo.bar.com";
-		$ipAddress = "127.0.0.1";
+		$orderLanguage = 'sv';
+		$returnUrl = 'http://foo.bar.com';
+		$ipAddress = '127.0.0.1';
 
 		// create order
-		$order = TestUtil::createOrder(TestUtil::createIndividualCustomer("SE")->setIpAddress($ipAddress));
-		$order->setClientOrderNumber("foobar" . date('c'));
+		$order = TestUtil::createOrder(TestUtil::createIndividualCustomer('SE')->setIpAddress($ipAddress));
+		$order->setClientOrderNumber('foobar' . date('c'));
 		// set payment method
 		// call getPaymentURL
 		$response = $order
@@ -88,9 +88,9 @@ class CardPaymentURLIntegrationTest extends \PHPUnit\Framework\TestCase
 		$this->assertTrue(isset($response->id));
 		$this->assertTrue(isset($response->created));
 		// check that request response contains url
-		$this->assertEquals("https://test", substr($response->url, 0, 12));
+		$this->assertEquals('https://test', substr($response->url, 0, 12));
 		// check that request response contains testurl
-		$this->assertEquals("https://test", substr($response->testurl, 0, 12));
+		$this->assertEquals('https://test', substr($response->testurl, 0, 12));
 	}
 
 	/**
@@ -109,16 +109,16 @@ class CardPaymentURLIntegrationTest extends \PHPUnit\Framework\TestCase
 		// 4. go to https://webpaypaymentgatewaystage.svea.com/webpay-admin/admin/start.xhtml
 		// 5. retrieve the transactionid from the response in the transaction log
 
-		$orderLanguage = "sv";
-		$returnUrl = "http://foo.bar.com";
-		$ipAddress = "127.0.0.1";
+		$orderLanguage = 'sv';
+		$returnUrl = 'http://foo.bar.com';
+		$ipAddress = '127.0.0.1';
 
 		// create order
-		$order = TestUtil::createOrder(TestUtil::createIndividualCustomer("SE")->setIpAddress($ipAddress));
+		$order = TestUtil::createOrder(TestUtil::createIndividualCustomer('SE')->setIpAddress($ipAddress));
 		// set payment method
 		// call getPaymentURL
 		$response = $order
-			->setClientOrderNumber("foobar" . date('c'))
+			->setClientOrderNumber('foobar' . date('c'))
 			->usePaymentMethod(PaymentMethod::KORTCERT)
 			->setPayPageLanguage($orderLanguage)
 			->setReturnUrl($returnUrl)
@@ -128,7 +128,7 @@ class CardPaymentURLIntegrationTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals(1, $response->accepted);
 
 		// print the url to use to confirm the transaction
-		//print_r( " test_manual_card_payment by going to: " . $response->testurl ." and complete payment manually" );
+		//print_r( ' test_manual_card_payment by going to: ' . $response->testurl .' and complete payment manually' );
 	}
 
 	/**
@@ -147,16 +147,16 @@ class CardPaymentURLIntegrationTest extends \PHPUnit\Framework\TestCase
 		// 4. go to https://webpaypaymentgatewaystage.svea.com/webpay-admin/admin/start.xhtml
 		// 5. retrieve the transactionid from the response in the transaction log
 
-		$orderLanguage = "sv";
-		$returnUrl = "http://foo.bar.com";
-		$ipAddress = "127.0.0.1";
+		$orderLanguage = 'sv';
+		$returnUrl = 'http://foo.bar.com';
+		$ipAddress = '127.0.0.1';
 
 		// create order
-		$order = TestUtil::createOrder(TestUtil::createIndividualCustomer("SE")->setIpAddress($ipAddress));
+		$order = TestUtil::createOrder(TestUtil::createIndividualCustomer('SE')->setIpAddress($ipAddress));
 		// set payment method
 		// call getPaymentURL
 		$response = $order
-			->setClientOrderNumber("foobar" . date('c'))
+			->setClientOrderNumber('foobar' . date('c'))
 			->usePaymentMethod(PaymentMethod::KORTCERT)
 			->setPayPageLanguage($orderLanguage)
 			->setReturnUrl($returnUrl)

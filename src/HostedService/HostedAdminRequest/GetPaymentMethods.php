@@ -9,9 +9,9 @@ namespace Svea\WebPay\HostedService\HostedAdminRequest;
  * @author anne-hal
  */
 class GetPaymentMethods {
-	private $method = "getpaymentmethods";
+	private $method = 'getpaymentmethods';
 	private $config;
-	private $countryCode = "SE";	//Default SE
+	private $countryCode = 'SE';	//Default SE
 
 	/**
 	 * @deprecated 2.0 Use class ListPaymentMethods instead.

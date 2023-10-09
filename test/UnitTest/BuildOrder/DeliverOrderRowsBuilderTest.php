@@ -28,14 +28,14 @@ class DeliverOrderRowsBuilderTest extends \PHPUnit\Framework\TestCase
 
 	public function test_deliverOrderRowsBuilder_setOrderId()
 	{
-		$orderId = "123456";
+		$orderId = '123456';
 		$this->deliverOrderRowsObject->setOrderId($orderId);
 		$this->assertEquals($orderId, $this->deliverOrderRowsObject->orderId);
 	}
 
 	public function test_deliverOrderRowsBuilder_setCountryCode()
 	{
-		$country = "SE";
+		$country = 'SE';
 		$this->deliverOrderRowsObject->setCountryCode($country);
 		$this->assertEquals($country, $this->deliverOrderRowsObject->countryCode);
 	}
@@ -50,7 +50,7 @@ class DeliverOrderRowsBuilderTest extends \PHPUnit\Framework\TestCase
 	public function test_deliverOrderRowsBuilder_deliverInvoiceOrderRowsBuilder_returns_deliverOrderRowsRequest()
 	{
 		$deliverOrderRowsObject = $this->deliverOrderRowsObject
-			->setCountryCode("SE")
+			->setCountryCode('SE')
 			->setOrderId(123456)
 			->setInvoiceDistributionType(DistributionType::POST)
 			->setRowTodeliver(1)
@@ -62,7 +62,7 @@ class DeliverOrderRowsBuilderTest extends \PHPUnit\Framework\TestCase
 	public function test_deliverOrderRowsBuilder_deliverAccountCreditRowsBuilder_returns_deliverOrderRowsRequest()
 	{
 		$deliverOrderRowsObject = $this->deliverOrderRowsObject
-			->setCountryCode("SE")
+			->setCountryCode('SE')
 			->setOrderId(123456)
 			->setInvoiceDistributionType(DistributionType::POST)
 			->setRowTodeliver(1)
@@ -81,7 +81,7 @@ class DeliverOrderRowsBuilderTest extends \PHPUnit\Framework\TestCase
 	public function test_deliverInvoiceOrderRows_throws_ValidationException_on_missing_setCountryCode()
 	{
 		$deliverOrderRowsObject = $this->deliverOrderRowsObject
-			//->setCountryCode("SE")
+			//->setCountryCode('SE')
 			->setOrderId(123456)
 			->setInvoiceDistributionType(DistributionType::POST)
 			->setRowTodeliver(1);
@@ -96,7 +96,7 @@ class DeliverOrderRowsBuilderTest extends \PHPUnit\Framework\TestCase
 	public function test_deliverInvoiceOrderRows_throws_ValidationException_on_missing_setOrderId()
 	{
 		$deliverOrderRowsObject = $this->deliverOrderRowsObject
-			->setCountryCode("SE")
+			->setCountryCode('SE')
 			//->setOrderId(123456)
 			->setInvoiceDistributionType(DistributionType::POST)
 			->setRowTodeliver(1);
@@ -111,7 +111,7 @@ class DeliverOrderRowsBuilderTest extends \PHPUnit\Framework\TestCase
 	public function test_deliverInvoiceOrderRows_throws_ValidationException_on_missing_setInvoiceDistributionType()
 	{
 		$deliverOrderRowsObject = $this->deliverOrderRowsObject
-			->setCountryCode("SE")
+			->setCountryCode('SE')
 			->setOrderId(123456)
 			//->setInvoiceDistributionType( \Svea\WebPay\Constant\DistributionType::POST )
 			->setRowTodeliver(1);
@@ -126,7 +126,7 @@ class DeliverOrderRowsBuilderTest extends \PHPUnit\Framework\TestCase
 	public function test_deliverInvoiceOrderRows_throws_ValidationException_on_missing_setRowToDeliver()
 	{
 		$deliverOrderRowsObject = $this->deliverOrderRowsObject
-			->setCountryCode("SE")
+			->setCountryCode('SE')
 			->setOrderId(123456)
 			->setInvoiceDistributionType(DistributionType::POST)//->setRowTodeliver(1)
 		;

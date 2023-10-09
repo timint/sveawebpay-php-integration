@@ -38,7 +38,7 @@ class IdentityValidator {
 			&& isset($order->customerIdentity->locality) == false
 			&& isset($order->customerIdentity->companyName) == false
 		) {
-			$errors['missing values'] = "Customer values are required for Invoice and PaymentPlan orders.";
+			$errors['missing values'] = 'Customer values are required for Invoice and PaymentPlan orders.';
 		}
 
 		return $errors;
@@ -55,11 +55,11 @@ class IdentityValidator {
 	public function validateNordicIdentity($order, $errors) {
 		if ($this->isCompany == false) {
 			if (!isset($order->customerIdentity->ssn) || empty($order->customerIdentity->ssn)) {
-				$errors['missing value'] = "NationalIdNumber is required for individual customers when countrycode is SE, NO, DK or FI. Use function setNationalIdNumber().";
+				$errors['missing value'] = 'NationalIdNumber is required for individual customers when countrycode is SE, NO, DK or FI. Use function setNationalIdNumber().';
 			}
 		} else { // is company customer
 			if (!isset($order->customerIdentity->orgNumber) || empty($order->customerIdentity->orgNumber)) {
-				$errors['missing value'] = "OrgNumber is required for company customers when countrycode is SE, NO, DK or FI. Use function setNationalIdNumber().";
+				$errors['missing value'] = 'OrgNumber is required for company customers when countrycode is SE, NO, DK or FI. Use function setNationalIdNumber().';
 			}
 		}
 
@@ -74,35 +74,35 @@ class IdentityValidator {
 	 */
 	public function validateNLidentity($order, $errors) {
 		if ($this->isCompany == false && isset($order->customerIdentity->initials) == false) {
-			$errors['missing value'] = "Initials is required for individual customers when countrycode is NL. Use function setInitials().";
+			$errors['missing value'] = 'Initials is required for individual customers when countrycode is NL. Use function setInitials().';
 		}
 
 		if ($this->isCompany == false && isset($order->customerIdentity->birthDate) == false) {
-			$errors['missing value'] = "BirthDate is required for individual customers when countrycode is NL. Use function setBirthDate().";
+			$errors['missing value'] = 'BirthDate is required for individual customers when countrycode is NL. Use function setBirthDate().';
 		}
 
 		if ($this->isCompany == false && (isset($order->customerIdentity->firstname) == false || isset($order->customerIdentity->lastname) == false)) {
-			$errors['missing value'] = "Name is required for individual customers when countrycode is NL. Use function setName().";
+			$errors['missing value'] = 'Name is required for individual customers when countrycode is NL. Use function setName().';
 		}
 
 		if ($this->isCompany == true && isset($order->customerIdentity->companyVatNumber) == false) {
-			$errors['missing value'] = "VatNumber is required for company customers when countrycode is NL. Use function setVatNumber().";
+			$errors['missing value'] = 'VatNumber is required for company customers when countrycode is NL. Use function setVatNumber().';
 		}
 		if ($this->isCompany == true && isset($order->customerIdentity->companyName) == false) {
-			$errors['missing value'] = "CompanyName is required for company customers when countrycode is NL. Use function setCompanyName().";
+			$errors['missing value'] = 'CompanyName is required for company customers when countrycode is NL. Use function setCompanyName().';
 
 		}
 
 		if (isset($order->customerIdentity->street) == false || isset($order->customerIdentity->housenumber) == false) {
-			$errors['missing value'] = "StreetAddress is required for all customers when countrycode is NL. Use function setStreetAddress().";
+			$errors['missing value'] = 'StreetAddress is required for all customers when countrycode is NL. Use function setStreetAddress().';
 		}
 
 		if (isset($order->customerIdentity->locality) == false) {
-			$errors['missing value'] = "Locality is required for all customers when countrycode is NL. Use function setLocality().";
+			$errors['missing value'] = 'Locality is required for all customers when countrycode is NL. Use function setLocality().';
 		}
 
 		if (isset($order->customerIdentity->zipCode) == false) {
-			$errors['missing value'] = "ZipCode is required for all customers when countrycode is NL. Use function setZipCode().";
+			$errors['missing value'] = 'ZipCode is required for all customers when countrycode is NL. Use function setZipCode().';
 		}
 
 		return $errors;
@@ -116,31 +116,31 @@ class IdentityValidator {
 	 */
 	public function validateDEidentity($order, $errors) {
 		if ($this->isCompany == false && isset($order->customerIdentity->birthDate) == false) {
-			$errors['missing value'] = "BirthDate is required for individual customers when countrycode is DE. Use function setBirthDate().";
+			$errors['missing value'] = 'BirthDate is required for individual customers when countrycode is DE. Use function setBirthDate().';
 		}
 
 		if ($this->isCompany == false && (isset($order->customerIdentity->firstname) == false || isset($order->customerIdentity->lastname) == false)) {
-			$errors['missing value'] = "Name is required for individual customers when countrycode is DE. Use function setName().";
+			$errors['missing value'] = 'Name is required for individual customers when countrycode is DE. Use function setName().';
 		}
 
 		if ($this->isCompany == true && isset($order->customerIdentity->companyVatNumber) == false) {
-			$errors['missing value'] = "VatNumber is required for company customers when countrycode is DE. Use function setVatNumber().";
+			$errors['missing value'] = 'VatNumber is required for company customers when countrycode is DE. Use function setVatNumber().';
 		}
 
 		if ($this->isCompany == true && isset($order->customerIdentity->companyName) == false) {
-			$errors['missing value'] = "CompanyName is required for individual customers when countrycode is DE. Use function setCompanyName().";
+			$errors['missing value'] = 'CompanyName is required for individual customers when countrycode is DE. Use function setCompanyName().';
 		}
 
 		if (isset($order->customerIdentity->street) == false || isset($order->customerIdentity->housenumber) == false) {
-			$errors['missing value'] = "StreetAddress is required for all customers when countrycode is DE. Use function setStreetAddress().";
+			$errors['missing value'] = 'StreetAddress is required for all customers when countrycode is DE. Use function setStreetAddress().';
 		}
 
 		if (isset($order->customerIdentity->locality) == false) {
-			$errors['missing value'] = "Locality is required for all customers when countrycode is DE. Use function setLocality().";
+			$errors['missing value'] = 'Locality is required for all customers when countrycode is DE. Use function setLocality().';
 		}
 
 		if (isset($order->customerIdentity->zipCode) == false) {
-			$errors['missing value'] = "ZipCode is required for all customers when countrycode is DE. Use function setZipCode().";
+			$errors['missing value'] = 'ZipCode is required for all customers when countrycode is DE. Use function setZipCode().';
 		}
 
 		return $errors;
@@ -153,7 +153,7 @@ class IdentityValidator {
 	 */
 	public function validateDoubleIdentity($order, $errors) {
 		if ((isset($order->customerIdentity->orgNumber) || isset($order->customerIdentity->companyVatNumber)) && isset($order->customerIdentity->ssn)) {
-			$errors['duplicated value'] = "Customer is either an individual or a company. You can not use function setNationalIdNumber() in combination with setNationalIdNumber() or setCompanyVatNumber().";
+			$errors['duplicated value'] = 'Customer is either an individual or a company. You can not use function setNationalIdNumber() in combination with setNationalIdNumber() or setCompanyVatNumber().';
 		}
 
 		return $errors;

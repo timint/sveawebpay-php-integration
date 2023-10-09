@@ -42,7 +42,7 @@ class AccountCreditParamsResponse extends WebServiceResponse {
 		// set response resultcode & errormessage, if any
 		$this->resultcode = $response->GetAccountCreditParamsEuResult->ResultCode;
 
-		$this->errormessage = isset($response->GetAccountCreditParamsEuResult->ErrorMessage) ? $response->GetAccountCreditParamsEuResult->ErrorMessage : "";
+		$this->errormessage = isset($response->GetAccountCreditParamsEuResult->ErrorMessage) ? $response->GetAccountCreditParamsEuResult->ErrorMessage : '';
 
 		// set response attributes
 		if ($this->accepted == 1) {

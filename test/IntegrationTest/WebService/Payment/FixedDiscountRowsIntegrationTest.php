@@ -29,35 +29,35 @@ class FixedDiscountRowsIntegrationTest extends \PHPUnit\Framework\TestCase
 	{
 		$order = WebPay::createOrder(ConfigurationService::getDefaultConfig())
 			->addCustomerDetails(WebPayItem::individualCustomer()->setNationalIdNumber(194605092222))
-			->setCountryCode("SE")
-			->setCustomerReference("33")
-			->setOrderDate("2012-12-12")
-			->setCurrency("SEK")
+			->setCountryCode('SE')
+			->setCustomerReference('33')
+			->setOrderDate('2012-12-12')
+			->setCurrency('SEK')
 			->addOrderRow(
 				WebPayItem::orderRow()
 					->setAmountExVat(60.00)
 					->setVatPercent(20)
 					->setQuantity(1)
-					->setName("exvatRow")
+					->setName('exvatRow')
 			)
 			->addOrderRow(
 				WebPayItem::orderRow()
 					->setAmountIncVat(33.00)
 					->setVatPercent(10)
 					->setQuantity(1)
-					->setName("incvatRow")
+					->setName('incvatRow')
 			)
 			->addFee(
 				WebPayItem::invoiceFee()
 					->setAmountIncVat(8.80)
 					->setVatPercent(10)
-					->setName("incvatInvoiceFee")
+					->setName('incvatInvoiceFee')
 			)
 			->addFee(
 				WebPayItem::shippingFee()
 					->setAmountExVat(16.00)
 					->setVatPercent(10)
-					->setName("exvatShippingFee")
+					->setName('exvatShippingFee')
 			);
 
 		return $order;
@@ -88,7 +88,7 @@ class FixedDiscountRowsIntegrationTest extends \PHPUnit\Framework\TestCase
 		// check that service accepts order
 		$response = $order->useInvoicePayment()->doRequest();
 		$this->assertEquals(true, $response->accepted);
-		$this->assertEquals("131.4", $response->amount);
+		$this->assertEquals('131.4', $response->amount);
 	}
 
 	// same order with discount exvat should be sent with PriceIncludingVat = false but with split discount rows based on order amounts ex vat
@@ -100,8 +100,8 @@ class FixedDiscountRowsIntegrationTest extends \PHPUnit\Framework\TestCase
 			WebPayItem::fixedDiscount()
 				->setAmountExVat(10.0)
 				//->setVatPercent(10)
-				->setDiscountId("fixedDiscount")
-				->setName("fixedDiscount: 10e")
+				->setDiscountId('fixedDiscount')
+				->setName('fixedDiscount: 10e')
 		);
 		$request = $order->useInvoicePayment()->prepareRequest();
 		// all order rows
@@ -134,7 +134,7 @@ class FixedDiscountRowsIntegrationTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals(true, $response->accepted);
 		// r() is round($val, 2, PHP_ROUND_HALF_EVEN), i.e. bankers rounding
 		// r(60*1.20*1) + r(30*1.10*1) + r(16*1.10*1) + r(8*1.10*1) + r(-6.67*1.20*1) + r(-3.33*1.10*1) => 72.00+33.00+17.60+8.80-8.00-3.66 => 119.74
-		$this->assertEquals("119.74", $response->amount);
+		$this->assertEquals('119.74', $response->amount);
 	}
 
 	// same order with discount incvat should be sent with PriceIncludingVat = false but with split discount rows based on order amounts inc vat
@@ -146,8 +146,8 @@ class FixedDiscountRowsIntegrationTest extends \PHPUnit\Framework\TestCase
 			WebPayItem::fixedDiscount()
 				->setAmountIncVat(10.0)
 				//->setVatPercent(10)
-				->setDiscountId("fixedDiscount")
-				->setName("fixedDiscount: 10i")
+				->setDiscountId('fixedDiscount')
+				->setName('fixedDiscount: 10i')
 		);
 		$request = $order->useInvoicePayment()->prepareRequest();
 		// all order rows
@@ -179,7 +179,7 @@ class FixedDiscountRowsIntegrationTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals(true, $response->accepted);
 		// r() is round($val, 2, PHP_ROUND_HALF_EVEN), i.e. bankers rounding
 		// r(60*1.20*1) + r(30*1.10*1) + r(16*1.10*1) + r(8*1.10*1) + r(-5.72*1.20*1) + r(-2.85*1.10*1) => 72.00+33.00+17.60+8.80-6.85-3.15 => 121.40
-		$this->assertEquals("121.40", $response->amount);
+		$this->assertEquals('121.40', $response->amount);
 	}
 
 	// same order with discount exvat+vat should be sent with PriceIncludingVat = false with one discount row amount based on given exvat + vat
@@ -191,8 +191,8 @@ class FixedDiscountRowsIntegrationTest extends \PHPUnit\Framework\TestCase
 			WebPayItem::fixedDiscount()
 				->setAmountExVat(10.0)
 				->setVatPercent(10)
-				->setDiscountId("fixedDiscount")
-				->setName("fixedDiscount: 10e@10%")
+				->setDiscountId('fixedDiscount')
+				->setName('fixedDiscount: 10e@10%')
 		);
 		$request = $order->useInvoicePayment()->prepareRequest();
 		// all order rows
@@ -222,7 +222,7 @@ class FixedDiscountRowsIntegrationTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals(true, $response->accepted);
 		// r() is round($val, 2, PHP_ROUND_HALF_EVEN), i.e. bankers rounding
 		// r(60*1.20*1) + r(30*1.10*1) + r(16*1.10*1) + r(8*1.10*1) + r(-10*1.10*1) = 72+33+17.60 + 8.80 -11.00 = 120.40
-		$this->assertEquals("120.4", $response->amount);
+		$this->assertEquals('120.4', $response->amount);
 	}
 
 	// same order with discount incvat+vat should be sent with PriceIncludingVat = false with one discount row amount based on given incvat + vat
@@ -234,8 +234,8 @@ class FixedDiscountRowsIntegrationTest extends \PHPUnit\Framework\TestCase
 			WebPayItem::fixedDiscount()
 				->setAmountIncVat(11.0)
 				->setVatPercent(10)
-				->setDiscountId("fixedDiscount")
-				->setName("fixedDiscount: 11i@10%")
+				->setDiscountId('fixedDiscount')
+				->setName('fixedDiscount: 11i@10%')
 		);
 		$request = $order->useInvoicePayment()->prepareRequest();
 		// all order rows
@@ -265,42 +265,42 @@ class FixedDiscountRowsIntegrationTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals(true, $response->accepted);
 		// r() is round($val, 2, PHP_ROUND_HALF_EVEN), i.e. bankers rounding
 		// r(60*1.20*1) + r(30*1.10*1) + r(16*1.10*1) + r(8*1.10*1) + r(-10*1.10*1) = 72+33+17.60 + 8.80 -11.00 = 120.40
-		$this->assertEquals("120.4", $response->amount);
+		$this->assertEquals('120.4', $response->amount);
 	}
 
 	private static function create_only_incvat_order_and_fee_rows_order()
 	{
 		$order = WebPay::createOrder(ConfigurationService::getDefaultConfig())
 			->addCustomerDetails(WebPayItem::individualCustomer()->setNationalIdNumber(194605092222))
-			->setCountryCode("SE")
-			->setCustomerReference("33")
-			->setOrderDate("2012-12-12")
-			->setCurrency("SEK")
+			->setCountryCode('SE')
+			->setCustomerReference('33')
+			->setOrderDate('2012-12-12')
+			->setCurrency('SEK')
 			->addOrderRow(
 				WebPayItem::orderRow()
 					->setAmountIncVat(72.00)
 					->setVatPercent(20)
 					->setQuantity(1)
-					->setName("incvatRow")
+					->setName('incvatRow')
 			)
 			->addOrderRow(
 				WebPayItem::orderRow()
 					->setAmountIncVat(33.00)
 					->setVatPercent(10)
 					->setQuantity(1)
-					->setName("incvatRow2")
+					->setName('incvatRow2')
 			)
 			->addFee(
 				WebPayItem::invoiceFee()
 					->setAmountIncVat(8.80)
 					->setVatPercent(10)
-					->setName("incvatInvoiceFee")
+					->setName('incvatInvoiceFee')
 			)
 			->addFee(
 				WebPayItem::shippingFee()
 					->setAmountIncVat(17.60)
 					->setVatPercent(10)
-					->setName("incvatShippingFee")
+					->setName('incvatShippingFee')
 			);
 
 		return $order;
@@ -331,7 +331,7 @@ class FixedDiscountRowsIntegrationTest extends \PHPUnit\Framework\TestCase
 		// check that service accepts order
 		$response = $order->useInvoicePayment()->doRequest();
 		$this->assertEquals(true, $response->accepted);
-		$this->assertEquals("131.4", $response->amount);
+		$this->assertEquals('131.4', $response->amount);
 	}
 
 	// same order with discount exvat should be sent with PriceIncludingVat = true but with split discount rows based on order amounts ex vat
@@ -343,8 +343,8 @@ class FixedDiscountRowsIntegrationTest extends \PHPUnit\Framework\TestCase
 			WebPayItem::fixedDiscount()
 				->setAmountExVat(10.0)
 				//->setVatPercent(10)
-				->setDiscountId("fixedDiscount")
-				->setName("fixedDiscount: 10e")
+				->setDiscountId('fixedDiscount')
+				->setName('fixedDiscount: 10e')
 		);
 		$request = $order->useInvoicePayment()->prepareRequest();
 		// all order rows
@@ -376,8 +376,8 @@ class FixedDiscountRowsIntegrationTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals(true, $response->accepted);
 		// r() is round($val, 2, PHP_ROUND_HALF_EVEN), i.e. bankers rounding
 		// r(72.00*1) + r(33.00*1) + r(17.60*1) + r(8.80*1) + r(-8.00*1) + r(-3.66*1) => 72.00+33.00+17.60+8.80-8.00-3.67 => 119.73
-		//$this->assertEquals( "119.73", $response->amount );	 // TODO check that this is the amount in S1 invoice, vs 119.74 w/PriceIncludingVat = false
-		$this->assertEquals("119.74", $response->amount);	 // jfr vs 119.73 w/PriceIncludingVat = true
+		//$this->assertEquals( '119.73', $response->amount );	 // TODO check that this is the amount in S1 invoice, vs 119.74 w/PriceIncludingVat = false
+		$this->assertEquals('119.74', $response->amount);	 // jfr vs 119.73 w/PriceIncludingVat = true
 	}
 
 	// same order with discount incvat should be sent with PriceIncludingVat = false but with split discount rows based on order amounts inc vat
@@ -389,8 +389,8 @@ class FixedDiscountRowsIntegrationTest extends \PHPUnit\Framework\TestCase
 			WebPayItem::fixedDiscount()
 				->setAmountIncVat(10.0)
 				//->setVatPercent(10)
-				->setDiscountId("fixedDiscount")
-				->setName("fixedDiscount: 10i")
+				->setDiscountId('fixedDiscount')
+				->setName('fixedDiscount: 10i')
 		);
 		$request = $order->useInvoicePayment()->prepareRequest();
 		// all order rows
@@ -422,7 +422,7 @@ class FixedDiscountRowsIntegrationTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals(true, $response->accepted);
 		// r() is round($val, 2, PHP_ROUND_HALF_EVEN), i.e. bankers rounding
 		// r(72*1) + r(33*1) + r(17.60*1) + r(8.80*1) + r(-5.72*1.20*1) + r(-2.85*1.10*1) => 72.00+33.00+17.60+8.80-6.86-3.14 => 121.40
-		$this->assertEquals("121.40", $response->amount);
+		$this->assertEquals('121.40', $response->amount);
 	}
 
 	// same order with discount exvat+vat should be sent with PriceIncludingVat = false with one discount row amount based on given exvat + vat
@@ -434,8 +434,8 @@ class FixedDiscountRowsIntegrationTest extends \PHPUnit\Framework\TestCase
 			WebPayItem::fixedDiscount()
 				->setAmountExVat(10.0)
 				->setVatPercent(10)
-				->setDiscountId("fixedDiscount")
-				->setName("fixedDiscount: 10e@10%")
+				->setDiscountId('fixedDiscount')
+				->setName('fixedDiscount: 10e@10%')
 		);
 		$request = $order->useInvoicePayment()->prepareRequest();
 		// all order rows
@@ -465,7 +465,7 @@ class FixedDiscountRowsIntegrationTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals(true, $response->accepted);
 		// r() is round($val, 2, PHP_ROUND_HALF_EVEN), i.e. bankers rounding
 		// r(72*1) + r(33*1) + r(17.60*1) + r(8.80*1) + r(-5.72*1.20*1) + r(-2.85*1.10*1) => 72.00+33.00+17.60+8.80-11.00 => 120.40
-		$this->assertEquals("120.4", $response->amount);
+		$this->assertEquals('120.4', $response->amount);
 	}
 
 	// same order with discount incvat+vat should be sent with PriceIncludingVat = false with one discount row amount based on given incvat + vat
@@ -477,8 +477,8 @@ class FixedDiscountRowsIntegrationTest extends \PHPUnit\Framework\TestCase
 			WebPayItem::fixedDiscount()
 				->setAmountIncVat(11.0)
 				->setVatPercent(10)
-				->setDiscountId("fixedDiscount")
-				->setName("fixedDiscount: 11i@10%")
+				->setDiscountId('fixedDiscount')
+				->setName('fixedDiscount: 11i@10%')
 		);
 		$request = $order->useInvoicePayment()->prepareRequest();
 		// all order rows
@@ -508,6 +508,6 @@ class FixedDiscountRowsIntegrationTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals(true, $response->accepted);
 		// r() is round($val, 2, PHP_ROUND_HALF_EVEN), i.e. bankers rounding
 		// r(72*1) + r(33*1) + r(17.60*1) + r(8.80*1) + r(-5.72*1.20*1) + r(-2.85*1.10*1) => 72.00+33.00+17.60+8.80-11.00 => 120.40
-		$this->assertEquals("120.4", $response->amount);
+		$this->assertEquals('120.4', $response->amount);
 	}
 }

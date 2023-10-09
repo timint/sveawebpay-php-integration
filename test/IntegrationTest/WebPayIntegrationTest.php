@@ -30,9 +30,9 @@ class WebPayIntegrationTest extends \PHPUnit\Framework\TestCase
 					->setVatPercent(24)
 					->setQuantity(1)
 			)
-			->addCustomerDetails(TestUtil::createIndividualCustomer("SE"))
-			->setCountryCode("SE")
-			->setOrderDate("2012-12-12")
+			->addCustomerDetails(TestUtil::createIndividualCustomer('SE'))
+			->setCountryCode('SE')
+			->setOrderDate('2012-12-12')
 			->useInvoicePayment()
 			->doRequest();
 		$this->assertEquals(1, $request->accepted);
@@ -45,33 +45,33 @@ class WebPayIntegrationTest extends \PHPUnit\Framework\TestCase
 		$campaigncode = TestUtil::getGetPaymentPlanParamsForTesting();
 		$request = WebPay::createOrder($config)
 			->addOrderRow(WebPayItem::orderRow()
-				->setArticleNumber("1")
+				->setArticleNumber('1')
 				->setQuantity(2)
 				->setAmountExVat(1000.00)
-				->setDescription("Specification")
+				->setDescription('Specification')
 				->setName('Prod')
-				->setUnit("st")
+				->setUnit('st')
 				->setVatPercent(25)
 				->setDiscountPercent(0)
 			)
 			->addCustomerDetails(WebPayItem::individualCustomer()
 				->setNationalIdNumber(194605092222)
-				->setInitials("SB")
+				->setInitials('SB')
 				->setBirthDate(1923, 12, 12)
-				->setName("Tess", "Testson")
-				->setEmail("test@svea.com")
+				->setName('Tess', 'Testson')
+				->setEmail('test@svea.com')
 				->setPhoneNumber(999999)
-				->setIpAddress("123.123.123")
-				->setStreetAddress("Gatan", 23)
-				->setCoAddress("c/o Eriksson")
+				->setIpAddress('123.123.123')
+				->setStreetAddress('Gatan', 23)
+				->setCoAddress('c/o Eriksson')
 				->setZipCode(9999)
-				->setLocality("Stan")
+				->setLocality('Stan')
 			)
-			->setCountryCode("SE")
-			->setCustomerReference("33")
-			->setClientOrderNumber("nr26")
-			->setOrderDate("2012-12-12")
-			->setCurrency("SEK")
+			->setCountryCode('SE')
+			->setCustomerReference('33')
+			->setClientOrderNumber('nr26')
+			->setOrderDate('2012-12-12')
+			->setCurrency('SEK')
 			->usePaymentPlanPayment($campaigncode)
 			->doRequest();
 		$this->assertEquals(1, $request->accepted);
@@ -89,24 +89,24 @@ class WebPayIntegrationTest extends \PHPUnit\Framework\TestCase
 			->addOrderRow(TestUtil::createOrderRow())
 			->run($rowFactory->buildShippingFee())
 			->addDiscount(WebPayItem::relativeDiscount()
-				->setDiscountId("1")
+				->setDiscountId('1')
 				->setDiscountPercent(50)
-				->setUnit("st")
+				->setUnit('st')
 				->setName('Relative')
-				->setDescription("RelativeDiscount")
+				->setDescription('RelativeDiscount')
 			)
-			->setCountryCode("SE")
-			->setClientOrderNumber("foobar" . date('c'))
-			->setOrderDate("2012-12-12")
-			->setCurrency("SEK")
+			->setCountryCode('SE')
+			->setClientOrderNumber('foobar' . date('c'))
+			->setOrderDate('2012-12-12')
+			->setCurrency('SEK')
 			->usePaymentMethod(PaymentMethod::KORTCERT)
-			->setReturnUrl("http://myurl.se")
+			->setReturnUrl('http://myurl.se')
 			->getPaymentForm();
-		$url = "https://webpaypaymentgatewaystage.svea.com/webpay/payment";
+		$url = 'https://webpaypaymentgatewaystage.svea.com/webpay/payment';
 
 		/** CURL  **/
 		$fields = ['merchantid' => urlencode($form->merchantid), 'message' => urlencode($form->xmlMessageBase64), 'mac' => urlencode($form->mac)];
-		$fieldsString = "";
+		$fieldsString = '';
 		foreach ($fields as $key => $value) {
 			$fieldsString .= $key . '=' . $value . '&';
 		}
@@ -128,7 +128,7 @@ class WebPayIntegrationTest extends \PHPUnit\Framework\TestCase
 
 		$this->assertEquals(200, $info['http_code']);
 		$this->assertEquals(1, $info['redirect_count']);
-		$this->assertEquals("https://etest.certitrade.net/card/paywin/index", substr($info['url'], 0, 46));
+		$this->assertEquals('https://etest.certitrade.net/card/paywin/index', substr($info['url'], 0, 46));
 	}
 
 	// TODO Move below to unit tests?
@@ -171,7 +171,7 @@ class WebPayIntegrationTest extends \PHPUnit\Framework\TestCase
 	public function test_createOrder_usePaymentMethod_returns_PaymentMethodPayment()
 	{
 		$createOrder = WebPay::createOrder(ConfigurationService::getDefaultConfig());
-		$request = $createOrder->usePaymentMethod("mocked_paymentMethod");
+		$request = $createOrder->usePaymentMethod('mocked_paymentMethod');
 		$this->assertInstanceOf("Svea\WebPay\HostedService\Payment\PaymentMethodPayment", $request);
 	}
 
@@ -214,7 +214,7 @@ class WebPayIntegrationTest extends \PHPUnit\Framework\TestCase
 		// deliver order
 		$deliverOrderBuilder = WebPay::deliverOrder(ConfigurationService::getDefaultConfig())
 			->setOrderId($createdOrderId)
-			->setCountryCode("SE")
+			->setCountryCode('SE')
 			->setInvoiceDistributionType(DistributionType::POST)
 			->addOrderRow($specifiedOrderRow);
 		$deliverOrderResponse = $deliverOrderBuilder->deliverInvoiceOrder()->doRequest();
@@ -228,7 +228,7 @@ class WebPayIntegrationTest extends \PHPUnit\Framework\TestCase
 		// credit order
 		$creditOrderBuilder = WebPay::deliverOrder(ConfigurationService::getDefaultConfig())
 			->setOrderId($createdOrderId)
-			->setCountryCode("SE")
+			->setCountryCode('SE')
 			->setInvoiceDistributionType(DistributionType::POST)
 			->addOrderRow($specifiedOrderRow)
 			->setCreditInvoice($deliveredInvoiceId);
@@ -247,33 +247,33 @@ class WebPayIntegrationTest extends \PHPUnit\Framework\TestCase
 		$campaigncode = TestUtil::getGetPaymentPlanParamsForTesting();
 		$order = WebPay::createOrder($config)
 			->addOrderRow(WebPayItem::orderRow()
-				->setArticleNumber("1")
+				->setArticleNumber('1')
 				->setQuantity(2)
 				->setAmountExVat(1000.00)
-				->setDescription("Specification")
+				->setDescription('Specification')
 				->setName('Prod')
-				->setUnit("st")
+				->setUnit('st')
 				->setVatPercent(25)
 				->setDiscountPercent(0)
 			)
 			->addCustomerDetails(WebPayItem::individualCustomer()
 				->setNationalIdNumber(194605092222)
-				->setInitials("SB")
+				->setInitials('SB')
 				->setBirthDate(1923, 12, 12)
-				->setName("Tess", "Testson")
-				->setEmail("test@svea.com")
+				->setName('Tess', 'Testson')
+				->setEmail('test@svea.com')
 				->setPhoneNumber(999999)
-				->setIpAddress("123.123.123")
-				->setStreetAddress("Gatan", 23)
-				->setCoAddress("c/o Eriksson")
+				->setIpAddress('123.123.123')
+				->setStreetAddress('Gatan', 23)
+				->setCoAddress('c/o Eriksson')
 				->setZipCode(9999)
-				->setLocality("Stan")
+				->setLocality('Stan')
 			)
-			->setCountryCode("SE")
-			->setCustomerReference("33")
-			->setClientOrderNumber("nr26")
-			->setOrderDate("2012-12-12")
-			->setCurrency("SEK")
+			->setCountryCode('SE')
+			->setCustomerReference('33')
+			->setClientOrderNumber('nr26')
+			->setOrderDate('2012-12-12')
+			->setCurrency('SEK')
 			->usePaymentPlanPayment($campaigncode)// returnerar InvoiceOrder object
 			->doRequest();
 
@@ -285,17 +285,17 @@ class WebPayIntegrationTest extends \PHPUnit\Framework\TestCase
 		$orderBuilder = WebPay::deliverOrder($config);
 		$deliverResponse = $orderBuilder
 			//->addOrderRow(Svea\WebPay\WebPayItem::orderRow()
-			//		->setArticleNumber("1")
+			//		->setArticleNumber('1')
 			//		->setQuantity(2)
 			//		->setAmountExVat(1000.00)
-			//		->setDescription("Specification")
+			//		->setDescription('Specification')
 			//		->setName('Prod')
-			//		->setUnit("st")
+			//		->setUnit('st')
 			//		->setVatPercent(25)
 			//		->setDiscountPercent(0)
 			//)
 			->setOrderId($orderId)
-			->setCountryCode("SE")
+			->setCountryCode('SE')
 			->deliverPaymentPlanOrder()
 			->doRequest();
 
@@ -313,43 +313,43 @@ class WebPayIntegrationTest extends \PHPUnit\Framework\TestCase
 		$campaigncode = TestUtil::getGetPaymentPlanParamsForTesting();
 		$order = WebPay::createOrder($config)
 			->addOrderRow(WebPayItem::orderRow()
-				->setArticleNumber("1")
+				->setArticleNumber('1')
 				->setQuantity(2)
 				->setAmountExVat(1000.00)
-				->setDescription("Specification")
+				->setDescription('Specification')
 				->setName('Prod')
-				->setUnit("st")
+				->setUnit('st')
 				->setVatPercent(25)
 				->setDiscountPercent(0)
 			)
 			->addOrderRow(WebPayItem::orderRow()
-				->setArticleNumber("2")
+				->setArticleNumber('2')
 				->setQuantity(2)
 				->setAmountExVat(1000.00)
-				->setDescription("Specification")
+				->setDescription('Specification')
 				->setName('Prod')
-				->setUnit("st")
+				->setUnit('st')
 				->setVatPercent(25)
 				->setDiscountPercent(0)
 			)
 			->addCustomerDetails(WebPayItem::individualCustomer()
 				->setNationalIdNumber(194605092222)
-				->setInitials("SB")
+				->setInitials('SB')
 				->setBirthDate(1923, 12, 12)
-				->setName("Tess", "Testson")
-				->setEmail("test@svea.com")
+				->setName('Tess', 'Testson')
+				->setEmail('test@svea.com')
 				->setPhoneNumber(999999)
-				->setIpAddress("123.123.123")
-				->setStreetAddress("Gatan", 23)
-				->setCoAddress("c/o Eriksson")
+				->setIpAddress('123.123.123')
+				->setStreetAddress('Gatan', 23)
+				->setCoAddress('c/o Eriksson')
 				->setZipCode(9999)
-				->setLocality("Stan")
+				->setLocality('Stan')
 			)
-			->setCountryCode("SE")
-			->setCustomerReference("33")
-			->setClientOrderNumber("nr26")
-			->setOrderDate("2012-12-12")
-			->setCurrency("SEK")
+			->setCountryCode('SE')
+			->setCustomerReference('33')
+			->setClientOrderNumber('nr26')
+			->setOrderDate('2012-12-12')
+			->setCurrency('SEK')
 			->usePaymentPlanPayment($campaigncode)// returnerar InvoiceOrder object
 			->doRequest();
 
@@ -363,18 +363,18 @@ class WebPayIntegrationTest extends \PHPUnit\Framework\TestCase
 		$orderBuilder = WebPay::deliverOrder($config);
 		$deliverResponse = $orderBuilder
 			->addOrderRow(WebPayItem::orderRow()// TODO should raise validation exception
-			->setArticleNumber("1")
+			->setArticleNumber('1')
 				->setQuantity(2)
 				->setAmountExVat(1000.00)
-				->setDescription("Specification")
+				->setDescription('Specification')
 				->setName('Prod')
-				->setUnit("st")
+				->setUnit('st')
 				->setVatPercent(25)
 				->setDiscountPercent(0)
 			)
 			->setOrderId($orderId)
-			->setInvoiceDistributionType("Post")// TODO should raise validation exception
-			->setCountryCode("SE")
+			->setInvoiceDistributionType('Post')// TODO should raise validation exception
+			->setCountryCode('SE')
 			->deliverPaymentPlanOrder()
 			->doRequest();
 
@@ -396,7 +396,7 @@ class WebPayIntegrationTest extends \PHPUnit\Framework\TestCase
 	public function test_listPaymentMethods_returns_ListPaymentMethods()
 	{
 		$response = WebPay::listPaymentMethods(ConfigurationService::getDefaultConfig())
-			->setCountryCode("SE")
+			->setCountryCode('SE')
 			->doRequest();
 		$this->assertInstanceOf("Svea\WebPay\HostedService\HostedResponse\HostedAdminResponse\ListPaymentMethodsResponse", $response);
 		$this->assertEquals(true, $response->accepted);
@@ -407,7 +407,7 @@ class WebPayIntegrationTest extends \PHPUnit\Framework\TestCase
 	{
 		$campaigns =
 			WebPay::getPaymentPlanParams(ConfigurationService::getDefaultConfig())
-				->setCountryCode("SE")
+				->setCountryCode('SE')
 				->doRequest();
 		$this->assertTrue($campaigns->accepted);
 
@@ -421,47 +421,47 @@ class WebPayIntegrationTest extends \PHPUnit\Framework\TestCase
 	public function test_Checkout_SveaConfigurationProvider()
 	{
 		$responseSE = WebPay::checkout(ConfigurationService::getTestConfig())
-			->setCountryCode("SE")
-			->setCurrency("SEK")
-			->setLocale("sv-se")
-			->setCheckoutUri("http://localhost")
-			->setTermsUri("http://localhost")
-			->setPushUri("http://localhost")
-			->setConfirmationUri("http://localhost")
-			->setClientOrderNumber("PHP_IntegrationTest_" . rand(0, 10000000))
+			->setCountryCode('SE')
+			->setCurrency('SEK')
+			->setLocale('sv-se')
+			->setCheckoutUri('http://localhost')
+			->setTermsUri('http://localhost')
+			->setPushUri('http://localhost')
+			->setConfirmationUri('http://localhost')
+			->setClientOrderNumber('PHP_IntegrationTest_' . rand(0, 10000000))
 			->addOrderRow(WebPayItem::orderRow()
-			->setArticleNumber("1")
+			->setArticleNumber('1')
 				->setQuantity(2)
 				->setAmountIncVat(1000.00)
-				->setDescription("Specification")
+				->setDescription('Specification')
 				->setName('Prod')
-				->setUnit("st")
+				->setUnit('st')
 				->setVatPercent(25)
 				->setDiscountPercent(0)
 			)->createOrder();
 
-		$this->assertEquals($responseSE['CountryCode'], "SE");
+		$this->assertEquals($responseSE['CountryCode'], 'SE');
 
 		$responseNO = WebPay::checkout(ConfigurationService::getTestConfig())
-			->setCountryCode("NO")
-			->setCurrency("NOK")
-			->setLocale("nn-no")
-			->setCheckoutUri("http://localhost")
-			->setTermsUri("http://localhost")
-			->setPushUri("http://localhost")
-			->setConfirmationUri("http://localhost")
-			->setClientOrderNumber("PHP_IntegrationTest_" .rand(0, 10000000))
+			->setCountryCode('NO')
+			->setCurrency('NOK')
+			->setLocale('nn-no')
+			->setCheckoutUri('http://localhost')
+			->setTermsUri('http://localhost')
+			->setPushUri('http://localhost')
+			->setConfirmationUri('http://localhost')
+			->setClientOrderNumber('PHP_IntegrationTest_' .rand(0, 10000000))
 			->addOrderRow(WebPayItem::orderRow()
-			->setArticleNumber("1")
+			->setArticleNumber('1')
 				->setQuantity(2)
 				->setAmountIncVat(1000.00)
-				->setDescription("Specification")
+				->setDescription('Specification')
 				->setName('Prod')
-				->setUnit("st")
+				->setUnit('st')
 				->setVatPercent(25)
 				->setDiscountPercent(0)
 			)->createOrder();
 
-		$this->assertEquals($responseNO['CountryCode'], "NO");
+		$this->assertEquals($responseNO['CountryCode'], 'NO');
 	}
 }

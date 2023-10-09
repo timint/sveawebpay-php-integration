@@ -40,10 +40,10 @@ use Svea\WebPay\HostedService\HostedResponse\HostedAdminResponse\RecurTransactio
  * @author Anneli Halld'n, Daniel Brolund, Kristian Grossman-Madsen for Svea Webpay
  */
 class HostedPayment {
-	const RECURRINGCAPTURE = "RECURRINGCAPTURE";
-	const ONECLICKCAPTURE = "ONECLICKCAPTURE";
-	const RECURRING = "RECURRING";
-	const ONECLICK = "ONECLICK";
+	const RECURRINGCAPTURE = 'RECURRINGCAPTURE';
+	const ONECLICKCAPTURE = 'ONECLICKCAPTURE';
+	const RECURRING = 'RECURRING';
+	const ONECLICK = 'ONECLICK';
 
 	/**
 	 * @var CreateOrderBuilder $order holds the order information
@@ -95,7 +95,7 @@ class HostedPayment {
 	 * @param CreateOrderBuilder $order
 	 */
 	public function __construct($order) {
-		$this->langCode = "en";
+		$this->langCode = 'en';
 		$this->order = $order;
 		$this->request = [];
 	}
@@ -160,20 +160,20 @@ class HostedPayment {
 	 */
 	public function setPayPageLanguage($languageCodeAsISO639) {
 		switch ($languageCodeAsISO639) {
-			case "sv":
-			case "en":
-			case "da":
-			case "no":
-			case "fi":
-			case "es":
-			case "nl":
-			case "fr":
-			case "de":
-			case "it":
+			case 'sv':
+			case 'en':
+			case 'da':
+			case 'no':
+			case 'fi':
+			case 'es':
+			case 'nl':
+			case 'fr':
+			case 'de':
+			case 'it':
 				$this->langCode = $languageCodeAsISO639;
 				break;
 			default:
-				$this->langCode = "en";
+				$this->langCode = 'en';
 				break;
 		}
 
@@ -189,14 +189,14 @@ class HostedPayment {
 	public function getPaymentForm() {
 		//validate the order
 		$errors = $this->validateOrder();
-		$exceptionString = "";
+		$exceptionString = '';
 		if (count($errors) > 0 || (isset($this->returnUrl) == false && isset($this->paymentMethod) == false)) {
 			if (isset($this->returnUrl) == false) {
 				$exceptionString .= "-missing value : ReturnUrl is required. Use function setReturnUrl().\n";
 			}
 
 			foreach ($errors as $key => $value) {
-				$exceptionString .= "-" . $key . " : " . $value . "\n";
+				$exceptionString .= '-' . $key . ' : ' . $value . "\n";
 			}
 
 			throw new ValidationException($exceptionString);
@@ -217,7 +217,7 @@ class HostedPayment {
 	public function validateOrder() {
 		$validator = new HostedOrderValidator();
 		$errors = $validator->validate($this);
-		if (($this->order->countryCode == "NL" || $this->order->countryCode == "DE") && isset($this->paymentMethod)) {
+		if (($this->order->countryCode == 'NL' || $this->order->countryCode == 'DE') && isset($this->paymentMethod)) {
 			if (isset($this->paymentMethod) &&
 				($this->paymentMethod == PaymentMethod::INVOICE || $this->paymentMethod == PaymentMethod::PAYMENTPLAN)
 			) {
@@ -272,8 +272,8 @@ class HostedPayment {
 	 * to get a link which the customer can use to confirm a payment at a later
 	 * time after having received the url via i.e. an email message.
 	 *
-	 * Use function setIpAddress() on the order customer.";
-	 * Use function setPayPageLanguage().";
+	 * Use function setIpAddress() on the order customer.';
+	 * Use function setPayPageLanguage().';
 	 *
 	 * @return \Svea\WebPay\HostedService\HostedResponse\HostedPaymentResponse
 	 * [accepted] => 1
@@ -294,20 +294,20 @@ class HostedPayment {
 
 		//additional validation for PreparedPayment request
 		if (!isset($this->order->customerIdentity->ipAddress)) {
-			$errors['missing value'] = "ipAddress is required. Use function setIpAddress() on the order customer.";
+			$errors['missing value'] = 'ipAddress is required. Use function setIpAddress() on the order customer.';
 		}
 		if (!isset($this->langCode)) {
-			$errors['missing value'] = "langCode is required. Use function setPayPageLanguage().";
+			$errors['missing value'] = 'langCode is required. Use function setPayPageLanguage().';
 		}
 
-		$exceptionString = "";
+		$exceptionString = '';
 		if (count($errors) > 0 || (isset($this->returnUrl) == false && isset($this->paymentMethod) == false)) {
 			if (isset($this->returnUrl) == false) {
 				$exceptionString .= "-missing value : ReturnUrl is required. Use function setReturnUrl().\n";
 			}
 
 			foreach ($errors as $key => $value) {
-				$exceptionString .= "-" . $key . " : " . $value . "\n";
+				$exceptionString .= '-' . $key . ' : ' . $value . "\n";
 			}
 
 			throw new ValidationException($exceptionString);
@@ -329,7 +329,7 @@ class HostedPayment {
 		$secret = $this->config->getSecret(ConfigurationProvider::HOSTED_TYPE, $this->countryCode);
 
 		// calculate mac
-		$mac = hash("sha512", base64_encode($message) . $secret);
+		$mac = hash('sha512', base64_encode($message) . $secret);
 
 		// encode the request elements
 		$fields = [
@@ -339,7 +339,13 @@ class HostedPayment {
 		];
 
 		// below taken from HostedRequest doRequest
-		$fieldsString = "";
+		// Proper way that we cannot use (see below)
+		$fieldsString = http_build_query($fields, '', '&');
+
+		// Strange workaround providing non-urlencoded keys and values
+		// !! This is a reported security vulnerability allowing users inject params in the query parameters !!
+		// !! This has been reported to Svea but development team keeps ignoring it !!
+		$fieldsString = '';
 		foreach ($fields as $key => $value) {
 			$fieldsString .= $key . '=' . $value . '&';
 		}
@@ -351,7 +357,7 @@ class HostedPayment {
 		}
 
 		$ch = curl_init();
-		curl_setopt($ch, CURLOPT_URL, $this->config->getEndpoint(SveaConfigurationProvider::HOSTED_ADMIN_TYPE) . "preparepayment");
+		curl_setopt($ch, CURLOPT_URL, $this->config->getEndpoint(SveaConfigurationProvider::HOSTED_ADMIN_TYPE) . 'preparepayment');
 		curl_setopt($ch, CURLOPT_POST, count($fields));
 		curl_setopt($ch, CURLOPT_POSTFIELDS, $fieldsString);
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);

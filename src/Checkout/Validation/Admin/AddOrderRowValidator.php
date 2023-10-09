@@ -27,7 +27,7 @@ class AddOrderRowValidator extends OrderValidator {
 		}
 
 		if (count($orderRow) > 1) {
-			$errors['incorrect Order Row data'] = "You can Add just one Order Row";
+			$errors['incorrect Order Row data'] = 'You can Add just one Order Row';
 		}
 
 		$errors = $this->validateOrderRows($adminBuilder, $errors);
@@ -45,13 +45,13 @@ class AddOrderRowValidator extends OrderValidator {
 		$errors = $this->validateCheckoutOrderRows($order, $errors);
 
 		if (empty($order->orderRows[0]->amountIncVat)) {
-			$errors['incorrect Order Row data'] = "This function support only amountIncVat you need to use ->setAmountIncVat()";
+			$errors['incorrect Order Row data'] = 'This function support only amountIncVat you need to use ->setAmountIncVat()';
 		}
 
 		foreach ($order->orderRows as $row) {
 			if (isset($row->discountPercent)) {
 				if (!is_int($row->discountPercent) || ($row->discountPercent < 0 || $row->discountPercent > 99)) {
-					$errors['bad discount percent'] = "Discount percent must be integer in value range of 0-99";
+					$errors['bad discount percent'] = 'Discount percent must be integer in value range of 0-99';
 				}
 			}
 		}

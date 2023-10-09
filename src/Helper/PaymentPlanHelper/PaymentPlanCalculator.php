@@ -27,18 +27,18 @@ class PaymentPlanCalculator {
 		}
 
 		switch($campaign['paymentPlanType']) {
-			case "InterestAndAmortizationFree":
+			case 'InterestAndAmortizationFree':
 				return InterestAndAmortizationFreePaymentPlanCalculator::calculateTotalAmountToPay($totalPrice, $campaign, $decimals);
 				break;
-			case "InterestFree":
+			case 'InterestFree':
 				return InterestFreePaymentPlanCalculator::calculateTotalAmountToPay($totalPrice, $campaign, $decimals);
 				break;
-			case "Standard":
+			case 'Standard':
 				return StandardPaymentPlanCalculator::calculateTotalAmountToPay($totalPrice, $campaign, $decimals);
 				break;
 
 		}
-		throw new ValidationException("paymentPlanType not recognized");
+		throw new ValidationException('paymentPlanType not recognized');
 	}
 
 	/**
@@ -59,17 +59,17 @@ class PaymentPlanCalculator {
 		}
 
 		switch($campaign['paymentPlanType']) {
-			case "InterestAndAmortizationFree":
+			case 'InterestAndAmortizationFree':
 				return InterestAndAmortizationFreePaymentPlanCalculator::calculateMonthlyAmountToPay($totalPrice, $campaign, $decimals);
 				break;
-			case "InterestFree":
+			case 'InterestFree':
 				return InterestFreePaymentPlanCalculator::calculateMonthlyAmountToPay($totalPrice, $campaign, $decimals);
 				break;
-			case "Standard":
+			case 'Standard':
 				return StandardPaymentPlanCalculator::calculateMonthlyAmountToPay($totalPrice, $campaign, $decimals);
 				break;
 		}
-		throw new ValidationException("paymentPlanType not recognized");
+		throw new ValidationException('paymentPlanType not recognized');
 	}
 
 	/**
@@ -90,17 +90,17 @@ class PaymentPlanCalculator {
 		}
 
 		switch($campaign['paymentPlanType']) {
-			case "InterestAndAmortizationFree":
+			case 'InterestAndAmortizationFree':
 				return InterestAndAmortizationFreePaymentPlanCalculator::calculateEffectiveInterestRate($totalPrice, $campaign, $decimals);
 				break;
-			case "InterestFree":
+			case 'InterestFree':
 				return InterestFreePaymentPlanCalculator::calculateEffectiveInterestRate($totalPrice, $campaign, $decimals);
 				break;
-			case "Standard":
+			case 'Standard':
 				return StandardPaymentPlanCalculator::calculateEffectiveInterestRate($totalPrice, $campaign, $decimals);
 				break;
 		}
-		throw new ValidationException("paymentPlanType not recognized");
+		throw new ValidationException('paymentPlanType not recognized');
 	}
 
 	/**
@@ -121,23 +121,23 @@ class PaymentPlanCalculator {
 		}
 
 		switch($campaign['paymentPlanType']) {
-			case "InterestAndAmortizationFree":
+			case 'InterestAndAmortizationFree':
 				$campaign['effectiveInterestRate'] = InterestAndAmortizationFreePaymentPlanCalculator::calculateEffectiveInterestRate($totalPrice, $campaign, $decimals);
 				$campaign['monthlyAmountToPay'] = InterestAndAmortizationFreePaymentPlanCalculator::calculateMonthlyAmountToPay($totalPrice, $campaign, $decimals);
 				$campaign['totalAmountToPay'] = InterestAndAmortizationFreePaymentPlanCalculator::calculateTotalAmountToPay($totalPrice, $campaign, $decimals);
 				break;
-			case "InterestFree":
+			case 'InterestFree':
 				$campaign['effectiveInterestRate'] = InterestFreePaymentPlanCalculator::calculateEffectiveInterestRate($totalPrice, $campaign, $decimals);
 				$campaign['monthlyAmountToPay'] = InterestFreePaymentPlanCalculator::calculateMonthlyAmountToPay($totalPrice, $campaign, $decimals);
 				$campaign['totalAmountToPay'] = InterestFreePaymentPlanCalculator::calculateTotalAmountToPay($totalPrice, $campaign, $decimals);
 				break;
-			case "Standard":
+			case 'Standard':
 				$campaign['effectiveInterestRate'] = StandardPaymentPlanCalculator::calculateEffectiveInterestRate($totalPrice, $campaign, $decimals);
 				$campaign['monthlyAmountToPay'] = StandardPaymentPlanCalculator::calculateMonthlyAmountToPay($totalPrice, $campaign, $decimals);
 				$campaign['totalAmountToPay'] = StandardPaymentPlanCalculator::calculateTotalAmountToPay($totalPrice, $campaign, $decimals);
 				break;
 			default:
-				throw new ValidationException("paymentPlanType not recognized");
+				throw new ValidationException('paymentPlanType not recognized');
 		}
 		if (array_key_exists('checkout', $campaign) == true) {
 			$campaign = self::convertToCheckoutArray($campaign);
@@ -287,13 +287,13 @@ class PaymentPlanCalculator {
 		$campaign['checkout'] = true;
 		switch($campaign['paymentPlanType']) {
 			case 0:
-				$campaign['paymentPlanType'] = "Standard";
+				$campaign['paymentPlanType'] = 'Standard';
 				break;
 			case 1:
-				$campaign['paymentPlanType'] = "InterestFree";
+				$campaign['paymentPlanType'] = 'InterestFree';
 				break;
 			case 2:
-				$campaign['paymentPlanType'] = "InterestAndAmortizationFree";
+				$campaign['paymentPlanType'] = 'InterestAndAmortizationFree';
 				break;
 		}
 		return $campaign;
@@ -308,13 +308,13 @@ class PaymentPlanCalculator {
 		$campaign = self::convertFirstArrayKeyToUpperCase($campaign);
 		unset($campaign['Checkout']);
 		switch($campaign['PaymentPlanType']) {
-			case "Standard":
+			case 'Standard':
 				$campaign['PaymentPlanType'] = 0;
 				break;
-			case "InterestFree":
+			case 'InterestFree':
 				$campaign['PaymentPlanType'] = 1;
 				break;
-			case "InterestAndAmortizationFree":
+			case 'InterestAndAmortizationFree':
 				$campaign['PaymentPlanType'] = 2;
 				break;
 		}

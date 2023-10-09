@@ -30,7 +30,7 @@ class DeliverOrderBuilderIntegrationTest extends \PHPUnit\Framework\TestCase
 
 		$DeliverOrderBuilder = WebPay::deliverOrder(ConfigurationService::getDefaultConfig())
 			->addOrderRow(TestUtil::createOrderRow())
-			->setCountryCode("SE")
+			->setCountryCode('SE')
 			->setOrderId($orderId)
 			->setInvoiceDistributionType(DistributionType::POST);
 
@@ -52,7 +52,7 @@ class DeliverOrderBuilderIntegrationTest extends \PHPUnit\Framework\TestCase
 		$orderId = $createResponse->sveaOrderId;
 		$DeliverOrderBuilder = WebPay::deliverOrder(ConfigurationService::getDefaultConfig())
 			//->addOrderRow( Svea\WebPay\Test\TestUtil::createOrderRow() )
-			->setCountryCode("SE")
+			->setCountryCode('SE')
 			->setOrderId($orderId)
 			->setInvoiceDistributionType(DistributionType::POST);
 
@@ -99,10 +99,10 @@ class DeliverOrderBuilderIntegrationTest extends \PHPUnit\Framework\TestCase
 
 		$this->assertEquals(79021, $deliverResponse->clientId);
 		$this->assertEquals(250.00, $deliverResponse->amount);
-		$this->assertStringMatchesFormat("%d", $deliverResponse->invoiceId);   // %d => an unsigned integer value
+		$this->assertStringMatchesFormat('%d', $deliverResponse->invoiceId);   // %d => an unsigned integer value
 		$this->assertEquals(null, $deliverResponse->contractNumber);
-		$this->assertEquals("Invoice", $deliverResponse->orderType);
-		$this->assertStringMatchesFormat("%d", $deliverResponse->orderId);   // %d => an unsigned integer value
+		$this->assertEquals('Invoice', $deliverResponse->orderType);
+		$this->assertStringMatchesFormat('%d', $deliverResponse->orderId);   // %d => an unsigned integer value
 	}
 
 	// orderrows are ignored by the service for paymentplan orders
@@ -115,9 +115,9 @@ class DeliverOrderBuilderIntegrationTest extends \PHPUnit\Framework\TestCase
 				->setAmountExVat(1000.00)
 				->setVatPercent(25)
 			)
-			->addCustomerDetails(TestUtil::createIndividualCustomer("SE"))
-			->setCountryCode("SE")
-			->setCurrency("SEK")
+			->addCustomerDetails(TestUtil::createIndividualCustomer('SE'))
+			->setCountryCode('SE')
+			->setCurrency('SEK')
 			->setOrderDate(date('c'));
 		$response = $order->usePaymentPlanPayment(TestUtil::getGetPaymentPlanParamsForTesting())->doRequest();
 
@@ -131,7 +131,7 @@ class DeliverOrderBuilderIntegrationTest extends \PHPUnit\Framework\TestCase
 				->setAmountExVat(1000.00)
 				->setVatPercent(25)
 			)
-			->setCountryCode("SE")
+			->setCountryCode('SE')
 			->setOrderId($orderId);
 
 		$response = $DeliverOrderBuilder->deliverPaymentPlanOrder()->doRequest();
@@ -150,9 +150,9 @@ class DeliverOrderBuilderIntegrationTest extends \PHPUnit\Framework\TestCase
 				->setAmountExVat(1000.00)
 				->setVatPercent(25)
 			)
-			->addCustomerDetails(TestUtil::createIndividualCustomer("SE"))
-			->setCountryCode("SE")
-			->setCurrency("SEK")
+			->addCustomerDetails(TestUtil::createIndividualCustomer('SE'))
+			->setCountryCode('SE')
+			->setCurrency('SEK')
 			->setOrderDate(date('c'));
 		$response = $order->usePaymentPlanPayment(TestUtil::getGetPaymentPlanParamsForTesting())->doRequest();
 
@@ -166,7 +166,7 @@ class DeliverOrderBuilderIntegrationTest extends \PHPUnit\Framework\TestCase
 			//	->setAmountExVat(1000.00)
 			//	->setVatPercent(25)
 			//)
-			->setCountryCode("SE")
+			->setCountryCode('SE')
 			->setOrderId($orderId);
 
 		$response = $DeliverOrderBuilder->deliverPaymentPlanOrder()->doRequest();
@@ -189,7 +189,7 @@ class DeliverOrderBuilderIntegrationTest extends \PHPUnit\Framework\TestCase
 		$orderId = 585714;  // pre-existing card transactionId with status AUTHORIZED
 
 		$DeliverOrderBuilder = WebPay::deliverOrder(ConfigurationService::getDefaultConfig())
-			->setCountryCode("SE")
+			->setCountryCode('SE')
 			->setOrderId($orderId);
 
 		$response = $DeliverOrderBuilder->deliverCardOrder()->doRequest();

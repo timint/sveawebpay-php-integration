@@ -20,10 +20,10 @@ class GetRequestTotalsIntegrationTest extends \PHPUnit\Framework\TestCase
 	{
 		$order = WebPay::createOrder(ConfigurationService::getDefaultConfig())
 			->addCustomerDetails(WebPayItem::individualCustomer()->setNationalIdNumber(194605092222))
-			->setCountryCode("SE")
-			->setCustomerReference("33")
-			->setOrderDate("2012-12-12")
-			->setCurrency("SEK");
+			->setCountryCode('SE')
+			->setCustomerReference('33')
+			->setOrderDate('2012-12-12')
+			->setCurrency('SEK');
 		$order->addOrderRow(WebPayItem::orderRow()
 			->setName('Universal Camera Charger')
 			->setAmountIncVat(19.60)
@@ -54,10 +54,10 @@ class GetRequestTotalsIntegrationTest extends \PHPUnit\Framework\TestCase
 	{
 		$order = WebPay::createOrder(ConfigurationService::getDefaultConfig())
 			->addCustomerDetails(WebPayItem::individualCustomer()->setNationalIdNumber(194605092222))
-			->setCountryCode("SE")
-			->setCustomerReference("33")
-			->setOrderDate("2012-12-12")
-			->setCurrency("SEK");
+			->setCountryCode('SE')
+			->setCustomerReference('33')
+			->setOrderDate('2012-12-12')
+			->setCurrency('SEK');
 		$order->addOrderRow(WebPayItem::orderRow()
 			->setName('Universal Camera Charger')
 			->setAmountIncVat(19.60)
@@ -90,35 +90,35 @@ class GetRequestTotalsIntegrationTest extends \PHPUnit\Framework\TestCase
 	{
 		$order = WebPay::createOrder(ConfigurationService::getDefaultConfig())
 			->addCustomerDetails(WebPayItem::individualCustomer()->setNationalIdNumber(194605092222))
-			->setCountryCode("SE")
-			->setCustomerReference("33")
-			->setOrderDate("2012-12-12")
-			->setCurrency("SEK")
+			->setCountryCode('SE')
+			->setCustomerReference('33')
+			->setOrderDate('2012-12-12')
+			->setCurrency('SEK')
 			->addOrderRow(
 				WebPayItem::orderRow()
 					->setAmountIncVat(72.00)
 					->setVatPercent(20)
 					->setQuantity(1)
-					->setName("incvatRow")
+					->setName('incvatRow')
 			)
 			->addOrderRow(
 				WebPayItem::orderRow()
 					->setAmountIncVat(33.00)
 					->setVatPercent(10)
 					->setQuantity(1)
-					->setName("incvatRow2")
+					->setName('incvatRow2')
 			)
 			->addFee(
 				WebPayItem::invoiceFee()
 					->setAmountIncVat(8.80)
 					->setVatPercent(10)
-					->setName("incvatInvoiceFee")
+					->setName('incvatInvoiceFee')
 			)
 			->addFee(
 				WebPayItem::shippingFee()
 					->setAmountIncVat(17.60)
 					->setVatPercent(10)
-					->setName("incvatShippingFee")
+					->setName('incvatShippingFee')
 			);
 
 		return $order;
@@ -132,8 +132,8 @@ class GetRequestTotalsIntegrationTest extends \PHPUnit\Framework\TestCase
 			WebPayItem::fixedDiscount()
 				->setAmountExVat(10.0)
 				//->setVatPercent(10)
-				->setDiscountId("fixedDiscount")
-				->setName("fixedDiscount: 10e")
+				->setDiscountId('fixedDiscount')
+				->setName('fixedDiscount: 10e')
 		);
 		$request = $order->useInvoicePayment()->prepareRequest();
 		// all order rows
@@ -165,12 +165,12 @@ class GetRequestTotalsIntegrationTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals(true, $response->accepted);
 		// r() is round($val, 2, PHP_ROUND_HALF_EVEN), i.e. bankers rounding
 		// r(72.00*1) + r(33.00*1) + r(17.60*1) + r(8.80*1) + r(-8.00*1) + r(-3.66*1) => 72.00+33.00+17.60+8.80-8.00-3.67 => 119.73
-		//$this->assertEquals( "119.73", $response->amount );	 // TODO check that this is the amount in S1 invoice, vs 119.74 w/PriceIncludingVat = false
-		$this->assertEquals("119.74", $response->amount);	 // jfr vs 119.73 w/PriceIncludingVat = true
+		//$this->assertEquals( '119.73', $response->amount );	 // TODO check that this is the amount in S1 invoice, vs 119.74 w/PriceIncludingVat = false
+		$this->assertEquals('119.74', $response->amount);	 // jfr vs 119.73 w/PriceIncludingVat = true
 
 		// verify that getRequestTotals() got the same amount as the service
 		$preview = $order->useInvoicePayment()->getRequestTotals();
-		$this->assertEquals("119.74", $preview['total_incvat']);
+		$this->assertEquals('119.74', $preview['total_incvat']);
 		$this->assertEquals($preview['total_incvat'], $response->amount);
 	}
 
@@ -182,15 +182,15 @@ class GetRequestTotalsIntegrationTest extends \PHPUnit\Framework\TestCase
 			WebPayItem::fixedDiscount()
 				->setAmountIncVat(8.00)
 				->setVatPercent(20)
-				->setDiscountId("fixedDiscount")
-				->setName("fixedDiscount: 8.00i@20%")
+				->setDiscountId('fixedDiscount')
+				->setName('fixedDiscount: 8.00i@20%')
 		)
 			->addDiscount(
 				WebPayItem::fixedDiscount()
 					->setAmountIncVat(3.67)
 					->setVatPercent(10)
-					->setDiscountId("fixedDiscount")
-					->setName("fixedDiscount: 3.67ie@10%")
+					->setDiscountId('fixedDiscount')
+					->setName('fixedDiscount: 3.67ie@10%')
 			);
 		$request = $order->useInvoicePayment()->prepareRequest();
 		// all order rows
@@ -222,12 +222,12 @@ class GetRequestTotalsIntegrationTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals(true, $response->accepted);
 		// r() is round($val, 2, PHP_ROUND_HALF_EVEN), i.e. bankers rounding
 		// r(72.00*1) + r(33.00*1) + r(17.60*1) + r(8.80*1) + r(-8.00*1) + r(-3.66*1) => 72.00+33.00+17.60+8.80-8.00-3.67 => 119.73
-		//$this->assertEquals( "119.73", $response->amount );	 // TODO check that this is the amount in S1 invoice, vs 119.74 w/PriceIncludingVat = false
-		$this->assertEquals("119.73", $response->amount);	 // jfr vs 119.73 w/PriceIncludingVat = true
+		//$this->assertEquals( '119.73', $response->amount );	 // TODO check that this is the amount in S1 invoice, vs 119.74 w/PriceIncludingVat = false
+		$this->assertEquals('119.73', $response->amount);	 // jfr vs 119.73 w/PriceIncludingVat = true
 
 		// verify that getRequestTotals() got the same amount as the service
 		$preview = $order->useInvoicePayment()->getRequestTotals();
-		$this->assertEquals("119.73", $preview['total_incvat']);
+		$this->assertEquals('119.73', $preview['total_incvat']);
 		$this->assertEquals($preview['total_incvat'], $response->amount);
 	}
 
@@ -242,9 +242,9 @@ class GetRequestTotalsIntegrationTest extends \PHPUnit\Framework\TestCase
 					->setVatPercent(6)
 					->setQuantity(1)
 			)
-			->addCustomerDetails(TestUtil::createIndividualCustomer("SE"))
-			->setCountryCode("SE")
-			->setOrderDate("2016-04-14");
+			->addCustomerDetails(TestUtil::createIndividualCustomer('SE'))
+			->setCountryCode('SE')
+			->setOrderDate('2016-04-14');
 		$response = $order->useInvoicePayment()->doRequest();
 
 		$this->assertEquals(1, $response->accepted);
@@ -267,9 +267,9 @@ class GetRequestTotalsIntegrationTest extends \PHPUnit\Framework\TestCase
 					->setVatPercent(6)
 					->setQuantity(1)
 			)
-			->addCustomerDetails(TestUtil::createIndividualCustomer("SE"))
-			->setCountryCode("SE")
-			->setOrderDate("2016-04-14");
+			->addCustomerDetails(TestUtil::createIndividualCustomer('SE'))
+			->setCountryCode('SE')
+			->setOrderDate('2016-04-14');
 		$response = $order->useInvoicePayment()->doRequest();
 
 		$this->assertEquals(1, $response->accepted);
@@ -290,9 +290,9 @@ class GetRequestTotalsIntegrationTest extends \PHPUnit\Framework\TestCase
 					->setVatPercent(6)
 					->setQuantity(1)
 			)
-			->addCustomerDetails(TestUtil::createIndividualCustomer("SE"))
-			->setCountryCode("SE")
-			->setOrderDate("2016-04-14");
+			->addCustomerDetails(TestUtil::createIndividualCustomer('SE'))
+			->setCountryCode('SE')
+			->setOrderDate('2016-04-14');
 
 		$preview_total = $order->useInvoicePayment()->getRequestTotals();
 		$this->assertEquals(1400.00, $preview_total['total_incvat']);
@@ -314,9 +314,9 @@ class GetRequestTotalsIntegrationTest extends \PHPUnit\Framework\TestCase
 					->setVatPercent(6)
 					->setQuantity(1)
 			)
-			->addCustomerDetails(TestUtil::createIndividualCustomer("SE"))
-			->setCountryCode("SE")
-			->setOrderDate("2016-04-14");
+			->addCustomerDetails(TestUtil::createIndividualCustomer('SE'))
+			->setCountryCode('SE')
+			->setOrderDate('2016-04-14');
 
 		$preview_total = $order->useInvoicePayment()->getRequestTotals();
 		$this->assertEquals(1400.26, $preview_total['total_incvat']);
@@ -338,9 +338,9 @@ class GetRequestTotalsIntegrationTest extends \PHPUnit\Framework\TestCase
 					->setVatPercent(6)
 					->setQuantity(1)
 			)
-			->addCustomerDetails(TestUtil::createIndividualCustomer("SE"))
-			->setCountryCode("SE")
-			->setOrderDate("2016-04-14");
+			->addCustomerDetails(TestUtil::createIndividualCustomer('SE'))
+			->setCountryCode('SE')
+			->setOrderDate('2016-04-14');
 
 		$preview_total = $order->useInvoicePayment()->getRequestTotals();
 		$this->assertEquals(1400.26, $preview_total['total_incvat']);
@@ -363,9 +363,9 @@ class GetRequestTotalsIntegrationTest extends \PHPUnit\Framework\TestCase
 					->setVatPercent(6)
 					->setQuantity(1)
 			)
-			->addCustomerDetails(TestUtil::createIndividualCustomer("SE"))
-			->setCountryCode("SE")
-			->setOrderDate("2016-04-14");
+			->addCustomerDetails(TestUtil::createIndividualCustomer('SE'))
+			->setCountryCode('SE')
+			->setOrderDate('2016-04-14');
 
 		$preview_total = $order->useInvoicePayment()->getRequestTotals();
 		$this->assertEquals(1400.26, $preview_total['total_incvat']);
@@ -389,7 +389,7 @@ class GetRequestTotalsIntegrationTest extends \PHPUnit\Framework\TestCase
 		$response = $order->useInvoicePayment()->doRequest();
 		$this->assertEquals(1, $response->accepted);
 		$this->assertEquals($compensated_preview_total['total_incvat'], $response->amount);
-		//print_r( "test_getRequestTotals_reference_1321_00_ex_with_compensation_row: " + $response->sveaOrderId );
+		//print_r( 'test_getRequestTotals_reference_1321_00_ex_with_compensation_row: ' + $response->sveaOrderId );
 	}
 
 	public function test_getRequestTotals_reference_1400_26_inc_with_compensation_row()
@@ -402,9 +402,9 @@ class GetRequestTotalsIntegrationTest extends \PHPUnit\Framework\TestCase
 					->setVatPercent(6)
 					->setQuantity(1)
 			)
-			->addCustomerDetails(TestUtil::createIndividualCustomer("SE"))
-			->setCountryCode("SE")
-			->setOrderDate("2016-04-14");
+			->addCustomerDetails(TestUtil::createIndividualCustomer('SE'))
+			->setCountryCode('SE')
+			->setOrderDate('2016-04-14');
 
 		$preview_total = $order->useInvoicePayment()->getRequestTotals();
 		$this->assertEquals(1400.26, $preview_total['total_incvat']);
@@ -428,7 +428,7 @@ class GetRequestTotalsIntegrationTest extends \PHPUnit\Framework\TestCase
 		$response = $order->useInvoicePayment()->doRequest();
 		$this->assertEquals(1, $response->accepted);
 		$this->assertEquals($compensated_preview_total['total_incvat'], $response->amount);
-		//print_r( "test_getRequestTotals_reference_1400_26_inc_with_compensation_row: " + $response->sveaOrderId );
+		//print_r( 'test_getRequestTotals_reference_1400_26_inc_with_compensation_row: ' + $response->sveaOrderId );
 
 	}
 
@@ -442,9 +442,9 @@ class GetRequestTotalsIntegrationTest extends \PHPUnit\Framework\TestCase
 					->setVatPercent(6)
 					->setQuantity(1)
 			)
-			->addCustomerDetails(TestUtil::createIndividualCustomer("SE"))
-			->setCountryCode("SE")
-			->setOrderDate("2016-04-14");
+			->addCustomerDetails(TestUtil::createIndividualCustomer('SE'))
+			->setCountryCode('SE')
+			->setOrderDate('2016-04-14');
 
 		$preview_total = $order->useInvoicePayment()->getRequestTotals();
 		$this->assertEquals(1400.00, $preview_total['total_incvat']);

@@ -36,12 +36,12 @@ class RecurCardPaymentIntegrationTest extends \PHPUnit\Framework\TestCase
 		// 5. retrieve the subscriptionId from the response in the transaction log
 		// 6. use the subscriptionId to run
 
-		$orderLanguage = "sv";
-		$returnUrl = "http://foo.bar.com";
-		$ipAddress = "127.0.0.1";
+		$orderLanguage = 'sv';
+		$returnUrl = 'http://foo.bar.com';
+		$ipAddress = '127.0.0.1';
 
 		// create order
-		$order = TestUtil::createOrder(TestUtil::createIndividualCustomer("SE")->setIpAddress($ipAddress));
+		$order = TestUtil::createOrder(TestUtil::createIndividualCustomer('SE')->setIpAddress($ipAddress));
 		// set payment method
 		// call getPaymentURL
 		$response = $order
@@ -55,7 +55,7 @@ class RecurCardPaymentIntegrationTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals(1, $response->accepted);
 
 		// print the url to use to confirm the transaction
-		//print_r( " test_manual_recurring_payment_step_1(): " . $response->testurl ." ");
+		//print_r( ' test_manual_recurring_payment_step_1(): ' . $response->testurl .' ');
 	}
 
 	/**
@@ -76,22 +76,22 @@ class RecurCardPaymentIntegrationTest extends \PHPUnit\Framework\TestCase
 		// 2. run the test and check the output for the subscriptionid and transactionid of the recur request
 
 		// Set the below to match the original transaction, then run the test.
-		$paymentmethod = "KORTCERT";
+		$paymentmethod = 'KORTCERT';
 		$merchantid = 1130;
-		$currency = "SEK";
-		$cardtype = "VISA";
-		$maskedcardno = "444433xxxxxx1100";
+		$currency = 'SEK';
+		$cardtype = 'VISA';
+		$maskedcardno = '444433xxxxxx1100';
 		$expirymonth = 02;
 		$expiryyear = 16;
 		$subscriptionid = 2960; // insert
 
 		// the below applies to the recur request, and may differ from the original transaction
-		$new_amount = "2500"; // in minor currency
-		$new_customerrefno = "test_manual_recurring_payment_step_1 " . date('c');
+		$new_amount = '2500'; // in minor currency
+		$new_customerrefno = 'test_manual_recurring_payment_step_1 ' . date('c');
 
 		// below is actual test, shouldn't need to change it
 		$request = new RecurTransaction(ConfigurationService::getDefaultConfig());
-		$request->countryCode = "SE";
+		$request->countryCode = 'SE';
 		$request->subscriptionId = $subscriptionid;
 		$request->currency = $currency;
 		$request->customerRefNo = $new_customerrefno;
@@ -102,8 +102,8 @@ class RecurCardPaymentIntegrationTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals(1, $response->accepted);
 
 		// print the subscription id that succeeded to use to confirm the transaction
-		//print_r( " test_manual_recurring_payment_step_2() recur succeded using subscriptionid: " . $response->subscriptionid ." " );
-		//print_r( " test_manual_recurring_payment_step_2() for more info, check logs for transaction: " . $response->transactionid ." " );
+		//print_r( ' test_manual_recurring_payment_step_2() recur succeded using subscriptionid: ' . $response->subscriptionid .' ' );
+		//print_r( ' test_manual_recurring_payment_step_2() for more info, check logs for transaction: ' . $response->transactionid .' ' );
 	}
 
 }

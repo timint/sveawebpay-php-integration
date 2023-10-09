@@ -27,28 +27,28 @@ class CancelOrderBuilderTest extends \PHPUnit\Framework\TestCase
 
 	public function test_CancelOrderBuilder_setOrderId()
 	{
-		$orderId = "123456";
+		$orderId = '123456';
 		$this->cancelOrderObject->setOrderId($orderId);
 		$this->assertEquals($orderId, $this->cancelOrderObject->orderId);
 	}
 
 	public function test_CancelOrderBuilder_setTransactionId()
 	{
-		$orderId = "123456";
+		$orderId = '123456';
 		$this->cancelOrderObject->setTransactionId($orderId);
 		$this->assertEquals($orderId, $this->cancelOrderObject->orderId);
 	}
 
 	public function test_CancelOrderBuilder_setCountryCode()
 	{
-		$country = "SE";
+		$country = 'SE';
 		$this->cancelOrderObject->setCountryCode($country);
 		$this->assertEquals($country, $this->cancelOrderObject->countryCode);
 	}
 
 	public function test_CancelOrderBuilder_setPaymentMethod_INVOICE_returns_CloseOrder_with_correct_orderType()
 	{
-		$orderId = "123456";
+		$orderId = '123456';
 		$paymentMethod = PaymentMethod::INVOICE;
 
 		$closeOrderObject = $this->cancelOrderObject->setOrderId($orderId)->cancelInvoiceOrder();
@@ -60,7 +60,7 @@ class CancelOrderBuilderTest extends \PHPUnit\Framework\TestCase
 
 	public function test_CancelOrderBuilder_setPaymentMethod_PAYMENTPLAN_returns_CloseOrder_with_correct_orderType()
 	{
-		$orderId = "123456";
+		$orderId = '123456';
 		$paymentMethod = PaymentMethod::PAYMENTPLAN;
 
 		$closeOrderObject = $this->cancelOrderObject->setOrderId($orderId)->cancelPaymentPlanOrder();
@@ -71,7 +71,7 @@ class CancelOrderBuilderTest extends \PHPUnit\Framework\TestCase
 
 	public function test_CancelOrderBuilder_setPaymentMethod_KORTCERT_returns_CloseOrder()
 	{
-		$orderId = "123456";
+		$orderId = '123456';
 		$paymentMethod = PaymentMethod::KORTCERT;
 
 		$annulTransactionObject = $this->cancelOrderObject->setOrderId($orderId)->cancelCardOrder();
@@ -81,7 +81,7 @@ class CancelOrderBuilderTest extends \PHPUnit\Framework\TestCase
 
 	public function test_CancelOrderBuilder_AccountCredit_returns_CloseOrder_with_correct_orderType()
 	{
-		$orderId = "123456";
+		$orderId = '123456';
 
 		$closeOrderObject = $this->cancelOrderObject->setOrderId($orderId)->cancelAccountCreditOrder();
 

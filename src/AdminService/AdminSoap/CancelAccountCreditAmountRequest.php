@@ -25,14 +25,14 @@ class CancelAccountCreditAmountRequest {
 		$request = 'http://schemas.datacontract.org/2004/07/DataObjects.Admin.Service.Requests';
 
 		$this->Authentication = new SoapVar($authentication, SOAP_ENC_OBJECT,
-			"-", "--", "Authentication", $regular);
+			'-', '--', 'Authentication', $regular);
 		$this->AmountIncVat = new SoapVar($amountIncVat, XSD_DECIMAL,
-			"-", "--", "AmountInclVat", $request);
+			'-', '--', 'AmountInclVat', $request);
 		$this->ClientAccountCreditId = new SoapVar($orderId, XSD_LONG,
-			"-", "--", "ClientAccountCreditId", $request);
+			'-', '--', 'ClientAccountCreditId', $request);
 		$this->ClientId = new SoapVar($clientId, XSD_LONG,
-			"-", "--", "ClientId", $request);
+			'-', '--', 'ClientId', $request);
 		$this->Description = new SoapVar($description, XSD_STRING,
-			"-", "--", "Description", $request);
+			'-', '--', 'Description', $request);
 	}
 }

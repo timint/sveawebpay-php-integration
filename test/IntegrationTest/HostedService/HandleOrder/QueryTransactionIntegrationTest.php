@@ -29,42 +29,42 @@ class QueryTransactionIntegrationTest extends \PHPUnit\Framework\TestCase
 
 		$request = WebPayAdmin::queryOrder(
 			ConfigurationService::getSingleCountryConfig(
-				"SE",
-				"foo", "bar", "123456", // invoice
-				"foo", "bar", "123456", // paymentplan
-				"foo", "bar", "123456", // accountplan
-				"1200", // merchantid, secret
-				"27f18bfcbe4d7f39971cb3460fbe7234a82fb48f985cf22a068fa1a685fe7e6f93c7d0d92fee4e8fd7dc0c9f11e2507300e675220ee85679afa681407ee2416d",
+				'SE',
+				'foo', 'bar', '123456', // invoice
+				'foo', 'bar', '123456', // paymentplan
+				'foo', 'bar', '123456', // accountplan
+				'1200', // merchantid, secret
+				'27f18bfcbe4d7f39971cb3460fbe7234a82fb48f985cf22a068fa1a685fe7e6f93c7d0d92fee4e8fd7dc0c9f11e2507300e675220ee85679afa681407ee2416d',
 				false // prod = false
 			)
 		)
 			->setTransactionId(strval($transactionId))
-			->setCountryCode("SE");
+			->setCountryCode('SE');
 		$response = $request->queryCardOrder()->doRequest();
-//		echo "foo: ";
+//		echo 'foo: ';
 //		var_dump($response); die;
 
 		$this->assertEquals(1, $response->accepted);
 
 		$this->assertEquals($transactionId, $response->transactionId);
 		$this->assertInstanceOf("Svea\WebPay\BuildOrder\RowBuilders\NumberedOrderRow", $response->numberedOrderRows[0]);
-		$this->assertEquals("Soft213s", $response->numberedOrderRows[0]->articleNumber);
-		$this->assertEquals("1.0", $response->numberedOrderRows[0]->quantity);
-		$this->assertEquals("st", $response->numberedOrderRows[0]->unit);
+		$this->assertEquals('Soft213s', $response->numberedOrderRows[0]->articleNumber);
+		$this->assertEquals('1.0', $response->numberedOrderRows[0]->quantity);
+		$this->assertEquals('st', $response->numberedOrderRows[0]->unit);
 		$this->assertEquals(3212.00, $response->numberedOrderRows[0]->amountExVat);   // amount = 401500, vat = 80300 => 3212.00 @25%
 		$this->assertEquals(25, $response->numberedOrderRows[0]->vatPercent);
-		$this->assertEquals("Soft", $response->numberedOrderRows[0]->name);
-//		$this->assertEquals( "Specification", $response->numberedOrderRows[1]->description );
+		$this->assertEquals('Soft', $response->numberedOrderRows[0]->name);
+//		$this->assertEquals( 'Specification', $response->numberedOrderRows[1]->description );
 		$this->assertEquals(0, $response->numberedOrderRows[0]->vatDiscount);
 
 		$this->assertInstanceOf("Svea\WebPay\BuildOrder\RowBuilders\NumberedOrderRow", $response->numberedOrderRows[1]);
-		$this->assertEquals("07", $response->numberedOrderRows[1]->articleNumber);
-		$this->assertEquals("1.0", $response->numberedOrderRows[1]->quantity);
-		$this->assertEquals("st", $response->numberedOrderRows[1]->unit);
+		$this->assertEquals('07', $response->numberedOrderRows[1]->articleNumber);
+		$this->assertEquals('1.0', $response->numberedOrderRows[1]->quantity);
+		$this->assertEquals('st', $response->numberedOrderRows[1]->unit);
 		$this->assertEquals(0, $response->numberedOrderRows[1]->amountExVat);   // amount = 401500, vat = 80300 => 3212.00 @25%
 		$this->assertEquals(0, $response->numberedOrderRows[1]->vatPercent);
-		$this->assertEquals("Sits: Hatfield Beige 6", $response->numberedOrderRows[1]->name);
-//		$this->assertEquals( "Specification", $response->numberedOrderRows[1]->description );
+		$this->assertEquals('Sits: Hatfield Beige 6', $response->numberedOrderRows[1]->name);
+//		$this->assertEquals( 'Specification', $response->numberedOrderRows[1]->description );
 		$this->assertEquals(0, $response->numberedOrderRows[1]->vatDiscount);
 	}
 
@@ -80,14 +80,14 @@ class QueryTransactionIntegrationTest extends \PHPUnit\Framework\TestCase
 
 		$request = new QueryTransaction(ConfigurationService::getDefaultConfig());
 		$request->transactionId = $transactionId;
-		$request->countryCode = "SE";
+		$request->countryCode = 'SE';
 		$response = $request->doRequest();
 
 		$this->assertInstanceOf("Svea\WebPay\HostedService\HostedResponse\HostedAdminResponse\QueryTransactionResponse", $response);
 
 		// if we receive an error from the service, the integration test passes
 		$this->assertEquals(0, $response->accepted);
-		$this->assertEquals("128 (NO_SUCH_TRANS)", $response->resultcode);
+		$this->assertEquals('128 (NO_SUCH_TRANS)', $response->resultcode);
 	}
 
 	/**
@@ -119,7 +119,7 @@ class QueryTransactionIntegrationTest extends \PHPUnit\Framework\TestCase
 
 		$request = new QueryTransaction(ConfigurationService::getDefaultConfig());
 		$request->transactionId = $transactionId;
-		$request->countryCode = "SE";
+		$request->countryCode = 'SE';
 		$response = $request->doRequest();
 
 		// Example of raw card order 580964 response to parse (from QueryTransactionResponse formatXml):
@@ -277,45 +277,45 @@ class QueryTransactionIntegrationTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals(null, $response->errormessage);
 
 		$this->assertEquals($transactionId, $response->transactionId);
-		$this->assertEquals("test_manual_query_card_2xz", $response->clientOrderNumber); //
-		$this->assertEquals("1130", $response->merchantId);
-		//$this->assertEquals( "AUTHORIZED", $response->status );  // if just created
-		$this->assertEquals("SUCCESS", $response->status);	// after having been confirmed & batch process by bank
-		$this->assertEquals("25500", $response->amount);
-		$this->assertEquals("SEK", $response->currency);
-		$this->assertEquals("600", $response->vat);
-		//$this->assertEquals( "", $response->capturedamount ); // if just created
-		$this->assertEquals("25500", $response->capturedamount); // after having been confirmed & batch process by bank
-		$this->assertEquals("25500", $response->authorizedamount);
-		$this->assertEquals("2014-10-06 15:35:55.327", $response->created);
-		$this->assertEquals("CREDNONE", $response->creditstatus);
-		$this->assertEquals("0", $response->creditedamount);
-		$this->assertEquals("0", $response->merchantresponsecode);
-		$this->assertEquals("KORTCERT", $response->paymentMethod);
+		$this->assertEquals('test_manual_query_card_2xz', $response->clientOrderNumber); //
+		$this->assertEquals('1130', $response->merchantId);
+		//$this->assertEquals( 'AUTHORIZED', $response->status );  // if just created
+		$this->assertEquals('SUCCESS', $response->status);	// after having been confirmed & batch process by bank
+		$this->assertEquals('25500', $response->amount);
+		$this->assertEquals('SEK', $response->currency);
+		$this->assertEquals('600', $response->vat);
+		//$this->assertEquals( '', $response->capturedamount ); // if just created
+		$this->assertEquals('25500', $response->capturedamount); // after having been confirmed & batch process by bank
+		$this->assertEquals('25500', $response->authorizedamount);
+		$this->assertEquals('2014-10-06 15:35:55.327', $response->created);
+		$this->assertEquals('CREDNONE', $response->creditstatus);
+		$this->assertEquals('0', $response->creditedamount);
+		$this->assertEquals('0', $response->merchantresponsecode);
+		$this->assertEquals('KORTCERT', $response->paymentMethod);
 
 		$this->assertInstanceOf("Svea\WebPay\BuildOrder\RowBuilders\NumberedOrderRow", $response->numberedOrderRows[0]);
-		$this->assertEquals("123", $response->numberedOrderRows[0]->articleNumber);
-		$this->assertEquals("1", $response->numberedOrderRows[0]->quantity);
-		$this->assertEquals("st", $response->numberedOrderRows[0]->unit);
+		$this->assertEquals('123', $response->numberedOrderRows[0]->articleNumber);
+		$this->assertEquals('1', $response->numberedOrderRows[0]->quantity);
+		$this->assertEquals('st', $response->numberedOrderRows[0]->unit);
 		$this->assertEquals(4, $response->numberedOrderRows[0]->amountExVat);
 		$this->assertEquals(25, $response->numberedOrderRows[0]->vatPercent);
-		$this->assertEquals("Orderrow1", $response->numberedOrderRows[0]->name);
-		$this->assertEquals("Orderrow description", $response->numberedOrderRows[0]->description);
+		$this->assertEquals('Orderrow1', $response->numberedOrderRows[0]->name);
+		$this->assertEquals('Orderrow description', $response->numberedOrderRows[0]->description);
 		$this->assertEquals(0, $response->numberedOrderRows[0]->vatDiscount);
 
 		$this->assertInstanceOf("Svea\WebPay\BuildOrder\RowBuilders\OrderRow", $response->numberedOrderRows[1]);
-		$this->assertEquals("124", $response->numberedOrderRows[1]->articleNumber);
-		$this->assertEquals("2", $response->numberedOrderRows[1]->quantity);
-		$this->assertEquals("m2", $response->numberedOrderRows[1]->unit);
+		$this->assertEquals('124', $response->numberedOrderRows[1]->articleNumber);
+		$this->assertEquals('2', $response->numberedOrderRows[1]->quantity);
+		$this->assertEquals('m2', $response->numberedOrderRows[1]->unit);
 		$this->assertEquals(100, $response->numberedOrderRows[1]->amountExVat);
 		$this->assertEquals(25, $response->numberedOrderRows[1]->vatPercent);
-		$this->assertEquals("Orderrow2", $response->numberedOrderRows[1]->name);
-		$this->assertEquals("Orderrow2 description", $response->numberedOrderRows[1]->description);
+		$this->assertEquals('Orderrow2', $response->numberedOrderRows[1]->name);
+		$this->assertEquals('Orderrow2 description', $response->numberedOrderRows[1]->description);
 		$this->assertEquals(0, $response->numberedOrderRows[1]->vatDiscount);
 
 		$this->assertEquals(null, $response->callbackurl);
 		//$this->assertEquals( null, $response->capturedate ); // if just created
-		$this->assertEquals("2014-10-07 00:15:17.857", $response->capturedate); // after having been confirmed & batch process by bank
+		$this->assertEquals('2014-10-07 00:15:17.857', $response->capturedate); // after having been confirmed & batch process by bank
 		$this->assertEquals(null, $response->subscriptionId);
 		$this->assertEquals(null, $response->subscriptiontype);
 		$this->assertEquals(null, $response->cardType);
@@ -351,7 +351,7 @@ class QueryTransactionIntegrationTest extends \PHPUnit\Framework\TestCase
 
 		$request = new QueryTransaction(ConfigurationService::getDefaultConfig());
 		$request->transactionId = $transactionId;
-		$request->countryCode = "SE";
+		$request->countryCode = 'SE';
 		$response = $request->doRequest();
 
 		// Example of raw recur order 581497 response (see QueryTransactionResponse class) to parse
@@ -432,24 +432,24 @@ class QueryTransactionIntegrationTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals(null, $response->errormessage);
 
 		$this->assertEquals($transactionId, $response->transactionId);
-		$this->assertEquals("test_recur_1", $response->clientOrderNumber); //
-		$this->assertEquals("1130", $response->merchantId);
-		$this->assertEquals("SUCCESS", $response->status);	// after having been confirmed & batch process by bank
-		$this->assertEquals("500", $response->amount);
-		$this->assertEquals("SEK", $response->currency);
-		$this->assertEquals("100", $response->vat);
-		$this->assertEquals("500", $response->capturedamount); // after having been confirmed & batch process by bank
-		$this->assertEquals("500", $response->authorizedamount);
-		$this->assertEquals("2014-04-16 14:51:34.917", $response->created);
-		$this->assertEquals("CREDNONE", $response->creditstatus);
-		$this->assertEquals("0", $response->creditedamount);
-		$this->assertEquals("0", $response->merchantresponsecode);
-		$this->assertEquals("KORTCERT", $response->paymentMethod);
+		$this->assertEquals('test_recur_1', $response->clientOrderNumber); //
+		$this->assertEquals('1130', $response->merchantId);
+		$this->assertEquals('SUCCESS', $response->status);	// after having been confirmed & batch process by bank
+		$this->assertEquals('500', $response->amount);
+		$this->assertEquals('SEK', $response->currency);
+		$this->assertEquals('100', $response->vat);
+		$this->assertEquals('500', $response->capturedamount); // after having been confirmed & batch process by bank
+		$this->assertEquals('500', $response->authorizedamount);
+		$this->assertEquals('2014-04-16 14:51:34.917', $response->created);
+		$this->assertEquals('CREDNONE', $response->creditstatus);
+		$this->assertEquals('0', $response->creditedamount);
+		$this->assertEquals('0', $response->merchantresponsecode);
+		$this->assertEquals('KORTCERT', $response->paymentMethod);
 		$this->assertEquals(null, $response->numberedOrderRows);
 		$this->assertEquals(null, $response->callbackurl);
-		$this->assertEquals("2014-04-18 00:15:12.287", $response->capturedate);
-		$this->assertEquals("2922", $response->subscriptionId);
-		$this->assertEquals("RECURRINGCAPTURE", $response->subscriptiontype);
+		$this->assertEquals('2014-04-18 00:15:12.287', $response->capturedate);
+		$this->assertEquals('2922', $response->subscriptionId);
+		$this->assertEquals('RECURRINGCAPTURE', $response->subscriptiontype);
 		$this->assertEquals(null, $response->cardType);
 		$this->assertEquals(null, $response->maskedCardNumber);
 		$this->assertEquals(null, $response->eci);
@@ -480,7 +480,7 @@ class QueryTransactionIntegrationTest extends \PHPUnit\Framework\TestCase
 
 		$request = new QueryTransaction(ConfigurationService::getDefaultConfig());
 		$request->transactionId = $transactionId;
-		$request->countryCode = "SE";
+		$request->countryCode = 'SE';
 		$response = $request->doRequest();
 
 		// Example of raw recur order 586076 response (see QueryTransactionResponse class) to parse
@@ -594,35 +594,35 @@ class QueryTransactionIntegrationTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals(null, $response->errormessage);
 
 		$this->assertEquals($transactionId, $response->transactionId);
-		$this->assertEquals("clientOrderNumber:2014-09-10T14:27:23 02:00", $response->clientOrderNumber); //
-		$this->assertEquals("1130", $response->merchantId);
-		//$this->assertEquals( "AUTHORIZED", $response->status ); // if just created
-		$this->assertEquals("SUCCESS", $response->status);
-		$this->assertEquals("25000", $response->amount);
-		$this->assertEquals("SEK", $response->currency);
-		$this->assertEquals("5000", $response->vat);
+		$this->assertEquals('clientOrderNumber:2014-09-10T14:27:23 02:00', $response->clientOrderNumber); //
+		$this->assertEquals('1130', $response->merchantId);
+		//$this->assertEquals( 'AUTHORIZED', $response->status ); // if just created
+		$this->assertEquals('SUCCESS', $response->status);
+		$this->assertEquals('25000', $response->amount);
+		$this->assertEquals('SEK', $response->currency);
+		$this->assertEquals('5000', $response->vat);
 		//$this->assertEquals( null, $response->capturedamount ); // if just created
-		$this->assertEquals("25000", $response->capturedamount);
-		$this->assertEquals("25000", $response->authorizedamount);
-		$this->assertEquals("2014-09-10 14:27:23.04", $response->created);
-		$this->assertEquals("CREDNONE", $response->creditstatus);
-		$this->assertEquals("0", $response->creditedamount);
-		$this->assertEquals("0", $response->merchantresponsecode);
-		$this->assertEquals("KORTCERT", $response->paymentMethod);
+		$this->assertEquals('25000', $response->capturedamount);
+		$this->assertEquals('25000', $response->authorizedamount);
+		$this->assertEquals('2014-09-10 14:27:23.04', $response->created);
+		$this->assertEquals('CREDNONE', $response->creditstatus);
+		$this->assertEquals('0', $response->creditedamount);
+		$this->assertEquals('0', $response->merchantresponsecode);
+		$this->assertEquals('KORTCERT', $response->paymentMethod);
 
 		$this->assertInstanceOf("Svea\WebPay\BuildOrder\RowBuilders\OrderRow", $response->numberedOrderRows[0]);
-		$this->assertEquals("1", $response->numberedOrderRows[0]->articleNumber);
-		$this->assertEquals("2.0", $response->numberedOrderRows[0]->quantity);
-		$this->assertEquals("st", $response->numberedOrderRows[0]->unit);
+		$this->assertEquals('1', $response->numberedOrderRows[0]->articleNumber);
+		$this->assertEquals('2.0', $response->numberedOrderRows[0]->quantity);
+		$this->assertEquals('st', $response->numberedOrderRows[0]->unit);
 		$this->assertEquals(100.00, $response->numberedOrderRows[0]->amountExVat);
 		$this->assertEquals(25.00, $response->numberedOrderRows[0]->vatPercent);
-		$this->assertEquals("Product", $response->numberedOrderRows[0]->name);
-		$this->assertEquals("Specification", $response->numberedOrderRows[0]->description);
+		$this->assertEquals('Product', $response->numberedOrderRows[0]->name);
+		$this->assertEquals('Specification', $response->numberedOrderRows[0]->description);
 		$this->assertEquals(0, $response->numberedOrderRows[0]->vatDiscount);
 
 		$this->assertEquals(null, $response->callbackurl);
 		//$this->assertEquals( null, $response->capturedate ); // if just created
-		$this->assertEquals("2014-09-11 00:15:11.313", $response->capturedate);
+		$this->assertEquals('2014-09-11 00:15:11.313', $response->capturedate);
 		$this->assertEquals(null, $response->subscriptionId);
 		$this->assertEquals(null, $response->subscriptiontype);
 		$this->assertEquals(null, $response->cardType);
@@ -664,7 +664,7 @@ class QueryTransactionIntegrationTest extends \PHPUnit\Framework\TestCase
 
 		$request = new QueryTransaction(ConfigurationService::getDefaultConfig());
 		$request->transactionId = $transactionId;
-		$request->countryCode = "SE";
+		$request->countryCode = 'SE';
 		$response = $request->doRequest();
 
 		$this->assertInstanceOf("Svea\WebPay\HostedService\HostedResponse\HostedAdminResponse\QueryTransactionResponse", $response);
@@ -790,7 +790,7 @@ class QueryTransactionIntegrationTest extends \PHPUnit\Framework\TestCase
 
 		$request = new QueryTransaction(ConfigurationService::getDefaultConfig());
 		$request->transactionId = $transactionId;
-		$request->countryCode = "SE";
+		$request->countryCode = 'SE';
 		$response = $request->doRequest();
 
 		$this->assertInstanceOf("Svea\WebPay\HostedService\HostedResponse\HostedAdminResponse\QueryTransactionResponse", $response);
@@ -800,7 +800,7 @@ class QueryTransactionIntegrationTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals(1, $response->accepted);
 
 		$this->assertEquals(3050, $response->subscriptionId);
-		$this->assertEquals("RECURRINGCAPTURE", $response->subscriptiontype);
+		$this->assertEquals('RECURRINGCAPTURE', $response->subscriptiontype);
 	}
 
 
@@ -816,22 +816,22 @@ class QueryTransactionIntegrationTest extends \PHPUnit\Framework\TestCase
 		// 2. run the test and check the output for the subscriptionId and transactionid of the recur request
 
 		// Set the below to match the original transaction, then run the test.
-		$paymentmethod = "KORTCERT";
+		$paymentmethod = 'KORTCERT';
 		$merchantid = 1130;
-		$currency = "SEK";
-		$cardType = "VISA";
-		$maskedCardNumber = "444433xxxxxx1100";
+		$currency = 'SEK';
+		$cardType = 'VISA';
+		$maskedCardNumber = '444433xxxxxx1100';
 		$expiryMonth = 01;
 		$expiryYear = 15;
 		$subscriptionId = 3050; // insert
 
 		// the below applies to the recur request, and may differ from the original transaction
-		$new_amount = "2500"; // in minor currency
-		$new_customerrefno = "test_manual_recurring_payment_step_1 " . date('c');
+		$new_amount = '2500'; // in minor currency
+		$new_customerrefno = 'test_manual_recurring_payment_step_1 ' . date('c');
 
 		// below is actual test, shouldn't need to change it
 		$request = new RecurTransaction(ConfigurationService::getDefaultConfig());
-		$request->countryCode = "SE";
+		$request->countryCode = 'SE';
 		$request->subscriptionId = $subscriptionId;
 		$request->currency = $currency;
 		$request->customerRefNo = $new_customerrefno;
@@ -910,7 +910,7 @@ class QueryTransactionIntegrationTest extends \PHPUnit\Framework\TestCase
 
 		$request = new QueryTransaction(ConfigurationService::getDefaultConfig());
 		$request->transactionId = $transactionId;
-		$request->countryCode = "SE";
+		$request->countryCode = 'SE';
 		$queryResponse = $request->doRequest();
 
 		$this->assertInstanceOf("Svea\WebPay\HostedService\HostedResponse\HostedAdminResponse\QueryTransactionResponse", $queryResponse);

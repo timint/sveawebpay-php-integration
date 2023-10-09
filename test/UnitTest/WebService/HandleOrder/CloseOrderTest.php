@@ -18,12 +18,12 @@ class CloseOrderTest extends \PHPUnit\Framework\TestCase
 		$config = ConfigurationService::getDefaultConfig();
 		$orderBuilder = WebPay::closeOrder($config);
 		$request = $orderBuilder
-			->setOrderId("id")
-			->setCountryCode("SE")
+			->setOrderId('id')
+			->setCountryCode('SE')
 			->closeInvoiceOrder()
 			->prepareRequest();
 
-		$this->assertEquals("id", $request->request->CloseOrderInformation->SveaOrderId);
+		$this->assertEquals('id', $request->request->CloseOrderInformation->SveaOrderId);
 	}
 
 	public function testClosePaymentPlanOrder()
@@ -31,11 +31,11 @@ class CloseOrderTest extends \PHPUnit\Framework\TestCase
 		$config = ConfigurationService::getDefaultConfig();
 		$orderBuilder = WebPay::closeOrder($config);
 		$request = $orderBuilder
-			->setCountryCode("SE")
-			->setOrderId("id")
+			->setCountryCode('SE')
+			->setOrderId('id')
 			->closePaymentPlanOrder()
 			->prepareRequest();
 
-		$this->assertEquals("id", $request->request->CloseOrderInformation->SveaOrderId);
+		$this->assertEquals('id', $request->request->CloseOrderInformation->SveaOrderId);
 	}
 }

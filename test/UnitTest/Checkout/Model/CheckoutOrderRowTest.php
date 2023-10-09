@@ -21,11 +21,11 @@ class CheckoutOrderRowTest extends TestCase
 				->setVatPercent($this->getRandVatPercent())// - required
 				->setQuantity($this->getRandQuantity())
 				->setDiscountPercent($this->getRandDiscountPercent())
-				->setArticleNumber("123456")
+				->setArticleNumber('123456')
 				->setName('Fork')
 				->setMerchantData('test string'));
 
-		$this->assertEquals($order->orderRows[0]->merchantData, "test string");
+		$this->assertEquals($order->orderRows[0]->merchantData, 'test string');
 	}
 
 }

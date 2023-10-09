@@ -29,7 +29,7 @@ class CancelRecurSubscription extends HostedRequest {
 	 * @param ConfigurationProvider $config instance implementing Svea\WebPay\Config\ConfigurationProvider
 	 */
 	function __construct($config) {
-		$this->method = "cancelrecursubscription";
+		$this->method = 'cancelrecursubscription';
 		parent::__construct($config);
 	}
 
@@ -42,7 +42,7 @@ class CancelRecurSubscription extends HostedRequest {
 
 	private function validateSubscriptionId($self, $errors) {
 		if (isset($self->subscriptionId) == false) {
-			$errors['missing value'] = "subscriptionId is required. Use function setSubscriptionId() with the subscriptionId from the createOrder response.";
+			$errors['missing value'] = 'subscriptionId is required. Use function setSubscriptionId() with the subscriptionId from the createOrder response.';
 		}
 
 		return $errors;
@@ -53,10 +53,10 @@ class CancelRecurSubscription extends HostedRequest {
 
 		$XMLWriter->openMemory();
 		$XMLWriter->setIndent(true);
-		$XMLWriter->startDocument("1.0", "UTF-8");
+		$XMLWriter->startDocument('1.0', 'UTF-8');
 		$XMLWriter->writeComment(Helper::getLibraryAndPlatformPropertiesAsJson($this->config));
 		$XMLWriter->startElement($this->method);
-		$XMLWriter->writeElement("subscriptionid", $this->subscriptionId);
+		$XMLWriter->writeElement('subscriptionid', $this->subscriptionId);
 		$XMLWriter->endElement();
 		$XMLWriter->endDocument();
 

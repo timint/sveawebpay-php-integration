@@ -36,18 +36,18 @@ class HostedOrderValidator extends OrderValidator {
 	 * @return array
 	 */
 	private function validatePayerAlias($order, $errors) {
-		if (isset($order->order->payerAlias) && $order->paymentMethod == "SWISH") {
+		if (isset($order->order->payerAlias) && $order->paymentMethod == 'SWISH') {
 			if (ctype_digit($order->order->payerAlias) == false) {
 				$errors['incorrect type'] = 'payerAlias must be numeric and can not contain any non-numeric characters';
 			}
 			if (strlen($order->order->payerAlias) != 11) {
 				$errors['incorrect length'] = 'payerAlias must be 11 digits';
 			}
-			if ($order->order->countryCode != "SE") {
+			if ($order->order->countryCode != 'SE') {
 				$errors['incorrect value'] = 'countryCode must be set to "SE" if payment method is SWISH';
 			}
 		}
-		elseif (isset($order->order->payerAlias) == false && isset($order->paymentMethod) && $order->paymentMethod == "SWISH") {
+		elseif (isset($order->order->payerAlias) == false && isset($order->paymentMethod) && $order->paymentMethod == 'SWISH') {
 			$errors['missing value'] = 'payerAlias must be set if using payment method SWISH. Use function setPayerAlias()';
 		}
 		return $errors;
@@ -59,11 +59,11 @@ class HostedOrderValidator extends OrderValidator {
 	 * @return array
 	 */
 	private function validateClientOrderNumber($order, $errors) {
-		if (isset($order->clientOrderNumber) == false || "" == $order->clientOrderNumber) {
-			$errors['missing value'] = "ClientOrderNumber is required. Use function setClientOrderNumber().";
+		if (isset($order->clientOrderNumber) == false || '' == $order->clientOrderNumber) {
+			$errors['missing value'] = 'ClientOrderNumber is required. Use function setClientOrderNumber().';
 		}
-		/*if (isset($order->clientOrderNumber) && $order->paymentMethod == "SWISH") {
-			$errors['incorrect value'] = "ClientOrderNumber cannot be longer than 35 characters for Swish payments";
+		/*if (isset($order->clientOrderNumber) && $order->paymentMethod == 'SWISH') {
+			$errors['incorrect value'] = 'ClientOrderNumber cannot be longer than 35 characters for Swish payments';
 		}*/
 		return $errors;
 	}
@@ -75,12 +75,12 @@ class HostedOrderValidator extends OrderValidator {
 	 */
 	private function validateCurrency($order, $errors) {
 		if (isset($order->order->currency) == false) {
-			$errors['missing value'] = "Currency is required. Use function setCurrency().";
+			$errors['missing value'] = 'Currency is required. Use function setCurrency().';
 		}
 		if (isset($order->order->currency) && isset($order->paymentMethod)) {
-			if ($order->paymentMethod == "SVEACARDPAY" || $order->paymentMethod == "SVEACARDPAY_PF") {
+			if ($order->paymentMethod == 'SVEACARDPAY' || $order->paymentMethod == 'SVEACARDPAY_PF') {
 				if (Helper::isCardPayCurrency($order->order->currency) == false) {
-					$errors['unsupported currency'] = "Currency is not supported with this payment method.";
+					$errors['unsupported currency'] = 'Currency is not supported with this payment method.';
 				}
 			}
 		}
@@ -93,37 +93,37 @@ class HostedOrderValidator extends OrderValidator {
 	 * @return type
 	 */
 	private function validateCountryCode($order, $errors) {
-		if (isset($order->order->countryCode) == false && isset($order->paymentMethod) && $order->paymentMethod == "SVEACARDPAY_PF") {
-			$errors['missing value'] = "CountryCode is required for SVEACARDPAY_PF. Use function setCountryCode().";
+		if (isset($order->order->countryCode) == false && isset($order->paymentMethod) && $order->paymentMethod == 'SVEACARDPAY_PF') {
+			$errors['missing value'] = 'CountryCode is required for SVEACARDPAY_PF. Use function setCountryCode().';
 		}
 
 		return $errors;
 	}
 
 	public function validateEuroCustomer($order, $errors) {
-		if (isset($order->customerIdentity->initials) == false && $this->isCompany == false && $order->countryCode == "NL") {
-			$errors['missing value'] = "Initials is required for INVOICE and PAYMENTPLAN payments for individual customers when countrycode is NL. Use function setInitials().";
+		if (isset($order->customerIdentity->initials) == false && $this->isCompany == false && $order->countryCode == 'NL') {
+			$errors['missing value'] = 'Initials is required for INVOICE and PAYMENTPLAN payments for individual customers when countrycode is NL. Use function setInitials().';
 		}
 		if (isset($order->customerIdentity->birthDate) == false && $this->isCompany == false) {
-			$errors['missing value'] = "BirthDate is required for INVOICE and PAYMENTPLAN payments for individual customers when countrycode is NL. Use function setBirthDate().";
+			$errors['missing value'] = 'BirthDate is required for INVOICE and PAYMENTPLAN payments for individual customers when countrycode is NL. Use function setBirthDate().';
 		}
 		if (isset($order->customerIdentity->firstname) == false || isset($order->customerIdentity->lastname) == false && $this->isCompany == false) {
-			$errors['missing value'] = "Name is required for INVOICE and PAYMENTPLAN payments for individual customers when countrycode is NL. Use function setName().";
+			$errors['missing value'] = 'Name is required for INVOICE and PAYMENTPLAN payments for individual customers when countrycode is NL. Use function setName().';
 		}
 		if (isset($order->customerIdentity->companyVatNumber) == false && $this->isCompany == true) {
-			$errors['missing value'] = "VatNumber is required for INVOICE and PAYMENTPLAN payments for company customers when countrycode is NL. Use function setVatNumber().";
+			$errors['missing value'] = 'VatNumber is required for INVOICE and PAYMENTPLAN payments for company customers when countrycode is NL. Use function setVatNumber().';
 		}
 		if (isset($order->customerIdentity->companyName) == false && $this->isCompany == true) {
-			$errors['missing value'] = "CompanyName is required for INVOICE and PAYMENTPLAN payments for individual customers when countrycode is NL. Use function setCompanyName().";
+			$errors['missing value'] = 'CompanyName is required for INVOICE and PAYMENTPLAN payments for individual customers when countrycode is NL. Use function setCompanyName().';
 		}
 		if (isset($order->customerIdentity->street) == false || isset($order->customerIdentity->housenumber) == false) {
-			$errors['missing value'] = "StreetAddress is required for INVOICE and PAYMENTPLAN payments for all customers when countrycode is NL. Use function setStreetAddress().";
+			$errors['missing value'] = 'StreetAddress is required for INVOICE and PAYMENTPLAN payments for all customers when countrycode is NL. Use function setStreetAddress().';
 		}
 		if (isset($order->customerIdentity->locality) == false) {
-			$errors['missing value'] = "Locality is required for INVOICE and PAYMENTPLAN payments for all customers when countrycode is NL. Use function setLocality().";
+			$errors['missing value'] = 'Locality is required for INVOICE and PAYMENTPLAN payments for all customers when countrycode is NL. Use function setLocality().';
 		}
 		if (isset($order->customerIdentity->zipCode) == false) {
-			$errors['missing value'] = "ZipCode is required for INVOICE and PAYMENTPLAN payments for all customers when countrycode is NL. Use function setZipCode().";
+			$errors['missing value'] = 'ZipCode is required for INVOICE and PAYMENTPLAN payments for all customers when countrycode is NL. Use function setZipCode().';
 		}
 
 		return $errors;

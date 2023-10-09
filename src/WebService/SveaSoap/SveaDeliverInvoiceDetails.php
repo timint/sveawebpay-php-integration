@@ -9,7 +9,7 @@ class SveaDeliverInvoiceDetails {
 	/**
 	 * Already set at Svea, but needs to be included in array
 	 */
-	public $NumberOfCreditDays = "";
+	public $NumberOfCreditDays = '';
 
 	/**
 	 * Post or Email
@@ -19,7 +19,7 @@ class SveaDeliverInvoiceDetails {
 	/**
 	 * Can leave blank
 	 */
-	public $IsCreditInvoice = "";
+	public $IsCreditInvoice = '';
 
 	public $InvoiceIdToCredit;
 

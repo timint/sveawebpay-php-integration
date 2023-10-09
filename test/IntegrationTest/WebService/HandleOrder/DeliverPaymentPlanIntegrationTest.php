@@ -26,10 +26,10 @@ class DeliverPaymentPlanIntegrationTest extends \PHPUnit\Framework\TestCase
 		$response = WebPay::createOrder($config)
 			->addOrderRow(TestUtil::createOrderRow(1000.00, 1))
 			->addCustomerDetails(WebPayItem::individualCustomer()->setNationalIdNumber(194605092222))
-			->setCountryCode("SE")
-			->setCustomerReference("33")
-			->setOrderDate("2012-12-12")
-			->setCurrency("SEK")
+			->setCountryCode('SE')
+			->setCustomerReference('33')
+			->setOrderDate('2012-12-12')
+			->setCurrency('SEK')
 			->usePaymentPlanPayment(TestUtil::getGetPaymentPlanParamsForTesting())
 			->doRequest();
 
@@ -44,7 +44,7 @@ class DeliverPaymentPlanIntegrationTest extends \PHPUnit\Framework\TestCase
 		$request = $orderBuilder
 			->addOrderRow(TestUtil::createOrderRow(1000.00, 1))
 			->setOrderId($orderId)
-			->setCountryCode("SE")
+			->setCountryCode('SE')
 			->deliverPaymentPlanOrder()
 			->doRequest();
 
@@ -64,7 +64,7 @@ class DeliverPaymentPlanIntegrationTest extends \PHPUnit\Framework\TestCase
 		$orderBuilder = WebPay::deliverOrder($config);
 		$request = $orderBuilder
 			//->setOrderId($orderId)
-			->setCountryCode("SE")
+			->setCountryCode('SE')
 			->deliverPaymentPlanOrder()
 			->doRequest();
 	}
@@ -84,9 +84,9 @@ class DeliverPaymentPlanIntegrationTest extends \PHPUnit\Framework\TestCase
 					->setVatPercent(24)
 					->setQuantity(1)
 			)
-			->addCustomerDetails(TestUtil::createIndividualCustomer("SE"))
-			->setCountryCode("SE")
-			->setOrderDate("2012-12-12")
+			->addCustomerDetails(TestUtil::createIndividualCustomer('SE'))
+			->setCountryCode('SE')
+			->setOrderDate('2012-12-12')
 			->usePaymentPlanPayment($campaigncode)
 			->doRequest();
 		$request = WebPay::deliverOrder($config);
@@ -99,7 +99,7 @@ class DeliverPaymentPlanIntegrationTest extends \PHPUnit\Framework\TestCase
 			)
 			->setOrderId($order->sveaOrderId)
 			->setInvoiceDistributionType(DistributionType::POST)//Post or Email
-			->setCountryCode("SE")
+			->setCountryCode('SE')
 			->deliverPaymentPlanOrder()
 			->doRequest();
 //			print_r($request);
@@ -118,9 +118,9 @@ class DeliverPaymentPlanIntegrationTest extends \PHPUnit\Framework\TestCase
 					->setVatPercent(24)
 					->setQuantity(1)
 			)
-			->addCustomerDetails(TestUtil::createIndividualCustomer("SE"))
-			->setCountryCode("SE")
-			->setOrderDate("2012-12-12")
+			->addCustomerDetails(TestUtil::createIndividualCustomer('SE'))
+			->setCountryCode('SE')
+			->setOrderDate('2012-12-12')
 			->usePaymentPlanPayment($campaigncode)
 			->doRequest();
 		$request = WebPay::deliverOrder($config);
@@ -133,7 +133,7 @@ class DeliverPaymentPlanIntegrationTest extends \PHPUnit\Framework\TestCase
 			)
 			->setOrderId($order->sveaOrderId)
 			->setInvoiceDistributionType(DistributionType::POST)//Post or Email
-			->setCountryCode("SE")
+			->setCountryCode('SE')
 			->deliverPaymentPlanOrder()
 			->doRequest();
 //			print_r($request);
@@ -160,9 +160,9 @@ class DeliverPaymentPlanIntegrationTest extends \PHPUnit\Framework\TestCase
 				->setAmountIncVat(123.9876)
 				->setVatPercent(24)
 			)
-			->addCustomerDetails(TestUtil::createIndividualCustomer("SE"))
-			->setCountryCode("SE")
-			->setOrderDate("2012-12-12")
+			->addCustomerDetails(TestUtil::createIndividualCustomer('SE'))
+			->setCountryCode('SE')
+			->setOrderDate('2012-12-12')
 			->usePaymentPlanPayment($campaigncode)
 			->doRequest();
 		$request = WebPay::deliverOrder($config);
@@ -183,7 +183,7 @@ class DeliverPaymentPlanIntegrationTest extends \PHPUnit\Framework\TestCase
 			)
 			->setOrderId($order->sveaOrderId)
 			->setInvoiceDistributionType(DistributionType::POST)//Post or Email
-			->setCountryCode("SE")
+			->setCountryCode('SE')
 			->deliverPaymentPlanOrder()
 			->doRequest();
 		$this->assertEquals(1, $request->accepted);
@@ -209,9 +209,9 @@ class DeliverPaymentPlanIntegrationTest extends \PHPUnit\Framework\TestCase
 				->setAmountIncVat(123.9876)
 				->setVatPercent(24)
 			)
-			->addCustomerDetails(TestUtil::createIndividualCustomer("SE"))
-			->setCountryCode("SE")
-			->setOrderDate("2012-12-12")
+			->addCustomerDetails(TestUtil::createIndividualCustomer('SE'))
+			->setCountryCode('SE')
+			->setOrderDate('2012-12-12')
 			->usePaymentPlanPayment($campaigncode)
 			->doRequest();
 		$request = WebPay::deliverOrder($config);
@@ -232,7 +232,7 @@ class DeliverPaymentPlanIntegrationTest extends \PHPUnit\Framework\TestCase
 			)
 			->setOrderId($order->sveaOrderId)
 			->setInvoiceDistributionType(DistributionType::POST)//Post or Email
-			->setCountryCode("SE")
+			->setCountryCode('SE')
 			->deliverPaymentPlanOrder()
 			->doRequest();
 		$this->assertEquals(1, $request->accepted);
@@ -257,9 +257,9 @@ class DeliverPaymentPlanIntegrationTest extends \PHPUnit\Framework\TestCase
 			->addDiscount(WebPayItem::relativeDiscount()
 				->setDiscountPercent(10)
 			)
-			->addCustomerDetails(TestUtil::createIndividualCustomer("SE"))
-			->setCountryCode("SE")
-			->setOrderDate("2012-12-12")
+			->addCustomerDetails(TestUtil::createIndividualCustomer('SE'))
+			->setCountryCode('SE')
+			->setOrderDate('2012-12-12')
 			->usePaymentPlanPayment($campaigncode)
 			->doRequest();
 		$request = WebPay::deliverOrder($config);
@@ -279,7 +279,7 @@ class DeliverPaymentPlanIntegrationTest extends \PHPUnit\Framework\TestCase
 			)
 			->setOrderId($order->sveaOrderId)
 			->setInvoiceDistributionType(DistributionType::POST)//Post or Email
-			->setCountryCode("SE")
+			->setCountryCode('SE')
 			->deliverPaymentPlanOrder()
 			->doRequest();
 		$this->assertEquals(1, $request->accepted);

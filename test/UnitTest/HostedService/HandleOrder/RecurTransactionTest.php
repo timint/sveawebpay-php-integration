@@ -30,11 +30,11 @@ class RecurTransactionTest extends \PHPUnit\Framework\TestCase
 	function test_class_exists()
 	{
 		$this->assertInstanceOf("Svea\WebPay\HostedService\HostedAdminRequest\RecurTransaction", $this->recurTransactionObject);
-		$this->assertEquals("recur", \PHPUnit\Framework\Assert::readAttribute($this->recurTransactionObject, 'method'));
+		$this->assertEquals('recur', \PHPUnit\Framework\Assert::readAttribute($this->recurTransactionObject, 'method'));
 	}
 
 //    function test_setCurrency() {
-//        $currency = "SEK";
+//        $currency = 'SEK';
 //        $this->recurTransactionObject->setCurrency( $currency );
 //        $this->assertEquals( $currency, PHPUnit_Framework_Assert::readAttribute($this->recurTransactionObject, 'currency') );
 //    }
@@ -46,7 +46,7 @@ class RecurTransactionTest extends \PHPUnit\Framework\TestCase
 //    }
 //
 //    function test_setCustomerRefNo( ){
-//        $customerRefNo = "myCustomerRefNo";
+//        $customerRefNo = 'myCustomerRefNo';
 //        $this->recurTransactionObject->setCustomerRefNo( $customerRefNo );
 //        $this->assertEquals( $customerRefNo, PHPUnit_Framework_Assert::readAttribute($this->recurTransactionObject, 'customerRefNo') );
 //    }
@@ -61,19 +61,19 @@ class RecurTransactionTest extends \PHPUnit\Framework\TestCase
 	{
 
 		// set up recurTransaction object & get request form
-		$customerRefNo = "myCustomerRefNo";
+		$customerRefNo = 'myCustomerRefNo';
 		$this->recurTransactionObject->customerRefNo = $customerRefNo;
 
 		$subscriptionId = 987654;
 		$this->recurTransactionObject->subscriptionId = $subscriptionId;
 
-		$currency = "SEK";
+		$currency = 'SEK';
 		$this->recurTransactionObject->currency = $currency;
 
 		$amount = 100;
 		$this->recurTransactionObject->amount = $amount;
 
-		$countryCode = "SE";
+		$countryCode = 'SE';
 		$this->recurTransactionObject->countryCode = $countryCode;
 
 		$form = $this->recurTransactionObject->prepareRequest();
@@ -88,19 +88,19 @@ class RecurTransactionTest extends \PHPUnit\Framework\TestCase
 	{
 
 		// set up recurTransaction object & get request form
-		$customerRefNo = "myCustomerRefNo";
+		$customerRefNo = 'myCustomerRefNo';
 		$this->recurTransactionObject->customerRefNo = $customerRefNo;
 
 		$subscriptionId = 987654;
 		$this->recurTransactionObject->subscriptionId = $subscriptionId;
 
-		$currency = "SEK";
+		$currency = 'SEK';
 		$this->recurTransactionObject->currency = $currency;
 
 		$amount = 100;
 		$this->recurTransactionObject->amount = $amount;
 
-		$countryCode = "SE";
+		$countryCode = 'SE';
 		$this->recurTransactionObject->countryCode = $countryCode;
 
 		$form = $this->recurTransactionObject->prepareRequest();
@@ -113,12 +113,12 @@ class RecurTransactionTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals($merchantid, urldecode($form['merchantid']));
 
 		// check valid mac
-		$this->assertEquals(hash("sha512", urldecode($form['message']) . $secret), urldecode($form['mac']));
+		$this->assertEquals(hash('sha512', urldecode($form['message']) . $secret), urldecode($form['mac']));
 
 		// check credit request message contents
 		$xmlMessage = new SimpleXMLElement(base64_decode(urldecode($form['message'])));
 
-		$this->assertEquals("recur", $xmlMessage->getName());   // root node
+		$this->assertEquals('recur', $xmlMessage->getName());   // root node
 		$this->assertEquals((string)$customerRefNo, $xmlMessage->customerrefno);
 		$this->assertEquals((string)$subscriptionId, $xmlMessage->subscriptionid);
 		$this->assertEquals((string)$currency, $xmlMessage->currency);
@@ -134,13 +134,13 @@ class RecurTransactionTest extends \PHPUnit\Framework\TestCase
 		$subscriptionId = 987654;
 		$this->recurTransactionObject->subscriptionId = $subscriptionId;
 
-		$currency = "SEK";
+		$currency = 'SEK';
 		$this->recurTransactionObject->currency = $currency;
 
 		$amount = 100;
 		$this->recurTransactionObject->amount = $amount;
 
-		$countryCode = "SE";
+		$countryCode = 'SE';
 		$this->recurTransactionObject->countryCode = $countryCode;
 
 		$form = $this->recurTransactionObject->prepareRequest();
@@ -152,16 +152,16 @@ class RecurTransactionTest extends \PHPUnit\Framework\TestCase
 	 */
 	function test_prepareRequest_missing_subscriptionId_throws_exception()
 	{
-		$customerRefNo = "myCustomerRefNo";
+		$customerRefNo = 'myCustomerRefNo';
 		$this->recurTransactionObject->customerRefNo = $customerRefNo;
 
-		$currency = "SEK";
+		$currency = 'SEK';
 		$this->recurTransactionObject->currency = $currency;
 
 		$amount = 100;
 		$this->recurTransactionObject->amount = $amount;
 
-		$countryCode = "SE";
+		$countryCode = 'SE';
 		$this->recurTransactionObject->countryCode = $countryCode;
 
 		$form = $this->recurTransactionObject->prepareRequest();
@@ -173,16 +173,16 @@ class RecurTransactionTest extends \PHPUnit\Framework\TestCase
 	 */
 	function test_prepareRequest_missing_amount_throws_exception()
 	{
-		$customerRefNo = "myCustomerRefNo";
+		$customerRefNo = 'myCustomerRefNo';
 		$this->recurTransactionObject->customerRefNo = $customerRefNo;
 
 		$subscriptionId = 987654;
 		$this->recurTransactionObject->subscriptionId = $subscriptionId;
 
-		$currency = "SEK";
+		$currency = 'SEK';
 		$this->recurTransactionObject->currency = $currency;
 
-		$countryCode = "SE";
+		$countryCode = 'SE';
 		$this->recurTransactionObject->countryCode = $countryCode;
 
 		$form = $this->recurTransactionObject->prepareRequest();
@@ -193,7 +193,7 @@ class RecurTransactionTest extends \PHPUnit\Framework\TestCase
 	function test_prepareRequest_missing_currency_does_not_throw_an_exception()
 	{
 
-		$customerRefNo = "myCustomerRefNo";
+		$customerRefNo = 'myCustomerRefNo';
 		$this->recurTransactionObject->customerRefNo = $customerRefNo;
 
 		$subscriptionId = 987654;
@@ -202,7 +202,7 @@ class RecurTransactionTest extends \PHPUnit\Framework\TestCase
 		$amount = 100;
 		$this->recurTransactionObject->amount = $amount;
 
-		$countryCode = "SE";
+		$countryCode = 'SE';
 		$this->recurTransactionObject->countryCode = $countryCode;
 
 		$form = $this->recurTransactionObject->prepareRequest();

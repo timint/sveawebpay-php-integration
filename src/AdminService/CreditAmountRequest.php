@@ -27,7 +27,7 @@ class CreditAmountRequest extends AdminServiceRequest {
 	 * @param CreditAmountBuilder $creditAmountBuilder
 	 */
 	public function __construct($creditAmountBuilder) {
-		$this->action = "CancelPaymentPlanAmount";
+		$this->action = 'CancelPaymentPlanAmount';
 		$this->orderBuilder = $creditAmountBuilder;
 
 	}
@@ -67,7 +67,7 @@ class CreditAmountRequest extends AdminServiceRequest {
 
 	public function validateContractNumber($errors) {
 		if (isset($this->orderBuilder->contractNumber) == false) {
-			$errors[] = ['missing value' => "contractNumber is required, use setContractNumber()."];
+			$errors[] = ['missing value' => 'contractNumber is required, use setContractNumber().'];
 		}
 
 		return $errors;
@@ -75,7 +75,7 @@ class CreditAmountRequest extends AdminServiceRequest {
 
 	private function validateOrderType($errors) {
 		if (isset($this->orderBuilder->orderType) == false) {
-			$errors[] = ['missing value' => "orderType is required."];
+			$errors[] = ['missing value' => 'orderType is required.'];
 		}
 
 		return $errors;
@@ -83,7 +83,7 @@ class CreditAmountRequest extends AdminServiceRequest {
 
 	private function validateCountryCode($errors) {
 		if (isset($this->orderBuilder->countryCode) == false) {
-			$errors[] = ['missing value' => "countryCode is required, use setCountryCode()."];
+			$errors[] = ['missing value' => 'countryCode is required, use setCountryCode().'];
 		}
 
 		return $errors;
@@ -91,9 +91,9 @@ class CreditAmountRequest extends AdminServiceRequest {
 
 	private function validateAmount($errors) {
 		if (!isset($this->orderBuilder->amountIncVat) || $this->orderBuilder->amountIncVat <= 0) {
-			$errors[] = ['incorrect value' => "amountIncVat is too small."];
+			$errors[] = ['incorrect value' => 'amountIncVat is too small.'];
 		} elseif (isset($this->orderBuilder->amountIncVat) && !(is_float($this->orderBuilder->amountIncVat) || is_int($this->orderBuilder->amountIncVat))) {
-			$errors[] = ['incorrect datatype' => "amountIncVat is not of type float or float."];
+			$errors[] = ['incorrect datatype' => 'amountIncVat is not of type float or float.'];
 		}
 
 		return $errors;
@@ -117,7 +117,7 @@ class CreditAmountRequest extends AdminServiceRequest {
 					$this->formatRowNameAndDescription($orderRow),
 					$orderRow->rowNumber,
 					$orderRow->vatPercent
-				), SOAP_ENC_OBJECT, null, null, 'CancellationRow', "http://schemas.datacontract.org/2004/07/DataObjects.Webservice"
+				), SOAP_ENC_OBJECT, null, null, 'CancellationRow', 'http://schemas.datacontract.org/2004/07/DataObjects.Webservice'
 			);
 		}
 

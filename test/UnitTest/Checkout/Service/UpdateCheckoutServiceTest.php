@@ -21,7 +21,7 @@ class UpdateCheckoutServiceTest extends TestCase
 	{
 		parent::setUp();
 
-		$this->order->setCountryCode("SE");
+		$this->order->setCountryCode('SE');
 
 		$this->service = new UpdateOrderService($this->order);
 	}

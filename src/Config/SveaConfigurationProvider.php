@@ -155,7 +155,7 @@ class SveaConfigurationProvider implements ConfigurationProvider {
 		try {
 			$integrationplatform = $this->getIntegrationProperty('integrationplatform');
 		} catch (InvalidTypeException $e) {
-			$integrationplatform = "Please provide your integration platform here.";
+			$integrationplatform = 'Please provide your integration platform here.';
 		}
 
 		return $integrationplatform;
@@ -163,7 +163,7 @@ class SveaConfigurationProvider implements ConfigurationProvider {
 
 	private function getIntegrationProperty($property) {
 		if (array_key_exists('integrationproperties', $this->conf) == false) {
-			throw new InvalidTypeException("integration properties not set");
+			throw new InvalidTypeException('integration properties not set');
 		}
 
 		return $this->conf['integrationproperties'][$property];
@@ -173,7 +173,7 @@ class SveaConfigurationProvider implements ConfigurationProvider {
 		try {
 			$integrationversion = $this->getIntegrationProperty('integrationversion');
 		} catch (InvalidTypeException $e) {
-			$integrationversion = "Please provide your integration version here.";
+			$integrationversion = 'Please provide your integration version here.';
 		}
 
 		return $integrationversion;
@@ -183,7 +183,7 @@ class SveaConfigurationProvider implements ConfigurationProvider {
 		try {
 			$integrationcompany = $this->getIntegrationProperty('integrationcompany');
 		} catch (InvalidTypeException $e) {
-			$integrationcompany = "Please provide your integration company here.";
+			$integrationcompany = 'Please provide your integration company here.';
 		}
 
 		return $integrationcompany;

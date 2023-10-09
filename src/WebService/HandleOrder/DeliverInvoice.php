@@ -39,12 +39,12 @@ class DeliverInvoice extends HandleOrder {
 	public function doRequest() {
 		$requestObject = $this->prepareRequest();
 		$priceIncludingVat = $requestObject->request->DeliverOrderInformation->DeliverInvoiceDetails->OrderRows['OrderRow'][0]->PriceIncludingVat;
-		$request = new SveaDoRequest($this->orderBuilder->conf, $this->orderBuilder->orderType, "DeliverOrderEu", $requestObject, $this->orderBuilder->logging);
-		$responseObject = new SveaResponse($request->result['requestResult'], "", null, null, isset($request->result['logs']) ? $request->result['logs'] : null);
-		if ($responseObject->response->resultcode == "50036") {
+		$request = new SveaDoRequest($this->orderBuilder->conf, $this->orderBuilder->orderType, 'DeliverOrderEu', $requestObject, $this->orderBuilder->logging);
+		$responseObject = new SveaResponse($request->result['requestResult'], '', null, null, isset($request->result['logs']) ? $request->result['logs'] : null);
+		if ($responseObject->response->resultcode == '50036') {
 			$requestObject = $this->prepareRequest($priceIncludingVat);
-			$request = new SveaDoRequest($this->orderBuilder->conf, $this->orderBuilder->orderType, "DeliverOrderEu", $requestObject, $this->orderBuilder->logging);
-			$responseObject = new SveaResponse($request->result['requestResult'], "", null, null, isset($request->result['logs']) ? $request->result['logs'] : null);
+			$request = new SveaDoRequest($this->orderBuilder->conf, $this->orderBuilder->orderType, 'DeliverOrderEu', $requestObject, $this->orderBuilder->logging);
+			$responseObject = new SveaResponse($request->result['requestResult'], '', null, null, isset($request->result['logs']) ? $request->result['logs'] : null);
 		}
 
 		return $responseObject->response;
@@ -96,7 +96,7 @@ class DeliverInvoice extends HandleOrder {
 
 	private function validateCountryCode($order, $errors) {
 		if (isset($order->countryCode) == false) {
-			$errors['missing value'] = "CountryCode is required. Use function setCountryCode().";
+			$errors['missing value'] = 'CountryCode is required. Use function setCountryCode().';
 		}
 
 		return $errors;
@@ -104,7 +104,7 @@ class DeliverInvoice extends HandleOrder {
 
 	private function validateOrderId($order, $errors) {
 		if (isset($order->orderId) == false) {
-			$errors['missing value'] = "OrderId is required. Use function setOrderId() with the SveaOrderId from the createOrder response.";
+			$errors['missing value'] = 'OrderId is required. Use function setOrderId() with the SveaOrderId from the createOrder response.';
 		}
 
 		return $errors;
@@ -112,7 +112,7 @@ class DeliverInvoice extends HandleOrder {
 
 	private function validateInvoiceDetails($order, $errors) {
 		if (isset($order->orderId) && $order->orderType == ConfigurationProvider::INVOICE_TYPE && isset($order->distributionType) == false) {
-			$errors['missing value'] = "InvoiceDistributionType is required for deliverInvoiceOrder. Use function setInvoiceDistributionType().";
+			$errors['missing value'] = 'InvoiceDistributionType is required for deliverInvoiceOrder. Use function setInvoiceDistributionType().';
 		}
 
 		return $errors;
@@ -120,7 +120,7 @@ class DeliverInvoice extends HandleOrder {
 
 	private function validateOrderRows($order, $errors) {
 		if ($order->orderType == ConfigurationProvider::INVOICE_TYPE && empty($order->orderRows) && empty($order->shippingFee) && empty($order->invoiceFee)) {
-			$errors['missing values'] = "No rows has been included. Use function beginOrderRow(), beginShippingfee() or beginInvoiceFee().";
+			$errors['missing values'] = 'No rows has been included. Use function beginOrderRow(), beginShippingfee() or beginInvoiceFee().';
 		}
 
 		return $errors;

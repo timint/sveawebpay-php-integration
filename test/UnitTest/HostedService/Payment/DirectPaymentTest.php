@@ -24,12 +24,12 @@ class DirectPaymentTest extends \PHPUnit\Framework\TestCase {
 			->addCustomerDetails(WebPayItem::individualCustomer()
 					->setNationalIdNumber(194605092222)
 			)
-			->setCountryCode("SE")
-			->setClientOrderNumber("33")
-			->setOrderDate("2012-12-12")
-			->setCurrency("SEK")
+			->setCountryCode('SE')
+			->setClientOrderNumber('33')
+			->setOrderDate('2012-12-12')
+			->setCurrency('SEK')
 			->usePayPageDirectBankOnly()
-				->setReturnUrl("http://myurl.se")
+				->setReturnUrl('http://myurl.se')
 				->getPaymentForm();
 
 		$xmlMessage = new \SimpleXMLElement($form->xmlMessage);
@@ -52,26 +52,26 @@ class DirectPaymentTest extends \PHPUnit\Framework\TestCase {
 				->addFee(WebPayItem::shippingFee()
 					->setShippingId('33')
 					->setName('shipping')
-					->setDescription("Specification")
+					->setDescription('Specification')
 					->setAmountExVat(50)
-					->setUnit("st")
+					->setUnit('st')
 					->setVatPercent(25)
 					->setDiscountPercent(0)
 				)
 				->addDiscount(WebPayItem::relativeDiscount()
-					->setDiscountId("1")
+					->setDiscountId('1')
 					->setDiscountPercent(50)
-					->setUnit("st")
+					->setUnit('st')
 					->setName('Relative')
-					->setDescription("RelativeDiscount")
+					->setDescription('RelativeDiscount')
 				)
 				->addCustomerDetails(WebPayItem::individualCustomer()->setNationalIdNumber(194605092222))
-				->setCountryCode("SE")
-				->setClientOrderNumber("33")
-				->setOrderDate("2012-12-12")
-				->setCurrency("SEK")
+				->setCountryCode('SE')
+				->setClientOrderNumber('33')
+				->setOrderDate('2012-12-12')
+				->setCurrency('SEK')
 				->usePayPageDirectBankOnly()
-				->setReturnUrl("http://myurl.se")
+				->setReturnUrl('http://myurl.se')
 				->getPaymentForm();
 
 		$xmlMessage = new \SimpleXMLElement($form->xmlMessage);
@@ -89,17 +89,17 @@ class DirectPaymentTest extends \PHPUnit\Framework\TestCase {
 		$form = WebPay::createOrder($config)
 				->addOrderRow(TestUtil::createOrderRow())
 				->addCustomerDetails(WebPayItem::individualCustomer()->setNationalIdNumber(194605092222))
-				->setCountryCode("SE")
-				->setClientOrderNumber("33")
-				->setOrderDate("2012-12-12")
-				->setCurrency("SEK")
+				->setCountryCode('SE')
+				->setClientOrderNumber('33')
+				->setOrderDate('2012-12-12')
+				->setCurrency('SEK')
 				->usePayPageDirectBankOnly()
-				->setReturnUrl("http://myurl.se")
-				->setCallbackUrl("http://myurl.se")
+				->setReturnUrl('http://myurl.se')
+				->setCallbackUrl('http://myurl.se')
 				->getPaymentForm();
 
 		$xmlMessage = new \SimpleXMLElement($form->xmlMessage);
-	   $this->assertEquals("http://myurl.se", $xmlMessage->callbackurl);
+	   $this->assertEquals('http://myurl.se', $xmlMessage->callbackurl);
 	}
 
 

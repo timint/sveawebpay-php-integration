@@ -225,7 +225,7 @@ class CheckoutOrderBuilder extends OrderBuilder {
 	 * @return string
 	 */
 	public function getCountryCode() {
-		$countryCode = $this->countryCode != null ? $this->countryCode : "SE";
+		$countryCode = $this->countryCode != null ? $this->countryCode : 'SE';
 
 		return $countryCode;
 	}

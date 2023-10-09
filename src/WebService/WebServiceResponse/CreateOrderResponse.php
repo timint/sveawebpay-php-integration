@@ -73,7 +73,7 @@ class CreateOrderResponse extends WebServiceResponse {
 	public function __construct($response) {
 		// was request accepted?
 		$this->accepted = $response->CreateOrderEuResult->Accepted;
-		$this->errormessage = isset($response->CreateOrderEuResult->ErrorMessage) ? $response->CreateOrderEuResult->ErrorMessage : "";
+		$this->errormessage = isset($response->CreateOrderEuResult->ErrorMessage) ? $response->CreateOrderEuResult->ErrorMessage : '';
 
 		// set response resultcode
 		$this->resultcode = $response->CreateOrderEuResult->ResultCode;

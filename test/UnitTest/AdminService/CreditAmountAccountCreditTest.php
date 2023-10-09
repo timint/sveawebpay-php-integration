@@ -18,7 +18,7 @@ class CreditAmountAccountCreditTestextends extends  \PHPUnit\Framework\TestCase
 	{
 		$this->builderObject = new CreditOrderRowsBuilder(ConfigurationService::getDefaultConfig());
 		$this->builderObject->orderId = 123456;
-		$this->builderObject->countryCode = "SE";
+		$this->builderObject->countryCode = 'SE';
 		$this->builderObject->amountIncVat = 150.00;
 	}
 
@@ -69,7 +69,7 @@ class CreditAmountAccountCreditTestextends extends  \PHPUnit\Framework\TestCase
 	 */
 	public function test_validate_throws_exception_on_bad_amount_value()
 	{
-		$this->builderObject->amountIncVat = "badValue";
+		$this->builderObject->amountIncVat = 'badValue';
 		$creditRequest = new CreditAmountAccountCreditRequest($this->builderObject);
 		$request = $creditRequest->prepareRequest();
 	}

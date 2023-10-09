@@ -68,18 +68,18 @@ class DeliverOrderResult extends WebServiceResponse {
 		if ($this->accepted == 1) {
 			$this->amount = $response->DeliverOrderEuResult->DeliverOrderResult->Amount;
 			$this->orderType = $response->DeliverOrderEuResult->DeliverOrderResult->OrderType;
-			if (property_exists($response->DeliverOrderEuResult->DeliverOrderResult, "InvoiceResultDetails")) {
+			if (property_exists($response->DeliverOrderEuResult->DeliverOrderResult, 'InvoiceResultDetails')) {
 				$this->invoiceId = $response->DeliverOrderEuResult->DeliverOrderResult->InvoiceResultDetails->InvoiceId;
 				$this->dueDate = $response->DeliverOrderEuResult->DeliverOrderResult->InvoiceResultDetails->DueDate;
 				$this->invoiceDate = $response->DeliverOrderEuResult->DeliverOrderResult->InvoiceResultDetails->InvoiceDate;
 				$this->invoiceDistributionType = $response->DeliverOrderEuResult->DeliverOrderResult->InvoiceResultDetails->InvoiceDistributionType;
 				$this->ocr = $response->DeliverOrderEuResult->DeliverOrderResult->InvoiceResultDetails->Ocr;
 				$this->lowestAmountToPay = $response->DeliverOrderEuResult->DeliverOrderResult->InvoiceResultDetails->LowestAmountToPay;
-			} elseif (property_exists($response->DeliverOrderEuResult->DeliverOrderResult, "PaymentPlanResultDetails")) {
+			} elseif (property_exists($response->DeliverOrderEuResult->DeliverOrderResult, 'PaymentPlanResultDetails')) {
 				$this->contractNumber = $response->DeliverOrderEuResult->DeliverOrderResult->PaymentPlanResultDetails->ContractNumber;
 			}
 			// - specific for accountCredit
-			if (property_exists($response->DeliverOrderEuResult->DeliverOrderResult, "DeliveryReferenceNumber")) {
+			if (property_exists($response->DeliverOrderEuResult->DeliverOrderResult, 'DeliveryReferenceNumber')) {
 				$this->deliveryReferenceNumber = $response->DeliverOrderEuResult->DeliverOrderResult->DeliveryReferenceNumber;
 			}
 		}

@@ -16,7 +16,7 @@ ini_set('display_errors', 'On');
 // get config object
 $myConfig = ConfigurationService::getTestConfig();
 
-$countryCode = "SE"; // should match request countryCode
+$countryCode = 'SE'; // should match request countryCode
 
 // the raw request response is posted to the returnurl (this page) from Svea.
 $rawResponse = $_REQUEST;
@@ -26,7 +26,7 @@ $myResponse = new SveaResponse($rawResponse, $countryCode, $myConfig);
 
 // abort if request failed
 if ($myResponse->getResponse()->accepted == 0) {
-	echo "<pre>Request failed. aborting";
+	echo '<pre>Request failed. aborting';
 	print_r($myResponse->getResponse());
 	die;
 }
@@ -38,9 +38,9 @@ print_r($myResponse->getResponse());
 
 // save the subscriptionid to a file, for use in recurorder.php
 $mySubscriptionId = $myResponse->getResponse()->subscriptionId;
-file_put_contents("subscription.txt", $mySubscriptionId);
+file_put_contents('subscription.txt', $mySubscriptionId);
 
-$recurorderUrl = "http://localhost/" . getPath() . "/recurorder.php";
+$recurorderUrl = 'http://localhost/' . getPath() . '/recurorder.php';
 
 echo "\nFollow the link to place a recur card order using subscriptionId $mySubscriptionId:\n";
 print_r("<a href=\"$recurorderUrl\">$recurorderUrl</a>");

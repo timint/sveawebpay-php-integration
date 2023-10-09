@@ -17,16 +17,16 @@ class BvDiscountTest extends \PHPUnit\Framework\TestCase {
 
 		$order = WebPay::createOrder(\Svea\WebPay\Config\ConfigurationService::getDefaultConfig())
 			->addCustomerDetails(WebPayItem::individualCustomer()->setNationalIdNumber(194605092222))
-			->setCountryCode("SE")
-			->setCustomerReference("1337")
-			->setOrderDate("2015-05-20")
-			->setCurrency("SEK")
+			->setCountryCode('SE')
+			->setCustomerReference('1337')
+			->setOrderDate('2015-05-20')
+			->setCurrency('SEK')
 			->addOrderRow(
 				WebPayItem::orderRow()
 				->setAmountIncVat(1.00)
 				->setVatPercent(6)
 				->setQuantity(800)
-				->setName("3.00i@6%*800")
+				->setName('3.00i@6%*800')
 			)
 			->setClientOrderNumber(date('c'))
 		;
@@ -35,8 +35,8 @@ class BvDiscountTest extends \PHPUnit\Framework\TestCase {
 				WebPayItem::fixedDiscount()
 				->setAmountIncVat(240)
 				->setVatPercent(6)
-				->setDiscountId("fixedDiscount")
-				->setName("-240i@6%*1")
+				->setDiscountId('fixedDiscount')
+				->setName('-240i@6%*1')
 			)
 		;
 		$order->
@@ -44,11 +44,11 @@ class BvDiscountTest extends \PHPUnit\Framework\TestCase {
 				WebPayItem::fixedDiscount()
 				->setAmountIncVat(20)
 				->setVatPercent(6)
-				->setDiscountId("fixedDiscount2")
-				->setName("-20i@6%*1")
+				->setDiscountId('fixedDiscount2')
+				->setName('-20i@6%*1')
 			)
 		;		$request = $order->usePaymentMethod(PaymentMethod::KORTCERT)
-				->setReturnUrl("https://webpaypaymentgatewaystage.svea.com/webpay-admin/admin/merchantresponsetest.xhtml")
+				->setReturnUrl('https://webpaypaymentgatewaystage.svea.com/webpay-admin/admin/merchantresponsetest.xhtml')
 				->getPaymentForm();
 
 //	print_r( $request->xmlMessage );
@@ -118,16 +118,16 @@ class BvDiscountTest extends \PHPUnit\Framework\TestCase {
 
 		$order = WebPay::createOrder(\Svea\WebPay\Config\ConfigurationService::getDefaultConfig())
 			->addCustomerDetails(WebPayItem::individualCustomer()->setNationalIdNumber(194605092222))
-			->setCountryCode("SE")
-			->setCustomerReference("1337")
-			->setOrderDate("2015-05-20")
-			->setCurrency("SEK")
+			->setCountryCode('SE')
+			->setCustomerReference('1337')
+			->setOrderDate('2015-05-20')
+			->setCurrency('SEK')
 			->addOrderRow(
 				WebPayItem::orderRow()
 				->setAmountIncVat(1.00)
 				->setVatPercent(6)
 				->setQuantity(800)
-				->setName("3.00i@6%*800")
+				->setName('3.00i@6%*800')
 			)
 			->setClientOrderNumber(date('c'))
 		;
@@ -135,19 +135,19 @@ class BvDiscountTest extends \PHPUnit\Framework\TestCase {
 			addDiscount(
 				WebPayItem::fixedDiscount()
 				->setAmountIncVat(240)
-				->setDiscountId("fixedDiscount")
-				->setName("-240i*1")
+				->setDiscountId('fixedDiscount')
+				->setName('-240i*1')
 			)
 		;
 		$order->
 			addDiscount(
 				WebPayItem::fixedDiscount()
 				->setAmountIncVat(20)
-				->setDiscountId("fixedDiscount2")
-				->setName("-20i*1")
+				->setDiscountId('fixedDiscount2')
+				->setName('-20i*1')
 			)
 		;
-		$request = $order->usePaymentMethod(PaymentMethod::KORTCERT)->setReturnUrl("https://webpaypaymentgatewaystage.svea.com/webpay-admin/admin/merchantresponsetest.xhtml");
+		$request = $order->usePaymentMethod(PaymentMethod::KORTCERT)->setReturnUrl('https://webpaypaymentgatewaystage.svea.com/webpay-admin/admin/merchantresponsetest.xhtml');
 		$request = $request->getPaymentForm();
 
 //	print_r( $request->xmlMessage );

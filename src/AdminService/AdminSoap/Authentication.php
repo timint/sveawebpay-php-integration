@@ -12,7 +12,7 @@ class Authentication {
 	 * @param string $password
 	 */
 	function __construct($username, $password) {
-		$this->Password = new \SoapVar( $password, XSD_STRING,"-","--","Password","http://schemas.datacontract.org/2004/07/DataObjects.Admin.Service");
-		$this->Username = new \SoapVar( $username, XSD_STRING,"-","--","Username","http://schemas.datacontract.org/2004/07/DataObjects.Admin.Service");
+		$this->Password = new \SoapVar( $password, XSD_STRING,'-','--','Password','http://schemas.datacontract.org/2004/07/DataObjects.Admin.Service');
+		$this->Username = new \SoapVar( $username, XSD_STRING,'-','--','Username','http://schemas.datacontract.org/2004/07/DataObjects.Admin.Service');
 	}
 }

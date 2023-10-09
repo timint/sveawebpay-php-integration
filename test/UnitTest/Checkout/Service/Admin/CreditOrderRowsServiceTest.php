@@ -18,7 +18,7 @@ class CreditOrderRowsServiceTest extends TestCase
 			->setAmountIncVat(300.00)
 			->setVatPercent(25)
 			->setQuantity(1)
-			->setDescription("Credited order with new Order row");
+			->setDescription('Credited order with new Order row');
 
 		$orderService = WebPayAdmin::creditOrderRows($testConfig)
 			->setCheckoutOrderId($sveaCheckoutOrderId)
@@ -98,7 +98,7 @@ class CreditOrderRowsServiceTest extends TestCase
 			->setAmountIncVat(300.00)
 			->setVatPercent(25)
 			->setQuantity(1)
-			->setDescription("Credited order with new Order row");
+			->setDescription('Credited order with new Order row');
 
 		$orderService = WebPayAdmin::creditOrderRows($testConfig)
 			->setCheckoutOrderId($sveaCheckoutOrderId)

@@ -196,11 +196,11 @@ class CancelOrderRowsBuilder extends CheckoutAdminOrderBuilder {
 
 	private function validateCancelCardOrderRows() {
 		if (count($this->numberedOrderRows) == 0) {
-			$exceptionString = "numberedOrderRows is required for cancelCardOrderRows(). Use method addNumberedOrderRows().";
+			$exceptionString = 'numberedOrderRows is required for cancelCardOrderRows(). Use method addNumberedOrderRows().';
 			throw new ValidationException($exceptionString);
 		}
 		if (count($this->rowsToCancel) == 0) {
-			$exceptionString = "rowsToCancel is required for cancelCardOrderRows(). Use method setRowToCancel() or setRowsToCancel.";
+			$exceptionString = 'rowsToCancel is required for cancelCardOrderRows(). Use method setRowToCancel() or setRowsToCancel.';
 			throw new ValidationException($exceptionString);
 		}
 	}

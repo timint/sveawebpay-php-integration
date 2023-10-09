@@ -28,8 +28,8 @@ class GetAddressesIntegrationTest extends \PHPUnit\Framework\TestCase
 	{
 		$request = $this->addressRequest
 			->setOrderTypeInvoice()
-			->setCountryCode("SE")
-			->setCustomerIdentifier("194605092222")
+			->setCountryCode('SE')
+			->setCustomerIdentifier('194605092222')
 			->getIndividualAddresses()
 			->doRequest();
 		$this->assertEquals(1, $request->accepted);
@@ -39,8 +39,8 @@ class GetAddressesIntegrationTest extends \PHPUnit\Framework\TestCase
 	{
 		$request = $this->addressRequest
 			->setOrderTypeInvoice()
-			->setCountryCode("SE")
-			->setCustomerIdentifier("4608142222")
+			->setCountryCode('SE')
+			->setCustomerIdentifier('4608142222')
 			->getCompanyAddresses()
 			->doRequest();
 		$this->assertEquals(1, $request->accepted);
@@ -50,8 +50,8 @@ class GetAddressesIntegrationTest extends \PHPUnit\Framework\TestCase
 	{
 		$request = $this->addressRequest
 			->setOrderTypePaymentPlan()
-			->setCountryCode("SE")
-			->setCustomerIdentifier("4608142222")
+			->setCountryCode('SE')
+			->setCustomerIdentifier('4608142222')
 			->getCompanyAddresses()
 			->doRequest();
 		$this->assertEquals(1, $request->accepted);
@@ -61,8 +61,8 @@ class GetAddressesIntegrationTest extends \PHPUnit\Framework\TestCase
 	{
 		$request = $this->addressRequest
 			->setOrderTypeInvoice()
-			->setCountryCode("SE")
-			->setCustomerIdentifier("4608142222")
+			->setCountryCode('SE')
+			->setCustomerIdentifier('4608142222')
 			->getCompanyAddresses()
 			->doRequest();
 		$this->assertEquals(1, $request->accepted);
@@ -72,33 +72,33 @@ class GetAddressesIntegrationTest extends \PHPUnit\Framework\TestCase
 	{
 		$request = $this->addressRequest
 			->setOrderTypeInvoice()
-			->setCountryCode("SE")
-			->setCustomerIdentifier("4608142222")
+			->setCountryCode('SE')
+			->setCustomerIdentifier('4608142222')
 			->getIndividualAddresses()
 			->doRequest();
 		$this->assertEquals(0, $request->accepted);
-		$this->assertEquals("NoSuchEntity", $request->resultcode);
+		$this->assertEquals('NoSuchEntity', $request->resultcode);
 	}
 
 	public function test_GetAddressesResult_Invoice_Errormessage()
 	{
 		$request = $this->addressRequest
 			->setOrderTypeInvoice()
-			->setCountryCode("SE")
-			->setCustomerIdentifier("4608142222")
+			->setCountryCode('SE')
+			->setCustomerIdentifier('4608142222')
 			->getIndividualAddresses()
 			->doRequest();
 		$this->assertEquals(0, $request->accepted);
-		$this->assertEquals("NoSuchEntity", $request->resultcode);
-		$this->assertEquals("No customer address was found", $request->errormessage);
+		$this->assertEquals('NoSuchEntity', $request->resultcode);
+		$this->assertEquals('No customer address was found', $request->errormessage);
 	}
 
 	public function test_GetAddresses_CredentialsForPrivate_areCorrect()
 	{
 		$request = $this->addressRequest
 			->setOrderTypeInvoice()
-			->setCountryCode("SE")
-			->setCustomerIdentifier("194605092222")
+			->setCountryCode('SE')
+			->setCustomerIdentifier('194605092222')
 			->getIndividualAddresses()
 			->doRequest();
 
@@ -124,8 +124,8 @@ class GetAddressesIntegrationTest extends \PHPUnit\Framework\TestCase
 	{
 		$request = $this->addressRequest
 			->setOrderTypeInvoice()
-			->setCountryCode("SE")
-			->setCustomerIdentifier("194608142222")// 12 digit orgnr should start with 16 or be 10 digits.
+			->setCountryCode('SE')
+			->setCustomerIdentifier('194608142222')// 12 digit orgnr should start with 16 or be 10 digits.
 			->getCompanyAddresses()
 			->doRequest();
 
@@ -162,8 +162,8 @@ class GetAddressesIntegrationTest extends \PHPUnit\Framework\TestCase
 	{
 		$request = $this->addressRequest
 			->setOrderTypeInvoice()
-			->setCountryCode("SE")
-			->setCustomerIdentifier("194605092222")
+			->setCountryCode('SE')
+			->setCustomerIdentifier('194605092222')
 			->getIndividualAddresses()
 			->doRequest();
 
@@ -176,8 +176,8 @@ class GetAddressesIntegrationTest extends \PHPUnit\Framework\TestCase
 	{
 		$request = $this->addressRequest
 			->setOrderTypeInvoice()
-			->setCountryCode("DK")
-			->setCustomerIdentifier("2603692503")
+			->setCountryCode('DK')
+			->setCustomerIdentifier('2603692503')
 			->getIndividualAddresses()
 			->doRequest();
 
@@ -190,8 +190,8 @@ class GetAddressesIntegrationTest extends \PHPUnit\Framework\TestCase
 	{
 		$request = $this->addressRequest
 			->setOrderTypeInvoice()
-			->setCountryCode("SE")
-			->setCustomerIdentifier("4608142222")
+			->setCountryCode('SE')
+			->setCustomerIdentifier('4608142222')
 			->getCompanyAddresses()
 			->doRequest();
 
@@ -204,8 +204,8 @@ class GetAddressesIntegrationTest extends \PHPUnit\Framework\TestCase
 	{
 		$request = $this->addressRequest
 			->setOrderTypeInvoice()
-			->setCountryCode("DK")
-			->setCustomerIdentifier("99999993")
+			->setCountryCode('DK')
+			->setCustomerIdentifier('99999993')
 			->getCompanyAddresses()
 			->doRequest();
 
@@ -218,8 +218,8 @@ class GetAddressesIntegrationTest extends \PHPUnit\Framework\TestCase
 	{
 		$request = $this->addressRequest
 			->setOrderTypeInvoice()
-			->setCountryCode("NO")
-			->setCustomerIdentifier("923313850")
+			->setCountryCode('NO')
+			->setCustomerIdentifier('923313850')
 			->getCompanyAddresses()
 			->doRequest();
 
@@ -232,8 +232,8 @@ class GetAddressesIntegrationTest extends \PHPUnit\Framework\TestCase
 	{
 		$request = $this->addressRequest
 			->setOrderTypeInvoice()
-			->setCountryCode("NO")
-			->setCustomerIdentifier("17054512066")
+			->setCountryCode('NO')
+			->setCustomerIdentifier('17054512066')
 			->getCompanyAddresses()
 			->doRequest();
 
@@ -247,8 +247,8 @@ class GetAddressesIntegrationTest extends \PHPUnit\Framework\TestCase
 	{
 		$request = $this->addressRequest
 			->setOrderTypeInvoice()
-			->setCountryCode("DE")
-			->setCustomerIdentifier("foo")
+			->setCountryCode('DE')
+			->setCustomerIdentifier('foo')
 			->getIndividualAddresses()
 			->doRequest();
 
@@ -261,8 +261,8 @@ class GetAddressesIntegrationTest extends \PHPUnit\Framework\TestCase
 	{
 		$request = $this->addressRequest
 			->setOrderTypeInvoice()
-			->setCountryCode("DE")
-			->setCustomerIdentifier("19680403")
+			->setCountryCode('DE')
+			->setCustomerIdentifier('19680403')
 			->getCompanyAddresses()
 			->doRequest();
 
@@ -276,8 +276,8 @@ class GetAddressesIntegrationTest extends \PHPUnit\Framework\TestCase
 	{
 		$request = $this->addressRequest
 			->setOrderTypeInvoice()
-			->setCountryCode("NL")
-			->setCustomerIdentifier("foo")
+			->setCountryCode('NL')
+			->setCustomerIdentifier('foo')
 			->getIndividualAddresses()
 			->doRequest();
 
@@ -290,8 +290,8 @@ class GetAddressesIntegrationTest extends \PHPUnit\Framework\TestCase
 	{
 		$request = $this->addressRequest
 			->setOrderTypeInvoice()
-			->setCountryCode("NL")
-			->setCustomerIdentifier("19550307")
+			->setCountryCode('NL')
+			->setCustomerIdentifier('19550307')
 			->getCompanyAddresses()
 			->doRequest();
 
@@ -302,8 +302,8 @@ class GetAddressesIntegrationTest extends \PHPUnit\Framework\TestCase
 	public function test_GetAddresses_checkAndSetConfiguredPaymentMethod_Accepted()
 	{
 		$request =$this->addressRequest
-			->setCountryCode("SE")
-			->setCustomerIdentifier("4605092222")
+			->setCountryCode('SE')
+			->setCustomerIdentifier('4605092222')
 			->getIndividualAddresses()
 			->doRequest();
 		$this->assertEquals(1,$request->accepted);

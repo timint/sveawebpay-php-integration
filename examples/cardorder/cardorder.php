@@ -22,12 +22,12 @@ $myConfig = ConfigurationService::getTestConfig(); // add your Svea credentials 
 // We assume that you've collected the following information about the order in your shop:
 
 // customer information:
-$customerFirstName = "Tess T";
-$customerLastName = "Persson";
-$customerAddress = "Testgatan 1";
-$customerZipCode = "99999";
-$customerCity = "Stan";
-$customerCountry = "Sverige";
+$customerFirstName = 'Tess T';
+$customerLastName = 'Persson';
+$customerAddress = 'Testgatan 1';
+$customerZipCode = '99999';
+$customerCity = 'Stan';
+$customerCountry = 'Sverige';
 
 // The customer has bought three items, one "Billy" which cost 700,99 kr excluding vat (25%) and two hotdogs for 5 kr (incl. vat).
 
@@ -38,12 +38,12 @@ $myOrder = WebPay::createOrder( $myConfig );
 
 // You then add information to the order object by using the methods in the Svea\WebPay\BuildOrder\CreateOrderBuilder class.
 // For a Card order, the following methods are required:
-$myOrder->setCurrency("SEK");						   // order currency
-$myOrder->setClientOrderNumber( "order #".date('c') );  // required - use a not previously sent client side order identifier, i.e. "order #20140519-371"
+$myOrder->setCurrency('SEK');						   // order currency
+$myOrder->setClientOrderNumber( 'order #'.date('c') );  // required - use a not previously sent client side order identifier, i.e. 'order #20140519-371'
 // You may also chain fluent methods together:
 $myOrder
-		->setCustomerReference("customer #123")		 // optional - This should contain a customer reference, as in "customer #123".
-		->setOrderDate("2014-05-28")					// optional - or use an ISO8601 date as produced by i.e. date('c')
+		->setCustomerReference('customer #123')		 // optional - This should contain a customer reference, as in 'customer #123'.
+		->setOrderDate('2014-05-28')					// optional - or use an ISO8601 date as produced by i.e. date('c')
 ;
 
 // Then specify the items bought as order rows, using the methods in the Svea\WebPay\BuildOrder\RowBuilders\OrderRow class, and adding them to the order:
@@ -51,8 +51,8 @@ $firstBoughtItem = WebPayItem::orderRow();
 $firstBoughtItem->setAmountExVat( 10.99 );
 $firstBoughtItem->setVatPercent( 25 );
 $firstBoughtItem->setQuantity( 1 );
-$firstBoughtItem->setDescription( "Billy" );
-$firstBoughtItem->setArticleNumber("123456789A");
+$firstBoughtItem->setDescription( 'Billy' );
+$firstBoughtItem->setArticleNumber('123456789A');
 
 // Add firstBoughtItem to order row
 $myOrder->addOrderRow( $firstBoughtItem );
@@ -63,7 +63,7 @@ $myOrder->addOrderRow(
 				->setAmountIncVat( 5.00 )
 				->setVatPercent( 12 )
 				->setQuantity( 2 )
-				->setDescription( "Korv med bröd" )
+				->setDescription( 'Korv med bröd' )
 );
 
 // For card orders the ->addCustomerDetails() method is optional, but recommended, so we'll add what info we have
@@ -84,15 +84,15 @@ $myCardOrderRequest = $myOrder->usePaymentMethod(PaymentMethod::SVEACARDPAY);
 
 // Then set any additional required request attributes as detailed below. (See Svea\PaymentMethodPayment and Svea\HostedPayment classes for details.)
 $myCardOrderRequest
-	->setCardPageLanguage("SV")									 // ISO639 language code, i.e. "SV", "EN" etc. Defaults to English.
-	->setReturnUrl("http://localhost/".getPath()."/landingpage.php"); // The return url where we receive and process the finished request response
+	->setCardPageLanguage('SV')									 // ISO639 language code, i.e. 'SV', 'EN' etc. Defaults to English.
+	->setReturnUrl('http://localhost/'.getPath().'/landingpage.php'); // The return url where we receive and process the finished request response
 
 // Get a payment form object which you can use to send the payment request to Svea
 $myCardOrderPaymentForm = $myCardOrderRequest->getPaymentForm();
 
 // Then send the form to Svea, and receive the response on the landingpage after the customer has completed the card checkout SveaCardPay
-echo "<pre>";
-print_r( "press submit to send the card payment request to Svea");
+echo '<pre>';
+print_r( 'press submit to send the card payment request to Svea');
 print_r( $myCardOrderPaymentForm->completeHtmlFormWithSubmitButton );
 
 /**

@@ -14,10 +14,10 @@ class SveaDeliverOrderInformation {
 	 */
 	public function __construct($orderType) {
 		if ($orderType == ConfigurationProvider::INVOICE_TYPE) {
-			$this->DeliverInvoiceDetails = "";
+			$this->DeliverInvoiceDetails = '';
 		}
 		else if ($orderType == ConfigurationProvider::ACCOUNTCREDIT_TYPE) {
-			$this->DeliverAccountCreditDetails = "";
+			$this->DeliverAccountCreditDetails = '';
 		}
 	}
 }

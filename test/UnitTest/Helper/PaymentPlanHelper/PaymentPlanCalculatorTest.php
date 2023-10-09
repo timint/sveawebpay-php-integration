@@ -20,11 +20,11 @@ class PaymentPlanCalculatorTest extends TestCase
 	protected function getInterestAndAmortizationFreeCampaign()
 	{
 		$response = (object) array(
-			"GetPaymentPlanParamsEuResult" => (object)array (
-				"Accepted" => true,
-				"ResultCode" => 0,
-				"CampaignCodes" => (object)array(
-					"CampaignCodeInfo" => array(
+			'GetPaymentPlanParamsEuResult' => (object)array (
+				'Accepted' => true,
+				'ResultCode' => 0,
+				'CampaignCodes' => (object)array(
+					'CampaignCodeInfo' => array(
 						0 =>
 							(object)array(
 								'CampaignCode' => 223060,
@@ -71,11 +71,11 @@ class PaymentPlanCalculatorTest extends TestCase
 	protected function getInterestFreeCampaign()
 	{
 		$response = (object) array(
-			"GetPaymentPlanParamsEuResult" => (object)array (
-				"Accepted" => true,
-				"ResultCode" => 0,
-				"CampaignCodes" => (object)array(
-					"CampaignCodeInfo" => array(
+			'GetPaymentPlanParamsEuResult' => (object)array (
+				'Accepted' => true,
+				'ResultCode' => 0,
+				'CampaignCodes' => (object)array(
+					'CampaignCodeInfo' => array(
 						0 =>
 							(object)array(
 								'CampaignCode' => 310012,
@@ -158,25 +158,25 @@ class PaymentPlanCalculatorTest extends TestCase
 	protected function getStandardCampaign()
 	{
 		$response = (object) array(
-			"GetPaymentPlanParamsEuResult" => (object)array (
-				"Accepted" => true,
-				"ResultCode" => 0,
-				"CampaignCodes" => (object)array(
-					"CampaignCodeInfo" => array(
+			'GetPaymentPlanParamsEuResult' => (object)array (
+				'Accepted' => true,
+				'ResultCode' => 0,
+				'CampaignCodes' => (object)array(
+					'CampaignCodeInfo' => array(
 						0 =>
 							(object)array(
-								"CampaignCode" => 213060,
-								"Description" => "Dela upp betalningen på 60 månader",
-								"PaymentPlanType" => "Standard",
-								"ContractLengthInMonths" => 60,
-								"MonthlyAnnuityFactor" => '0.02555',
-								"InitialFee" => '100',
-								"NotificationFee" => '29',
-								"InterestRatePercent" => '16.75',
-								"NumberOfInterestFreeMonths" => 3,
-								"NumberOfPaymentFreeMonths" => 3,
-								"FromAmount" => '1000',
-								"ToAmount" => '50000',
+								'CampaignCode' => 213060,
+								'Description' => 'Dela upp betalningen på 60 månader',
+								'PaymentPlanType' => 'Standard',
+								'ContractLengthInMonths' => 60,
+								'MonthlyAnnuityFactor' => '0.02555',
+								'InitialFee' => '100',
+								'NotificationFee' => '29',
+								'InterestRatePercent' => '16.75',
+								'NumberOfInterestFreeMonths' => 3,
+								'NumberOfPaymentFreeMonths' => 3,
+								'FromAmount' => '1000',
+								'ToAmount' => '50000',
 							)
 					)
 				)
@@ -227,25 +227,25 @@ class PaymentPlanCalculatorTest extends TestCase
 	protected function getMixedCampaigns()
 	{
 		$response = (object) array(
-			"GetPaymentPlanParamsEuResult" => (object)array (
-				"Accepted" => true,
-				"ResultCode" => 0,
-				"CampaignCodes" => (object)array(
-					"CampaignCodeInfo" => array(
+			'GetPaymentPlanParamsEuResult' => (object)array (
+				'Accepted' => true,
+				'ResultCode' => 0,
+				'CampaignCodes' => (object)array(
+					'CampaignCodeInfo' => array(
 						0 =>
 							(object)array(
-								"CampaignCode" => 213060,
-								"Description" => "Dela upp betalningen på 60 månader",
-								"PaymentPlanType" => "Standard",
-								"ContractLengthInMonths" => 60,
-								"MonthlyAnnuityFactor" => '0.02555',
-								"InitialFee" => '100',
-								"NotificationFee" => '29',
-								"InterestRatePercent" => '16.75',
-								"NumberOfInterestFreeMonths" => 3,
-								"NumberOfPaymentFreeMonths" => 3,
-								"FromAmount" => '1000',
-								"ToAmount" => '50000',
+								'CampaignCode' => 213060,
+								'Description' => 'Dela upp betalningen på 60 månader',
+								'PaymentPlanType' => 'Standard',
+								'ContractLengthInMonths' => 60,
+								'MonthlyAnnuityFactor' => '0.02555',
+								'InitialFee' => '100',
+								'NotificationFee' => '29',
+								'InterestRatePercent' => '16.75',
+								'NumberOfInterestFreeMonths' => 3,
+								'NumberOfPaymentFreeMonths' => 3,
+								'FromAmount' => '1000',
+								'ToAmount' => '50000',
 							),
 						1 =>
 							(object)array(
@@ -1153,11 +1153,11 @@ class PaymentPlanCalculatorTest extends TestCase
 		$method->setAccessible(true);
 		$convertedArray = $method->invoke(null, $arr);
 
-		$this->assertEquals(array_key_exists("campaignCode", $convertedArray), true);
-		$this->assertEquals(array_key_exists("description", $convertedArray), true);
-		$this->assertEquals(array_key_exists("toAmount", $convertedArray), true);
+		$this->assertEquals(array_key_exists('campaignCode', $convertedArray), true);
+		$this->assertEquals(array_key_exists('description', $convertedArray), true);
+		$this->assertEquals(array_key_exists('toAmount', $convertedArray), true);
 		$this->assertEquals($convertedArray['checkout'], true);
-		$this->assertEquals($convertedArray['paymentPlanType'], "InterestAndAmortizationFree");
+		$this->assertEquals($convertedArray['paymentPlanType'], 'InterestAndAmortizationFree');
 	}
 
 	function test_PaymentPlanCalculator_convertToCheckoutArray()
@@ -1172,7 +1172,7 @@ class PaymentPlanCalculatorTest extends TestCase
 		$methodConvertTo->setAccessible(true);
 		$convertedToCheckoutArray = $methodConvertTo->invoke(null, $convertedFromCheckoutArray);
 
-		$this->assertEquals(array_key_exists("CampaignCode", $convertedToCheckoutArray), true);
+		$this->assertEquals(array_key_exists('CampaignCode', $convertedToCheckoutArray), true);
 		$this->assertEquals($convertedToCheckoutArray['PaymentPlanType'], 2);
 	}
 
@@ -1183,7 +1183,7 @@ class PaymentPlanCalculatorTest extends TestCase
 	function test_InterestAndAmortizationFreePaymentPlanCalculator_getTotalAmountToPay_invalid_paymentPlanType()
 	{
 		$campaign = $this->getStandardCampaign();
-		$campaign['paymentPlanType'] = "invalid";
+		$campaign['paymentPlanType'] = 'invalid';
 		PaymentPlanCalculator::getTotalAmountToPay($this->price, $campaign);
 	}
 

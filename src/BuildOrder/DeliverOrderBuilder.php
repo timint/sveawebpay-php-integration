@@ -233,7 +233,7 @@ class DeliverOrderBuilder  extends CheckoutAdminOrderBuilder {
 
 		// if no captureDate set, use today's date as default.
 		if (!isset($this->captureDate)) {
-			$defaultCaptureDate = explode("T", date('c')); // [0] contains date part
+			$defaultCaptureDate = explode('T', date('c')); // [0] contains date part
 			$this->captureDate = $defaultCaptureDate[0];
 		}
 

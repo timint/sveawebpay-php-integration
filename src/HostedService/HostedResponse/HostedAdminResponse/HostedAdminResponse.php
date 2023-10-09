@@ -41,14 +41,14 @@ class HostedAdminResponse extends HostedResponse {
 				} else {
 					$this->accepted = 0;
 					$this->resultcode = '0';
-					$this->errormessage = "Response failed authorization. MAC not valid.";
+					$this->errormessage = 'Response failed authorization. MAC not valid.';
 				}
 			}
 
 		} else {
 			$this->accepted = 0;
 			$this->resultcode = '0';
-			$this->errormessage = "Response is not recognized.";
+			$this->errormessage = 'Response is not recognized.';
 		}
 	}
 
@@ -70,7 +70,7 @@ class HostedAdminResponse extends HostedResponse {
 		}
 
 		// getPaymentUrl/preparepayment request
-		if (property_exists($hostedAdminResponse, "preparedpayment")) {
+		if (property_exists($hostedAdminResponse, 'preparedpayment')) {
 			$url = $this->config->getEndpoint(SveaConfigurationProvider::PREPARED_URL);
 			$testurl = ConfigurationService::SWP_TEST_PREPARED_URL;
 

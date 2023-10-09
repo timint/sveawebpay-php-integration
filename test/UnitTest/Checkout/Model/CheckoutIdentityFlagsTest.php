@@ -29,7 +29,7 @@ class CheckoutIdentityFlagsTest extends TestCase
 
 		// Set some valid flags and one invalid flag
 		$this->order->addIdentityFlag(IdentityFlags::HIDEANONYMOUS);
-		$this->order->addIdentityFlag("NonExistingFlag");
+		$this->order->addIdentityFlag('NonExistingFlag');
 		$this->order->addIdentityFlag(IdentityFlags::HIDECHANGEADDRESS);
 
 		$this->order->createOrder();
@@ -47,9 +47,9 @@ class CheckoutIdentityFlagsTest extends TestCase
 
 		$arr = $this->order->getIdentityFlags();
 
-		$this->assertEquals("HideAnonymous", $arr[0]);
-		$this->assertEquals("HideChangeAddress", $arr[1]);
-		$this->assertEquals("HideNotYou", $arr[2]);
+		$this->assertEquals('HideAnonymous', $arr[0]);
+		$this->assertEquals('HideChangeAddress', $arr[1]);
+		$this->assertEquals('HideNotYou', $arr[2]);
 
 	}
 }

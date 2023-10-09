@@ -28,14 +28,14 @@ $myConfig = ConfigurationService::getTestConfig(); // add your Svea credentials 
 $firstCreditOrderRowsBuilder = WebPayAdmin::creditOrderRows($myConfig);
 
 // To credit the order, we need its transactionid, which we received with the order request response and wrote to file.
-$myTransactionId = file_get_contents("transactionid.txt");
+$myTransactionId = file_get_contents('transactionid.txt');
 if (!$myTransactionId) {
-	echo "<pre>Error: transactionid.txt not found, first run cardorder_credit.php to set up the card order. aborting.";
+	echo '<pre>Error: transactionid.txt not found, first run cardorder_credit.php to set up the card order. aborting.';
 	die;
 }
 $firstCreditOrderRowsBuilder
 	->setOrderId($myTransactionId)
-	->setCountryCode("SE");
+	->setCountryCode('SE');
 
 // Assume that we know that the original order total amount was 1*(100*1.25) + 2*(5.00*1.12) = 125+11.2 = SEK 136.2 (incl. VAT 26.2)
 // Create a new OrderRow for the credited amount and add it to the builder object using addCreditOrderRow():
@@ -43,7 +43,7 @@ $myCreditRow = WebPayItem::orderRow()
 	->setAmountExVat(300)
 	->setVatPercent(25)
 	->setQuantity(1)
-	->setDescription("Credited order #" . $myTransactionId);
+	->setDescription('Credited order #' . $myTransactionId);
 // Add the new order row to credit to the builder object.
 $firstCreditOrderRowsBuilder->addCreditOrderRow($myCreditRow);
 
@@ -54,8 +54,8 @@ $myCreditResponse = $myCreditRequest->doRequest();
 
 
 // The response is an instance of LowerTransactionResponse
-echo "<pre>";
-print_r("the creditCardOrderRows() response:");
+echo '<pre>';
+print_r('the creditCardOrderRows() response:');
 print_r($myCreditResponse);
 
 echo "\n</pre><font color='red'><pre>\n\n
@@ -77,9 +77,9 @@ the creditCardOrderRows() response:Svea\WebPay\HostedService\HostedResponse\Host
 	[accepted] => 0
 	[resultcode] => 119 (ILLEGAL_CREDITED_AMOUNT)
 	[errormessage] => Invalid credited amount.
-)";
+)';
 
-echo "\n</pre><font color='blue'><pre>\n\n
+echo '\n</pre><font color='blue'><pre>\n\n
 An example of a non-successful credit request response, where the card order has been first confirmed and then processed to status SUCCESS in bank.
 
 the creditCardOrderRows() response:Svea\WebPay\HostedService\HostedResponse\HostedAdminResponse\CreditTransactionResponse Object

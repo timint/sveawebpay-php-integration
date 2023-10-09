@@ -111,6 +111,6 @@ class RecurTransactionResponse extends HostedAdminResponse {
 		$this->expiryYear = (string)$hostedAdminResponse->transaction->expiryyear;
 		$this->authCode = (string)$hostedAdminResponse->transaction->authcode;
 		$this->subscriptionId = (string)$hostedAdminResponse->transaction->subscriptionid;
-		$this->decimalamount = number_format(($hostedAdminResponse->transaction->amount * 0.01), 2, ".", "");
+		$this->decimalamount = number_format(($hostedAdminResponse->transaction->amount * 0.01), 2, '.', '');
 	}
 }

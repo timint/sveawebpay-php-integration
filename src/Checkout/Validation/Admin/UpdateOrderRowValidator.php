@@ -29,7 +29,7 @@ class UpdateOrderRowValidator extends OrderValidator {
 		}
 
 		if (count($orderRow) > 1) {
-			$errors['incorrect Order Row data'] = "You can Update just one Order Row";
+			$errors['incorrect Order Row data'] = 'You can Update just one Order Row';
 
 			return $errors;
 		}
@@ -51,12 +51,12 @@ class UpdateOrderRowValidator extends OrderValidator {
 		foreach ($order->numberedOrderRows as $row) {
 			if (isset($row->discountPercent)) {
 				if (!is_int($row->discountPercent) || ($row->discountPercent < 0 || $row->discountPercent > 99)) {
-					$errors['bad discount percent'] = "Discount percent must be integer in value range of 0-99";
+					$errors['bad discount percent'] = 'Discount percent must be integer in value range of 0-99';
 				}
 			}
 			if (isset($row->amountIncVat)) {
 				if (!is_float($row->amountIncVat) && $row->amountIncVat !== 0) {
-					$errors['missing values'] = "amountIncVat is not of type float.";
+					$errors['missing values'] = 'amountIncVat is not of type float.';
 				}
 			}
 		}

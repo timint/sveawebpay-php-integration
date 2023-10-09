@@ -25,14 +25,14 @@ class AccountCreditPaymentTest extends \PHPUnit\Framework\TestCase
 	public function getCustomerRow()
 	{
 		return WebPayItem::individualCustomer()
-			->setNationalIdNumber("194605092222")
+			->setNationalIdNumber('194605092222')
 			->setBirthDate(1946, 05, 9)
-			->setName("Tess T", "Persson")
-			->setStreetAddress("Testgatan", 1)
-			->setCoAddress("c/o Eriksson, Erik")
-			->setLocality("Stan")
+			->setName('Tess T', 'Persson')
+			->setStreetAddress('Testgatan', 1)
+			->setCoAddress('c/o Eriksson, Erik')
+			->setLocality('Stan')
 			->setEmail('testt@svea.com')->
-			setZipCode("99999");
+			setZipCode('99999');
 	}
 
 	public function testInvoiceRequestObjectForCustomerIdentityIndividualFromSE()
@@ -42,15 +42,15 @@ class AccountCreditPaymentTest extends \PHPUnit\Framework\TestCase
 		$request = WebPay::createOrder($config)
 			->addOrderRow(TestUtil::createOrderRow())
 			->addCustomerDetails($this->getCustomerRow())
-			->setCountryCode("SE")
-			->setCurrency("SEK")
+			->setCountryCode('SE')
+			->setCurrency('SEK')
 			->setOrderDate(date('c'))
-			->useAccountCredit("111111")
+			->useAccountCredit('111111')
 			->prepareRequest();
 
 		$this->assertEquals(194605092222, $request->request->CreateOrderInformation->CustomerIdentity->NationalIdNumber); //Check all in identity
-		$this->assertEquals("SE", $request->request->CreateOrderInformation->CustomerIdentity->CountryCode); //Check all in identity
-		$this->assertEquals("Individual", $request->request->CreateOrderInformation->CustomerIdentity->CustomerType); //Check all in identity
+		$this->assertEquals('SE', $request->request->CreateOrderInformation->CustomerIdentity->CountryCode); //Check all in identity
+		$this->assertEquals('Individual', $request->request->CreateOrderInformation->CustomerIdentity->CustomerType); //Check all in identity
 	}
 
 	public function testInvoiceRequestOnProductVatCero()
@@ -59,10 +59,10 @@ class AccountCreditPaymentTest extends \PHPUnit\Framework\TestCase
 		$request = WebPay::createOrder($config)
 			->addOrderRow($this->getOrderRow())
 			->addCustomerDetails($this->getCustomerRow())
-			->setCountryCode("SE")
-			->setCurrency("SEK")
+			->setCountryCode('SE')
+			->setCurrency('SEK')
 			->setOrderDate(date('c'))
-			->useAccountCredit("111111")
+			->useAccountCredit('111111')
 			->prepareRequest();
 
 		$this->assertEquals(100, $request->request->CreateOrderInformation->OrderRows['OrderRow'][0]->PricePerUnit); //Check all in identity
@@ -72,12 +72,12 @@ class AccountCreditPaymentTest extends \PHPUnit\Framework\TestCase
 	public function getOrderRow()
 	{
 		return WebPayItem::orderRow()
-			->setArticleNumber("1")
+			->setArticleNumber('1')
 			->setQuantity(2)
 			->setAmountExVat(100.00)
-			->setDescription("Specification")
+			->setDescription('Specification')
 			->setName('Prod')
-			->setUnit("st")
+			->setUnit('st')
 			->setVatPercent(0)
 			->setDiscountPercent(0);
 	}
@@ -88,15 +88,15 @@ class AccountCreditPaymentTest extends \PHPUnit\Framework\TestCase
 		$request = WebPay::createOrder($config)
 			->addOrderRow(TestUtil::createOrderRow())
 			->addCustomerDetails($this->getCustomerRow())
-			->setCountryCode("SE")
-			->setCurrency("SEK")
+			->setCountryCode('SE')
+			->setCurrency('SEK')
 			->setOrderDate(date('c'))
-			->useAccountCredit("111111")// return object
+			->useAccountCredit('111111')// return object
 			->prepareRequest();
 
 		$this->assertEquals(58702, $request->request->Auth->ClientNumber); //Check all in identity
-		$this->assertEquals("sverigetest", $request->request->Auth->Username); //Check all in identity
-		$this->assertEquals("sverigetest", $request->request->Auth->Password); //Check all in identity
+		$this->assertEquals('sverigetest', $request->request->Auth->Username); //Check all in identity
+		$this->assertEquals('sverigetest', $request->request->Auth->Password); //Check all in identity
 	}
 
 	public function testInvoiceRequestObjectForCustomerIdentityIndividualFromNL()
@@ -105,37 +105,37 @@ class AccountCreditPaymentTest extends \PHPUnit\Framework\TestCase
 		$request = WebPay::createOrder($config)
 			->addOrderRow(TestUtil::createOrderRow())
 			->addCustomerDetails(WebPayItem::individualCustomer()
-				->setInitials("SB")
+				->setInitials('SB')
 				->setBirthDate(1923, 12, 12)
-				->setName("Tess", "Testson")
-				->setEmail("test@svea.com")
+				->setName('Tess', 'Testson')
+				->setEmail('test@svea.com')
 				->setPhoneNumber(999999)
-				->setIpAddress("123.123.123")
-				->setStreetAddress("Gatan", 23)
-				->setCoAddress("c/o Eriksson")
+				->setIpAddress('123.123.123')
+				->setStreetAddress('Gatan', 23)
+				->setCoAddress('c/o Eriksson')
 				->setZipCode(9999)
-				->setLocality("Stan")
+				->setLocality('Stan')
 			)
-			->setCountryCode("NL")
-			->setOrderDate("2012-12-12")
-			->setCurrency("SEK")
+			->setCountryCode('NL')
+			->setOrderDate('2012-12-12')
+			->setCurrency('SEK')
 			->useAccountCredit('111111')
 			->prepareRequest();
 
-		$this->assertEquals("test@svea.com", $request->request->CreateOrderInformation->CustomerIdentity->Email); //Check all in identity
+		$this->assertEquals('test@svea.com', $request->request->CreateOrderInformation->CustomerIdentity->Email); //Check all in identity
 		$this->assertEquals(999999, $request->request->CreateOrderInformation->CustomerIdentity->PhoneNumber); //Check all in identity
-		$this->assertEquals("123.123.123", $request->request->CreateOrderInformation->CustomerIdentity->IpAddress); //Check all in identity
-		$this->assertEquals("Tess Testson", $request->request->CreateOrderInformation->CustomerIdentity->FullName); //Check all in identity
-		$this->assertEquals("Gatan", $request->request->CreateOrderInformation->CustomerIdentity->Street); //Check all in identity
-		$this->assertEquals("c/o Eriksson", $request->request->CreateOrderInformation->CustomerIdentity->CoAddress); //Check all in identity
+		$this->assertEquals('123.123.123', $request->request->CreateOrderInformation->CustomerIdentity->IpAddress); //Check all in identity
+		$this->assertEquals('Tess Testson', $request->request->CreateOrderInformation->CustomerIdentity->FullName); //Check all in identity
+		$this->assertEquals('Gatan', $request->request->CreateOrderInformation->CustomerIdentity->Street); //Check all in identity
+		$this->assertEquals('c/o Eriksson', $request->request->CreateOrderInformation->CustomerIdentity->CoAddress); //Check all in identity
 		$this->assertEquals(9999, $request->request->CreateOrderInformation->CustomerIdentity->ZipCode); //Check all in identity
 		$this->assertEquals(23, $request->request->CreateOrderInformation->CustomerIdentity->HouseNumber); //Check all in identity
-		$this->assertEquals("Stan", $request->request->CreateOrderInformation->CustomerIdentity->Locality); //Check all in identity
-		$this->assertEquals("NL", $request->request->CreateOrderInformation->CustomerIdentity->CountryCode); //Check all in identity
-		$this->assertEquals("Individual", $request->request->CreateOrderInformation->CustomerIdentity->CustomerType); //Check all in identity
-		$this->assertEquals("Tess", $request->request->CreateOrderInformation->CustomerIdentity->IndividualIdentity->FirstName); //Check all in identity
-		$this->assertEquals("Testson", $request->request->CreateOrderInformation->CustomerIdentity->IndividualIdentity->LastName); //Check all in identity
-		$this->assertEquals("SB", $request->request->CreateOrderInformation->CustomerIdentity->IndividualIdentity->Initials); //Check all in identity
+		$this->assertEquals('Stan', $request->request->CreateOrderInformation->CustomerIdentity->Locality); //Check all in identity
+		$this->assertEquals('NL', $request->request->CreateOrderInformation->CustomerIdentity->CountryCode); //Check all in identity
+		$this->assertEquals('Individual', $request->request->CreateOrderInformation->CustomerIdentity->CustomerType); //Check all in identity
+		$this->assertEquals('Tess', $request->request->CreateOrderInformation->CustomerIdentity->IndividualIdentity->FirstName); //Check all in identity
+		$this->assertEquals('Testson', $request->request->CreateOrderInformation->CustomerIdentity->IndividualIdentity->LastName); //Check all in identity
+		$this->assertEquals('SB', $request->request->CreateOrderInformation->CustomerIdentity->IndividualIdentity->Initials); //Check all in identity
 		$this->assertEquals(19231212, $request->request->CreateOrderInformation->CustomerIdentity->IndividualIdentity->BirthDate); //Check all in identity
 	}
 
@@ -146,34 +146,34 @@ class AccountCreditPaymentTest extends \PHPUnit\Framework\TestCase
 			->addOrderRow(TestUtil::createOrderRow())
 			->addCustomerDetails(WebPayItem::individualCustomer()
 				->setBirthDate(1923, 12, 12)
-				->setName("Tess", "Testson")
-				->setEmail("test@svea.com")
+				->setName('Tess', 'Testson')
+				->setEmail('test@svea.com')
 				->setPhoneNumber(999999)
-				->setIpAddress("123.123.123")
-				->setStreetAddress("Gatan", 23)
-				->setCoAddress("c/o Eriksson")
+				->setIpAddress('123.123.123')
+				->setStreetAddress('Gatan', 23)
+				->setCoAddress('c/o Eriksson')
 				->setZipCode(9999)
-				->setLocality("Stan")
+				->setLocality('Stan')
 			)
-			->setCountryCode("DE")
-			->setOrderDate("2012-12-12")
-			->setCurrency("EUR")
+			->setCountryCode('DE')
+			->setOrderDate('2012-12-12')
+			->setCurrency('EUR')
 			->useAccountCredit('111111')
 			->prepareRequest();
 
-		$this->assertEquals("test@svea.com", $request->request->CreateOrderInformation->CustomerIdentity->Email); //Check all in identity
+		$this->assertEquals('test@svea.com', $request->request->CreateOrderInformation->CustomerIdentity->Email); //Check all in identity
 		$this->assertEquals(999999, $request->request->CreateOrderInformation->CustomerIdentity->PhoneNumber); //Check all in identity
-		$this->assertEquals("123.123.123", $request->request->CreateOrderInformation->CustomerIdentity->IpAddress); //Check all in identity
-		$this->assertEquals("Tess Testson", $request->request->CreateOrderInformation->CustomerIdentity->FullName); //Check all in identity
-		$this->assertEquals("Gatan", $request->request->CreateOrderInformation->CustomerIdentity->Street); //Check all in identity
-		$this->assertEquals("c/o Eriksson", $request->request->CreateOrderInformation->CustomerIdentity->CoAddress); //Check all in identity
+		$this->assertEquals('123.123.123', $request->request->CreateOrderInformation->CustomerIdentity->IpAddress); //Check all in identity
+		$this->assertEquals('Tess Testson', $request->request->CreateOrderInformation->CustomerIdentity->FullName); //Check all in identity
+		$this->assertEquals('Gatan', $request->request->CreateOrderInformation->CustomerIdentity->Street); //Check all in identity
+		$this->assertEquals('c/o Eriksson', $request->request->CreateOrderInformation->CustomerIdentity->CoAddress); //Check all in identity
 		$this->assertEquals(9999, $request->request->CreateOrderInformation->CustomerIdentity->ZipCode); //Check all in identity
 		$this->assertEquals(23, $request->request->CreateOrderInformation->CustomerIdentity->HouseNumber); //Check all in identity
-		$this->assertEquals("Stan", $request->request->CreateOrderInformation->CustomerIdentity->Locality); //Check all in identity
-		$this->assertEquals("DE", $request->request->CreateOrderInformation->CustomerIdentity->CountryCode); //Check all in identity
-		$this->assertEquals("Individual", $request->request->CreateOrderInformation->CustomerIdentity->CustomerType); //Check all in identity
-		$this->assertEquals("Tess", $request->request->CreateOrderInformation->CustomerIdentity->IndividualIdentity->FirstName); //Check all in identity
-		$this->assertEquals("Testson", $request->request->CreateOrderInformation->CustomerIdentity->IndividualIdentity->LastName); //Check all in identity
+		$this->assertEquals('Stan', $request->request->CreateOrderInformation->CustomerIdentity->Locality); //Check all in identity
+		$this->assertEquals('DE', $request->request->CreateOrderInformation->CustomerIdentity->CountryCode); //Check all in identity
+		$this->assertEquals('Individual', $request->request->CreateOrderInformation->CustomerIdentity->CustomerType); //Check all in identity
+		$this->assertEquals('Tess', $request->request->CreateOrderInformation->CustomerIdentity->IndividualIdentity->FirstName); //Check all in identity
+		$this->assertEquals('Testson', $request->request->CreateOrderInformation->CustomerIdentity->IndividualIdentity->LastName); //Check all in identity
 		$this->assertEquals(19231212, $request->request->CreateOrderInformation->CustomerIdentity->IndividualIdentity->BirthDate); //Check all in identity
 	}
 
@@ -183,34 +183,34 @@ class AccountCreditPaymentTest extends \PHPUnit\Framework\TestCase
 		$request = WebPay::createOrder($config)
 			->addOrderRow(TestUtil::createOrderRow())
 			->addCustomerDetails(WebPayItem::individualCustomer()
-				->setInitials("SB")
+				->setInitials('SB')
 				->setBirthDate(1923, 12, 12)
-				->setName("Tess", "Testson")
-				->setEmail("test@svea.com")
+				->setName('Tess', 'Testson')
+				->setEmail('test@svea.com')
 				->setPhoneNumber(999999)
-				->setIpAddress("123.123.123")
-				->setStreetAddress("Gatan", 23)
-				->setCoAddress("c/o Eriksson")
+				->setIpAddress('123.123.123')
+				->setStreetAddress('Gatan', 23)
+				->setCoAddress('c/o Eriksson')
 				->setZipCode(9999)
-				->setLocality("Stan")
+				->setLocality('Stan')
 			)
-			->setCountryCode("NL")
-			->setOrderDate("2012-12-12")
-			->setCurrency("SEK")
+			->setCountryCode('NL')
+			->setOrderDate('2012-12-12')
+			->setCurrency('SEK')
 			->useAccountCredit('111111')
 			->prepareRequest();
 
-		$this->assertEquals("test@svea.com", $request->request->CreateOrderInformation->CustomerIdentity->Email); //Check all in identity
+		$this->assertEquals('test@svea.com', $request->request->CreateOrderInformation->CustomerIdentity->Email); //Check all in identity
 		$this->assertEquals(999999, $request->request->CreateOrderInformation->CustomerIdentity->PhoneNumber); //Check all in identity
-		$this->assertEquals("123.123.123", $request->request->CreateOrderInformation->CustomerIdentity->IpAddress); //Check all in identity
-		$this->assertEquals("Tess Testson", $request->request->CreateOrderInformation->CustomerIdentity->FullName); //Check all in identity
-		$this->assertEquals("Gatan", $request->request->CreateOrderInformation->CustomerIdentity->Street); //Check all in identity
-		$this->assertEquals("c/o Eriksson", $request->request->CreateOrderInformation->CustomerIdentity->CoAddress); //Check all in identity
+		$this->assertEquals('123.123.123', $request->request->CreateOrderInformation->CustomerIdentity->IpAddress); //Check all in identity
+		$this->assertEquals('Tess Testson', $request->request->CreateOrderInformation->CustomerIdentity->FullName); //Check all in identity
+		$this->assertEquals('Gatan', $request->request->CreateOrderInformation->CustomerIdentity->Street); //Check all in identity
+		$this->assertEquals('c/o Eriksson', $request->request->CreateOrderInformation->CustomerIdentity->CoAddress); //Check all in identity
 		$this->assertEquals(9999, $request->request->CreateOrderInformation->CustomerIdentity->ZipCode); //Check all in identity
 		$this->assertEquals(23, $request->request->CreateOrderInformation->CustomerIdentity->HouseNumber); //Check all in identity
-		$this->assertEquals("Stan", $request->request->CreateOrderInformation->CustomerIdentity->Locality); //Check all in identity
-		$this->assertEquals("NL", $request->request->CreateOrderInformation->CustomerIdentity->CountryCode); //Check all in identity
-		$this->assertEquals("Individual", $request->request->CreateOrderInformation->CustomerIdentity->CustomerType); //Check all in identity
+		$this->assertEquals('Stan', $request->request->CreateOrderInformation->CustomerIdentity->Locality); //Check all in identity
+		$this->assertEquals('NL', $request->request->CreateOrderInformation->CustomerIdentity->CountryCode); //Check all in identity
+		$this->assertEquals('Individual', $request->request->CreateOrderInformation->CustomerIdentity->CustomerType); //Check all in identity
 	}
 
 	public function testInvoiceRequestObjectForCustomerIdentityCompanyFromSE()
@@ -218,16 +218,16 @@ class AccountCreditPaymentTest extends \PHPUnit\Framework\TestCase
 		$config = ConfigurationService::getDefaultConfig();
 		$request = WebPay::createOrder($config)
 			->addOrderRow(TestUtil::createOrderRow())
-			->addCustomerDetails(WebPayItem::companyCustomer()->setNationalIdNumber("vat234"))
-			->setCountryCode("SE")
-			->setOrderDate("2012-12-12")
-			->setCurrency("SEK")
+			->addCustomerDetails(WebPayItem::companyCustomer()->setNationalIdNumber('vat234'))
+			->setCountryCode('SE')
+			->setOrderDate('2012-12-12')
+			->setCurrency('SEK')
 			->useAccountCredit('111111')
 			->prepareRequest();
 
-		$this->assertEquals("vat234", $request->request->CreateOrderInformation->CustomerIdentity->NationalIdNumber); //Check all in identity
-		$this->assertEquals("SE", $request->request->CreateOrderInformation->CustomerIdentity->CountryCode); //Check all in identity
-		$this->assertEquals("Company", $request->request->CreateOrderInformation->CustomerIdentity->CustomerType); //Check all in identity
+		$this->assertEquals('vat234', $request->request->CreateOrderInformation->CustomerIdentity->NationalIdNumber); //Check all in identity
+		$this->assertEquals('SE', $request->request->CreateOrderInformation->CustomerIdentity->CountryCode); //Check all in identity
+		$this->assertEquals('Company', $request->request->CreateOrderInformation->CustomerIdentity->CustomerType); //Check all in identity
 	}
 
 	public function testInvoiceRequestObjectForSEorderOnOneProductRow()
@@ -239,9 +239,9 @@ class AccountCreditPaymentTest extends \PHPUnit\Framework\TestCase
 			->run($rowFactory->buildShippingFee())
 			->run($rowFactory->buildInvoiceFee())
 			->addCustomerDetails(WebPayItem::individualCustomer()->setNationalIdNumber(194605092222))
-			->setCountryCode("SE")
-			->setOrderDate("2012-12-12")
-			->setCurrency("SEK")
+			->setCountryCode('SE')
+			->setOrderDate('2012-12-12')
+			->setCurrency('SEK')
 			->useAccountCredit('111111')
 			->prepareRequest();
 
@@ -277,36 +277,36 @@ class AccountCreditPaymentTest extends \PHPUnit\Framework\TestCase
 		$rowFactory = new TestUtil();
 		$request = WebPay::createOrder($config)
 			->addOrderRow(WebPayItem::orderRow()
-				->setArticleNumber("1")
+				->setArticleNumber('1')
 				->setQuantity(2)
 				->setAmountIncVat(125.00)
-				->setDescription("Specification")
+				->setDescription('Specification')
 				->setName('Product')
-				->setUnit("st")
+				->setUnit('st')
 				->setVatPercent(25)
 				->setDiscountPercent(0)
 			)
 			->addFee(WebPayItem::shippingFee()
 				->setShippingId('33')
 				->setName('shipping')
-				->setDescription("Specification")
+				->setDescription('Specification')
 				->setAmountIncVat(62.50)
-				->setUnit("st")
+				->setUnit('st')
 				->setVatPercent(25)
 				->setDiscountPercent(0)
 			)
 			->addFee(WebPayItem::invoiceFee()
 				->setName('Svea fee')
-				->setDescription("Fee for invoice")
+				->setDescription('Fee for invoice')
 				->setAmountIncVat(62.50)
-				->setUnit("st")
+				->setUnit('st')
 				->setVatPercent(25)
 				->setDiscountPercent(0)
 			)
 			->addCustomerDetails(WebPayItem::individualCustomer()->setNationalIdNumber(194605092222))
-			->setCountryCode("SE")
-			->setOrderDate("2012-12-12")
-			->setCurrency("SEK")
+			->setCountryCode('SE')
+			->setOrderDate('2012-12-12')
+			->setCurrency('SEK')
 			->useAccountCredit('111111')
 			->prepareRequest();
 
@@ -342,36 +342,36 @@ class AccountCreditPaymentTest extends \PHPUnit\Framework\TestCase
 		$rowFactory = new TestUtil();
 		$request = WebPay::createOrder($config)
 			->addOrderRow(WebPayItem::orderRow()
-				->setArticleNumber("1")
+				->setArticleNumber('1')
 				->setQuantity(2)
 				->setAmountIncVat(125.00)
 				->setAmountExVat(100.00)
-				->setDescription("Specification")
+				->setDescription('Specification')
 				->setName('Product')
-				->setUnit("st")
+				->setUnit('st')
 				->setDiscountPercent(0)
 			)
 			->addFee(WebPayItem::shippingFee()
 				->setShippingId('33')
 				->setName('shipping')
-				->setDescription("Specification")
+				->setDescription('Specification')
 				->setAmountIncVat(62.50)
 				->setAmountExVat(50.00)
-				->setUnit("st")
+				->setUnit('st')
 				->setDiscountPercent(0)
 			)
 			->addFee(WebPayItem::invoiceFee()
 				->setName('Svea fee')
-				->setDescription("Fee for invoice")
+				->setDescription('Fee for invoice')
 				->setAmountIncVat(62.50)
 				->setAmountExVat(50.00)
-				->setUnit("st")
+				->setUnit('st')
 				->setDiscountPercent(0)
 			)
 			->addCustomerDetails(WebPayItem::individualCustomer()->setNationalIdNumber(194605092222))
-			->setCountryCode("SE")
-			->setOrderDate("2012-12-12")
-			->setCurrency("SEK")
+			->setCountryCode('SE')
+			->setOrderDate('2012-12-12')
+			->setCurrency('SEK')
 			->useAccountCredit('111111')
 			->prepareRequest();
 
@@ -406,30 +406,30 @@ class AccountCreditPaymentTest extends \PHPUnit\Framework\TestCase
 		$config = ConfigurationService::getDefaultConfig();
 		$request = WebPay::createOrder($config)
 			->addOrderRow(WebPayItem::orderRow()
-				->setArticleNumber("1")
+				->setArticleNumber('1')
 				->setQuantity(1)
 				->setAmountExVat(240.00)
 				//->setAmountIncVat(300.00)
-				->setDescription("CD")
+				->setDescription('CD')
 				->setVatPercent(25)
 			)
 			->addOrderRow(WebPayItem::orderRow()
-				->setArticleNumber("1")
+				->setArticleNumber('1')
 				->setQuantity(1)
 				->setAmountExVat(188.68)
 				//->setAmountIncVat(200.00)
-				->setDescription("Bok")
+				->setDescription('Bok')
 				->setVatPercent(6)
 			)
 			->addDiscount(WebPayItem::relativeDiscount()
-				->setDiscountId("1")
+				->setDiscountId('1')
 				->setDiscountPercent(20)
-				->setDescription("RelativeDiscount")
+				->setDescription('RelativeDiscount')
 			)
 			->addCustomerDetails(WebPayItem::individualCustomer()->setNationalIdNumber(194605092222))
-			->setCountryCode("SE")
-			->setOrderDate("2012-12-12")
-			->setCurrency("SEK")
+			->setCountryCode('SE')
+			->setOrderDate('2012-12-12')
+			->setCurrency('SEK')
 			->useAccountCredit('111111')
 			->prepareRequest();
 
@@ -457,30 +457,30 @@ class AccountCreditPaymentTest extends \PHPUnit\Framework\TestCase
 		$config = ConfigurationService::getDefaultConfig();
 		$request = WebPay::createOrder($config)
 			->addOrderRow(WebPayItem::orderRow()
-				->setArticleNumber("1")
+				->setArticleNumber('1')
 				->setQuantity(1)
 				->setAmountExVat(240.00)
 				//->setAmountIncVat(300.00)
-				->setDescription("CD")
+				->setDescription('CD')
 				->setVatPercent(25)
 			)
 			->addOrderRow(WebPayItem::orderRow()
-				->setArticleNumber("1")
+				->setArticleNumber('1')
 				->setQuantity(1)
 				->setAmountExVat(188.68)
 				//->setAmountIncVat(200.00)
-				->setDescription("Bok")
+				->setDescription('Bok')
 				->setVatPercent(6)
 			)
 			->addDiscount(WebPayItem::relativeDiscount()
-				->setDiscountId("1")
+				->setDiscountId('1')
 				->setDiscountPercent(21)
-				->setDescription("RelativeDiscount")
+				->setDescription('RelativeDiscount')
 			)
 			->addCustomerDetails(WebPayItem::individualCustomer()->setNationalIdNumber(194605092222))
-			->setCountryCode("SE")
-			->setOrderDate("2012-12-12")
-			->setCurrency("SEK")
+			->setCountryCode('SE')
+			->setOrderDate('2012-12-12')
+			->setCurrency('SEK')
 			->useAccountCredit('111111')
 			->prepareRequest();
 
@@ -495,30 +495,30 @@ class AccountCreditPaymentTest extends \PHPUnit\Framework\TestCase
 		$config = ConfigurationService::getDefaultConfig();
 		$request = WebPay::createOrder($config)
 			->addOrderRow(WebPayItem::orderRow()
-				->setArticleNumber("1")
+				->setArticleNumber('1')
 				->setQuantity(1)
 				->setAmountExVat(240.00)
 				//->setAmountIncVat(300.00)
-				->setDescription("CD")
+				->setDescription('CD')
 				->setVatPercent(25)
 			)
 			->addOrderRow(WebPayItem::orderRow()
-				->setArticleNumber("1")
+				->setArticleNumber('1')
 				->setQuantity(1)
 				->setAmountExVat(188.68)
 				//->setAmountIncVat(200.00)
-				->setDescription("Bok")
+				->setDescription('Bok')
 				->setVatPercent(6)
 			)
 			->addDiscount(WebPayItem::relativeDiscount()
-				->setDiscountId("1")
+				->setDiscountId('1')
 				->setDiscountPercent(20.5)//
-				->setDescription("RelativeDiscount")
+				->setDescription('RelativeDiscount')
 			)
 			->addCustomerDetails(WebPayItem::individualCustomer()->setNationalIdNumber(194605092222))
-			->setCountryCode("SE")
-			->setOrderDate("2012-12-12")
-			->setCurrency("SEK")
+			->setCountryCode('SE')
+			->setOrderDate('2012-12-12')
+			->setCurrency('SEK')
 			->useAccountCredit('111111')
 			->prepareRequest();
 
@@ -533,10 +533,10 @@ class AccountCreditPaymentTest extends \PHPUnit\Framework\TestCase
 		$config = ConfigurationService::getDefaultConfig();
 		$request = WebPay::createOrder($config)
 			->addOrderRow(WebPayItem::orderRow()
-				->setArticleNumber("1")
+				->setArticleNumber('1')
 				->setQuantity(1)
 				->setAmountExVat(240.00)
-				->setDescription("CD")
+				->setDescription('CD')
 				->setVatPercent(25)
 			)
 			->addDiscount(WebPayItem::fixedDiscount()
@@ -545,9 +545,9 @@ class AccountCreditPaymentTest extends \PHPUnit\Framework\TestCase
 				->setDiscountId('1')
 			)
 			->addCustomerDetails(WebPayItem::individualCustomer()->setNationalIdNumber(194605092222))
-			->setCountryCode("SE")
-			->setOrderDate("2012-12-12")
-			->setCurrency("SEK")
+			->setCountryCode('SE')
+			->setOrderDate('2012-12-12')
+			->setCurrency('SEK')
 			->useAccountCredit('111111')
 			->prepareRequest();
 		//couponrow
@@ -567,18 +567,18 @@ class AccountCreditPaymentTest extends \PHPUnit\Framework\TestCase
 		$request = WebPay::createOrder($config)
 			->addOrderRow(TestUtil::createOrderRow())
 			->run($rowFactory->buildShippingFee())
-			->addCustomerDetails(WebPayItem::companyCustomer()->setNationalIdNumber(194605092222)->setAddressSelector("ad33"))
-			->setCountryCode("SE")
-			->setClientOrderNumber("nr26")
-			->setOrderDate("2012-12-12")
-			->setCurrency("SEK")
+			->addCustomerDetails(WebPayItem::companyCustomer()->setNationalIdNumber(194605092222)->setAddressSelector('ad33'))
+			->setCountryCode('SE')
+			->setClientOrderNumber('nr26')
+			->setOrderDate('2012-12-12')
+			->setCurrency('SEK')
 			->useAccountCredit('111111')
 			->prepareRequest();
 		/**
 		 * Test that all data is in the right place for SoapRequest
 		 */
 		//First orderrow is a product
-		$this->assertEquals("2012-12-12", $request->request->CreateOrderInformation->OrderDate);
+		$this->assertEquals('2012-12-12', $request->request->CreateOrderInformation->OrderDate);
 		$this->assertEquals('AccountCredit', $request->request->CreateOrderInformation->OrderType);
 		$this->assertEquals('nr26', $request->request->CreateOrderInformation->ClientOrderNumber); //check in identity
 		$this->assertEquals('ad33', $request->request->CreateOrderInformation->AddressSelector); //check in identity
@@ -591,11 +591,11 @@ class AccountCreditPaymentTest extends \PHPUnit\Framework\TestCase
 		$request = WebPay::createOrder($config)
 			->addOrderRow(TestUtil::createOrderRow())
 			->run($rowFactory->buildShippingFee())
-			->addCustomerDetails(WebPayItem::companyCustomer()->setNationalIdNumber(194605092222)->setAddressSelector("ad33"))
-			->setCountryCode("SE")
-			->setClientOrderNumber("nr26")
-			->setOrderDate("2012-12-12")
-			->setCurrency("SEK")
+			->addCustomerDetails(WebPayItem::companyCustomer()->setNationalIdNumber(194605092222)->setAddressSelector('ad33'))
+			->setCountryCode('SE')
+			->setClientOrderNumber('nr26')
+			->setOrderDate('2012-12-12')
+			->setCurrency('SEK')
 			->useAccountCredit('111111')
 			->prepareRequest();
 
@@ -623,9 +623,9 @@ class AccountCreditPaymentTest extends \PHPUnit\Framework\TestCase
 					->setVatPercent(24)
 					->setQuantity(1)
 			)
-			->addCustomerDetails(TestUtil::createIndividualCustomer("SE"))
-			->setCountryCode("SE")
-			->setOrderDate("2012-12-12")
+			->addCustomerDetails(TestUtil::createIndividualCustomer('SE'))
+			->setCountryCode('SE')
+			->setOrderDate('2012-12-12')
 			->useAccountCredit('111111')
 			->prepareRequest();
 		$this->assertEquals(80, $request->request->CreateOrderInformation->OrderRows['OrderRow'][0]->PricePerUnit);
@@ -650,9 +650,9 @@ class AccountCreditPaymentTest extends \PHPUnit\Framework\TestCase
 					->setQuantity(1)
 			)
 			->addDiscount(WebPayItem::fixedDiscount()->setAmountExVat(8))
-			->addCustomerDetails(TestUtil::createIndividualCustomer("SE"))
-			->setCountryCode("SE")
-			->setOrderDate("2012-12-12")
+			->addCustomerDetails(TestUtil::createIndividualCustomer('SE'))
+			->setCountryCode('SE')
+			->setOrderDate('2012-12-12')
 			->useAccountCredit('111111')
 			->prepareRequest();
 		$this->assertEquals(80.00, $request->request->CreateOrderInformation->OrderRows['OrderRow'][0]->PricePerUnit);
@@ -679,9 +679,9 @@ class AccountCreditPaymentTest extends \PHPUnit\Framework\TestCase
 			->addDiscount(WebPayItem::fixedDiscount()
 				->setAmountExVat(8)
 				->setVatPercent(0))
-			->addCustomerDetails(TestUtil::createIndividualCustomer("SE"))
-			->setCountryCode("SE")
-			->setOrderDate("2012-12-12")
+			->addCustomerDetails(TestUtil::createIndividualCustomer('SE'))
+			->setCountryCode('SE')
+			->setOrderDate('2012-12-12')
 			->useAccountCredit('111111')
 			->prepareRequest();
 		$this->assertEquals(80, $request->request->CreateOrderInformation->OrderRows['OrderRow'][0]->PricePerUnit);
@@ -709,9 +709,9 @@ class AccountCreditPaymentTest extends \PHPUnit\Framework\TestCase
 			->addDiscount(WebPayItem::relativeDiscount()
 				->setDiscountPercent(10)
 			)
-			->addCustomerDetails(TestUtil::createIndividualCustomer("SE"))
-			->setCountryCode("SE")
-			->setOrderDate("2012-12-12")
+			->addCustomerDetails(TestUtil::createIndividualCustomer('SE'))
+			->setCountryCode('SE')
+			->setOrderDate('2012-12-12')
 			->useAccountCredit('111111')
 			->prepareRequest();
 		$this->assertEquals(99.99, $request->request->CreateOrderInformation->OrderRows['OrderRow'][0]->PricePerUnit);
@@ -744,9 +744,9 @@ class AccountCreditPaymentTest extends \PHPUnit\Framework\TestCase
 				->setAmountExVat(80.00)
 				->setVatPercent(24)
 			)
-			->addCustomerDetails(TestUtil::createIndividualCustomer("SE"))
-			->setCountryCode("SE")
-			->setOrderDate("2012-12-12")
+			->addCustomerDetails(TestUtil::createIndividualCustomer('SE'))
+			->setCountryCode('SE')
+			->setOrderDate('2012-12-12')
 			->useAccountCredit('111111')
 			->prepareRequest();
 
@@ -777,9 +777,9 @@ class AccountCreditPaymentTest extends \PHPUnit\Framework\TestCase
 					->setVatPercent(24)
 					->setQuantity(1)
 			)
-			->addCustomerDetails(TestUtil::createIndividualCustomer("SE"))
-			->setCountryCode("SE")
-			->setOrderDate("2012-12-12")
+			->addCustomerDetails(TestUtil::createIndividualCustomer('SE'))
+			->setCountryCode('SE')
+			->setOrderDate('2012-12-12')
 			->useAccountCredit('111111')
 			->prepareRequest();
 
@@ -807,9 +807,9 @@ class AccountCreditPaymentTest extends \PHPUnit\Framework\TestCase
 				->setAmountIncVat(100.00)
 				->setVatPercent(24)
 			)
-			->addCustomerDetails(TestUtil::createIndividualCustomer("SE"))
-			->setCountryCode("SE")
-			->setOrderDate("2012-12-12")
+			->addCustomerDetails(TestUtil::createIndividualCustomer('SE'))
+			->setCountryCode('SE')
+			->setOrderDate('2012-12-12')
 			->useAccountCredit('111111')
 			->prepareRequest();
 
@@ -840,9 +840,9 @@ class AccountCreditPaymentTest extends \PHPUnit\Framework\TestCase
 					->setQuantity(1)
 			)
 			->addDiscount(WebPayItem::fixedDiscount()->setAmountIncVat(10))
-			->addCustomerDetails(TestUtil::createIndividualCustomer("SE"))
-			->setCountryCode("SE")
-			->setOrderDate("2012-12-12")
+			->addCustomerDetails(TestUtil::createIndividualCustomer('SE'))
+			->setCountryCode('SE')
+			->setOrderDate('2012-12-12')
 			->useAccountCredit('111111')
 			->prepareRequest();
 		$this->assertEquals(123.9876, $request->request->CreateOrderInformation->OrderRows['OrderRow'][0]->PricePerUnit);
@@ -869,9 +869,9 @@ class AccountCreditPaymentTest extends \PHPUnit\Framework\TestCase
 			->addDiscount(WebPayItem::fixedDiscount()
 				->setAmountIncVat(10)
 				->setVatPercent(0))
-			->addCustomerDetails(TestUtil::createIndividualCustomer("SE"))
-			->setCountryCode("SE")
-			->setOrderDate("2012-12-12")
+			->addCustomerDetails(TestUtil::createIndividualCustomer('SE'))
+			->setCountryCode('SE')
+			->setOrderDate('2012-12-12')
 			->useAccountCredit('111111')
 			->prepareRequest();
 		$this->assertEquals(123.9876, $request->request->CreateOrderInformation->OrderRows['OrderRow'][0]->PricePerUnit);
@@ -898,9 +898,9 @@ class AccountCreditPaymentTest extends \PHPUnit\Framework\TestCase
 			->addDiscount(WebPayItem::relativeDiscount()
 				->setDiscountPercent(10)
 			)
-			->addCustomerDetails(TestUtil::createIndividualCustomer("SE"))
-			->setCountryCode("SE")
-			->setOrderDate("2012-12-12")
+			->addCustomerDetails(TestUtil::createIndividualCustomer('SE'))
+			->setCountryCode('SE')
+			->setOrderDate('2012-12-12')
 			->useAccountCredit('111111')
 			->prepareRequest();
 		$this->assertEquals(123.9876, $request->request->CreateOrderInformation->OrderRows['OrderRow'][0]->PricePerUnit);
@@ -923,9 +923,9 @@ class AccountCreditPaymentTest extends \PHPUnit\Framework\TestCase
 					->setAmountExVat(99.99)
 					->setQuantity(1)
 			)
-			->addCustomerDetails(TestUtil::createIndividualCustomer("SE"))
-			->setCountryCode("SE")
-			->setOrderDate("2012-12-12")
+			->addCustomerDetails(TestUtil::createIndividualCustomer('SE'))
+			->setCountryCode('SE')
+			->setOrderDate('2012-12-12')
 			->useAccountCredit('111111')
 			->prepareRequest();
 		$this->assertEquals(123.9876, $request->request->CreateOrderInformation->OrderRows['OrderRow'][0]->PricePerUnit);
@@ -950,9 +950,9 @@ class AccountCreditPaymentTest extends \PHPUnit\Framework\TestCase
 			->addFee(WebPayItem::invoiceFee()
 				->setAmountIncVat(123.9876)->setAmountExVat(99.99)
 			)
-			->addCustomerDetails(TestUtil::createIndividualCustomer("SE"))
-			->setCountryCode("SE")
-			->setOrderDate("2012-12-12")
+			->addCustomerDetails(TestUtil::createIndividualCustomer('SE'))
+			->setCountryCode('SE')
+			->setOrderDate('2012-12-12')
 			->useAccountCredit('111111')
 			->prepareRequest();
 
@@ -979,9 +979,9 @@ class AccountCreditPaymentTest extends \PHPUnit\Framework\TestCase
 			->addDiscount(WebPayItem::fixedDiscount()
 				->setAmountIncVat(12.39876)
 			)
-			->addCustomerDetails(TestUtil::createIndividualCustomer("SE"))
-			->setCountryCode("SE")
-			->setOrderDate("2012-12-12")
+			->addCustomerDetails(TestUtil::createIndividualCustomer('SE'))
+			->setCountryCode('SE')
+			->setOrderDate('2012-12-12')
 			->useAccountCredit('111111')
 			->prepareRequest();
 
@@ -1008,9 +1008,9 @@ class AccountCreditPaymentTest extends \PHPUnit\Framework\TestCase
 			->addDiscount(WebPayItem::relativeDiscount()
 				->setDiscountPercent(10)
 			)
-			->addCustomerDetails(TestUtil::createIndividualCustomer("SE"))
-			->setCountryCode("SE")
-			->setOrderDate("2012-12-12")
+			->addCustomerDetails(TestUtil::createIndividualCustomer('SE'))
+			->setCountryCode('SE')
+			->setOrderDate('2012-12-12')
 			->useAccountCredit('111111')
 			->prepareRequest();
 
@@ -1046,9 +1046,9 @@ class AccountCreditPaymentTest extends \PHPUnit\Framework\TestCase
 					->setAmountIncVat(123.9876)
 					->setQuantity(1)
 			)
-			->addCustomerDetails(TestUtil::createIndividualCustomer("SE"))
-			->setCountryCode("SE")
-			->setOrderDate("2012-12-12")
+			->addCustomerDetails(TestUtil::createIndividualCustomer('SE'))
+			->setCountryCode('SE')
+			->setOrderDate('2012-12-12')
 			->useAccountCredit('111111')
 			->prepareRequest();
 		$this->assertEquals(99.99, $request->request->CreateOrderInformation->OrderRows['OrderRow'][0]->PricePerUnit);
@@ -1090,9 +1090,9 @@ class AccountCreditPaymentTest extends \PHPUnit\Framework\TestCase
 					->setVatPercent(24)
 					->setQuantity(1)
 			)
-			->addCustomerDetails(TestUtil::createIndividualCustomer("SE"))
-			->setCountryCode("SE")
-			->setOrderDate("2012-12-12")
+			->addCustomerDetails(TestUtil::createIndividualCustomer('SE'))
+			->setCountryCode('SE')
+			->setOrderDate('2012-12-12')
 			->useAccountCredit('111111')
 			->prepareRequest();
 		$this->assertEquals(99.99, $request->request->CreateOrderInformation->OrderRows['OrderRow'][0]->PricePerUnit);
@@ -1128,9 +1128,9 @@ class AccountCreditPaymentTest extends \PHPUnit\Framework\TestCase
 				->setAmountExVat(99.99)
 				->setVatPercent(24)
 			)
-			->addCustomerDetails(TestUtil::createIndividualCustomer("SE"))
-			->setCountryCode("SE")
-			->setOrderDate("2012-12-12")
+			->addCustomerDetails(TestUtil::createIndividualCustomer('SE'))
+			->setCountryCode('SE')
+			->setOrderDate('2012-12-12')
 			->useAccountCredit('111111')
 			->prepareRequest();
 		$this->assertEquals(99.99, $request->request->CreateOrderInformation->OrderRows['OrderRow'][0]->PricePerUnit);
@@ -1166,9 +1166,9 @@ class AccountCreditPaymentTest extends \PHPUnit\Framework\TestCase
 				->setAmountIncVat(123.9876)
 				->setVatPercent(24)
 			)
-			->addCustomerDetails(TestUtil::createIndividualCustomer("SE"))
-			->setCountryCode("SE")
-			->setOrderDate("2012-12-12")
+			->addCustomerDetails(TestUtil::createIndividualCustomer('SE'))
+			->setCountryCode('SE')
+			->setOrderDate('2012-12-12')
 			->useAccountCredit('111111')
 			->prepareRequest();
 		$this->assertEquals(99.99, $request->request->CreateOrderInformation->OrderRows['OrderRow'][0]->PricePerUnit);
@@ -1198,9 +1198,9 @@ class AccountCreditPaymentTest extends \PHPUnit\Framework\TestCase
 			->addDiscount(WebPayItem::fixedDiscount()
 				->setAmountIncVat(12.39876)
 			)
-			->addCustomerDetails(TestUtil::createIndividualCustomer("SE"))
-			->setCountryCode("SE")
-			->setOrderDate("2012-12-12")
+			->addCustomerDetails(TestUtil::createIndividualCustomer('SE'))
+			->setCountryCode('SE')
+			->setOrderDate('2012-12-12')
 			->useAccountCredit('111111')
 			->prepareRequest();
 
@@ -1233,9 +1233,9 @@ class AccountCreditPaymentTest extends \PHPUnit\Framework\TestCase
 			->addDiscount(WebPayItem::relativeDiscount()
 				->setDiscountPercent(5)
 			)
-			->addCustomerDetails(TestUtil::createIndividualCustomer("SE"))
-			->setCountryCode("SE")
-			->setOrderDate("2012-12-12")
+			->addCustomerDetails(TestUtil::createIndividualCustomer('SE'))
+			->setCountryCode('SE')
+			->setOrderDate('2012-12-12')
 			->useAccountCredit('111111')
 			->prepareRequest();
 
@@ -1260,41 +1260,41 @@ class AccountCreditPaymentTest extends \PHPUnit\Framework\TestCase
 	{
 		$order = WebPay::createOrder(ConfigurationService::getDefaultConfig())
 			->addCustomerDetails(WebPayItem::individualCustomer()->setNationalIdNumber(194605092222))
-			->setCountryCode("SE")
-			->setCustomerReference("33")
-			->setOrderDate("2012-12-12")
-			->setCurrency("SEK")
+			->setCountryCode('SE')
+			->setCustomerReference('33')
+			->setOrderDate('2012-12-12')
+			->setCurrency('SEK')
 			->addOrderRow(
 				WebPayItem::orderRow()
 					->setAmountExVat(80.00)
 					->setVatPercent(25)
 					->setQuantity(1)
-					->setName("exvatRow")
+					->setName('exvatRow')
 			)
 			->addOrderRow(
 				WebPayItem::orderRow()
 					->setAmountExVat(80.00)
 					->setVatPercent(25)
 					->setQuantity(1)
-					->setName("exvatRow2")
+					->setName('exvatRow2')
 			)
 			->addFee(
 				WebPayItem::invoiceFee()
 					->setAmountExVat(8.00)
 					->setVatPercent(25)
-					->setName("exvatInvoiceFee")
+					->setName('exvatInvoiceFee')
 			)
 			->addFee(
 				WebPayItem::shippingFee()
 					->setAmountExVat(16.00)
 					->setVatPercent(25)
-					->setName("exvatShippingFee")
+					->setName('exvatShippingFee')
 			)
 			->addDiscount(
 				WebPayItem::relativeDiscount()
 					->setDiscountPercent(10.0)
-					->setDiscountId("TenPercentOff")
-					->setName("relativeDiscount")
+					->setDiscountId('TenPercentOff')
+					->setName('relativeDiscount')
 			);
 		$request = $order->useAccountCredit('111111')->prepareRequest();
 		// all order rows
@@ -1319,41 +1319,41 @@ class AccountCreditPaymentTest extends \PHPUnit\Framework\TestCase
 	{
 		$order = WebPay::createOrder(ConfigurationService::getDefaultConfig())
 			->addCustomerDetails(WebPayItem::individualCustomer()->setNationalIdNumber(194605092222))
-			->setCountryCode("SE")
-			->setCustomerReference("33")
-			->setOrderDate("2012-12-12")
-			->setCurrency("SEK")
+			->setCountryCode('SE')
+			->setCustomerReference('33')
+			->setOrderDate('2012-12-12')
+			->setCurrency('SEK')
 			->addOrderRow(
 				WebPayItem::orderRow()
 					->setAmountExVat(60.00)
 					->setVatPercent(20)
 					->setQuantity(1)
-					->setName("exvatRow")
+					->setName('exvatRow')
 			)
 			->addOrderRow(
 				WebPayItem::orderRow()
 					->setAmountExVat(30.00)
 					->setVatPercent(10)
 					->setQuantity(1)
-					->setName("exvatRow2")
+					->setName('exvatRow2')
 			)
 			->addFee(
 				WebPayItem::invoiceFee()
 					->setAmountExVat(8.00)
 					->setVatPercent(10)
-					->setName("exvatInvoiceFee")
+					->setName('exvatInvoiceFee')
 			)
 			->addFee(
 				WebPayItem::shippingFee()
 					->setAmountExVat(16.00)
 					->setVatPercent(10)
-					->setName("exvatShippingFee")
+					->setName('exvatShippingFee')
 			)
 			->addDiscount(
 				WebPayItem::relativeDiscount()
 					->setDiscountPercent(10.0)
-					->setDiscountId("TenPercentOff")
-					->setName("relativeDiscount")
+					->setDiscountId('TenPercentOff')
+					->setName('relativeDiscount')
 			);
 		$request = $order->useAccountCredit('111111')->prepareRequest();
 		// all order rows
@@ -1384,41 +1384,41 @@ class AccountCreditPaymentTest extends \PHPUnit\Framework\TestCase
 	{
 		$order = WebPay::createOrder(ConfigurationService::getDefaultConfig())
 			->addCustomerDetails(WebPayItem::individualCustomer()->setNationalIdNumber(194605092222))
-			->setCountryCode("SE")
-			->setCustomerReference("33")
-			->setOrderDate("2012-12-12")
-			->setCurrency("SEK")
+			->setCountryCode('SE')
+			->setCustomerReference('33')
+			->setOrderDate('2012-12-12')
+			->setCurrency('SEK')
 			->addOrderRow(
 				WebPayItem::orderRow()
 					->setAmountIncVat(72.00)
 					->setVatPercent(20)
 					->setQuantity(1)
-					->setName("exvatRow")
+					->setName('exvatRow')
 			)
 			->addOrderRow(
 				WebPayItem::orderRow()
 					->setAmountIncVat(33.00)
 					->setVatPercent(10)
 					->setQuantity(1)
-					->setName("exvatRow2")
+					->setName('exvatRow2')
 			)
 			->addFee(
 				WebPayItem::invoiceFee()
 					->setAmountIncVat(8.80)
 					->setVatPercent(10)
-					->setName("incvatInvoiceFee")
+					->setName('incvatInvoiceFee')
 			)
 			->addFee(
 				WebPayItem::shippingFee()
 					->setAmountIncVat(17.60)
 					->setVatPercent(10)
-					->setName("incvatShippingFee")
+					->setName('incvatShippingFee')
 			)
 			->addDiscount(
 				WebPayItem::relativeDiscount()
 					->setDiscountPercent(10.0)
-					->setDiscountId("TenPercentOff")
-					->setName("relativeDiscount")
+					->setDiscountId('TenPercentOff')
+					->setName('relativeDiscount')
 			);
 		$request = $order->useAccountCredit('111111')->prepareRequest();
 		// all order rows
@@ -1454,42 +1454,42 @@ class AccountCreditPaymentTest extends \PHPUnit\Framework\TestCase
 	{
 		$order = WebPay::createOrder(ConfigurationService::getDefaultConfig())
 			->addCustomerDetails(WebPayItem::individualCustomer()->setNationalIdNumber(194605092222))
-			->setCountryCode("SE")
-			->setCustomerReference("33")
-			->setOrderDate("2012-12-12")
-			->setCurrency("SEK")
+			->setCountryCode('SE')
+			->setCustomerReference('33')
+			->setOrderDate('2012-12-12')
+			->setCurrency('SEK')
 			->addOrderRow(
 				WebPayItem::orderRow()
 					->setAmountExVat(60.00)
 					->setVatPercent(20)
 					->setQuantity(1)
-					->setName("exvatRow")
+					->setName('exvatRow')
 			)
 			->addOrderRow(
 				WebPayItem::orderRow()
 					->setAmountExVat(30.00)
 					->setVatPercent(10)
 					->setQuantity(1)
-					->setName("exvatRow2")
+					->setName('exvatRow2')
 			)
 			->addFee(
 				WebPayItem::invoiceFee()
 					->setAmountExVat(8.00)
 					->setVatPercent(10)
-					->setName("exvatInvoiceFee")
+					->setName('exvatInvoiceFee')
 			)
 			->addFee(
 				WebPayItem::shippingFee()
 					->setAmountExVat(16.00)
 					->setVatPercent(10)
-					->setName("exvatShippingFee")
+					->setName('exvatShippingFee')
 			)
 			->addDiscount(
 				WebPayItem::fixedDiscount()
 					->setAmountExVat(10.0)
 					->setVatPercent(10)
-					->setDiscountId("ElevenCrownsOff")
-					->setName("fixedDiscount: 10 @10% => 11kr")
+					->setDiscountId('ElevenCrownsOff')
+					->setName('fixedDiscount: 10 @10% => 11kr')
 			);
 		$request = $order->useAccountCredit('111111')->prepareRequest();
 		// all order rows
@@ -1518,42 +1518,42 @@ class AccountCreditPaymentTest extends \PHPUnit\Framework\TestCase
 	{
 		$order = WebPay::createOrder(ConfigurationService::getDefaultConfig())
 			->addCustomerDetails(WebPayItem::individualCustomer()->setNationalIdNumber(194605092222))
-			->setCountryCode("SE")
-			->setCustomerReference("33")
-			->setOrderDate("2012-12-12")
-			->setCurrency("SEK")
+			->setCountryCode('SE')
+			->setCustomerReference('33')
+			->setOrderDate('2012-12-12')
+			->setCurrency('SEK')
 			->addOrderRow(
 				WebPayItem::orderRow()
 					->setAmountExVat(60.00)
 					->setVatPercent(20)
 					->setQuantity(1)
-					->setName("exvatRow")
+					->setName('exvatRow')
 			)
 			->addOrderRow(
 				WebPayItem::orderRow()
 					->setAmountExVat(30.00)
 					->setVatPercent(10)
 					->setQuantity(1)
-					->setName("exvatRow2")
+					->setName('exvatRow2')
 			)
 			->addFee(
 				WebPayItem::invoiceFee()
 					->setAmountExVat(8.00)
 					->setVatPercent(10)
-					->setName("exvatInvoiceFee")
+					->setName('exvatInvoiceFee')
 			)
 			->addFee(
 				WebPayItem::shippingFee()
 					->setAmountExVat(16.00)
 					->setVatPercent(10)
-					->setName("exvatShippingFee")
+					->setName('exvatShippingFee')
 			)
 			->addDiscount(
 				WebPayItem::fixedDiscount()
 					->setAmountIncVat(11.0)
 					->setVatPercent(10)
-					->setDiscountId("ElevenCrownsOff")
-					->setName("fixedDiscount: 10 @10% => 11kr")
+					->setDiscountId('ElevenCrownsOff')
+					->setName('fixedDiscount: 10 @10% => 11kr')
 			);
 		$request = $order->useAccountCredit('111111')->prepareRequest();
 		// all order rows
@@ -1577,41 +1577,41 @@ class AccountCreditPaymentTest extends \PHPUnit\Framework\TestCase
 	{
 		$order = WebPay::createOrder(ConfigurationService::getDefaultConfig())
 			->addCustomerDetails(WebPayItem::individualCustomer()->setNationalIdNumber(194605092222))
-			->setCountryCode("SE")
-			->setCustomerReference("33")
-			->setOrderDate("2012-12-12")
-			->setCurrency("SEK")
+			->setCountryCode('SE')
+			->setCustomerReference('33')
+			->setOrderDate('2012-12-12')
+			->setCurrency('SEK')
 			->addOrderRow(
 				WebPayItem::orderRow()
 					->setAmountExVat(60.00)
 					->setVatPercent(20)
 					->setQuantity(1)
-					->setName("exvatRow")
+					->setName('exvatRow')
 			)
 			->addOrderRow(
 				WebPayItem::orderRow()
 					->setAmountExVat(30.00)
 					->setVatPercent(10)
 					->setQuantity(1)
-					->setName("exvatRow2")
+					->setName('exvatRow2')
 			)
 			->addFee(
 				WebPayItem::invoiceFee()
 					->setAmountExVat(8.00)
 					->setVatPercent(10)
-					->setName("exvatInvoiceFee")
+					->setName('exvatInvoiceFee')
 			)
 			->addFee(
 				WebPayItem::shippingFee()
 					->setAmountExVat(16.00)
 					->setVatPercent(10)
-					->setName("exvatShippingFee")
+					->setName('exvatShippingFee')
 			)
 			->addDiscount(
 				WebPayItem::fixedDiscount()
 					->setAmountExVat(10.0)
-					->setDiscountId("TenCrownsOff")
-					->setName("fixedDiscount: 10 off exvat")
+					->setDiscountId('TenCrownsOff')
+					->setName('fixedDiscount: 10 off exvat')
 			);
 		$request = $order->useAccountCredit('111111')->prepareRequest();
 		// all order rows
@@ -1637,41 +1637,41 @@ class AccountCreditPaymentTest extends \PHPUnit\Framework\TestCase
 	{
 		$order = WebPay::createOrder(ConfigurationService::getDefaultConfig())
 			->addCustomerDetails(WebPayItem::individualCustomer()->setNationalIdNumber(194605092222))
-			->setCountryCode("SE")
-			->setCustomerReference("33")
-			->setOrderDate("2012-12-12")
-			->setCurrency("SEK")
+			->setCountryCode('SE')
+			->setCustomerReference('33')
+			->setOrderDate('2012-12-12')
+			->setCurrency('SEK')
 			->addOrderRow(
 				WebPayItem::orderRow()
 					->setAmountExVat(60.00)
 					->setVatPercent(20)
 					->setQuantity(1)
-					->setName("exvatRow")
+					->setName('exvatRow')
 			)
 			->addOrderRow(
 				WebPayItem::orderRow()
 					->setAmountExVat(30.00)
 					->setVatPercent(10)
 					->setQuantity(1)
-					->setName("exvatRow2")
+					->setName('exvatRow2')
 			)
 			->addFee(
 				WebPayItem::invoiceFee()
 					->setAmountExVat(8.00)
 					->setVatPercent(10)
-					->setName("exvatInvoiceFee")
+					->setName('exvatInvoiceFee')
 			)
 			->addFee(
 				WebPayItem::shippingFee()
 					->setAmountExVat(16.00)
 					->setVatPercent(10)
-					->setName("exvatShippingFee")
+					->setName('exvatShippingFee')
 			)
 			->addDiscount(
 				WebPayItem::fixedDiscount()
 					->setAmountIncVat(10.0)
-					->setDiscountId("TenCrownsOff")
-					->setName("fixedDiscount: 10 off incvat")
+					->setDiscountId('TenCrownsOff')
+					->setName('fixedDiscount: 10 off incvat')
 			);
 		$request = $order->useAccountCredit('111111')->prepareRequest();
 		// all order rows
@@ -1698,42 +1698,42 @@ class AccountCreditPaymentTest extends \PHPUnit\Framework\TestCase
 	{
 		$order = WebPay::createOrder(ConfigurationService::getDefaultConfig())
 			->addCustomerDetails($this->getCustomerRow())
-			->setCountryCode("SE")
-			->setCustomerReference("33")
-			->setOrderDate("2012-12-12")
-			->setCurrency("SEK")
+			->setCountryCode('SE')
+			->setCustomerReference('33')
+			->setOrderDate('2012-12-12')
+			->setCurrency('SEK')
 			->addOrderRow(
 				WebPayItem::orderRow()
 					->setAmountExVat(60.00)
 					->setVatPercent(20)
 					->setQuantity(1)
-					->setName("exvatRow")
+					->setName('exvatRow')
 			)
 			->addOrderRow(
 				WebPayItem::orderRow()
 					->setAmountExVat(30.00)
 					->setVatPercent(10)
 					->setQuantity(1)
-					->setName("exvatRow2")
+					->setName('exvatRow2')
 			)
 			->addFee(
 				WebPayItem::invoiceFee()
 					->setAmountExVat(8.00)
 					->setVatPercent(10)
-					->setName("exvatInvoiceFee")
+					->setName('exvatInvoiceFee')
 			)
 			->addFee(
 				WebPayItem::shippingFee()
 					->setAmountExVat(16.00)
 					->setVatPercent(10)
-					->setName("exvatShippingFee")
+					->setName('exvatShippingFee')
 			)
 			->addDiscount(
 				WebPayItem::fixedDiscount()
 					->setAmountIncVat(11.0)
 					->setVatPercent(10)
-					->setDiscountId("ElevenCrownsOff")
-					->setName("fixedDiscount: 10 @10% => 11kr")
+					->setDiscountId('ElevenCrownsOff')
+					->setName('fixedDiscount: 10 @10% => 11kr')
 			);
 		$request = $order->useAccountCredit('111111')->prepareRequest();
 		// all order rows
@@ -1757,41 +1757,41 @@ class AccountCreditPaymentTest extends \PHPUnit\Framework\TestCase
 	{
 		$order = WebPay::createOrder(ConfigurationService::getDefaultConfig())
 			->addCustomerDetails(WebPayItem::individualCustomer()->setNationalIdNumber(194605092222))
-			->setCountryCode("SE")
-			->setCustomerReference("33")
-			->setOrderDate("2012-12-12")
-			->setCurrency("SEK")
+			->setCountryCode('SE')
+			->setCustomerReference('33')
+			->setOrderDate('2012-12-12')
+			->setCurrency('SEK')
 			->addOrderRow(
 				WebPayItem::orderRow()
 					->setAmountExVat(60.00)
 					->setVatPercent(20)
 					->setQuantity(1)
-					->setName("exvatRow")
+					->setName('exvatRow')
 			)
 			->addOrderRow(
 				WebPayItem::orderRow()
 					->setAmountExVat(30.00)
 					->setVatPercent(10)
 					->setQuantity(1)
-					->setName("exvatRow2")
+					->setName('exvatRow2')
 			)
 			->addFee(
 				WebPayItem::invoiceFee()
 					->setAmountExVat(8.00)
 					->setVatPercent(10)
-					->setName("exvatInvoiceFee")
+					->setName('exvatInvoiceFee')
 			)
 			->addFee(
 				WebPayItem::shippingFee()
 					->setAmountExVat(16.00)
 					->setVatPercent(10)
-					->setName("exvatShippingFee")
+					->setName('exvatShippingFee')
 			)
 			->addDiscount(
 				WebPayItem::fixedDiscount()
 					->setAmountExVat(10.0)
-					->setDiscountId("TenCrownsOff")
-					->setName("fixedDiscount: 10 off exvat")
+					->setDiscountId('TenCrownsOff')
+					->setName('fixedDiscount: 10 off exvat')
 			);
 		$request = $order->useAccountCredit('111111')->prepareRequest();
 		// all order rows
@@ -1817,41 +1817,41 @@ class AccountCreditPaymentTest extends \PHPUnit\Framework\TestCase
 	{
 		$order = WebPay::createOrder(ConfigurationService::getDefaultConfig())
 			->addCustomerDetails(WebPayItem::individualCustomer()->setNationalIdNumber(194605092222))
-			->setCountryCode("SE")
-			->setCustomerReference("33")
-			->setOrderDate("2012-12-12")
-			->setCurrency("SEK")
+			->setCountryCode('SE')
+			->setCustomerReference('33')
+			->setOrderDate('2012-12-12')
+			->setCurrency('SEK')
 			->addOrderRow(
 				WebPayItem::orderRow()
 					->setAmountExVat(60.00)
 					->setVatPercent(20)
 					->setQuantity(1)
-					->setName("exvatRow")
+					->setName('exvatRow')
 			)
 			->addOrderRow(
 				WebPayItem::orderRow()
 					->setAmountExVat(30.00)
 					->setVatPercent(10)
 					->setQuantity(1)
-					->setName("exvatRow2")
+					->setName('exvatRow2')
 			)
 			->addFee(
 				WebPayItem::invoiceFee()
 					->setAmountExVat(8.00)
 					->setVatPercent(10)
-					->setName("exvatInvoiceFee")
+					->setName('exvatInvoiceFee')
 			)
 			->addFee(
 				WebPayItem::shippingFee()
 					->setAmountExVat(16.00)
 					->setVatPercent(10)
-					->setName("exvatShippingFee")
+					->setName('exvatShippingFee')
 			)
 			->addDiscount(
 				WebPayItem::fixedDiscount()
 					->setAmountIncVat(10.0)
-					->setDiscountId("TenCrownsOff")
-					->setName("fixedDiscount: 10 off incvat")
+					->setDiscountId('TenCrownsOff')
+					->setName('fixedDiscount: 10 off incvat')
 			);
 		$request = $order->useAccountCredit('111111')->prepareRequest();
 		// all order rows

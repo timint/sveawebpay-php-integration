@@ -15,7 +15,7 @@ class SearchOrdersRequest extends AdminServiceRequest {
 	 * @param QueryOrderBuilder $builder
 	 */
 	public function __construct($builder) {
-		$this->action = "GetAccountCredits";
+		$this->action = 'GetAccountCredits';
 		$this->orderBuilder = $builder;
 	}
 
@@ -46,7 +46,7 @@ class SearchOrdersRequest extends AdminServiceRequest {
 
 	private function validateOrderId($errors) {
 		if (isset($this->orderBuilder->orderId) == false) {
-			$errors[] = ['missing value' => "orderId is required."];
+			$errors[] = ['missing value' => 'orderId is required.'];
 		}
 
 		return $errors;

@@ -18,7 +18,7 @@ class CancelOrderBuilderIntegrationTest extends \PHPUnit\Framework\TestCase
 	// CancelOrderBuilder endpoints: cancelInvoiceOrder(), cancelPaymentPlanOrder(), cancelCardOrder()
 	function test_CancelOrderBuilder_Invoice_success()
 	{
-		$country = "SE";
+		$country = 'SE';
 		$order = TestUtil::createOrder(TestUtil::createIndividualCustomer($country));
 		$orderResponse = $order->useInvoicePayment()->doRequest();
 
@@ -35,7 +35,7 @@ class CancelOrderBuilderIntegrationTest extends \PHPUnit\Framework\TestCase
 
 	function test_CancelOrderBuilder_PaymentPlan_success()
 	{
-		$country = "SE";
+		$country = 'SE';
 		$order = TestUtil::createOrder(TestUtil::createIndividualCustomer($country))
 			->addOrderRow(WebPayItem::orderRow()
 				->setQuantity(1)
@@ -70,12 +70,12 @@ class CancelOrderBuilderIntegrationTest extends \PHPUnit\Framework\TestCase
 		);
 
 		// Set the below to match the transaction, then run the test.
-		$customerrefno = "test_1396964349955";
+		$customerrefno = 'test_1396964349955';
 		$transactionId = 580658;
 
 		$request = WebPayAdmin::cancelOrder(ConfigurationService::getDefaultConfig())
 			->setOrderId($transactionId)
-			->setCountryCode("SE")
+			->setCountryCode('SE')
 			->cancelCardOrder()
 			->doRequest();
 

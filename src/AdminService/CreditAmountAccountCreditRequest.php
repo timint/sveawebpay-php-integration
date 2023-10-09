@@ -28,7 +28,7 @@ class CreditAmountAccountCreditRequest extends AdminServiceRequest {
 	 * @param CreditAmountBuilder $creditAmountBuilder
 	 */
 	public function __construct($creditAmountBuilder) {
-		$this->action = "CancelAccountCreditAmount";
+		$this->action = 'CancelAccountCreditAmount';
 		$this->orderBuilder = $creditAmountBuilder;
 	}
 
@@ -66,7 +66,7 @@ class CreditAmountAccountCreditRequest extends AdminServiceRequest {
 
 	public function validateOrderId($errors) {
 		if (isset($this->orderBuilder->orderId) == false) {
-			$errors[] = ['missing value' => "orderId is required, use setOrderId()."];
+			$errors[] = ['missing value' => 'orderId is required, use setOrderId().'];
 		}
 
 		return $errors;
@@ -74,7 +74,7 @@ class CreditAmountAccountCreditRequest extends AdminServiceRequest {
 
 	private function validateCountryCode($errors) {
 		if (isset($this->orderBuilder->countryCode) == false) {
-			$errors[] = ['missing value' => "countryCode is required, use setCountryCode()."];
+			$errors[] = ['missing value' => 'countryCode is required, use setCountryCode().'];
 		}
 
 		return $errors;
@@ -82,10 +82,10 @@ class CreditAmountAccountCreditRequest extends AdminServiceRequest {
 
 	private function validateAmount($errors) {
 		if (!isset($this->orderBuilder->amountIncVat) || $this->orderBuilder->amountIncVat <= 0) {
-			$errors[] = ['incorrect value' => "amountIncVat is too small."];
+			$errors[] = ['incorrect value' => 'amountIncVat is too small.'];
 		} elseif (isset($this->orderBuilder->amountIncVat) &&
 				  !(is_float($this->orderBuilder->amountIncVat) || is_int($this->orderBuilder->amountIncVat))) {
-			$errors[] = ['incorrect datatype' => "amountIncVat is not of type float or int."];
+			$errors[] = ['incorrect datatype' => 'amountIncVat is not of type float or int.'];
 		}
 
 		return $errors;
@@ -109,7 +109,7 @@ class CreditAmountAccountCreditRequest extends AdminServiceRequest {
 					$this->formatRowNameAndDescription($orderRow),
 					$orderRow->rowNumber,
 					$orderRow->vatPercent
-				), SOAP_ENC_OBJECT, null, null, 'CancellationRow', "http://schemas.datacontract.org/2004/07/DataObjects.Webservice"
+				), SOAP_ENC_OBJECT, null, null, 'CancellationRow', 'http://schemas.datacontract.org/2004/07/DataObjects.Webservice'
 			);
 		}
 

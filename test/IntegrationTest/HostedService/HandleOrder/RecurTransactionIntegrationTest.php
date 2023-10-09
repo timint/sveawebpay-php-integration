@@ -23,8 +23,8 @@ class RecurTransactionIntegrationTest extends \PHPUnit\Framework\TestCase
 	{
 
 		$subscriptionId = 987654;
-		$customerRefNo = "myCustomerRefNo";
-		$currency = "SEK";
+		$customerRefNo = 'myCustomerRefNo';
+		$currency = 'SEK';
 		$amount = 100;
 
 		$request = new RecurTransaction(ConfigurationService::getDefaultConfig());
@@ -33,14 +33,14 @@ class RecurTransactionIntegrationTest extends \PHPUnit\Framework\TestCase
 		$request->amount = $amount;
 		$request->currency = $currency;
 
-		$request->countryCode = "SE";
+		$request->countryCode = 'SE';
 		$response = $request->doRequest();
 
 		$this->assertInstanceOf("Svea\WebPay\HostedService\HostedResponse\HostedAdminResponse\RecurTransactionResponse", $response);
 
 		// if we receive an error from the service, the integration test passes
 		$this->assertEquals(0, $response->accepted);
-		$this->assertEquals("322 (BAD_SUBSCRIPTION_ID)", $response->resultcode);
+		$this->assertEquals('322 (BAD_SUBSCRIPTION_ID)', $response->resultcode);
 	}
 
 	/**
@@ -88,7 +88,7 @@ class RecurTransactionIntegrationTest extends \PHPUnit\Framework\TestCase
 		$request->amount = $new_amount;
 		$request->currency = $currency;
 
-		$request->countryCode = "SE";
+		$request->countryCode = 'SE';
 		$response = $request->doRequest();
 
 		$this->assertInstanceOf("Svea\WebPay\HostedService\HostedResponse\HostedAdminResponse\RecurTransactionResponse", $response);
@@ -96,7 +96,7 @@ class RecurTransactionIntegrationTest extends \PHPUnit\Framework\TestCase
 		////print_r($response);
 		$this->assertEquals(1, $response->accepted);
 
-		$this->assertEquals("CARD", $response->paymentMethod);	// CARD is alias for KORTCERT, and this alias is returned by webservice
+		$this->assertEquals('CARD', $response->paymentMethod);	// CARD is alias for KORTCERT, and this alias is returned by webservice
 		$this->assertEquals($merchantId, $response->merchantId);
 		$this->assertEquals($currency, $response->currency);
 		$this->assertEquals($cardType, $response->cardType);
@@ -105,7 +105,7 @@ class RecurTransactionIntegrationTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals($expiryYear, $response->expiryYear);
 		$this->assertEquals($subscriptionId, $response->subscriptionId);
 
-		$this->assertObjectHasAttribute("transactionId", $response);
+		$this->assertObjectHasAttribute('transactionId', $response);
 		$this->assertEquals($new_clientOrderNumber, $response->clientOrderNumber);
 		$this->assertEquals($new_amount, $response->amount);
 	}

@@ -26,35 +26,35 @@ class FixedDiscountRowsTest extends \PHPUnit\Framework\TestCase
 	{
 		$order = WebPay::createOrder(ConfigurationService::getDefaultConfig())
 			->addCustomerDetails(WebPayItem::individualCustomer()->setNationalIdNumber(194605092222))
-			->setCountryCode("SE")
-			->setCustomerReference("33")
-			->setOrderDate("2012-12-12")
-			->setCurrency("SEK")
+			->setCountryCode('SE')
+			->setCustomerReference('33')
+			->setOrderDate('2012-12-12')
+			->setCurrency('SEK')
 			->addOrderRow(
 				WebPayItem::orderRow()
 					->setAmountExVat(60.00)
 					->setVatPercent(20)
 					->setQuantity(1)
-					->setName("exvatRow")
+					->setName('exvatRow')
 			)
 			->addOrderRow(
 				WebPayItem::orderRow()
 					->setAmountIncVat(33.00)
 					->setVatPercent(10)
 					->setQuantity(1)
-					->setName("incvatRow")
+					->setName('incvatRow')
 			)
 			->addFee(
 				WebPayItem::invoiceFee()
 					->setAmountIncVat(8.80)
 					->setVatPercent(10)
-					->setName("incvatInvoiceFee")
+					->setName('incvatInvoiceFee')
 			)
 			->addFee(
 				WebPayItem::shippingFee()
 					->setAmountExVat(16.00)
 					->setVatPercent(10)
-					->setName("exvatShippingFee")
+					->setName('exvatShippingFee')
 			);
 
 		return $order;
@@ -69,8 +69,8 @@ class FixedDiscountRowsTest extends \PHPUnit\Framework\TestCase
 			WebPayItem::fixedDiscount()
 				->setAmountExVat(10.0)
 				//->setVatPercent(10)
-				->setDiscountId("fixedDiscount")
-				->setName("fixedDiscount: 10e")
+				->setDiscountId('fixedDiscount')
+				->setName('fixedDiscount: 10e')
 		);
 		$request = $order->useInvoicePayment()->prepareRequest();
 		// all order rows
@@ -109,8 +109,8 @@ class FixedDiscountRowsTest extends \PHPUnit\Framework\TestCase
 			WebPayItem::fixedDiscount()
 				->setAmountIncVat(10.0)
 				//->setVatPercent(10)
-				->setDiscountId("fixedDiscount")
-				->setName("fixedDiscount: 10i")
+				->setDiscountId('fixedDiscount')
+				->setName('fixedDiscount: 10i')
 		);
 		$request = $order->useInvoicePayment()->prepareRequest();
 		// all order rows
@@ -149,8 +149,8 @@ class FixedDiscountRowsTest extends \PHPUnit\Framework\TestCase
 			WebPayItem::fixedDiscount()
 				->setAmountExVat(10.0)
 				->setVatPercent(10)
-				->setDiscountId("fixedDiscount")
-				->setName("fixedDiscount: 10e@10%")
+				->setDiscountId('fixedDiscount')
+				->setName('fixedDiscount: 10e@10%')
 		);
 		$request = $order->useInvoicePayment()->prepareRequest();
 		// all order rows
@@ -187,8 +187,8 @@ class FixedDiscountRowsTest extends \PHPUnit\Framework\TestCase
 			WebPayItem::fixedDiscount()
 				->setAmountIncVat(11.0)
 				->setVatPercent(10)
-				->setDiscountId("fixedDiscount")
-				->setName("fixedDiscount: 11i@10%")
+				->setDiscountId('fixedDiscount')
+				->setName('fixedDiscount: 11i@10%')
 		);
 		$request = $order->useInvoicePayment()->prepareRequest();
 		// all order rows
@@ -220,35 +220,35 @@ class FixedDiscountRowsTest extends \PHPUnit\Framework\TestCase
 	{
 		$order = WebPay::createOrder(ConfigurationService::getDefaultConfig())
 			->addCustomerDetails(WebPayItem::individualCustomer()->setNationalIdNumber(194605092222))
-			->setCountryCode("SE")
-			->setCustomerReference("33")
-			->setOrderDate("2012-12-12")
-			->setCurrency("SEK")
+			->setCountryCode('SE')
+			->setCustomerReference('33')
+			->setOrderDate('2012-12-12')
+			->setCurrency('SEK')
 			->addOrderRow(
 				WebPayItem::orderRow()
 					->setAmountIncVat(72.00)
 					->setVatPercent(20)
 					->setQuantity(1)
-					->setName("incvatRow")
+					->setName('incvatRow')
 			)
 			->addOrderRow(
 				WebPayItem::orderRow()
 					->setAmountIncVat(33.00)
 					->setVatPercent(10)
 					->setQuantity(1)
-					->setName("incvatRow2")
+					->setName('incvatRow2')
 			)
 			->addFee(
 				WebPayItem::invoiceFee()
 					->setAmountIncVat(8.80)
 					->setVatPercent(10)
-					->setName("incvatInvoiceFee")
+					->setName('incvatInvoiceFee')
 			)
 			->addFee(
 				WebPayItem::shippingFee()
 					->setAmountIncVat(17.60)
 					->setVatPercent(10)
-					->setName("incvatShippingFee")
+					->setName('incvatShippingFee')
 			);
 
 		return $order;
@@ -288,8 +288,8 @@ class FixedDiscountRowsTest extends \PHPUnit\Framework\TestCase
 			WebPayItem::fixedDiscount()
 				->setAmountExVat(10.0)
 				//->setVatPercent(10)
-				->setDiscountId("fixedDiscount")
-				->setName("fixedDiscount: 10e")
+				->setDiscountId('fixedDiscount')
+				->setName('fixedDiscount: 10e')
 		);
 		$request = $order->useInvoicePayment()->prepareRequest();
 		// all order rows
@@ -329,8 +329,8 @@ class FixedDiscountRowsTest extends \PHPUnit\Framework\TestCase
 			WebPayItem::fixedDiscount()
 				->setAmountIncVat(10.0)
 				//->setVatPercent(10)
-				->setDiscountId("fixedDiscount")
-				->setName("fixedDiscount: 10i")
+				->setDiscountId('fixedDiscount')
+				->setName('fixedDiscount: 10i')
 		);
 		$request = $order->useInvoicePayment()->prepareRequest();
 		// all order rows
@@ -369,8 +369,8 @@ class FixedDiscountRowsTest extends \PHPUnit\Framework\TestCase
 			WebPayItem::fixedDiscount()
 				->setAmountExVat(10.0)
 				->setVatPercent(10)
-				->setDiscountId("fixedDiscount")
-				->setName("fixedDiscount: 10e@10%")
+				->setDiscountId('fixedDiscount')
+				->setName('fixedDiscount: 10e@10%')
 		);
 		$request = $order->useInvoicePayment()->prepareRequest();
 		// all order rows
@@ -407,8 +407,8 @@ class FixedDiscountRowsTest extends \PHPUnit\Framework\TestCase
 			WebPayItem::fixedDiscount()
 				->setAmountIncVat(11.0)
 				->setVatPercent(10)
-				->setDiscountId("fixedDiscount")
-				->setName("fixedDiscount: 11i@10%")
+				->setDiscountId('fixedDiscount')
+				->setName('fixedDiscount: 11i@10%')
 		);
 		$request = $order->useInvoicePayment()->prepareRequest();
 		// all order rows

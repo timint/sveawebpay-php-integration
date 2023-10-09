@@ -25,14 +25,14 @@ class AnnulTransactionIntegrationTest extends \PHPUnit\Framework\TestCase
 
 		$request = new AnnulTransaction(ConfigurationService::getDefaultConfig());
 		$request->transactionId = $transactionId;
-		$request->countryCode = "SE";
+		$request->countryCode = 'SE';
 		$response = $request->doRequest();
 
 		$this->assertInstanceOf("Svea\WebPay\HostedService\HostedResponse\HostedAdminResponse\AnnulTransactionResponse", $response);
 
 		// if we receive an error from the service, the integration test passes
 		$this->assertEquals(0, $response->accepted);
-		$this->assertEquals("128 (NO_SUCH_TRANS)", $response->resultcode);
+		$this->assertEquals('128 (NO_SUCH_TRANS)', $response->resultcode);
 	}
 
 	/**
@@ -50,18 +50,18 @@ class AnnulTransactionIntegrationTest extends \PHPUnit\Framework\TestCase
 		);
 
 		// Set the below to match the transaction, then run the test.
-		$customerrefno = "794";
+		$customerrefno = '794';
 		$transactionId = 587947;
 
 		$request = new AnnulTransaction(ConfigurationService::getDefaultConfig());
 		$request->transactionId = $transactionId;
-		$request->countryCode = "SE";
+		$request->countryCode = 'SE';
 		$response = $request->doRequest();
 
 		//print_r( $response);
 		$this->assertInstanceOf("Svea\WebPay\HostedService\HostedResponse\HostedAdminResponse\AnnulTransactionResponse", $response);
 		$this->assertEquals(1, $response->accepted);
-		$this->assertStringMatchesFormat("%d", $response->transactionId);   // %d => an unsigned integer value
+		$this->assertStringMatchesFormat('%d', $response->transactionId);   // %d => an unsigned integer value
 
 		$this->assertEquals($customerrefno, $response->clientOrderNumber);
 	}

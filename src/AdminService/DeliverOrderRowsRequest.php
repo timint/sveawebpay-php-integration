@@ -25,7 +25,7 @@ class DeliverOrderRowsRequest extends AdminServiceRequest {
 	 * @param DeliverOrderRowsBuilder $deliverOrderRowsBuilder
 	 */
 	public function __construct($deliverOrderRowsBuilder) {
-		$this->action = "DeliverPartial";
+		$this->action = 'DeliverPartial';
 		$this->orderBuilder = $deliverOrderRowsBuilder;
 	}
 
@@ -38,7 +38,7 @@ class DeliverOrderRowsRequest extends AdminServiceRequest {
 		$this->validateRequest();
 
 		foreach ($this->orderBuilder->rowsToDeliver as $rowToDeliver) {
-			$this->rowNumbers[] = new SoapVar($rowToDeliver, XSD_LONG, null, null, 'long', "http://schemas.microsoft.com/2003/10/Serialization/Arrays");
+			$this->rowNumbers[] = new SoapVar($rowToDeliver, XSD_LONG, null, null, 'long', 'http://schemas.microsoft.com/2003/10/Serialization/Arrays');
 		}
 
 		$soapRequest = new DeliverPartialRequest(
@@ -71,7 +71,7 @@ class DeliverOrderRowsRequest extends AdminServiceRequest {
 
 	private function validateOrderId($errors) {
 		if (isset($this->orderBuilder->orderId) == false) {
-			$errors[] = ['missing value' => "orderId is required."];
+			$errors[] = ['missing value' => 'orderId is required.'];
 		}
 
 		return $errors;
@@ -79,7 +79,7 @@ class DeliverOrderRowsRequest extends AdminServiceRequest {
 
 	private function validateOrderType($errors) {
 		if (isset($this->orderBuilder->orderType) == false) {
-			$errors[] = ['missing value' => "orderType is required."];
+			$errors[] = ['missing value' => 'orderType is required.'];
 		}
 
 		return $errors;
@@ -87,7 +87,7 @@ class DeliverOrderRowsRequest extends AdminServiceRequest {
 
 	private function validateCountryCode($errors) {
 		if (isset($this->orderBuilder->countryCode) == false) {
-			$errors[] = ['missing value' => "countryCode is required."];
+			$errors[] = ['missing value' => 'countryCode is required.'];
 		}
 
 		return $errors;
@@ -95,7 +95,7 @@ class DeliverOrderRowsRequest extends AdminServiceRequest {
 
 	private function validateRowsToDeliver($errors) {
 		if (isset($this->orderBuilder->rowsToDeliver) == false) {
-			$errors[] = ['missing value' => "rowsToDeliver is required."];
+			$errors[] = ['missing value' => 'rowsToDeliver is required.'];
 		}
 
 		return $errors;

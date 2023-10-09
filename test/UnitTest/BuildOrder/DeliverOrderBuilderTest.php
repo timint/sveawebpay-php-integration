@@ -26,21 +26,21 @@ class DeliverOrderBuilderTest extends \PHPUnit\Framework\TestCase
 
 	public function test_DeliverOrderBuilder_setOrderId()
 	{
-		$orderId = "123456";
+		$orderId = '123456';
 		$this->deliverOrderObject->setOrderId($orderId);
 		$this->assertEquals($orderId, $this->deliverOrderObject->orderId);
 	}
 
 	public function test_DeliverOrderBuilder_setTransactionId()
 	{
-		$orderId = "123456";
+		$orderId = '123456';
 		$this->deliverOrderObject->setTransactionId($orderId);
 		$this->assertEquals($orderId, $this->deliverOrderObject->orderId);
 	}
 
 	public function test_DeliverOrderBuilder_setCountryCode()
 	{
-		$country = "SE";
+		$country = 'SE';
 		$this->deliverOrderObject->setCountryCode($country);
 		$this->assertEquals($country, $this->deliverOrderObject->countryCode);
 	}

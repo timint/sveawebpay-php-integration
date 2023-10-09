@@ -16,7 +16,7 @@ class GetPaymentPlanParamsIntegrationTest extends \PHPUnit\Framework\TestCase
 		$config = ConfigurationService::getDefaultConfig();
 		$paymentPlanRequest = new GetPaymentPlanParams($config);
 		$request = $paymentPlanRequest
-			->setCountryCode("SE")
+			->setCountryCode('SE')
 			->doRequest();
 
 		$this->assertEquals(1, $request->accepted);
@@ -27,7 +27,7 @@ class GetPaymentPlanParamsIntegrationTest extends \PHPUnit\Framework\TestCase
 		$config = ConfigurationService::getDefaultConfig();
 		$paymentPlanRequest = new GetPaymentPlanParams($config);
 		$request = $paymentPlanRequest
-			->setCountryCode("SE")
+			->setCountryCode('SE')
 			->doRequest();
 
 		$this->assertEquals(1, $request->accepted);
@@ -51,7 +51,7 @@ class GetPaymentPlanParamsIntegrationTest extends \PHPUnit\Framework\TestCase
 //
 //		$paymentPlanRequest = new GetPaymentPlanParams(Svea\WebPay\Config\ConfigurationService::getTestConfig());
 //		$request = $paymentPlanRequest
-//				->setCountryCode("SE")
+//				->setCountryCode('SE')
 //				->doRequest();
 //		print_r($request);
 //		$this->assertEquals(1, $request->accepted);

@@ -44,7 +44,7 @@ class GetTaskInfoService extends AdminImplementationService {
 
 		if (!preg_match("/\b(?:(?:https?|ftp):\/\/|www\.)[-a-z0-9+&@#\/%?=~_|!:,.;]*[-a-z0-9+&@#\/%=~_|]/i", $taskUrl)
 		) {
-			$errors['incorrect Task URL'] = "Task Url must be valid Task Location URL string";
+			$errors['incorrect Task URL'] = 'Task Url must be valid Task Location URL string';
 		}
 
 		$this->processErrors($errors);

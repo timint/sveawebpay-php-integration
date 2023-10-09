@@ -8,7 +8,7 @@
 require_once __DIR__.'/../../vendor/autoload.php';
 
 // Include my config file, populated with my account credentials
-require("MyConfig.php");
+require('MyConfig.php');
 
 use Svea\WebPay\WebPay;
 
@@ -34,8 +34,8 @@ $request = WebPay::getAddresses($myConfig);
 // We need to supply the (individual) customer's social security number
 // We need to supply the country code that corresponds to the account credentials used in the address lookup, as well call corresponding setOrderType method
 
-$getAddressesForIndividualSE = "4605092222";
-$useCredentialsForCountry = "SE";
+$getAddressesForIndividualSE = '4605092222';
+$useCredentialsForCountry = 'SE';
 
 // Populate the request object
 $request->setCustomerIdentifier($getAddressesForIndividualSE);
@@ -46,7 +46,7 @@ $request->setOrderTypeInvoice();
 // Then send the request to Svea, and receive a response in return
 $response = $request->doRequest();
 
-echo "<pre>";
+echo '<pre>';
 print_r("Raw GetAddressResponse contents for testperson $getAddressesForIndividualSE:\n\n");
 print_r($response);
 
@@ -58,7 +58,7 @@ $getAddressesForCompanyNO = 923313850;
 
 $companyRequest->setCustomerIdentifier($getAddressesForCompanyNO);
 $companyRequest->getCompanyAddresses();
-$companyRequest->setCountryCode("NO");
+$companyRequest->setCountryCode('NO');
 $companyRequest->setOrderTypeInvoice();
 
 $companyResponse = $companyRequest->doRequest();

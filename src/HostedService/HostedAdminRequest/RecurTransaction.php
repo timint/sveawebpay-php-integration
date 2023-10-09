@@ -48,7 +48,7 @@ class RecurTransaction extends HostedRequest {
 	 * @param ConfigurationProvider $config instance implementing Svea\WebPay\Config\ConfigurationProvider
 	 */
 	function __construct($config) {
-		$this->method = "recur";
+		$this->method = 'recur';
 		parent::__construct($config);
 	}
 
@@ -63,7 +63,7 @@ class RecurTransaction extends HostedRequest {
 
 	private function validateAmount($self, $errors) {
 		if (isset($self->amount) == false) {
-			$errors['missing value'] = "amount is required. Use function setAmount().";
+			$errors['missing value'] = 'amount is required. Use function setAmount().';
 		}
 
 		return $errors;
@@ -71,7 +71,7 @@ class RecurTransaction extends HostedRequest {
 
 	private function validateCustomerRefNo($self, $errors) {
 		if (isset($self->customerRefNo) == false) {
-			$errors['missing value'] = "customerRefNo is required. Use function setCustomerRefNo (also check setClientOrderNumber in order builder).";
+			$errors['missing value'] = 'customerRefNo is required. Use function setCustomerRefNo (also check setClientOrderNumber in order builder).';
 		}
 
 		return $errors;
@@ -79,7 +79,7 @@ class RecurTransaction extends HostedRequest {
 
 	private function validateSubscriptionId($self, $errors) {
 		if (isset($self->subscriptionId) == false) {
-			$errors['missing value'] = "subscriptionId is required. Use function setSubscriptionId() with the subscriptionId from the createOrder response.";
+			$errors['missing value'] = 'subscriptionId is required. Use function setSubscriptionId() with the subscriptionId from the createOrder response.';
 		}
 
 		return $errors;
@@ -90,17 +90,17 @@ class RecurTransaction extends HostedRequest {
 
 		$XMLWriter->openMemory();
 		$XMLWriter->setIndent(true);
-		$XMLWriter->startDocument("1.0", "UTF-8");
+		$XMLWriter->startDocument('1.0', 'UTF-8');
 		$XMLWriter->writeComment(Helper::getLibraryAndPlatformPropertiesAsJson($this->config));
 		$XMLWriter->startElement($this->method);
-		$XMLWriter->writeElement("amount", $this->amount);
-		$XMLWriter->writeElement("customerrefno", $this->customerRefNo);
-		$XMLWriter->writeElement("subscriptionid", $this->subscriptionId);
+		$XMLWriter->writeElement('amount', $this->amount);
+		$XMLWriter->writeElement('customerrefno', $this->customerRefNo);
+		$XMLWriter->writeElement('subscriptionid', $this->subscriptionId);
 		if (isset($this->vat)) {
-			$XMLWriter->writeElement("vat", $this->vat);
+			$XMLWriter->writeElement('vat', $this->vat);
 		}
 		if (isset($this->currency)) {
-			$XMLWriter->writeElement("currency", $this->currency);
+			$XMLWriter->writeElement('currency', $this->currency);
 		}
 		$XMLWriter->endElement();
 		$XMLWriter->endDocument();

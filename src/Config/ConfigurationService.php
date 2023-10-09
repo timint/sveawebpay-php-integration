@@ -11,18 +11,18 @@ use Svea\Checkout\Transport\Connector;
  * You can change that params in config files.
  */
 class ConfigurationService {
-	const SWP_TEST_URL = "https://webpaypaymentgatewaystage.svea.com/webpay/payment";
-	const SWP_PROD_URL = "https://webpaypaymentgateway.svea.com/webpay/payment";
-	const SWP_TEST_WS_URL = "https://webpaywsstage.svea.com/SveaWebPay.asmx?WSDL";
-	const SWP_PROD_WS_URL = "https://webpayws.svea.com/SveaWebPay.asmx?WSDL";
-	const SWP_TEST_HOSTED_ADMIN_URL = "https://webpaypaymentgatewaystage.svea.com/webpay/rest/"; // ends with "/" as we need to add request method
-	const SWP_PROD_HOSTED_ADMIN_URL = "https://webpaypaymentgateway.svea.com/webpay/rest/"; // ends with "/" as we need to add request method
+	const SWP_TEST_URL = 'https://webpaypaymentgatewaystage.svea.com/webpay/payment';
+	const SWP_PROD_URL = 'https://webpaypaymentgateway.svea.com/webpay/payment';
+	const SWP_TEST_WS_URL = 'https://webpaywsstage.svea.com/SveaWebPay.asmx?WSDL';
+	const SWP_PROD_WS_URL = 'https://webpayws.svea.com/SveaWebPay.asmx?WSDL';
+	const SWP_TEST_HOSTED_ADMIN_URL = 'https://webpaypaymentgatewaystage.svea.com/webpay/rest/'; // ends with "/" as we need to add request method
+	const SWP_PROD_HOSTED_ADMIN_URL = 'https://webpaypaymentgateway.svea.com/webpay/rest/'; // ends with "/" as we need to add request method
 
-	const SWP_TEST_ADMIN_URL = "https://webpayadminservicestage.svea.com/AdminService.svc/backward";
-	const SWP_PROD_ADMIN_URL = "https://webpayadminservice.svea.com/AdminService.svc/backward";
+	const SWP_TEST_ADMIN_URL = 'https://webpayadminservicestage.svea.com/AdminService.svc/backward';
+	const SWP_PROD_ADMIN_URL = 'https://webpayadminservice.svea.com/AdminService.svc/backward';
 
-	const SWP_TEST_PREPARED_URL = "https://webpaypaymentgatewaystage.svea.com/webpay/preparedpayment/";
-	const SWP_PROD_PREPARED_URL = "https://webpaypaymentgateway.svea.com/webpay/preparedpayment/";
+	const SWP_TEST_PREPARED_URL = 'https://webpaypaymentgatewaystage.svea.com/webpay/preparedpayment/';
+	const SWP_PROD_PREPARED_URL = 'https://webpaypaymentgateway.svea.com/webpay/preparedpayment/';
 
 	const CHECKOUT_TEST_BASE_URL = Connector::TEST_BASE_URL;
 	const CHECKOUT_PROD_BASE_URL = Connector::PROD_BASE_URL;
@@ -112,43 +112,43 @@ class ConfigurationService {
 		$secret = ($secret == null) ? $defaultSecretWord : $secret;
 
 		// set up credentials array for given country:
-		$singleCountryConfig[$countryCode] = ["auth" =>
+		$singleCountryConfig[$countryCode] = ['auth' =>
 			[
 				ConfigurationProvider::INVOICE_TYPE => [
-					"username" => $invoiceUsername,
-					"password" => $invoicePassword,
-					"clientNumber" => $invoiceClientNo
+					'username' => $invoiceUsername,
+					'password' => $invoicePassword,
+					'clientNumber' => $invoiceClientNo
 				],
 				ConfigurationProvider::PAYMENTPLAN_TYPE => [
-					"username" => $paymentPlanUsername,
-					"password" => $paymentPlanPassword,
-					"clientNumber" => $paymentPlanClientNo
+					'username' => $paymentPlanUsername,
+					'password' => $paymentPlanPassword,
+					'clientNumber' => $paymentPlanClientNo
 				],
 				ConfigurationProvider::ACCOUNTCREDIT_TYPE => [
-					"username" => $accountCreditUsername,
-					"password" => $accountCreditPassword,
-					"clientNumber" => $accountCreditClientNo
+					'username' => $accountCreditUsername,
+					'password' => $accountCreditPassword,
+					'clientNumber' => $accountCreditClientNo
 				],
 				ConfigurationProvider::HOSTED_TYPE => [
-					"merchantId" => $merchantId,
-					"secret" => $secret
+					'merchantId' => $merchantId,
+					'secret' => $secret
 				]
 			]
 		];
 
 		$singleCountryConfig['common']['auth'][ConfigurationProvider::HOSTED_TYPE] = [
-			"merchantId" => $merchantId,
-			"secret" => $secret
+			'merchantId' => $merchantId,
+			'secret' => $secret
 		];
 
 		$singleCountryConfig['common']['auth'][ConfigurationProvider::CHECKOUT] = [
-			"merchantId" => $merchantId,
-			"secret" => $secret
+			'merchantId' => $merchantId,
+			'secret' => $secret
 		];
 
 		// return a ConfigurationProvider object
 		return new SveaConfigurationProvider(
-			["url" => $urls, "credentials" => $singleCountryConfig, "integrationproperties" => $integrationProperties]
+			['url' => $urls, 'credentials' => $singleCountryConfig, 'integrationproperties' => $integrationProperties]
 		);
 	}
 
@@ -164,7 +164,7 @@ class ConfigurationService {
 		foreach ($credentials as $countryCode => $configPerCountry) {
 			$credentialParams[$countryCode] = ['auth' => []];
 			foreach ($configPerCountry as $paymentType => $configPerType) {
-				if ($paymentType === ConfigurationProvider::CHECKOUT && ($countryCode == "DE" || $countryCode  == "NL")) {
+				if ($paymentType === ConfigurationProvider::CHECKOUT && ($countryCode == 'DE' || $countryCode  == 'NL')) {
 					$configPerType = array_merge($configPerType, $checkoutCredentials);
 				}
 				$credentialParams[$countryCode]['auth'][$paymentType] = $configPerType;
@@ -177,7 +177,7 @@ class ConfigurationService {
 
 		$integrationProperties = $config['integrationParams'];
 
-		return new SveaConfigurationProvider(["url" => $urls, "credentials" => $credentialParams, "integrationproperties" => $integrationProperties]);
+		return new SveaConfigurationProvider(['url' => $urls, 'credentials' => $credentialParams, 'integrationproperties' => $integrationProperties]);
 	}
 
 	private static function retrieveConfigFile($isProd) {

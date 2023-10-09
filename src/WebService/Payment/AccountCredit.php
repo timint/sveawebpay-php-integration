@@ -15,7 +15,7 @@ class AccountCredit extends WebServicePayment {
 	}
 
 	public function setOrderType($orderInformation) {
-		$orderInformation->AddressSelector = isset($this->order->customerIdentity->addressSelector) ? $this->order->customerIdentity->addressSelector : "";
+		$orderInformation->AddressSelector = isset($this->order->customerIdentity->addressSelector) ? $this->order->customerIdentity->addressSelector : '';
 		$orderInformation->OrderType = $this->orderType;
 
 		return $orderInformation;
@@ -28,7 +28,7 @@ class AccountCredit extends WebServicePayment {
 	 */
 	protected function formatOrderInformationWithOrderRows($rows) {
 		$orderInformation = new SveaCreateAccountCreditOrderInformation(
-			(isset($this->order->campaignCode) ? $this->order->campaignCode : "")
+			(isset($this->order->campaignCode) ? $this->order->campaignCode : '')
 		);
 
 		// rewrite order rows to soap_class order rows

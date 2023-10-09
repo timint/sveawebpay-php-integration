@@ -23,7 +23,7 @@ $orderBuilder->setCheckoutOrderId(51721)
 
 try {
 	$response = $orderBuilder->getOrder();
-	echo "<pre>" . print_r($response, true) ."</pre>";
+	echo '<pre>' . print_r($response, true) .'</pre>';
 } catch (\Exception $e) {
-	echo "<pre>" . print_r($e->getMessage(), true) . "</pre>";
+	echo '<pre>' . print_r($e->getMessage(), true) . '</pre>';
 }

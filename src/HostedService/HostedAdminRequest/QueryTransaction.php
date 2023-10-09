@@ -26,7 +26,7 @@ class QueryTransaction extends HostedRequest {
 	 * @param ConfigurationProvider $config instance implementing Svea\WebPay\Config\ConfigurationProvider
 	 */
 	function __construct($config) {
-		$this->method = "querytransactionid";
+		$this->method = 'querytransactionid';
 		parent::__construct($config);
 	}
 
@@ -39,7 +39,7 @@ class QueryTransaction extends HostedRequest {
 
 	private function validateTransactionId($self, $errors) {
 		if (isset($self->transactionId) == false) {
-			$errors['missing value'] = "transactionId is required. Use function setTransactionId() with the SveaOrderId from the createOrder response.";
+			$errors['missing value'] = 'transactionId is required. Use function setTransactionId() with the SveaOrderId from the createOrder response.';
 		}
 
 		return $errors;
@@ -50,10 +50,10 @@ class QueryTransaction extends HostedRequest {
 
 		$XMLWriter->openMemory();
 		$XMLWriter->setIndent(true);
-		$XMLWriter->startDocument("1.0", "UTF-8");
+		$XMLWriter->startDocument('1.0', 'UTF-8');
 		$XMLWriter->writeComment(Helper::getLibraryAndPlatformPropertiesAsJson($this->config));
-		$XMLWriter->startElement("query");  // note, not the same as $this->method above
-		$XMLWriter->writeElement("transactionid", $this->transactionId);
+		$XMLWriter->startElement('query');  // note, not the same as $this->method above
+		$XMLWriter->writeElement('transactionid', $this->transactionId);
 		$XMLWriter->endElement();
 		$XMLWriter->endDocument();
 

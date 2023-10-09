@@ -17,4 +17,4 @@ $ppCampaign->enableLogging(true);
 $campaigns = $ppCampaign->setCountryCode('SE')
 	->doRequest();
 
-echo "<pre>" . print_r($campaigns, true) . "</pre>";
+echo '<pre>' . print_r($campaigns, true) . '</pre>';

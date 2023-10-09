@@ -249,7 +249,7 @@ class WebServiceRowFormatter {
 	 */
 	public function formatRowNameAndDescription($webPayItemRow) {
 
-		$description = ""; //fallback to empty string if we haven't got either of name or description
+		$description = ''; //fallback to empty string if we haven't got either of name or description
 
 		// if both name and description are set in the package orderrow, add both to the request row description field
 		if (isset($webPayItemRow->name) && isset($webPayItemRow->description)) {
@@ -321,7 +321,7 @@ class WebServiceRowFormatter {
 	protected function formatInvoiceFeeRows($row) {
 		$orderRow = new SveaOrderRow();
 
-		$orderRow->ArticleNumber = "";
+		$orderRow->ArticleNumber = '';
 
 		$orderRow->Description = $this->formatRowNameAndDescription($row);
 
@@ -481,7 +481,7 @@ class WebServiceRowFormatter {
 			$orderRow->Description = $this->formatRowNameAndDescription($discountRow);
 
 			if (sizeof($this->totalAmountPerVatRateIncVat) > 1) {  // add tax rate for split discount to description
-				$orderRow->Description .= " (" . $vatRate . "%)";
+				$orderRow->Description .= ' (' . $vatRate . '%)';
 			}
 			if (isset($discountRow->unit)) {
 				$orderRow->Unit = $discountRow->unit;
@@ -524,7 +524,7 @@ class WebServiceRowFormatter {
 			$orderRow->Description = $this->formatRowNameAndDescription($discountRow);
 
 			if (sizeof($this->totalAmountPerVatRateExVat) > 1) {  // add tax rate for split discount to description
-				$orderRow->Description .= " (" . $vatRate . "%)";
+				$orderRow->Description .= ' (' . $vatRate . '%)';
 			}
 			if (isset($discountRow->unit)) {
 				$orderRow->Unit = $discountRow->unit;
@@ -572,7 +572,7 @@ class WebServiceRowFormatter {
 			$orderRow->Description = $this->formatRowNameAndDescription($row);
 
 			if (sizeof($this->totalAmountPerVatRateIncVat) > 1) {  // add tax rate for split discount to description
-				$orderRow->Description .= " (" . $vatRate . "%)";
+				$orderRow->Description .= ' (' . $vatRate . '%)';
 			}
 			if (isset($row->unit)) {
 				$orderRow->Unit = $row->unit;
@@ -586,7 +586,7 @@ class WebServiceRowFormatter {
 				$orderRow->TemporaryReference = $row->temporaryReference;
 			}
 
-			$amountAtThisVatRateExVat = $amountAtThisVatRateIncVat - $amountAtThisVatRateIncVat * (1 - (1 / (1 + $vatRate / 100)));   // calculate "reverse vat", i.e. 25% => 20%
+			$amountAtThisVatRateExVat = $amountAtThisVatRateIncVat - $amountAtThisVatRateIncVat * (1 - (1 / (1 + $vatRate / 100)));   // calcul	 i.e. 25% => 20%
 
 			$discountIncVat = $amountAtThisVatRateIncVat * ($row->discountPercent * 0.01);
 			$discountExVat = $amountAtThisVatRateExVat * ($row->discountPercent * 0.01);

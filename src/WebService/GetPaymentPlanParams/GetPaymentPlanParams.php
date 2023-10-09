@@ -58,9 +58,9 @@ class GetPaymentPlanParams {
 	 */
 	public function doRequest() {
 		$requestObject = $this->prepareRequest();
-		$request = new SveaDoRequest($this->conf, ConfigurationProvider::PAYMENTPLAN_TYPE, "GetPaymentPlanParamsEu", $requestObject, $this->logFile);
+		$request = new SveaDoRequest($this->conf, ConfigurationProvider::PAYMENTPLAN_TYPE, 'GetPaymentPlanParamsEu', $requestObject, $this->logFile);
 
-		$responseObject = new SveaResponse($request->result['requestResult'], "", null, null);
+		$responseObject = new SveaResponse($request->result['requestResult'], '', null, null);
 
 		return $responseObject->response;
 	}
@@ -76,7 +76,7 @@ class GetPaymentPlanParams {
 		);
 
 		$object = new SveaRequest();
-		$object->request = (object)["Auth" => $auth];
+		$object->request = (object)['Auth' => $auth];
 
 		return $object;
 	}

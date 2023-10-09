@@ -30,49 +30,49 @@ class CreateInvoiceOrderUnitTest extends \PHPUnit\Framework\TestCase
 
 		$this->order = WebPay::createOrder(ConfigurationService::getDefaultConfig())
 			->addCustomerDetails(WebPayItem::individualCustomer()->setNationalIdNumber(194605092222))
-			->setCountryCode("SE")
+			->setCountryCode('SE')
 			->setOrderDate(date('c'));
 
 		$this->exvatRow = WebPayItem::orderRow()
 			->setAmountExVat(80.00)
 			->setVatPercent(25)
 			->setQuantity(1)
-			->setName("exvatRow");
+			->setName('exvatRow');
 		$this->exvatRow2 = WebPayItem::orderRow()
 			->setAmountExVat(80.00)
 			->setVatPercent(25)
 			->setQuantity(1)
-			->setName("exvatRow2");
+			->setName('exvatRow2');
 
 		$this->exvatInvoiceFee = WebPayItem::invoiceFee()
 			->setAmountExVat(8.00)
 			->setVatPercent(25)
-			->setName("exvatInvoiceFee");
+			->setName('exvatInvoiceFee');
 
 		$this->exvatShippingFee = WebPayItem::shippingFee()
 			->setAmountExVat(16.00)
 			->setVatPercent(25)
-			->setName("exvatShippingFee");
+			->setName('exvatShippingFee');
 		$this->incvatRow = WebPayItem::orderRow()
 			->setAmountIncvat(100.00)
 			->setVatPercent(25)
 			->setQuantity(1)
-			->setName("incvatRow");
+			->setName('incvatRow');
 		$this->incvatRow2 = WebPayItem::orderRow()
 			->setAmountIncvat(100.00)
 			->setVatPercent(25)
 			->setQuantity(1)
-			->setName("incvatRow2");
+			->setName('incvatRow2');
 
 		$this->incvatInvoiceFee = WebPayItem::invoiceFee()
 			->setAmountIncvat(10.00)
 			->setVatPercent(25)
-			->setName("incvatInvoiceFee");
+			->setName('incvatInvoiceFee');
 
 		$this->incvatShippingFee = WebPayItem::shippingFee()
 			->setAmountIncvat(20.00)
 			->setVatPercent(25)
-			->setName("incvatShippingFee");
+			->setName('incvatShippingFee');
 	}
 
 	/// tests preparing order rows price specification
@@ -155,7 +155,7 @@ class CreateInvoiceOrderUnitTest extends \PHPUnit\Framework\TestCase
 			$this->assertTrue(true);
 		} catch (Exception $e) {
 			// fail on validation error
-			$this->fail("Unexpected validation exception: " . $e->getMessage());
+			$this->fail('Unexpected validation exception: ' . $e->getMessage());
 		}
 	}
 
@@ -173,7 +173,7 @@ class CreateInvoiceOrderUnitTest extends \PHPUnit\Framework\TestCase
 			$this->assertTrue(true);
 		} catch (Exception $e) {
 			// fail on validation error
-			$this->fail("Unexpected validation exception: " . $e->getMessage());
+			$this->fail('Unexpected validation exception: ' . $e->getMessage());
 		}
 	}
 
@@ -202,8 +202,8 @@ class CreateInvoiceOrderUnitTest extends \PHPUnit\Framework\TestCase
 			)
 			->addDiscount(WebPayItem::fixedDiscount()
 				->setAmountIncVat(10.0)
-				->setDiscountId("TenCrownsOff")
-				->setName("fixedDiscount: 10 off incvat")
+				->setDiscountId('TenCrownsOff')
+				->setName('fixedDiscount: 10 off incvat')
 			);
 
 		$request = $order->useInvoicePayment()->prepareRequest();
@@ -261,8 +261,8 @@ class CreateInvoiceOrderUnitTest extends \PHPUnit\Framework\TestCase
 			)
 			->addDiscount(WebPayItem::fixedDiscount()
 				->setAmountIncVat(10.0)
-				->setDiscountId("TenCrownsOff")
-				->setName("fixedDiscount: 10 off incvat")
+				->setDiscountId('TenCrownsOff')
+				->setName('fixedDiscount: 10 off incvat')
 			);
 
 		$request = $order->useInvoicePayment()->prepareRequest();
@@ -307,8 +307,8 @@ class CreateInvoiceOrderUnitTest extends \PHPUnit\Framework\TestCase
 
 		$order->addDiscount(WebPayItem::relativeDiscount()
 			->setDiscountPercent(10.0)
-			->setDiscountId("TenPercentOff")
-			->setName("relativeDiscount")
+			->setDiscountId('TenPercentOff')
+			->setName('relativeDiscount')
 		);
 
 		$request = $order->useInvoicePayment()->prepareRequest();
@@ -358,8 +358,8 @@ class CreateInvoiceOrderUnitTest extends \PHPUnit\Framework\TestCase
 			);
 		$order->addDiscount(WebPayItem::relativeDiscount()
 			->setDiscountPercent(10)
-			->setDiscountId("TenPercentOff")
-			->setName("relativeDiscount")
+			->setDiscountId('TenPercentOff')
+			->setName('relativeDiscount')
 		);
 
 		$request = $order->useInvoicePayment()->prepareRequest();
@@ -412,8 +412,8 @@ class CreateInvoiceOrderUnitTest extends \PHPUnit\Framework\TestCase
 			);
 		$order->addDiscount(WebPayItem::relativeDiscount()
 			->setDiscountPercent(10)
-			->setDiscountId("TenPercentOff")
-			->setName("relativeDiscount")
+			->setDiscountId('TenPercentOff')
+			->setName('relativeDiscount')
 		);
 
 		$request = $order->useInvoicePayment()->prepareRequest();
@@ -468,8 +468,8 @@ class CreateInvoiceOrderUnitTest extends \PHPUnit\Framework\TestCase
 		$order->addDiscount(WebPayItem::fixedDiscount()
 			->setAmountExVat(10.0)
 			->setVatPercent(10.0)
-			->setDiscountId("ElevenCrownsOff")
-			->setName("fixedDiscount: 10 @10% => 11kr")
+			->setDiscountId('ElevenCrownsOff')
+			->setName('fixedDiscount: 10 @10% => 11kr')
 		);
 
 		$request = $order->useInvoicePayment()->prepareRequest();
@@ -520,8 +520,8 @@ class CreateInvoiceOrderUnitTest extends \PHPUnit\Framework\TestCase
 		$order->addDiscount(WebPayItem::fixedDiscount()
 			->setAmountExVat(10.0)
 			->setVatPercent(10.0)
-			->setDiscountId("ElevenCrownsOff")
-			->setName("fixedDiscount: 10 @10% => 11kr")
+			->setDiscountId('ElevenCrownsOff')
+			->setName('fixedDiscount: 10 @10% => 11kr')
 		);
 
 		$request = $order->useInvoicePayment()->prepareRequest();
@@ -572,8 +572,8 @@ class CreateInvoiceOrderUnitTest extends \PHPUnit\Framework\TestCase
 		$order->addDiscount(WebPayItem::fixedDiscount()
 			->setAmountIncVat(11.0)
 			->setVatPercent(10.0)
-			->setDiscountId("ElevenCrownsOff")
-			->setName("fixedDiscount: 11i @10% => 11kr")
+			->setDiscountId('ElevenCrownsOff')
+			->setName('fixedDiscount: 11i @10% => 11kr')
 		);
 
 		$request = $order->useInvoicePayment()->prepareRequest();
@@ -624,8 +624,8 @@ class CreateInvoiceOrderUnitTest extends \PHPUnit\Framework\TestCase
 		$order->addDiscount(WebPayItem::fixedDiscount()
 			->setAmountIncVat(11.0)
 			->setVatPercent(10.0)
-			->setDiscountId("ElevenCrownsOff")
-			->setName("fixedDiscount: 11i @10% => 11kr")
+			->setDiscountId('ElevenCrownsOff')
+			->setName('fixedDiscount: 11i @10% => 11kr')
 		);
 
 		$request = $order->useInvoicePayment()->prepareRequest();
@@ -675,8 +675,8 @@ class CreateInvoiceOrderUnitTest extends \PHPUnit\Framework\TestCase
 			);
 		$order->addDiscount(WebPayItem::fixedDiscount()
 			->setAmountExVat(10.0)
-			->setDiscountId("TenCrownsOff")
-			->setName("fixedDiscount: 10 off exvat")
+			->setDiscountId('TenCrownsOff')
+			->setName('fixedDiscount: 10 off exvat')
 		);
 
 		$request = $order->useInvoicePayment()->prepareRequest();
@@ -729,8 +729,8 @@ class CreateInvoiceOrderUnitTest extends \PHPUnit\Framework\TestCase
 			);
 		$order->addDiscount(WebPayItem::fixedDiscount()
 			->setAmountExVat(10.0)
-			->setDiscountId("TenCrownsOffExVat")
-			->setName("fixedDiscount: 10 off exvat")
+			->setDiscountId('TenCrownsOffExVat')
+			->setName('fixedDiscount: 10 off exvat')
 		);
 
 		$request = $order->useInvoicePayment()->prepareRequest();
@@ -783,8 +783,8 @@ class CreateInvoiceOrderUnitTest extends \PHPUnit\Framework\TestCase
 			);
 		$order->addDiscount(WebPayItem::fixedDiscount()
 			->setAmountIncVat(10.0)
-			->setDiscountId("TenCrownsOff")
-			->setName("fixedDiscount: 10 off incvat")
+			->setDiscountId('TenCrownsOff')
+			->setName('fixedDiscount: 10 off incvat')
 		);
 
 		$request = $order->useInvoicePayment()->prepareRequest();
@@ -838,8 +838,8 @@ class CreateInvoiceOrderUnitTest extends \PHPUnit\Framework\TestCase
 			);
 		$order->addDiscount(WebPayItem::fixedDiscount()
 			->setAmountIncVat(10.0)
-			->setDiscountId("TenCrownsOff")
-			->setName("fixedDiscount: 10 off incvat")
+			->setDiscountId('TenCrownsOff')
+			->setName('fixedDiscount: 10 off incvat')
 		);
 
 		$request = $order->useInvoicePayment()->prepareRequest();

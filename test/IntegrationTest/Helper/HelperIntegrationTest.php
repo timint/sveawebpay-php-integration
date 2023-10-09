@@ -36,8 +36,8 @@ class HelperIntegrationTest extends \PHPUnit\Framework\TestCase
 
 		$discountExVatFromShop = 100;
 		$meanVatRateFromShop = 18.6667;
-		$titleFromShop = "Coupon (1112)";
-		$descriptionFromShop = "Value 100";
+		$titleFromShop = 'Coupon (1112)';
+		$descriptionFromShop = 'Value 100';
 
 		$taxRates = Helper::getTaxRatesInOrder($order);
 		$discountRows = Helper::splitMeanToTwoTaxRates($discountExVatFromShop, $meanVatRateFromShop, $titleFromShop, $descriptionFromShop, $taxRates);
@@ -50,12 +50,12 @@ class HelperIntegrationTest extends \PHPUnit\Framework\TestCase
 		$newRows = $formatter->formatRows();
 
 		$newRow = $newRows[2];
-		$this->assertEquals("Coupon (1112): Value 100 (25%)", $newRow->Description);
+		$this->assertEquals('Coupon (1112): Value 100 (25%)', $newRow->Description);
 		$this->assertEquals(-66.67, $newRow->PricePerUnit);
 		$this->assertEquals(25, $newRow->VatPercent);
 
 		$newRow = $newRows[3];
-		$this->assertEquals("Coupon (1112): Value 100 (6%)", $newRow->Description);
+		$this->assertEquals('Coupon (1112): Value 100 (6%)', $newRow->Description);
 		$this->assertEquals(-33.33, $newRow->PricePerUnit);
 		$this->assertEquals(6, $newRow->VatPercent);
 	}
@@ -75,8 +75,8 @@ class HelperIntegrationTest extends \PHPUnit\Framework\TestCase
 
 		$discountExVatFromShop = 100;
 		$meanVatRateFromShop = 25.00;
-		$titleFromShop = "Coupon (1112)";
-		$descriptionFromShop = "Value 100";
+		$titleFromShop = 'Coupon (1112)';
+		$descriptionFromShop = 'Value 100';
 
 		$taxRates = Helper::getTaxRatesInOrder($order);
 		$discountRows = Helper::splitMeanToTwoTaxRates($discountExVatFromShop, $meanVatRateFromShop, $titleFromShop, $descriptionFromShop, $taxRates);
@@ -88,7 +88,7 @@ class HelperIntegrationTest extends \PHPUnit\Framework\TestCase
 		$newRows = $formatter->formatRows();
 
 		$newRow = $newRows[1];
-		$this->assertEquals("Coupon (1112): Value 100", $newRow->Description);
+		$this->assertEquals('Coupon (1112): Value 100', $newRow->Description);
 		$this->assertEquals(-100, $newRow->PricePerUnit);
 		$this->assertEquals(25, $newRow->VatPercent);
 	}
@@ -98,7 +98,7 @@ class HelperIntegrationTest extends \PHPUnit\Framework\TestCase
 	{
 		$campaigns =
 			WebPay::getPaymentPlanParams(ConfigurationService::getDefaultConfig())
-				->setCountryCode("SE")
+				->setCountryCode('SE')
 				->doRequest();
 		$this->assertTrue($campaigns->accepted);
 
@@ -130,9 +130,9 @@ class HelperIntegrationTest extends \PHPUnit\Framework\TestCase
 					->setQuantity(1)
 			)
 			->addDiscount($discountRows[0])
-			->addCustomerDetails(TestUtil::createIndividualCustomer("SE"))
-			->setCountryCode("SE")
-			->setOrderDate("2012-12-12");
+			->addCustomerDetails(TestUtil::createIndividualCustomer('SE'))
+			->setCountryCode('SE')
+			->setOrderDate('2012-12-12');
 		$response = $order->useInvoicePayment()->doRequest();
 
 		$this->assertEquals(1, $response->accepted);
@@ -161,9 +161,9 @@ class HelperIntegrationTest extends \PHPUnit\Framework\TestCase
 					->setQuantity(1)
 			)
 			->addDiscount($discountRows[0])
-			->addCustomerDetails(TestUtil::createIndividualCustomer("SE"))
-			->setCountryCode("SE")
-			->setOrderDate("2012-12-12");
+			->addCustomerDetails(TestUtil::createIndividualCustomer('SE'))
+			->setCountryCode('SE')
+			->setOrderDate('2012-12-12');
 		$response = $order->useInvoicePayment()->doRequest();
 
 		$this->assertEquals(1, $response->accepted);
@@ -207,9 +207,9 @@ class HelperIntegrationTest extends \PHPUnit\Framework\TestCase
 			)
 			->addDiscount($discountRows[0])
 			->addDiscount($discountRows[1])
-			->addCustomerDetails(TestUtil::createIndividualCustomer("SE"))
-			->setCountryCode("SE")
-			->setOrderDate("2012-12-12");
+			->addCustomerDetails(TestUtil::createIndividualCustomer('SE'))
+			->setCountryCode('SE')
+			->setOrderDate('2012-12-12');
 		$response = $order->useInvoicePayment()->doRequest();
 
 		$this->assertEquals(1, $response->accepted);
@@ -239,9 +239,9 @@ class HelperIntegrationTest extends \PHPUnit\Framework\TestCase
 			)
 			->addDiscount($discountRows[0])
 			->addDiscount($discountRows[1])
-			->addCustomerDetails(TestUtil::createIndividualCustomer("SE"))
-			->setCountryCode("SE")
-			->setOrderDate("2012-12-12");
+			->addCustomerDetails(TestUtil::createIndividualCustomer('SE'))
+			->setCountryCode('SE')
+			->setOrderDate('2012-12-12');
 		$response = $order->useInvoicePayment()->doRequest();
 
 		$this->assertEquals(1, $response->accepted);

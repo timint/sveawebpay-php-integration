@@ -186,7 +186,7 @@ class QueryTransactionResponse extends HostedAdminResponse {
 		//print_r( $hostedAdminResponse ); // uncomment to dump raw request response
 
 		// queryTransaction
-		if (property_exists($hostedAdminResponse->transaction, "customerrefno") && property_exists($hostedAdminResponse->transaction, "merchantid")) {
+		if (property_exists($hostedAdminResponse->transaction, 'customerrefno') && property_exists($hostedAdminResponse->transaction, 'merchantid')) {
 
 			$this->transactionId = (string)$hostedAdminResponse->transaction['id'];
 
@@ -250,7 +250,7 @@ class QueryTransactionResponse extends HostedAdminResponse {
 			//	[statuscode] => 0
 			//)
 
-			if (property_exists($hostedAdminResponse->transaction, "orderrows")) {
+			if (property_exists($hostedAdminResponse->transaction, 'orderrows')) {
 				$rownumber = 1;
 				foreach ($hostedAdminResponse->transaction->orderrows->row as $orderrow) {
 

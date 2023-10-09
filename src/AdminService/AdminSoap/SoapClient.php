@@ -45,7 +45,7 @@ class SoapClient
 			null,
 			[
 				'location' => $endpoint,
-				'uri' => "http://tempuri.org/",
+				'uri' => 'http://tempuri.org/',
 				'use' => SOAP_LITERAL,
 				'exceptions' => 1,
 				'connection_timeout' => 60,
@@ -79,11 +79,11 @@ class SoapClient
 	public function doSoapCall($action, $request) {
 
 		// wrap the request
-		$wrappedRequest = new \SoapVar($request, SOAP_ENC_OBJECT, "-", "--", "request", "http://tempuri.org/");
+		$wrappedRequest = new \SoapVar($request, SOAP_ENC_OBJECT, '-', '--', 'request', 'http://tempuri.org/');
 
 		// do soapcall
 		$response = $this->client->__soapCall($action, [$wrappedRequest],
-			["soapaction" => 'http://tempuri.org/IAdminService/' . $action]
+			['soapaction' => 'http://tempuri.org/IAdminService/' . $action]
 		);
 
 		return $response;

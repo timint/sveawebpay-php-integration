@@ -22,35 +22,35 @@ class InvoicePaymentIntegrationTest extends \PHPUnit\Framework\TestCase
 	{
 		$order = $order = WebPay::createOrder(ConfigurationService::getDefaultConfig())
 			->addCustomerDetails(WebPayItem::individualCustomer()->setNationalIdNumber(194605092222))
-			->setCountryCode("SE")
-			->setCustomerReference("33")
-			->setOrderDate("2012-12-12")
-			->setCurrency("SEK")
+			->setCountryCode('SE')
+			->setCustomerReference('33')
+			->setOrderDate('2012-12-12')
+			->setCurrency('SEK')
 			->addOrderRow(
 				WebPayItem::orderRow()
 					->setAmountExVat(60.00)
 					->setVatPercent(20)
 					->setQuantity(1)
-					->setName("exvatRow")
+					->setName('exvatRow')
 			)
 			->addOrderRow(
 				WebPayItem::orderRow()
 					->setAmountIncVat(33.00)
 					->setVatPercent(10)
 					->setQuantity(1)
-					->setName("incvatRow")
+					->setName('incvatRow')
 			)
 			->addFee(
 				WebPayItem::invoiceFee()
 					->setAmountIncVat(8.80)
 					->setVatPercent(10)
-					->setName("incvatInvoiceFee")
+					->setName('incvatInvoiceFee')
 			)
 			->addFee(
 				WebPayItem::shippingFee()
 					->setAmountExVat(16.00)
 					->setVatPercent(10)
-					->setName("exvatShippingFee")
+					->setName('exvatShippingFee')
 			);
 
 		$request = $order->useInvoicePayment()->prepareRequest();
@@ -73,7 +73,7 @@ class InvoicePaymentIntegrationTest extends \PHPUnit\Framework\TestCase
 		// check that service accepts order
 		$response = $order->useInvoicePayment()->doRequest();
 		$this->assertEquals(true, $response->accepted);
-		$this->assertEquals("131.4", $response->amount);
+		$this->assertEquals('131.4', $response->amount);
 	}
 
 	public function testInvoiceRequestwithPeppolId()
@@ -84,9 +84,9 @@ class InvoicePaymentIntegrationTest extends \PHPUnit\Framework\TestCase
 			->addCustomerDetails(
 				WebPayItem::companyCustomer()
 					->setNationalIdNumber(194608142222))
-			->setOrderDate("2019-04-01")
-			->setCountryCode("SE")
-			->setPeppolId("1234:asdf")
+			->setOrderDate('2019-04-01')
+			->setCountryCode('SE')
+			->setPeppolId('1234:asdf')
 			->useInvoicePayment()
 			->doRequest();
 
@@ -101,10 +101,10 @@ class InvoicePaymentIntegrationTest extends \PHPUnit\Framework\TestCase
 			->addCustomerDetails(WebPayItem::individualCustomer()
 				->setNationalIdNumber(4605092222)
 			)
-			->setCountryCode("SE")
-			->setCustomerReference("33")
-			->setOrderDate("2012-12-12")
-			->setCurrency("SEK")
+			->setCountryCode('SE')
+			->setCustomerReference('33')
+			->setOrderDate('2012-12-12')
+			->setCurrency('SEK')
 			->useInvoicePayment()
 			->doRequest();
 
@@ -114,24 +114,24 @@ class InvoicePaymentIntegrationTest extends \PHPUnit\Framework\TestCase
 
 	public function testInvoiceRequestNLAcceptedWithDoubleHousenumber()
 	{
-		$this->markTestIncomplete("NL flow not maintained by webpay-dev");
+		$this->markTestIncomplete('NL flow not maintained by webpay-dev');
 
 		$config = ConfigurationService::getDefaultConfig();
 		$request = WebPay::createOrder($config)
 			->addOrderRow(TestUtil::createOrderRow())
 			->addCustomerDetails(WebPayItem::individualCustomer()
 				->setBirthDate(1955, 03, 07)
-				->setName("Sneider", "Boasman")
-				->setStreetAddress("Gate 42", "23")// result of splitStreetAddress w/Svea testperson
+				->setName('Sneider', 'Boasman')
+				->setStreetAddress('Gate 42', '23')// result of splitStreetAddress w/Svea testperson
 				->setCoAddress(138)
-				->setLocality("BARENDRECHT")
-				->setZipCode("1102 HG")
-				->setInitials("SB")
+				->setLocality('BARENDRECHT')
+				->setZipCode('1102 HG')
+				->setInitials('SB')
 			)
-			->setCountryCode("NL")
-			->setCustomerReference("33")
-			->setOrderDate("2012-12-12")
-			->setCurrency("SEK")
+			->setCountryCode('NL')
+			->setCustomerReference('33')
+			->setOrderDate('2012-12-12')
+			->setCurrency('SEK')
 			->useInvoicePayment()
 			->doRequest();
 
@@ -141,16 +141,16 @@ class InvoicePaymentIntegrationTest extends \PHPUnit\Framework\TestCase
 
 	public function testInvoiceRequestUsingISO8601dateAccepted()
 	{
-		$this->markTestIncomplete("NL flow not maintained by webpay-dev");
+		$this->markTestIncomplete('NL flow not maintained by webpay-dev');
 
 		$config = ConfigurationService::getDefaultConfig();
 		$request = WebPay::createOrder($config)
 			->addOrderRow(TestUtil::createOrderRow())
 			->addCustomerDetails(WebPayItem::individualCustomer()->setNationalIdNumber(4605092222))
-			->setCountryCode("SE")
-			->setCustomerReference("33")
+			->setCountryCode('SE')
+			->setCustomerReference('33')
 			->setOrderDate(date('c'))
-			->setCurrency("SEK")
+			->setCurrency('SEK')
 			->useInvoicePayment()
 			->doRequest();
 
@@ -164,10 +164,10 @@ class InvoicePaymentIntegrationTest extends \PHPUnit\Framework\TestCase
 		$request = WebPay::createOrder($config)
 			->addOrderRow(TestUtil::createOrderRow())
 			->addCustomerDetails(WebPayItem::individualCustomer()->setNationalIdNumber(4606082222))
-			->setCountryCode("SE")
-			->setCustomerReference("33")
-			->setOrderDate("2012-12-12")
-			->setCurrency("SEK")
+			->setCountryCode('SE')
+			->setCustomerReference('33')
+			->setOrderDate('2012-12-12')
+			->setCurrency('SEK')
 			->useInvoicePayment()
 			->doRequest();
 
@@ -181,10 +181,10 @@ class InvoicePaymentIntegrationTest extends \PHPUnit\Framework\TestCase
 		$request = WebPay::createOrder($config)
 			->addOrderRow(TestUtil::createOrderRow())
 			->addCustomerDetails(WebPayItem::individualCustomer()->setNationalIdNumber(2603692503))
-			->setCountryCode("DK")
-			->setCustomerReference("33")
-			->setOrderDate("2012-12-12")
-			->setCurrency("DKK")
+			->setCountryCode('DK')
+			->setCustomerReference('33')
+			->setOrderDate('2012-12-12')
+			->setCurrency('DKK')
 			->useInvoicePayment()
 			->doRequest();
 
@@ -197,9 +197,9 @@ class InvoicePaymentIntegrationTest extends \PHPUnit\Framework\TestCase
 		$request = WebPay::createOrder($config)
 			->addOrderRow(TestUtil::createOrderRow())
 			->addCustomerDetails(WebPayItem::companyCustomer()->setNationalIdNumber(4608142222))
-			->setCountryCode("SE")
-			->setOrderDate("2012-12-12")
-			->setCurrency("SEK")
+			->setCountryCode('SE')
+			->setOrderDate('2012-12-12')
+			->setCurrency('SEK')
 			->useInvoicePayment()
 			->doRequest();
 
@@ -215,11 +215,11 @@ class InvoicePaymentIntegrationTest extends \PHPUnit\Framework\TestCase
 				->setVatPercent(25)
 				->setQuantity(1.25)
 			)
-			->addCustomerDetails(TestUtil::createIndividualCustomer("SE"))
-			->setCountryCode("SE")
-			->setCustomerReference("33")
-			->setOrderDate("2012-12-12")
-			->setCurrency("EUR")
+			->addCustomerDetails(TestUtil::createIndividualCustomer('SE'))
+			->setCountryCode('SE')
+			->setCustomerReference('33')
+			->setOrderDate('2012-12-12')
+			->setCurrency('EUR')
 			->useInvoicePayment()
 			->doRequest();
 
@@ -239,11 +239,11 @@ class InvoicePaymentIntegrationTest extends \PHPUnit\Framework\TestCase
 				->setVatPercent(25)
 				->setQuantity(1)
 			)
-			->addCustomerDetails(TestUtil::createIndividualCustomer("SE"))
-			->setCountryCode("SE")
-			->setCustomerReference("33")
-			->setOrderDate("2012-12-12")
-			->setCurrency("EUR")
+			->addCustomerDetails(TestUtil::createIndividualCustomer('SE'))
+			->setCountryCode('SE')
+			->setCustomerReference('33')
+			->setOrderDate('2012-12-12')
+			->setCurrency('EUR')
 			->useInvoicePayment()
 			->doRequest();
 
@@ -263,11 +263,11 @@ class InvoicePaymentIntegrationTest extends \PHPUnit\Framework\TestCase
 		$request = WebPay::createOrder($config)
 			->addOrderRow(TestUtil::createOrderRowWithVat(6))
 			->addOrderRow(TestUtil::createOrderRowWithVat(21))
-			->addCustomerDetails(TestUtil::createIndividualCustomer("NL"))
-			->setCountryCode("NL")
-			->setCustomerReference("33")
-			->setOrderDate("2012-12-12")
-			->setCurrency("EUR")
+			->addCustomerDetails(TestUtil::createIndividualCustomer('NL'))
+			->setCountryCode('NL')
+			->setCustomerReference('33')
+			->setOrderDate('2012-12-12')
+			->setCurrency('EUR')
 			->useInvoicePayment()
 			->doRequest();
 
@@ -311,10 +311,10 @@ class InvoicePaymentIntegrationTest extends \PHPUnit\Framework\TestCase
 				->setAmountExVat(29.00)
 				->setVatPercent(25)
 			)
-			->addCustomerDetails(TestUtil::createCompanyCustomer("SE"))
-			->setCountryCode("SE")
-			->setOrderDate("2013-10-28")
-			->setCurrency("SEK");
+			->addCustomerDetails(TestUtil::createCompanyCustomer('SE'))
+			->setCountryCode('SE')
+			->setOrderDate('2013-10-28')
+			->setCurrency('SEK');
 
 		// asserts on request
 		$request = $order->useInvoicePayment()->prepareRequest();
@@ -361,10 +361,10 @@ class InvoicePaymentIntegrationTest extends \PHPUnit\Framework\TestCase
 				->setAmountIncVat(29.00)
 				->setVatPercent(25)
 			)
-			->addCustomerDetails(TestUtil::createCompanyCustomer("SE"))
-			->setCountryCode("SE")
-			->setOrderDate("2013-10-28")
-			->setCurrency("SEK");
+			->addCustomerDetails(TestUtil::createCompanyCustomer('SE'))
+			->setCountryCode('SE')
+			->setOrderDate('2013-10-28')
+			->setCurrency('SEK');
 
 		// asserts on request
 		$request = $order->useInvoicePayment()->prepareRequest();
@@ -410,10 +410,10 @@ class InvoicePaymentIntegrationTest extends \PHPUnit\Framework\TestCase
 				->setAmountIncVat(29.00)
 				->setAmountExVat(23.20)
 			)
-			->addCustomerDetails(TestUtil::createCompanyCustomer("SE"))
-			->setCountryCode("SE")
-			->setOrderDate("2013-10-28")
-			->setCurrency("SEK");
+			->addCustomerDetails(TestUtil::createCompanyCustomer('SE'))
+			->setCountryCode('SE')
+			->setOrderDate('2013-10-28')
+			->setCurrency('SEK');
 
 		// asserts on request
 		$request = $order->useInvoicePayment()->prepareRequest();
@@ -458,10 +458,10 @@ class InvoicePaymentIntegrationTest extends \PHPUnit\Framework\TestCase
 				->setAmountExVat(23.20)
 				->setVatPercent(25)
 			)
-			->addCustomerDetails(TestUtil::createCompanyCustomer("SE"))
-			->setCountryCode("SE")
-			->setOrderDate("2013-10-28")
-			->setCurrency("SEK");
+			->addCustomerDetails(TestUtil::createCompanyCustomer('SE'))
+			->setCountryCode('SE')
+			->setOrderDate('2013-10-28')
+			->setCurrency('SEK');
 
 		// asserts on request
 		$request = $order->useInvoicePayment()->prepareRequest();
@@ -507,10 +507,10 @@ class InvoicePaymentIntegrationTest extends \PHPUnit\Framework\TestCase
 				->setAmountExVat(23.20)
 				->setVatPercent(25)
 			)
-			->addCustomerDetails(TestUtil::createCompanyCustomer("SE"))
-			->setCountryCode("SE")
-			->setOrderDate("2013-10-28")
-			->setCurrency("SEK");
+			->addCustomerDetails(TestUtil::createCompanyCustomer('SE'))
+			->setCountryCode('SE')
+			->setOrderDate('2013-10-28')
+			->setCurrency('SEK');
 
 		// asserts on request
 		$request = $order->useInvoicePayment()->prepareRequest();
@@ -556,10 +556,10 @@ class InvoicePaymentIntegrationTest extends \PHPUnit\Framework\TestCase
 				->setAmountExVat(23.20)
 				->setVatPercent(25)
 			)
-			->addCustomerDetails(TestUtil::createCompanyCustomer("SE"))
-			->setCountryCode("SE")
-			->setOrderDate("2013-10-28")
-			->setCurrency("SEK");
+			->addCustomerDetails(TestUtil::createCompanyCustomer('SE'))
+			->setCountryCode('SE')
+			->setOrderDate('2013-10-28')
+			->setCurrency('SEK');
 
 		// asserts on request
 		$request = $order->useInvoicePayment()->prepareRequest();
@@ -596,17 +596,17 @@ class InvoicePaymentIntegrationTest extends \PHPUnit\Framework\TestCase
 			->addCustomerDetails(WebPayItem::individualCustomer()
 				->setNationalIdNumber(4605092222)
 			)
-			->setCountryCode("SE")
-			->setCustomerReference("33")
-			->setOrderDate("2012-12-12")
-			->setCurrency("SEK")
-			->setClientOrderNumber("I_exist!")
+			->setCountryCode('SE')
+			->setCustomerReference('33')
+			->setOrderDate('2012-12-12')
+			->setCurrency('SEK')
+			->setClientOrderNumber('I_exist!')
 			->useInvoicePayment()
 			->doRequest();
 
 		$this->assertEquals(1, $request->accepted);
 		$this->assertEquals(true, isset($request->clientOrderNumber));
-		$this->assertEquals("I_exist!", $request->clientOrderNumber);
+		$this->assertEquals('I_exist!', $request->clientOrderNumber);
 	}
 
 	public function testInvoiceRequest_optional_clientOrderNumber_not_present_in_response_if_not_sent()
@@ -617,10 +617,10 @@ class InvoicePaymentIntegrationTest extends \PHPUnit\Framework\TestCase
 			->addCustomerDetails(WebPayItem::individualCustomer()
 				->setNationalIdNumber(4605092222)
 			)
-			->setCountryCode("SE")
-			->setCustomerReference("33")
-			->setOrderDate("2012-12-12")
-			->setCurrency("SEK")
+			->setCountryCode('SE')
+			->setCustomerReference('33')
+			->setOrderDate('2012-12-12')
+			->setCurrency('SEK')
 			->useInvoicePayment()
 			->doRequest();
 
@@ -633,14 +633,14 @@ class InvoicePaymentIntegrationTest extends \PHPUnit\Framework\TestCase
 		$config = ConfigurationService::getDefaultConfig();
 		$request = WebPay::createOrder($config)
 			->addOrderRow(TestUtil::createOrderRow())
-			->addCustomerDetails(TestUtil::createIndividualCustomer("SE"))
-			->setCountryCode("SE")
-			->setOrderDate("2012-12-12")
+			->addCustomerDetails(TestUtil::createIndividualCustomer('SE'))
+			->setCountryCode('SE')
+			->setOrderDate('2012-12-12')
 			->useInvoicePayment()
 			->doRequest();
 
 		$this->assertEquals(1, $request->accepted);
-		$this->assertEquals("Invoice", $request->orderType);
+		$this->assertEquals('Invoice', $request->orderType);
 	}
 
 	/**
@@ -657,9 +657,9 @@ class InvoicePaymentIntegrationTest extends \PHPUnit\Framework\TestCase
 					->setVatPercent(24)
 					->setQuantity(1)
 			)
-			->addCustomerDetails(TestUtil::createIndividualCustomer("SE"))
-			->setCountryCode("SE")
-			->setOrderDate("2012-12-12")
+			->addCustomerDetails(TestUtil::createIndividualCustomer('SE'))
+			->setCountryCode('SE')
+			->setOrderDate('2012-12-12')
 			->useInvoicePayment()
 			->doRequest();
 		$this->assertEquals(1, $request->accepted);
@@ -683,9 +683,9 @@ class InvoicePaymentIntegrationTest extends \PHPUnit\Framework\TestCase
 				->setAmountExVat(80.00)
 				->setVatPercent(24)
 			)
-			->addCustomerDetails(TestUtil::createIndividualCustomer("SE"))
-			->setCountryCode("SE")
-			->setOrderDate("2012-12-12")
+			->addCustomerDetails(TestUtil::createIndividualCustomer('SE'))
+			->setCountryCode('SE')
+			->setOrderDate('2012-12-12')
 			->useInvoicePayment()
 			->doRequest();
 		$this->assertEquals(1, $request->accepted);
@@ -702,9 +702,9 @@ class InvoicePaymentIntegrationTest extends \PHPUnit\Framework\TestCase
 					->setVatPercent(24)
 					->setQuantity(1)
 			)
-			->addCustomerDetails(TestUtil::createIndividualCustomer("SE"))
-			->setCountryCode("SE")
-			->setOrderDate("2012-12-12")
+			->addCustomerDetails(TestUtil::createIndividualCustomer('SE'))
+			->setCountryCode('SE')
+			->setOrderDate('2012-12-12')
 			->useInvoicePayment()
 			->doRequest();
 		$this->assertEquals(1, $request->accepted);
@@ -729,9 +729,9 @@ class InvoicePaymentIntegrationTest extends \PHPUnit\Framework\TestCase
 				->setAmountIncVat(100.00)
 				->setVatPercent(24)
 			)
-			->addCustomerDetails(TestUtil::createIndividualCustomer("SE"))
-			->setCountryCode("SE")
-			->setOrderDate("2012-12-12")
+			->addCustomerDetails(TestUtil::createIndividualCustomer('SE'))
+			->setCountryCode('SE')
+			->setOrderDate('2012-12-12')
 			->useInvoicePayment()
 			->doRequest();
 
@@ -750,9 +750,9 @@ class InvoicePaymentIntegrationTest extends \PHPUnit\Framework\TestCase
 					->setQuantity(1)
 			)
 			->addDiscount(WebPayItem::fixedDiscount()->setAmountIncVat(10))
-			->addCustomerDetails(TestUtil::createIndividualCustomer("SE"))
-			->setCountryCode("SE")
-			->setOrderDate("2012-12-12")
+			->addCustomerDetails(TestUtil::createIndividualCustomer('SE'))
+			->setCountryCode('SE')
+			->setOrderDate('2012-12-12')
 			->useInvoicePayment()
 			->doRequest();
 		$this->assertEquals(1, $request->accepted);
@@ -773,9 +773,9 @@ class InvoicePaymentIntegrationTest extends \PHPUnit\Framework\TestCase
 			->addDiscount(WebPayItem::fixedDiscount()
 				->setAmountIncVat(10)
 				->setVatPercent(0))
-			->addCustomerDetails(TestUtil::createIndividualCustomer("SE"))
-			->setCountryCode("SE")
-			->setOrderDate("2012-12-12")
+			->addCustomerDetails(TestUtil::createIndividualCustomer('SE'))
+			->setCountryCode('SE')
+			->setOrderDate('2012-12-12')
 			->useInvoicePayment()
 			->doRequest();
 
@@ -797,9 +797,9 @@ class InvoicePaymentIntegrationTest extends \PHPUnit\Framework\TestCase
 			->addDiscount(WebPayItem::relativeDiscount()
 				->setDiscountPercent(10)
 			)
-			->addCustomerDetails(TestUtil::createIndividualCustomer("SE"))
-			->setCountryCode("SE")
-			->setOrderDate("2012-12-12")
+			->addCustomerDetails(TestUtil::createIndividualCustomer('SE'))
+			->setCountryCode('SE')
+			->setOrderDate('2012-12-12')
 			->useInvoicePayment()
 			->doRequest();
 
@@ -820,9 +820,9 @@ class InvoicePaymentIntegrationTest extends \PHPUnit\Framework\TestCase
 			->addDiscount(WebPayItem::relativeDiscount()
 				->setDiscountPercent(10)
 			)
-			->addCustomerDetails(TestUtil::createIndividualCustomer("SE"))
-			->setCountryCode("SE")
-			->setOrderDate("2012-12-12")
+			->addCustomerDetails(TestUtil::createIndividualCustomer('SE'))
+			->setCountryCode('SE')
+			->setOrderDate('2012-12-12')
 			->useInvoicePayment()
 			->doRequest();
 
@@ -843,9 +843,9 @@ class InvoicePaymentIntegrationTest extends \PHPUnit\Framework\TestCase
 			->addDiscount(WebPayItem::fixedDiscount()
 				->setAmountExVat(9.999)
 			)
-			->addCustomerDetails(TestUtil::createIndividualCustomer("SE"))
-			->setCountryCode("SE")
-			->setOrderDate("2012-12-12")
+			->addCustomerDetails(TestUtil::createIndividualCustomer('SE'))
+			->setCountryCode('SE')
+			->setOrderDate('2012-12-12')
 			->useInvoicePayment()
 			->doRequest();
 
@@ -866,9 +866,9 @@ class InvoicePaymentIntegrationTest extends \PHPUnit\Framework\TestCase
 			->addDiscount(WebPayItem::fixedDiscount()
 				->setAmountIncVat(12.39876)
 			)
-			->addCustomerDetails(TestUtil::createIndividualCustomer("SE"))
-			->setCountryCode("SE")
-			->setOrderDate("2012-12-12")
+			->addCustomerDetails(TestUtil::createIndividualCustomer('SE'))
+			->setCountryCode('SE')
+			->setOrderDate('2012-12-12')
 			->useInvoicePayment()
 			->doRequest();
 
@@ -889,9 +889,9 @@ class InvoicePaymentIntegrationTest extends \PHPUnit\Framework\TestCase
 			->addDiscount(WebPayItem::fixedDiscount()
 				->setAmountExVat(9.999)
 			)
-			->addCustomerDetails(TestUtil::createIndividualCustomer("SE"))
-			->setCountryCode("SE")
-			->setOrderDate("2012-12-12")
+			->addCustomerDetails(TestUtil::createIndividualCustomer('SE'))
+			->setCountryCode('SE')
+			->setOrderDate('2012-12-12')
 			->useInvoicePayment()
 			->doRequest();
 
@@ -921,10 +921,10 @@ class InvoicePaymentIntegrationTest extends \PHPUnit\Framework\TestCase
 					->setVatPercent(24)
 					->setQuantity(1)
 			)
-			->addCustomerDetails(TestUtil::createIndividualCustomer("FI"))
-			->setCountryCode("FI")
-			->setCurrency("EUR")
-			->setOrderDate("2012-12-12")
+			->addCustomerDetails(TestUtil::createIndividualCustomer('FI'))
+			->setCountryCode('FI')
+			->setCurrency('EUR')
+			->setOrderDate('2012-12-12')
 			->useInvoicePayment()
 			->doRequest();
 		$this->assertEquals(1, $request->accepted);
@@ -954,10 +954,10 @@ class InvoicePaymentIntegrationTest extends \PHPUnit\Framework\TestCase
 					->setVatPercent(24)
 					->setQuantity(1)
 			)
-			->addCustomerDetails(TestUtil::createIndividualCustomer("FI"))
-			->setCountryCode("FI")
-			->setCurrency("EUR")
-			->setOrderDate("2012-12-12")
+			->addCustomerDetails(TestUtil::createIndividualCustomer('FI'))
+			->setCountryCode('FI')
+			->setCurrency('EUR')
+			->setOrderDate('2012-12-12')
 			->useInvoicePayment()
 			->doRequest();
 		$this->assertEquals(1, $request->accepted);
@@ -979,20 +979,20 @@ class InvoicePaymentIntegrationTest extends \PHPUnit\Framework\TestCase
 			)
 			->addCustomerDetails(
 				WebPayItem::individualCustomer()
-					->setNationalIdNumber("4605092222")
+					->setNationalIdNumber('4605092222')
 			)
-			->setCountryCode("SE")
+			->setCountryCode('SE')
 			->setOrderDate(date('c'));
 		$response = $order->useInvoicePayment()->doRequest();
 		//print_r($response);
 		$this->assertEquals(1, $response->accepted);
 		$this->assertTrue($response->customerIdentity instanceof CreateOrderIdentity);
 		// verify returned address
-		$this->assertEquals("Persson Tess T", $response->customerIdentity->fullName);	// Note: order may vary between countries, given by UC
-		$this->assertEquals("Testgatan 1", $response->customerIdentity->street);
-		$this->assertEquals("c/o Eriksson, Erik", $response->customerIdentity->coAddress);
-		$this->assertEquals("99999", $response->customerIdentity->zipCode);
-		$this->assertEquals("Stan", $response->customerIdentity->locality);
+		$this->assertEquals('Persson Tess T', $response->customerIdentity->fullName);	// Note: order may vary between countries, given by UC
+		$this->assertEquals('Testgatan 1', $response->customerIdentity->street);
+		$this->assertEquals('c/o Eriksson, Erik', $response->customerIdentity->coAddress);
+		$this->assertEquals('99999', $response->customerIdentity->zipCode);
+		$this->assertEquals('Stan', $response->customerIdentity->locality);
 	}
 
 	// NO
@@ -1008,20 +1008,20 @@ class InvoicePaymentIntegrationTest extends \PHPUnit\Framework\TestCase
 			)
 			->addCustomerDetails(
 				WebPayItem::individualCustomer()
-					->setNationalIdNumber("17054512066")
+					->setNationalIdNumber('17054512066')
 			)
-			->setCountryCode("NO")
+			->setCountryCode('NO')
 			->setOrderDate(date('c'));
 		$response = $order->useInvoicePayment()->doRequest();
 		//print_r($response);
 		$this->assertEquals(1, $response->accepted);
 		$this->assertTrue($response->customerIdentity instanceof CreateOrderIdentity);
 		// verify returned address
-		$this->assertEquals("Ola Normann", $response->customerIdentity->fullName);	// Note: order may vary between countries, given by UC
-		$this->assertEquals("Testveien 2", $response->customerIdentity->street);
-		$this->assertEquals("", $response->customerIdentity->coAddress);
-		$this->assertEquals("0359", $response->customerIdentity->zipCode);
-		$this->assertEquals("Oslo", $response->customerIdentity->locality);
+		$this->assertEquals('Ola Normann', $response->customerIdentity->fullName);	// Note: order may vary between countries, given by UC
+		$this->assertEquals('Testveien 2', $response->customerIdentity->street);
+		$this->assertEquals('', $response->customerIdentity->coAddress);
+		$this->assertEquals('0359', $response->customerIdentity->zipCode);
+		$this->assertEquals('Oslo', $response->customerIdentity->locality);
 	}
 
 	// DK
@@ -1037,20 +1037,20 @@ class InvoicePaymentIntegrationTest extends \PHPUnit\Framework\TestCase
 			)
 			->addCustomerDetails(
 				WebPayItem::individualCustomer()
-					->setNationalIdNumber("2603692503")
+					->setNationalIdNumber('2603692503')
 			)
-			->setCountryCode("DK")
+			->setCountryCode('DK')
 			->setOrderDate(date('c'));
 		$response = $order->useInvoicePayment()->doRequest();
 		//print_r($response);
 		$this->assertEquals(1, $response->accepted);
 		$this->assertTrue($response->customerIdentity instanceof CreateOrderIdentity);
 		// verify returned address
-		$this->assertEquals("Hanne Jensen", $response->customerIdentity->fullName);	// Note: order may vary between countries, given by UC
-		$this->assertEquals("Testvejen 42", $response->customerIdentity->street);
-		$this->assertEquals("c/o Test A/s", $response->customerIdentity->coAddress);
-		$this->assertEquals("2100", $response->customerIdentity->zipCode);
-		$this->assertEquals("Københvn Ø", $response->customerIdentity->locality);
+		$this->assertEquals('Hanne Jensen', $response->customerIdentity->fullName);	// Note: order may vary between countries, given by UC
+		$this->assertEquals('Testvejen 42', $response->customerIdentity->street);
+		$this->assertEquals('c/o Test A/s', $response->customerIdentity->coAddress);
+		$this->assertEquals('2100', $response->customerIdentity->zipCode);
+		$this->assertEquals('Københvn Ø', $response->customerIdentity->locality);
 	}
 
 	// FI
@@ -1066,27 +1066,27 @@ class InvoicePaymentIntegrationTest extends \PHPUnit\Framework\TestCase
 			)
 			->addCustomerDetails(
 				WebPayItem::individualCustomer()
-					->setNationalIdNumber("160264-999N")
+					->setNationalIdNumber('160264-999N')
 			)
-			->setCountryCode("FI")
+			->setCountryCode('FI')
 			->setOrderDate(date('c'));
 		$response = $order->useInvoicePayment()->doRequest();
 		//print_r($response);
 		$this->assertEquals(1, $response->accepted);
 		$this->assertTrue($response->customerIdentity instanceof CreateOrderIdentity);
 		// verify returned address
-		$this->assertEquals("Kanerva Haapakoski Kukka-Maaria", $response->customerIdentity->fullName);	// Note: order may vary between countries, given by UC
-		$this->assertEquals("Atomitie 2 C", $response->customerIdentity->street);
-		$this->assertEquals("", $response->customerIdentity->coAddress);
-		$this->assertEquals("00370", $response->customerIdentity->zipCode);
-		$this->assertEquals("Helsinki", $response->customerIdentity->locality);
+		$this->assertEquals('Kanerva Haapakoski Kukka-Maaria', $response->customerIdentity->fullName);	// Note: order may vary between countries, given by UC
+		$this->assertEquals('Atomitie 2 C', $response->customerIdentity->street);
+		$this->assertEquals('', $response->customerIdentity->coAddress);
+		$this->assertEquals('00370', $response->customerIdentity->zipCode);
+		$this->assertEquals('Helsinki', $response->customerIdentity->locality);
 	}
 
 	// DE
 	// IndividualCustomer validation
 	function test_validates_all_required_methods_for_createOrder_useInvoicePayment_IndividualCustomer_DE()
 	{
-		$this->markTestIncomplete("NL flow not maintained by webpay-dev");
+		$this->markTestIncomplete('NL flow not maintained by webpay-dev');
 
 		$order = WebPay::createOrder(ConfigurationService::getDefaultConfig())
 			->addOrderRow(
@@ -1094,36 +1094,36 @@ class InvoicePaymentIntegrationTest extends \PHPUnit\Framework\TestCase
 					->setQuantity(1.0)
 					->setAmountExVat(4.0)
 					->setAmountIncVat(5.0)
-					->setDescription("IntegrationTest")
+					->setDescription('IntegrationTest')
 			)
 			->addCustomerDetails(
 				WebPayItem::individualCustomer()
-					->setBirthDate("19680403")
-					->setName("Theo", "Giebel")
-					->setStreetAddress("Zörgiebelweg", 21)
-					->setZipCode("13591")
-					->setLocality("BERLIN")
+					->setBirthDate('19680403')
+					->setName('Theo', 'Giebel')
+					->setStreetAddress('Zörgiebelweg', 21)
+					->setZipCode('13591')
+					->setLocality('BERLIN')
 			)
-			->setCountryCode("DE")
+			->setCountryCode('DE')
 			->setOrderDate(date('c'));
 		$response = $order->useInvoicePayment()->doRequest();
 		//print_r($response);
 		$this->assertEquals(1, $response->accepted);
 		$this->assertTrue($response->customerIdentity instanceof CreateOrderIdentity);
 		// verify returned address
-		$this->assertEquals("Theo Giebel", $response->customerIdentity->fullName);	// Note: order may vary between countries, given by UC
-		$this->assertEquals("Zörgiebelweg", $response->customerIdentity->street);
-		$this->assertEquals("21", $response->customerIdentity->houseNumber);
-		$this->assertEquals("", $response->customerIdentity->coAddress);
-		$this->assertEquals("13591", $response->customerIdentity->zipCode);
-		$this->assertEquals("BERLIN", $response->customerIdentity->locality);
+		$this->assertEquals('Theo Giebel', $response->customerIdentity->fullName);	// Note: order may vary between countries, given by UC
+		$this->assertEquals('Zörgiebelweg', $response->customerIdentity->street);
+		$this->assertEquals('21', $response->customerIdentity->houseNumber);
+		$this->assertEquals('', $response->customerIdentity->coAddress);
+		$this->assertEquals('13591', $response->customerIdentity->zipCode);
+		$this->assertEquals('BERLIN', $response->customerIdentity->locality);
 	}
 
 	// NL
 	// IndividualCustomer validation
 	function test_validates_all_required_methods_for_createOrder_useInvoicePayment_IndividualCustomer_NL()
 	{
-		$this->markTestIncomplete("NL flow not maintained by webpay-dev");
+		$this->markTestIncomplete('NL flow not maintained by webpay-dev');
 
 		$order = WebPay::createOrder(ConfigurationService::getDefaultConfig())
 			->addOrderRow(
@@ -1131,98 +1131,98 @@ class InvoicePaymentIntegrationTest extends \PHPUnit\Framework\TestCase
 					->setQuantity(1.0)
 					->setAmountExVat(4.0)
 					->setAmountIncVat(5.0)
-					->setDescription("IntegrationTest")
+					->setDescription('IntegrationTest')
 			)
 			->addCustomerDetails(
 				WebPayItem::individualCustomer()
-					->setBirthDate("19550307")
-					->setInitials("SB")
-					->setName("Sneider", "Boasman")
-					->setStreetAddress("Gate 42", 23)
-					->setZipCode("1102 HG")
-					->setLocality("BARENDRECHT")
+					->setBirthDate('19550307')
+					->setInitials('SB')
+					->setName('Sneider', 'Boasman')
+					->setStreetAddress('Gate 42', 23)
+					->setZipCode('1102 HG')
+					->setLocality('BARENDRECHT')
 			)
-			->setCountryCode("NL")
+			->setCountryCode('NL')
 			->setOrderDate(date('c'));
 		$response = $order->useInvoicePayment()->doRequest();
 		//print_r($response);
 		$this->assertEquals(1, $response->accepted);
 		$this->assertTrue($response->customerIdentity instanceof CreateOrderIdentity);
 		// verify returned address
-		$this->assertEquals("Sneider Boasman", $response->customerIdentity->fullName);	// Note: order may vary between countries, given by UC
-		$this->assertEquals("Gate 42", $response->customerIdentity->street);
-		$this->assertEquals("23", $response->customerIdentity->houseNumber);
-		$this->assertEquals("", $response->customerIdentity->coAddress);
-		$this->assertEquals("1102 HG", $response->customerIdentity->zipCode);
-		$this->assertEquals("BARENDRECHT", $response->customerIdentity->locality);
+		$this->assertEquals('Sneider Boasman', $response->customerIdentity->fullName);	// Note: order may vary between countries, given by UC
+		$this->assertEquals('Gate 42', $response->customerIdentity->street);
+		$this->assertEquals('23', $response->customerIdentity->houseNumber);
+		$this->assertEquals('', $response->customerIdentity->coAddress);
+		$this->assertEquals('1102 HG', $response->customerIdentity->zipCode);
+		$this->assertEquals('BARENDRECHT', $response->customerIdentity->locality);
 	}
 
 	public function testInvoiceRequestNLReturnsSameAddress()
 	{
-		$this->markTestIncomplete("NL flow not maintained by webpay-dev");
+		$this->markTestIncomplete('NL flow not maintained by webpay-dev');
 
 		$config = ConfigurationService::getDefaultConfig();
 		$request = WebPay::createOrder($config)
 			->addOrderRow(TestUtil::createOrderRow())
 			->addCustomerDetails(WebPayItem::individualCustomer()
 				->setBirthDate(1955, 03, 07)
-				->setName("Sneider", "Boasman")
-				->setStreetAddress("Gate 42", "23")// result of splitStreetAddress w/Svea testperson
+				->setName('Sneider', 'Boasman')
+				->setStreetAddress('Gate 42', '23')// result of splitStreetAddress w/Svea testperson
 				->setCoAddress(138)
-				->setLocality("BARENDRECHT")
-				->setZipCode("1102 HG")
-				->setInitials("SB")
+				->setLocality('BARENDRECHT')
+				->setZipCode('1102 HG')
+				->setInitials('SB')
 			)
-			->setCountryCode("NL")
-			->setCustomerReference("33")
-			->setOrderDate("2012-12-12")
-			->setCurrency("SEK")
+			->setCountryCode('NL')
+			->setCustomerReference('33')
+			->setOrderDate('2012-12-12')
+			->setCurrency('SEK')
 			->useInvoicePayment()
 			->doRequest();
 
 		$this->assertEquals(1, $request->accepted);
 		$this->assertTrue($request->customerIdentity instanceof CreateOrderIdentity);
 		// verify returned address
-		$this->assertEquals("Sneider Boasman", $request->customerIdentity->fullName);
-		$this->assertEquals("Gate 42", $request->customerIdentity->street);
-		$this->assertEquals("23", $request->customerIdentity->houseNumber);
-		$this->assertEquals("1102 HG", $request->customerIdentity->zipCode);
-		$this->assertEquals("BARENDRECHT", $request->customerIdentity->locality);
+		$this->assertEquals('Sneider Boasman', $request->customerIdentity->fullName);
+		$this->assertEquals('Gate 42', $request->customerIdentity->street);
+		$this->assertEquals('23', $request->customerIdentity->houseNumber);
+		$this->assertEquals('1102 HG', $request->customerIdentity->zipCode);
+		$this->assertEquals('BARENDRECHT', $request->customerIdentity->locality);
 	}
 
 	public function testInvoiceRequestNLReturnsCorrectAddress()
 	{
-		$this->markTestIncomplete("NL flow not maintained by webpay-dev");
+		$this->markTestIncomplete('NL flow not maintained by webpay-dev');
 
 		$config = ConfigurationService::getDefaultConfig();
 		$request = WebPay::createOrder($config)
 			->addOrderRow(TestUtil::createOrderRow())
 			->addCustomerDetails(WebPayItem::individualCustomer()
 				->setBirthDate(1955, 03, 07)
-				->setName("Sneider", "Boasman")
-				->setStreetAddress("Gate 42", "23")// result of splitStreetAddress w/Svea testperson
+				->setName('Sneider', 'Boasman')
+				->setStreetAddress('Gate 42', '23')// result of splitStreetAddress w/Svea testperson
 				->setCoAddress(138)
-				->setLocality("BARENDRECHT")
-				->setZipCode("1102 HG")
-				->setInitials("SB")
+				->setLocality('BARENDRECHT')
+				->setZipCode('1102 HG')
+				->setInitials('SB')
 			)
-			->setCountryCode("NL")
-			->setCustomerReference("33")
-			->setOrderDate("2012-12-12")
-			->setCurrency("SEK")
+			->setCountryCode('NL')
+			->setCustomerReference('33')
+			->setOrderDate('2012-12-12')
+			->setCurrency('SEK')
 			->useInvoicePayment()
 			->doRequest();
 
 		$this->assertEquals(1, $request->accepted);
 		$this->assertTrue($request->customerIdentity instanceof CreateOrderIdentity);
 		// verify returned address
-		$this->assertEquals("Sneider Boasman", $request->customerIdentity->fullName);
-		$this->assertEquals("Gate 42", $request->customerIdentity->street);
-		$this->assertEquals("23", $request->customerIdentity->houseNumber);
-		$this->assertEquals("1102 HG", $request->customerIdentity->zipCode);
-		$this->assertEquals("BARENDRECHT", $request->customerIdentity->locality);
+		$this->assertEquals('Sneider Boasman', $request->customerIdentity->fullName);
+		$this->assertEquals('Gate 42', $request->customerIdentity->street);
+		$this->assertEquals('23', $request->customerIdentity->houseNumber);
+		$this->assertEquals('1102 HG', $request->customerIdentity->zipCode);
+		$this->assertEquals('BARENDRECHT', $request->customerIdentity->locality);
 
-		//<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ns1="https://webservices.sveaekonomi.se/webpay">
+		//<SOAP-ENV:Envelope xmlns:SOAP-ENV='http://schemas.xmlsoap.org/soap/envelope/' xmlns:ns1='https://webservices.sveaekonomi.se/webpay'>
 		//  <SOAP-ENV:Body>
 		//	<ns1:CreateOrderEu>
 		//	  <ns1:request>
@@ -1280,24 +1280,24 @@ class InvoicePaymentIntegrationTest extends \PHPUnit\Framework\TestCase
 
 	public function testInvoiceRequestNLReproduceErrorIn471193()
 	{
-		$this->markTestIncomplete("NL flow not maintained by webpay-dev");
+		$this->markTestIncomplete('NL flow not maintained by webpay-dev');
 
 		$config = ConfigurationService::getDefaultConfig();
 		$request = WebPay::createOrder($config)
 			->addOrderRow(TestUtil::createOrderRow())
 			->addCustomerDetails(WebPayItem::individualCustomer()
 				->setBirthDate(1955, 03, 07)// BirthDate and ZipCode is sufficient for a successful test order
-				->setZipCode("1102 HG")//
-				->setName("foo", "bar")
-				->setStreetAddress("foo", "bar")
+				->setZipCode('1102 HG')//
+				->setName('foo', 'bar')
+				->setStreetAddress('foo', 'bar')
 				->setCoAddress(1337)
-				->setLocality("dns")
-				->setInitials("nsl")
+				->setLocality('dns')
+				->setInitials('nsl')
 			)
-			->setCountryCode("NL")
-			->setCustomerReference("33")
-			->setOrderDate("2012-12-12")
-			->setCurrency("SEK")
+			->setCountryCode('NL')
+			->setCustomerReference('33')
+			->setOrderDate('2012-12-12')
+			->setCurrency('SEK')
 			->useInvoicePayment()
 			->doRequest();
 		//->prepareRequest();
@@ -1308,20 +1308,20 @@ class InvoicePaymentIntegrationTest extends \PHPUnit\Framework\TestCase
 
 		//print_r( $request->sveaOrderId);
 		// verify returned address is wrong
-		$this->assertNotEquals("Sneider Boasman", $request->customerIdentity->fullName);
-		$this->assertNotEquals("Gate 42", $request->customerIdentity->street);
-		$this->assertNotEquals("23", $request->customerIdentity->houseNumber);
-		$this->assertNotEquals("BARENDRECHT", $request->customerIdentity->locality);
-		//$this->assertNotEquals( "1102 HG", $request->customerIdentity->zipCode );
+		$this->assertNotEquals('Sneider Boasman', $request->customerIdentity->fullName);
+		$this->assertNotEquals('Gate 42', $request->customerIdentity->street);
+		$this->assertNotEquals('23', $request->customerIdentity->houseNumber);
+		$this->assertNotEquals('BARENDRECHT', $request->customerIdentity->locality);
+		//$this->assertNotEquals( '1102 HG', $request->customerIdentity->zipCode );
 
-		$this->assertEquals("foo bar", $request->customerIdentity->fullName);
-		$this->assertEquals("foo", $request->customerIdentity->street);
-		$this->assertEquals("bar", $request->customerIdentity->houseNumber);
-		$this->assertEquals("dns", $request->customerIdentity->locality);
-		$this->assertEquals("1102 HG", $request->customerIdentity->zipCode);
+		$this->assertEquals('foo bar', $request->customerIdentity->fullName);
+		$this->assertEquals('foo', $request->customerIdentity->street);
+		$this->assertEquals('bar', $request->customerIdentity->houseNumber);
+		$this->assertEquals('dns', $request->customerIdentity->locality);
+		$this->assertEquals('1102 HG', $request->customerIdentity->zipCode);
 
 
-		//<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ns1="https://webservices.sveaekonomi.se/webpay" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+		//<SOAP-ENV:Envelope xmlns:SOAP-ENV='http://schemas.xmlsoap.org/soap/envelope/' xmlns:ns1='https://webservices.sveaekonomi.se/webpay' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'>
 		//  <SOAP-ENV:Body>
 		//	<ns1:CreateOrderEu>
 		//	  <ns1:request>
@@ -1337,7 +1337,7 @@ class InvoicePaymentIntegrationTest extends \PHPUnit\Framework\TestCase
 		//			  <ns1:ArticleNumber>NTB03</ns1:ArticleNumber>
 		//			  <ns1:Description>Making candles and soaps for dummies: Making candles and soaps for dummies</ns1:Description>
 		//			  <ns1:PricePerUnit>12.12</ns1:PricePerUnit>
-		//			  <ns1:PriceIncludingVat xsi:nil="true" />
+		//			  <ns1:PriceIncludingVat xsi:nil='true' />
 		//			  <ns1:NumberOfUnits>2</ns1:NumberOfUnits>
 		//			  <ns1:Unit>st</ns1:Unit>
 		//			  <ns1:VatPercent>25</ns1:VatPercent>
@@ -1347,7 +1347,7 @@ class InvoicePaymentIntegrationTest extends \PHPUnit\Framework\TestCase
 		//			  <ns1:ArticleNumber>SHIP25</ns1:ArticleNumber>
 		//			  <ns1:Description>Frakt / Shipping</ns1:Description>
 		//			  <ns1:PricePerUnit>8.66</ns1:PricePerUnit>
-		//			  <ns1:PriceIncludingVat xsi:nil="true" />
+		//			  <ns1:PriceIncludingVat xsi:nil='true' />
 		//			  <ns1:NumberOfUnits>1</ns1:NumberOfUnits>
 		//			  <ns1:Unit>st</ns1:Unit>
 		//			  <ns1:VatPercent>25</ns1:VatPercent>
@@ -1357,7 +1357,7 @@ class InvoicePaymentIntegrationTest extends \PHPUnit\Framework\TestCase
 		//			  <ns1:ArticleNumber>HAND25</ns1:ArticleNumber>
 		//			  <ns1:Description>Expeditionsavgift / Handling</ns1:Description>
 		//			  <ns1:PricePerUnit>2.51</ns1:PricePerUnit>
-		//			  <ns1:PriceIncludingVat xsi:nil="true" />
+		//			  <ns1:PriceIncludingVat xsi:nil='true' />
 		//			  <ns1:NumberOfUnits>1</ns1:NumberOfUnits>
 		//			  <ns1:Unit>st</ns1:Unit>
 		//			  <ns1:VatPercent>25</ns1:VatPercent>
@@ -1409,12 +1409,12 @@ class InvoicePaymentIntegrationTest extends \PHPUnit\Framework\TestCase
 					->setVatPercent(25)
 					->setQuantity(1)
 			)
-			->addCustomerDetails(TestUtil::createIndividualCustomer("SE"))
-			->setCountryCode("SE")
-			->setOrderDate("2012-12-12")
+			->addCustomerDetails(TestUtil::createIndividualCustomer('SE'))
+			->setCountryCode('SE')
+			->setOrderDate('2012-12-12')
 			->useInvoicePayment()->doRequest();
 		$this->assertEquals(1, $orderResponse->accepted);
-		$this->assertEquals("125.00", $orderResponse->amount);
+		$this->assertEquals('125.00', $orderResponse->amount);
 		//print_r($orderResponse);
 
 		$query = WebPayAdmin::queryOrder($config)
@@ -1438,12 +1438,12 @@ class InvoicePaymentIntegrationTest extends \PHPUnit\Framework\TestCase
 					->setQuantity(1)
 					->setDiscountPercent(50)
 			)
-			->addCustomerDetails(TestUtil::createIndividualCustomer("SE"))
-			->setCountryCode("SE")
-			->setOrderDate("2012-12-12")
+			->addCustomerDetails(TestUtil::createIndividualCustomer('SE'))
+			->setCountryCode('SE')
+			->setOrderDate('2012-12-12')
 			->useInvoicePayment()->doRequest();
 		$this->assertEquals(1, $orderResponse->accepted);
-		$this->assertEquals("62.50", $orderResponse->amount);
+		$this->assertEquals('62.50', $orderResponse->amount);
 
 		$query = WebPayAdmin::queryOrder($config)
 			->setCountryCode('SE')
@@ -1466,12 +1466,12 @@ class InvoicePaymentIntegrationTest extends \PHPUnit\Framework\TestCase
 					->setQuantity(1)
 					->setDiscountPercent(50)
 			)
-			->addCustomerDetails(TestUtil::createIndividualCustomer("SE"))
-			->setCountryCode("SE")
-			->setOrderDate("2012-12-12")
+			->addCustomerDetails(TestUtil::createIndividualCustomer('SE'))
+			->setCountryCode('SE')
+			->setOrderDate('2012-12-12')
 			->useInvoicePayment()->doRequest();
 		$this->assertEquals(1, $orderResponse->accepted);
-		$this->assertEquals("62.5", $orderResponse->amount);   // this is where
+		$this->assertEquals('62.5', $orderResponse->amount);   // this is where
 
 		$query = WebPayAdmin::queryOrder($config)
 			->setCountryCode('SE')
@@ -1490,42 +1490,42 @@ class InvoicePaymentIntegrationTest extends \PHPUnit\Framework\TestCase
 	{
 		$order = WebPay::createOrder(ConfigurationService::getDefaultConfig())
 			->addCustomerDetails(WebPayItem::individualCustomer()->setNationalIdNumber(194605092222))
-			->setCountryCode("SE")
-			->setCustomerReference("33")
-			->setOrderDate("2012-12-12")
-			->setCurrency("SEK")
+			->setCountryCode('SE')
+			->setCustomerReference('33')
+			->setOrderDate('2012-12-12')
+			->setCurrency('SEK')
 			->addOrderRow(
 				WebPayItem::orderRow()
 					->setAmountIncVat(72.00)
 					->setVatPercent(20)
 					->setQuantity(1)
-					->setName("incvatRow")
+					->setName('incvatRow')
 			)
 			->addOrderRow(
 				WebPayItem::orderRow()
 					->setAmountIncVat(33.00)
 					->setVatPercent(10)
 					->setQuantity(1)
-					->setName("incvatRow2")
+					->setName('incvatRow2')
 			)
 			->addFee(
 				WebPayItem::invoiceFee()
 					->setAmountIncVat(8.80)
 					->setVatPercent(10)
-					->setName("incvatInvoiceFee")
+					->setName('incvatInvoiceFee')
 			)
 			->addFee(
 				WebPayItem::shippingFee()
 					->setAmountIncVat(17.60)
 					->setVatPercent(10)
-					->setName("incvatShippingFee")
+					->setName('incvatShippingFee')
 			)
 			->addDiscount(
 				WebPayItem::fixedDiscount()
 					->setAmountExVat(10.0)
 					->setVatPercent(10)
-					->setDiscountId("ElevenCrownsOff")
-					->setName("fixedDiscount: 10 @10% => 11kr")
+					->setDiscountId('ElevenCrownsOff')
+					->setName('fixedDiscount: 10 @10% => 11kr')
 			);
 		$request = $order->useInvoicePayment()->prepareRequest();
 		// all order rows
@@ -1559,42 +1559,42 @@ class InvoicePaymentIntegrationTest extends \PHPUnit\Framework\TestCase
 	{
 		$order = WebPay::createOrder(ConfigurationService::getDefaultConfig())
 			->addCustomerDetails(WebPayItem::individualCustomer()->setNationalIdNumber(194605092222))
-			->setCountryCode("SE")
-			->setCustomerReference("33")
-			->setOrderDate("2012-12-12")
-			->setCurrency("SEK")
+			->setCountryCode('SE')
+			->setCustomerReference('33')
+			->setOrderDate('2012-12-12')
+			->setCurrency('SEK')
 			->addOrderRow(
 				WebPayItem::orderRow()
 					->setAmountExVat(60.00)
 					->setVatPercent(20)
 					->setQuantity(1)
-					->setName("exvatRow")
+					->setName('exvatRow')
 			)
 			->addOrderRow(
 				WebPayItem::orderRow()
 					->setAmountExVat(30.00)
 					->setVatPercent(10)
 					->setQuantity(1)
-					->setName("exvatRow2")
+					->setName('exvatRow2')
 			)
 			->addFee(
 				WebPayItem::invoiceFee()
 					->setAmountExVat(8.00)
 					->setVatPercent(10)
-					->setName("exvatInvoiceFee")
+					->setName('exvatInvoiceFee')
 			)
 			->addFee(
 				WebPayItem::shippingFee()
 					->setAmountExVat(16.00)
 					->setVatPercent(10)
-					->setName("exvatShippingFee")
+					->setName('exvatShippingFee')
 			)
 			->addDiscount(
 				WebPayItem::fixedDiscount()
 					->setAmountExVat(10.0)
 					->setVatPercent(10)
-					->setDiscountId("ElevenCrownsOff")
-					->setName("fixedDiscount: 10 @10% => 11kr")
+					->setDiscountId('ElevenCrownsOff')
+					->setName('fixedDiscount: 10 @10% => 11kr')
 			);
 		$request = $order->useInvoicePayment()->prepareRequest();
 		// all order rows
@@ -1625,9 +1625,9 @@ class InvoicePaymentIntegrationTest extends \PHPUnit\Framework\TestCase
 			->addDiscount(WebPayItem::fixedDiscount()
 				->setAmountExVat(9.999)
 			)
-			->addCustomerDetails(TestUtil::createIndividualCustomer("SE"))
-			->setCountryCode("SE")
-			->setOrderDate("2012-12-12");
+			->addCustomerDetails(TestUtil::createIndividualCustomer('SE'))
+			->setCountryCode('SE')
+			->setOrderDate('2012-12-12');
 
 		$request = $order->useInvoicePayment()->prepareRequest();
 
@@ -1658,9 +1658,9 @@ class InvoicePaymentIntegrationTest extends \PHPUnit\Framework\TestCase
 			->addDiscount(WebPayItem::fixedDiscount()
 				->setAmountExVat(9.999)
 			)
-			->addCustomerDetails(TestUtil::createIndividualCustomer("SE"))
-			->setCountryCode("SE")
-			->setOrderDate("2012-12-12");
+			->addCustomerDetails(TestUtil::createIndividualCustomer('SE'))
+			->setCountryCode('SE')
+			->setOrderDate('2012-12-12');
 		$request = $order->useInvoicePayment()->prepareRequest();
 
 		$this->assertEquals(99.99, $request->request->CreateOrderInformation->OrderRows['OrderRow'][0]->PricePerUnit);

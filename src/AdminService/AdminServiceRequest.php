@@ -45,13 +45,13 @@ abstract class AdminServiceRequest {
 	public static function CamelCaseOrderType($orderTypeAsConst) {
 		switch ($orderTypeAsConst) {
 			case ConfigurationProvider::INVOICE_TYPE:
-				return "Invoice";
+				return 'Invoice';
 				break;
 			case ConfigurationProvider::PAYMENTPLAN_TYPE:
-				return "PaymentPlan";
+				return 'PaymentPlan';
 				break;
 			case ConfigurationProvider::ACCOUNTCREDIT_TYPE:
-				return "AccountCredit";
+				return 'AccountCredit';
 				break;
 			default:
 				return $orderTypeAsConst;
@@ -80,17 +80,17 @@ abstract class AdminServiceRequest {
 
 		if ($this->orderBuilder->logFile) {
 			$log = [
-				"request" => [
-					"timestamp" => $timestampStart,
-					"headers" => $soapClient->getClient()->__getLastRequestHeaders(),
-					"body" => $this->prettyPrintXml($soapClient->getClient()->__getLastRequest())
+				'request' => [
+					'timestamp' => $timestampStart,
+					'headers' => $soapClient->getClient()->__getLastRequestHeaders(),
+					'body' => $this->prettyPrintXml($soapClient->getClient()->__getLastRequest())
 				],
-				"response" => [
-					"timestamp" => time(),
-					"headers" => $soapClient->getClient()->__getLastResponseHeaders(),
-					"body" => $this->prettyPrintXml($soapClient->getClient()->__getLastResponse()),
-					"dataAmount" => strlen($soapClient->getClient()->__getLastResponseHeaders()) + strlen($soapClient->getClient()->__getLastResponse()),
-					"duration" => round(microtime(true) - $microtimeStart, 3)
+				'response' => [
+					'timestamp' => time(),
+					'headers' => $soapClient->getClient()->__getLastResponseHeaders(),
+					'body' => $this->prettyPrintXml($soapClient->getClient()->__getLastResponse()),
+					'dataAmount' => strlen($soapClient->getClient()->__getLastResponseHeaders()) + strlen($soapClient->getClient()->__getLastResponse()),
+					'duration' => round(microtime(true) - $microtimeStart, 3)
 				]
 			];
 
@@ -142,10 +142,10 @@ abstract class AdminServiceRequest {
 		$errors = $this->validate();
 
 		if (count($errors) > 0) {
-			$exceptionString = "";
+			$exceptionString = '';
 			foreach ($errors as $error) {
 				foreach ($error as $key => $value) {
-					$exceptionString .= "-" . $key . " : " . $value . "\n";
+					$exceptionString .= '-' . $key . ' : ' . $value . "\n";
 				}
 			}
 
@@ -202,7 +202,7 @@ abstract class AdminServiceRequest {
 					$orderRow->unit,
 					$orderRow->vatPercent,
 					$priceIncludingVat // attribute is set in correct (alphabetical) position via OrderRow constructor, see AdminSoap/OrderRow
-				), SOAP_ENC_OBJECT, null, null, 'OrderRow', "http://schemas.datacontract.org/2004/07/DataObjects.Webservice"
+				), SOAP_ENC_OBJECT, null, null, 'OrderRow', 'http://schemas.datacontract.org/2004/07/DataObjects.Webservice'
 			);
 		}
 
@@ -248,7 +248,7 @@ abstract class AdminServiceRequest {
 					$orderRow->rowNumber,
 					$priceIncludingVat // attribute is set in correct (alphabetical) position via OrderRow constructor, see AdminSoap/OrderRow
 				),
-				SOAP_ENC_OBJECT, null, null, 'NumberedOrderRow', "http://schemas.datacontract.org/2004/07/DataObjects.Admin.Service"
+				SOAP_ENC_OBJECT, null, null, 'NumberedOrderRow', 'http://schemas.datacontract.org/2004/07/DataObjects.Admin.Service'
 			);
 		}
 

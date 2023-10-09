@@ -23,24 +23,24 @@ class CardPaymentIntegrationTest extends \PHPUnit\Framework\TestCase
 			->addOrderRow(TestUtil::createOrderRow())
 			->run($rowFactory->buildShippingFee())
 			->addDiscount(WebPayItem::relativeDiscount()
-				->setDiscountId("1")
+				->setDiscountId('1')
 				->setDiscountPercent(50)
-				->setUnit("st")
+				->setUnit('st')
 				->setName('Relative')
-				->setDescription("RelativeDiscount")
+				->setDescription('RelativeDiscount')
 			)
-			->setCountryCode("SE")
-			->setClientOrderNumber("foobar" . date('c'))
-			->setOrderDate("2012-12-12")
-			->setCurrency("SEK")
+			->setCountryCode('SE')
+			->setClientOrderNumber('foobar' . date('c'))
+			->setOrderDate('2012-12-12')
+			->setCurrency('SEK')
 			->usePayPage()// PayPageObject
-			->setReturnUrl("http://myurl.se")
+			->setReturnUrl('http://myurl.se')
 			->getPaymentForm();
-		$url = "https://webpaypaymentgatewaystage.svea.com/webpay/payment";
+		$url = 'https://webpaypaymentgatewaystage.svea.com/webpay/payment';
 
 		/** CURL  **/
 		$fields = ['merchantid' => urlencode($form->merchantid), 'message' => urlencode($form->xmlMessageBase64), 'mac' => urlencode($form->mac)];
-		$fieldsString = "";
+		$fieldsString = '';
 		foreach ($fields as $key => $value) {
 			$fieldsString .= $key . '=' . $value . '&';
 		}
@@ -63,7 +63,7 @@ class CardPaymentIntegrationTest extends \PHPUnit\Framework\TestCase
 		//print_r( $cr);
 		$this->assertEquals(200, $info['http_code']);
 		$this->assertEquals(1, $info['redirect_count']);
-		$expected_infourl = "https://webpaypaymentgatewaystage.svea.com/webpay/public/static/paypage.html";
+		$expected_infourl = 'https://webpaypaymentgatewaystage.svea.com/webpay/public/static/paypage.html';
 		$start_of_actual_infourl = substr($info['url'], 0, strlen($expected_infourl));
 		$this->assertEquals($expected_infourl, $start_of_actual_infourl);
 	}

@@ -40,7 +40,7 @@ class PaymentForm {
 		$this->endPointUrl = $config->getEndPoint(ConfigurationProvider::HOSTED_TYPE);
 		$this->merchantid = $config->getMerchantId(ConfigurationProvider::HOSTED_TYPE, $countryCode);
 		$this->secretWord = $config->getSecret(ConfigurationProvider::HOSTED_TYPE, $countryCode);
-		$this->mac = hash("sha512", $this->xmlMessageBase64 . $this->secretWord);
+		$this->mac = hash('sha512', $this->xmlMessageBase64 . $this->secretWord);
 
 		$this->setForm();
 		$this->setHtmlFields();
@@ -87,13 +87,13 @@ class PaymentForm {
 
 	public function setSubmitMessage($countryCode = false) {
 		switch ($countryCode) {
-			case "SE":
-				$this->submitMessage = "Betala";
-				$this->noScriptMessage = "Javascript är inaktiverat i er webbläsare, så ni får manuellt omdirigera till paypage";
+			case 'SE':
+				$this->submitMessage = 'Betala';
+				$this->noScriptMessage = 'Javascript är inaktiverat i er webbläsare, så ni får manuellt omdirigera till paypage';
 				break;
 			default:
-				$this->submitMessage = "Submit";
-				$this->noScriptMessage = "Javascript is inactivated in your browser, you will manually have to redirect to the paypage";
+				$this->submitMessage = 'Submit';
+				$this->noScriptMessage = 'Javascript is inactivated in your browser, you will manually have to redirect to the paypage';
 				break;
 		}
 	}

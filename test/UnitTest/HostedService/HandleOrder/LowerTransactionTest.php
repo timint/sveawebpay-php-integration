@@ -30,12 +30,12 @@ class LowerTransactionTest extends \PHPUnit\Framework\TestCase
 	function test_class_exists()
 	{
 		$this->assertInstanceOf("Svea\WebPay\HostedService\HostedAdminRequest\LowerTransaction", $this->lowerTransactionObject);
-		$this->assertEquals("loweramount", \PHPUnit\Framework\Assert::readAttribute($this->lowerTransactionObject, 'method'));
+		$this->assertEquals('loweramount', \PHPUnit\Framework\Assert::readAttribute($this->lowerTransactionObject, 'method'));
 	}
 
 	function test_setCountryCode()
 	{
-		$countryCode = "SE";
+		$countryCode = 'SE';
 		$this->lowerTransactionObject->countryCode = $countryCode;
 		$this->assertEquals($countryCode, \PHPUnit\Framework\Assert::readAttribute($this->lowerTransactionObject, 'countryCode'));
 	}
@@ -50,7 +50,7 @@ class LowerTransactionTest extends \PHPUnit\Framework\TestCase
 		$amountToLower = 100;
 		$this->lowerTransactionObject->amountToLower = $amountToLower;
 
-		$countryCode = "SE";
+		$countryCode = 'SE';
 		$this->lowerTransactionObject->countryCode = $countryCode;
 
 		$form = $this->lowerTransactionObject->prepareRequest();
@@ -71,7 +71,7 @@ class LowerTransactionTest extends \PHPUnit\Framework\TestCase
 		$amountToLower = 100;
 		$this->lowerTransactionObject->amountToLower = $amountToLower;
 
-		$countryCode = "SE";
+		$countryCode = 'SE';
 		$this->lowerTransactionObject->countryCode = $countryCode;
 
 		$form = $this->lowerTransactionObject->prepareRequest();
@@ -84,12 +84,12 @@ class LowerTransactionTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals($merchantid, urldecode($form['merchantid']));
 
 		// check valid mac
-		$this->assertEquals(hash("sha512", urldecode($form['message']) . $secret), urldecode($form['mac']));
+		$this->assertEquals(hash('sha512', urldecode($form['message']) . $secret), urldecode($form['mac']));
 
 		// check credit request message contents
 		$xmlMessage = new SimpleXMLElement(base64_decode(urldecode($form['message'])));
 
-		$this->assertEquals("loweramount", $xmlMessage->getName());   // root node
+		$this->assertEquals('loweramount', $xmlMessage->getName());   // root node
 		$this->assertEquals((string)$transactionId, $xmlMessage->transactionid);
 		$this->assertEquals((string)$amountToLower, $xmlMessage->amounttolower);
 	}
@@ -103,7 +103,7 @@ class LowerTransactionTest extends \PHPUnit\Framework\TestCase
 		$amountToLower = 100;
 		$this->lowerTransactionObject->amountToLower = $amountToLower;
 
-		$countryCode = "SE";
+		$countryCode = 'SE';
 		$this->lowerTransactionObject->countryCode = $countryCode;
 
 		$form = $this->lowerTransactionObject->prepareRequest();
@@ -118,7 +118,7 @@ class LowerTransactionTest extends \PHPUnit\Framework\TestCase
 		$transactionId = 987654;
 		$this->lowerTransactionObject->transactionId = $transactionId;
 
-		$countryCode = "SE";
+		$countryCode = 'SE';
 		$this->lowerTransactionObject->countryCode = $countryCode;
 
 		$form = $this->lowerTransactionObject->prepareRequest();

@@ -37,9 +37,9 @@ abstract class HandleOrder {
 	public function validateRequest() {
 		$errors = $this->validate($this->orderBuilder);
 		if (count($errors) > 0) {
-			$exceptionString = "";
+			$exceptionString = '';
 			foreach ($errors as $key => $value) {
-				$exceptionString .= "-" . $key . " : " . $value . "\n";
+				$exceptionString .= '-' . $key . ' : ' . $value . "\n";
 			}
 
 			throw new ValidationException($exceptionString);

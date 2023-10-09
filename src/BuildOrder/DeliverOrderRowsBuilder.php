@@ -282,22 +282,22 @@ class DeliverOrderRowsBuilder extends CheckoutAdminOrderBuilder {
 	 */
 	private function validateDeliverInvoiceOrderRows() {
 		if (!isset($this->orderId)) {
-			$exceptionString = "orderId is required for deliverInvoiceOrderRows(). Use method setOrderId().";
+			$exceptionString = 'orderId is required for deliverInvoiceOrderRows(). Use method setOrderId().';
 			throw new ValidationException($exceptionString);
 		}
 
 		if (!isset($this->countryCode)) {
-			$exceptionString = "countryCode is required for deliverInvoiceOrderRows(). Use method setCountryCode().";
+			$exceptionString = 'countryCode is required for deliverInvoiceOrderRows(). Use method setCountryCode().';
 			throw new ValidationException($exceptionString);
 		}
 
 		if (!isset($this->distributionType)) {
-			$exceptionString = "distributionType is required for deliverInvoiceOrderRows(). Use method setInvoiceDistributionType().";
+			$exceptionString = 'distributionType is required for deliverInvoiceOrderRows(). Use method setInvoiceDistributionType().';
 			throw new ValidationException($exceptionString);
 		}
 
 		if ((count($this->rowsToDeliver) == 0)) {
-			$exceptionString = "rowsToDeliver is required for deliverInvoiceOrderRows(). Use methods setRowToDeliver() or setRowsToDeliver().";
+			$exceptionString = 'rowsToDeliver is required for deliverInvoiceOrderRows(). Use methods setRowToDeliver() or setRowsToDeliver().';
 			throw new ValidationException($exceptionString);
 		}
 	}
@@ -307,22 +307,22 @@ class DeliverOrderRowsBuilder extends CheckoutAdminOrderBuilder {
 	 */
 	private function validateDeliverCardOrderRows() {
 		if (!isset($this->orderId)) {
-			$exceptionString = "orderId is required for deliverInvoiceOrderRows(). Use method setOrderId().";
+			$exceptionString = 'orderId is required for deliverInvoiceOrderRows(). Use method setOrderId().';
 			throw new ValidationException($exceptionString);
 		}
 
 		if (!isset($this->countryCode)) {
-			$exceptionString = "countryCode is required for deliverInvoiceOrderRows(). Use method setCountryCode().";
+			$exceptionString = 'countryCode is required for deliverInvoiceOrderRows(). Use method setCountryCode().';
 			throw new ValidationException($exceptionString);
 		}
 
 		if ((count($this->rowsToDeliver) == 0)) {
-			$exceptionString = "rowsToDeliver is required for deliverCardOrderRows(). Use methods setRowToDeliver() or setRowsToDeliver().";
+			$exceptionString = 'rowsToDeliver is required for deliverCardOrderRows(). Use methods setRowToDeliver() or setRowsToDeliver().';
 			throw new ValidationException($exceptionString);
 		}
 
 		if ((count($this->numberedOrderRows) == 0)) {
-			$exceptionString = "numberedOrderRows is required for deliverCardOrderRows(). Use setNumberedOrderRow() or setNumberedOrderRows().";
+			$exceptionString = 'numberedOrderRows is required for deliverCardOrderRows(). Use setNumberedOrderRow() or setNumberedOrderRows().';
 			throw new ValidationException($exceptionString);
 		}
 	}

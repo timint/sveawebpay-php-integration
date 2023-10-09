@@ -115,7 +115,7 @@ class CreateOrderValidationTest extends TestCase
 	 */
 	public function ifPartnerKeyPassed()
 	{
-		$this->order->setPartnerKey("77FB33EC-505D-4CCF-AA21-D9DF50DC8344");
+		$this->order->setPartnerKey('77FB33EC-505D-4CCF-AA21-D9DF50DC8344');
 
 		$errors = $this->invokeMethod($this->validator, 'validatePartnerKey', array($this->order, array()));
 

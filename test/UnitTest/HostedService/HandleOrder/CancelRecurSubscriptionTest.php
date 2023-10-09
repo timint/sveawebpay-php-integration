@@ -30,12 +30,12 @@ class CancelRecurSubscriptionTest extends \PHPUnit\Framework\TestCase
 	function test_class_exists()
 	{
 		$this->assertInstanceOf("Svea\WebPay\HostedService\HostedAdminRequest\CancelRecurSubscription", $this->cancelRecurSubscriptionObject);
-		$this->assertEquals("cancelrecursubscription", \PHPUnit\Framework\Assert::readAttribute($this->cancelRecurSubscriptionObject, 'method'));
+		$this->assertEquals('cancelrecursubscription', \PHPUnit\Framework\Assert::readAttribute($this->cancelRecurSubscriptionObject, 'method'));
 	}
 
 	function test_setCountryCode()
 	{
-		$countryCode = "SE";
+		$countryCode = 'SE';
 		$this->cancelRecurSubscriptionObject->countryCode = $countryCode;
 		$this->assertEquals($countryCode, \PHPUnit\Framework\Assert::readAttribute($this->cancelRecurSubscriptionObject, 'countryCode'));
 	}
@@ -47,7 +47,7 @@ class CancelRecurSubscriptionTest extends \PHPUnit\Framework\TestCase
 		$subscriptionId = 334455;
 		$this->cancelRecurSubscriptionObject->subscriptionId = $subscriptionId;
 
-		$countryCode = "SE";
+		$countryCode = 'SE';
 		$this->cancelRecurSubscriptionObject->countryCode = $countryCode;
 
 		$form = $this->cancelRecurSubscriptionObject->prepareRequest();
@@ -62,10 +62,10 @@ class CancelRecurSubscriptionTest extends \PHPUnit\Framework\TestCase
 	{
 
 		// set up creditTransaction object & get request form
-		$subscriptionId = "334455";
+		$subscriptionId = '334455';
 		$this->cancelRecurSubscriptionObject->subscriptionId = $subscriptionId;
 
-		$countryCode = "SE";
+		$countryCode = 'SE';
 		$this->cancelRecurSubscriptionObject->countryCode = $countryCode;
 
 		$form = $this->cancelRecurSubscriptionObject->prepareRequest();
@@ -78,12 +78,12 @@ class CancelRecurSubscriptionTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals($merchantid, urldecode($form['merchantid']));
 
 		// check valid mac
-		$this->assertEquals(hash("sha512", urldecode($form['message']) . $secret), urldecode($form['mac']));
+		$this->assertEquals(hash('sha512', urldecode($form['message']) . $secret), urldecode($form['mac']));
 
 		// check annul request message contents
 		$xmlMessage = new SimpleXMLElement(base64_decode(urldecode($form['message'])));
 
-		$this->assertEquals("cancelrecursubscription", $xmlMessage->getName());   // root node
+		$this->assertEquals('cancelrecursubscription', $xmlMessage->getName());   // root node
 		$this->assertEquals((string)$subscriptionId, $xmlMessage->subscriptionid);
 	}
 
@@ -93,7 +93,7 @@ class CancelRecurSubscriptionTest extends \PHPUnit\Framework\TestCase
 	 */
 	function test_prepareRequest_missing_transactionId_throws_exception()
 	{
-		$countryCode = "SE";
+		$countryCode = 'SE';
 		$this->cancelRecurSubscriptionObject->countryCode = $countryCode;
 
 		$form = $this->cancelRecurSubscriptionObject->prepareRequest();

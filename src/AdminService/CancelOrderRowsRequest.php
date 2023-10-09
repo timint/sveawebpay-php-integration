@@ -23,7 +23,7 @@ class CancelOrderRowsRequest extends AdminServiceRequest
 	 */
 	public function __construct($cancelOrderRowsBuilder)
 	{
-		$this->action = "CancelOrderRows";
+		$this->action = 'CancelOrderRows';
 		$this->orderBuilder = $cancelOrderRowsBuilder;
 	}
 
@@ -37,7 +37,7 @@ class CancelOrderRowsRequest extends AdminServiceRequest
 
 		$orderRowNumbers = [];
 		foreach ($this->orderBuilder->rowsToCancel as $rowToCancel) {
-			$orderRowNumbers[] = new SoapVar($rowToCancel, XSD_LONG, null, null, 'long', "http://schemas.microsoft.com/2003/10/Serialization/Arrays");
+			$orderRowNumbers[] = new SoapVar($rowToCancel, XSD_LONG, null, null, 'long', 'http://schemas.microsoft.com/2003/10/Serialization/Arrays');
 		}
 
 		$soapRequest = new \Svea\WebPay\AdminService\AdminSoap\CancelOrderRowsRequest(
@@ -91,7 +91,7 @@ class CancelOrderRowsRequest extends AdminServiceRequest
 	private function validateOrderId($errors)
 	{
 		if (isset($this->orderBuilder->orderId) == false) {
-			$errors[] = ['missing value' => "orderId is required."];
+			$errors[] = ['missing value' => 'orderId is required.'];
 		}
 
 		return $errors;
@@ -100,7 +100,7 @@ class CancelOrderRowsRequest extends AdminServiceRequest
 	private function validateOrderType($errors)
 	{
 		if (isset($this->orderBuilder->orderType) == false) {
-			$errors[] = ['missing value' => "orderType is required."];
+			$errors[] = ['missing value' => 'orderType is required.'];
 		}
 
 		return $errors;
@@ -109,7 +109,7 @@ class CancelOrderRowsRequest extends AdminServiceRequest
 	private function validateCountryCode($errors)
 	{
 		if (isset($this->orderBuilder->countryCode) == false) {
-			$errors[] = ['missing value' => "countryCode is required."];
+			$errors[] = ['missing value' => 'countryCode is required.'];
 		}
 
 		return $errors;
@@ -118,7 +118,7 @@ class CancelOrderRowsRequest extends AdminServiceRequest
 	private function validateRowsToCancel($errors)
 	{
 		if (isset($this->orderBuilder->rowsToCancel) == false) {
-			$errors[] = ['missing value' => "rowsToCancel is required."];
+			$errors[] = ['missing value' => 'rowsToCancel is required.'];
 		}
 
 		return $errors;

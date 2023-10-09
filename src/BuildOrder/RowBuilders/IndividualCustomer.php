@@ -129,10 +129,10 @@ class IndividualCustomer {
 			}
 		}
 		if ($mm < 10) {
-			$mm = "0" . intval($mm);
+			$mm = '0' . intval($mm);
 		}
 		if ($dd < 10) {
-			$dd = "0" . intval($dd);
+			$dd = '0' . intval($dd);
 		}
 
 		$this->birthDate = $yyyy . $mm . $dd;

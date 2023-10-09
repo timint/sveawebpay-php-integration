@@ -18,9 +18,9 @@ class HostedPaymentTest extends \PHPUnit\Framework\TestCase {
 
 	public function test_setXXXUrl() {
 
-		$returnUrlAsString = "http://foo.bar.com/1";
-		$cancelUrlAsString = "http://foo.bar.com/2";
-		$callbackUrlAsString = "http://foo.bar.com/3";
+		$returnUrlAsString = 'http://foo.bar.com/1';
+		$cancelUrlAsString = 'http://foo.bar.com/2';
+		$callbackUrlAsString = 'http://foo.bar.com/3';
 
 		$order = TestUtil::createOrder();
 		$payment = $order->usePaymentMethod(PaymentMethod::KORTCERT)
@@ -34,7 +34,7 @@ class HostedPaymentTest extends \PHPUnit\Framework\TestCase {
 	}
 
 	public function test_payPageLanguage_defaults_to_english() {
-		$defaultLanguage = "en";
+		$defaultLanguage = 'en';
 
 		$order = TestUtil::createOrder();
 		$payment = $order->usePaymentMethod(PaymentMethod::KORTCERT);
@@ -43,17 +43,17 @@ class HostedPaymentTest extends \PHPUnit\Framework\TestCase {
 	}
 
 	public function test_setPayPageLanguage_with_unrecognised_language() {
-		$newLanguage = "unrecognised_language";
+		$newLanguage = 'unrecognised_language';
 
 		$order = TestUtil::createOrder();
 		$payment = $order->usePaymentMethod(PaymentMethod::KORTCERT)
 			->setPayPageLanguage( $newLanguage );
 
-		$this->assertEquals("en", $payment->langCode );
+		$this->assertEquals('en', $payment->langCode );
 	}
 
 	public function test_setPayPageLanguage_with_recognised_language() {
-		$orderLanguage = "sv";
+		$orderLanguage = 'sv';
 
 		$order = TestUtil::createOrder();
 		$payment = $order->usePaymentMethod(PaymentMethod::KORTCERT)
@@ -76,13 +76,13 @@ class HostedPaymentTest extends \PHPUnit\Framework\TestCase {
 		$order = new CreateOrderBuilder(new SveaConfigurationProvider(ConfigurationService::getDefaultConfig()));
 		$order->
 			addOrderRow(WebPayItem::orderRow()
-				->setArticleNumber("0")
-				->setName("testCalculateRequestValues_CorrectTotalAmountFromMultipleItems")
-				->setDescription("testCalculateRequestValues_CorrectTotalAmountFromMultipleItems")
+				->setArticleNumber('0')
+				->setName('testCalculateRequestValues_CorrectTotalAmountFromMultipleItems')
+				->setDescription('testCalculateRequestValues_CorrectTotalAmountFromMultipleItems')
 				->setAmountExVat(69.99)
 				->setVatPercent(25)
 				->setQuantity(30)
-				->setUnit("st")
+				->setUnit('st')
 			);
 
 		// follows HostedPayment calculateRequestValues() outline:
@@ -101,13 +101,13 @@ class HostedPaymentTest extends \PHPUnit\Framework\TestCase {
 		$order = new CreateOrderBuilder(new SveaConfigurationProvider(ConfigurationService::getDefaultConfig()));
 		$order->
 			addOrderRow(WebPayItem::orderRow()
-				->setArticleNumber("0")
-				->setName("testCalculateRequestValues_CorrectTotalAmountFromMultipleItems")
-				->setDescription("testCalculateRequestValues_CorrectTotalAmountFromMultipleItems")
+				->setArticleNumber('0')
+				->setName('testCalculateRequestValues_CorrectTotalAmountFromMultipleItems')
+				->setDescription('testCalculateRequestValues_CorrectTotalAmountFromMultipleItems')
 				->setAmountIncVat(87.4875)	// if low precision here, i.e. 87.49, we'll get a cumulative rounding error
 				->setVatPercent(25)
 				->setQuantity(30)
-				->setUnit("st")
+				->setUnit('st')
 			);
 
 		// follows HostedPayment calculateRequestValues() outline:
@@ -126,13 +126,13 @@ class HostedPaymentTest extends \PHPUnit\Framework\TestCase {
 		$order = new CreateOrderBuilder(new SveaConfigurationProvider(ConfigurationService::getDefaultConfig()));
 		$order->
 			addOrderRow(WebPayItem::orderRow()
-				->setArticleNumber("0")
-				->setName("testCalculateRequestValues_CorrectTotalAmountFromMultipleItems")
-				->setDescription("testCalculateRequestValues_CorrectTotalAmountFromMultipleItems")
+				->setArticleNumber('0')
+				->setName('testCalculateRequestValues_CorrectTotalAmountFromMultipleItems')
+				->setDescription('testCalculateRequestValues_CorrectTotalAmountFromMultipleItems')
 				->setAmountExVat(69.99)
 				->setAmountIncVat(87.4875)   // if low precision here, i.e. 87.49, we'll get a cumulative rounding error
 				->setQuantity(30)
-				->setUnit("st")
+				->setUnit('st')
 			);
 
 		// follows HostedPayment calculateRequestValues() outline:

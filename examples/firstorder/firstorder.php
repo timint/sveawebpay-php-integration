@@ -27,12 +27,12 @@ $myOrder = WebPay::createOrder($myConfig);
 // We then add information to the order object by using the various methods in the Svea\CreateOrderBuilder class.
 
 // We begin by adding any additional information required by the payment method, which for an invoice order means:
-$myOrder->setCountryCode("SE");
+$myOrder->setCountryCode('SE');
 $myOrder->setOrderDate(date('c'));
 
 // To add the cart contents to the order we first create and specify a new orderRow item using methods from the Svea\WebPay\BuildOrder\RowBuilders\OrderRow class:
 $boughtItem = WebPayItem::orderRow();
-$boughtItem->setDescription("Billy");
+$boughtItem->setDescription('Billy');
 $boughtItem->setAmountExVat(0.01);
 $boughtItem->setVatPercent(0);
 $boughtItem->setQuantity(1);
@@ -42,7 +42,7 @@ $myOrder->addOrderRow($boughtItem);
 
 // Next, we create a customer identity object, for invoice orders Svea will look up the customer address et al based on the social security number
 $customerInformation = WebPayItem::individualCustomer();
-$customerInformation->setNationalIdNumber("194605092222");
+$customerInformation->setNationalIdNumber('194605092222');
 
 // Add the customer to the order:
 $myOrder->addCustomerDetails($customerInformation);
@@ -61,7 +61,7 @@ $myResponse = $myInvoiceOrderRequest->doRequest();
 if ($myResponse->accepted == true) {
 	// save the sveaOrderId to a file, for use in firstdeliver.php
 	$myFirstOrderId = $myResponse->sveaOrderId;
-	file_put_contents("sveaorderid.txt", $myFirstOrderId);
+	file_put_contents('sveaorderid.txt', $myFirstOrderId);
 };
 
 echo "<pre>Your request response (the customerIdentity contains the verified invoice address, which should match the order shipping address used):\n\n";

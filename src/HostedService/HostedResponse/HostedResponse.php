@@ -34,7 +34,7 @@ class HostedResponse {
 	 */
 	public function validateMac($messageEncoded, $mac, $secret) {
 
-		$macKey = hash("sha512", $messageEncoded . $secret);
+		$macKey = hash('sha512', $messageEncoded . $secret);
 
 		if ($mac == $macKey) {
 			return true;

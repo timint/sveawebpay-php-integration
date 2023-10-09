@@ -20,7 +20,7 @@ $myConfig = ConfigurationService::getTestConfig();
 $orderBuilder = WebPay::checkout($myConfig);
 
 $orderBuilder->setCheckoutOrderId(7479)
-	//->setMerchantData("merchantData")
+	//->setMerchantData('merchantData')
 	->setCountryCode('SE');
 
 // create and add items to order
@@ -29,8 +29,8 @@ $firstBoughtItem = WebPayItem::orderRow()
 	->setVatPercent(25)
 //	->setAmountExVat(12.32)   // - this action is not allowed for checkout
 	->setQuantity(1)
-	->setDescription("Billy")
-	->setArticleNumber("123456789A")
+	->setDescription('Billy')
+	->setArticleNumber('123456789A')
 	->setName('Fork');
 
 $secondBoughtItem = WebPayItem::orderRow()
@@ -38,8 +38,8 @@ $secondBoughtItem = WebPayItem::orderRow()
 	->setVatPercent(12)
 //	->setAmountExVat(12.32)   // - this action is not allowed for checkout
 	->setQuantity(2)
-	->setDescription("Korv med bröd")
-	->setArticleNumber("123456789B")
+	->setDescription('Korv med bröd')
+	->setArticleNumber('123456789B')
 	->setName('Fork');
 
 $orderBuilder->addOrderRow($firstBoughtItem);

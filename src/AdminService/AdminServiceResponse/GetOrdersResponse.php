@@ -156,14 +156,14 @@ class GetOrdersResponse extends AdminServiceResponse {
 			$this->createdDate = $order->CreatedDate;
 
 			if (isset($order->CreditReportStatus->Accepted)) {
-				$this->creditReportStatusAccepted = ($order->CreditReportStatus->Accepted === "true") ? true : false;
+				$this->creditReportStatusAccepted = ($order->CreditReportStatus->Accepted === 'true') ? true : false;
 				$this->creditReportStatusCreationDate = $order->CreditReportStatus->CreationDate;
 			}
 
 			$this->currency = $order->Currency;
 
 			//individual customer?
-			if ($order->Customer->CustomerType === "Individual") {
+			if ($order->Customer->CustomerType === 'Individual') {
 
 				//stdClass Object
 				//(
@@ -308,7 +308,7 @@ class GetOrdersResponse extends AdminServiceResponse {
 				$this->customer->setLocality($order->Customer->Locality);
 			}
 
-			if ($order->Customer->CustomerType === "Company") {
+			if ($order->Customer->CustomerType === 'Company') {
 
 				//stdClass Object
 				//(
@@ -417,13 +417,13 @@ class GetOrdersResponse extends AdminServiceResponse {
 			$this->customerId = $order->CustomerId;
 			$this->customerReference = $order->CustomerReference;
 			//$this->deliveryAddress = $order->DeliveryAddress; // not supported
-			$this->isPossibleToAdminister = ($order->IsPossibleToAdminister === "true") ? true : false;
+			$this->isPossibleToAdminister = ($order->IsPossibleToAdminister === 'true') ? true : false;
 			$this->isPossibleToCancel = ($order->IsPossibleToCancel === 'true') ? true : false;
 			$this->notes = $order->Notes;
 			$this->orderDeliveryStatus = $order->OrderDeliveryStatus;
 
 			// a single order row is returned as type stdClass
-			if (is_a($order->OrderRows->NumberedOrderRow, "stdClass")) {
+			if (is_a($order->OrderRows->NumberedOrderRow, 'stdClass')) {
 				$row = $order->OrderRows->NumberedOrderRow;
 				$newrow = new NumberedOrderRow(); // webpay orderrow
 				$newrow
@@ -505,18 +505,18 @@ class GetOrdersResponse extends AdminServiceResponse {
 			$this->orderStatus = $order->OrderStatus;
 			$this->orderType = $order->OrderType;
 
-			if (is_a($order->PaymentPlanDetails, "stdClass") && property_exists($order->PaymentPlanDetails, "ContractLengthMonths")) {
+			if (is_a($order->PaymentPlanDetails, 'stdClass') && property_exists($order->PaymentPlanDetails, 'ContractLengthMonths')) {
 				$this->paymentPlanDetailsContractLengthMonths = $order->PaymentPlanDetails->ContractLengthMonths;
 			}
-			if (is_a($order->PaymentPlanDetails, "stdClass") && property_exists($order->PaymentPlanDetails, "ContractNumber")) {
+			if (is_a($order->PaymentPlanDetails, 'stdClass') && property_exists($order->PaymentPlanDetails, 'ContractNumber')) {
 				$this->paymentPlanDetailsContractNumber = $order->PaymentPlanDetails->ContractNumber;
 			}
 
 			$this->pendingReasons = $order->PendingReasons;
-			if (is_a($order->PendingReasons, "stdClass") && property_exists($order->PendingReasons, "PendingType")) {
+			if (is_a($order->PendingReasons, 'stdClass') && property_exists($order->PendingReasons, 'PendingType')) {
 				$this->pendingReasonsPendingType = $order->PendingReasons->PendingType;
 			}
-			if (is_a($order->PendingReasons, "stdClass") && property_exists($order->PendingReasons, "CreatedDate")) {
+			if (is_a($order->PendingReasons, 'stdClass') && property_exists($order->PendingReasons, 'CreatedDate')) {
 				$this->PendingReasonsCreatedDate = $order->PendingReasons->CreatedDate;
 			}
 

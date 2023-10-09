@@ -40,14 +40,14 @@ class Helper {
 			$discountA = WebPayItem::fixedDiscount()
 				->setAmountExVat(Helper::bround(($discountAmountExVat * $a), 2))
 				->setVatPercent($allowedTaxRates[0])
-				->setName(isset($discountName) ? $discountName : "")
-				->setDescription((isset($discountDescription) ? $discountDescription : "") . ' (' . $allowedTaxRates[0] . '%)');
+				->setName(isset($discountName) ? $discountName : '')
+				->setDescription((isset($discountDescription) ? $discountDescription : '') . ' (' . $allowedTaxRates[0] . '%)');
 
 			$discountB = WebPayItem::fixedDiscount()
 				->setAmountExVat(Helper::bround(($discountAmountExVat * $b), 2))
 				->setVatPercent($allowedTaxRates[1])
-				->setName(isset($discountName) ? $discountName : "")
-				->setDescription((isset($discountDescription) ? $discountDescription : "") . ' (' . $allowedTaxRates[1] . '%)');
+				->setName(isset($discountName) ? $discountName : '')
+				->setDescription((isset($discountDescription) ? $discountDescription : '') . ' (' . $allowedTaxRates[1] . '%)');
 
 			$fixedDiscounts[] = $discountA;
 			$fixedDiscounts[] = $discountB;
@@ -57,8 +57,8 @@ class Helper {
 			$discountA = WebPayItem::fixedDiscount()
 				->setAmountExVat(Helper::bround(($discountAmountExVat), 2))
 				->setVatPercent($allowedTaxRates[0])
-				->setName(isset($discountName) ? $discountName : "")
-				->setDescription((isset($discountDescription) ? $discountDescription : ""));
+				->setName(isset($discountName) ? $discountName : '')
+				->setDescription((isset($discountDescription) ? $discountDescription : ''));
 			$fixedDiscounts[] = $discountA;
 		}
 
@@ -122,7 +122,7 @@ class Helper {
 
 		// fallback if no match w/regexp
 		if (!array_key_exists(2, $addressArr)) {
-			$addressArr[2] = "";
+			$addressArr[2] = '';
 		}		  //fix for addresses w/o housenumber
 		if (!array_key_exists(1, $addressArr)) {
 			$addressArr[1] = $address;
@@ -166,7 +166,7 @@ class Helper {
 		if (!defined('SVEA_REQUEST_DIR')) {
 			define('SVEA_REQUEST_DIR', dirname(__FILE__));
 		}
-		$versionFile = file_get_contents(SVEA_REQUEST_DIR . "/../../version.json");
+		$versionFile = file_get_contents(SVEA_REQUEST_DIR . '/../../version.json');
 		$versionFile= json_decode($versionFile, true);
 
 
@@ -181,22 +181,22 @@ class Helper {
 
 	/**
 	 * Checks Svea\WebPay\Config\ConfigurationProvider for getIntegrationXX() methods, and returns associative array containing Svea integration platform, version et al.
-	 * array contains keys "integration_platform", "integration_version", "integration_company"
+	 * array contains keys 'integration_platform', 'integration_version', 'integration_company'
 	 * @param ConfigurationProvider $config
 	 * @return array
 	 */
 	static function getSveaIntegrationProperties($config) {
 		$integrationPlatform =
-			method_exists($config, "getIntegrationPlatform") ? $config->getIntegrationPlatform() : "Integration platform not available";
+			method_exists($config, 'getIntegrationPlatform') ? $config->getIntegrationPlatform() : 'Integration platform not available';
 		$integrationCompany =
-			method_exists($config, "getIntegrationCompany") ? $config->getIntegrationCompany() : "Integration company not available";
+			method_exists($config, 'getIntegrationCompany') ? $config->getIntegrationCompany() : 'Integration company not available';
 		$integrationVersion =
-			method_exists($config, "getIntegrationVersion") ? $config->getIntegrationVersion() : "Integration version not available";
+			method_exists($config, 'getIntegrationVersion') ? $config->getIntegrationVersion() : 'Integration version not available';
 
 		$integration_properties = [
-			"integration_platform" => $integrationPlatform,
-			"integration_version" => $integrationVersion,
-			"integration_company" => $integrationCompany
+			'integration_platform' => $integrationPlatform,
+			'integration_version' => $integrationVersion,
+			'integration_company' => $integrationCompany
 		];
 
 		return $integration_properties;
@@ -240,16 +240,16 @@ class Helper {
 				$discountA = WebPayItem::fixedDiscount()
 					->setAmountIncVat(Helper::bround($discountAAmount, 2))
 					->setVatPercent($allowedTaxRates[0])
-					->setName(isset($discountName) ? $discountName : "")
-					->setDescription((isset($discountDescription) ? $discountDescription : "") . ' (' . $allowedTaxRates[0] . '%)');
+					->setName(isset($discountName) ? $discountName : '')
+					->setDescription((isset($discountDescription) ? $discountDescription : '') . ' (' . $allowedTaxRates[0] . '%)');
 
 				$discountBAmount = $discountAmount * $b *
 					($amountExVatFlag ? (1 + ($allowedTaxRates[1] / 100.00)) : (1 + ($allowedTaxRates[1] / 100.00)) / (1 + ($discountMeanVat / 100.00)));
 				$discountB = WebPayItem::fixedDiscount()
 					->setAmountIncVat(Helper::bround($discountBAmount, 2))
 					->setVatPercent($allowedTaxRates[1])
-					->setName(isset($discountName) ? $discountName : "")
-					->setDescription((isset($discountDescription) ? $discountDescription : "") . ' (' . $allowedTaxRates[1] . '%)');
+					->setName(isset($discountName) ? $discountName : '')
+					->setDescription((isset($discountDescription) ? $discountDescription : '') . ' (' . $allowedTaxRates[1] . '%)');
 
 				$fixedDiscounts[] = $discountA;
 				$fixedDiscounts[] = $discountB;
@@ -259,8 +259,8 @@ class Helper {
 				$discountA = WebPayItem::fixedDiscount()
 					->setAmountIncVat(Helper::bround(($discountIncVat), 2))
 					->setVatPercent($allowedTaxRates[0])
-					->setName(isset($discountName) ? $discountName : "")
-					->setDescription((isset($discountDescription) ? $discountDescription : ""));
+					->setName(isset($discountName) ? $discountName : '')
+					->setDescription((isset($discountDescription) ? $discountDescription : ''));
 				$fixedDiscounts[] = $discountA;
 			}
 		} // discountMeanVat <= 0;
@@ -268,8 +268,8 @@ class Helper {
 			$discount = WebPayItem::fixedDiscount()
 				->setAmountIncVat(Helper::bround(($discountAmount), 2))
 				->setVatPercent(0.0)
-				->setName(isset($discountName) ? $discountName : "")
-				->setDescription((isset($discountDescription) ? $discountDescription : ""));
+				->setName(isset($discountName) ? $discountName : '')
+				->setDescription((isset($discountDescription) ? $discountDescription : ''));
 			$fixedDiscounts[] = $discount;
 		}
 
@@ -304,13 +304,13 @@ class Helper {
 
 	public static function getCardPayCurrencies() {
 		$currencyList = [
-			"SEK",
-			"NOK",
-			"DKK",
-			"EUR",
-			"USD",
-			"GBP",
-			"PLN"
+			'SEK',
+			'NOK',
+			'DKK',
+			'EUR',
+			'USD',
+			'GBP',
+			'PLN'
 			];
 		return $currencyList;
 	}
@@ -330,7 +330,7 @@ class Helper {
 			return false;
 		}
 
-		if (substr($peppolId,4,1) != ":") { // Fifth character must be ':'.
+		if (substr($peppolId,4,1) != ':') { // Fifth character must be ":".
 			return false;
 		}
 

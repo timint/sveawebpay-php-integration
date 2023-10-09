@@ -22,12 +22,12 @@ $myConfig = ConfigurationService::getTestConfig(); // add your Svea credentials 
 // We assume that you've collected the following information about the order in your shop:
 
 // customer information:
-$customerFirstName = "Tess T";
-$customerLastName = "Persson";
-$customerAddress = "Testgatan 1";
-$customerZipCode = "99999";
-$customerCity = "Stan";
-$customerCountry = "Sverige";
+$customerFirstName = 'Tess T';
+$customerLastName = 'Persson';
+$customerAddress = 'Testgatan 1';
+$customerZipCode = '99999';
+$customerCity = 'Stan';
+$customerCountry = 'Sverige';
 
 // The customer has bought three items, one "Billy" which cost 700,99 kr excluding vat (25%) and two hotdogs for 5 kr (incl. vat).
 
@@ -38,21 +38,21 @@ $myOrder = WebPay::createOrder($myConfig);
 
 // You then add information to the order object by using the methods in the Svea\WebPay\BuildOrder\CreateOrderBuilder class.
 // For an Invoice order, the following methods are required:
-$myOrder->setCountryCode("SE");						 // customer country, we recommend basing this on the customer billing address
-//$myOrder->setCurrency("SEK");						   // order currency
+$myOrder->setCountryCode('SE');						 // customer country, we recommend basing this on the customer billing address
+//$myOrder->setCurrency('SEK');						   // order currency
 // You may also chain fluent methods together:
 $myOrder
-//		->setClientOrderNumber("order #20140519-375")   // optional - use a not previously sent client side order identifier, i.e. "order #20140519-371"
-//		->setCustomerReference("customer #123")		 // optional - This should contain a customer reference, as in "customer #123".
-	->setOrderDate("2014-05-28")					// required - or use an ISO8601 date as produced by i.e. date('c')
+//		->setClientOrderNumber('order #20140519-375')   // optional - use a not previously sent client side order identifier, i.e. 'order #20140519-371'
+//		->setCustomerReference('customer #123')		 // optional - This should contain a customer reference, as in 'customer #123'.
+	->setOrderDate('2014-05-28')					// required - or use an ISO8601 date as produced by i.e. date('c')
 ;
 // Then specify the items bought as order rows, using the methods in the Svea\WebPay\BuildOrder\RowBuilders\OrderRow class, and adding them to the order:
 $firstBoughtItem = WebPayItem::orderRow();
 $firstBoughtItem->setAmountExVat(10.99);
 $firstBoughtItem->setVatPercent(25);
 $firstBoughtItem->setQuantity(1);
-$firstBoughtItem->setDescription("Billy");
-$firstBoughtItem->setArticleNumber("123456789A");
+$firstBoughtItem->setDescription('Billy');
+$firstBoughtItem->setArticleNumber('123456789A');
 
 // Add firstBoughtItem to order row
 $myOrder->addOrderRow($firstBoughtItem);
@@ -63,7 +63,7 @@ $myOrder->addOrderRow(
 		->setAmountIncVat(5.00)
 		->setVatPercent(12)
 		->setQuantity(2)
-		->setDescription("Korv med bröd")
+		->setDescription('Korv med bröd')
 );
 
 // Next, we create a customer identity object, note that for invoice orders Svea overrides any given address w/verified credit report address in the response.

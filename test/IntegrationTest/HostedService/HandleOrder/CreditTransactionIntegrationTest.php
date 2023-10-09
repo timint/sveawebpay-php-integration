@@ -28,13 +28,13 @@ class CreditTransactionIntegrationTest extends \PHPUnit\Framework\TestCase
 		$request = new CreditTransaction(ConfigurationService::getDefaultConfig());
 		$request->transactionId = $transactionId;
 		$request->creditAmount = $amount;
-		$request->countryCode = "SE";
+		$request->countryCode = 'SE';
 		$response = $request->doRequest();
 
 		$this->assertInstanceOf("Svea\WebPay\HostedService\HostedResponse\HostedAdminResponse\CreditTransactionResponse", $response);
 
 		$this->assertEquals(0, $response->accepted);
-		$this->assertEquals("128 (NO_SUCH_TRANS)", $response->resultcode);
+		$this->assertEquals('128 (NO_SUCH_TRANS)', $response->resultcode);
 	}
 
 	/**
@@ -52,20 +52,20 @@ class CreditTransactionIntegrationTest extends \PHPUnit\Framework\TestCase
 		);
 
 		// Set the below to match the transaction, then run the test.
-		$clientOrderNumber = "796";
+		$clientOrderNumber = '796';
 		$transactionId = 587949;
 		$amount = 100;
 
 		$request = new CreditTransaction(ConfigurationService::getDefaultConfig());
 		$request->transactionId = $transactionId;
 		$request->creditAmount = $amount;
-		$request->countryCode = "SE";
+		$request->countryCode = 'SE';
 		$response = $request->doRequest();
 
 		//print_r( $response );
 		$this->assertInstanceOf("Svea\WebPay\HostedService\HostedResponse\HostedAdminResponse\CreditTransactionResponse", $response);
 		$this->assertEquals(1, $response->accepted);
-		$this->assertStringMatchesFormat("%d", $response->transactionId);   // %d => an unsigned integer value
+		$this->assertStringMatchesFormat('%d', $response->transactionId);   // %d => an unsigned integer value
 
 		$this->assertEquals($clientOrderNumber, $response->clientOrderNumber);
 	}

@@ -55,10 +55,10 @@ class WebPayItem {
 	 *		  ->setVatPercent(25)			 // optional, recommended, use precisely two of the price specification methods
 	 *		  ->setAmountIncVat(125.00)	   // optional, use precisely two of the price specification methods
 	 *		  ->setQuantity(2)				// required
-	 *		  ->setUnit("pcs.")			   // optional
+	 *		  ->setUnit('pcs.')			   // optional
 	 *		  ->setName('name')			   // optional, invoice, accountCredit & payment plan orders will merge "name" with "description"
-	 *		  ->setDescription("description") // optional, invoice, accountCredit & payment plan orders will merge "name" with "description"
-	 *		  ->setArticleNumber("1")		 // optional
+	 *		  ->setDescription('description') // optional, invoice, accountCredit & payment plan orders will merge "name" with "description"
+	 *		  ->setArticleNumber('1')		 // optional
 	 *		  ->setDiscountPercent(0)		 // optional
 	 *	  );
 	 *
@@ -87,9 +87,9 @@ class WebPayItem {
 	 *		  ->setAmountExVat(100.00)		// optional, recommended, use precisely two of the price specification methods
 	 *		  ->setVatPercent(25)			 // optional, recommended, use precisely two of the price specification methods
 	 *		  ->setAmountIncVat(125.00)	   // optional, use precisely two of the price specification methods
-	 *		  ->setUnit("pcs.")			   // optional
+	 *		  ->setUnit('pcs.')			   // optional
 	 *		  ->setName('name')			   // optional
-	 *		  ->setDescription("description") // optional
+	 *		  ->setDescription('description') // optional
 	 *		  ->setShippingId('33')		   // optional
 	 *		  ->setDiscountPercent(0)		 // optional
 	 *	  );
@@ -111,9 +111,9 @@ class WebPayItem {
 	 *		  ->setAmountExVat(100.00)		// optional, recommended, use precisely two of the price specification methods
 	 *		  ->setVatPercent(25)			 // optional, recommended, use precisely two of the price specification methods
 	 *		  ->setAmountIncVat(125.00)	   // optional, use precisely two of the price specification methods
-	 *		  ->setUnit("pcs.")			   // optional
+	 *		  ->setUnit('pcs.')			   // optional
 	 *		  ->setName('name')			   // optional
-	 *		  ->setDescription("description") // optional
+	 *		  ->setDescription('description') // optional
 	 *		  ->setDiscountPercent(0)		 // optional
 	 *	  );
 	 *
@@ -139,10 +139,10 @@ class WebPayItem {
 	 *		  ->setAmountIncVat(100.00)			   // recommended, see info above
 	 *		  ->setAmountExVat(1.0)				   // optional, see info above
 	 *		  ->setVatPercent(25)					 // optional, see info above
-	 *		  ->setDiscountId("1")					// optional
-	 *		  ->setUnit("st")						 // optional
-	 *		  ->setName("Fixed")					  // optional
-	 *		  ->setDescription("FixedDiscount")	   // optional
+	 *		  ->setDiscountId('1')					// optional
+	 *		  ->setUnit('st')						 // optional
+	 *		  ->setName('Fixed')					  // optional
+	 *		  ->setDescription('FixedDiscount')	   // optional
 	 *	  );
 	 *
 	 * @see \Svea\FixedDiscount
@@ -166,10 +166,10 @@ class WebPayItem {
 	 *
 	 *	  $relativeDiscount = Svea\WebPay\WebPayItem::relativeDiscount()
 	 *		  ->setDiscountPercent(10.0)		  // required,
-	 *		  ->setDiscountId("1")				// optional
-	 *		  ->setUnit("st.")					// optional
-	 *		  ->setName("DiscountName")		   // optional
-	 *		  ->setDescription("DiscountDesc.")   // optional
+	 *		  ->setDiscountId('1')				// optional
+	 *		  ->setUnit('st.')					// optional
+	 *		  ->setName('DiscountName')		   // optional
+	 *		  ->setDescription('DiscountDesc.')   // optional
 	 *	  );
 	 *
 	 * @see \Svea\RelativeDiscount

@@ -18,9 +18,9 @@ $myConfig = \Svea\WebPay\Config\ConfigurationService::getTestConfig();
 // We assume that you've previously run the firstorder.php file and successfully made a createOrder request to Svea using the invoice payment method.
 // The svea order id returned in the request response was then written to the file sveaorderid.txt in the firstorder/ folder
 
-$mySveaOrderId = file_get_contents("../firstorder/sveaorderid.txt");
+$mySveaOrderId = file_get_contents('../firstorder/sveaorderid.txt');
 if (!$mySveaOrderId) {
-	print_r("../firstorder/sveaorderid.txt not found, run firstorder.php first. aborting.");
+	print_r('../firstorder/sveaorderid.txt not found, run firstorder.php first. aborting.');
 	die();
 }
 
@@ -30,7 +30,7 @@ $myOrder = WebPay::deliverOrder($myConfig);
 // We then add information to the order object by using the various methods in the Svea\WebPay\BuildOrder\DeliverOrderBuilder class.
 
 // We begin by adding any additional information required by the payment method, which for an invoice order means:
-$myOrder->setCountryCode("SE");
+$myOrder->setCountryCode('SE');
 $myOrder->setOrderId($mySveaOrderId);
 $myOrder->setInvoiceDistributionType(\Svea\WebPay\Constant\DistributionType::POST);
 
