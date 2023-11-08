@@ -182,10 +182,10 @@ class ConfigurationService {
 
 	private static function retrieveConfigFile($isProd) {
 		if ($isProd === true) {
-			$config = require rtrim(__DIR__,'/').'/../../config_prod.php';;
+			$config = require rtrim(__DIR__,'/').'/../../../config_prod.php';
 			$urls = self::getProdUrls();
 		} else {
-			$config = require rtrim(__DIR__,'/').'/../../config_test.php';;
+			$config = require rtrim(__DIR__,'/').'/../../../config_test.php';
 			$urls = self::getTestUrls();
 		}
 
