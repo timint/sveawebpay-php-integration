@@ -224,17 +224,17 @@ class WebServiceRowFormatter {
 		if (isset($row->vatPercent) && isset($row->amountExVat)) {
 			$orderRow->PricePerUnit = $this->priceIncludingVat ? WebServiceRowFormatter::convertExVatToIncVat($row->amountExVat, Helper::bround($row->vatPercent)) : $row->amountExVat;
 			$orderRow->VatPercent = Helper::bround($row->vatPercent);
-			$orderRow->PriceIncludingVat = $this->priceIncludingVat ? false : true;
+			$orderRow->PriceIncludingVat = $this->priceIncludingVat ? true : false;
 		} // amountIncVat & vatPercent used to specify product price
 		elseif (isset($row->vatPercent) && isset($row->amountIncVat)) {
 			$orderRow->PricePerUnit = $this->priceIncludingVat ? $row->amountIncVat : WebServiceRowFormatter::convertIncVatToExVat($row->amountIncVat, Helper::bround($row->vatPercent));
 			$orderRow->VatPercent = Helper::bround($row->vatPercent);
-			$orderRow->PriceIncludingVat = $this->priceIncludingVat ? false : true;
+			$orderRow->PriceIncludingVat = $this->priceIncludingVat ? true : false;
 		} // no vatPercent given
 		else {
 			$orderRow->PricePerUnit = $this->priceIncludingVat ? $row->amountIncVat : $row->amountExVat;
 			$orderRow->VatPercent = $this->calculateVatPercentFromPriceExVatAndPriceIncVat($row->amountIncVat, $row->amountExVat);
-			$orderRow->PriceIncludingVat = $this->priceIncludingVat ? false : true;
+			$orderRow->PriceIncludingVat = $this->priceIncludingVat ? true : false;
 		}
 
 		$this->newRows[] = $orderRow;
@@ -287,24 +287,24 @@ class WebServiceRowFormatter {
 		if (isset($row->vatPercent) && isset($row->amountExVat)) {
 			$orderRow->PricePerUnit = $this->priceIncludingVat ? WebServiceRowFormatter::convertExVatToIncVat($row->amountExVat, Helper::bround($row->vatPercent)) : $row->amountExVat;
 			$orderRow->VatPercent = Helper::bround($row->vatPercent);
-			$orderRow->PriceIncludingVat = $this->priceIncludingVat ? false : true;
+			$orderRow->PriceIncludingVat = $this->priceIncludingVat ? true : false;
 		} // amountIncVat & vatPercent used to specify product price
 		elseif (isset($row->vatPercent) && isset($row->amountIncVat)) {
 //				$orderRow->PricePerUnit =
 //						WebServiceRowFormatter::convertIncVatToExVat( $row->amountIncVat, $row->vatPercent );
 			$orderRow->PricePerUnit = $this->priceIncludingVat ? $row->amountIncVat : WebServiceRowFormatter::convertIncVatToExVat($row->amountIncVat, Helper::bround($row->vatPercent));
 			$orderRow->VatPercent = Helper::bround($row->vatPercent);
-			$orderRow->PriceIncludingVat = $this->priceIncludingVat ? false : true;
+			$orderRow->PriceIncludingVat = $this->priceIncludingVat ? true : false;
 		} // no vatPercent given, booth ExVat and IncVat
 		elseif (isset($row->amountExVat) && isset($row->amountIncVat)) {
 			$orderRow->PricePerUnit = $this->priceIncludingVat ? $row->amountIncVat : $row->amountExVat;
 			$orderRow->VatPercent = $this->calculateVatPercentFromPriceExVatAndPriceIncVat($row->amountIncVat, $row->amountExVat);
-			$orderRow->PriceIncludingVat = $this->priceIncludingVat ? false : true;
+			$orderRow->PriceIncludingVat = $this->priceIncludingVat ? true : false;
 		} // no vatPercent given
 		else {
 			$orderRow->PricePerUnit = $this->priceIncludingVat ? $row->amountIncVat : WebServiceRowFormatter::convertIncVatToExVat($row->amountIncVat, Helper::bround($row->vatPercent));
 			$orderRow->VatPercent = $this->calculateVatPercentFromPriceExVatAndPriceIncVat($row->amountIncVat, $row->amountExVat);
-			$orderRow->PriceIncludingVat = $this->priceIncludingVat ? false : true;
+			$orderRow->PriceIncludingVat = $this->priceIncludingVat ? true : false;
 		}
 
 		if (!empty($row->name)) {
@@ -335,23 +335,23 @@ class WebServiceRowFormatter {
 		if (isset($row->vatPercent) && isset($row->amountExVat)) {
 			$orderRow->PricePerUnit = $this->priceIncludingVat ? WebServiceRowFormatter::convertExVatToIncVat($row->amountExVat, Helper::bround($row->vatPercent)) : $row->amountExVat;
 			$orderRow->VatPercent = Helper::bround($row->vatPercent);
-			$orderRow->PriceIncludingVat = $this->priceIncludingVat ? false : true;
+			$orderRow->PriceIncludingVat = $this->priceIncludingVat ? true : false;
 		} // amountIncVat & vatPercent used to specify product price
 		elseif (isset($row->vatPercent) && isset($row->amountIncVat)) {
 //				$orderRow->PricePerUnit =
 //						WebServiceRowFormatter::convertIncVatToExVat( $row->amountIncVat, $row->vatPercent );
 			$orderRow->PricePerUnit = $this->priceIncludingVat ? $row->amountIncVat : WebServiceRowFormatter::convertIncVatToExVat($row->amountIncVat, Helper::bround($row->vatPercent));
 			$orderRow->VatPercent = Helper::bround($row->vatPercent);
-			$orderRow->PriceIncludingVat = $this->priceIncludingVat ? false : true;
+			$orderRow->PriceIncludingVat = $this->priceIncludingVat ? true : false;
 		} // no vatPercent given, booth ExVat and IncVat
 		elseif (isset($row->amountExVat) && isset($row->amountIncVat)) {
 			$orderRow->PricePerUnit = $this->priceIncludingVat ? $row->amountIncVat : $row->amountExVat;
 			$orderRow->VatPercent = $this->calculateVatPercentFromPriceExVatAndPriceIncVat($row->amountIncVat, $row->amountExVat);
-			$orderRow->PriceIncludingVat = $this->priceIncludingVat ? false : true;
+			$orderRow->PriceIncludingVat = $this->priceIncludingVat ? true : false;
 		} else {
 			$orderRow->PricePerUnit = $this->priceIncludingVat ? $row->amountIncVat : WebServiceRowFormatter::convertIncVatToExVat($row->amountIncVat, Helper::bround($row->vatPercent));
 			$orderRow->VatPercent = $this->calculateVatPercentFromPriceExVatAndPriceIncVat($row->amountIncVat, $row->amountExVat);
-			$orderRow->PriceIncludingVat = $this->priceIncludingVat ? false : true;
+			$orderRow->PriceIncludingVat = $this->priceIncludingVat ? true : false;
 		}
 
 		if (!empty($row->name)) {
@@ -401,7 +401,7 @@ class WebServiceRowFormatter {
 
 			$orderRow->PricePerUnit = (-1) * ($this->priceIncludingVat ? $discountAtThisVatRateIncVat : WebServiceRowFormatter::convertIncVatToExVat($row->amount, Helper::bround($row->vatPercent)));
 			$orderRow->VatPercent = $vatRate;
-			$orderRow->PriceIncludingVat = $this->priceIncludingVat ? false : true;
+			$orderRow->PriceIncludingVat = $this->priceIncludingVat ? true : false;
 
 			if (!empty($row->name)) {
 				$orderRow->Name = $row->name;
@@ -437,7 +437,7 @@ class WebServiceRowFormatter {
 
 			$orderRow->PricePerUnit = (-1) * $discountAtThisVatRate;
 			$orderRow->VatPercent = $vatRate;
-			$orderRow->PriceIncludingVat = $this->priceIncludingVat ? false : true;
+			$orderRow->PriceIncludingVat = $this->priceIncludingVat ? true : false;
 
 			if (!empty($row->name)) {
 				$orderRow->Name = $row->name;
@@ -495,7 +495,7 @@ class WebServiceRowFormatter {
 				WebServiceRowFormatter::convertIncVatToExVat($discountAtThisVatRateIncVat, $vatRate);
 			$orderRow->PricePerUnit = (-1) * ($this->priceIncludingVat ? $discountAtThisVatRateIncVat : WebServiceRowFormatter::convertIncVatToExVat($discountAtThisVatRateIncVat, $vatRate));;
 			$orderRow->VatPercent = $vatRate;
-			$orderRow->PriceIncludingVat = $this->priceIncludingVat ? false : true;
+			$orderRow->PriceIncludingVat = $this->priceIncludingVat ? true : false;
 			$splitRows[] = $orderRow;
 		}
 
@@ -594,7 +594,7 @@ class WebServiceRowFormatter {
 			$orderRow->NumberOfUnits = 1; //only one discount per row
 			$orderRow->PricePerUnit = $this->priceIncludingVat ? -number_format($discountIncVat, 5, '.', '') : -number_format($discountExVat, 5, '.', ''); //Discountpercent on total price inc vat.
 			$orderRow->VatPercent = $vatRate;
-			$orderRow->PriceIncludingVat = $this->priceIncludingVat ? false : true;
+			$orderRow->PriceIncludingVat = $this->priceIncludingVat ? true : false;
 
 			$this->newRows[] = $orderRow;
 		}

@@ -72,7 +72,7 @@ class DeliverAccountCredit extends HandleOrder {
 		if ($this->orderBuilder->orderType == ConfigurationProvider::ACCOUNTCREDIT_TYPE) {
 			$accountCreditDetails = new SveaDeliverInvoiceDetails();
 			$accountCreditDetails->InvoiceDistributionType = $this->orderBuilder->distributionType;
-			$accountCreditDetails->IsCreditInvoice = isset($this->orderBuilder->invoiceIdToCredit) ? false : true;	// required
+			$accountCreditDetails->IsCreditInvoice = isset($this->orderBuilder->invoiceIdToCredit) ? true : false;	// required
 
 			if (isset($this->orderBuilder->invoiceIdToCredit)) {
 				$accountCreditDetails->InvoiceIdToCredit = $this->orderBuilder->invoiceIdToCredit;					// optional

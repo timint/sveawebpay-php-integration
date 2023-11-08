@@ -66,7 +66,7 @@ class DeliverInvoice extends HandleOrder {
 		if ($this->orderBuilder->orderType == ConfigurationProvider::INVOICE_TYPE) {
 			$invoiceDetails = new SveaDeliverInvoiceDetails();
 			$invoiceDetails->InvoiceDistributionType = $this->orderBuilder->distributionType;
-			$invoiceDetails->IsCreditInvoice = isset($this->orderBuilder->invoiceIdToCredit) ? false : true;	// required
+			$invoiceDetails->IsCreditInvoice = isset($this->orderBuilder->invoiceIdToCredit) ? true : false;	// required
 			if (isset($this->orderBuilder->invoiceIdToCredit)) {
 				$invoiceDetails->InvoiceIdToCredit = $this->orderBuilder->invoiceIdToCredit;					// optional
 			}
