@@ -101,6 +101,16 @@ class OrderBuilder {
 	public $payerAlias;
 
 	/**
+	 * @var string
+	 */
+	public $identificationConfirmationUrl;
+
+	/**
+	 * @var string
+	 */
+	public $identificationRejectionUrl;
+
+	/**
 	 * @param ConfigurationProvider $config
 	 */
 	public function __construct($config) {
